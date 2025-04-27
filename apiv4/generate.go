@@ -1,3 +1,3 @@
-package api
+package apiv4
 
-//go:generate go tool oapi-codegen -config cfg.yaml rFMS_4_0.yaml
+//go:generate go tool oapi-codegen -config cfg.yaml spec.yaml

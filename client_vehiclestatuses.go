@@ -33,7 +33,7 @@ type ListVehicleStatusesResponse struct {
 	// Raw response body.
 	Raw json.RawMessage `json:"-"`
 	// VehicleStatuses in the response.
-	VehicleStatuses []json.RawMessage `json:"vehicleStatuses,omitempty"`
+	VehicleStatuses []*VehicleStatus `json:"vehicleStatuses,omitempty"`
 	// MoreDataAvailable indicates if there is more data available.
 	MoreDataAvailable bool `json:"moreDataAvailable,omitempty"`
 	// MoreDataAvailableLink is the link to the next page of data.
@@ -92,16 +92,13 @@ func (c *Client) ListVehicleStatuses(
 		return nil, fmt.Errorf("send request: %w", err)
 	}
 	defer resp.Body.Close()
-
 	if resp.StatusCode != http.StatusOK {
 		return nil, newHTTPError(resp)
 	}
-
 	data, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, fmt.Errorf("read response body: %w", err)
 	}
-
 	var responseBody struct {
 		VehicleStatusResponse ListVehicleStatusesResponse `json:"vehicleStatusResponse"`
 		MoreDataAvailable     bool                        `json:"moreDataAvailable"`
@@ -111,7 +108,6 @@ func (c *Client) ListVehicleStatuses(
 	if err := json.Unmarshal(data, &responseBody); err != nil {
 		return nil, fmt.Errorf("unmarshal response body: %w", err)
 	}
-
 	var rawStatuses struct {
 		VehicleStatusResponse struct {
 			VehicleStatuses []json.RawMessage `json:"vehicleStatuses"`
@@ -120,13 +116,12 @@ func (c *Client) ListVehicleStatuses(
 	if err := json.Unmarshal(data, &rawStatuses); err != nil {
 		return nil, fmt.Errorf("unmarshal raw vehicle statuses: %w", err)
 	}
-
-	// Set raw data and propagate MoreDataAvailable/Link and RequestServerDateTime
+	for i, rawStatus := range rawStatuses.VehicleStatusResponse.VehicleStatuses {
+		responseBody.VehicleStatusResponse.VehicleStatuses[i].Raw = rawStatus
+	}
 	responseBody.VehicleStatusResponse.Raw = data
 	responseBody.VehicleStatusResponse.MoreDataAvailable = responseBody.MoreDataAvailable
 	responseBody.VehicleStatusResponse.MoreDataAvailableLink = responseBody.MoreDataAvailableLink
 	responseBody.VehicleStatusResponse.RequestServerDateTime = responseBody.RequestServerDateTime
-	responseBody.VehicleStatusResponse.VehicleStatuses = rawStatuses.VehicleStatusResponse.VehicleStatuses
-
 	return &responseBody.VehicleStatusResponse, nil
 }

@@ -82,7 +82,7 @@ func newLoginScaniaCommand() *cobra.Command {
 	const provider = rfms.Scania
 	cmd := newCommand()
 	cmd.Use = "scania"
-	cmd.Short = "Login to Scania's rFMS API"
+	cmd.Short = "Login to the Scania rFMS API"
 	clientID := cmd.Flags().String("client-id", "", "client ID to use for authentication")
 	cmd.MarkFlagRequired("client-id")
 	clientSecret := cmd.Flags().String("client-secret", "", "client secret to use for authentication")
@@ -110,7 +110,7 @@ func newLoginVolvoTrucksCommand() *cobra.Command {
 	const provider = rfms.VolvoTrucks
 	cmd := newCommand()
 	cmd.Use = "volvo-trucks"
-	cmd.Short = "Login to Volvo Trucks' rFMS API"
+	cmd.Short = "Login to the Volvo Trucks rFMS API"
 	username := cmd.Flags().String("username", "", "username to use for authentication")
 	cmd.MarkFlagRequired("username")
 	password := cmd.Flags().String("password", "", "password to use for authentication")

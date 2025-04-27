@@ -9,8 +9,8 @@ type VehicleStatus struct {
 	// Raw response body.
 	Raw json.RawMessage `json:"-"`
 
-	// Vin vehicle identification number. See ISO 3779 (17 characters)
-	Vin string `json:"vin"`
+	// VIN vehicle identification number. See ISO 3779 (17 characters)
+	VIN string `json:"vin"`
 
 	AccumulatedData *AccumulatedData `json:"accumulatedData,omitempty"`
 
