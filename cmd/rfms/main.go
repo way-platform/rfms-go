@@ -30,6 +30,7 @@ func newRootCommand() *cobra.Command {
 	cmd.Short = "rFMS CLI"
 	cmd.AddCommand(newAuthCommand())
 	cmd.AddCommand(newVehiclesCommand())
+	cmd.AddCommand(newVehiclePositionsCommand())
 	return cmd
 }
 
@@ -54,9 +55,38 @@ func newVehiclesCommand() *cobra.Command {
 			for _, vehicle := range response.Vehicles {
 				printRawJSON(cmd, vehicle.Raw)
 			}
-			// moreDataAvailable = response.MoreDataAvailable
-			moreDataAvailable = false
+			moreDataAvailable = response.MoreDataAvailable
 			lastVIN = response.Vehicles[len(response.Vehicles)-1].VIN
+		}
+		return nil
+	}
+	return cmd
+}
+
+func newVehiclePositionsCommand() *cobra.Command {
+	cmd := newCommand()
+	cmd.Use = "vehicle-positions"
+	cmd.Short = "List vehicle positions"
+	cmd.RunE = func(cmd *cobra.Command, args []string) error {
+		client, err := newClient()
+		if err != nil {
+			return err
+		}
+		moreDataAvailable := true
+		lastVIN := ""
+		for moreDataAvailable {
+			response, err := client.ListVehiclePositions(cmd.Context(), &rfms.ListVehiclePositionsRequest{
+				LastVIN:    lastVIN,
+				LatestOnly: true,
+			})
+			if err != nil {
+				return err
+			}
+			for _, vehiclePosition := range response.VehiclePositions {
+				printRawJSON(cmd, vehiclePosition.Raw)
+			}
+			moreDataAvailable = response.MoreDataAvailable
+			lastVIN = response.VehiclePositions[len(response.VehiclePositions)-1].VIN
 		}
 		return nil
 	}
