@@ -96,27 +96,7 @@ paths:
           in the Trigger filter chapter in the API documentation.
         required: false
         schema:
-          type: string
-          enum:
-          - TIMER
-          - TELL_TALE
-          - DRIVER_LOGIN
-          - DRIVER_LOGOUT
-          - IGNITION_ON
-          - IGNITION_OFF
-          - ENGINE_ON
-          - ENGINE_OFF
-          - PTO_ENABLED
-          - PTO_DISABLED
-          - DISTANCE_TRAVELLED
-          - DRIVER_1_WORKING_STATE_CHANGED
-          - DRIVER_2_WORKING_STATE_CHANGED
-          - FUEL_TYPE_CHANGE
-          - PARKING_BRAKE_SWITCH_CHANGE
-          - BATTERY_PACK_CHARGING_STATUS_CHANGE
-          - BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE
-          - TRAILER_CONNECTED
-          - TRAILER_DISCONNECTED
+          $ref: '#/components/schemas/TriggerType'
       - $ref: "#/components/parameters/lastVin"
       responses:
         200:
@@ -206,27 +186,7 @@ paths:
         schema:
           type: array
           items:
-            type: string
-            enum:
-            - TIMER
-            - TELL_TALE
-            - DRIVER_LOGIN
-            - DRIVER_LOGOUT
-            - IGNITION_ON
-            - IGNITION_OFF
-            - ENGINE_ON
-            - ENGINE_OFF
-            - PTO_ENABLED
-            - PTO_DISABLED
-            - DISTANCE_TRAVELLED
-            - DRIVER_1_WORKING_STATE_CHANGED
-            - DRIVER_2_WORKING_STATE_CHANGED
-            - FUEL_TYPE_CHANGE
-            - PARKING_BRAKE_SWITCH_CHANGE
-            - BATTERY_PACK_CHARGING_STATUS_CHANGE
-            - BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE
-            - TRAILER_CONNECTED
-            - TRAILER_DISCONNECTED
+            $ref: '#/components/schemas/TriggerType'
       - name: latestOnly
         in: query
         description: >-
@@ -1366,28 +1326,7 @@ components:
         This is only set if the TriggerType = TELL_TALE"
       properties:
         triggerType:
-          type: string
-          description: "Trigger types for Context=RFMS:\n
-            TIMER - Data was sent due to a timer trigger. (Timer value set outside rFMS scope)\n
-            IGNITION_ON - Data was sent due to an ignition on\n
-            IGNITION_OFF - Data was sent due to an ignition off\n
-            PTO_ENABLED - Data was sent due to that a PTO was enabled, will be sent for each PTO that gets enabled\n
-            PTO_DISABLED - Data was sent due to that a PTO was disabled, will be sent for each PTO that gets disabled.\n
-            DRIVER_LOGIN - Data was sent due to a successful driver login.\n
-            DRIVER_LOGOUT - Data was sent due to a driver logout\n
-            TELL_TALE - Data was sent due to that at least one tell tale changed state\n
-            ENGINE_ON - Data was sent due to an engine on. For electric motor crank is on\n
-            ENGINE_OFF - Data was sent due to an engine off. For electric motor crank is off\n
-            DRIVER_1_WORKING_STATE_CHANGED - Data was sent due to that driver 1 changed working state\n
-            DRIVER_2_WORKING_STATE_CHANGED - Data was sent due to that driver 2 changed working state\n
-            DISTANCE_TRAVELLED - Data was sent due to that a set distance was travelled. (Distance set outside rFMS scope)\n
-            FUEL_TYPE_CHANGE - Data was sent due to that the type of fuel currently being utilized by the vehicle changed\n
-            PARKING_BRAKE_SWITCH_CHANGE - Data was sent due to that the parking brake state has changed\n
-            BATTERY_PACK_CHARGING_STATUS_CHANGE - Data was sent due to a change in the battery pack charging status.\n
-            BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE - Data was sent due to a change in the battery pack charging connection status.\n
-            TRAILER_CONNECTED - One or several trailers were connected\n
-            TRAILER_DISCONNECTED - One or several trailers were disconnected"
-          example: IGNITION_ON
+          $ref: '#/components/schemas/TriggerType'
         context:
           type: string
           description: The context defines if this is part of the standard or OEM
@@ -1760,6 +1699,49 @@ components:
       - DRIVE
       - ERROR
       - NOT_AVAILABLE
+    TriggerType:
+      type: string
+      description: "Defines the different types of triggers that can cause vehicle data to be reported.\n
+        TIMER - Data was sent due to a timer trigger. (Timer value set outside rFMS scope)\n
+        TELL_TALE - Data was sent due to that at least one tell tale changed state\n
+        DRIVER_LOGIN - Data was sent due to a successful driver login\n
+        DRIVER_LOGOUT - Data was sent due to a driver logout\n
+        IGNITION_ON - Data was sent due to an ignition on\n
+        IGNITION_OFF - Data was sent due to an ignition off\n
+        ENGINE_ON - Data was sent due to an engine on. For electric motor crank is on\n
+        ENGINE_OFF - Data was sent due to an engine off. For electric motor crank is off\n
+        PTO_ENABLED - Data was sent due to that a PTO was enabled, will be sent for each PTO that gets enabled\n
+        PTO_DISABLED - Data was sent due to that a PTO was disabled, will be sent for each PTO that gets disabled\n
+        DISTANCE_TRAVELLED - Data was sent due to that a set distance was travelled. (Distance set outside rFMS scope)\n
+        DRIVER_1_WORKING_STATE_CHANGED - Data was sent due to that driver 1 changed working state\n
+        DRIVER_2_WORKING_STATE_CHANGED - Data was sent due to that driver 2 changed working state\n
+        FUEL_TYPE_CHANGE - Data was sent due to that the type of fuel currently being utilized by the vehicle changed\n
+        PARKING_BRAKE_SWITCH_CHANGE - Data was sent due to that the parking brake state has changed\n
+        BATTERY_PACK_CHARGING_STATUS_CHANGE - Data was sent due to a change in the battery pack charging status\n
+        BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE - Data was sent due to a change in the battery pack charging connection status\n
+        TRAILER_CONNECTED - One or several trailers were connected\n
+        TRAILER_DISCONNECTED - One or several trailers were disconnected"
+      example: IGNITION_ON
+      enum:
+      - TIMER
+      - TELL_TALE
+      - DRIVER_LOGIN
+      - DRIVER_LOGOUT
+      - IGNITION_ON
+      - IGNITION_OFF
+      - ENGINE_ON
+      - ENGINE_OFF
+      - PTO_ENABLED
+      - PTO_DISABLED
+      - DISTANCE_TRAVELLED
+      - DRIVER_1_WORKING_STATE_CHANGED
+      - DRIVER_2_WORKING_STATE_CHANGED
+      - FUEL_TYPE_CHANGE
+      - PARKING_BRAKE_SWITCH_CHANGE
+      - BATTERY_PACK_CHARGING_STATUS_CHANGE
+      - BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE
+      - TRAILER_CONNECTED
+      - TRAILER_DISCONNECTED
   responses:
     BadRequest:
       description: "The server cannot or will not process the request due to an apparent client error

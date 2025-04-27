@@ -172,6 +172,29 @@ const (
 	TriggerChargingStatusInfoEventTIMER                          TriggerChargingStatusInfoEvent = "TIMER"
 )
 
+// Defines values for TriggerType.
+const (
+	TriggerTypeBATTERYPACKCHARGINGCONNECTIONSTATUSCHANGE TriggerType = "BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE"
+	TriggerTypeBATTERYPACKCHARGINGSTATUSCHANGE           TriggerType = "BATTERY_PACK_CHARGING_STATUS_CHANGE"
+	TriggerTypeDISTANCETRAVELLED                         TriggerType = "DISTANCE_TRAVELLED"
+	TriggerTypeDRIVER1WORKINGSTATECHANGED                TriggerType = "DRIVER_1_WORKING_STATE_CHANGED"
+	TriggerTypeDRIVER2WORKINGSTATECHANGED                TriggerType = "DRIVER_2_WORKING_STATE_CHANGED"
+	TriggerTypeDRIVERLOGIN                               TriggerType = "DRIVER_LOGIN"
+	TriggerTypeDRIVERLOGOUT                              TriggerType = "DRIVER_LOGOUT"
+	TriggerTypeENGINEOFF                                 TriggerType = "ENGINE_OFF"
+	TriggerTypeENGINEON                                  TriggerType = "ENGINE_ON"
+	TriggerTypeFUELTYPECHANGE                            TriggerType = "FUEL_TYPE_CHANGE"
+	TriggerTypeIGNITIONOFF                               TriggerType = "IGNITION_OFF"
+	TriggerTypeIGNITIONON                                TriggerType = "IGNITION_ON"
+	TriggerTypePARKINGBRAKESWITCHCHANGE                  TriggerType = "PARKING_BRAKE_SWITCH_CHANGE"
+	TriggerTypePTODISABLED                               TriggerType = "PTO_DISABLED"
+	TriggerTypePTOENABLED                                TriggerType = "PTO_ENABLED"
+	TriggerTypeTELLTALE                                  TriggerType = "TELL_TALE"
+	TriggerTypeTIMER                                     TriggerType = "TIMER"
+	TriggerTypeTRAILERCONNECTED                          TriggerType = "TRAILER_CONNECTED"
+	TriggerTypeTRAILERDISCONNECTED                       TriggerType = "TRAILER_DISCONNECTED"
+)
+
 // Defines values for UptimeDataAlternatorInfoAlternatorStatus.
 const (
 	UptimeDataAlternatorInfoAlternatorStatusCHARGING     UptimeDataAlternatorInfoAlternatorStatus = "CHARGING"
@@ -224,29 +247,6 @@ const (
 	GetVehiclepositionsParamsDatetypeReceived GetVehiclepositionsParamsDatetype = "received"
 )
 
-// Defines values for GetVehiclepositionsParamsTriggerFilter.
-const (
-	GetVehiclepositionsParamsTriggerFilterBATTERYPACKCHARGINGCONNECTIONSTATUSCHANGE GetVehiclepositionsParamsTriggerFilter = "BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE"
-	GetVehiclepositionsParamsTriggerFilterBATTERYPACKCHARGINGSTATUSCHANGE           GetVehiclepositionsParamsTriggerFilter = "BATTERY_PACK_CHARGING_STATUS_CHANGE"
-	GetVehiclepositionsParamsTriggerFilterDISTANCETRAVELLED                         GetVehiclepositionsParamsTriggerFilter = "DISTANCE_TRAVELLED"
-	GetVehiclepositionsParamsTriggerFilterDRIVER1WORKINGSTATECHANGED                GetVehiclepositionsParamsTriggerFilter = "DRIVER_1_WORKING_STATE_CHANGED"
-	GetVehiclepositionsParamsTriggerFilterDRIVER2WORKINGSTATECHANGED                GetVehiclepositionsParamsTriggerFilter = "DRIVER_2_WORKING_STATE_CHANGED"
-	GetVehiclepositionsParamsTriggerFilterDRIVERLOGIN                               GetVehiclepositionsParamsTriggerFilter = "DRIVER_LOGIN"
-	GetVehiclepositionsParamsTriggerFilterDRIVERLOGOUT                              GetVehiclepositionsParamsTriggerFilter = "DRIVER_LOGOUT"
-	GetVehiclepositionsParamsTriggerFilterENGINEOFF                                 GetVehiclepositionsParamsTriggerFilter = "ENGINE_OFF"
-	GetVehiclepositionsParamsTriggerFilterENGINEON                                  GetVehiclepositionsParamsTriggerFilter = "ENGINE_ON"
-	GetVehiclepositionsParamsTriggerFilterFUELTYPECHANGE                            GetVehiclepositionsParamsTriggerFilter = "FUEL_TYPE_CHANGE"
-	GetVehiclepositionsParamsTriggerFilterIGNITIONOFF                               GetVehiclepositionsParamsTriggerFilter = "IGNITION_OFF"
-	GetVehiclepositionsParamsTriggerFilterIGNITIONON                                GetVehiclepositionsParamsTriggerFilter = "IGNITION_ON"
-	GetVehiclepositionsParamsTriggerFilterPARKINGBRAKESWITCHCHANGE                  GetVehiclepositionsParamsTriggerFilter = "PARKING_BRAKE_SWITCH_CHANGE"
-	GetVehiclepositionsParamsTriggerFilterPTODISABLED                               GetVehiclepositionsParamsTriggerFilter = "PTO_DISABLED"
-	GetVehiclepositionsParamsTriggerFilterPTOENABLED                                GetVehiclepositionsParamsTriggerFilter = "PTO_ENABLED"
-	GetVehiclepositionsParamsTriggerFilterTELLTALE                                  GetVehiclepositionsParamsTriggerFilter = "TELL_TALE"
-	GetVehiclepositionsParamsTriggerFilterTIMER                                     GetVehiclepositionsParamsTriggerFilter = "TIMER"
-	GetVehiclepositionsParamsTriggerFilterTRAILERCONNECTED                          GetVehiclepositionsParamsTriggerFilter = "TRAILER_CONNECTED"
-	GetVehiclepositionsParamsTriggerFilterTRAILERDISCONNECTED                       GetVehiclepositionsParamsTriggerFilter = "TRAILER_DISCONNECTED"
-)
-
 // Defines values for GetVehiclestatusesParamsDatetype.
 const (
 	Created  GetVehiclestatusesParamsDatetype = "created"
@@ -258,29 +258,6 @@ const (
 	ACCUMULATED GetVehiclestatusesParamsContentFilter = "ACCUMULATED"
 	SNAPSHOT    GetVehiclestatusesParamsContentFilter = "SNAPSHOT"
 	UPTIME      GetVehiclestatusesParamsContentFilter = "UPTIME"
-)
-
-// Defines values for GetVehiclestatusesParamsTriggerFilter.
-const (
-	BATTERYPACKCHARGINGCONNECTIONSTATUSCHANGE GetVehiclestatusesParamsTriggerFilter = "BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE"
-	BATTERYPACKCHARGINGSTATUSCHANGE           GetVehiclestatusesParamsTriggerFilter = "BATTERY_PACK_CHARGING_STATUS_CHANGE"
-	DISTANCETRAVELLED                         GetVehiclestatusesParamsTriggerFilter = "DISTANCE_TRAVELLED"
-	DRIVER1WORKINGSTATECHANGED                GetVehiclestatusesParamsTriggerFilter = "DRIVER_1_WORKING_STATE_CHANGED"
-	DRIVER2WORKINGSTATECHANGED                GetVehiclestatusesParamsTriggerFilter = "DRIVER_2_WORKING_STATE_CHANGED"
-	DRIVERLOGIN                               GetVehiclestatusesParamsTriggerFilter = "DRIVER_LOGIN"
-	DRIVERLOGOUT                              GetVehiclestatusesParamsTriggerFilter = "DRIVER_LOGOUT"
-	ENGINEOFF                                 GetVehiclestatusesParamsTriggerFilter = "ENGINE_OFF"
-	ENGINEON                                  GetVehiclestatusesParamsTriggerFilter = "ENGINE_ON"
-	FUELTYPECHANGE                            GetVehiclestatusesParamsTriggerFilter = "FUEL_TYPE_CHANGE"
-	IGNITIONOFF                               GetVehiclestatusesParamsTriggerFilter = "IGNITION_OFF"
-	IGNITIONON                                GetVehiclestatusesParamsTriggerFilter = "IGNITION_ON"
-	PARKINGBRAKESWITCHCHANGE                  GetVehiclestatusesParamsTriggerFilter = "PARKING_BRAKE_SWITCH_CHANGE"
-	PTODISABLED                               GetVehiclestatusesParamsTriggerFilter = "PTO_DISABLED"
-	PTOENABLED                                GetVehiclestatusesParamsTriggerFilter = "PTO_ENABLED"
-	TELLTALE                                  GetVehiclestatusesParamsTriggerFilter = "TELL_TALE"
-	TIMER                                     GetVehiclestatusesParamsTriggerFilter = "TIMER"
-	TRAILERCONNECTED                          GetVehiclestatusesParamsTriggerFilter = "TRAILER_CONNECTED"
-	TRAILERDISCONNECTED                       GetVehiclestatusesParamsTriggerFilter = "TRAILER_DISCONNECTED"
 )
 
 // AccumulatedData defines model for AccumulatedData.
@@ -740,27 +717,27 @@ type Trigger struct {
 	// TriggerInfo Additional TriggerInfo content for OEM specific triggers E.g. TRAILER_ATTACHED_TRIGGER [id of trailer]
 	TriggerInfo *[]string `json:"triggerInfo,omitempty"`
 
-	// TriggerType Trigger types for Context=RFMS:
+	// TriggerType Defines the different types of triggers that can cause vehicle data to be reported.
 	//  TIMER - Data was sent due to a timer trigger. (Timer value set outside rFMS scope)
+	//  TELL_TALE - Data was sent due to that at least one tell tale changed state
+	//  DRIVER_LOGIN - Data was sent due to a successful driver login
+	//  DRIVER_LOGOUT - Data was sent due to a driver logout
 	//  IGNITION_ON - Data was sent due to an ignition on
 	//  IGNITION_OFF - Data was sent due to an ignition off
-	//  PTO_ENABLED - Data was sent due to that a PTO was enabled, will be sent for each PTO that gets enabled
-	//  PTO_DISABLED - Data was sent due to that a PTO was disabled, will be sent for each PTO that gets disabled.
-	//  DRIVER_LOGIN - Data was sent due to a successful driver login.
-	//  DRIVER_LOGOUT - Data was sent due to a driver logout
-	//  TELL_TALE - Data was sent due to that at least one tell tale changed state
 	//  ENGINE_ON - Data was sent due to an engine on. For electric motor crank is on
 	//  ENGINE_OFF - Data was sent due to an engine off. For electric motor crank is off
+	//  PTO_ENABLED - Data was sent due to that a PTO was enabled, will be sent for each PTO that gets enabled
+	//  PTO_DISABLED - Data was sent due to that a PTO was disabled, will be sent for each PTO that gets disabled
+	//  DISTANCE_TRAVELLED - Data was sent due to that a set distance was travelled. (Distance set outside rFMS scope)
 	//  DRIVER_1_WORKING_STATE_CHANGED - Data was sent due to that driver 1 changed working state
 	//  DRIVER_2_WORKING_STATE_CHANGED - Data was sent due to that driver 2 changed working state
-	//  DISTANCE_TRAVELLED - Data was sent due to that a set distance was travelled. (Distance set outside rFMS scope)
 	//  FUEL_TYPE_CHANGE - Data was sent due to that the type of fuel currently being utilized by the vehicle changed
 	//  PARKING_BRAKE_SWITCH_CHANGE - Data was sent due to that the parking brake state has changed
-	//  BATTERY_PACK_CHARGING_STATUS_CHANGE - Data was sent due to a change in the battery pack charging status.
-	//  BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE - Data was sent due to a change in the battery pack charging connection status.
+	//  BATTERY_PACK_CHARGING_STATUS_CHANGE - Data was sent due to a change in the battery pack charging status
+	//  BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE - Data was sent due to a change in the battery pack charging connection status
 	//  TRAILER_CONNECTED - One or several trailers were connected
 	//  TRAILER_DISCONNECTED - One or several trailers were disconnected
-	TriggerType string `json:"triggerType"`
+	TriggerType TriggerType `json:"triggerType"`
 }
 
 // TriggerChargingConnectionStatusInfoEvent CONNECTING - Vehicle is being connected to a charger
@@ -780,6 +757,29 @@ type TriggerChargingConnectionStatusInfoEvent string
 //	TIMER - A predefined time has passed since last charge status update. (Frequency is outside the scope of rFMS)
 //	CHARGING_LEVEL - The charging level has reached a predefined level. (Charging levels are outside the scope of rFMS)
 type TriggerChargingStatusInfoEvent string
+
+// TriggerType Defines the different types of triggers that can cause vehicle data to be reported.
+//
+//	TIMER - Data was sent due to a timer trigger. (Timer value set outside rFMS scope)
+//	TELL_TALE - Data was sent due to that at least one tell tale changed state
+//	DRIVER_LOGIN - Data was sent due to a successful driver login
+//	DRIVER_LOGOUT - Data was sent due to a driver logout
+//	IGNITION_ON - Data was sent due to an ignition on
+//	IGNITION_OFF - Data was sent due to an ignition off
+//	ENGINE_ON - Data was sent due to an engine on. For electric motor crank is on
+//	ENGINE_OFF - Data was sent due to an engine off. For electric motor crank is off
+//	PTO_ENABLED - Data was sent due to that a PTO was enabled, will be sent for each PTO that gets enabled
+//	PTO_DISABLED - Data was sent due to that a PTO was disabled, will be sent for each PTO that gets disabled
+//	DISTANCE_TRAVELLED - Data was sent due to that a set distance was travelled. (Distance set outside rFMS scope)
+//	DRIVER_1_WORKING_STATE_CHANGED - Data was sent due to that driver 1 changed working state
+//	DRIVER_2_WORKING_STATE_CHANGED - Data was sent due to that driver 2 changed working state
+//	FUEL_TYPE_CHANGE - Data was sent due to that the type of fuel currently being utilized by the vehicle changed
+//	PARKING_BRAKE_SWITCH_CHANGE - Data was sent due to that the parking brake state has changed
+//	BATTERY_PACK_CHARGING_STATUS_CHANGE - Data was sent due to a change in the battery pack charging status
+//	BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE - Data was sent due to a change in the battery pack charging connection status
+//	TRAILER_CONNECTED - One or several trailers were connected
+//	TRAILER_DISCONNECTED - One or several trailers were disconnected
+type TriggerType string
 
 // UptimeData defines model for UptimeData.
 type UptimeData struct {
@@ -1122,7 +1122,7 @@ type GetVehiclepositionsParams struct {
 	LatestOnly *bool `form:"latestOnly,omitempty" json:"latestOnly,omitempty"`
 
 	// TriggerFilter Will only return data reports that was triggered by the trigger defined by the filter. Detailed information for this parameter can be found in the Trigger filter chapter in the API documentation.
-	TriggerFilter *GetVehiclepositionsParamsTriggerFilter `form:"triggerFilter,omitempty" json:"triggerFilter,omitempty"`
+	TriggerFilter *TriggerType `form:"triggerFilter,omitempty" json:"triggerFilter,omitempty"`
 
 	// LastVin The response will return the next block of vehicles not including the one with the given VIN. When the last call to the vehicle list function had MoreDataAvailable-parameter set to true you must supply the VIN of the last item in the list as lastVin parameter in the next call.
 	LastVin *LastVin `form:"lastVin,omitempty" json:"lastVin,omitempty"`
@@ -1133,9 +1133,6 @@ type GetVehiclepositionsParams struct {
 
 // GetVehiclepositionsParamsDatetype defines parameters for GetVehiclepositions.
 type GetVehiclepositionsParamsDatetype string
-
-// GetVehiclepositionsParamsTriggerFilter defines parameters for GetVehiclepositions.
-type GetVehiclepositionsParamsTriggerFilter string
 
 // GetVehiclesParams defines parameters for GetVehicles.
 type GetVehiclesParams struct {
@@ -1164,7 +1161,7 @@ type GetVehiclestatusesParams struct {
 	ContentFilter *[]GetVehiclestatusesParamsContentFilter `form:"contentFilter,omitempty" json:"contentFilter,omitempty"`
 
 	// TriggerFilter Will only return data reports that were triggered by the triggers defined by the filter. Detailed information for this parameter can be found in the Trigger filter chapter in the API documentation. If this filter parameter isn't supplied the returned data reports contain data reports triggered by any trigger.
-	TriggerFilter *[]GetVehiclestatusesParamsTriggerFilter `form:"triggerFilter,omitempty" json:"triggerFilter,omitempty"`
+	TriggerFilter *[]TriggerType `form:"triggerFilter,omitempty" json:"triggerFilter,omitempty"`
 
 	// LatestOnly If this value is set to true only the last latest vehicle status event, matching the trigger filter (if used), is returned for each vehicle in the response. If this value is set to false (or not present) all vehicle status events matching the starttime/stoptime criteria is returned for each vehicle in the response.
 	LatestOnly *bool `form:"latestOnly,omitempty" json:"latestOnly,omitempty"`
@@ -1181,6 +1178,3 @@ type GetVehiclestatusesParamsDatetype string
 
 // GetVehiclestatusesParamsContentFilter defines parameters for GetVehiclestatuses.
 type GetVehiclestatusesParamsContentFilter string
-
-// GetVehiclestatusesParamsTriggerFilter defines parameters for GetVehiclestatuses.
-type GetVehiclestatusesParamsTriggerFilter string
