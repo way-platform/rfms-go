@@ -1,6 +1,12 @@
 package rfms
 
-import "net/http"
+import (
+	"context"
+	"fmt"
+	"io"
+	"net/http"
+	"runtime/debug"
+)
 
 // Client is an rFMS API client.
 type Client struct {
@@ -22,4 +28,26 @@ func NewClient(baseURL string, opts ...ClientOption) *Client {
 		baseURL:    baseURL,
 		httpClient: httpClient,
 	}
+}
+
+func (c *Client) newRequest(ctx context.Context, method, path string, body io.Reader) (_ *http.Request, err error) {
+	defer func() {
+		if err != nil {
+			err = fmt.Errorf("new request: %w", err)
+		}
+	}()
+	request, err := http.NewRequestWithContext(ctx, method, c.baseURL+path, body)
+	if err != nil {
+		return nil, err
+	}
+	request.Header.Set("User-Agent", getUserAgent())
+	return request, nil
+}
+
+func getUserAgent() string {
+	userAgent := "rfms-go"
+	if info, ok := debug.ReadBuildInfo(); ok && info.Main.Version != "" {
+		userAgent = fmt.Sprintf("rfms-go/%s", info.Main.Version)
+	}
+	return userAgent
 }

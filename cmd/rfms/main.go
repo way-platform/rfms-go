@@ -26,7 +26,7 @@ func newCommand() *cobra.Command {
 
 func newRootCommand() *cobra.Command {
 	cmd := newCommand()
-	cmd.Use = "rfmsctl"
+	cmd.Use = "rfms"
 	cmd.Short = "rFMS CLI"
 	cmd.AddCommand(newAuthCommand())
 	cmd.AddCommand(newVehiclesCommand())

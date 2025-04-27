@@ -14,14 +14,18 @@ import (
 	"time"
 )
 
+// scaniaTokenAuthenticator is an [TokenAuthenticator] for Scania's rFMS API.
 type scaniaTokenAuthenticator struct {
+	baseURL      string
 	clientID     string
 	clientSecret string
 	httpClient   *http.Client
 }
 
+// NewScaniaTokenAuthenticator creates a new [TokenAuthenticator] for Scania's rFMS API.
 func NewScaniaTokenAuthenticator(clientID string, clientSecret string) TokenAuthenticator {
 	return &scaniaTokenAuthenticator{
+		baseURL:      ScaniaAuthBaseURL,
 		clientID:     clientID,
 		clientSecret: clientSecret,
 		httpClient:   http.DefaultClient,
@@ -54,15 +58,15 @@ func (a *scaniaTokenAuthenticator) Authenticate(ctx context.Context) (_ TokenCre
 
 // Refresh implements the [TokenAuthenticator] interface.
 func (a *scaniaTokenAuthenticator) Refresh(ctx context.Context, refreshToken string) (_ TokenCredentials, err error) {
-	apiMethod, apiPath := http.MethodPost, ScaniaBaseURL+"/auth/refreshtoken"
+	apiMethod, apiPath := http.MethodPost, "/refreshtoken"
 	defer func() {
 		if err != nil {
-			err = fmt.Errorf("refresh: %w", err)
+			err = fmt.Errorf("%s %s: %w", apiMethod, apiPath, err)
 		}
 	}()
-	req, err := http.NewRequestWithContext(ctx, apiMethod, apiPath, nil)
+	req, err := a.newRequest(ctx, apiMethod, apiPath, nil)
 	if err != nil {
-		return TokenCredentials{}, fmt.Errorf("create request: %w", err)
+		return TokenCredentials{}, nil
 	}
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	body := url.Values{}
@@ -95,15 +99,15 @@ func (a *scaniaTokenAuthenticator) Refresh(ctx context.Context, refreshToken str
 
 // getChallenge requests an authentication challenge.
 func (a *scaniaTokenAuthenticator) getChallenge(ctx context.Context) (_ string, err error) {
-	apiMethod, apiPath := http.MethodPost, ScaniaBaseURL+"/auth/clientid2challenge"
+	apiMethod, apiPath := http.MethodPost, "/clientid2challenge"
 	defer func() {
 		if err != nil {
-			err = fmt.Errorf("get challenge: %w", err)
+			err = fmt.Errorf("%s %s: %w", apiMethod, apiPath, err)
 		}
 	}()
-	req, err := http.NewRequestWithContext(ctx, apiMethod, apiPath, nil)
+	req, err := a.newRequest(ctx, apiMethod, apiPath, nil)
 	if err != nil {
-		return "", fmt.Errorf("create request: %w", err)
+		return "", nil
 	}
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	body := url.Values{}
@@ -131,13 +135,13 @@ func (a *scaniaTokenAuthenticator) exchangeToken(
 	ctx context.Context,
 	challengeResponse string,
 ) (_ TokenCredentials, err error) {
-	apiMethod, apiPath := http.MethodPost, ScaniaBaseURL+"/auth/response2token"
+	apiMethod, apiPath := http.MethodPost, "/response2token"
 	defer func() {
 		if err != nil {
-			err = fmt.Errorf("exchange token: %w", err)
+			err = fmt.Errorf("%s %s: %w", apiMethod, apiPath, err)
 		}
 	}()
-	req, err := http.NewRequestWithContext(ctx, apiMethod, apiPath, nil)
+	req, err := a.newRequest(ctx, apiMethod, apiPath, nil)
 	if err != nil {
 		return TokenCredentials{}, fmt.Errorf("create request: %w", err)
 	}
@@ -168,6 +172,20 @@ func (a *scaniaTokenAuthenticator) exchangeToken(
 		RefreshToken:           response.RefreshToken,
 		RefreshTokenExpireTime: now.Add(time.Hour * 24),
 	}, nil
+}
+
+func (a *scaniaTokenAuthenticator) newRequest(ctx context.Context, method, path string, body io.Reader) (_ *http.Request, err error) {
+	defer func() {
+		if err != nil {
+			err = fmt.Errorf("new request: %w", err)
+		}
+	}()
+	request, err := http.NewRequestWithContext(ctx, method, a.baseURL+path, body)
+	if err != nil {
+		return nil, err
+	}
+	request.Header.Set("User-Agent", getUserAgent())
+	return request, nil
 }
 
 // computeScaniaChallengeResponse calculates the HMAC-SHA256 of a challenge using a secret key.

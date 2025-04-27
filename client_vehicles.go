@@ -21,20 +21,20 @@ type ListVehiclesResponse struct {
 	// Vehicles in the response.
 	Vehicles []Vehicle `json:"vehicles,omitempty"`
 	// MoreDataAvailable indicates if there is more data available.
-	MoreDataAvailable bool
+	MoreDataAvailable bool `json:"moreDataAvailable,omitempty"`
 	// MoreDataAvailableLink is the link to the next page of data.
-	MoreDataAvailableLink string
+	MoreDataAvailableLink string `json:"moreDataAvailableLink,omitempty"`
 }
 
 // ListVehicles implements the rFMS API method "GET /vehicles".
 func (c *Client) ListVehicles(ctx context.Context, request *ListVehiclesRequest) (_ *ListVehiclesResponse, err error) {
-	apiMethod, apiURL := "GET", c.baseURL+"/rfms4/vehicles" // TODO: Don't assume /rfms4
+	apiMethod, apiPath := "GET", "/vehicles"
 	defer func() {
 		if err != nil {
-			err = fmt.Errorf("%s %s: %w", apiMethod, apiURL, err)
+			err = fmt.Errorf("%s %s: %w", apiMethod, apiPath, err)
 		}
 	}()
-	req, err := http.NewRequestWithContext(ctx, apiMethod, apiURL, nil)
+	req, err := c.newRequest(ctx, apiMethod, apiPath, nil)
 	if err != nil {
 		return nil, fmt.Errorf("create request: %w", err)
 	}
@@ -49,7 +49,7 @@ func (c *Client) ListVehicles(ctx context.Context, request *ListVehiclesRequest)
 		return nil, fmt.Errorf("send request: %w", err)
 	}
 	defer resp.Body.Close()
-	if resp.StatusCode != 200 {
+	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("response status code: %d", resp.StatusCode)
 	}
 	data, err := io.ReadAll(resp.Body)
