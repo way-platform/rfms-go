@@ -1,0 +1,2510 @@
+{
+    "x-generator": "NSwag v14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))",
+    "openapi": "3.0.0",
+    "info": {
+        "title": "rFMS4",
+        "description": "API for rFMS vehicle data",
+        "contact": {
+            "name": "Developer Support",
+            "url": "https://developer.scania.com/",
+            "email": "developer@scania.com"
+        },
+        "version": "4.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://dataaccess.scania.com"
+        }
+    ],
+    "paths": {
+        "/rfms4/vehiclepositions": {
+            "get": {
+                "tags": [
+                    "Vehicle Data"
+                ],
+                "summary": "Positions for one or more vehicles",
+                "operationId": "VehiclePositions_VehiclePositionsGet",
+                "parameters": [
+                    {
+                        "name": "X-Correlation-ID",
+                        "in": "header",
+                        "description": "A client unique request id used for fault tracing at the API supplier. This shall be unique for each request if used. Max 40 characters.",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": ""
+                    },
+                    {
+                        "name": "datetype",
+                        "in": "query",
+                        "description": "The start/stop times are compared to the created or received time of the position reports. If this isn't supplied all times are received times.",
+                        "schema": {
+                            "type": "string",
+                            "default": "received",
+                            "enum": [
+                                "created",
+                                "received"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "starttime",
+                        "in": "query",
+                        "description": "Only the data created/received at or after this time should be returned. (i.e. >= starttime)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "stoptime",
+                        "in": "query",
+                        "description": "Only the data created/received before this time should be returned. (i.e. < stoptime)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "vin",
+                        "in": "query",
+                        "description": "Only the data created by the vehicle with this VIN should be returned",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "latestOnly",
+                        "in": "query",
+                        "description": "If this value is set to true only the last latest position, matching the trigger filter (if used), is returned for each vehicle in the response. If this value is set to false (or not present) all positions matching the starttime/stoptime criteria is returned for each vehicle in the response.",
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    {
+                        "name": "triggerFilter",
+                        "in": "query",
+                        "description": "Will only return data reports that was triggered by the trigger defined by the filter. Detailed information for this parameter can be found in the Trigger filter chapter in the API documentation.",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "TIMER",
+                                "DISTANCE_TRAVELLED",
+                                "DRIVER_1_WORKING_STATE_CHANGED",
+                                "DRIVER_2_WORKING_STATE_CHANGED",
+                                "BATTERY_PACK_CHARGING_STATUS_CHANGE",
+                                "IGNITION_CHANGE",
+                                "TRAILER_CONNECTION_CHANGE"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "lastVin",
+                        "in": "query",
+                        "description": "The response will return the next block of vehicles not including the one with the given VIN. When the last call to the vehicle list function had MoreDataAvailable-parameter set to true you must supply the VIN of the last item in the list as lastVin parameter in the next call.",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json; rfms=vehiclepositions.v4.0": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VehiclePositionResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The server cannot or will not process the request due to an apparent client error  (e.g., malformed request syntax, invalid request message framing, or deceptive request routing)  Possible reason: Mandatory field missing, e.g. Authentication Header empty or missing  The comments for the 4xx codes are from the Wikipedia article [List of HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors), which is released under the [Creative Commons Attribution-Share-Alike License 3.0](https://creativecommons.org/licenses/by-sa/3.0/). View authors on this [page](https://en.wikipedia.org/w/index.php?title&#x3D;List_of_HTTP_status_codes&amp;action&#x3D;history).",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorObject"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Similar to 403 Forbidden, but specifically for use when authentication is required and has failed or has not yet been provided. The response must include a WWW-Authenticate header field containing a challenge applicable to the requested resource. See Basic access authentication and Digest access authentication.  Possible reasons: Wrong credentials, Login credentials expired and/or Access token not valid or expired  The comments for the 4xx codes are from the Wikipedia article [List of HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors), which is released under the [Creative Commons Attribution-Share-Alike License 3.0](https://creativecommons.org/licenses/by-sa/3.0/). View authors on this [page](https://en.wikipedia.org/w/index.php?title&#x3D;List_of_HTTP_status_codes&amp;action&#x3D;history).",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorObject"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The request was a valid request, but the server is refusing to respond to it. Unlike a 401 Unauthorized response, authenticating will make no difference. On servers where authentication is required, this commonly means that the provided credentials were successfully authenticated but that the credentials still do not grant the client permission to access the resource (e.g. a recognized user attempting to access restricted content)  Possible reason: Insufficient rights for the service, no rights on any service of this vehicle and/or Response is too large  The comments for the 4xx codes are from the Wikipedia article [List of HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors), which is released under the [Creative Commons Attribution-Share-Alike License 3.0](https://creativecommons.org/licenses/by-sa/3.0/). View authors on this [page](https://en.wikipedia.org/w/index.php?title&#x3D;List_of_HTTP_status_codes&amp;action&#x3D;history).",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorObject"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested resource could not be found but may be available again in the future.  Subsequent requests by the client are permissible  Possible reason: vehicle unknown and/or rFMS-Version not supported  The comments for the 4xx codes are from the Wikipedia article [List of HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors), which is released under the [Creative Commons Attribution-Share-Alike License 3.0](https://creativecommons.org/licenses/by-sa/3.0/). View authors on this [page](https://en.wikipedia.org/w/index.php?title&#x3D;List_of_HTTP_status_codes&amp;action&#x3D;history).",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorObject"
+                                }
+                            }
+                        }
+                    },
+                    "406": {
+                        "description": "Possible reason: unsupported Accept parameter sent",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorObject"
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "The user has sent too many requests in a given amount of time. Intended for use with rate limiting schemes Possible reason Request sent too often and/or Max concurrent calls ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorObject"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/rfms4/vehicles": {
+            "get": {
+                "tags": [
+                    "Vehicle Data"
+                ],
+                "summary": "List of vehicles",
+                "description": "The vehicle resource is used to get a list of all the vehicles the client credentials  has access to. The vehicle list is always returned in the same order. The max number of items returned in one call is OEM specific.",
+                "operationId": "Vehicles_VehiclesGet",
+                "parameters": [
+                    {
+                        "name": "X-Correlation-ID",
+                        "in": "header",
+                        "description": "A client unique request id used for fault tracing at the API supplier. This shall be unique for each request if used. Max 40 characters.",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": ""
+                    },
+                    {
+                        "name": "lastVin",
+                        "in": "query",
+                        "description": "The response will return the next block of vehicles not including the one with the given VIN. When the last call to the vehicle list function had MoreDataAvailable-parameter set to true you must supply the VIN of the last item in the list as lastVin parameter in the next call.",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json; rfms=vehicles.v4.0": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VehicleResponseDto"
+                                }
+                            },
+                            "application/json; rfms=vehicles.v4.0; scania=vehicles.v1": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VehicleResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The server cannot or will not process the request due to an apparent client error  (e.g., malformed request syntax, invalid request message framing, or deceptive request routing)  Possible reason: Mandatory field missing, e.g. Authentication Header empty or missing  The comments for the 4xx codes are from the Wikipedia article [List of HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors), which is released under the [Creative Commons Attribution-Share-Alike License 3.0](https://creativecommons.org/licenses/by-sa/3.0/). View authors on this [page](https://en.wikipedia.org/w/index.php?title&#x3D;List_of_HTTP_status_codes&amp;action&#x3D;history).",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorObject"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Similar to 403 Forbidden, but specifically for use when authentication is required and has failed or has not yet been provided. The response must include a WWW-Authenticate header field containing a challenge applicable to the requested resource. See Basic access authentication and Digest access authentication.  Possible reasons: Wrong credentials, Login credentials expired and/or Access token not valid or expired  The comments for the 4xx codes are from the Wikipedia article [List of HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors), which is released under the [Creative Commons Attribution-Share-Alike License 3.0](https://creativecommons.org/licenses/by-sa/3.0/). View authors on this [page](https://en.wikipedia.org/w/index.php?title&#x3D;List_of_HTTP_status_codes&amp;action&#x3D;history).",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorObject"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The request was a valid request, but the server is refusing to respond to it. Unlike a 401 Unauthorized response, authenticating will make no difference. On servers where authentication is required, this commonly means that the provided credentials were successfully authenticated but that the credentials still do not grant the client permission to access the resource (e.g. a recognized user attempting to access restricted content)  Possible reason: Insufficient rights for the service, no rights on any service of this vehicle and/or Response is too large  The comments for the 4xx codes are from the Wikipedia article [List of HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors), which is released under the [Creative Commons Attribution-Share-Alike License 3.0](https://creativecommons.org/licenses/by-sa/3.0/). View authors on this [page](https://en.wikipedia.org/w/index.php?title&#x3D;List_of_HTTP_status_codes&amp;action&#x3D;history).",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorObject"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested resource could not be found but may be available again in the future.  Subsequent requests by the client are permissible  Possible reason: vehicle unknown and/or rFMS-Version not supported  The comments for the 4xx codes are from the Wikipedia article [List of HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors), which is released under the [Creative Commons Attribution-Share-Alike License 3.0](https://creativecommons.org/licenses/by-sa/3.0/). View authors on this [page](https://en.wikipedia.org/w/index.php?title&#x3D;List_of_HTTP_status_codes&amp;action&#x3D;history).",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorObject"
+                                }
+                            }
+                        }
+                    },
+                    "406": {
+                        "description": "Possible reason: unsupported Accept parameter sent",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorObject"
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "The user has sent too many requests in a given amount of time. Intended for use with rate limiting schemes Possible reason Request sent too often and/or Max concurrent calls ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorObject"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/rfms4/vehiclestatuses": {
+            "get": {
+                "tags": [
+                    "Vehicle Data"
+                ],
+                "summary": "Status for one or more vehicles",
+                "description": "The vehicle status resource is used to get the status reports for one or several vehicles. Using the starttime, stoptime & latestOnly parameters it can be used to get all historical status reports between a start and stop time or the latest known status only. Using the vin parameter it can be used to get all historical vehicle reports or latest status for one individual vehicle. If a request is made for data in a period where no data has been received, an empty list will be returned. The max number of items returned in one call is OEM specific. It is mandatory to either supply the starttime (for historical requests) or latestOnly (for getting the latest data). If neither of these parameters is set, a HTTP 400 error will be returned indicating that the parameters supplied are invalid. If latestOnly and starttime and/or stoptime are set, a HTTP 400 error will be returned indicating that the parameters supplied are invalid. If the moreDataAvailable is set to true in the response and the latestOnly was set to true in the request then the next request shall state the last received VIN to get the full set. The vehicles are always returned in the same order, when using latestOnly. The ordering is OEM specific. Otherwise use the last ReceivedDateTime + 1 second of the last vehicle from the last response using it as the starttime parameter in the next request.",
+                "operationId": "VehicleStatuses_VehicleStatusesGet",
+                "parameters": [
+                    {
+                        "name": "X-Correlation-ID",
+                        "in": "header",
+                        "description": "A client unique request id used for fault tracing at the API supplier. This shall be unique for each request if used. Max 40 characters.",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": ""
+                    },
+                    {
+                        "name": "datetype",
+                        "in": "query",
+                        "description": "The start/stop times are compared to the created or received time of the position reports. If this isn't supplied all times are received times.",
+                        "schema": {
+                            "type": "string",
+                            "default": "received",
+                            "enum": [
+                                "created",
+                                "received"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "starttime",
+                        "in": "query",
+                        "description": "Only the data created/received at or after this time should be returned. (i.e. >= starttime)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "stoptime",
+                        "in": "query",
+                        "description": "Only the data created/received before this time should be returned. (i.e. < stoptime)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "vin",
+                        "in": "query",
+                        "description": "Only the data created by the vehicle with this VIN should be returned",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "contentFilter",
+                        "in": "query",
+                        "style": "form",
+                        "description": "Will only return data reports that contain information in the area defined by the filters. Detailed information for this parameter can be found in the Content chapter. If this filter parameter isn't supplied the returned reports contain all available blocks. If the content filter is set and the latestOnly is set to true then the response will be the last received data containing the data set in the content filter",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "ACCUMULATED",
+                                    "SNAPSHOT",
+                                    "UPTIME"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "triggerFilter",
+                        "in": "query",
+                        "style": "form",
+                        "description": "Will only return data reports that was triggered by the trigger defined by the filter. Detailed information for this parameter can be found in the Trigger filter chapter in the API documentation.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "TIMER",
+                                    "DISTANCE_TRAVELLED",
+                                    "DRIVER_1_WORKING_STATE_CHANGED",
+                                    "DRIVER_2_WORKING_STATE_CHANGED",
+                                    "BATTERY_PACK_CHARGING_STATUS_CHANGE",
+                                    "IGNITION_CHANGE",
+                                    "TRAILER_CONNECTION_CHANGE"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "latestOnly",
+                        "in": "query",
+                        "description": "If this value is set to true only the last latest position, matching the trigger filter (if used), is returned for each vehicle in the response. If this value is set to false (or not present) all positions matching the starttime/stoptime criteria is returned for each vehicle in the response.",
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    {
+                        "name": "lastVin",
+                        "in": "query",
+                        "description": "The response will return the next block of vehicles not including the one with the given VIN. When the last call to the vehicle list function had MoreDataAvailable-parameter set to true you must supply the VIN of the last item in the list as lastVin parameter in the next call.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json; rfms=vehiclestatuses.v4.0": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VehicleStatusResponseDto"
+                                }
+                            },
+                            "application/json; rfms=vehiclestatuses.v4.0; scania=vehiclestatuses.v1": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VehicleStatusResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The server cannot or will not process the request due to an apparent client error  (e.g., malformed request syntax, invalid request message framing, or deceptive request routing)  Possible reason: Mandatory field missing, e.g. Authentication Header empty or missing  The comments for the 4xx codes are from the Wikipedia article [List of HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors), which is released under the [Creative Commons Attribution-Share-Alike License 3.0](https://creativecommons.org/licenses/by-sa/3.0/). View authors on this [page](https://en.wikipedia.org/w/index.php?title&#x3D;List_of_HTTP_status_codes&amp;action&#x3D;history).",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorObject"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Similar to 403 Forbidden, but specifically for use when authentication is required and has failed or has not yet been provided. The response must include a WWW-Authenticate header field containing a challenge applicable to the requested resource. See Basic access authentication and Digest access authentication.  Possible reasons: Wrong credentials, Login credentials expired and/or Access token not valid or expired  The comments for the 4xx codes are from the Wikipedia article [List of HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors), which is released under the [Creative Commons Attribution-Share-Alike License 3.0](https://creativecommons.org/licenses/by-sa/3.0/). View authors on this [page](https://en.wikipedia.org/w/index.php?title&#x3D;List_of_HTTP_status_codes&amp;action&#x3D;history).",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorObject"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The request was a valid request, but the server is refusing to respond to it. Unlike a 401 Unauthorized response, authenticating will make no difference. On servers where authentication is required, this commonly means that the provided credentials were successfully authenticated but that the credentials still do not grant the client permission to access the resource (e.g. a recognized user attempting to access restricted content)  Possible reason: Insufficient rights for the service, no rights on any service of this vehicle and/or Response is too large  The comments for the 4xx codes are from the Wikipedia article [List of HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors), which is released under the [Creative Commons Attribution-Share-Alike License 3.0](https://creativecommons.org/licenses/by-sa/3.0/). View authors on this [page](https://en.wikipedia.org/w/index.php?title&#x3D;List_of_HTTP_status_codes&amp;action&#x3D;history).",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorObject"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested resource could not be found but may be available again in the future.  Subsequent requests by the client are permissible  Possible reason: vehicle unknown and/or rFMS-Version not supported  The comments for the 4xx codes are from the Wikipedia article [List of HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors), which is released under the [Creative Commons Attribution-Share-Alike License 3.0](https://creativecommons.org/licenses/by-sa/3.0/). View authors on this [page](https://en.wikipedia.org/w/index.php?title&#x3D;List_of_HTTP_status_codes&amp;action&#x3D;history).",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorObject"
+                                }
+                            }
+                        }
+                    },
+                    "406": {
+                        "description": "Possible reason: unsupported Accept parameter sent",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorObject"
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "The user has sent too many requests in a given amount of time. Intended for use with rate limiting schemes Possible reason Request sent too often and/or Max concurrent calls ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorObject"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "VehiclePositionResponseDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "vehiclePositionResponse",
+                    "moreDataAvailable",
+                    "requestServerDateTime"
+                ],
+                "properties": {
+                    "vehiclePositionResponse": {
+                        "description": "Gets or Sets VehiclePositionResponse",
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/VehiclePositionsDto"
+                            }
+                        ]
+                    },
+                    "moreDataAvailable": {
+                        "type": "boolean",
+                        "description": "This will be set to true if the result set was too large to be sent back in one reply. A new request must be sent to get the rest of the vehicle positions, where the starttime parameter must be supplied. The starttime should be set to the latest ReceivedDateTime + 1 second of the last vehicle in the result set of this message."
+                    },
+                    "moreDataAvailableLink": {
+                        "type": "string",
+                        "description": "Populated with the link to the next part of the result when moreDataAvailable is true. The link is relative, i.e. starts with /rfms/vehiclepositions, and preserves any query parameters from the original request.",
+                        "nullable": true
+                    },
+                    "requestServerDateTime": {
+                        "type": "string",
+                        "description": "Time to be used to ask for historical data at customers (for starttime), to solve the problem of having different times at server and clients. This is the time at the server when this request was received. To avoid losing any messages or get duplicates, this is the time that should be supplied in the startTime parameter in the next request in iso8601 format.",
+                        "format": "date-time",
+                        "minLength": 1
+                    }
+                }
+            },
+            "VehiclePositionsDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "vehiclePositions": {
+                        "type": "array",
+                        "description": "Gets or Sets VehiclePositions",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/VehiclePositionDto"
+                        }
+                    }
+                }
+            },
+            "VehiclePositionDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "vin",
+                    "triggerType",
+                    "createdDateTime",
+                    "receivedDateTime"
+                ],
+                "properties": {
+                    "vin": {
+                        "type": "string",
+                        "description": "Gets or Sets Vin",
+                        "minLength": 1
+                    },
+                    "triggerType": {
+                        "description": "Gets or Sets TriggerType",
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TriggerDto"
+                            }
+                        ]
+                    },
+                    "createdDateTime": {
+                        "type": "string",
+                        "description": "Gets or Sets CreatedDateTime",
+                        "format": "date-time",
+                        "minLength": 1
+                    },
+                    "receivedDateTime": {
+                        "type": "string",
+                        "description": "Gets or Sets ReceivedDateTime",
+                        "format": "date-time",
+                        "minLength": 1
+                    },
+                    "gnssPosition": {
+                        "description": "Gets or Sets GnssPosition",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/GNSSPositionDto"
+                            }
+                        ]
+                    },
+                    "wheelBasedSpeed": {
+                        "type": "number",
+                        "description": "Wheel-Based Vehicle Speed in km/h (Speed of the vehicle as calculated from wheel or tailshaft speed)",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "tachographSpeed": {
+                        "type": "number",
+                        "description": "Tachograph vehicle speed in km/h (Speed of the vehicle registered by the tachograph)",
+                        "format": "double",
+                        "nullable": true
+                    }
+                }
+            },
+            "TriggerDto": {
+                "type": "object",
+                "description": "This description is placed here due to limitations of describing references in OpenAPI  Property __driverId__:  The driver id of driver. (independant whether it is driver or Co-driver)  This is only set if the TriggerType = DRIVER_LOGIN, DRIVER_LOGOUT, DRIVER_1_WORKING_STATE_CHANGED or DRIVER_2_WORKING_STATE_CHANGED  For DRIVER_LOGIN it is the id of the driver that logged in  For DRIVER_LOGOUT it is the id of the driver that logged out  For DRIVER_1_WORKING_STATE_CHANGED it is the id of driver 1  For DRIVER_2_WORKING_STATE_CHANGED it is the id of driver 2  Property __tellTaleInfo__:  The tell tale(s) that triggered this message.  This is only set if the TriggerType = TELL_TALE",
+                "additionalProperties": false,
+                "required": [
+                    "triggerType",
+                    "context"
+                ],
+                "properties": {
+                    "triggerType": {
+                        "type": "string",
+                        "description": "Trigger types for Context=RFMS:  TIMER - Data was sent due to a timer trigger. (Timer value set outside rFMS scope)  IGNITION_ON - Data was sent due to an ignition on  IGNITION_OFF - Data was sent due to an ignition off  PTO_ENABLED - Data was sent due to that a PTO was enabled, will be sent for each PTO that gets enabled  PTO_DISABLED - Data was sent due to that a PTO was disabled, will be sent for each PTO that gets disabled.  DRIVER_LOGIN - Data was sent due to a successful driver login.  DRIVER_LOGOUT - Data was sent due to a driver logout  TELL_TALE - Data was sent due to that at least one tell tale changed state  ENGINE_ON - Data was sent due to an engine on. For electric motor crank is on  ENGINE_OFF - Data was sent due to an engine off. For electric motor crank is off  DRIVER_1_WORKING_STATE_CHANGED - Data was sent due to that driver 1 changed working state  DRIVER_2_WORKING_STATE_CHANGED - Data was sent due to that driver 2 changed working state  DISTANCE_TRAVELLED - Data was sent due to that a set distance was travelled. (Distance set outside rFMS scope)  FUEL_TYPE_CHANGE - Data was sent due to that the type of fuel currently being utilized by the vehicle changed  PARKING_BRAKE_SWITCH_CHANGE - Data was sent due to that the parking brake state has changed  BATTERY_PACK_CHARGING_STATUS_CHANGE - Data was sent due to a change in the battery pack charging status.  BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE - Data was sent due to a change in the battery pack charging connection status.  TRAILER_CONNECTED - One or several trailers were connected  TRAILER_DISCONNECTED - One or several trailers were disconnected",
+                        "minLength": 1
+                    },
+                    "context": {
+                        "type": "string",
+                        "description": "The context defines if this is part of the standard or OEM specific. rFMS standard values VOLVO TRUCKS, SCANIA, DAIMLER, IVECO, DAF, MAN, RENAULT TRUCKS, VDL, VOLVO BUSES, IVECO BUS, IRISBUS If the Trigger is defined in the rFMS standard, the Context = RFMS",
+                        "minLength": 1
+                    },
+                    "triggerInfo": {
+                        "type": "array",
+                        "description": "Additional TriggerInfo content for OEM specific triggers E.g. TRAILER_ATTACHED_TRIGGER [id of trailer]",
+                        "nullable": true,
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "driverId": {
+                        "description": "Gets or Sets DriverId",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/DriverIdDto"
+                            }
+                        ]
+                    },
+                    "ptoId": {
+                        "type": "string",
+                        "description": "The id of a PTO. This is only set if the TriggerType = PTO_ENABLED or PTO_DISABLED",
+                        "nullable": true
+                    },
+                    "tellTaleInfo": {
+                        "description": "Gets or Sets TellTaleInfo",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TellTaleDto"
+                            }
+                        ]
+                    },
+                    "chargingStatusInfo": {
+                        "description": "Gets or Sets ChargingStatusInfo",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TriggerChargingStatusInfoDto"
+                            }
+                        ]
+                    },
+                    "chargingConnectionStatusInfo": {
+                        "description": "Gets or Sets ChargingConnectionStatusInfo",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ChargingConnectionStatusInfoDto"
+                            }
+                        ]
+                    }
+                }
+            },
+            "DriverIdDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "tachoDriverIdentification": {
+                        "description": "Gets or Sets TachoDriverIdentification",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TachoDriverIdentificationDto"
+                            }
+                        ]
+                    },
+                    "oemDriverIdentification": {
+                        "description": "Gets or Sets OemDriverIdentification",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/OemDriverIdentificationDto"
+                            }
+                        ]
+                    }
+                }
+            },
+            "TachoDriverIdentificationDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "driverIdentification",
+                    "cardIssuingMemberState"
+                ],
+                "properties": {
+                    "driverIdentification": {
+                        "type": "string",
+                        "description": "The unique identification of a driver in a Member State. This fields is formatted according the definition for driverIdentification in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b",
+                        "minLength": 1
+                    },
+                    "cardIssuingMemberState": {
+                        "type": "string",
+                        "description": "The country alpha code of the Member State having issued the card. This fields is formatted according the definition for NationAlpha in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b",
+                        "minLength": 1
+                    },
+                    "driverAuthenticationEquipment": {
+                        "description": "Code to distinguish different types of equipment for the tachograph application. See description of the field 'DriverAuthenticationEquipment' in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/DriverAuthenticationEquipmentEnum"
+                            }
+                        ]
+                    },
+                    "cardReplacementIndex": {
+                        "type": "string",
+                        "description": "A card replacement index. This fields is formatted according the definition for CardReplacementIndex (chap 2.26) in: COMMISSION REGULATION (EC) No 1360/2002 Annex 1b",
+                        "nullable": true
+                    },
+                    "cardRenewalIndex": {
+                        "type": "string",
+                        "description": "A card renewal index. This fields is formatted according the definition for CardRenewalIndex (chap 2.25) in: COMMISSION REGULATION (EC) No 1360/2002 Annex 1b",
+                        "nullable": true
+                    }
+                }
+            },
+            "DriverAuthenticationEquipmentEnum": {
+                "type": "string",
+                "description": "Code to distinguish different types of equipment for the tachograph application. See description of the field 'DriverAuthenticationEquipment' in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b",
+                "x-enumNames": [
+                    "RESERVED",
+                    "DRIVERCARD",
+                    "CONTROLCARD",
+                    "COMPANYCARD",
+                    "MANUFACTURINGCARD",
+                    "VEHICLEUNIT",
+                    "MOTIONSENSOR"
+                ],
+                "enum": [
+                    "RESERVED",
+                    "DRIVER_CARD",
+                    "CONTROL_CARD",
+                    "COMPANY_CARD",
+                    "MANUFACTURING_CARD",
+                    "VEHICLE_UNIT",
+                    "MOTION_SENSOR"
+                ]
+            },
+            "OemDriverIdentificationDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "idType": {
+                        "type": "string",
+                        "description": "Contains an optional id type (e.g. pin, USB, encrypted EU id...)",
+                        "nullable": true
+                    },
+                    "oemDriverIdentification": {
+                        "type": "string",
+                        "description": "An OEM specific driver id.",
+                        "nullable": true
+                    }
+                }
+            },
+            "TellTaleDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "tellTale",
+                    "state"
+                ],
+                "properties": {
+                    "tellTale": {
+                        "description": "Gets or Sets TellTale",
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TellTaleEnum"
+                            }
+                        ]
+                    },
+                    "oemTellTale": {
+                        "type": "string",
+                        "description": "The OemTellTale is only set when the TellTale == OEM_SPECIFIC_TELL_TALE. This is an OEM specific string defining a tell tale in the OEM context.",
+                        "nullable": true
+                    },
+                    "state": {
+                        "description": "The current state of the tell tale.",
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/StateEnum"
+                            }
+                        ]
+                    }
+                }
+            },
+            "TellTaleEnum": {
+                "type": "string",
+                "description": "Gets or Sets TellTale",
+                "x-enumNames": [
+                    "COOLINGAIRCONDITIONING",
+                    "HIGHBEAMMAINBEAM",
+                    "LOWBEAMDIPPEDBEAM",
+                    "TURNSIGNALS",
+                    "HAZARDWARNING",
+                    "PROVISIONINGHANDICAPPEDPERSON",
+                    "PARKINGBRAKE",
+                    "BRAKEMALFUNCTION",
+                    "HATCHOPENEnum",
+                    "FUELLEVELE",
+                    "ENGINECOOLANTTEMPERATURE",
+                    "BATTERYCHARGINGCONDITION",
+                    "ENGINEOIL",
+                    "POSITIONLIGHTSEnum",
+                    "FRONTFOGLIGHT",
+                    "REARFOGLIGHT",
+                    "PARKINGHEATER",
+                    "ENGINEMILINDICATOR",
+                    "SERVICECALLFORMAINTENANCE",
+                    "TRANSMISSIONFLUIDTEMPERATURE",
+                    "TRANSMISSIONMALFUNCTION",
+                    "ANTILOCKBRAKEFAILURE",
+                    "WORNBRAKELININGS",
+                    "WINDSCREENWASHERFLUID",
+                    "TIREMALFUNCTION",
+                    "GENERALFAILURE",
+                    "ENGINEOILTEMPERATURE",
+                    "ENGINEOILLEVEL",
+                    "ENGINECOOLANTLEVEL",
+                    "STEERINGFLUIDLEVEL",
+                    "STEERINGFAILURE",
+                    "HEIGHTCONTROL",
+                    "RETARDER",
+                    "ENGINEEMISSIONFAILURE",
+                    "ESCINDICATOR",
+                    "BRAKELIGHTS",
+                    "ARTICULATION",
+                    "STOPREQUEST",
+                    "PRAMREQUEST",
+                    "BUSSTOPBRAKE",
+                    "ADBLUELEVEL",
+                    "RAISING",
+                    "LOWERING",
+                    "KNEELING",
+                    "ENGINECOMPARTMENTTEMPERATURE",
+                    "AUXILLARYAIRPRESSURE",
+                    "AIRFILTERCLOGGED",
+                    "FUELFILTERDIFFPRESSURE",
+                    "SEATBELT",
+                    "EBS",
+                    "LANEDEPARTUREINDICATOR",
+                    "ADVANCEDEMERGENCYBREAKING",
+                    "ACC",
+                    "TRAILERCONNECTED",
+                    "ABSTRAILER",
+                    "AIRBAG",
+                    "EBSTRAILER12",
+                    "TACHOGRAPHINDICATOR",
+                    "ESCSWITCHEDOFF",
+                    "LANEDEPARTUREWARNINGSWITCHEDOFF",
+                    "ENGINEEMISSIONFILTERSOOTFILTER",
+                    "ELECTRICMOTORFAILURES",
+                    "ADBLUETAMPERING",
+                    "MULTIPLEXSYSTEM",
+                    "BATTERYPACK",
+                    "HIGHVOLTAGESYSTEMCAUTION",
+                    "BATTERYPACKTEMPERATURE",
+                    "LIMITEDPERFORMANCEELECTRICMOTOR",
+                    "BATTERYPACKCOOLING",
+                    "OEMSPECIFICTELLTALE"
+                ],
+                "enum": [
+                    "COOLING_AIR_CONDITIONING",
+                    "HIGH_BEAM_MAIN_BEAM",
+                    "LOW_BEAM_DIPPED_BEAM",
+                    "TURN_SIGNALS",
+                    "HAZARD_WARNING",
+                    "PROVISIONING_HANDICAPPED_PERSON",
+                    "PARKING_BRAKE",
+                    "BRAKE_MALFUNCTION",
+                    "HATCH_OPEN",
+                    "FUEL_LEVEL",
+                    "ENGINE_COOLANT_TEMPERATURE",
+                    "BATTERY_CHARGING_CONDITION",
+                    "ENGINE_OIL",
+                    "POSITION_LIGHTS",
+                    "FRONT_FOG_LIGHT",
+                    "REAR_FOG_LIGHT",
+                    "PARKING_HEATER",
+                    "ENGINE_MIL_INDICATOR",
+                    "SERVICE_CALL_FOR_MAINTENANCE",
+                    "TRANSMISSION_FLUID_TEMPERATURE",
+                    "TRANSMISSION_MALFUNCTION",
+                    "ANTI_LOCK_BRAKE_FAILURE",
+                    "WORN_BRAKE_LININGS",
+                    "WINDSCREEN_WASHER_FLUID",
+                    "TIRE_MALFUNCTION",
+                    "GENERAL_FAILURE",
+                    "ENGINE_OIL_TEMPERATURE",
+                    "ENGINE_OIL_LEVEL",
+                    "ENGINE_COOLANT_LEVEL",
+                    "STEERING_FLUID_LEVEL",
+                    "STEERING_FAILURE",
+                    "HEIGHT_CONTROL",
+                    "RETARDER",
+                    "ENGINE_EMISSION_FAILURE",
+                    "ESC_INDICATOR",
+                    "BRAKE_LIGHTS",
+                    "ARTICULATION",
+                    "STOP_REQUEST",
+                    "PRAM_REQUEST",
+                    "BUS_STOP_BRAKE",
+                    "ADBLUE_LEVEL",
+                    "RAISING",
+                    "LOWERING",
+                    "KNEELING",
+                    "ENGINE_COMPARTMENT_TEMPERATURE",
+                    "AUXILLARY_AIR_PRESSURE",
+                    "AIR_FILTER_CLOGGED",
+                    "FUEL_FILTER_DIFF_PRESSURE",
+                    "SEAT_BELT",
+                    "EBS",
+                    "LANE_DEPARTURE_INDICATOR",
+                    "ADVANCED_EMERGENCY_BREAKING",
+                    "ACC",
+                    "TRAILER_CONNECTED",
+                    "ABS_TRAILER",
+                    "AIRBAG",
+                    "EBS_TRAILER_1_2",
+                    "TACHOGRAPH_INDICATOR",
+                    "ESC_SWITCHED_OFF",
+                    "LANE_DEPARTURE_WARNING_SWITCHED_OFF",
+                    "ENGINE_EMISSION_FILTER_SOOT_FILTER",
+                    "ELECTRIC_MOTOR_FAILURES",
+                    "ADBLUE_TAMPERING",
+                    "MULTIPLEX_SYSTEM",
+                    "BATTERY_PACK",
+                    "HIGH_VOLTAGE_SYSTEM_CAUTION",
+                    "BATTERY_PACK_TEMPERATURE",
+                    "LIMITED_PERFORMANCE_ELECTRIC_MOTOR",
+                    "BATTERY_PACK_COOLING",
+                    "OEM_SPECIFIC_TELL_TALE"
+                ]
+            },
+            "StateEnum": {
+                "type": "string",
+                "description": "The current state of the tell tale.",
+                "x-enumNames": [
+                    "RED",
+                    "YELLOW",
+                    "INFO",
+                    "OFF",
+                    "RESERVED4",
+                    "RESERVED5",
+                    "RESERVED6",
+                    "NOTAVAILABLE"
+                ],
+                "enum": [
+                    "RED",
+                    "YELLOW",
+                    "INFO",
+                    "OFF",
+                    "RESERVED_4",
+                    "RESERVED_5",
+                    "RESERVED_6",
+                    "NOT_AVAILABLE"
+                ]
+            },
+            "TriggerChargingStatusInfoDto": {
+                "type": "object",
+                "description": "Additional information can be provided if the trigger type is BATTERY_PACK_CHARGING_STATUS_CHANGE.",
+                "additionalProperties": false,
+                "properties": {
+                    "event": {
+                        "description": "CHARGING_STARTED - Charging has started  CHARGING_COMPLETED - Charging is completed  CHARGING_INTERRUPTED - Charging has been interrupted (no error)  ERROR - An error occurred when charging  ESTIMATED_COMPLETION_TIME_CHANGED - The estimated time for completed charging has changed. (Threshold is outside scope of rFMS)  TIMER - A predefined time has passed since last charge status update. (Frequency is outside the scope of rFMS)  CHARGING_LEVEL - The charging level has reached a predefined level. (Charging levels are outside the scope of rFMS)",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ChargingEventEnum"
+                            }
+                        ]
+                    },
+                    "eventDetail": {
+                        "type": "string",
+                        "description": "Details regarding the event. Content is OEM specific",
+                        "nullable": true
+                    }
+                }
+            },
+            "ChargingEventEnum": {
+                "type": "string",
+                "description": "CHARGING_STARTED - Charging has started  CHARGING_COMPLETED - Charging is completed  CHARGING_INTERRUPTED - Charging has been interrupted (no error)  ERROR - An error occurred when charging  ESTIMATED_COMPLETION_TIME_CHANGED - The estimated time for completed charging has changed. (Threshold is outside scope of rFMS)  TIMER - A predefined time has passed since last charge status update. (Frequency is outside the scope of rFMS)  CHARGING_LEVEL - The charging level has reached a predefined level. (Charging levels are outside the scope of rFMS)",
+                "x-enumNames": [
+                    "CHARGINGSTARTED",
+                    "CHARGINGCOMPLETED",
+                    "CHARGINGINTERRUPTED",
+                    "ERROR",
+                    "ESTIMATEDCOMPLETIONTIMECHANGED",
+                    "TIMER",
+                    "CHARGINGLEVEL"
+                ],
+                "enum": [
+                    "CHARGING_STARTED",
+                    "CHARGING_COMPLETED",
+                    "CHARGING_INTERRUPTED",
+                    "ERROR",
+                    "ESTIMATED_COMPLETION_TIME_CHANGED",
+                    "TIMER",
+                    "CHARGING_LEVEL"
+                ]
+            },
+            "ChargingConnectionStatusInfoDto": {
+                "type": "object",
+                "description": "Additional information can be provided if the trigger type is BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE.",
+                "additionalProperties": false,
+                "properties": {
+                    "event": {
+                        "description": "CONNECTING - Vehicle is being connected to a charger  CONNECTED - Vehicle is connected to a charger  DISCONNECTING - Vehicle is being disconnected from the charger  DISCONNECTED - Vehicle is not connected to a charger  ERROR - An error occurred",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ConnectionEventEnum"
+                            }
+                        ]
+                    },
+                    "eventDetail": {
+                        "type": "string",
+                        "description": "Details regarding the event. Content is OEM specific",
+                        "nullable": true
+                    }
+                }
+            },
+            "ConnectionEventEnum": {
+                "type": "string",
+                "description": "CONNECTING - Vehicle is being connected to a charger  CONNECTED - Vehicle is connected to a charger  DISCONNECTING - Vehicle is being disconnected from the charger  DISCONNECTED - Vehicle is not connected to a charger  ERROR - An error occurred",
+                "x-enumNames": [
+                    "CONNECTING",
+                    "CONNECTED",
+                    "DISCONNECTING",
+                    "DISCONNECTED",
+                    "ERROR"
+                ],
+                "enum": [
+                    "CONNECTING",
+                    "CONNECTED",
+                    "DISCONNECTING",
+                    "DISCONNECTED",
+                    "ERROR"
+                ]
+            },
+            "GNSSPositionDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "latitude",
+                    "longitude",
+                    "positionDateTime"
+                ],
+                "properties": {
+                    "latitude": {
+                        "type": "number",
+                        "description": "Latitude (WGS84 based)",
+                        "format": "double"
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "description": "Longitude (WGS84 based)",
+                        "format": "double"
+                    },
+                    "heading": {
+                        "type": "string",
+                        "description": "The direction of the vehicle (0-359)",
+                        "nullable": true
+                    },
+                    "altitude": {
+                        "type": "integer",
+                        "description": "The altitude of the vehicle. Where 0 is sea level, negative values below sealevel and positive above sealevel. Unit in meters.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "speed": {
+                        "type": "number",
+                        "description": "The GNSS(e.g. GPS)-speed in km/h",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "positionDateTime": {
+                        "type": "string",
+                        "description": "The time of the position data in iso8601 format.",
+                        "format": "date-time",
+                        "minLength": 1
+                    }
+                }
+            },
+            "ErrorObject": {
+                "type": "object",
+                "description": "Optional responses for error codes, detailing the error if needed",
+                "additionalProperties": false,
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "description": "An identifier for this error",
+                        "nullable": true
+                    },
+                    "error_description": {
+                        "type": "string",
+                        "description": "A description of the error",
+                        "nullable": true
+                    },
+                    "error_uri": {
+                        "type": "string",
+                        "description": "A URI providing more information",
+                        "nullable": true
+                    }
+                }
+            },
+            "VehicleResponseDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "vehicleResponse",
+                    "moreDataAvailable"
+                ],
+                "properties": {
+                    "vehicleResponse": {
+                        "description": "Gets or Sets VehicleResponse",
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/VehiclesDto"
+                            }
+                        ]
+                    },
+                    "moreDataAvailable": {
+                        "type": "boolean",
+                        "description": "This will be set to true if the result set was too large to be sent back in one reply. A new request must be sent to get the rest of the vehicles, where the lastVin parameter must be supplied. The lastVin should be set to the VIN of the last vehicle in the result set of this message."
+                    },
+                    "moreDataAvailableLink": {
+                        "type": "string",
+                        "description": "Populated with the link to the next part of the result when moreDataAvailable is true. The link is relative, i.e. starts with /rfms/vehicles, and preserves any query parameters from the original request.",
+                        "nullable": true
+                    }
+                }
+            },
+            "VehiclesDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "vehicles": {
+                        "type": "array",
+                        "description": "Gets or Sets Vehicles",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/VehicleDto"
+                        }
+                    }
+                }
+            },
+            "VehicleDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "vin"
+                ],
+                "properties": {
+                    "vin": {
+                        "type": "string",
+                        "description": "Gets or Sets Vin",
+                        "minLength": 1
+                    },
+                    "customerVehicleName": {
+                        "type": "string",
+                        "description": "The customer's name for the vehicle.",
+                        "nullable": true
+                    },
+                    "registrationNumber": {
+                        "type": "string",
+                        "description": "The registration number (license plate) of the vehicle.",
+                        "nullable": true
+                    },
+                    "brand": {
+                        "type": "string",
+                        "description": "The vehicle brand. rFMS standard values VOLVO TRUCKS, SCANIA, DAIMLER, IVECO, DAF, MAN, RENAULT TRUCKS, VDL, VOLVO BUSES, IVECO BUS, IRISBUS",
+                        "nullable": true
+                    },
+                    "productionDate": {
+                        "description": "Gets or Sets ProductionDate",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/VehicleProductionDateDto"
+                            }
+                        ]
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Indicates the type of vehicle. rFMS standard values TRUCK, BUS, VAN",
+                        "nullable": true
+                    },
+                    "model": {
+                        "type": "string",
+                        "description": "Indicates the model of the vehicle. OEM specific value.",
+                        "nullable": true
+                    },
+                    "possibleFuelType": {
+                        "type": "array",
+                        "description": "The possible fuel types supported by this vehicle, formatted as the HEX id number according to SPN 5837. This does NOT indicate which fuel type that is presently being used.",
+                        "nullable": true,
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "emissionLevel": {
+                        "type": "string",
+                        "description": "The emission level this vehicle supports. Possible values:  European Union, Heavy-Duty Truck and Bus Engines:  EURO_III, EURO_III_EEV, EURO_IV, EURO_V, EURO_VI  European Union, Nonroad Engines:  EURO_STAGE_III, EURO_STAGE_IV, EURO_STAGE_V  United_States, Heavy-Duty Truck and Bus Engines:  EPA_2004, EPA_2007, EPA_2010, EPA_2015_NOX10, EPA_2015_NOX05, EPA_2015_NOX02  United_States, Nonroad Engines:  EPA_TIER_2, EPA_TIER_3, EPA_TIER_4_2008, EPA_TIER_4_2013  Brazil, Heavy-Duty Truck and Bus Engines:  PROCONVE_P5, PROCONVE_P6, PROCONVE_P7  Brazil, Nonroad Engines:  PROCONVE_MARI",
+                        "nullable": true
+                    },
+                    "tellTaleCode": {
+                        "type": "string",
+                        "description": "This parameter indicates how the tell tales shall be interpreted, the code is unique for each OEM. One OEM can have different interpretations  depending on vehicle type.",
+                        "nullable": true
+                    },
+                    "chassisType": {
+                        "type": "string",
+                        "description": "The chassis type of the vehicle. OEM specific value. This is used mainly for buses",
+                        "nullable": true
+                    },
+                    "noOfAxles": {
+                        "type": "integer",
+                        "description": "Number of axles on the vehicle. This is used mainly for buses",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "totalFuelTankVolume": {
+                        "type": "integer",
+                        "description": "Total fuel tank volume for all tanks in milliltres.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "totalFuelTankCapacityGaseous": {
+                        "type": "integer",
+                        "description": "Total gas tank capacity for all tanks in kilograms.",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "totalBatteryPackCapacity": {
+                        "type": "integer",
+                        "description": "Total battery pack capacity in watt hours.",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "tachographType": {
+                        "type": "string",
+                        "description": "The type of tachograph in the vehicle. rFMS standard values MTCO, DTCO, TSU, DTCO_G1, DTCO_G2, NONE   DTCO - Digital tachograph, unknown generation  DTCO_G1 - Digital tachograph generation 1  DTCO_G2 - Digital tachograph generation 2  NONE - No tachograph in the vehicle  MTCO - Modular tachograph  TSU - Tachograph simulator",
+                        "nullable": true
+                    },
+                    "gearboxType": {
+                        "type": "string",
+                        "description": "The type of gearbox the vehicle is equipped with. rFMS standard values MANUAL, AUTOMATIC, SEMI_AUTOMATIC, NO_GEAR (e.g electrical)",
+                        "nullable": true
+                    },
+                    "bodyType": {
+                        "type": "string",
+                        "description": "The type of body on the chassis. rFMS standard values CITY_BUS, INTERCITY_BUS, COACH. This is used mainly for buses.",
+                        "nullable": true
+                    },
+                    "doorConfiguration": {
+                        "type": "array",
+                        "description": "The door configuration. The door order definition is OEM specific. E.g. [1, 2, 2] means the bus has 3 doors: 1 front door, double doors for door 2 and 3. This is used mainly for buses.",
+                        "nullable": true,
+                        "items": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    "hasRampOrLift": {
+                        "type": "boolean",
+                        "description": "If the vehicle is equipped with a ramp or not. This is used mainly for buses.",
+                        "nullable": true
+                    },
+                    "authorizedPaths": {
+                        "type": "array",
+                        "description": "Paths that the client is authorized to call",
+                        "nullable": true,
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "VehicleProductionDateDto": {
+                "type": "object",
+                "description": "Indicates when the vehicle was produced.",
+                "additionalProperties": false,
+                "properties": {
+                    "day": {
+                        "type": "integer",
+                        "description": "Day of the month where first day of the month is 1",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "month": {
+                        "type": "integer",
+                        "description": "Month of the year, where January is value 1",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "year": {
+                        "type": "integer",
+                        "description": "Gets or Sets Year",
+                        "format": "int32",
+                        "nullable": true
+                    }
+                }
+            },
+            "VehicleStatusResponseDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "vehicleStatusResponse",
+                    "moreDataAvailable",
+                    "requestServerDateTime"
+                ],
+                "properties": {
+                    "vehicleStatusResponse": {
+                        "description": "Gets or Sets VehicleStatusResponse",
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/VehicleStatusesDto"
+                            }
+                        ]
+                    },
+                    "moreDataAvailable": {
+                        "type": "boolean",
+                        "description": "This will be set to true if the result set was too large to be sent back in one reply. A new request must be done to get the rest of the vehicle statuses, where the starttime parameter must be supplied. The starttime should be set to the ReceivedDateTime + 1 second of the last vehicle in the result set of this message."
+                    },
+                    "moreDataAvailableLink": {
+                        "type": "string",
+                        "description": "Populated with the link to the next part of the result when moreDataAvailable is true. The link is relative, i.e. starts with /rfms/vehiclestatuses, and preserves any query parameters from the original request.",
+                        "nullable": true
+                    },
+                    "requestServerDateTime": {
+                        "type": "string",
+                        "description": "Time in UTC to be used to ask for historical data (for starttime), to solve the problem of having different times at server and clients. This is the time at the server when this request was received. To avoid losing any messages or get duplicates, this is the time that should be supplied in the startTime parameter in the next request in iso8601 format.",
+                        "format": "date-time",
+                        "minLength": 1
+                    }
+                }
+            },
+            "VehicleStatusesDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "vehicleStatuses": {
+                        "type": "array",
+                        "description": "Gets or Sets VehicleStatuses",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/VehicleStatusDto"
+                        }
+                    }
+                }
+            },
+            "VehicleStatusDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "vin",
+                    "triggerType",
+                    "createdDateTime",
+                    "receivedDateTime"
+                ],
+                "properties": {
+                    "vin": {
+                        "type": "string",
+                        "description": "Gets or Sets Vin",
+                        "minLength": 1
+                    },
+                    "triggerType": {
+                        "description": "Gets or Sets TriggerType",
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TriggerDto"
+                            }
+                        ]
+                    },
+                    "createdDateTime": {
+                        "type": "string",
+                        "description": "Gets or Sets CreatedDateTime",
+                        "format": "date-time",
+                        "minLength": 1
+                    },
+                    "receivedDateTime": {
+                        "type": "string",
+                        "description": "Gets or Sets ReceivedDateTime",
+                        "format": "date-time",
+                        "minLength": 1
+                    },
+                    "hrTotalVehicleDistance": {
+                        "type": "integer",
+                        "description": "Accumulated distance travelled by the vehicle during its operation in meter",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "totalEngineHours": {
+                        "type": "number",
+                        "description": "The total hours of operation for the vehicle combustion engine. At least one of totalEngineHours or totalElectricMotorHours is Mandatory",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "totalElectricMotorHours": {
+                        "type": "number",
+                        "description": "The total hours the electric motor is ready for propulsion (i.e. crank mode). At least one of totalEngineHours or totalElectricMotorHours is mandatory",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "driver1Id": {
+                        "description": "Gets or Sets Driver1Id",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/DriverIdDto"
+                            }
+                        ]
+                    },
+                    "grossCombinationVehicleWeight": {
+                        "type": "integer",
+                        "description": "The full vehicle weight in kg",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "engineTotalFuelUsed": {
+                        "type": "integer",
+                        "description": "The total fuel the vehicle has used during its lifetime in MilliLitres. At least one of engineTotalFuelUsed, totalFuelUsedGaseous or totalElectricEnergyUsed is mandatory.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "totalFuelUsedGaseous": {
+                        "type": "integer",
+                        "description": "Total fuel consumed in kg (trip drive fuel + trip PTO governor moving fuel + trip PTO governor non-moving fuel + trip idle fuel) over the life of the engine. At least one of engineTotalFuelUsed, totalFuelUsedGaseous or totalElectricEnergyUsed is mandatory.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "totalElectricEnergyUsed": {
+                        "type": "integer",
+                        "description": "Total electric energy consumed by the vehicle, excluding when plugged in (vehicle coupler) for charging, (incl. motor, PTO, cooling, etc.) in watt hours. Recuperation is subtracted from the value.  At least one of engineTotalFuelUsed, totalFuelUsedGaseous or totalElectricEnergyUsed is mandatory.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "status2OfDoors": {
+                        "description": "Composite indication of all bus door statuses. Bus specific parameter",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Status2OfDoorsEnum"
+                            }
+                        ]
+                    },
+                    "doorStatus": {
+                        "type": "array",
+                        "description": "Individual status for each door. Bus specific parameter",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/DoorStatusDto"
+                        }
+                    },
+                    "accumulatedData": {
+                        "description": "Gets or Sets AccumulatedData",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/AccumulatedDataDto"
+                            }
+                        ]
+                    },
+                    "snapshotData": {
+                        "description": "Gets or Sets SnapshotData",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/SnapshotDataDto"
+                            }
+                        ]
+                    },
+                    "uptimeData": {
+                        "description": "Gets or Sets UptimeData",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/UptimeDataDto"
+                            }
+                        ]
+                    }
+                }
+            },
+            "Status2OfDoorsEnum": {
+                "type": "string",
+                "description": "Composite indication of all bus door statuses. Bus specific parameter",
+                "x-enumNames": [
+                    "ALLDOORSDISABLED",
+                    "ATLEASTONEDOORENABLED",
+                    "ERROR",
+                    "NOTAVAILABLE"
+                ],
+                "enum": [
+                    "ALL_DOORS_DISABLED",
+                    "AT_LEAST_ONE_DOOR_ENABLED",
+                    "ERROR",
+                    "NOT_AVAILABLE"
+                ]
+            },
+            "DoorStatusDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "doorEnabledStatus": {
+                        "description": "Gets or Sets DoorEnabledStatus",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/DoorEnabledStatusEnum"
+                            }
+                        ]
+                    },
+                    "doorOpenStatus": {
+                        "description": "Gets or Sets DoorOpenStatus",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/DoorOpenStatusEnum"
+                            }
+                        ]
+                    },
+                    "doorLockStatus": {
+                        "description": "Gets or Sets DoorLockStatus",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/DoorLockStatusEnum"
+                            }
+                        ]
+                    },
+                    "doorNumber": {
+                        "type": "integer",
+                        "description": "Gets or Sets DoorNumber",
+                        "format": "int64",
+                        "nullable": true
+                    }
+                }
+            },
+            "DoorEnabledStatusEnum": {
+                "type": "string",
+                "description": "Gets or Sets DoorEnabledStatus",
+                "x-enumNames": [
+                    "ENABLED",
+                    "DISABLED",
+                    "ERROR",
+                    "NOTAVAILABLE"
+                ],
+                "enum": [
+                    "ENABLED",
+                    "DISABLED",
+                    "ERROR",
+                    "NOT_AVAILABLE"
+                ]
+            },
+            "DoorOpenStatusEnum": {
+                "type": "string",
+                "description": "Gets or Sets DoorOpenStatus",
+                "x-enumNames": [
+                    "CLOSED",
+                    "OPEN",
+                    "ERROR",
+                    "NOTAVAILABLE"
+                ],
+                "enum": [
+                    "CLOSED",
+                    "OPEN",
+                    "ERROR",
+                    "NOT_AVAILABLE"
+                ]
+            },
+            "DoorLockStatusEnum": {
+                "type": "string",
+                "description": "Gets or Sets DoorLockStatus",
+                "x-enumNames": [
+                    "UNLOCKED",
+                    "LOCKED",
+                    "ERROR",
+                    "NOTAVAILABLE"
+                ],
+                "enum": [
+                    "UNLOCKED",
+                    "LOCKED",
+                    "ERROR",
+                    "NOT_AVAILABLE"
+                ]
+            },
+            "AccumulatedDataDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "durationWheelbasedSpeedOverZero": {
+                        "type": "integer",
+                        "description": "The time the vehicle speed has been over zero.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "distanceCruiseControlActive": {
+                        "type": "integer",
+                        "description": "The distance the vehicle has been driven with cruise control active",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "durationCruiseControlActive": {
+                        "type": "integer",
+                        "description": "The time the vehicle has been driven with cruise control active",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "fuelConsumptionDuringCruiseActive": {
+                        "type": "integer",
+                        "description": "The fuel the vehicle has consumed while driven with cruise control active, in millilitres",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "fuelConsumptionDuringCruiseActiveGaseous": {
+                        "type": "integer",
+                        "description": "The gas the vehicle has consumed while driven with cruise control active, in kilograms.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "electricEnergyConsumptionDuringCruiseActive": {
+                        "type": "integer",
+                        "description": "The electric energy the vehicle has consumed while driven with cruise control active, in watt-hours.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "durationWheelbasedSpeedZero": {
+                        "type": "integer",
+                        "description": "The time the vehicle speed has been equal to zero, in seconds. Engine on (RPM>0 or electic motor in crank mode) and no PTO active",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "fuelWheelbasedSpeedZero": {
+                        "type": "integer",
+                        "description": "The fuel the vehicle has consumed while the vehicle speed has been equal to zero. Engine on (RPM>0) and no PTO active. Unit in millilitres.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "fuelWheelbasedSpeedZeroGaseous": {
+                        "type": "integer",
+                        "description": "The gas the vehicle has consumed while the vehicle speed has been equal to zero. Engine on (RPM>0) and no PTO active. Unit in kilograms.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "electricEnergyWheelbasedSpeedZero": {
+                        "type": "integer",
+                        "description": "The electric energy the vehicle has consumed while the vehicle speed has been equal to zero. Electric motor is in crank mode and no PTO active. Unit in watt-hours.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "fuelWheelbasedSpeedOverZero": {
+                        "type": "integer",
+                        "description": "The fuel the vehicle has consumed while the vehicle speed has been over zero. Engine on (RPM>0). Unit in millilitres.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "fuelWheelbasedSpeedOverZeroGaseous": {
+                        "type": "integer",
+                        "description": "The gas the vehicle has consumed while the vehicle speed has been over zero. Engine on (RPM>0). Unit in kilograms.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "electricEnergyWheelbasedSpeedOverZero": {
+                        "type": "integer",
+                        "description": "The electric energy the vehicle has consumed (including recuperation) while the vehicle speed has been over zero. Electric motor is in crank mode. Unit in watt-hours.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "electricEnergyAux": {
+                        "type": "integer",
+                        "description": "The electric energy the auxiliary systems have consumed, in watt hours. Auxiliary systems are all consumers except electric motor(s) and PTO(s). ",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "ptoActiveClass": {
+                        "type": "array",
+                        "description": "Label WHEELBASED_SPEED_ZERO  At least one PTO active during wheelbased speed=0  Counters for time (seconds) and consumption (millilitres, kilograms, watt-hours)  Label WHEELBASED_SPEED_OVER_ZERO  At least one PTO active during wheelbased speed>0  Counters for time (seconds), distance (meter) and consumption (millilitres, kilograms, watt-hours)",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/LabelDto"
+                        }
+                    },
+                    "brakePedalCounterSpeedOverZero": {
+                        "type": "integer",
+                        "description": "The total number of times the brake pedal has been used while the vehicle was driving.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "distanceBrakePedalActiveSpeedOverZero": {
+                        "type": "integer",
+                        "description": "The total distance the vehicle has driven where the brake pedal has been used. Unit Meters.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "accelerationPedalPositionClass": {
+                        "type": "array",
+                        "description": "In percent. Minimum 5 classes [0, 20[ [20, 40[ [40, 60[ [60, 80[ [80, 100]",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/FromToClassDto"
+                        }
+                    },
+                    "brakePedalPositionClass": {
+                        "type": "array",
+                        "description": "In percent. Minimum 5 classes [0, 20[ [20, 40[ [40, 60[ [60, 80[ [80, 100]",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/FromToClassDto"
+                        }
+                    },
+                    "accelerationClass": {
+                        "type": "array",
+                        "description": "In m/s2 Minimum 13 classes. ], -1.1] ]-1.1, -0.9] ]-0.9, -0.7] ]-0.7, -0.5] ]-0.5, -0.3] ]-0.3, -0.1] ]-0.1, 0.1[ [0.1, 0.3[ [0.3, 0.5[ [0.5, 0.7[ [0.7, 0.9[ [0.9, 1.1[ [1.1, [",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/FromToClassDto"
+                        }
+                    },
+                    "highAccelerationClass": {
+                        "type": "array",
+                        "description": "In m/s2 Minimum 11 classes ], -3.0] ]-3.0, -2.5] ]-2.5, -2.0] ]-2.0, -1.5] ]-1.5, -1.1] ]-1.1, 1.1[ [1.1, 1.5[ [1.5, 2.0[ [2.0, 2.5[ [2.5, 3.0[ [3.0, [",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/FromToClassDto"
+                        }
+                    },
+                    "retarderTorqueClass": {
+                        "type": "array",
+                        "description": "In percent (how the retarder is used as a positive value). Minimum 5 classes ]0, 20[ [20, 40[ [40, 60[ [60, 80[ [80, 100]",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/FromToClassDto"
+                        }
+                    },
+                    "drivingWithoutTorqueClass": {
+                        "type": "array",
+                        "description": "Driving without torque, with gear (clutch is engaged) Labels DRIVING_WITHOUT_TORQUE",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/LabelDto"
+                        }
+                    },
+                    "engineTorqueClass": {
+                        "type": "array",
+                        "description": "In percent based on EEC1 value (Actual Engine-Percent Torque). Minimum 10 classes [0, 10[ [10, 20[ [20, 30[ [30, 40[ [40, 50[ [50, 60[ [60, 70[ [70, 80[ [80, 90[ [90, 100]",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/FromToClassDto"
+                        }
+                    },
+                    "electricMotorTorqueClass": {
+                        "type": "array",
+                        "description": "In percent (Actual Engine-Percent Torque). Minimum 10 classes [0, 10[ [10, 20[ [20, 30[ [30, 40[ [40, 50[ [50, 60[ [60, 70[ [70, 80[ [80, 90[ [90, 100]",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/FromToClassElectricalDto"
+                        }
+                    },
+                    "engineTorqueAtCurrentSpeedClass": {
+                        "type": "array",
+                        "description": "In percent based on EEC2 value (Engine Percent Load At Current Speed). Minimum 10 classes [0, 10[ [10, 20[ [20, 30[ [30, 40[ [40, 50[ [50, 60[ [60, 70[ [70, 80[ [80, 90[ [90, 100]",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/FromToClassDto"
+                        }
+                    },
+                    "electricMotorTorqueAtCurrentSpeedClass": {
+                        "type": "array",
+                        "description": "In percent (Engine Percent Load At Current Speed). Minimum 10 classes [0, 10[ [10, 20[ [20, 30[ [30, 40[ [40, 50[ [50, 60[ [60, 70[ [70, 80[ [80, 90[ [90, 100]",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/FromToClassDto"
+                        }
+                    },
+                    "vehicleSpeedClass": {
+                        "type": "array",
+                        "description": "In km/h Minimum 40 classes. [0, 4[ [4, 8[ [8, 12[ [12, 16[ [16, 20[ [20, 24[ ... [156, [ Engine on (RPM>0 or electric motor in crank mode)",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/FromToClassDto"
+                        }
+                    },
+                    "engineSpeedClass": {
+                        "type": "array",
+                        "description": "Classes refer to the RPM of the combustion engine. Only mandatory if the vehicle has a combustion engine for propulsion. Minimum 10 classes [0, 400[ [400, 800[ [800, 1200[ [1200, 1600[ [1600, 2000[ [2000, 2400[ [2400, 2800[ [2800, 3200[ [3200, 3600[ [3600, [ Note: Engine on (RPM>0 or electric motor in crank mode)",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/FromToClassDto"
+                        }
+                    },
+                    "accelerationDuringBrakeClass": {
+                        "type": "array",
+                        "description": "In m/s2 Minimum 13 classes. ], -1.1] ]-1.1, -0.9] ]-0.9, -0.7] ]-0.7, -0.5] ]-0.5, -0.3] ]-0.3, -0.1] ]-0.1, 0.1[ [0.1, 0.3[ [0.3, 0.5[ [0.5, 0.7[ [0.7, 0.9[ [0.9, 1.1[ [1.1, [",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/FromToClassDto"
+                        }
+                    },
+                    "selectedGearClass": {
+                        "type": "array",
+                        "description": "The currently selected gear One class per gear. Neutral is also a gear. Park is also a gear. This is formatted according to SPN 524, supplied as a decimal value. Example 0 = Neutral, 1 = 1:st gear... This is mainly used for Buses.",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/LabelDto"
+                        }
+                    },
+                    "currentGearClass": {
+                        "type": "array",
+                        "description": "The currently used gear One class per gear. Neutral is also a gear. Park is also a gear. This is formatted according to SPN 523, supplied as a decimal value. Example 0 = Neutral, 1 = 1:st gear... This is mainly used for Buses.",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/LabelDto"
+                        }
+                    },
+                    "chairliftCounter": {
+                        "type": "integer",
+                        "description": "The total number of times the chairlift has been outside the bus. This is mainly used for Buses",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "stopRequestCounter": {
+                        "type": "integer",
+                        "description": "The total number of stop requests made. This is mainly used for Buses",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "kneelingCounter": {
+                        "type": "integer",
+                        "description": "The total number of times the bus has knelt.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "pramRequestCounter": {
+                        "type": "integer",
+                        "description": "The total number of pram requests made. This is mainly used for Buses",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "electricPowerRecuperationClass": {
+                        "type": "array",
+                        "description": "Classes refer to the recuperated electric power in kilowatt Minimum 11 classes [0, 100[ [100, 200[ [200, 300[ ... [900, 1000[ [1000, [",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/FromToClassElectricalDto"
+                        }
+                    }
+                }
+            },
+            "LabelDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "label": {
+                        "type": "string",
+                        "description": "Gets or Sets Label",
+                        "nullable": true
+                    },
+                    "seconds": {
+                        "type": "integer",
+                        "description": "Gets or Sets Seconds",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "meters": {
+                        "type": "integer",
+                        "description": "Gets or Sets Meters",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "milliLitres": {
+                        "type": "integer",
+                        "description": "Gets or Sets MilliLitres",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "kilograms": {
+                        "type": "integer",
+                        "description": "Gets or Sets Kilograms",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "watthours": {
+                        "type": "integer",
+                        "description": "Gets or Sets Watthours",
+                        "format": "int64",
+                        "nullable": true
+                    }
+                }
+            },
+            "FromToClassDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "from": {
+                        "type": "number",
+                        "description": "Gets or Sets From",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "to": {
+                        "type": "number",
+                        "description": "Gets or Sets To",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "seconds": {
+                        "type": "integer",
+                        "description": "Gets or Sets Seconds",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "meters": {
+                        "type": "integer",
+                        "description": "Gets or Sets Meters",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "milliLitres": {
+                        "type": "integer",
+                        "description": "Gets or Sets MilliLitres",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "kilograms": {
+                        "type": "integer",
+                        "description": "Gets or Sets Kilograms",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "watthours": {
+                        "type": "integer",
+                        "description": "Gets or Sets Watthours",
+                        "format": "int64",
+                        "nullable": true
+                    }
+                }
+            },
+            "FromToClassElectricalDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "from": {
+                        "type": "number",
+                        "description": "Gets or Sets From",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "to": {
+                        "type": "number",
+                        "description": "Gets or Sets To",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "seconds": {
+                        "type": "integer",
+                        "description": "Gets or Sets Seconds",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "meters": {
+                        "type": "integer",
+                        "description": "Gets or Sets Meters",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "watthours": {
+                        "type": "integer",
+                        "description": "Gets or Sets Watthours",
+                        "format": "int64",
+                        "nullable": true
+                    }
+                }
+            },
+            "SnapshotDataDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "gnssPosition": {
+                        "description": "Gets or Sets GnssPosition",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/GNSSPositionDto"
+                            }
+                        ]
+                    },
+                    "ignition": {
+                        "type": "string",
+                        "description": "The ignition state of the vehicle.",
+                        "nullable": true
+                    },
+                    "wheelBasedSpeed": {
+                        "type": "number",
+                        "description": "The vehicle wheelbased speed",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "tachographSpeed": {
+                        "type": "number",
+                        "description": "The Tacho speed",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "engineSpeed": {
+                        "type": "number",
+                        "description": "The engine (Diesel/gaseous) speed in rev/min",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "electricMotorSpeed": {
+                        "type": "number",
+                        "description": "The electric motor speed in rev/min",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "fuelType": {
+                        "type": "string",
+                        "description": "Type of fuel currently being utilized by the vehicle acc. SPN 5837",
+                        "nullable": true
+                    },
+                    "fuelLevel1": {
+                        "type": "number",
+                        "description": "The fuel level percentage",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "fuelLevel2": {
+                        "type": "number",
+                        "description": "Ratio of volume of fuel to the total volume of fuel storage container, in percent. When Fuel Level 2 is not used, Fuel Level 1 represents the total fuel in all fuel storage containers.  When Fuel Level 2 is used, Fuel Level 1 represents the fuel level in the primary or left-side fuel storage container.",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "catalystFuelLevel": {
+                        "type": "number",
+                        "description": "The adblue level percentage",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "driver1WorkingState": {
+                        "description": "Gets or Sets Driver1WorkingState",
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/DriverWorkingStateEnum"
+                            }
+                        ]
+                    },
+                    "driver2Id": {
+                        "description": "Gets or Sets Driver2Id",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/DriverIdDto"
+                            }
+                        ]
+                    },
+                    "driver2WorkingState": {
+                        "description": "Gets or Sets Driver2WorkingState",
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/DriverWorkingStateEnum"
+                            }
+                        ]
+                    },
+                    "ambientAirTemperature": {
+                        "type": "number",
+                        "description": "The Ambient air temperature in Celsius",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "parkingBrakeSwitch": {
+                        "type": "boolean",
+                        "description": "Switch signal which indicates when the parking brake is set. In general the switch actuated by the operator's park brake control, whether a pedal, lever or other control mechanism  true - parking brake set  false - parking brake not set",
+                        "nullable": true
+                    },
+                    "hybridBatteryPackRemainingCharge": {
+                        "type": "number",
+                        "description": "Indicates the hybrid battery pack remaining charge.  0% means no charge remaining,  100% means full charge remaining.  Is used as well for full electrical vehicles",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "batteryPackChargingStatus": {
+                        "description": "Indicates the charging status of the battery pack. Recuperation is excluded.  Not charging - No charging  Charging - Charging ongoing (AC or DC is unknown)  Charging AC - AC charging ongoing  Charging DC - DC charging ongoing  Error - An error occurred when charging  Not available - Charging status is not available",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/BatteryPackChargingStatusEnum"
+                            }
+                        ]
+                    },
+                    "batteryPackChargingConnectionStatus": {
+                        "description": "Indicates the charging connection status of the battery pack.  Connecting - A charger is being connected  Connected - A charger is connected  Disconnecting - A charger is being disconnected  Disconnected - No charger is connected  Error - An error occurred when connecting or disconnecting  Not available - Charging connection status is not available",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/BatteryPackChargingConnectionStatusEnum"
+                            }
+                        ]
+                    },
+                    "batteryPackChargingDevice": {
+                        "type": "string",
+                        "description": "Device used to charge the battery pack. Standard rFMS values taken from ISO 15118 (OEM can have additional values):  ACD - Automatic Connection Device  WPT - Wireless Power Transfer  VEHICLE_COUPLER - manual connection of a flexible cable to an EV  NONE - No device connected  NOT_AVAILABLE - Unknown",
+                        "nullable": true
+                    },
+                    "batteryPackChargingPower": {
+                        "type": "number",
+                        "description": "Charging power in watts.",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "estimatedTimeBatteryPackChargingCompleted": {
+                        "type": "string",
+                        "description": "Estimated time when charging has reached the target level.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "estimatedDistanceToEmpty": {
+                        "description": "Gets or Sets EstimatedDistanceToEmpty",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/EstimatedDistanceToEmptyDto"
+                            }
+                        ]
+                    },
+                    "vehicleAxles": {
+                        "type": "array",
+                        "description": "A list of vehicle axles",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/VehicleAxlesDto"
+                        }
+                    },
+                    "trailers": {
+                        "type": "array",
+                        "description": "List of trailers connected to the truck.",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/TrailersDto"
+                        }
+                    }
+                }
+            },
+            "DriverWorkingStateEnum": {
+                "type": "string",
+                "description": "Tachograph Working state of the driver",
+                "x-enumNames": [
+                    "REST",
+                    "DRIVERAVAILABLE",
+                    "WORK",
+                    "DRIVE",
+                    "ERROR",
+                    "NOTAVAILABLE"
+                ],
+                "enum": [
+                    "REST",
+                    "DRIVER_AVAILABLE",
+                    "WORK",
+                    "DRIVE",
+                    "ERROR",
+                    "NOT_AVAILABLE"
+                ]
+            },
+            "BatteryPackChargingStatusEnum": {
+                "type": "string",
+                "description": "Indicates the charging status of the battery pack. Recuperation is excluded.  Not charging - No charging  Charging - Charging ongoing (AC or DC is unknown)  Charging AC - AC charging ongoing  Charging DC - DC charging ongoing  Error - An error occurred when charging  Not available - Charging status is not available",
+                "x-enumNames": [
+                    "NOTCHARGING",
+                    "CHARGING",
+                    "CHARGINGAC",
+                    "CHARGINGDC",
+                    "ERROR",
+                    "NOTAVAILABLE"
+                ],
+                "enum": [
+                    "NOT_CHARGING",
+                    "CHARGING",
+                    "CHARGING_AC",
+                    "CHARGING_DC",
+                    "ERROR",
+                    "NOT_AVAILABLE"
+                ]
+            },
+            "BatteryPackChargingConnectionStatusEnum": {
+                "type": "string",
+                "description": "Indicates the charging connection status of the battery pack.  Connecting - A charger is being connected  Connected - A charger is connected  Disconnecting - A charger is being disconnected  Disconnected - No charger is connected  Error - An error occurred when connecting or disconnecting  Not available - Charging connection status is not available",
+                "x-enumNames": [
+                    "CONNECTING",
+                    "CONNECTED",
+                    "DISCONNECTING",
+                    "DISCONNECTED",
+                    "ERROR",
+                    "NOT_AVAILABLE"
+                ],
+                "enum": [
+                    "CONNECTING",
+                    "CONNECTED",
+                    "DISCONNECTING",
+                    "DISCONNECTED",
+                    "ERROR",
+                    "NOT_AVAILABLE"
+                ]
+            },
+            "EstimatedDistanceToEmptyDto": {
+                "type": "object",
+                "description": "Estimated distance to empty (tanks and/or battery packs) in meters",
+                "additionalProperties": false,
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "description": "Estimated distance to empty, summarizing fuel, gas and battery in meters",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "fuel": {
+                        "type": "integer",
+                        "description": "Estimated distance to empty, fuel tank, in meters",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "gas": {
+                        "type": "integer",
+                        "description": "Estimated distance to empty, gas tank, in meters",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "batteryPack": {
+                        "type": "integer",
+                        "description": "Estimated distance to empty, battery pack, in meters",
+                        "format": "int64",
+                        "nullable": true
+                    }
+                }
+            },
+            "VehicleAxlesDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "vehicleAxlePosition": {
+                        "type": "integer",
+                        "description": "Axle position from 1 to 15, 1 being in the front of the truck",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "vehicleAxleLoad": {
+                        "type": "number",
+                        "description": "The static vertical load of a vehicle axle in kilograms.",
+                        "format": "decimal",
+                        "nullable": true
+                    }
+                }
+            },
+            "TrailersDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "trailerNo": {
+                        "type": "integer",
+                        "description": "Trailer number from 1 to 5, 1 being closest to the truck, according to ISO 11992-2.",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "trailerIdentificationData": {
+                        "type": "string",
+                        "description": "The identification data sent by the trailer to the truck in the RGE23 message of ISO 11992-2. An alternative source is the DID (Data identifier definition) record VIN, as specified in ISO 11992-4. Even though both ISO 11992-2 and ISO 11992-4 specifies this as a VIN, the actual data sent from a trailer is not always the true VIN of the trailer.",
+                        "nullable": true
+                    },
+                    "trailerVin": {
+                        "type": "string",
+                        "description": "The vehicle identification number of the trailer. See ISO 3779 (17 characters) If the trailerIdentificationData is reporting a true VIN, trailerVin will have the same value. If it is possible to map the trailerIdentificationData to a true VIN using other sources, the value can be provided here.",
+                        "nullable": true
+                    },
+                    "customerTrailerName": {
+                        "type": "string",
+                        "description": "The customer's name for the trailer",
+                        "nullable": true
+                    },
+                    "trailerType": {
+                        "description": "Indicates the type of the trailer. The type is sent in the EBS24 message of  ISO 11992-2.",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TrailerTypeEnum"
+                            }
+                        ]
+                    },
+                    "trailerAxleLoadSum": {
+                        "type": "integer",
+                        "description": "The sum of the static vertical loads of the trailer axles in kilograms. The load is sent in the EBS22 message of ISO 11992-2.",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "trailerAxles": {
+                        "type": "array",
+                        "description": "A list of trailer axles",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/TrailerAxlesDto"
+                        }
+                    }
+                }
+            },
+            "TrailerTypeEnum": {
+                "type": "string",
+                "description": "Indicates the type of the trailer. The type is sent in the EBS24 message of  ISO 11992-2.",
+                "x-enumNames": [
+                    "SEMITRAILER",
+                    "CENTREAXLETRAILER",
+                    "FULLTRAILER",
+                    "CONVERTERDOLLY",
+                    "LINKTRAILER",
+                    "TOWINGSEMITRAILER",
+                    "TOWINGCENTREAXLETRAILER",
+                    "TOWINGFULLTRAILER",
+                    "UNKNOWN"
+                ],
+                "enum": [
+                    "SEMI_TRAILER",
+                    "CENTRE_AXLE_TRAILER",
+                    "FULL_TRAILER",
+                    "CONVERTER_DOLLY",
+                    "LINK_TRAILER",
+                    "TOWING_SEMI_TRAILER",
+                    "TOWING_CENTRE_AXLE_TRAILER",
+                    "TOWING_FULL_TRAILER",
+                    "UNKNOWN"
+                ]
+            },
+            "TrailerAxlesDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "trailerAxlePosition": {
+                        "type": "integer",
+                        "description": "Axle position from 1 to 15, 1 being in the front closest to the truck, according to ISO 11992-2.",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "trailerAxleLoad": {
+                        "type": "number",
+                        "description": "The static vertical load of a trailer axle in kilograms. The load is sent in the RGE22 message of ISO11992-2.",
+                        "format": "decimal",
+                        "nullable": true
+                    }
+                }
+            },
+            "UptimeDataDto": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "tellTaleInfo"
+                ],
+                "properties": {
+                    "tellTaleInfo": {
+                        "type": "array",
+                        "description": "List of tell tales with the actual status for each tell tale.",
+                        "items": {
+                            "$ref": "#/components/schemas/TellTaleDto"
+                        }
+                    },
+                    "serviceDistance": {
+                        "type": "integer",
+                        "description": "The distance in meter to the next service",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "engineCoolantTemperature": {
+                        "type": "number",
+                        "description": "The temperature of the coolant liquid in Celsius",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "hvessOutletCoolantTemperature": {
+                        "type": "number",
+                        "description": "The temperature of the battery pack coolant in Celsius HVESS - High Voltage Energy Storage System",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "hvessTemperature": {
+                        "type": "number",
+                        "description": "The temperature of the battery pack in Celsius HVESS - High Voltage Energy Storage System",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "serviceBrakeAirPressureCircuit1": {
+                        "type": "integer",
+                        "description": "The air pressure in circuit 1 in Pascal.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "serviceBrakeAirPressureCircuit2": {
+                        "type": "integer",
+                        "description": "The air pressure in circuit 2 in Pascal.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "durationAtLeastOneDoorOpen": {
+                        "type": "integer",
+                        "description": "The total time at least one door has been opened in the bus. (seconds) Used mainly for buses.",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "alternatorInfo": {
+                        "type": "array",
+                        "description": "Gets or Sets AlternatorInfo",
+                        "nullable": true,
+                        "items": {
+                            "$ref": "#/components/schemas/AlternatorInfoDto"
+                        }
+                    },
+                    "bellowPressureFrontAxleLeft": {
+                        "type": "number",
+                        "description": "The bellow pressure in the front axle left side in Pascal. Used mainly for buses.",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "bellowPressureFrontAxleRight": {
+                        "type": "number",
+                        "description": "The bellow pressure in the front axle right side in Pascal. Used mainly for buses.",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "bellowPressureRearAxleLeft": {
+                        "type": "number",
+                        "description": "The bellow pressure in the rear axle left side in Pascal. Used mainly for buses.",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "bellowPressureRearAxleRight": {
+                        "type": "number",
+                        "description": "The bellow pressure in the rear axle right side in Pascal. Used mainly for buses.",
+                        "format": "double",
+                        "nullable": true
+                    }
+                }
+            },
+            "AlternatorInfoDto": {
+                "type": "object",
+                "description": "The alternator status of the up to 4 alternators. Used mainly for buses.",
+                "additionalProperties": false,
+                "properties": {
+                    "alternatorStatus": {
+                        "description": "Gets or Sets AlternatorStatus",
+                        "nullable": true,
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/AlternatorStatusEnum"
+                            }
+                        ]
+                    },
+                    "alternatorNumber": {
+                        "type": "integer",
+                        "description": "Gets or Sets AlternatorNumber",
+                        "format": "int64",
+                        "nullable": true
+                    }
+                }
+            },
+            "AlternatorStatusEnum": {
+                "type": "string",
+                "description": "Gets or Sets AlternatorStatus",
+                "x-enumNames": [
+                    "NOTCHARGING",
+                    "CHARGING",
+                    "ERROR",
+                    "NOTAVAILABLE"
+                ],
+                "enum": [
+                    "NOT_CHARGING",
+                    "CHARGING",
+                    "ERROR",
+                    "NOT_AVAILABLE"
+                ]
+            }
+        },
+        "securitySchemes": {
+            "Bearer": {
+                "type": "apiKey",
+                "description": "Copy 'Bearer ' + valid JWT token into field",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "security": [
+        {
+            "Bearer": []
+        }
+    ]
+}

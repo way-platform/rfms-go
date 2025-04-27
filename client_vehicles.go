@@ -8,14 +8,18 @@ import (
 	"net/http"
 )
 
+// ListVehiclesRequest is the request for the [Client.ListVehicles] method.
 type ListVehiclesRequest struct {
 	LastVIN string
 }
 
+// ListVehiclesResponse is the response for the [Client.ListVehicles] method.
 type ListVehiclesResponse struct {
-	Raw json.RawMessage `json:"-"`
+	Raw      json.RawMessage `json:"-"`
+	Vehicles []Vehicle       `json:"vehicles,omitempty"`
 }
 
+// ListVehicles implements the rFMS API method "GET /vehicles".
 func (c *Client) ListVehicles(ctx context.Context, request *ListVehiclesRequest) (_ *ListVehiclesResponse, err error) {
 	apiMethod, apiURL := "GET", c.baseURL+"/rfms4/vehicles" // TODO: Don't assume /rfms4
 	defer func() {
