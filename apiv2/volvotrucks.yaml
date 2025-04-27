@@ -1,0 +1,1112 @@
+swagger: '2.0'
+info:
+  version: '2.1'
+  description: >-
+    rFMS standard version 2.1, for retrieval of vehicle information, position
+    and vehicle status
+  title: rFMS specification v2.1
+host: api.volvotrucks.com
+basePath: /
+securityDefinitions:
+  basicAuth:
+    type: basic
+security:
+  - basicAuth: []
+schemes:
+  - https
+paths:
+  /rfms/vehiclepositions:
+    get:
+      tags:
+        - Vehiclepositions
+      summary: Get vehicle positions
+      description: >-
+        The vehicle status resource is used to get the status reports for one or
+        several vehicles. Using the starttime, stoptime & latestOnly parameters
+        it can be used to get all historical status reports between a start and
+        stop time or the latest known status only. Using the vin parameter it
+        can be used to get all historical vehicle reports or latest status for
+        one individual vehicle. If a request is made for data in a period where
+        no data has been received, an empty list will be returned.
+      operationId: getVehiclePosition_2_1_0UsingGET_1
+      produces:
+        - application/vnd.fmsstandard.com.Vehiclepositions.v2.1+xml
+        - application/vnd.fmsstandard.com.Vehiclepositions.v2.1+json
+      parameters:
+        - name: vin
+          in: query
+          description: 'Vehicle Identification Number, 17 characters.'
+          required: false
+          type: string
+          x-example: Z00SC0000HQ000126
+        - name: starttime
+          in: query
+          description: >-
+            Only the data created/received after this time should be returned.
+            Format: yyyy-MM-dd'T'HH:mm:ss'Z'
+          required: false
+          type: string
+          x-example: '2018-05-02T23:00:24.486Z'
+        - name: stoptime
+          in: query
+          description: >-
+            Only the data created/received before this time should be returned.
+            Format: yyyy-MM-dd'T'HH:mm:ss'Z'
+          required: false
+          type: string
+          x-example: '2018-05-02T23:30:24.486Z'
+        - name: datetype
+          in: query
+          description: >-
+            The start/stop times are compared to the created or received time of
+            the position reports. If this isn’t supplied all times are received
+            times.Possible values are: 'created/received'
+          required: false
+          type: string
+          default: received
+          x-example: received
+        - name: triggerFilter
+          in: query
+          description: |-
+            Will only return data reports that were triggered by the trigger
+            defined by the filter. Possible values are:
+             * TIMER
+             * TELL_TALE
+             * DRIVER_LOGIN
+             * DRIVER_LOGOUT
+             * IGNITION_ON
+             * IGNITION_OFF
+             * ENGINE_ON
+             * ENGINE_OFF
+             * PTO_ENABLED
+             * PTO_DISABLED
+             * DISTANCE_TRAVELLED
+             * DRIVER_1_WORKING_STATE_CHANGED
+             * DRIVER_2_WORKING_STATE_CHANGED
+
+            If several values are used in the filter they should be in
+            a comma-separated list (Ex: triggerFilter=DRIVER_LOGIN,TIMER). If
+            this filter parameter isn’t supplied the returned data reports
+            contain data reports triggered by any trigger.
+          required: false
+          type: string
+          x-example: DRIVER_LOGIN
+        - name: latestOnly
+          in: query
+          description: >-
+            If this value is set to true only the last vehicle status event is
+            returned for each vehicle in the response. If this value is set to
+            false (or not present) all vehicle status events matching the
+            starttime/stoptime criteria is returned for each vehicle in the
+            response.
+          required: false
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/com.fms_standard.rfms.v2_1.VehiclePositions'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '415':
+          description: Unsupported Media Type
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+      x-xsd: /documentation/xsd-api-docs/vehicle_types_2.1.0.xsd
+  /rfms/vehiclestatuses:
+    get:
+      tags:
+        - Vehiclestatuses
+      summary: Get vehicle statuses
+      description: >-
+        The vehicle status resource is used to get the status reports for one or
+        several vehicles. Using the starttime, stoptime & latestOnly parameters
+        it can be used to get all historical status reports between a start and
+        stop time or the latest known status only. Using the vin parameter it
+        can be used to get all historical vehicle reports or latest status for
+        one individual vehicle. If a request is made for data in a period where
+        no data has been received, an empty list will be returned.
+      operationId: getVehicleStatus_2_1_0UsingGET_1
+      produces:
+        - application/vnd.fmsstandard.com.Vehiclestatuses.v2.1+xml
+        - application/vnd.fmsstandard.com.Vehiclestatuses.v2.1+json
+      parameters:
+        - name: vin
+          in: query
+          description: 'Vehicle Identification Number, 17 characters. '
+          required: false
+          type: string
+          x-example: Z00SC0000HQ000126
+        - name: starttime
+          in: query
+          description: >-
+            Only the data created/received after or equal to this time should be
+            returned. Format: yyyy-MM-dd'T'HH:mm:ss'Z'
+          required: false
+          type: string
+          x-example: '2018-05-02T23:00:24.486Z'
+        - name: stoptime
+          in: query
+          description: >-
+            Only the data created/received before this time should be returned.
+            Format: yyyy-MM-dd'T'HH:mm:ss'Z'
+          required: false
+          type: string
+          x-example: '2018-05-02T23:30:24.486Z'
+        - name: datetype
+          in: query
+          description: >-
+            The start/stop times are compared to the created or received time of
+            the position reports. If this isn’t supplied all times are received
+            times.Possible values are: 'created/received'
+          required: false
+          type: string
+          default: received
+          x-example: received
+        - name: contentFilter
+          in: query
+          description: >-
+            Will only return data reports that contain information in the area
+
+            defined by the filters. Possible values are:
+
+            'SNAPSHOT/ACCUMULATED/UPTIME'. If several values are used in the
+
+            filter they should be in a comma-separated list (E.g.:
+
+            contentFilter=ACCUMULATED,SNAPSHOT).  If this filter parameter isn’t
+
+            supplied the returned reports contain all available blocks.
+
+
+            Both sub type ACCUMULATED and UPTIME produces a lot of information
+            in
+
+            response payload. If such data is not used in consuming application
+            it
+
+            can be good to optimize requests by not querying such data to
+            reduce
+
+            data size in payloads and response time. When content filter is
+            used,
+
+            only data parameters provided at the triggered event is included in
+
+            content and only triggered events that contains parameters matching
+
+            the content filter are part of response. When content filter is not
+
+            used an aggregated view of all parameters and its state at each
+            given
+
+            event is provided.
+          required: false
+          type: string
+          x-example: SNAPSHOT
+        - name: triggerFilter
+          in: query
+          description: |-
+            Will only return data reports that were triggered by the trigger
+            defined by the filter. Possible values are:
+             * TIMER
+             * TELL_TALE
+             * DRIVER_LOGIN
+             * DRIVER_LOGOUT
+             * IGNITION_ON
+             * IGNITION_OFF
+             * ENGINE_ON
+             * ENGINE_OFF
+             * PTO_ENABLED
+             * PTO_DISABLED
+             * DISTANCE_TRAVELLED
+             * DRIVER_1_WORKING_STATE_CHANGED
+             * DRIVER_2_WORKING_STATE_CHANGED
+
+            If several values are used in the filter they should be in
+            a comma-separated list (Ex: triggerFilter=DRIVER_LOGIN,TIMER). If
+            this filter parameter isn’t supplied the returned data reports
+            contain data reports triggered by any trigger.
+          required: false
+          type: string
+          x-example: TIMER
+        - name: latestOnly
+          in: query
+          description: >-
+            If this value is set to true only the last vehicle status event is
+            returned for each vehicle in the response. If this value is set to
+            false (or not present) all vehicle status events matching the
+            starttime/stoptime criteria is returned for each vehicle in the
+            response.
+          required: false
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/com.fms_standard.rfms.v2_1.VehicleStatuses'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '415':
+          description: Unsupported Media Type
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+      x-xsd: /documentation/xsd-api-docs/vehicle_types_2.1.0.xsd
+  /rfms/vehicles:
+    get:
+      tags:
+        - Vehicles
+      summary: Get vehicles
+      description: >-
+        Returns list of vehicles based on the users' account. It will contain a
+        list of vehicles matching the filter parameters supplied in the request.
+        If there are no vehicles in the account an empty list will be returned
+        System responds with vehicle list message.
+      operationId: getVehicles_2_1_0UsingGET_1
+      produces:
+        - application/vnd.fmsstandard.com.Vehicles.v2.1+json
+        - application/vnd.fmsstandard.com.Vehicles.v2.1+xml
+      parameters:
+        - name: lastVin
+          in: query
+          description: >-
+            Mandatory if moreDataAvailable parameter was set to true in previous
+            request for vehicles. It should be set to the VIN of the last
+            vehicle in the result set of this message. The response will return
+            the next block of vehicles not including the one with the given VIN.
+            If moreDataAvailable parameter is set to true the VIN of the last
+            item in the vehicle list in the response is set to lastVin parameter
+            in the next call.
+          required: false
+          type: string
+          x-example: Z00SC0000HQ000126
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/com.fms_standard.rfms.v2_1.Vehicles'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '415':
+          description: Unsupported Media Type
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+      x-xsd: /documentation/xsd-api-docs/vehicle_types_2.1.0.xsd
+definitions:
+  com.fms_standard.rfms.v2_1.AccumulatedType:
+    type: object
+    properties:
+      AccelerationClass:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.FromToClassesType'
+      AccelerationDuringBrakeClass:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.FromToClassesType'
+      AccelerationPedalPositionClass:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.FromToClassesType'
+      BrakePedalCounterSpeedOverZero:
+        type: integer
+        format: int64
+        description: ''
+        example: 4
+      ChairliftCounter:
+        type: integer
+        format: int64
+        description: ''
+        example: 0
+      CurrentGearClass:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.LabelClassesType'
+      DistanceBrakePedalActiveSpeedOverZero:
+        type: integer
+        format: int64
+        description: ''
+        example: 270
+      DistanceCruiseControlActive:
+        type: integer
+        format: int64
+        description: ''
+        example: 7330
+      DrivingWithoutTorqueClass:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.LabelClassesType'
+      DurationCruiseControlActive:
+        type: integer
+        format: int64
+        description: ''
+        example: 690
+      DurationWheelbaseSpeedOverZero:
+        type: integer
+        format: int64
+        description: ''
+        example: 1320
+      DurationWheelbaseSpeedZero:
+        type: integer
+        format: int64
+        description: ''
+        example: 240
+      EngineSpeedClass:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.FromToClassesType'
+      EngineTorqueAtCurrentSpeedClass:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.FromToClassesType'
+      EngineTorqueClass:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.FromToClassesType'
+      FuelConsumptionCruiseControlActive:
+        type: integer
+        format: int64
+        description: ''
+        example: 2743
+      FuelWheelbaseSpeedOverZero:
+        type: integer
+        format: int64
+        description: ''
+        example: 4330
+      FuelWheelbaseSpeedZero:
+        type: integer
+        format: int64
+        description: ''
+        example: 350
+      HighAccelerationClass:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.FromToClassesType'
+      KneelingCounter:
+        type: integer
+        format: int64
+        description: ''
+        example: 0
+      PramRequestCounter:
+        type: integer
+        format: int64
+        description: ''
+        example: 0
+      PtoActiveClass:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.LabelClassesType'
+      RetarderTorqueClass:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.FromToClassesType'
+      SelectedGearClass:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.LabelClassesType'
+      StopRequestCounter:
+        type: integer
+        format: int64
+        description: ''
+        example: 0
+      VehicleSpeedClass:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.FromToClassesType'
+  com.fms_standard.rfms.v2_1.AlternatorInfoType:
+    type: object
+    required:
+      - AlternatorStatus
+    properties:
+      AlternatorNumber:
+        type: integer
+        format: int64
+        description: ''
+        example: 0
+      AlternatorStatus:
+        type: string
+        description: ''
+        enum:
+          - NOT_CHARGING
+          - CHARGING
+          - ERROR
+          - NOT_AVAILABLE
+        example: NOT_CHARGING
+  com.fms_standard.rfms.v2_1.DoorStatusType:
+    type: object
+    properties:
+      DoorEnabledStatus:
+        type: string
+        description: ''
+        enum:
+          - ENABLED
+          - DISABLED
+          - ERROR
+          - NOT_AVAILABLE
+        example: DISABLED
+      DoorLockStatus:
+        type: string
+        description: ''
+        enum:
+          - UNLOCKED
+          - LOCKED
+          - ERROR
+          - NOT_AVAILABLE
+        example: NOT_AVAILABLE
+      DoorNumber:
+        type: integer
+        format: int64
+        description: ''
+        example: 0
+      DoorOpenStatus:
+        type: string
+        description: ''
+        enum:
+          - CLOSED
+          - OPEN
+          - ERROR
+          - NOT_AVAILABLE
+        example: NOT_AVAILABLE
+  com.fms_standard.rfms.v2_1.DriverIdType:
+    type: object
+    properties:
+      OemDriverIdentification:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.OemDriverIdentificationType'
+      TachoDriverIdentification:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.TachoDriverIdentificationType'
+  com.fms_standard.rfms.v2_1.FromToClassType:
+    type: object
+    properties:
+      From:
+        type: number
+        format: double
+        description: ''
+        example: 1
+      Meters:
+        type: integer
+        format: int64
+        description: ''
+        example: 320
+      MilliLitres:
+        type: integer
+        format: int64
+        description: ''
+        example: 230
+      Seconds:
+        type: integer
+        format: int64
+        description: ''
+        example: 340
+      To:
+        type: number
+        format: double
+        description: ''
+        example: 3
+  com.fms_standard.rfms.v2_1.FromToClassesType:
+    type: object
+    properties:
+      Value:
+        type: array
+        description: ''
+        items:
+          $ref: '#/definitions/com.fms_standard.rfms.v2_1.FromToClassType'
+  com.fms_standard.rfms.v2_1.GNSSPositionType:
+    type: object
+    required:
+      - PositionDateTime
+    properties:
+      Altitude:
+        type: integer
+        format: int64
+        description: ''
+        example: 62
+      Heading:
+        type: integer
+        format: int32
+        description: ''
+        example: 120
+      Latitude:
+        type: number
+        format: double
+        description: ''
+        example: 57.823997
+      Longitude:
+        type: number
+        format: double
+        description: ''
+        example: 11.989384
+      PositionDateTime:
+        type: string
+        format: date-time
+        description: ''
+        example: 2018-03-26T13:50:16.000Z
+      Speed:
+        type: number
+        format: double
+        description: ''
+        example: 90
+  com.fms_standard.rfms.v2_1.LabelClassType:
+    type: object
+    required:
+      - Label
+    properties:
+      Label:
+        type: string
+        description: ''
+        example: Label1
+      Meters:
+        type: integer
+        format: int64
+        description: ''
+        example: 310
+      MilliLitres:
+        type: integer
+        format: int64
+        description: ''
+        example: 302
+      Seconds:
+        type: integer
+        format: int64
+        description: ''
+        example: 93
+  com.fms_standard.rfms.v2_1.LabelClassesType:
+    type: object
+    properties:
+      Value:
+        type: array
+        description: ''
+        items:
+          $ref: '#/definitions/com.fms_standard.rfms.v2_1.LabelClassType'
+  com.fms_standard.rfms.v2_1.OemDriverIdentificationType:
+    type: object
+    required:
+      - OemDriverIdentification
+    properties:
+      IdType:
+        type: string
+        description: ''
+        example: pin
+      OemDriverIdentification:
+        type: string
+        description: ''
+        example: Driver1
+  com.fms_standard.rfms.v2_1.ProductionDateType:
+    type: object
+    properties:
+      Day:
+        type: integer
+        format: int32
+        description: ''
+        example: 23
+      Month:
+        type: integer
+        format: int32
+        description: ''
+        example: 3
+      Year:
+        type: integer
+        format: int32
+        description: ''
+        example: 2017
+  com.fms_standard.rfms.v2_1.SnapshotType:
+    type: object
+    properties:
+      AmbientAirTemperature:
+        type: number
+        format: double
+        description: ''
+        example: 21.5
+      CatalystFuelLevel:
+        type: number
+        format: double
+        description: ''
+        example: 45.3
+      Driver1WorkingState:
+        type: string
+        description: ''
+        enum:
+          - REST
+          - DRIVER_AVAILABLE
+          - WORK
+          - DRIVE
+          - ERROR
+          - NOT_AVAILABLE
+        example: DRIVE
+      Driver2Id:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.DriverIdType'
+      Driver2WorkingState:
+        type: string
+        description: ''
+        enum:
+          - REST
+          - DRIVER_AVAILABLE
+          - WORK
+          - DRIVE
+          - ERROR
+          - NOT_AVAILABLE
+        example: REST
+      EngineSpeed:
+        type: number
+        format: double
+        description: ''
+        example: 3100
+      FuelLevel1:
+        type: number
+        format: double
+        description: ''
+        example: 23.6
+      GNSSPosition:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.GNSSPositionType'
+      TachographSpeed:
+        type: number
+        format: double
+        description: ''
+        example: 90
+      WheelBasedSpeed:
+        type: number
+        format: double
+        description: ''
+        example: 90
+  com.fms_standard.rfms.v2_1.TachoDriverIdentificationType:
+    type: object
+    required:
+      - CardIssuingMemberState
+      - DriverIdentification
+    properties:
+      CardIssuingMemberState:
+        type: string
+        description: ''
+        example: UK
+      CardRenewalIndex:
+        type: string
+        description: ''
+        example: 0
+      CardReplacementIndex:
+        type: string
+        description: ''
+        example: 0
+      DriverAuthenticationEquipment:
+        type: string
+        description: ''
+        enum:
+          - RESERVED
+          - DRIVER_CARD
+          - CONTROL_CARD
+          - COMPANY_CARD
+          - MANUFACTURING_CARD
+          - VEHICLE_UNIT
+          - MOTION_SENSOR
+        example: DRIVER_CARD
+      DriverIdentification:
+        type: string
+        description: ''
+        example: DB051241420307
+  com.fms_standard.rfms.v2_1.TellTaleInfoType:
+    type: object
+    required:
+      - State
+      - TellTale
+    properties:
+      State:
+        type: string
+        description: ''
+        enum:
+          - RED
+          - YELLOW
+          - INFO
+          - 'OFF'
+          - RESERVED_4
+          - RESERVED_5
+          - RESERVED_6
+          - NOT_AVAILABLE
+        example: RED
+      TellTale:
+        type: string
+        description: ''
+        enum:
+          - COOLING_AIR_CONDITIONING
+          - HIGH_BEAM_MAIN_BEAM
+          - LOW_BEAM_DIPPED_BEAM
+          - TURN_SIGNALS
+          - HAZARD_WARNING
+          - PROVISIONING_HANDICAPPED_PERSON
+          - PARKING_BRAKE
+          - BRAKE_MALFUNCTION
+          - HATCH_OPEN
+          - FUEL_LEVEL
+          - ENGINE_COOLANT_TEMPERATURE
+          - BATTERY_CHARGING_CONDITION
+          - ENGINE_OIL
+          - POSITION_LIGHTS
+          - FRONT_FOG_LIGHT
+          - REAR_FOG_LIGHT
+          - PARKING_HEATER
+          - ENGINE_MIL_INDICATOR
+          - SERVICE_CALL_FOR_MAINTENANCE
+          - TRANSMISSION_FLUID_TEMPERATURE
+          - TRANSMISSION_MALFUNCTION
+          - ANTI_LOCK_BRAKE_FAILURE
+          - WORN_BRAKE_LININGS
+          - WINDSCREEN_WASHER_FLUID
+          - TIRE_MALFUNCTION
+          - GENERAL_FAILURE
+          - ENGINE_OIL_TEMPERATURE
+          - ENGINE_OIL_LEVEL
+          - ENGINE_COOLANT_LEVEL
+          - STEERING_FLUID_LEVEL
+          - STEERING_FAILURE
+          - HEIGHT_CONTROL
+          - RETARDER
+          - ENGINE_EMISSION_FAILURE
+          - ESC_INDICATOR
+          - BRAKE_LIGHTS
+          - ARTICULATION
+          - STOP_REQUEST
+          - PRAM_REQUEST
+          - BUS_STOP_BRAKE
+          - ADBLUE_LEVEL
+          - RAISING
+          - LOWERING
+          - KNEELING
+          - ENGINE_COMPARTMENT_TEMPERATURE
+          - AUXILLARY_AIR_PRESSURE
+          - AIR_FILTER_CLOGGED
+          - FUEL_FILTER_DIFF_PRESSURE
+          - SEAT_BELT
+          - EBS
+          - LANE_DEPARTURE_INDICATOR
+          - ADVANCED_EMERGENCY_BREAKING
+          - ACC
+          - TRAILER_CONNECTED
+          - ABS_TRAILER
+          - AIRBAG
+          - EBS_TRAILER_1_2
+          - TACHOGRAPH_INDICATOR
+          - ESC_SWITCHED_OFF
+          - LANE_DEPARTURE_WARNING_SWITCHED_OFF
+          - OEM_SPECIFIC_TELL_TALE
+        example: ENGINE_OIL_LEVEL
+  com.fms_standard.rfms.v2_1.TriggerType:
+    type: object
+    required:
+      - Context
+      - TriggerType
+    properties:
+      Context:
+        type: string
+        description: ''
+        example: RFMS
+      DriverId:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.DriverIdType'
+      PtoId:
+        type: string
+        description: ''
+        example: pto1
+      TellTaleInfo:
+        type: array
+        description: ''
+        items:
+          $ref: '#/definitions/com.fms_standard.rfms.v2_1.TellTaleInfoType'
+      TriggerInfo:
+        type: array
+        description: ''
+        items:
+          type: string
+          example: InfoString
+      TriggerType:
+        type: string
+        description: ''
+        example: TIMER
+  com.fms_standard.rfms.v2_1.UptimeType:
+    type: object
+    properties:
+      AlternatorInfo:
+        type: array
+        description: ''
+        items:
+          $ref: '#/definitions/com.fms_standard.rfms.v2_1.AlternatorInfoType'
+      BellowPressureFrontAxleLeft:
+        type: integer
+        format: int64
+        description: ''
+        example: 12
+      BellowPressureFrontAxleRight:
+        type: integer
+        format: int64
+        description: ''
+        example: 12
+      BellowPressureRearAxleLeft:
+        type: integer
+        format: int64
+        description: ''
+        example: 12
+      BellowPressureRearAxleRight:
+        type: integer
+        format: int64
+        description: ''
+        example: 12
+      DurationAtLeastOneDoorOpen:
+        type: integer
+        format: int64
+        description: ''
+        example: 12
+      EngineCoolantTemperature:
+        type: number
+        format: double
+        description: ''
+        example: 52.8
+      ServiceBrakeAirPressureCircuit1:
+        type: integer
+        format: int64
+        description: ''
+        example: 230
+      ServiceBrakeAirPressureCircuit2:
+        type: integer
+        format: int64
+        description: ''
+        example: 0
+      ServiceDistance:
+        type: integer
+        format: int64
+        description: ''
+        example: 2351
+      TellTaleInfo:
+        type: array
+        description: ''
+        items:
+          $ref: '#/definitions/com.fms_standard.rfms.v2_1.TellTaleInfoType'
+  com.fms_standard.rfms.v2_1.VehiclePositionType:
+    type: object
+    required:
+      - CreatedDateTime
+      - ReceivedDateTime
+      - TriggerType
+      - VIN
+    properties:
+      CreatedDateTime:
+        type: string
+        format: date-time
+        description: ''
+        example: 2018-03-26T13:50:15.000Z
+      GNSSPosition:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.GNSSPositionType'
+      ReceivedDateTime:
+        type: string
+        format: date-time
+        description: ''
+        example: 2018-03-26T13:50:17.424Z
+      TachographSpeed:
+        type: number
+        format: double
+        description: ''
+        example: 52.4
+      TriggerType:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.TriggerType'
+      VIN:
+        type: string
+        description: ''
+        example: Z00SC0000HQ000126
+      WheelBasedSpeed:
+        type: number
+        format: double
+        description: ''
+        example: 52.4
+  com.fms_standard.rfms.v2_1.VehiclePositions:
+    type: object
+    required:
+      - RequestServerDateTime
+    properties:
+      MoreDataAvailable:
+        type: boolean
+        description: ''
+        example: false
+      RequestServerDateTime:
+        type: string
+        format: date-time
+        description: ''
+        example: 2018-03-26T13:51:00.000Z
+      VehiclePosition:
+        type: array
+        description: ''
+        items:
+          $ref: '#/definitions/com.fms_standard.rfms.v2_1.VehiclePositionType'
+  com.fms_standard.rfms.v2_1.VehicleStatusType:
+    type: object
+    required:
+      - CreatedDateTime
+      - ReceivedDateTime
+      - TriggerType
+      - Vin
+    properties:
+      AccumulatedData:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.AccumulatedType'
+      CreatedDateTime:
+        type: string
+        format: date-time
+        description: ''
+        example: 2018-03-26T13:50:15.000Z
+      DoorStatus:
+        type: array
+        description: ''
+        items:
+          $ref: '#/definitions/com.fms_standard.rfms.v2_1.DoorStatusType'
+      Driver1Id:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.DriverIdType'
+      EngineTotalFuelUsed:
+        type: integer
+        format: int64
+        description: ''
+        example: 34251
+      GrossCombinationVehicleWeight:
+        type: integer
+        description: ''
+        example: 10000
+      HRTotalVehicleDistance:
+        type: integer
+        format: int64
+        description: ''
+        example: 30415950
+      ReceivedDateTime:
+        type: string
+        format: date-time
+        description: ''
+        example: 2018-03-26T13:50:17.424Z
+      SnapshotData:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.SnapshotType'
+      Status2OfDoors:
+        type: string
+        description: ''
+        enum:
+          - ALL_DOORS_DISABLED
+          - AT_LEAST_ONE_DOOR_ENABLED
+          - ERROR
+          - NOT_AVAILABLE
+        example: ALL_DOORS_DISABLED
+      TotalEngineHours:
+        type: number
+        format: double
+        description: ''
+        example: 681.2
+      TriggerType:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.TriggerType'
+      UptimeData:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.UptimeType'
+      Vin:
+        type: string
+        description: ''
+        example: Z00SC0000HQ000126
+  com.fms_standard.rfms.v2_1.VehicleStatuses:
+    type: object
+    required:
+      - RequestServerDateTime
+    properties:
+      MoreDataAvailable:
+        type: boolean
+        description: ''
+        example: false
+      RequestServerDateTime:
+        type: string
+        format: date-time
+        description: ''
+        example: 2018-03-26T13:51:00.000Z
+      VehicleStatus:
+        type: array
+        description: ''
+        items:
+          $ref: '#/definitions/com.fms_standard.rfms.v2_1.VehicleStatusType'
+  com.fms_standard.rfms.v2_1.VehicleType:
+    type: object
+    required:
+      - VIN
+    properties:
+      BodyType:
+        type: string
+        description: ''
+        example: COACH
+      Brand:
+        type: string
+        description: ''
+        example: VOLVO TRUCKS
+      ChassisType:
+        type: string
+        description: ''
+        example: Self Support
+      CustomerVehicleName:
+        type: string
+        description: ''
+        example: B32D8723XE3
+      DoorConfiguration:
+        type: array
+        description: ''
+        items:
+          type: integer
+          format: int32
+          example: 2
+      EmissionLevel:
+        type: string
+        description: ''
+        example: EURO_VI
+      GearboxType:
+        type: string
+        description: ''
+        example: AUTOMATIC
+      HasRampOrLift:
+        type: boolean
+        description: ''
+        example: false
+      Model:
+        type: string
+        description: ''
+        example: FH16
+      NoOfAxles:
+        type: integer
+        format: int32
+        description: ''
+        example: 3
+      PossibleFuelType:
+        type: array
+        description: ''
+        items:
+          type: string
+          example: 1A
+      ProductionDate:
+        $ref: '#/definitions/com.fms_standard.rfms.v2_1.ProductionDateType'
+      TachographType:
+        type: string
+        description: ''
+        example: TSU
+      TellTaleCode:
+        type: string
+        description: ''
+        example: 'N'
+      TotalFuelTankVolume:
+        type: integer
+        format: int64
+        description: ''
+        example: 230000
+      Type:
+        type: string
+        description: ''
+        example: TRUCK
+      VIN:
+        type: string
+        description: ''
+        example: Z00SC0000HQ000126
+  com.fms_standard.rfms.v2_1.Vehicles:
+    type: object
+    properties:
+      MoreDataAvailable:
+        type: boolean
+        description: ''
+        example: false
+      Vehicle:
+        type: array
+        description: ''
+        items:
+          $ref: '#/definitions/com.fms_standard.rfms.v2_1.VehicleType'
