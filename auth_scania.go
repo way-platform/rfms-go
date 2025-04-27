@@ -38,7 +38,7 @@ var _ TokenAuthenticator = &scaniaTokenAuthenticator{}
 func (a *scaniaTokenAuthenticator) Authenticate(ctx context.Context) (_ TokenCredentials, err error) {
 	defer func() {
 		if err != nil {
-			err = fmt.Errorf("authenticate: %w", err)
+			err = fmt.Errorf("authenticate Scania: %w", err)
 		}
 	}()
 	challenge, err := a.getChallenge(ctx)
@@ -57,14 +57,16 @@ func (a *scaniaTokenAuthenticator) Authenticate(ctx context.Context) (_ TokenCre
 }
 
 // Refresh implements the [TokenAuthenticator] interface.
-func (a *scaniaTokenAuthenticator) Refresh(ctx context.Context, refreshToken string) (_ TokenCredentials, err error) {
-	apiMethod, apiPath := http.MethodPost, "/refreshtoken"
+func (a *scaniaTokenAuthenticator) Refresh(
+	ctx context.Context,
+	refreshToken string,
+) (_ TokenCredentials, err error) {
 	defer func() {
 		if err != nil {
-			err = fmt.Errorf("%s %s: %w", apiMethod, apiPath, err)
+			err = fmt.Errorf("refresh Scania: %w", err)
 		}
 	}()
-	req, err := a.newRequest(ctx, apiMethod, apiPath, nil)
+	req, err := a.newRequest(ctx, http.MethodPost, "/refreshtoken", nil)
 	if err != nil {
 		return TokenCredentials{}, nil
 	}
@@ -99,13 +101,12 @@ func (a *scaniaTokenAuthenticator) Refresh(ctx context.Context, refreshToken str
 
 // getChallenge requests an authentication challenge.
 func (a *scaniaTokenAuthenticator) getChallenge(ctx context.Context) (_ string, err error) {
-	apiMethod, apiPath := http.MethodPost, "/clientid2challenge"
 	defer func() {
 		if err != nil {
-			err = fmt.Errorf("%s %s: %w", apiMethod, apiPath, err)
+			err = fmt.Errorf("get challenge: %w", err)
 		}
 	}()
-	req, err := a.newRequest(ctx, apiMethod, apiPath, nil)
+	req, err := a.newRequest(ctx, http.MethodPost, "/clientid2challenge", nil)
 	if err != nil {
 		return "", nil
 	}
@@ -135,13 +136,12 @@ func (a *scaniaTokenAuthenticator) exchangeToken(
 	ctx context.Context,
 	challengeResponse string,
 ) (_ TokenCredentials, err error) {
-	apiMethod, apiPath := http.MethodPost, "/response2token"
 	defer func() {
 		if err != nil {
-			err = fmt.Errorf("%s %s: %w", apiMethod, apiPath, err)
+			err = fmt.Errorf("exchange token: %w", err)
 		}
 	}()
-	req, err := a.newRequest(ctx, apiMethod, apiPath, nil)
+	req, err := a.newRequest(ctx, http.MethodPost, "/response2token", nil)
 	if err != nil {
 		return TokenCredentials{}, fmt.Errorf("create request: %w", err)
 	}
@@ -174,7 +174,12 @@ func (a *scaniaTokenAuthenticator) exchangeToken(
 	}, nil
 }
 
-func (a *scaniaTokenAuthenticator) newRequest(ctx context.Context, method, path string, body io.Reader) (_ *http.Request, err error) {
+func (a *scaniaTokenAuthenticator) newRequest(
+	ctx context.Context,
+	method string,
+	path string,
+	body io.Reader,
+) (_ *http.Request, err error) {
 	defer func() {
 		if err != nil {
 			err = fmt.Errorf("new request: %w", err)

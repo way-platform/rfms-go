@@ -13,7 +13,9 @@ import (
 
 type authFile struct {
 	Provider         string                 `json:"provider"`
-	TokenCredentials *rfms.TokenCredentials `json:"tokenCredentials,omitempty"`
+	TokenCredentials *rfms.TokenCredentials `json:"tokenCredentials,omitzero"`
+	Username         string                 `json:"username,omitzero"`
+	Password         string                 `json:"password,omitzero"`
 }
 
 const authConfigFile = "rfms-go/auth.json"
@@ -77,6 +79,7 @@ func newLoginCommand() *cobra.Command {
 }
 
 func newLoginScaniaCommand() *cobra.Command {
+	const provider = rfms.Scania
 	cmd := newCommand()
 	cmd.Use = "scania"
 	cmd.Short = "Login to Scania's rFMS API"
@@ -91,19 +94,20 @@ func newLoginScaniaCommand() *cobra.Command {
 			return err
 		}
 		auth := &authFile{
-			Provider:         rfms.Scania,
+			Provider:         provider,
 			TokenCredentials: &credentials,
 		}
 		if err := writeAuthFile(auth); err != nil {
 			return err
 		}
-		cmd.Println("Logged in.")
+		cmd.Printf("Logged in to %s.", provider)
 		return nil
 	}
 	return cmd
 }
 
 func newLoginVolvoTrucksCommand() *cobra.Command {
+	const provider = rfms.VolvoTrucks
 	cmd := newCommand()
 	cmd.Use = "volvo-trucks"
 	cmd.Short = "Login to Volvo Trucks' rFMS API"
@@ -112,8 +116,15 @@ func newLoginVolvoTrucksCommand() *cobra.Command {
 	password := cmd.Flags().String("password", "", "password to use for authentication")
 	cmd.MarkFlagRequired("password")
 	cmd.RunE = func(cmd *cobra.Command, _ []string) error {
-		_, _ = *username, *password // TODO: Implement Volvo Trucks support.
-		cmd.Println("Logged in.")
+		auth := &authFile{
+			Provider: provider,
+			Username: *username,
+			Password: *password,
+		}
+		if err := writeAuthFile(auth); err != nil {
+			return err
+		}
+		cmd.Printf("Logged in to %s.", provider)
 		return nil
 	}
 	return cmd
@@ -150,6 +161,11 @@ func newClient() (*rfms.Client, error) {
 		return rfms.NewClient(
 			rfms.ScaniaBaseURL,
 			rfms.WithReuseTokenAuth(*auth.TokenCredentials),
+		), nil
+	case rfms.VolvoTrucks:
+		return rfms.NewClient(
+			rfms.VolvoTrucksBaseURL,
+			rfms.WithBasicAuth(auth.Username, auth.Password),
 		), nil
 	default:
 		return nil, fmt.Errorf("unknown provider: %s", auth.Provider)

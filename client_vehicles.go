@@ -28,13 +28,12 @@ type ListVehiclesResponse struct {
 
 // ListVehicles implements the rFMS API method "GET /vehicles".
 func (c *Client) ListVehicles(ctx context.Context, request *ListVehiclesRequest) (_ *ListVehiclesResponse, err error) {
-	apiMethod, apiPath := "GET", "/vehicles"
 	defer func() {
 		if err != nil {
-			err = fmt.Errorf("%s %s: %w", apiMethod, apiPath, err)
+			err = fmt.Errorf("list vehicles: %w", err)
 		}
 	}()
-	req, err := c.newRequest(ctx, apiMethod, apiPath, nil)
+	req, err := c.newRequest(ctx, http.MethodGet, "/vehicles", nil)
 	if err != nil {
 		return nil, fmt.Errorf("create request: %w", err)
 	}
@@ -50,7 +49,7 @@ func (c *Client) ListVehicles(ctx context.Context, request *ListVehiclesRequest)
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("response status code: %d", resp.StatusCode)
+		return nil, newHTTPError(resp)
 	}
 	data, err := io.ReadAll(resp.Body)
 	if err != nil {

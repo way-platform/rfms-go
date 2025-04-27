@@ -54,7 +54,8 @@ func newVehiclesCommand() *cobra.Command {
 			for _, vehicle := range response.Vehicles {
 				printRawJSON(cmd, vehicle.Raw)
 			}
-			moreDataAvailable = response.MoreDataAvailable
+			// moreDataAvailable = response.MoreDataAvailable
+			moreDataAvailable = false
 			lastVIN = response.Vehicles[len(response.Vehicles)-1].VIN
 		}
 		return nil
