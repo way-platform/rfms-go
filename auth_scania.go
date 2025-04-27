@@ -14,10 +14,6 @@ import (
 	"time"
 )
 
-const (
-	ScaniaBaseURL = "https://dataaccess.scania.com"
-)
-
 type scaniaTokenAuthenticator struct {
 	clientID     string
 	clientSecret string

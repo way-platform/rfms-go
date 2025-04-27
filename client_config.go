@@ -50,3 +50,13 @@ func WithScaniaAuth(clientID string, clientSecret string) ClientOption {
 		}
 	}
 }
+
+// WithReuseTokenAuth authenticates requests by re-using existing [TokenCredentials].
+func WithReuseTokenAuth(credentials TokenCredentials) ClientOption {
+	return func(cc *ClientConfig) {
+		cc.transport = &reuseTokenCredentialsTransport{
+			transport:   cc.transport,
+			credentials: credentials,
+		}
+	}
+}

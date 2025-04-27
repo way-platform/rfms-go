@@ -73,3 +73,18 @@ func (t *tokenAuthenticatorTransport) getToken(ctx context.Context) (string, err
 	t.mu.Unlock()
 	return newCredentials.Token, nil
 }
+
+type reuseTokenCredentialsTransport struct {
+	transport   http.RoundTripper
+	credentials TokenCredentials
+}
+
+func (t *reuseTokenCredentialsTransport) RoundTrip(req *http.Request) (_ *http.Response, err error) {
+	defer func() {
+		if err != nil {
+			err = fmt.Errorf("reuse token credentials transport: %w", err)
+		}
+	}()
+	req.Header.Set("Authorization", "Bearer "+t.credentials.Token)
+	return t.transport.RoundTrip(req)
+}
