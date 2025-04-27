@@ -10,13 +10,20 @@ import (
 
 // ListVehiclesRequest is the request for the [Client.ListVehicles] method.
 type ListVehiclesRequest struct {
+	// LastVIN is the last VIN included in the previous response.
 	LastVIN string
 }
 
 // ListVehiclesResponse is the response for the [Client.ListVehicles] method.
 type ListVehiclesResponse struct {
-	Raw      json.RawMessage `json:"-"`
-	Vehicles []Vehicle       `json:"vehicles,omitempty"`
+	// Raw response body.
+	Raw json.RawMessage `json:"-"`
+	// Vehicles in the response.
+	Vehicles []Vehicle `json:"vehicles,omitempty"`
+	// MoreDataAvailable indicates if there is more data available.
+	MoreDataAvailable bool
+	// MoreDataAvailableLink is the link to the next page of data.
+	MoreDataAvailableLink string
 }
 
 // ListVehicles implements the rFMS API method "GET /vehicles".
@@ -49,7 +56,23 @@ func (c *Client) ListVehicles(ctx context.Context, request *ListVehiclesRequest)
 	if err != nil {
 		return nil, fmt.Errorf("read response body: %w", err)
 	}
-	return &ListVehiclesResponse{
-		Raw: json.RawMessage(data),
-	}, nil
+	var responseBody struct {
+		VehicleResponse ListVehiclesResponse `json:"vehicleResponse"`
+	}
+	if err := json.Unmarshal(data, &responseBody); err != nil {
+		return nil, fmt.Errorf("unmarshal response body: %w", err)
+	}
+	var rawVehicles struct {
+		VehicleResponse struct {
+			Vehicles []json.RawMessage `json:"vehicles"`
+		} `json:"vehicleResponse"`
+	}
+	if err := json.Unmarshal(data, &rawVehicles); err != nil {
+		return nil, fmt.Errorf("unmarshal response body: %w", err)
+	}
+	responseBody.VehicleResponse.Raw = data
+	for i, rawVehicle := range rawVehicles.VehicleResponse.Vehicles {
+		responseBody.VehicleResponse.Vehicles[i].Raw = rawVehicle
+	}
+	return &responseBody.VehicleResponse, nil
 }

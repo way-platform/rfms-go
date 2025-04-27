@@ -42,11 +42,21 @@ func newVehiclesCommand() *cobra.Command {
 		if err != nil {
 			return err
 		}
-		response, err := client.ListVehicles(cmd.Context(), &rfms.ListVehiclesRequest{})
-		if err != nil {
-			return err
+		moreDataAvailable := true
+		lastVIN := ""
+		for moreDataAvailable {
+			response, err := client.ListVehicles(cmd.Context(), &rfms.ListVehiclesRequest{
+				LastVIN: lastVIN,
+			})
+			if err != nil {
+				return err
+			}
+			for _, vehicle := range response.Vehicles {
+				printRawJSON(cmd, vehicle.Raw)
+			}
+			moreDataAvailable = response.MoreDataAvailable
+			lastVIN = response.Vehicles[len(response.Vehicles)-1].VIN
 		}
-		printRawJSON(cmd, response.Raw)
 		return nil
 	}
 	return cmd
@@ -55,6 +65,6 @@ func newVehiclesCommand() *cobra.Command {
 func printRawJSON(cmd *cobra.Command, raw json.RawMessage) error {
 	var buf bytes.Buffer
 	json.Indent(&buf, raw, "", "  ")
-	_, _ = buf.WriteTo(cmd.OutOrStdout())
+	cmd.Println(buf.String())
 	return nil
 }

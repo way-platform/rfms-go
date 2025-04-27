@@ -3,7 +3,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "rFMS4",
-        "description": "API for rFMS vehicle data",
+        "description": "API for rFMS vehicle data (fetched on 2025-04-27)",
         "contact": {
             "name": "Developer Support",
             "url": "https://developer.scania.com/",
