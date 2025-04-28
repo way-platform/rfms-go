@@ -37,7 +37,7 @@ func newRootCommand() *cobra.Command {
 func newVehiclesCommand() *cobra.Command {
 	cmd := newCommand()
 	cmd.Use = "vehicles"
-	cmd.Short = "List vehicles"
+	cmd.Short = " vehicles"
 	cmd.RunE = func(cmd *cobra.Command, args []string) error {
 		client, err := newClient()
 		if err != nil {
@@ -46,7 +46,7 @@ func newVehiclesCommand() *cobra.Command {
 		moreDataAvailable := true
 		lastVIN := ""
 		for moreDataAvailable {
-			response, err := client.ListVehicles(cmd.Context(), &rfms.ListVehiclesRequest{
+			response, err := client.Vehicles(cmd.Context(), &rfms.VehiclesRequest{
 				LastVIN: lastVIN,
 			})
 			if err != nil {
@@ -70,7 +70,7 @@ func newVehiclesCommand() *cobra.Command {
 func newVehiclePositionsCommand() *cobra.Command {
 	cmd := newCommand()
 	cmd.Use = "vehicle-positions"
-	cmd.Short = "List vehicle positions"
+	cmd.Short = " vehicle positions"
 	cmd.RunE = func(cmd *cobra.Command, args []string) error {
 		client, err := newClient()
 		if err != nil {
@@ -79,7 +79,7 @@ func newVehiclePositionsCommand() *cobra.Command {
 		moreDataAvailable := true
 		lastVIN := ""
 		for moreDataAvailable {
-			response, err := client.ListVehiclePositions(cmd.Context(), &rfms.ListVehiclePositionsRequest{
+			response, err := client.VehiclePositions(cmd.Context(), &rfms.VehiclePositionsRequest{
 				LastVIN:    lastVIN,
 				LatestOnly: true,
 			})
@@ -106,7 +106,7 @@ func newVehiclePositionsCommand() *cobra.Command {
 func newVehicleStatusesCommand() *cobra.Command {
 	cmd := newCommand()
 	cmd.Use = "vehicle-statuses"
-	cmd.Short = "List vehicle statuses"
+	cmd.Short = " vehicle statuses"
 	cmd.RunE = func(cmd *cobra.Command, args []string) error {
 		client, err := newClient()
 		if err != nil {
@@ -115,7 +115,7 @@ func newVehicleStatusesCommand() *cobra.Command {
 		moreDataAvailable := true
 		lastVIN := ""
 		for moreDataAvailable {
-			response, err := client.ListVehicleStatuses(cmd.Context(), &rfms.ListVehicleStatusesRequest{
+			response, err := client.VehicleStatuses(cmd.Context(), &rfms.VehicleStatusesRequest{
 				LastVIN:    lastVIN,
 				LatestOnly: true,
 			})

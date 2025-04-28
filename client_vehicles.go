@@ -11,14 +11,14 @@ import (
 	"github.com/way-platform/rfms-go/v4/rfmsv4"
 )
 
-// ListVehiclesRequest is the request for the [Client.ListVehicles] method.
-type ListVehiclesRequest struct {
+// VehiclesRequest is the request for the [Client.Vehicles] method.
+type VehiclesRequest struct {
 	// LastVIN is the last VIN included in the previous response.
 	LastVIN string
 }
 
-// ListVehiclesResponse is the response for the [Client.ListVehicles] method.
-type ListVehiclesResponse struct {
+// VehiclesResponse is the response for the [Client.Vehicles] method.
+type VehiclesResponse struct {
 	// Raw response body.
 	Raw json.RawMessage `json:"-"`
 	// Vehicles in the response.
@@ -27,11 +27,11 @@ type ListVehiclesResponse struct {
 	MoreDataAvailable bool `json:"moreDataAvailable,omitempty"`
 }
 
-// ListVehicles implements the rFMS API method "GET /vehicles".
-func (c *Client) ListVehicles(ctx context.Context, request *ListVehiclesRequest) (_ *ListVehiclesResponse, err error) {
+// Vehicles implements the rFMS API method "GET /vehicles".
+func (c *Client) Vehicles(ctx context.Context, request *VehiclesRequest) (_ *VehiclesResponse, err error) {
 	defer func() {
 		if err != nil {
-			err = fmt.Errorf("list vehicles: %w", err)
+			err = fmt.Errorf("vehicles: %w", err)
 		}
 	}()
 	req, err := c.newRequest(ctx, http.MethodGet, "/vehicles", nil)
@@ -80,7 +80,7 @@ func (c *Client) ListVehicles(ctx context.Context, request *ListVehiclesRequest)
 	// for i, rawVehicle := range rawVehicles.VehicleResponse.Vehicles {
 	// 	responseBody.VehicleResponse.Vehicles[i].Raw = rawVehicle
 	// }
-	return &ListVehiclesResponse{
+	return &VehiclesResponse{
 		Vehicles:          *responseBody.VehicleResponse.Vehicles,
 		MoreDataAvailable: responseBody.MoreDataAvailable,
 	}, nil

@@ -11,7 +11,7 @@ import (
 	"github.com/way-platform/rfms-go/v4/rfmsv4"
 )
 
-type ListVehiclePositionsRequest struct {
+type VehiclePositionsRequest struct {
 	// LastVIN is the last VIN included in the previous response.
 	LastVIN string
 	// DateType indicates whether the start/stop times are compared to created or received time.
@@ -28,7 +28,7 @@ type ListVehiclePositionsRequest struct {
 	TriggerFilter string
 }
 
-type ListVehiclePositionsResponse struct {
+type VehiclePositionsResponse struct {
 	// Raw response body.
 	Raw json.RawMessage `json:"-"`
 	// VehiclePositions in the response.
@@ -41,13 +41,13 @@ type ListVehiclePositionsResponse struct {
 	RequestServerDateTime time.Time `json:"requestServerDateTime,omitzero"`
 }
 
-func (c *Client) ListVehiclePositions(
+func (c *Client) VehiclePositions(
 	ctx context.Context,
-	request *ListVehiclePositionsRequest,
-) (_ *ListVehiclePositionsResponse, err error) {
+	request *VehiclePositionsRequest,
+) (_ *VehiclePositionsResponse, err error) {
 	defer func() {
 		if err != nil {
-			err = fmt.Errorf("list vehicle positions: %w", err)
+			err = fmt.Errorf("vehicle positions: %w", err)
 		}
 	}()
 	req, err := c.newRequest(ctx, http.MethodGet, "/vehiclepositions", nil)
@@ -122,7 +122,7 @@ func (c *Client) ListVehiclePositions(
 	// 		responseBody.VehiclePositionResponse.VehiclePositions[i].Raw = rawPosition
 	// 	}
 	// }
-	return &ListVehiclePositionsResponse{
+	return &VehiclePositionsResponse{
 		VehiclePositions: *responseBody.VehiclePositionResponse.VehiclePositions,
 	}, nil
 }
