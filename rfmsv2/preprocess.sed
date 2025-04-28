@@ -1,3 +1,6 @@
+s/com.fms_standard.rfms.v2_1.Vehicles/com.fms_standard.rfms.v2_1.VehiclesResponse/g
+s/com.fms_standard.rfms.v2_1.VehicleStatuses/com.fms_standard.rfms.v2_1.VehicleStatusesResponse/g
+s/com.fms_standard.rfms.v2_1.VehiclePositions/com.fms_standard.rfms.v2_1.VehiclePositionsResponse/g
 s/com\.fms_standard\.rfms\.v2_1\.//g
 s/AccumulatedType/Accumulated/g
 s/AlternatorInfoType/AlternatorInfo/g

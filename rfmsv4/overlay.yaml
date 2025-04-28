@@ -7,10 +7,10 @@ info:
 actions:
 
 - target: $.paths
-  remove: true # TODO: Figure out why this is not being removed.
+  remove: true
 
 - target: $.components.securitySchemes
-  remove: true # TODO: Figure out why this is not being removed.
+  remove: true
 
 # Parameter enums
 - target: $.components.schemas

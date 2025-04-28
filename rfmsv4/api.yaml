@@ -28,7 +28,7 @@ paths:
           content:
             'application/json; rfms=vehicles.v4.0':
               schema:
-                $ref: '#/components/schemas/VehicleResponse'
+                $ref: '#/components/schemas/VehiclesResponse'
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -124,7 +124,7 @@ paths:
           content:
             'application/json; rfms=vehiclepositions.v4.0':
               schema:
-                $ref: '#/components/schemas/VehiclePositionResponse'
+                $ref: '#/components/schemas/VehiclePositionsResponse'
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -246,7 +246,7 @@ paths:
           content:
             'application/json; rfms=vehiclestatuses.v4.0':
               schema:
-                $ref: '#/components/schemas/VehicleStatusResponse'
+                $ref: '#/components/schemas/VehicleStatusesResponse'
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -278,7 +278,7 @@ components:
           description: A URI providing more information
           example: https://oem.com/rfms/UnsupportedAcceptParameter.html
       description: Optional responses for error codes, detailing the error if needed
-    VehicleResponse:
+    VehiclesResponse:
       required:
       - moreDataAvailable
       - vehicleResponse
@@ -438,7 +438,7 @@ components:
           - /vehiclepositions
           items:
             type: string
-    VehiclePositionResponse:
+    VehiclePositionsResponse:
       required:
       - moreDataAvailable
       - requestServerDateTime
@@ -504,7 +504,7 @@ components:
             by the tachograph)
           format: double
           example: 54.1
-    VehicleStatusResponse:
+    VehicleStatusesResponse:
       required:
       - moreDataAvailable
       - requestServerDateTime

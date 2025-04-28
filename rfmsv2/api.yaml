@@ -98,10 +98,10 @@ paths:
           content:
             application/vnd.fmsstandard.com.Vehiclepositions.v2.1+xml:
               schema:
-                $ref: "#/components/schemas/VehiclePositions"
+                $ref: "#/components/schemas/VehiclePositionsResponse"
             application/vnd.fmsstandard.com.Vehiclepositions.v2.1+json:
               schema:
-                $ref: "#/components/schemas/VehiclePositions"
+                $ref: "#/components/schemas/VehiclePositionsResponse"
         "400":
           description: Bad Request
         "401":
@@ -247,10 +247,10 @@ paths:
           content:
             application/vnd.fmsstandard.com.Vehiclestatuses.v2.1+xml:
               schema:
-                $ref: "#/components/schemas/VehicleStatuses"
+                $ref: "#/components/schemas/VehicleStatusesResponse"
             application/vnd.fmsstandard.com.Vehiclestatuses.v2.1+json:
               schema:
-                $ref: "#/components/schemas/VehicleStatuses"
+                $ref: "#/components/schemas/VehicleStatusesResponse"
         "400":
           description: Bad Request
         "401":
@@ -298,10 +298,10 @@ paths:
           content:
             application/vnd.fmsstandard.com.Vehicles.v2.1+json:
               schema:
-                $ref: "#/components/schemas/Vehicles"
+                $ref: "#/components/schemas/VehiclesResponse"
             application/vnd.fmsstandard.com.Vehicles.v2.1+xml:
               schema:
-                $ref: "#/components/schemas/Vehicles"
+                $ref: "#/components/schemas/VehiclesResponse"
         "400":
           description: Bad Request
         "401":
@@ -919,7 +919,7 @@ components:
           format: double
           description: ""
           example: 52.4
-    VehiclePositions:
+    VehiclePositionsResponse:
       type: object
       required:
         - RequestServerDateTime
@@ -1003,7 +1003,7 @@ components:
           type: string
           description: ""
           example: Z00SC0000HQ000126
-    VehicleStatuses:
+    VehicleStatusesResponse:
       type: object
       required:
         - RequestServerDateTime
@@ -1100,7 +1100,7 @@ components:
           type: string
           description: ""
           example: Z00SC0000HQ000126
-    Vehicles:
+    VehiclesResponse:
       type: object
       properties:
         MoreDataAvailable:

@@ -1,1 +1,4 @@
+s/VehicleResponseObject/VehiclesResponse/g
+s/VehiclePositionResponseObject/VehiclePositionsResponse/g
+s/VehicleStatusResponseObject/VehicleStatusesResponse/g
 s/Object//g

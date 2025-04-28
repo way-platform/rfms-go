@@ -981,8 +981,8 @@ type VehiclePosition struct {
 	WheelBasedSpeed *float64 `json:"wheelBasedSpeed,omitempty"`
 }
 
-// VehiclePositionResponse defines model for VehiclePositionResponse.
-type VehiclePositionResponse struct {
+// VehiclePositionsResponse defines model for VehiclePositionsResponse.
+type VehiclePositionsResponse struct {
 	// MoreDataAvailable This will be set to true if the result set was too large to be sent back in one reply. A new request must be sent to get the rest of the vehicle positions, where the starttime parameter must be supplied. The starttime should be set to the latest ReceivedDateTime + 1 second of the last vehicle in the result set of this message.
 	MoreDataAvailable bool `json:"moreDataAvailable"`
 
@@ -994,18 +994,6 @@ type VehiclePositionResponse struct {
 	VehiclePositionResponse struct {
 		VehiclePositions *[]VehiclePosition `json:"vehiclePositions,omitempty"`
 	} `json:"vehiclePositionResponse"`
-}
-
-// VehicleResponse defines model for VehicleResponse.
-type VehicleResponse struct {
-	// MoreDataAvailable This will be set to true if the result set was too large to be sent back in one reply. A new request must be sent to get the rest of the vehicles, where the lastVin parameter must be supplied. The lastVin should be set to the VIN of the last vehicle in the result set of this message.
-	MoreDataAvailable bool `json:"moreDataAvailable"`
-
-	// MoreDataAvailableLink Populated with the link to the next part of the result when moreDataAvailable is true. The link is relative, i.e. starts with /rfms/vehicles, and preserves any query parameters from the original request.
-	MoreDataAvailableLink *string `json:"moreDataAvailableLink,omitempty"`
-	VehicleResponse       struct {
-		Vehicles *[]Vehicle `json:"vehicles,omitempty"`
-	} `json:"vehicleResponse"`
 }
 
 // VehicleStatus defines model for VehicleStatus.
@@ -1065,8 +1053,8 @@ type VehicleStatus struct {
 	VIN VINProperty `json:"vin"`
 }
 
-// VehicleStatusResponse defines model for VehicleStatusResponse.
-type VehicleStatusResponse struct {
+// VehicleStatusesResponse defines model for VehicleStatusesResponse.
+type VehicleStatusesResponse struct {
 	// MoreDataAvailable This will be set to true if the result set was too large to be sent back in one reply. A new request must be done to get the rest of the vehicle statuses, where the starttime parameter must be supplied. The starttime should be set to the ReceivedDateTime + 1 second of the last vehicle in the result set of this message.
 	MoreDataAvailable bool `json:"moreDataAvailable"`
 
@@ -1078,6 +1066,18 @@ type VehicleStatusResponse struct {
 	VehicleStatusResponse struct {
 		VehicleStatuses *[]VehicleStatus `json:"vehicleStatuses,omitempty"`
 	} `json:"vehicleStatusResponse"`
+}
+
+// VehiclesResponse defines model for VehiclesResponse.
+type VehiclesResponse struct {
+	// MoreDataAvailable This will be set to true if the result set was too large to be sent back in one reply. A new request must be sent to get the rest of the vehicles, where the lastVin parameter must be supplied. The lastVin should be set to the VIN of the last vehicle in the result set of this message.
+	MoreDataAvailable bool `json:"moreDataAvailable"`
+
+	// MoreDataAvailableLink Populated with the link to the next part of the result when moreDataAvailable is true. The link is relative, i.e. starts with /rfms/vehicles, and preserves any query parameters from the original request.
+	MoreDataAvailableLink *string `json:"moreDataAvailableLink,omitempty"`
+	VehicleResponse       struct {
+		Vehicles *[]Vehicle `json:"vehicles,omitempty"`
+	} `json:"vehicleResponse"`
 }
 
 // VINProperty vehicle identification number. See ISO 3779 (17 characters)

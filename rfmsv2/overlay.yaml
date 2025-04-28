@@ -6,6 +6,12 @@ info:
 
 actions:
 
+- target: $.paths
+  remove: true
+
+- target: $.components.securitySchemes
+  remove: true
+
 - target: $.components.schemas
   update:
     DoorOpenStatus:

@@ -6,6 +6,7 @@ generate:
 compatibility:
   always-prefix-enum-values: true
 output-options:
+  skip-prune: true
   overlay:
     path: overlay.yaml
   name-normalizer: ToCamelCaseWithInitialisms
