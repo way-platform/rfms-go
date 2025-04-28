@@ -38,7 +38,7 @@ type ListVehiclePositionsResponse struct {
 	// MoreDataAvailableLink is the link to the next page of data.
 	MoreDataAvailableLink string `json:"moreDataAvailableLink,omitempty"`
 	// RequestServerDateTime is the server time when the request was received.
-	RequestServerDateTime Time `json:"requestServerDateTime,omitzero"`
+	RequestServerDateTime time.Time `json:"requestServerDateTime,omitzero"`
 }
 
 func (c *Client) ListVehiclePositions(

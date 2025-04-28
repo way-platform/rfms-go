@@ -15,3 +15,5 @@ output-options:
     - VIN
     - OEM
     - GNSS
+  user-templates:
+    typedef.tmpl: typedef.tmpl

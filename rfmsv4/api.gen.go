@@ -642,7 +642,7 @@ type SnapshotData struct {
 
 	// FuelType Type of fuel currently being utilized by the vehicle acc. SPN 5837
 	FuelType     *string       `json:"fuelType,omitempty"`
-	GnssPosition *GNSSPosition `json:"gnssPosition,omitempty"`
+	GNSSPosition *GNSSPosition `json:"gnssPosition,omitempty"`
 
 	// HybridBatteryPackRemainingCharge Indicates the hybrid battery pack remaining charge.
 	//  0% means no charge remaining,
@@ -953,7 +953,7 @@ type VehicleAxle struct {
 type VehiclePosition struct {
 	// CreatedDateTime When the data was retrieved in the vehicle in iso8601 format.
 	CreatedDateTime CreatedDateTimeProperty `json:"createdDateTime"`
-	GnssPosition    *GNSSPosition           `json:"gnssPosition,omitempty"`
+	GNSSPosition    *GNSSPosition           `json:"gnssPosition,omitempty"`
 
 	// ReceivedDateTime Reception at Server. To be used for handling of "more data available" in iso8601 format.
 	ReceivedDateTime ReceivedDateTimeProperty `json:"receivedDateTime"`

@@ -8,6 +8,8 @@ import (
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/way-platform/rfms-go/v4/rfmsv4"
 )
 
 type ListVehicleStatusesRequest struct {
@@ -33,13 +35,13 @@ type ListVehicleStatusesResponse struct {
 	// Raw response body.
 	Raw json.RawMessage `json:"-"`
 	// VehicleStatuses in the response.
-	VehicleStatuses []*VehicleStatus `json:"vehicleStatuses,omitempty"`
+	VehicleStatuses []rfmsv4.VehicleStatus `json:"vehicleStatuses,omitempty"`
 	// MoreDataAvailable indicates if there is more data available.
 	MoreDataAvailable bool `json:"moreDataAvailable,omitempty"`
 	// MoreDataAvailableLink is the link to the next page of data.
 	MoreDataAvailableLink string `json:"moreDataAvailableLink,omitempty"`
 	// RequestServerDateTime is the server time when the request was received.
-	RequestServerDateTime Time `json:"requestServerDateTime,omitempty"`
+	RequestServerDateTime time.Time `json:"requestServerDateTime,omitempty"`
 }
 
 func (c *Client) ListVehicleStatuses(
@@ -104,29 +106,26 @@ func (c *Client) ListVehicleStatuses(
 	if err != nil {
 		return nil, fmt.Errorf("read response body: %w", err)
 	}
-	var responseBody struct {
-		VehicleStatusResponse ListVehicleStatusesResponse `json:"vehicleStatusResponse"`
-		MoreDataAvailable     bool                        `json:"moreDataAvailable"`
-		MoreDataAvailableLink string                      `json:"moreDataAvailableLink,omitempty"`
-		RequestServerDateTime Time                        `json:"requestServerDateTime"`
-	}
+	var responseBody rfmsv4.VehicleStatusesResponse
 	if err := json.Unmarshal(data, &responseBody); err != nil {
 		return nil, fmt.Errorf("unmarshal response body: %w", err)
 	}
-	var rawStatuses struct {
-		VehicleStatusResponse struct {
-			VehicleStatuses []json.RawMessage `json:"vehicleStatuses"`
-		} `json:"vehicleStatusResponse"`
-	}
-	if err := json.Unmarshal(data, &rawStatuses); err != nil {
-		return nil, fmt.Errorf("unmarshal raw vehicle statuses: %w", err)
-	}
-	for i, rawStatus := range rawStatuses.VehicleStatusResponse.VehicleStatuses {
-		responseBody.VehicleStatusResponse.VehicleStatuses[i].Raw = rawStatus
-	}
-	responseBody.VehicleStatusResponse.Raw = data
-	responseBody.VehicleStatusResponse.MoreDataAvailable = responseBody.MoreDataAvailable
-	responseBody.VehicleStatusResponse.MoreDataAvailableLink = responseBody.MoreDataAvailableLink
-	responseBody.VehicleStatusResponse.RequestServerDateTime = responseBody.RequestServerDateTime
-	return &responseBody.VehicleStatusResponse, nil
+	// var rawStatuses struct {
+	// 	VehicleStatusResponse struct {
+	// 		VehicleStatuses []json.RawMessage `json:"vehicleStatuses"`
+	// 	} `json:"vehicleStatusResponse"`
+	// }
+	// if err := json.Unmarshal(data, &rawStatuses); err != nil {
+	// 	return nil, fmt.Errorf("unmarshal raw vehicle statuses: %w", err)
+	// }
+	// for i, rawStatus := range rawStatuses.VehicleStatusResponse.VehicleStatuses {
+	// 	responseBody.VehicleStatusResponse.VehicleStatuses[i].Raw = rawStatus
+	// }
+	// responseBody.VehicleStatusResponse.Raw = data
+	// responseBody.VehicleStatusResponse.MoreDataAvailable = responseBody.MoreDataAvailable
+	// responseBody.VehicleStatusResponse.MoreDataAvailableLink = responseBody.MoreDataAvailableLink
+	// responseBody.VehicleStatusResponse.RequestServerDateTime = responseBody.RequestServerDateTime
+	return &ListVehicleStatusesResponse{
+		VehicleStatuses: *responseBody.VehicleStatusResponse.VehicleStatuses,
+	}, nil
 }
