@@ -19,6 +19,14 @@ const (
 	AlternatorInfoAlternatorStatusNOTCHARGING  AlternatorInfoAlternatorStatus = "NOT_CHARGING"
 )
 
+// Defines values for DoorOpenStatus.
+const (
+	DoorOpenStatusCLOSED       DoorOpenStatus = "CLOSED"
+	DoorOpenStatusERROR        DoorOpenStatus = "ERROR"
+	DoorOpenStatusNOTAVAILABLE DoorOpenStatus = "NOT_AVAILABLE"
+	DoorOpenStatusOPEN         DoorOpenStatus = "OPEN"
+)
+
 // Defines values for DoorStatusDoorEnabledStatus.
 const (
 	DoorStatusDoorEnabledStatusDISABLED     DoorStatusDoorEnabledStatus = "DISABLED"
@@ -35,32 +43,14 @@ const (
 	DoorStatusDoorLockStatusUNLOCKED     DoorStatusDoorLockStatus = "UNLOCKED"
 )
 
-// Defines values for DoorStatusDoorOpenStatus.
+// Defines values for DriverWorkingState.
 const (
-	DoorStatusDoorOpenStatusCLOSED       DoorStatusDoorOpenStatus = "CLOSED"
-	DoorStatusDoorOpenStatusERROR        DoorStatusDoorOpenStatus = "ERROR"
-	DoorStatusDoorOpenStatusNOTAVAILABLE DoorStatusDoorOpenStatus = "NOT_AVAILABLE"
-	DoorStatusDoorOpenStatusOPEN         DoorStatusDoorOpenStatus = "OPEN"
-)
-
-// Defines values for SnapshotDriver1WorkingState.
-const (
-	SnapshotDriver1WorkingStateDRIVE           SnapshotDriver1WorkingState = "DRIVE"
-	SnapshotDriver1WorkingStateDRIVERAVAILABLE SnapshotDriver1WorkingState = "DRIVER_AVAILABLE"
-	SnapshotDriver1WorkingStateERROR           SnapshotDriver1WorkingState = "ERROR"
-	SnapshotDriver1WorkingStateNOTAVAILABLE    SnapshotDriver1WorkingState = "NOT_AVAILABLE"
-	SnapshotDriver1WorkingStateREST            SnapshotDriver1WorkingState = "REST"
-	SnapshotDriver1WorkingStateWORK            SnapshotDriver1WorkingState = "WORK"
-)
-
-// Defines values for SnapshotDriver2WorkingState.
-const (
-	SnapshotDriver2WorkingStateDRIVE           SnapshotDriver2WorkingState = "DRIVE"
-	SnapshotDriver2WorkingStateDRIVERAVAILABLE SnapshotDriver2WorkingState = "DRIVER_AVAILABLE"
-	SnapshotDriver2WorkingStateERROR           SnapshotDriver2WorkingState = "ERROR"
-	SnapshotDriver2WorkingStateNOTAVAILABLE    SnapshotDriver2WorkingState = "NOT_AVAILABLE"
-	SnapshotDriver2WorkingStateREST            SnapshotDriver2WorkingState = "REST"
-	SnapshotDriver2WorkingStateWORK            SnapshotDriver2WorkingState = "WORK"
+	DriverWorkingStateDRIVE           DriverWorkingState = "DRIVE"
+	DriverWorkingStateDRIVERAVAILABLE DriverWorkingState = "DRIVER_AVAILABLE"
+	DriverWorkingStateERROR           DriverWorkingState = "ERROR"
+	DriverWorkingStateNOTAVAILABLE    DriverWorkingState = "NOT_AVAILABLE"
+	DriverWorkingStateREST            DriverWorkingState = "REST"
+	DriverWorkingStateWORK            DriverWorkingState = "WORK"
 )
 
 // Defines values for TachoDriverIdentificationDriverAuthenticationEquipment.
@@ -153,10 +143,10 @@ const (
 
 // Defines values for VehicleStatusStatus2OfDoors.
 const (
-	VehicleStatusStatus2OfDoorsALLDOORSDISABLED      VehicleStatusStatus2OfDoors = "ALL_DOORS_DISABLED"
-	VehicleStatusStatus2OfDoorsATLEASTONEDOORENABLED VehicleStatusStatus2OfDoors = "AT_LEAST_ONE_DOOR_ENABLED"
-	VehicleStatusStatus2OfDoorsERROR                 VehicleStatusStatus2OfDoors = "ERROR"
-	VehicleStatusStatus2OfDoorsNOTAVAILABLE          VehicleStatusStatus2OfDoors = "NOT_AVAILABLE"
+	ALLDOORSDISABLED      VehicleStatusStatus2OfDoors = "ALL_DOORS_DISABLED"
+	ATLEASTONEDOORENABLED VehicleStatusStatus2OfDoors = "AT_LEAST_ONE_DOOR_ENABLED"
+	ERROR                 VehicleStatusStatus2OfDoors = "ERROR"
+	NOTAVAILABLE          VehicleStatusStatus2OfDoors = "NOT_AVAILABLE"
 )
 
 // Accumulated defines model for Accumulated.
@@ -198,12 +188,15 @@ type AlternatorInfo struct {
 // AlternatorInfoAlternatorStatus defines model for AlternatorInfo.AlternatorStatus.
 type AlternatorInfoAlternatorStatus string
 
+// DoorOpenStatus defines model for DoorOpenStatus.
+type DoorOpenStatus string
+
 // DoorStatus defines model for DoorStatus.
 type DoorStatus struct {
 	DoorEnabledStatus *DoorStatusDoorEnabledStatus `json:"DoorEnabledStatus,omitempty"`
 	DoorLockStatus    *DoorStatusDoorLockStatus    `json:"DoorLockStatus,omitempty"`
 	DoorNumber        *int64                       `json:"DoorNumber,omitempty"`
-	DoorOpenStatus    *DoorStatusDoorOpenStatus    `json:"DoorOpenStatus,omitempty"`
+	DoorOpenStatus    *DoorOpenStatus              `json:"DoorOpenStatus,omitempty"`
 }
 
 // DoorStatusDoorEnabledStatus defines model for DoorStatus.DoorEnabledStatus.
@@ -212,14 +205,14 @@ type DoorStatusDoorEnabledStatus string
 // DoorStatusDoorLockStatus defines model for DoorStatus.DoorLockStatus.
 type DoorStatusDoorLockStatus string
 
-// DoorStatusDoorOpenStatus defines model for DoorStatus.DoorOpenStatus.
-type DoorStatusDoorOpenStatus string
-
 // DriverId defines model for DriverId.
 type DriverId struct {
 	OemDriverIdentification   *OemDriverIdentification   `json:"OemDriverIdentification,omitempty"`
 	TachoDriverIdentification *TachoDriverIdentification `json:"TachoDriverIdentification,omitempty"`
 }
+
+// DriverWorkingState defines model for DriverWorkingState.
+type DriverWorkingState string
 
 // FromToClass defines model for FromToClass.
 type FromToClass struct {
@@ -273,23 +266,17 @@ type ProductionDate struct {
 
 // Snapshot defines model for Snapshot.
 type Snapshot struct {
-	AmbientAirTemperature *float64                     `json:"AmbientAirTemperature,omitempty"`
-	CatalystFuelLevel     *float64                     `json:"CatalystFuelLevel,omitempty"`
-	Driver1WorkingState   *SnapshotDriver1WorkingState `json:"Driver1WorkingState,omitempty"`
-	Driver2Id             *DriverId                    `json:"Driver2Id,omitempty"`
-	Driver2WorkingState   *SnapshotDriver2WorkingState `json:"Driver2WorkingState,omitempty"`
-	EngineSpeed           *float64                     `json:"EngineSpeed,omitempty"`
-	FuelLevel1            *float64                     `json:"FuelLevel1,omitempty"`
-	GNSSPosition          *GNSSPosition                `json:"GNSSPosition,omitempty"`
-	TachographSpeed       *float64                     `json:"TachographSpeed,omitempty"`
-	WheelBasedSpeed       *float64                     `json:"WheelBasedSpeed,omitempty"`
+	AmbientAirTemperature *float64            `json:"AmbientAirTemperature,omitempty"`
+	CatalystFuelLevel     *float64            `json:"CatalystFuelLevel,omitempty"`
+	Driver1WorkingState   *DriverWorkingState `json:"Driver1WorkingState,omitempty"`
+	Driver2Id             *DriverId           `json:"Driver2Id,omitempty"`
+	Driver2WorkingState   *DriverWorkingState `json:"Driver2WorkingState,omitempty"`
+	EngineSpeed           *float64            `json:"EngineSpeed,omitempty"`
+	FuelLevel1            *float64            `json:"FuelLevel1,omitempty"`
+	GNSSPosition          *GNSSPosition       `json:"GNSSPosition,omitempty"`
+	TachographSpeed       *float64            `json:"TachographSpeed,omitempty"`
+	WheelBasedSpeed       *float64            `json:"WheelBasedSpeed,omitempty"`
 }
-
-// SnapshotDriver1WorkingState defines model for Snapshot.Driver1WorkingState.
-type SnapshotDriver1WorkingState string
-
-// SnapshotDriver2WorkingState defines model for Snapshot.Driver2WorkingState.
-type SnapshotDriver2WorkingState string
 
 // TachoDriverIdentification defines model for TachoDriverIdentification.
 type TachoDriverIdentification struct {

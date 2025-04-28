@@ -1,24 +1,44 @@
 overlay: 1.0.0
+
 info:
   title: Overlay for the Volvo Trucks rFMS v2.1 API
   version: 1.0.0
-extends: './volvotrucks.yaml'
-actions:
-  - target: $.components.schemas
-    action: add
-    value:
-      Vehicles:
-        type: object
-        properties:
-          MoreDataAvailable:
-            type: boolean
-            description: ""
-            example: false
-          Vehicle:
-            type: array
-            description: ""
-            items:
-              $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.VehicleType"
 
-  - target: $.components.schemas.com.fms_standard.rfms.v2_1.Vehicles
-    action: remove
+actions:
+
+- target: $.components.schemas
+  update:
+    DoorOpenStatus:
+      type: string
+      enum:
+        - CLOSED
+        - OPEN
+        - ERROR
+        - NOT_AVAILABLE
+
+- target: $.components.schemas.DoorStatus.properties
+  update:
+    DoorOpenStatus:
+      $ref: '#/components/schemas/DoorOpenStatus'
+
+- target: $.components.schemas
+  update:
+    DriverWorkingState:
+      type: string
+      enum:
+        - DRIVE
+        - DRIVER_AVAILABLE
+        - ERROR
+        - NOT_AVAILABLE
+        - REST
+        - WORK
+
+- target: $.components.schemas.Snapshot.properties
+  update:
+    Driver1WorkingState:
+      $ref: '#/components/schemas/DriverWorkingState'
+
+- target: $.components.schemas.Snapshot.properties
+  update:
+    Driver2WorkingState:
+      $ref: '#/components/schemas/DriverWorkingState'
