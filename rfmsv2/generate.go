@@ -1,4 +1,4 @@
-package apiv2
+package rfmsv2
 
 //go:generate cp volvotrucks.original.yaml tmp.yaml
 //go:generate sed -i s/com\.fms_standard\.rfms\.v2_1\.//g tmp.yaml
