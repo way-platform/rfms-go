@@ -102,6 +102,14 @@ const (
 	DriverWorkingStateWORK            DriverWorkingState = "WORK"
 )
 
+// Defines values for IgnitionState.
+const (
+	IgnitionStateERROR        IgnitionState = "ERROR"
+	IgnitionStateNOTAVAILABLE IgnitionState = "NOT_AVAILABLE"
+	IgnitionStateOFF          IgnitionState = "OFF"
+	IgnitionStateON           IgnitionState = "ON"
+)
+
 // Defines values for Status2OfDoors.
 const (
 	Status2OfDoorsALLDOORSDISABLED      Status2OfDoors = "ALL_DOORS_DISABLED"
@@ -221,6 +229,7 @@ const (
 	TriggerTypeENGINEOFF                                 TriggerType = "ENGINE_OFF"
 	TriggerTypeENGINEON                                  TriggerType = "ENGINE_ON"
 	TriggerTypeFUELTYPECHANGE                            TriggerType = "FUEL_TYPE_CHANGE"
+	TriggerTypeIGNITIONCHANGE                            TriggerType = "IGNITION_CHANGE"
 	TriggerTypeIGNITIONOFF                               TriggerType = "IGNITION_OFF"
 	TriggerTypeIGNITIONON                                TriggerType = "IGNITION_ON"
 	TriggerTypePARKINGBRAKESWITCHCHANGE                  TriggerType = "PARKING_BRAKE_SWITCH_CHANGE"
@@ -229,6 +238,7 @@ const (
 	TriggerTypeTELLTALE                                  TriggerType = "TELL_TALE"
 	TriggerTypeTIMER                                     TriggerType = "TIMER"
 	TriggerTypeTRAILERCONNECTED                          TriggerType = "TRAILER_CONNECTED"
+	TriggerTypeTRAILERCONNECTIONCHANGE                   TriggerType = "TRAILER_CONNECTION_CHANGE"
 	TriggerTypeTRAILERDISCONNECTED                       TriggerType = "TRAILER_DISCONNECTED"
 )
 
@@ -552,6 +562,9 @@ type GNSSPosition struct {
 	Speed *float64 `json:"speed,omitempty"`
 }
 
+// IgnitionState The ignition state of the vehicle. This is a Scania-specific field.
+type IgnitionState string
+
 // Label defines model for Label.
 type Label struct {
 	Kilograms   *int64  `json:"kilograms,omitempty"`
@@ -645,6 +658,9 @@ type SnapshotData struct {
 	//  100% means full charge remaining.
 	//  Is used as well for full electrical vehicles
 	HybridBatteryPackRemainingCharge *float64 `json:"hybridBatteryPackRemainingCharge,omitempty"`
+
+	// Ignition The ignition state of the vehicle. This is a Scania-specific field.
+	Ignition *IgnitionState `json:"ignition,omitempty"`
 
 	// ParkingBrakeSwitch Switch signal which indicates when the parking brake is set. In general the switch actuated by the operator's park brake control, whether a pedal, lever or other control mechanism
 	//  true - parking brake set
@@ -907,6 +923,9 @@ type Vehicle struct {
 
 	// ProductionDate Indicates when the vehicle was produced.
 	ProductionDate *Date `json:"productionDate,omitempty"`
+
+	// RegistrationNumber The registration number (license plate) of the vehicle. This is a Scania-specific field.
+	RegistrationNumber *string `json:"registrationNumber,omitempty"`
 
 	// TachographType The type of tachograph in the vehicle. rFMS standard values MTCO, DTCO, TSU, DTCO_G1, DTCO_G2, NONE
 	//  DTCO - Digital tachograph, unknown generation

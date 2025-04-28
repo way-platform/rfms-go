@@ -16,6 +16,29 @@ actions:
   update:
     x-go-type: Time
 
+- target: $.components.schemas.Vehicle.properties
+  update:
+    registrationNumber:
+      type: string
+      description: "The registration number (license plate) of the vehicle. This is a Scania-specific field."
+      example: "ABC123"
+
+- target: $.components.schemas
+  update:
+    IgnitionState:
+      type: string
+      description: "The ignition state of the vehicle. This is a Scania-specific field."
+      enum:
+        - ON
+        - OFF
+        - ERROR
+        - NOT_AVAILABLE
+
+- target: $.components.schemas.SnapshotData.properties
+  update:
+    ignition:
+      $ref: '#/components/schemas/IgnitionState'
+
 # Parameter enums
 - target: $.components.schemas
   update:
@@ -345,6 +368,8 @@ actions:
         - BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE
         - TRAILER_CONNECTED
         - TRAILER_DISCONNECTED
+        - IGNITION_CHANGE # Scania-specific
+        - TRAILER_CONNECTION_CHANGE # Scania-specific
       example: IGNITION_ON
 
 - target: $.components.schemas.Trigger.properties
