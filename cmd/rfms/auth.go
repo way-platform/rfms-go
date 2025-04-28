@@ -159,13 +159,13 @@ func newClient() (*rfms.Client, error) {
 			return nil, fmt.Errorf("session expired - please login again")
 		}
 		return rfms.NewClient(
-			rfms.ScaniaBaseURL,
+			rfms.WithBaseURL(rfms.ScaniaBaseURL),
 			rfms.WithVersion(rfms.Version4),
 			rfms.WithReuseTokenAuth(*auth.TokenCredentials),
 		), nil
 	case rfms.VolvoTrucks:
 		return rfms.NewClient(
-			rfms.VolvoTrucksBaseURL,
+			rfms.WithBaseURL(rfms.VolvoTrucksBaseURL),
 			rfms.WithVersion(rfms.Version21),
 			rfms.WithBasicAuth(auth.Username, auth.Password),
 		), nil

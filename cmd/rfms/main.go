@@ -88,8 +88,11 @@ func newVehiclePositionsCommand() *cobra.Command {
 			}
 			for _, vehiclePosition := range response.VehiclePositions {
 				cmd.Println(vehiclePosition.VIN)
-				cmd.Println(vehiclePosition.GnssPosition.Latitude)
-				cmd.Println(vehiclePosition.GnssPosition.Longitude)
+				cmd.Println(vehiclePosition.GNSSPosition.Latitude)
+				cmd.Println(vehiclePosition.GNSSPosition.Longitude)
+				if vehiclePosition.GNSSPosition.Heading != nil {
+					cmd.Println(*vehiclePosition.GNSSPosition.Heading)
+				}
 				// printRawJSON(cmd, vehiclePosition.Raw)
 			}
 			moreDataAvailable = response.MoreDataAvailable
@@ -120,7 +123,8 @@ func newVehicleStatusesCommand() *cobra.Command {
 				return err
 			}
 			for _, vehicleStatus := range response.VehicleStatuses {
-				printRawJSON(cmd, vehicleStatus.Raw)
+				cmd.Println(vehicleStatus.VIN)
+				// printRawJSON(cmd, vehicleStatus.Raw)
 			}
 			moreDataAvailable = response.MoreDataAvailable
 			lastVIN = response.VehicleStatuses[len(response.VehicleStatuses)-1].VIN

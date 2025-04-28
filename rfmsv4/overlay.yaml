@@ -12,6 +12,10 @@ actions:
 - target: $.components.securitySchemes
   remove: true
 
+- target: $..[?(@.format=="date-time")]
+  update:
+    x-go-type: Time
+
 # Parameter enums
 - target: $.components.schemas
   update:

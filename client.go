@@ -10,24 +10,19 @@ import (
 
 // Client is an rFMS API client.
 type Client struct {
-	baseURL    string
-	apiVersion Version
+	config     ClientConfig
 	httpClient *http.Client
 }
 
 // NewClient creates a new [Client] with the given base URL and options.
-func NewClient(baseURL string, opts ...ClientOption) *Client {
+func NewClient(opts ...ClientOption) *Client {
 	config := newClientConfig()
 	for _, opt := range opts {
 		opt(&config)
 	}
-	httpClient := &http.Client{Transport: config.transport}
-	if httpClient.Transport == nil {
-		httpClient.Transport = http.DefaultTransport
-	}
 	return &Client{
-		baseURL:    baseURL,
-		httpClient: httpClient,
+		config:     config,
+		httpClient: &http.Client{Transport: config.transport},
 	}
 }
 
@@ -37,7 +32,7 @@ func (c *Client) newRequest(ctx context.Context, method, path string, body io.Re
 			err = fmt.Errorf("new request: %w", err)
 		}
 	}()
-	request, err := http.NewRequestWithContext(ctx, method, c.baseURL+path, body)
+	request, err := http.NewRequestWithContext(ctx, method, c.config.baseURL+path, body)
 	if err != nil {
 		return nil, err
 	}

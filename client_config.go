@@ -4,6 +4,7 @@ import "net/http"
 
 // ClientConfig is the configuration for a [Client].
 type ClientConfig struct {
+	baseURL    string
 	apiVersion Version
 	transport  http.RoundTripper
 }
@@ -11,6 +12,7 @@ type ClientConfig struct {
 // newClientConfig creates a new default [ClientConfig].
 func newClientConfig() ClientConfig {
 	return ClientConfig{
+		baseURL:    ScaniaBaseURL,
 		apiVersion: Version4,
 		transport:  http.DefaultTransport,
 	}
@@ -18,6 +20,13 @@ func newClientConfig() ClientConfig {
 
 // ClientOption is an option that configures a [Client].
 type ClientOption func(*ClientConfig)
+
+// WithBaseURL sets the API base URL for the [Client].
+func WithBaseURL(baseURL string) ClientOption {
+	return func(cc *ClientConfig) {
+		cc.baseURL = baseURL
+	}
+}
 
 // WithTransport sets the [http.RoundTripper] HTTP transport for the [Client].
 func WithTransport(transport http.RoundTripper) ClientOption {
