@@ -42,3 +42,198 @@ actions:
   update:
     Driver2WorkingState:
       $ref: '#/components/schemas/DriverWorkingState'
+
+# New component enums and references
+
+- target: $.components.schemas
+  update:
+    AlternatorStatus:
+      type: string
+      enum:
+        - NOT_CHARGING
+        - CHARGING
+        - ERROR
+        - NOT_AVAILABLE
+
+- target: $.components.schemas.AlternatorInfo.properties
+  update:
+    AlternatorStatus:
+      $ref: '#/components/schemas/AlternatorStatus'
+
+- target: $.components.schemas
+  update:
+    DoorEnabledStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+        - ERROR
+        - NOT_AVAILABLE
+
+- target: $.components.schemas.DoorStatus.properties
+  update:
+    DoorEnabledStatus:
+      $ref: '#/components/schemas/DoorEnabledStatus'
+
+- target: $.components.schemas
+  update:
+    DoorLockStatus:
+      type: string
+      enum:
+        - UNLOCKED
+        - LOCKED
+        - ERROR
+        - NOT_AVAILABLE
+
+- target: $.components.schemas.DoorStatus.properties
+  update:
+    DoorLockStatus:
+      $ref: '#/components/schemas/DoorLockStatus'
+
+- target: $.components.schemas
+  update:
+    Status2OfDoors:
+      type: string
+      enum:
+        - ALL_DOORS_DISABLED
+        - AT_LEAST_ONE_DOOR_ENABLED
+        - ERROR
+        - NOT_AVAILABLE
+
+- target: $.components.schemas.VehicleStatus.properties
+  update:
+    Status2OfDoors:
+      $ref: '#/components/schemas/Status2OfDoors'
+
+- target: $.components.schemas
+  update:
+    TellTaleState:
+      type: string
+      enum:
+        - RED
+        - YELLOW
+        - INFO
+        - OFF
+        - RESERVED_4
+        - RESERVED_5
+        - RESERVED_6
+        - NOT_AVAILABLE
+
+- target: $.components.schemas.TellTaleInfo.properties
+  update:
+    State:
+      $ref: '#/components/schemas/TellTaleState'
+
+- target: $.components.schemas
+  update:
+    TellTaleType:
+      type: string
+      enum:
+        - COOLING_AIR_CONDITIONING
+        - HIGH_BEAM_MAIN_BEAM
+        - LOW_BEAM_DIPPED_BEAM
+        - TURN_SIGNALS
+        - HAZARD_WARNING
+        - PROVISIONING_HANDICAPPED_PERSON
+        - PARKING_BRAKE
+        - BRAKE_MALFUNCTION
+        - HATCH_OPEN
+        - FUEL_LEVEL
+        - ENGINE_COOLANT_TEMPERATURE
+        - BATTERY_CHARGING_CONDITION
+        - ENGINE_OIL
+        - POSITION_LIGHTS
+        - FRONT_FOG_LIGHT
+        - REAR_FOG_LIGHT
+        - PARKING_HEATER
+        - ENGINE_MIL_INDICATOR
+        - SERVICE_CALL_FOR_MAINTENANCE
+        - TRANSMISSION_FLUID_TEMPERATURE
+        - TRANSMISSION_MALFUNCTION
+        - ANTI_LOCK_BRAKE_FAILURE
+        - WORN_BRAKE_LININGS
+        - WINDSCREEN_WASHER_FLUID
+        - TIRE_MALFUNCTION
+        - GENERAL_FAILURE
+        - ENGINE_OIL_TEMPERATURE
+        - ENGINE_OIL_LEVEL
+        - ENGINE_COOLANT_LEVEL
+        - STEERING_FLUID_LEVEL
+        - STEERING_FAILURE
+        - HEIGHT_CONTROL
+        - RETARDER
+        - ENGINE_EMISSION_FAILURE
+        - ESC_INDICATOR
+        - BRAKE_LIGHTS
+        - ARTICULATION
+        - STOP_REQUEST
+        - PRAM_REQUEST
+        - BUS_STOP_BRAKE
+        - ADBLUE_LEVEL
+        - RAISING
+        - LOWERING
+        - KNEELING
+        - ENGINE_COMPARTMENT_TEMPERATURE
+        - AUXILLARY_AIR_PRESSURE
+        - AIR_FILTER_CLOGGED
+        - FUEL_FILTER_DIFF_PRESSURE
+        - SEAT_BELT
+        - EBS
+        - LANE_DEPARTURE_INDICATOR
+        - ADVANCED_EMERGENCY_BREAKING
+        - ACC
+        - TRAILER_CONNECTED
+        - ABS_TRAILER
+        - AIRBAG
+        - EBS_TRAILER_1_2
+        - TACHOGRAPH_INDICATOR
+        - ESC_SWITCHED_OFF
+        - LANE_DEPARTURE_WARNING_SWITCHED_OFF
+        - OEM_SPECIFIC_TELL_TALE
+
+- target: $.components.schemas.TellTaleInfo.properties
+  update:
+    TellTale:
+      $ref: '#/components/schemas/TellTaleType'
+
+- target: $.components.schemas
+  update:
+    DriverAuthenticationType:
+      type: string
+      enum:
+        - RESERVED
+        - DRIVER_CARD
+        - CONTROL_CARD
+        - COMPANY_CARD
+        - MANUFACTURING_CARD
+        - VEHICLE_UNIT
+        - MOTION_SENSOR
+
+- target: $.components.schemas.TachoDriverIdentification.properties
+  update:
+    DriverAuthenticationEquipment:
+      $ref: '#/components/schemas/DriverAuthenticationType'
+
+- target: $.components.schemas
+  update:
+    TriggerType:
+      type: string
+      enum:
+        - TIMER
+        - TELL_TALE
+        - DRIVER_LOGIN
+        - DRIVER_LOGOUT
+        - IGNITION_ON
+        - IGNITION_OFF
+        - ENGINE_ON
+        - ENGINE_OFF
+        - PTO_ENABLED
+        - PTO_DISABLED
+        - DISTANCE_TRAVELLED
+        - DRIVER_1_WORKING_STATE_CHANGED
+        - DRIVER_2_WORKING_STATE_CHANGED
+
+- target: $.components.schemas.Trigger.properties
+  update:
+    Trigger:
+      $ref: '#/components/schemas/TriggerType'

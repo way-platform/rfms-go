@@ -11,12 +11,28 @@ const (
 	BasicAuthScopes = "basicAuth.Scopes"
 )
 
-// Defines values for AlternatorInfoAlternatorStatus.
+// Defines values for AlternatorStatus.
 const (
-	AlternatorInfoAlternatorStatusCHARGING     AlternatorInfoAlternatorStatus = "CHARGING"
-	AlternatorInfoAlternatorStatusERROR        AlternatorInfoAlternatorStatus = "ERROR"
-	AlternatorInfoAlternatorStatusNOTAVAILABLE AlternatorInfoAlternatorStatus = "NOT_AVAILABLE"
-	AlternatorInfoAlternatorStatusNOTCHARGING  AlternatorInfoAlternatorStatus = "NOT_CHARGING"
+	AlternatorStatusCHARGING     AlternatorStatus = "CHARGING"
+	AlternatorStatusERROR        AlternatorStatus = "ERROR"
+	AlternatorStatusNOTAVAILABLE AlternatorStatus = "NOT_AVAILABLE"
+	AlternatorStatusNOTCHARGING  AlternatorStatus = "NOT_CHARGING"
+)
+
+// Defines values for DoorEnabledStatus.
+const (
+	DoorEnabledStatusDISABLED     DoorEnabledStatus = "DISABLED"
+	DoorEnabledStatusENABLED      DoorEnabledStatus = "ENABLED"
+	DoorEnabledStatusERROR        DoorEnabledStatus = "ERROR"
+	DoorEnabledStatusNOTAVAILABLE DoorEnabledStatus = "NOT_AVAILABLE"
+)
+
+// Defines values for DoorLockStatus.
+const (
+	DoorLockStatusERROR        DoorLockStatus = "ERROR"
+	DoorLockStatusLOCKED       DoorLockStatus = "LOCKED"
+	DoorLockStatusNOTAVAILABLE DoorLockStatus = "NOT_AVAILABLE"
+	DoorLockStatusUNLOCKED     DoorLockStatus = "UNLOCKED"
 )
 
 // Defines values for DoorOpenStatus.
@@ -27,20 +43,15 @@ const (
 	DoorOpenStatusOPEN         DoorOpenStatus = "OPEN"
 )
 
-// Defines values for DoorStatusDoorEnabledStatus.
+// Defines values for DriverAuthenticationType.
 const (
-	DoorStatusDoorEnabledStatusDISABLED     DoorStatusDoorEnabledStatus = "DISABLED"
-	DoorStatusDoorEnabledStatusENABLED      DoorStatusDoorEnabledStatus = "ENABLED"
-	DoorStatusDoorEnabledStatusERROR        DoorStatusDoorEnabledStatus = "ERROR"
-	DoorStatusDoorEnabledStatusNOTAVAILABLE DoorStatusDoorEnabledStatus = "NOT_AVAILABLE"
-)
-
-// Defines values for DoorStatusDoorLockStatus.
-const (
-	DoorStatusDoorLockStatusERROR        DoorStatusDoorLockStatus = "ERROR"
-	DoorStatusDoorLockStatusLOCKED       DoorStatusDoorLockStatus = "LOCKED"
-	DoorStatusDoorLockStatusNOTAVAILABLE DoorStatusDoorLockStatus = "NOT_AVAILABLE"
-	DoorStatusDoorLockStatusUNLOCKED     DoorStatusDoorLockStatus = "UNLOCKED"
+	COMPANYCARD       DriverAuthenticationType = "COMPANY_CARD"
+	CONTROLCARD       DriverAuthenticationType = "CONTROL_CARD"
+	DRIVERCARD        DriverAuthenticationType = "DRIVER_CARD"
+	MANUFACTURINGCARD DriverAuthenticationType = "MANUFACTURING_CARD"
+	MOTIONSENSOR      DriverAuthenticationType = "MOTION_SENSOR"
+	RESERVED          DriverAuthenticationType = "RESERVED"
+	VEHICLEUNIT       DriverAuthenticationType = "VEHICLE_UNIT"
 )
 
 // Defines values for DriverWorkingState.
@@ -53,100 +64,106 @@ const (
 	DriverWorkingStateWORK            DriverWorkingState = "WORK"
 )
 
-// Defines values for TachoDriverIdentificationDriverAuthenticationEquipment.
+// Defines values for Status2OfDoors.
 const (
-	COMPANYCARD       TachoDriverIdentificationDriverAuthenticationEquipment = "COMPANY_CARD"
-	CONTROLCARD       TachoDriverIdentificationDriverAuthenticationEquipment = "CONTROL_CARD"
-	DRIVERCARD        TachoDriverIdentificationDriverAuthenticationEquipment = "DRIVER_CARD"
-	MANUFACTURINGCARD TachoDriverIdentificationDriverAuthenticationEquipment = "MANUFACTURING_CARD"
-	MOTIONSENSOR      TachoDriverIdentificationDriverAuthenticationEquipment = "MOTION_SENSOR"
-	RESERVED          TachoDriverIdentificationDriverAuthenticationEquipment = "RESERVED"
-	VEHICLEUNIT       TachoDriverIdentificationDriverAuthenticationEquipment = "VEHICLE_UNIT"
+	Status2OfDoorsALLDOORSDISABLED      Status2OfDoors = "ALL_DOORS_DISABLED"
+	Status2OfDoorsATLEASTONEDOORENABLED Status2OfDoors = "AT_LEAST_ONE_DOOR_ENABLED"
+	Status2OfDoorsERROR                 Status2OfDoors = "ERROR"
+	Status2OfDoorsNOTAVAILABLE          Status2OfDoors = "NOT_AVAILABLE"
 )
 
-// Defines values for TellTaleInfoState.
+// Defines values for TellTaleState.
 const (
-	TellTaleInfoStateINFO         TellTaleInfoState = "INFO"
-	TellTaleInfoStateNOTAVAILABLE TellTaleInfoState = "NOT_AVAILABLE"
-	TellTaleInfoStateOFF          TellTaleInfoState = "OFF"
-	TellTaleInfoStateRED          TellTaleInfoState = "RED"
-	TellTaleInfoStateRESERVED4    TellTaleInfoState = "RESERVED_4"
-	TellTaleInfoStateRESERVED5    TellTaleInfoState = "RESERVED_5"
-	TellTaleInfoStateRESERVED6    TellTaleInfoState = "RESERVED_6"
-	TellTaleInfoStateYELLOW       TellTaleInfoState = "YELLOW"
+	INFO         TellTaleState = "INFO"
+	NOTAVAILABLE TellTaleState = "NOT_AVAILABLE"
+	OFF          TellTaleState = "OFF"
+	RED          TellTaleState = "RED"
+	RESERVED4    TellTaleState = "RESERVED_4"
+	RESERVED5    TellTaleState = "RESERVED_5"
+	RESERVED6    TellTaleState = "RESERVED_6"
+	YELLOW       TellTaleState = "YELLOW"
 )
 
-// Defines values for TellTaleInfoTellTale.
+// Defines values for TellTaleType.
 const (
-	ABSTRAILER                      TellTaleInfoTellTale = "ABS_TRAILER"
-	ACC                             TellTaleInfoTellTale = "ACC"
-	ADBLUELEVEL                     TellTaleInfoTellTale = "ADBLUE_LEVEL"
-	ADVANCEDEMERGENCYBREAKING       TellTaleInfoTellTale = "ADVANCED_EMERGENCY_BREAKING"
-	AIRBAG                          TellTaleInfoTellTale = "AIRBAG"
-	AIRFILTERCLOGGED                TellTaleInfoTellTale = "AIR_FILTER_CLOGGED"
-	ANTILOCKBRAKEFAILURE            TellTaleInfoTellTale = "ANTI_LOCK_BRAKE_FAILURE"
-	ARTICULATION                    TellTaleInfoTellTale = "ARTICULATION"
-	AUXILLARYAIRPRESSURE            TellTaleInfoTellTale = "AUXILLARY_AIR_PRESSURE"
-	BATTERYCHARGINGCONDITION        TellTaleInfoTellTale = "BATTERY_CHARGING_CONDITION"
-	BRAKELIGHTS                     TellTaleInfoTellTale = "BRAKE_LIGHTS"
-	BRAKEMALFUNCTION                TellTaleInfoTellTale = "BRAKE_MALFUNCTION"
-	BUSSTOPBRAKE                    TellTaleInfoTellTale = "BUS_STOP_BRAKE"
-	COOLINGAIRCONDITIONING          TellTaleInfoTellTale = "COOLING_AIR_CONDITIONING"
-	EBS                             TellTaleInfoTellTale = "EBS"
-	EBSTRAILER12                    TellTaleInfoTellTale = "EBS_TRAILER_1_2"
-	ENGINECOMPARTMENTTEMPERATURE    TellTaleInfoTellTale = "ENGINE_COMPARTMENT_TEMPERATURE"
-	ENGINECOOLANTLEVEL              TellTaleInfoTellTale = "ENGINE_COOLANT_LEVEL"
-	ENGINECOOLANTTEMPERATURE        TellTaleInfoTellTale = "ENGINE_COOLANT_TEMPERATURE"
-	ENGINEEMISSIONFAILURE           TellTaleInfoTellTale = "ENGINE_EMISSION_FAILURE"
-	ENGINEMILINDICATOR              TellTaleInfoTellTale = "ENGINE_MIL_INDICATOR"
-	ENGINEOIL                       TellTaleInfoTellTale = "ENGINE_OIL"
-	ENGINEOILLEVEL                  TellTaleInfoTellTale = "ENGINE_OIL_LEVEL"
-	ENGINEOILTEMPERATURE            TellTaleInfoTellTale = "ENGINE_OIL_TEMPERATURE"
-	ESCINDICATOR                    TellTaleInfoTellTale = "ESC_INDICATOR"
-	ESCSWITCHEDOFF                  TellTaleInfoTellTale = "ESC_SWITCHED_OFF"
-	FRONTFOGLIGHT                   TellTaleInfoTellTale = "FRONT_FOG_LIGHT"
-	FUELFILTERDIFFPRESSURE          TellTaleInfoTellTale = "FUEL_FILTER_DIFF_PRESSURE"
-	FUELLEVEL                       TellTaleInfoTellTale = "FUEL_LEVEL"
-	GENERALFAILURE                  TellTaleInfoTellTale = "GENERAL_FAILURE"
-	HATCHOPEN                       TellTaleInfoTellTale = "HATCH_OPEN"
-	HAZARDWARNING                   TellTaleInfoTellTale = "HAZARD_WARNING"
-	HEIGHTCONTROL                   TellTaleInfoTellTale = "HEIGHT_CONTROL"
-	HIGHBEAMMAINBEAM                TellTaleInfoTellTale = "HIGH_BEAM_MAIN_BEAM"
-	KNEELING                        TellTaleInfoTellTale = "KNEELING"
-	LANEDEPARTUREINDICATOR          TellTaleInfoTellTale = "LANE_DEPARTURE_INDICATOR"
-	LANEDEPARTUREWARNINGSWITCHEDOFF TellTaleInfoTellTale = "LANE_DEPARTURE_WARNING_SWITCHED_OFF"
-	LOWBEAMDIPPEDBEAM               TellTaleInfoTellTale = "LOW_BEAM_DIPPED_BEAM"
-	LOWERING                        TellTaleInfoTellTale = "LOWERING"
-	OEMSPECIFICTELLTALE             TellTaleInfoTellTale = "OEM_SPECIFIC_TELL_TALE"
-	PARKINGBRAKE                    TellTaleInfoTellTale = "PARKING_BRAKE"
-	PARKINGHEATER                   TellTaleInfoTellTale = "PARKING_HEATER"
-	POSITIONLIGHTS                  TellTaleInfoTellTale = "POSITION_LIGHTS"
-	PRAMREQUEST                     TellTaleInfoTellTale = "PRAM_REQUEST"
-	PROVISIONINGHANDICAPPEDPERSON   TellTaleInfoTellTale = "PROVISIONING_HANDICAPPED_PERSON"
-	RAISING                         TellTaleInfoTellTale = "RAISING"
-	REARFOGLIGHT                    TellTaleInfoTellTale = "REAR_FOG_LIGHT"
-	RETARDER                        TellTaleInfoTellTale = "RETARDER"
-	SEATBELT                        TellTaleInfoTellTale = "SEAT_BELT"
-	SERVICECALLFORMAINTENANCE       TellTaleInfoTellTale = "SERVICE_CALL_FOR_MAINTENANCE"
-	STEERINGFAILURE                 TellTaleInfoTellTale = "STEERING_FAILURE"
-	STEERINGFLUIDLEVEL              TellTaleInfoTellTale = "STEERING_FLUID_LEVEL"
-	STOPREQUEST                     TellTaleInfoTellTale = "STOP_REQUEST"
-	TACHOGRAPHINDICATOR             TellTaleInfoTellTale = "TACHOGRAPH_INDICATOR"
-	TIREMALFUNCTION                 TellTaleInfoTellTale = "TIRE_MALFUNCTION"
-	TRAILERCONNECTED                TellTaleInfoTellTale = "TRAILER_CONNECTED"
-	TRANSMISSIONFLUIDTEMPERATURE    TellTaleInfoTellTale = "TRANSMISSION_FLUID_TEMPERATURE"
-	TRANSMISSIONMALFUNCTION         TellTaleInfoTellTale = "TRANSMISSION_MALFUNCTION"
-	TURNSIGNALS                     TellTaleInfoTellTale = "TURN_SIGNALS"
-	WINDSCREENWASHERFLUID           TellTaleInfoTellTale = "WINDSCREEN_WASHER_FLUID"
-	WORNBRAKELININGS                TellTaleInfoTellTale = "WORN_BRAKE_LININGS"
+	ABSTRAILER                      TellTaleType = "ABS_TRAILER"
+	ACC                             TellTaleType = "ACC"
+	ADBLUELEVEL                     TellTaleType = "ADBLUE_LEVEL"
+	ADVANCEDEMERGENCYBREAKING       TellTaleType = "ADVANCED_EMERGENCY_BREAKING"
+	AIRBAG                          TellTaleType = "AIRBAG"
+	AIRFILTERCLOGGED                TellTaleType = "AIR_FILTER_CLOGGED"
+	ANTILOCKBRAKEFAILURE            TellTaleType = "ANTI_LOCK_BRAKE_FAILURE"
+	ARTICULATION                    TellTaleType = "ARTICULATION"
+	AUXILLARYAIRPRESSURE            TellTaleType = "AUXILLARY_AIR_PRESSURE"
+	BATTERYCHARGINGCONDITION        TellTaleType = "BATTERY_CHARGING_CONDITION"
+	BRAKELIGHTS                     TellTaleType = "BRAKE_LIGHTS"
+	BRAKEMALFUNCTION                TellTaleType = "BRAKE_MALFUNCTION"
+	BUSSTOPBRAKE                    TellTaleType = "BUS_STOP_BRAKE"
+	COOLINGAIRCONDITIONING          TellTaleType = "COOLING_AIR_CONDITIONING"
+	EBS                             TellTaleType = "EBS"
+	EBSTRAILER12                    TellTaleType = "EBS_TRAILER_1_2"
+	ENGINECOMPARTMENTTEMPERATURE    TellTaleType = "ENGINE_COMPARTMENT_TEMPERATURE"
+	ENGINECOOLANTLEVEL              TellTaleType = "ENGINE_COOLANT_LEVEL"
+	ENGINECOOLANTTEMPERATURE        TellTaleType = "ENGINE_COOLANT_TEMPERATURE"
+	ENGINEEMISSIONFAILURE           TellTaleType = "ENGINE_EMISSION_FAILURE"
+	ENGINEMILINDICATOR              TellTaleType = "ENGINE_MIL_INDICATOR"
+	ENGINEOIL                       TellTaleType = "ENGINE_OIL"
+	ENGINEOILLEVEL                  TellTaleType = "ENGINE_OIL_LEVEL"
+	ENGINEOILTEMPERATURE            TellTaleType = "ENGINE_OIL_TEMPERATURE"
+	ESCINDICATOR                    TellTaleType = "ESC_INDICATOR"
+	ESCSWITCHEDOFF                  TellTaleType = "ESC_SWITCHED_OFF"
+	FRONTFOGLIGHT                   TellTaleType = "FRONT_FOG_LIGHT"
+	FUELFILTERDIFFPRESSURE          TellTaleType = "FUEL_FILTER_DIFF_PRESSURE"
+	FUELLEVEL                       TellTaleType = "FUEL_LEVEL"
+	GENERALFAILURE                  TellTaleType = "GENERAL_FAILURE"
+	HATCHOPEN                       TellTaleType = "HATCH_OPEN"
+	HAZARDWARNING                   TellTaleType = "HAZARD_WARNING"
+	HEIGHTCONTROL                   TellTaleType = "HEIGHT_CONTROL"
+	HIGHBEAMMAINBEAM                TellTaleType = "HIGH_BEAM_MAIN_BEAM"
+	KNEELING                        TellTaleType = "KNEELING"
+	LANEDEPARTUREINDICATOR          TellTaleType = "LANE_DEPARTURE_INDICATOR"
+	LANEDEPARTUREWARNINGSWITCHEDOFF TellTaleType = "LANE_DEPARTURE_WARNING_SWITCHED_OFF"
+	LOWBEAMDIPPEDBEAM               TellTaleType = "LOW_BEAM_DIPPED_BEAM"
+	LOWERING                        TellTaleType = "LOWERING"
+	OEMSPECIFICTELLTALE             TellTaleType = "OEM_SPECIFIC_TELL_TALE"
+	PARKINGBRAKE                    TellTaleType = "PARKING_BRAKE"
+	PARKINGHEATER                   TellTaleType = "PARKING_HEATER"
+	POSITIONLIGHTS                  TellTaleType = "POSITION_LIGHTS"
+	PRAMREQUEST                     TellTaleType = "PRAM_REQUEST"
+	PROVISIONINGHANDICAPPEDPERSON   TellTaleType = "PROVISIONING_HANDICAPPED_PERSON"
+	RAISING                         TellTaleType = "RAISING"
+	REARFOGLIGHT                    TellTaleType = "REAR_FOG_LIGHT"
+	RETARDER                        TellTaleType = "RETARDER"
+	SEATBELT                        TellTaleType = "SEAT_BELT"
+	SERVICECALLFORMAINTENANCE       TellTaleType = "SERVICE_CALL_FOR_MAINTENANCE"
+	STEERINGFAILURE                 TellTaleType = "STEERING_FAILURE"
+	STEERINGFLUIDLEVEL              TellTaleType = "STEERING_FLUID_LEVEL"
+	STOPREQUEST                     TellTaleType = "STOP_REQUEST"
+	TACHOGRAPHINDICATOR             TellTaleType = "TACHOGRAPH_INDICATOR"
+	TIREMALFUNCTION                 TellTaleType = "TIRE_MALFUNCTION"
+	TRAILERCONNECTED                TellTaleType = "TRAILER_CONNECTED"
+	TRANSMISSIONFLUIDTEMPERATURE    TellTaleType = "TRANSMISSION_FLUID_TEMPERATURE"
+	TRANSMISSIONMALFUNCTION         TellTaleType = "TRANSMISSION_MALFUNCTION"
+	TURNSIGNALS                     TellTaleType = "TURN_SIGNALS"
+	WINDSCREENWASHERFLUID           TellTaleType = "WINDSCREEN_WASHER_FLUID"
+	WORNBRAKELININGS                TellTaleType = "WORN_BRAKE_LININGS"
 )
 
-// Defines values for VehicleStatusStatus2OfDoors.
+// Defines values for TriggerType.
 const (
-	ALLDOORSDISABLED      VehicleStatusStatus2OfDoors = "ALL_DOORS_DISABLED"
-	ATLEASTONEDOORENABLED VehicleStatusStatus2OfDoors = "AT_LEAST_ONE_DOOR_ENABLED"
-	ERROR                 VehicleStatusStatus2OfDoors = "ERROR"
-	NOTAVAILABLE          VehicleStatusStatus2OfDoors = "NOT_AVAILABLE"
+	DISTANCETRAVELLED          TriggerType = "DISTANCE_TRAVELLED"
+	DRIVER1WORKINGSTATECHANGED TriggerType = "DRIVER_1_WORKING_STATE_CHANGED"
+	DRIVER2WORKINGSTATECHANGED TriggerType = "DRIVER_2_WORKING_STATE_CHANGED"
+	DRIVERLOGIN                TriggerType = "DRIVER_LOGIN"
+	DRIVERLOGOUT               TriggerType = "DRIVER_LOGOUT"
+	ENGINEOFF                  TriggerType = "ENGINE_OFF"
+	ENGINEON                   TriggerType = "ENGINE_ON"
+	IGNITIONOFF                TriggerType = "IGNITION_OFF"
+	IGNITIONON                 TriggerType = "IGNITION_ON"
+	PTODISABLED                TriggerType = "PTO_DISABLED"
+	PTOENABLED                 TriggerType = "PTO_ENABLED"
+	TELLTALE                   TriggerType = "TELL_TALE"
+	TIMER                      TriggerType = "TIMER"
 )
 
 // Accumulated defines model for Accumulated.
@@ -181,29 +198,32 @@ type Accumulated struct {
 
 // AlternatorInfo defines model for AlternatorInfo.
 type AlternatorInfo struct {
-	AlternatorNumber *int64                         `json:"AlternatorNumber,omitempty"`
-	AlternatorStatus AlternatorInfoAlternatorStatus `json:"AlternatorStatus"`
+	AlternatorNumber *int64           `json:"AlternatorNumber,omitempty"`
+	AlternatorStatus AlternatorStatus `json:"AlternatorStatus"`
 }
 
-// AlternatorInfoAlternatorStatus defines model for AlternatorInfo.AlternatorStatus.
-type AlternatorInfoAlternatorStatus string
+// AlternatorStatus defines model for AlternatorStatus.
+type AlternatorStatus string
+
+// DoorEnabledStatus defines model for DoorEnabledStatus.
+type DoorEnabledStatus string
+
+// DoorLockStatus defines model for DoorLockStatus.
+type DoorLockStatus string
 
 // DoorOpenStatus defines model for DoorOpenStatus.
 type DoorOpenStatus string
 
 // DoorStatus defines model for DoorStatus.
 type DoorStatus struct {
-	DoorEnabledStatus *DoorStatusDoorEnabledStatus `json:"DoorEnabledStatus,omitempty"`
-	DoorLockStatus    *DoorStatusDoorLockStatus    `json:"DoorLockStatus,omitempty"`
-	DoorNumber        *int64                       `json:"DoorNumber,omitempty"`
-	DoorOpenStatus    *DoorOpenStatus              `json:"DoorOpenStatus,omitempty"`
+	DoorEnabledStatus *DoorEnabledStatus `json:"DoorEnabledStatus,omitempty"`
+	DoorLockStatus    *DoorLockStatus    `json:"DoorLockStatus,omitempty"`
+	DoorNumber        *int64             `json:"DoorNumber,omitempty"`
+	DoorOpenStatus    *DoorOpenStatus    `json:"DoorOpenStatus,omitempty"`
 }
 
-// DoorStatusDoorEnabledStatus defines model for DoorStatus.DoorEnabledStatus.
-type DoorStatusDoorEnabledStatus string
-
-// DoorStatusDoorLockStatus defines model for DoorStatus.DoorLockStatus.
-type DoorStatusDoorLockStatus string
+// DriverAuthenticationType defines model for DriverAuthenticationType.
+type DriverAuthenticationType string
 
 // DriverId defines model for DriverId.
 type DriverId struct {
@@ -278,29 +298,29 @@ type Snapshot struct {
 	WheelBasedSpeed       *float64            `json:"WheelBasedSpeed,omitempty"`
 }
 
+// Status2OfDoors defines model for Status2OfDoors.
+type Status2OfDoors string
+
 // TachoDriverIdentification defines model for TachoDriverIdentification.
 type TachoDriverIdentification struct {
-	CardIssuingMemberState        string                                                  `json:"CardIssuingMemberState"`
-	CardRenewalIndex              *string                                                 `json:"CardRenewalIndex,omitempty"`
-	CardReplacementIndex          *string                                                 `json:"CardReplacementIndex,omitempty"`
-	DriverAuthenticationEquipment *TachoDriverIdentificationDriverAuthenticationEquipment `json:"DriverAuthenticationEquipment,omitempty"`
-	DriverIdentification          string                                                  `json:"DriverIdentification"`
+	CardIssuingMemberState        string                    `json:"CardIssuingMemberState"`
+	CardRenewalIndex              *string                   `json:"CardRenewalIndex,omitempty"`
+	CardReplacementIndex          *string                   `json:"CardReplacementIndex,omitempty"`
+	DriverAuthenticationEquipment *DriverAuthenticationType `json:"DriverAuthenticationEquipment,omitempty"`
+	DriverIdentification          string                    `json:"DriverIdentification"`
 }
-
-// TachoDriverIdentificationDriverAuthenticationEquipment defines model for TachoDriverIdentification.DriverAuthenticationEquipment.
-type TachoDriverIdentificationDriverAuthenticationEquipment string
 
 // TellTaleInfo defines model for TellTaleInfo.
 type TellTaleInfo struct {
-	State    TellTaleInfoState    `json:"State"`
-	TellTale TellTaleInfoTellTale `json:"TellTale"`
+	State    TellTaleState `json:"State"`
+	TellTale TellTaleType  `json:"TellTale"`
 }
 
-// TellTaleInfoState defines model for TellTaleInfo.State.
-type TellTaleInfoState string
+// TellTaleState defines model for TellTaleState.
+type TellTaleState string
 
-// TellTaleInfoTellTale defines model for TellTaleInfo.TellTale.
-type TellTaleInfoTellTale string
+// TellTaleType defines model for TellTaleType.
+type TellTaleType string
 
 // Trigger defines model for Trigger.
 type Trigger struct {
@@ -308,9 +328,12 @@ type Trigger struct {
 	DriverId     *DriverId       `json:"DriverId,omitempty"`
 	PtoId        *string         `json:"PtoId,omitempty"`
 	TellTaleInfo *[]TellTaleInfo `json:"TellTaleInfo,omitempty"`
-	Trigger      string          `json:"Trigger"`
+	Trigger      TriggerType     `json:"Trigger"`
 	TriggerInfo  *[]string       `json:"TriggerInfo,omitempty"`
 }
+
+// TriggerType defines model for TriggerType.
+type TriggerType string
 
 // Uptime defines model for Uptime.
 type Uptime struct {
@@ -368,24 +391,21 @@ type VehiclePositions struct {
 
 // VehicleStatus defines model for VehicleStatus.
 type VehicleStatus struct {
-	AccumulatedData               *Accumulated                 `json:"AccumulatedData,omitempty"`
-	CreatedDateTime               time.Time                    `json:"CreatedDateTime"`
-	DoorStatus                    *[]DoorStatus                `json:"DoorStatus,omitempty"`
-	Driver1Id                     *DriverId                    `json:"Driver1Id,omitempty"`
-	EngineTotalFuelUsed           *int64                       `json:"EngineTotalFuelUsed,omitempty"`
-	GrossCombinationVehicleWeight *int                         `json:"GrossCombinationVehicleWeight,omitempty"`
-	HRTotalVehicleDistance        *int64                       `json:"HRTotalVehicleDistance,omitempty"`
-	ReceivedDateTime              time.Time                    `json:"ReceivedDateTime"`
-	SnapshotData                  *Snapshot                    `json:"SnapshotData,omitempty"`
-	Status2OfDoors                *VehicleStatusStatus2OfDoors `json:"Status2OfDoors,omitempty"`
-	TotalEngineHours              *float64                     `json:"TotalEngineHours,omitempty"`
-	Trigger                       Trigger                      `json:"Trigger"`
-	UptimeData                    *Uptime                      `json:"UptimeData,omitempty"`
-	Vin                           string                       `json:"Vin"`
+	AccumulatedData               *Accumulated    `json:"AccumulatedData,omitempty"`
+	CreatedDateTime               time.Time       `json:"CreatedDateTime"`
+	DoorStatus                    *[]DoorStatus   `json:"DoorStatus,omitempty"`
+	Driver1Id                     *DriverId       `json:"Driver1Id,omitempty"`
+	EngineTotalFuelUsed           *int64          `json:"EngineTotalFuelUsed,omitempty"`
+	GrossCombinationVehicleWeight *int            `json:"GrossCombinationVehicleWeight,omitempty"`
+	HRTotalVehicleDistance        *int64          `json:"HRTotalVehicleDistance,omitempty"`
+	ReceivedDateTime              time.Time       `json:"ReceivedDateTime"`
+	SnapshotData                  *Snapshot       `json:"SnapshotData,omitempty"`
+	Status2OfDoors                *Status2OfDoors `json:"Status2OfDoors,omitempty"`
+	TotalEngineHours              *float64        `json:"TotalEngineHours,omitempty"`
+	Trigger                       Trigger         `json:"Trigger"`
+	UptimeData                    *Uptime         `json:"UptimeData,omitempty"`
+	Vin                           string          `json:"Vin"`
 }
-
-// VehicleStatusStatus2OfDoors defines model for VehicleStatus.Status2OfDoors.
-type VehicleStatusStatus2OfDoors string
 
 // VehicleStatuses defines model for VehicleStatuses.
 type VehicleStatuses struct {
