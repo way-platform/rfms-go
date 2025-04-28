@@ -60,6 +60,12 @@ const (
 	ChargingStatusEventTIMER                          ChargingStatusEvent = "TIMER"
 )
 
+// Defines values for DateType.
+const (
+	DateTypeCreated  DateType = "created"
+	DateTypeReceived DateType = "received"
+)
+
 // Defines values for DoorEnabledStatus.
 const (
 	DoorEnabledStatusDISABLED     DoorEnabledStatus = "DISABLED"
@@ -235,24 +241,6 @@ const (
 	TriggerTypeTRAILERDISCONNECTED                       TriggerType = "TRAILER_DISCONNECTED"
 )
 
-// Defines values for Datetype.
-const (
-	DatetypeCreated  Datetype = "created"
-	DatetypeReceived Datetype = "received"
-)
-
-// Defines values for GetVehiclepositionsParamsDatetype.
-const (
-	GetVehiclepositionsParamsDatetypeCreated  GetVehiclepositionsParamsDatetype = "created"
-	GetVehiclepositionsParamsDatetypeReceived GetVehiclepositionsParamsDatetype = "received"
-)
-
-// Defines values for GetVehiclestatusesParamsDatetype.
-const (
-	GetVehiclestatusesParamsDatetypeCreated  GetVehiclestatusesParamsDatetype = "created"
-	GetVehiclestatusesParamsDatetypeReceived GetVehiclestatusesParamsDatetype = "received"
-)
-
 // Defines values for GetVehiclestatusesParamsContentFilter.
 const (
 	GetVehiclestatusesParamsContentFilterACCUMULATED GetVehiclestatusesParamsContentFilter = "ACCUMULATED"
@@ -379,6 +367,12 @@ type AccumulatedData struct {
 	VehicleSpeedClass *[]FromToClass `json:"vehicleSpeedClass,omitempty"`
 }
 
+// AlternatorInfo The alternator status of the up to 4 alternators. Used mainly for buses.
+type AlternatorInfo struct {
+	AlternatorNumber *int64            `json:"alternatorNumber,omitempty"`
+	AlternatorStatus *AlternatorStatus `json:"alternatorStatus,omitempty"`
+}
+
 // AlternatorStatus defines model for AlternatorStatus.
 type AlternatorStatus string
 
@@ -410,6 +404,19 @@ type BatteryPackChargingStatus string
 //	ERROR - An error occurred
 type ChargingConnectionStatusEvent string
 
+// ChargingConnectionStatusInfo Additional information can be provided if the trigger type is BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE.
+type ChargingConnectionStatusInfo struct {
+	// Event CONNECTING - Vehicle is being connected to a charger
+	//  CONNECTED - Vehicle is connected to a charger
+	//  DISCONNECTING - Vehicle is being disconnected from the charger
+	//  DISCONNECTED - Vehicle is not connected to a charger
+	//  ERROR - An error occurred
+	Event *ChargingConnectionStatusEvent `json:"event,omitempty"`
+
+	// EventDetail Details regarding the event. Content is OEM specific
+	EventDetail *string `json:"eventDetail,omitempty"`
+}
+
 // ChargingStatusEvent CHARGING_STARTED - Charging has started
 //
 //	CHARGING_COMPLETED - Charging is completed
@@ -420,8 +427,36 @@ type ChargingConnectionStatusEvent string
 //	CHARGING_LEVEL - The charging level has reached a predefined level. (Charging levels are outside the scope of rFMS)
 type ChargingStatusEvent string
 
+// ChargingStatusInfo Additional information can be provided if the trigger type is BATTERY_PACK_CHARGING_STATUS_CHANGE.
+type ChargingStatusInfo struct {
+	// Event CHARGING_STARTED - Charging has started
+	//  CHARGING_COMPLETED - Charging is completed
+	//  CHARGING_INTERRUPTED - Charging has been interrupted (no error)
+	//  ERROR - An error occurred when charging
+	//  ESTIMATED_COMPLETION_TIME_CHANGED - The estimated time for completed charging has changed. (Threshold is outside scope of rFMS)
+	//  TIMER - A predefined time has passed since last charge status update. (Frequency is outside the scope of rFMS)
+	//  CHARGING_LEVEL - The charging level has reached a predefined level. (Charging levels are outside the scope of rFMS)
+	Event *ChargingStatusEvent `json:"event,omitempty"`
+
+	// EventDetail Details regarding the event. Content is OEM specific
+	EventDetail *string `json:"eventDetail,omitempty"`
+}
+
 // CreatedDateTimeProperty When the data was retrieved in the vehicle in iso8601 format.
 type CreatedDateTimeProperty = time.Time
+
+// Date Indicates when the vehicle was produced.
+type Date struct {
+	// Day Day of the month where first day of the month is 1
+	Day *int `json:"day,omitempty"`
+
+	// Month Month of the year, where January is value 1
+	Month *int `json:"month,omitempty"`
+	Year  *int `json:"year,omitempty"`
+}
+
+// DateType The start/stop times are compared to the created or received time of the position reports. If this isn't supplied all times are received times.
+type DateType string
 
 // DoorEnabledStatus defines model for DoorEnabledStatus.
 type DoorEnabledStatus string
@@ -432,34 +467,21 @@ type DoorLockStatus string
 // DoorOpenStatus defines model for DoorOpenStatus.
 type DoorOpenStatus string
 
+// DoorStatus defines model for DoorStatus.
+type DoorStatus struct {
+	DoorEnabledStatus *DoorEnabledStatus `json:"DoorEnabledStatus,omitempty"`
+	DoorLockStatus    *DoorLockStatus    `json:"DoorLockStatus,omitempty"`
+	DoorNumber        *int               `json:"DoorNumber,omitempty"`
+	DoorOpenStatus    *DoorOpenStatus    `json:"DoorOpenStatus,omitempty"`
+}
+
 // DriverAuthenticationType Code to distinguish different types of equipment for the tachograph application. See description of the field 'DriverAuthenticationEquipment' in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
 type DriverAuthenticationType string
 
 // DriverID defines model for DriverId.
 type DriverID struct {
-	OemDriverIdentification *struct {
-		// IDType Contains an optional id type (e.g. pin, USB, encrypted EU id...)
-		IDType *string `json:"idType,omitempty"`
-
-		// OemDriverIdentification An OEM specific driver id.
-		OemDriverIdentification *string `json:"oemDriverIdentification,omitempty"`
-	} `json:"oemDriverIdentification,omitempty"`
-	TachoDriverIdentification *struct {
-		// CardIssuingMemberState The country alpha code of the Member State having issued the card. This fields is formatted according the definition for NationAlpha in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
-		CardIssuingMemberState string `json:"cardIssuingMemberState"`
-
-		// CardRenewalIndex A card renewal index. This fields is formatted according the definition for CardRenewalIndex (chap 2.25) in: COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
-		CardRenewalIndex *string `json:"cardRenewalIndex,omitempty"`
-
-		// CardReplacementIndex A card replacement index. This fields is formatted according the definition for CardReplacementIndex (chap 2.26) in: COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
-		CardReplacementIndex *string `json:"cardReplacementIndex,omitempty"`
-
-		// DriverAuthenticationEquipment Code to distinguish different types of equipment for the tachograph application. See description of the field 'DriverAuthenticationEquipment' in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
-		DriverAuthenticationEquipment *DriverAuthenticationType `json:"driverAuthenticationEquipment,omitempty"`
-
-		// DriverIdentification The unique identification of a driver in a Member State. This fields is formatted according the definition for driverIdentification in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
-		DriverIdentification string `json:"driverIdentification"`
-	} `json:"tachoDriverIdentification,omitempty"`
+	OemDriverIdentification   *OemDriverIdentification   `json:"oemDriverIdentification,omitempty"`
+	TachoDriverIdentification *TachoDriverIdentification `json:"tachoDriverIdentification,omitempty"`
 }
 
 // DriverWorkingState Tachograph Working state of the driver
@@ -478,6 +500,21 @@ type Error struct {
 
 	// ErrorURI A URI providing more information
 	ErrorURI *string `json:"error_uri,omitempty"`
+}
+
+// EstimatedDistanceToEmpty Estimated distance to empty (tanks and/or battery packs) in meters
+type EstimatedDistanceToEmpty struct {
+	// BatteryPack Estimated distance to empty, battery pack, in meters
+	BatteryPack *int64 `json:"batteryPack,omitempty"`
+
+	// Fuel Estimated distance to empty, fuel tank, in meters
+	Fuel *int64 `json:"fuel,omitempty"`
+
+	// Gas Estimated distance to empty, gas tank, in meters
+	Gas *int64 `json:"gas,omitempty"`
+
+	// Total Estimated distance to empty, summarizing fuel, gas and battery in meters
+	Total *int64 `json:"total,omitempty"`
 }
 
 // FromToClass defines model for FromToClass.
@@ -541,6 +578,15 @@ type Label struct {
 	Watthours   *int64  `json:"watthours,omitempty"`
 }
 
+// OemDriverIdentification defines model for OemDriverIdentification.
+type OemDriverIdentification struct {
+	// IDType Contains an optional id type (e.g. pin, USB, encrypted EU id...)
+	IDType *string `json:"idType,omitempty"`
+
+	// OemDriverIdentification An OEM specific driver id.
+	OemDriverIdentification *string `json:"oemDriverIdentification,omitempty"`
+}
+
 // ReceivedDateTimeProperty Reception at Server. To be used for handling of "more data available" in iso8601 format.
 type ReceivedDateTimeProperty = time.Time
 
@@ -595,19 +641,7 @@ type SnapshotData struct {
 	EngineSpeed *float64 `json:"engineSpeed,omitempty"`
 
 	// EstimatedDistanceToEmpty Estimated distance to empty (tanks and/or battery packs) in meters
-	EstimatedDistanceToEmpty *struct {
-		// BatteryPack Estimated distance to empty, battery pack, in meters
-		BatteryPack *int64 `json:"batteryPack,omitempty"`
-
-		// Fuel Estimated distance to empty, fuel tank, in meters
-		Fuel *int64 `json:"fuel,omitempty"`
-
-		// Gas Estimated distance to empty, gas tank, in meters
-		Gas *int64 `json:"gas,omitempty"`
-
-		// Total Estimated distance to empty, summarizing fuel, gas and battery in meters
-		Total *int64 `json:"total,omitempty"`
-	} `json:"estimatedDistanceToEmpty,omitempty"`
+	EstimatedDistanceToEmpty *EstimatedDistanceToEmpty `json:"estimatedDistanceToEmpty,omitempty"`
 
 	// EstimatedTimeBatteryPackChargingCompleted Estimated time when charging has reached the target level.
 	EstimatedTimeBatteryPackChargingCompleted *time.Time `json:"estimatedTimeBatteryPackChargingCompleted,omitempty"`
@@ -637,43 +671,10 @@ type SnapshotData struct {
 	TachographSpeed *float64 `json:"tachographSpeed,omitempty"`
 
 	// Trailers List of trailers connected to the truck.
-	Trailers *[]struct {
-		// CustomerTrailerName The customer's name for the trailer
-		CustomerTrailerName *string `json:"customerTrailerName,omitempty"`
-
-		// TrailerAxleLoadSum The sum of the static vertical loads of the trailer axles in kilograms. The load is sent in the EBS22 message of ISO 11992-2.
-		TrailerAxleLoadSum *int `json:"trailerAxleLoadSum,omitempty"`
-
-		// TrailerAxles A list of trailer axles
-		TrailerAxles *[]struct {
-			// TrailerAxleLoad The static vertical load of a trailer axle in kilograms. The load is sent in the RGE22 message of ISO11992-2.
-			TrailerAxleLoad *float32 `json:"trailerAxleLoad,omitempty"`
-
-			// TrailerAxlePosition Axle position from 1 to 15, 1 being in the front closest to the truck, according to ISO 11992-2.
-			TrailerAxlePosition *int `json:"trailerAxlePosition,omitempty"`
-		} `json:"trailerAxles,omitempty"`
-
-		// TrailerIdentificationData The identification data sent by the trailer to the truck in the RGE23 message of ISO 11992-2. An alternative source is the DID (Data identifier definition) record VIN, as specified in ISO 11992-4. Even though both ISO 11992-2 and ISO 11992-4 specifies this as a VIN, the actual data sent from a trailer is not always the true VIN of the trailer.
-		TrailerIdentificationData *string `json:"trailerIdentificationData,omitempty"`
-
-		// TrailerNo Trailer number from 1 to 5, 1 being closest to the truck, according to ISO 11992-2.
-		TrailerNo *int `json:"trailerNo,omitempty"`
-
-		// TrailerType Indicates the type of the trailer. The type is sent in the EBS24 message of ISO 11992-2.
-		TrailerType *TrailerType `json:"trailerType,omitempty"`
-
-		// TrailerVin The vehicle identification number of the trailer. See ISO 3779 (17 characters) If the trailerIdentificationData is reporting a true VIN, trailerVin will have the same value. If it is possible to map the trailerIdentificationData to a true VIN using other sources, the value can be provided here.
-		TrailerVin *string `json:"trailerVin,omitempty"`
-	} `json:"trailers,omitempty"`
+	Trailers *[]Trailer `json:"trailers,omitempty"`
 
 	// VehicleAxles A list of vehicle axles
-	VehicleAxles *[]struct {
-		// VehicleAxleLoad The static vertical load of a vehicle axle in kilograms.
-		VehicleAxleLoad *float32 `json:"vehicleAxleLoad,omitempty"`
-
-		// VehicleAxlePosition Axle position from 1 to 15, 1 being in the front of the truck
-		VehicleAxlePosition *int `json:"vehicleAxlePosition,omitempty"`
-	} `json:"vehicleAxles,omitempty"`
+	VehicleAxles *[]VehicleAxle `json:"vehicleAxles,omitempty"`
 
 	// WheelBasedSpeed The vehicle wheelbased speed
 	WheelBasedSpeed *float64 `json:"wheelBasedSpeed,omitempty"`
@@ -681,6 +682,24 @@ type SnapshotData struct {
 
 // Status2OfDoors Composite indication of all bus door statuses. Bus specific parameter
 type Status2OfDoors string
+
+// TachoDriverIdentification defines model for TachoDriverIdentification.
+type TachoDriverIdentification struct {
+	// CardIssuingMemberState The country alpha code of the Member State having issued the card. This fields is formatted according the definition for NationAlpha in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
+	CardIssuingMemberState string `json:"cardIssuingMemberState"`
+
+	// CardRenewalIndex A card renewal index. This fields is formatted according the definition for CardRenewalIndex (chap 2.25) in: COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
+	CardRenewalIndex *string `json:"cardRenewalIndex,omitempty"`
+
+	// CardReplacementIndex A card replacement index. This fields is formatted according the definition for CardReplacementIndex (chap 2.26) in: COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
+	CardReplacementIndex *string `json:"cardReplacementIndex,omitempty"`
+
+	// DriverAuthenticationEquipment Code to distinguish different types of equipment for the tachograph application. See description of the field 'DriverAuthenticationEquipment' in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
+	DriverAuthenticationEquipment *DriverAuthenticationType `json:"driverAuthenticationEquipment,omitempty"`
+
+	// DriverIdentification The unique identification of a driver in a Member State. This fields is formatted according the definition for driverIdentification in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
+	DriverIdentification string `json:"driverIdentification"`
+}
 
 // TellTale defines model for TellTale.
 type TellTale struct {
@@ -697,6 +716,39 @@ type TellTaleState string
 
 // TellTaleType defines model for TellTaleType.
 type TellTaleType string
+
+// Trailer defines model for Trailer.
+type Trailer struct {
+	// CustomerTrailerName The customer's name for the trailer
+	CustomerTrailerName *string `json:"customerTrailerName,omitempty"`
+
+	// TrailerAxleLoadSum The sum of the static vertical loads of the trailer axles in kilograms. The load is sent in the EBS22 message of ISO 11992-2.
+	TrailerAxleLoadSum *int `json:"trailerAxleLoadSum,omitempty"`
+
+	// TrailerAxles A list of trailer axles
+	TrailerAxles *[]TrailerAxle `json:"trailerAxles,omitempty"`
+
+	// TrailerIdentificationData The identification data sent by the trailer to the truck in the RGE23 message of ISO 11992-2. An alternative source is the DID (Data identifier definition) record VIN, as specified in ISO 11992-4. Even though both ISO 11992-2 and ISO 11992-4 specifies this as a VIN, the actual data sent from a trailer is not always the true VIN of the trailer.
+	TrailerIdentificationData *string `json:"trailerIdentificationData,omitempty"`
+
+	// TrailerNo Trailer number from 1 to 5, 1 being closest to the truck, according to ISO 11992-2.
+	TrailerNo *int `json:"trailerNo,omitempty"`
+
+	// TrailerType Indicates the type of the trailer. The type is sent in the EBS24 message of ISO 11992-2.
+	TrailerType *TrailerType `json:"trailerType,omitempty"`
+
+	// TrailerVin The vehicle identification number of the trailer. See ISO 3779 (17 characters) If the trailerIdentificationData is reporting a true VIN, trailerVin will have the same value. If it is possible to map the trailerIdentificationData to a true VIN using other sources, the value can be provided here.
+	TrailerVin *string `json:"trailerVin,omitempty"`
+}
+
+// TrailerAxle defines model for TrailerAxle.
+type TrailerAxle struct {
+	// TrailerAxleLoad The static vertical load of a trailer axle in kilograms. The load is sent in the RGE22 message of ISO11992-2.
+	TrailerAxleLoad *float32 `json:"trailerAxleLoad,omitempty"`
+
+	// TrailerAxlePosition Axle position from 1 to 15, 1 being in the front closest to the truck, according to ISO 11992-2.
+	TrailerAxlePosition *int `json:"trailerAxlePosition,omitempty"`
+}
 
 // TrailerType Indicates the type of the trailer. The type is sent in the EBS24 message of ISO 11992-2.
 type TrailerType string
@@ -715,32 +767,10 @@ type TrailerType string
 //	This is only set if the TriggerType = TELL_TALE
 type Trigger struct {
 	// ChargingConnectionStatusInfo Additional information can be provided if the trigger type is BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE.
-	ChargingConnectionStatusInfo *struct {
-		// Event CONNECTING - Vehicle is being connected to a charger
-		//  CONNECTED - Vehicle is connected to a charger
-		//  DISCONNECTING - Vehicle is being disconnected from the charger
-		//  DISCONNECTED - Vehicle is not connected to a charger
-		//  ERROR - An error occurred
-		Event *ChargingConnectionStatusEvent `json:"event,omitempty"`
-
-		// EventDetail Details regarding the event. Content is OEM specific
-		EventDetail *string `json:"eventDetail,omitempty"`
-	} `json:"chargingConnectionStatusInfo,omitempty"`
+	ChargingConnectionStatusInfo *ChargingConnectionStatusInfo `json:"chargingConnectionStatusInfo,omitempty"`
 
 	// ChargingStatusInfo Additional information can be provided if the trigger type is BATTERY_PACK_CHARGING_STATUS_CHANGE.
-	ChargingStatusInfo *struct {
-		// Event CHARGING_STARTED - Charging has started
-		//  CHARGING_COMPLETED - Charging is completed
-		//  CHARGING_INTERRUPTED - Charging has been interrupted (no error)
-		//  ERROR - An error occurred when charging
-		//  ESTIMATED_COMPLETION_TIME_CHANGED - The estimated time for completed charging has changed. (Threshold is outside scope of rFMS)
-		//  TIMER - A predefined time has passed since last charge status update. (Frequency is outside the scope of rFMS)
-		//  CHARGING_LEVEL - The charging level has reached a predefined level. (Charging levels are outside the scope of rFMS)
-		Event *ChargingStatusEvent `json:"event,omitempty"`
-
-		// EventDetail Details regarding the event. Content is OEM specific
-		EventDetail *string `json:"eventDetail,omitempty"`
-	} `json:"chargingStatusInfo,omitempty"`
+	ChargingStatusInfo *ChargingStatusInfo `json:"chargingStatusInfo,omitempty"`
 
 	// Context The context defines if this is part of the standard or OEM specific. rFMS standard values VOLVO TRUCKS, SCANIA, DAIMLER, IVECO, DAF, MAN, RENAULT TRUCKS, VDL, VOLVO BUSES, IVECO BUS, IRISBUS If the Trigger is defined in the rFMS standard, the Context = RFMS
 	Context  string    `json:"context"`
@@ -802,10 +832,7 @@ type TriggerType string
 // UptimeData defines model for UptimeData.
 type UptimeData struct {
 	// AlternatorInfo The alternator status of the up to 4 alternators. Used mainly for buses.
-	AlternatorInfo *struct {
-		AlternatorNumber *int64            `json:"alternatorNumber,omitempty"`
-		AlternatorStatus *AlternatorStatus `json:"alternatorStatus,omitempty"`
-	} `json:"alternatorInfo,omitempty"`
+	AlternatorInfo *AlternatorInfo `json:"alternatorInfo,omitempty"`
 
 	// BellowPressureFrontAxleLeft The bellow pressure in the front axle left side in Pascal. Used mainly for buses.
 	BellowPressureFrontAxleLeft *int64 `json:"bellowPressureFrontAxleLeft,omitempty"`
@@ -895,14 +922,7 @@ type Vehicle struct {
 	PossibleFuelType *[]string `json:"possibleFuelType,omitempty"`
 
 	// ProductionDate Indicates when the vehicle was produced.
-	ProductionDate *struct {
-		// Day Day of the month where first day of the month is 1
-		Day *int `json:"day,omitempty"`
-
-		// Month Month of the year, where January is value 1
-		Month *int `json:"month,omitempty"`
-		Year  *int `json:"year,omitempty"`
-	} `json:"productionDate,omitempty"`
+	ProductionDate *Date `json:"productionDate,omitempty"`
 
 	// TachographType The type of tachograph in the vehicle. rFMS standard values MTCO, DTCO, TSU, DTCO_G1, DTCO_G2, NONE
 	//  DTCO - Digital tachograph, unknown generation
@@ -930,6 +950,15 @@ type Vehicle struct {
 
 	// Vin vehicle identification number. See ISO 3779 (17 characters)
 	Vin VinProperty `json:"vin"`
+}
+
+// VehicleAxle defines model for VehicleAxle.
+type VehicleAxle struct {
+	// VehicleAxleLoad The static vertical load of a vehicle axle in kilograms.
+	VehicleAxleLoad *float32 `json:"vehicleAxleLoad,omitempty"`
+
+	// VehicleAxlePosition Axle position from 1 to 15, 1 being in the front of the truck
+	VehicleAxlePosition *int `json:"vehicleAxlePosition,omitempty"`
 }
 
 // VehiclePosition defines model for VehiclePosition.
@@ -999,13 +1028,8 @@ type VehicleStatus struct {
 	CreatedDateTime CreatedDateTimeProperty `json:"createdDateTime"`
 
 	// DoorStatus Individual status for each door. Bus specific parameter
-	DoorStatus *[]struct {
-		DoorEnabledStatus *DoorEnabledStatus `json:"DoorEnabledStatus,omitempty"`
-		DoorLockStatus    *DoorLockStatus    `json:"DoorLockStatus,omitempty"`
-		DoorNumber        *int               `json:"DoorNumber,omitempty"`
-		DoorOpenStatus    *DoorOpenStatus    `json:"DoorOpenStatus,omitempty"`
-	} `json:"doorStatus,omitempty"`
-	Driver1ID *DriverID `json:"driver1Id,omitempty"`
+	DoorStatus *[]DoorStatus `json:"doorStatus,omitempty"`
+	Driver1ID  *DriverID     `json:"driver1Id,omitempty"`
 
 	// EngineTotalFuelUsed The total fuel the vehicle has used during its lifetime in MilliLitres. At least one of engineTotalFuelUsed, totalFuelUsedGaseous or totalElectricEnergyUsed is mandatory.
 	EngineTotalFuelUsed *int64 `json:"engineTotalFuelUsed,omitempty"`
@@ -1071,8 +1095,8 @@ type VehicleStatusResponse struct {
 // VinProperty vehicle identification number. See ISO 3779 (17 characters)
 type VinProperty = string
 
-// Datetype defines model for datetype.
-type Datetype string
+// Datetype The start/stop times are compared to the created or received time of the position reports. If this isn't supplied all times are received times.
+type Datetype = DateType
 
 // LastVin defines model for lastVin.
 type LastVin = string
@@ -1110,7 +1134,7 @@ type Unauthorized = Error
 // GetVehiclepositionsParams defines parameters for GetVehiclepositions.
 type GetVehiclepositionsParams struct {
 	// Datetype The start/stop times are compared to the created or received time of the position reports. If this isn't supplied all times are received times.
-	Datetype *GetVehiclepositionsParamsDatetype `form:"datetype,omitempty" json:"datetype,omitempty"`
+	Datetype *Datetype `form:"datetype,omitempty" json:"datetype,omitempty"`
 
 	// Starttime Only the data created/received at or after this time should be returned. (i.e. >= starttime)
 	Starttime *Starttime `form:"starttime,omitempty" json:"starttime,omitempty"`
@@ -1134,9 +1158,6 @@ type GetVehiclepositionsParams struct {
 	XCorrelationID *XCorrelationID `json:"X-Correlation-Id,omitempty"`
 }
 
-// GetVehiclepositionsParamsDatetype defines parameters for GetVehiclepositions.
-type GetVehiclepositionsParamsDatetype string
-
 // GetVehiclesParams defines parameters for GetVehicles.
 type GetVehiclesParams struct {
 	// LastVin The response will return the next block of vehicles not including the one with the given VIN. When the last call to the vehicle list function had MoreDataAvailable-parameter set to true you must supply the VIN of the last item in the list as lastVin parameter in the next call.
@@ -1149,7 +1170,7 @@ type GetVehiclesParams struct {
 // GetVehiclestatusesParams defines parameters for GetVehiclestatuses.
 type GetVehiclestatusesParams struct {
 	// Datetype The start/stop times are compared to the created or received time of the position reports. If this isn't supplied all times are received times.
-	Datetype *GetVehiclestatusesParamsDatetype `form:"datetype,omitempty" json:"datetype,omitempty"`
+	Datetype *Datetype `form:"datetype,omitempty" json:"datetype,omitempty"`
 
 	// Starttime Only the data created/received at or after this time should be returned. (i.e. >= starttime)
 	Starttime *Starttime `form:"starttime,omitempty" json:"starttime,omitempty"`
@@ -1175,9 +1196,6 @@ type GetVehiclestatusesParams struct {
 	// XCorrelationID A client unique request id used for fault tracing at the API supplier. This shall be unique for each request if used. Max 40 characters.
 	XCorrelationID *XCorrelationID `json:"X-Correlation-Id,omitempty"`
 }
-
-// GetVehiclestatusesParamsDatetype defines parameters for GetVehiclestatuses.
-type GetVehiclestatusesParamsDatetype string
 
 // GetVehiclestatusesParamsContentFilter defines parameters for GetVehiclestatuses.
 type GetVehiclestatusesParamsContentFilter string

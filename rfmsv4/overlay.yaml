@@ -9,6 +9,291 @@ actions:
 - target: $.components.securitySchemes
   remove: true # TODO: Figure out why this is not being removed.
 
+# Parameter enums
+- target: $.components.schemas
+  update:
+    DateType:
+      type: string
+      description: The start/stop times are compared to the created or received time of the position reports. If this isn't supplied all times are received times.
+      enum:
+        - created
+        - received
+      default: received
+
+- target: $.components.parameters.datetype.schema
+  update:
+    $ref: '#/components/schemas/DateType'
+
+- target: $.components.schemas
+  update:
+    Date:
+      type: object
+      properties:
+        day:
+          type: integer
+          description: Day of the month where first day of the month is 1
+          example: 1
+        month:
+          type: integer
+          description: Month of the year, where January is value 1
+          example: 4
+        year:
+          type: integer
+          example: 2018
+      description: Indicates when the vehicle was produced.
+
+- target: $.components.schemas.Vehicle.properties
+  update:
+    productionDate:
+      $ref: '#/components/schemas/Date'
+
+# TachoDriverIdentification component
+- target: $.components.schemas
+  update:
+    TachoDriverIdentification:
+      required:
+      - cardIssuingMemberState
+      - driverIdentification
+      type: object
+      properties:
+        driverIdentification:
+          type: string
+          description: The unique identification of a driver in a Member State. This fields is formatted according the definition for driverIdentification in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
+          example: "12345678901234"
+        cardIssuingMemberState:
+          type: string
+          description: The country alpha code of the Member State having issued the card. This fields is formatted according the definition for NationAlpha in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
+          example: S
+        driverAuthenticationEquipment:
+          $ref: '#/components/schemas/DriverAuthenticationType'
+        cardReplacementIndex:
+          type: string
+          description: 'A card replacement index. This fields is formatted according the definition for CardReplacementIndex (chap 2.26) in: COMMISSION REGULATION (EC) No 1360/2002 Annex 1b'
+          example: "0"
+        cardRenewalIndex:
+          type: string
+          description: 'A card renewal index. This fields is formatted according the definition for CardRenewalIndex (chap 2.25) in: COMMISSION REGULATION (EC) No 1360/2002 Annex 1b'
+          example: "0"
+
+- target: $.components.schemas.DriverId.properties
+  update:
+    tachoDriverIdentification:
+      $ref: '#/components/schemas/TachoDriverIdentification'
+
+# OemDriverIdentification component
+- target: $.components.schemas
+  update:
+    OemDriverIdentification:
+      type: object
+      properties:
+        idType:
+          type: string
+          description: Contains an optional id type (e.g. pin, USB, encrypted EU id...)
+          example: USB
+        oemDriverIdentification:
+          type: string
+          description: An OEM specific driver id.
+          example: ABC-123-DEF
+
+- target: $.components.schemas.DriverId.properties
+  update:
+    oemDriverIdentification:
+      $ref: '#/components/schemas/OemDriverIdentification'
+
+# DoorStatus component
+- target: $.components.schemas
+  update:
+    DoorStatus:
+      type: object
+      properties:
+        DoorEnabledStatus:
+          $ref: '#/components/schemas/DoorEnabledStatus'
+        DoorOpenStatus:
+          $ref: '#/components/schemas/DoorOpenStatus'
+        DoorLockStatus:
+          $ref: '#/components/schemas/DoorLockStatus'
+        DoorNumber:
+          type: integer
+          example: 1
+
+- target: $.components.schemas.VehicleStatus.properties
+  update:
+    doorStatus:
+      type: array
+      description: Individual status for each door. Bus specific parameter
+      items:
+        $ref: '#/components/schemas/DoorStatus'
+
+# AlternatorInfo component
+- target: $.components.schemas
+  update:
+    AlternatorInfo:
+      type: object
+      properties:
+        alternatorStatus:
+          $ref: '#/components/schemas/AlternatorStatus'
+        alternatorNumber:
+          type: integer
+          format: int64
+          example: 1
+      description: The alternator status of the up to 4 alternators. Used mainly for buses.
+
+- target: $.components.schemas.UptimeData.properties
+  update:
+    alternatorInfo:
+      $ref: '#/components/schemas/AlternatorInfo'
+
+# ChargingStatusInfo component
+- target: $.components.schemas
+  update:
+    ChargingStatusInfo:
+      type: object
+      properties:
+        event:
+          $ref: '#/components/schemas/ChargingStatusEvent'
+        eventDetail:
+          type: string
+          description: Details regarding the event. Content is OEM specific
+          example: NOT_ALLOWED_TO_CHARGE
+      description: Additional information can be provided if the trigger type is BATTERY_PACK_CHARGING_STATUS_CHANGE.
+
+- target: $.components.schemas.Trigger.properties
+  update:
+    chargingStatusInfo:
+      $ref: '#/components/schemas/ChargingStatusInfo'
+
+# ChargingConnectionStatusInfo component
+- target: $.components.schemas
+  update:
+    ChargingConnectionStatusInfo:
+      type: object
+      properties:
+        event:
+          $ref: '#/components/schemas/ChargingConnectionStatusEvent'
+        eventDetail:
+          type: string
+          description: Details regarding the event. Content is OEM specific
+          example: VEHICLE_NOT_IN_POSITION
+      description: Additional information can be provided if the trigger type is BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE.
+
+- target: $.components.schemas.Trigger.properties
+  update:
+    chargingConnectionStatusInfo:
+      $ref: '#/components/schemas/ChargingConnectionStatusInfo'
+
+# TrailerAxle component
+- target: $.components.schemas
+  update:
+    TrailerAxle:
+      type: object
+      properties:
+        trailerAxlePosition:
+          type: integer
+          description: Axle position from 1 to 15, 1 being in the front closest to the truck, according to ISO 11992-2.
+          example: 1
+        trailerAxleLoad:
+          type: number
+          description: The static vertical load of a trailer axle in kilograms. The load is sent in the RGE22 message of ISO11992-2.
+          example: 456.5
+
+- target: $.components.schemas
+  update:
+    Trailer:
+      type: object
+      properties:
+        trailerNo:
+          type: integer
+          description: Trailer number from 1 to 5, 1 being closest to the truck, according to ISO 11992-2.
+          example: 1.0
+        trailerIdentificationData:
+          type: string
+          description: The identification data sent by the trailer to the truck in the RGE23 message of ISO 11992-2. An alternative source is the DID (Data identifier definition) record VIN, as specified in ISO 11992-4. Even though both ISO 11992-2 and ISO 11992-4 specifies this as a VIN, the actual data sent from a trailer is not always the true VIN of the trailer.
+          example: ABC12345678901234
+        trailerVin:
+          type: string
+          description: The vehicle identification number of the trailer. See ISO 3779 (17 characters) If the trailerIdentificationData is reporting a true VIN, trailerVin will have the same value. If it is possible to map the trailerIdentificationData to a true VIN using other sources, the value can be provided here.
+          example: ABC12345678901234
+        customerTrailerName:
+          type: string
+          description: The customer's name for the trailer
+          example: Fridge trailer 5
+        trailerType:
+          $ref: '#/components/schemas/TrailerType'
+        trailerAxleLoadSum:
+          type: integer
+          description: The sum of the static vertical loads of the trailer axles in kilograms. The load is sent in the EBS22 message of ISO 11992-2.
+          example: 16200
+        trailerAxles:
+          type: array
+          description: A list of trailer axles
+          items:
+            $ref: '#/components/schemas/TrailerAxle'
+
+- target: $.components.schemas.SnapshotData.properties
+  update:
+    trailers:
+      type: array
+      description: List of trailers connected to the truck.
+      items:
+        $ref: '#/components/schemas/Trailer'
+
+# EstimatedDistanceToEmpty component
+- target: $.components.schemas
+  update:
+    EstimatedDistanceToEmpty:
+      type: object
+      description: Estimated distance to empty (tanks and/or battery packs) in meters
+      properties:
+        total:
+          type: integer
+          description: Estimated distance to empty, summarizing fuel, gas and battery in meters
+          format: int64
+          example: 503700
+        fuel:
+          type: integer
+          description: Estimated distance to empty, fuel tank, in meters
+          format: int64
+          example: 457600
+        gas:
+          type: integer
+          description: Estimated distance to empty, gas tank, in meters
+          format: int64
+          example: 299200
+        batteryPack:
+          type: integer
+          description: Estimated distance to empty, battery pack, in meters
+          format: int64
+          example: 150900
+
+- target: $.components.schemas.SnapshotData.properties
+  update:
+    estimatedDistanceToEmpty:
+      $ref: '#/components/schemas/EstimatedDistanceToEmpty'
+
+# VehicleAxle component
+- target: $.components.schemas
+  update:
+    VehicleAxle:
+      type: object
+      properties:
+        vehicleAxlePosition:
+          type: integer
+          description: Axle position from 1 to 15, 1 being in the front of the truck
+          example: 1
+        vehicleAxleLoad:
+          type: number
+          description: The static vertical load of a vehicle axle in kilograms.
+          example: 4556.5
+
+- target: $.components.schemas.SnapshotData.properties
+  update:
+    vehicleAxles:
+      type: array
+      description: A list of vehicle axles
+      items:
+        $ref: '#/components/schemas/VehicleAxle'
+
+# TriggerType enum
 - target: $.components.schemas
   update:
     TriggerType:
@@ -122,15 +407,6 @@ actions:
         - NOT_AVAILABLE
       example: UNLOCKED
 
-- target: $.components.schemas.VehicleStatus.properties.doorStatus.items.properties
-  update:
-    DoorEnabledStatus:
-      $ref: '#/components/schemas/DoorEnabledStatus'
-    DoorOpenStatus:
-      $ref: '#/components/schemas/DoorOpenStatus'
-    DoorLockStatus:
-      $ref: '#/components/schemas/DoorLockStatus'
-
 # Battery charging status enums
 - target: $.components.schemas
   update:
@@ -217,11 +493,6 @@ actions:
         - VEHICLE_UNIT
         - MOTION_SENSOR
       example: DRIVER_CARD
-
-- target: $.components.schemas.DriverId.properties.tachoDriverIdentification.properties
-  update:
-    driverAuthenticationEquipment:
-      $ref: '#/components/schemas/DriverAuthenticationType'
 
 # TellTale enums
 - target: $.components.schemas
@@ -345,11 +616,6 @@ actions:
         - UNKNOWN
       example: SEMI_TRAILER
 
-- target: $.components.schemas.SnapshotData.properties.trailers.items.properties
-  update:
-    trailerType:
-      $ref: '#/components/schemas/TrailerType'
-
 # Charging status event enums
 - target: $.components.schemas
   update:
@@ -372,11 +638,6 @@ actions:
         - CHARGING_LEVEL
       example: ERROR
 
-- target: $.components.schemas.Trigger.properties.chargingStatusInfo.properties
-  update:
-    event:
-      $ref: '#/components/schemas/ChargingStatusEvent'
-
 - target: $.components.schemas
   update:
     ChargingConnectionStatusEvent:
@@ -394,11 +655,6 @@ actions:
         - ERROR
       example: ERROR
 
-- target: $.components.schemas.Trigger.properties.chargingConnectionStatusInfo.properties
-  update:
-    event:
-      $ref: '#/components/schemas/ChargingConnectionStatusEvent'
-
 # Alternator status enum
 - target: $.components.schemas
   update:
@@ -410,8 +666,3 @@ actions:
         - ERROR
         - NOT_AVAILABLE
       example: CHARGING
-
-- target: $.components.schemas.UptimeData.properties.alternatorInfo.properties
-  update:
-    alternatorStatus:
-      $ref: '#/components/schemas/AlternatorStatus'
