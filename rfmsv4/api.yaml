@@ -28,7 +28,7 @@ paths:
           content:
             'application/json; rfms=vehicles.v4.0':
               schema:
-                $ref: '#/components/schemas/VehicleResponseObject'
+                $ref: '#/components/schemas/VehicleResponse'
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -124,7 +124,7 @@ paths:
           content:
             'application/json; rfms=vehiclepositions.v4.0':
               schema:
-                $ref: '#/components/schemas/VehiclePositionResponseObject'
+                $ref: '#/components/schemas/VehiclePositionResponse'
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -246,7 +246,7 @@ paths:
           content:
             'application/json; rfms=vehiclestatuses.v4.0':
               schema:
-                $ref: '#/components/schemas/VehicleStatusResponseObject'
+                $ref: '#/components/schemas/VehicleStatusResponse'
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -262,7 +262,7 @@ paths:
           
 components:
   schemas:
-    ErrorObject:
+    Error:
       type: object
       properties:
         error:
@@ -278,7 +278,7 @@ components:
           description: A URI providing more information
           example: https://oem.com/rfms/UnsupportedAcceptParameter.html
       description: Optional responses for error codes, detailing the error if needed
-    VehicleResponseObject:
+    VehicleResponse:
       required:
       - moreDataAvailable
       - vehicleResponse
@@ -290,7 +290,7 @@ components:
             vehicles:
               type: array
               items:
-                $ref: '#/components/schemas/VehicleObject'
+                $ref: '#/components/schemas/Vehicle'
         moreDataAvailable:
           type: boolean
           description: This will be set to true if the result set was too large to
@@ -304,7 +304,7 @@ components:
             moreDataAvailable is true. The link is relative, i.e. starts with /rfms/vehicles,
             and preserves any query parameters from the original request.
           example: /rfms/vehicles?lastVin=ABC12345678901234
-    VehicleObject:
+    Vehicle:
       required:
       - vin
       type: object
@@ -438,7 +438,7 @@ components:
           - /vehiclepositions
           items:
             type: string
-    VehiclePositionResponseObject:
+    VehiclePositionResponse:
       required:
       - moreDataAvailable
       - requestServerDateTime
@@ -451,7 +451,7 @@ components:
             vehiclePositions:
               type: array
               items:
-                $ref: '#/components/schemas/VehiclePositionObject'
+                $ref: '#/components/schemas/VehiclePosition'
         moreDataAvailable:
           type: boolean
           description: This will be set to true if the result set was too large to
@@ -474,7 +474,7 @@ components:
             should be supplied in the startTime parameter in the next request in iso8601
             format.
           format: date-time
-    VehiclePositionObject:
+    VehiclePosition:
       required:
       - createdDateTime
       - receivedDateTime
@@ -485,13 +485,13 @@ components:
         vin:
           $ref: '#/components/schemas/VinProperty'
         triggerType:
-          $ref: '#/components/schemas/TriggerObject'
+          $ref: '#/components/schemas/Trigger'
         createdDateTime:
           $ref: '#/components/schemas/CreatedDateTimeProperty'
         receivedDateTime:
           $ref: '#/components/schemas/ReceivedDateTimeProperty'
         gnssPosition:
-          $ref: '#/components/schemas/GNSSPositionObject'
+          $ref: '#/components/schemas/GNSSPosition'
         wheelBasedSpeed:
           type: number
           description: Wheel-Based Vehicle Speed in km/h (Speed of the vehicle as
@@ -504,7 +504,7 @@ components:
             by the tachograph)
           format: double
           example: 54.1
-    VehicleStatusResponseObject:
+    VehicleStatusResponse:
       required:
       - moreDataAvailable
       - requestServerDateTime
@@ -517,7 +517,7 @@ components:
             vehicleStatuses:
               type: array
               items:
-                $ref: '#/components/schemas/VehicleStatusObject'
+                $ref: '#/components/schemas/VehicleStatus'
         moreDataAvailable:
           type: boolean
           description: This will be set to true if the result set was too large to
@@ -539,7 +539,7 @@ components:
             losing any messages or get duplicates, this is the time that should be
             supplied in the startTime parameter in the next request in iso8601 format.
           format: date-time
-    VehicleStatusObject:
+    VehicleStatus:
       required:
       - createdDateTime
       - receivedDateTime
@@ -550,7 +550,7 @@ components:
         vin:
           $ref: '#/components/schemas/VinProperty'
         triggerType:
-          $ref: '#/components/schemas/TriggerObject'
+          $ref: '#/components/schemas/Trigger'
         createdDateTime:
           $ref: '#/components/schemas/CreatedDateTimeProperty'
         receivedDateTime:
@@ -575,7 +575,7 @@ components:
           format: double
           example: 987.6
         driver1Id:
-          $ref: '#/components/schemas/DriverIdObject'
+          $ref: '#/components/schemas/DriverId'
         grossCombinationVehicleWeight:
           type: integer
           description: The full vehicle weight in kg
@@ -647,12 +647,12 @@ components:
                 type: integer
                 example: 1
         accumulatedData:
-          $ref: '#/components/schemas/AccumulatedDataObject'
+          $ref: '#/components/schemas/AccumulatedData'
         snapshotData:
-          $ref: '#/components/schemas/SnapshotDataObject'
+          $ref: '#/components/schemas/SnapshotData'
         uptimeData:
-          $ref: '#/components/schemas/UptimeDataObject'
-    AccumulatedDataObject:
+          $ref: '#/components/schemas/UptimeData'
+    AccumulatedData:
       type: object
       properties:
         durationWheelbasedSpeedOverZero:
@@ -756,7 +756,7 @@ components:
             kilograms: 2345
             watthours: 287588
           items:
-            $ref: '#/components/schemas/LabelObject'
+            $ref: '#/components/schemas/Label'
         brakePedalCounterSpeedOverZero:
           type: integer
           description: The total number of times the brake pedal has been used while
@@ -782,7 +782,7 @@ components:
             kilograms: 564743
             watthours: 9897354
           items:
-            $ref: '#/components/schemas/FromToClassObject'
+            $ref: '#/components/schemas/FromToClass'
         brakePedalPositionClass:
           type: array
           description: In percent. Minimum 5 classes [0, 20[ [20, 40[ [40, 60[ [60,
@@ -796,7 +796,7 @@ components:
             kilograms: 564743
             watthours: 9897354
           items:
-            $ref: '#/components/schemas/FromToClassObject'
+            $ref: '#/components/schemas/FromToClass'
         accelerationClass:
           type: array
           description: In m/s2 Minimum 13 classes. ], -1.1] ]-1.1, -0.9] ]-0.9, -0.7]
@@ -811,7 +811,7 @@ components:
             kilograms: 564743
             watthours: 9897354
           items:
-            $ref: '#/components/schemas/FromToClassObject'
+            $ref: '#/components/schemas/FromToClass'
         highAccelerationClass:
           type: array
           description: In m/s2 Minimum 11 classes ], -3.0] ]-3.0, -2.5] ]-2.5, -2.0]
@@ -826,7 +826,7 @@ components:
             kilograms: 564743
             watthours: 9897354
           items:
-            $ref: '#/components/schemas/FromToClassObject'
+            $ref: '#/components/schemas/FromToClass'
         retarderTorqueClass:
           type: array
           description: In percent (how the retarder is used as a positive value).
@@ -840,7 +840,7 @@ components:
             kilograms: 564743
             watthours: 9897354
           items:
-            $ref: '#/components/schemas/FromToClassObject'
+            $ref: '#/components/schemas/FromToClass'
         drivingWithoutTorqueClass:
           type: array
           description: Driving without torque, with gear (clutch is engaged) Labels
@@ -853,7 +853,7 @@ components:
             kilograms: 2345
             watthours: 287588
           items:
-            $ref: '#/components/schemas/LabelObject'
+            $ref: '#/components/schemas/Label'
         engineTorqueClass:
           type: array
           description: In percent based on EEC1 value (Actual Engine-Percent Torque).
@@ -867,7 +867,7 @@ components:
             milliLitres: 678345
             kilograms: 2345
           items:
-            $ref: '#/components/schemas/FromToClassObjectCombustion'
+            $ref: '#/components/schemas/FromToClassCombustion'
         electricMotorTorqueClass:
           type: array
           description: In percent (Actual Engine-Percent Torque). Minimum 10 classes
@@ -880,7 +880,7 @@ components:
             meters: 345678
             watthours: 6778345
           items:
-            $ref: '#/components/schemas/FromToClassObjectElectrical'
+            $ref: '#/components/schemas/FromToClassElectrical'
         engineTorqueAtCurrentSpeedClass:
           type: array
           description: In percent based on EEC2 value (Engine Percent Load At Current
@@ -894,7 +894,7 @@ components:
             milliLitres: 678345
             kilograms: 234545
           items:
-            $ref: '#/components/schemas/FromToClassObjectCombustion'
+            $ref: '#/components/schemas/FromToClassCombustion'
         electricMotorTorqueAtCurrentSpeedClass:
           type: array
           description: In percent (Engine Percent Load At Current Speed). Minimum
@@ -907,7 +907,7 @@ components:
             meters: 345678
             watthours: 6784345
           items:
-            $ref: '#/components/schemas/FromToClassObjectElectrical'
+            $ref: '#/components/schemas/FromToClassElectrical'
         vehicleSpeedClass:
           type: array
           description: In km/h Minimum 40 classes. [0, 4[ [4, 8[ [8, 12[ [12, 16[
@@ -922,7 +922,7 @@ components:
             kilograms: 564743
             watthours: 9897354
           items:
-            $ref: '#/components/schemas/FromToClassObject'
+            $ref: '#/components/schemas/FromToClass'
         engineSpeedClass:
           type: array
           description: "Classes refer to the RPM of the combustion engine. Only mandatory
@@ -939,7 +939,7 @@ components:
             kilograms: 564743
             watthours: 9897354
           items:
-            $ref: '#/components/schemas/FromToClassObject'
+            $ref: '#/components/schemas/FromToClass'
         accelerationDuringBrakeClass:
           type: array
           description: In m/s2 Minimum 13 classes. ], -1.1] ]-1.1, -0.9] ]-0.9, -0.7]
@@ -954,7 +954,7 @@ components:
             kilograms: 564743
             watthours: 9897354
           items:
-            $ref: '#/components/schemas/FromToClassObject'
+            $ref: '#/components/schemas/FromToClass'
         selectedGearClass:
           type: array
           description: The currently selected gear One class per gear. Neutral is
@@ -969,7 +969,7 @@ components:
             kilograms: 5647
             watthours: 98973
           items:
-            $ref: '#/components/schemas/LabelObject'
+            $ref: '#/components/schemas/Label'
         currentGearClass:
           type: array
           description: The currently used gear One class per gear. Neutral is also
@@ -984,7 +984,7 @@ components:
             kilograms: 5647
             watthours: 98973
           items:
-            $ref: '#/components/schemas/LabelObject'
+            $ref: '#/components/schemas/Label'
         chairliftCounter:
           type: integer
           description: The total number of times the chairlift has been outside the
@@ -1020,12 +1020,12 @@ components:
             meters: 345678
             watthours: 4353945
           items:
-            $ref: '#/components/schemas/FromToClassObjectElectrical'
-    SnapshotDataObject:
+            $ref: '#/components/schemas/FromToClassElectrical'
+    SnapshotData:
       type: object
       properties:
         gnssPosition:
-          $ref: '#/components/schemas/GNSSPositionObject'
+          $ref: '#/components/schemas/GNSSPosition'
         wheelBasedSpeed:
           type: number
           description: The vehicle wheelbased speed
@@ -1074,7 +1074,7 @@ components:
         driver1WorkingState:
           $ref: '#/components/schemas/DriverWorkingStateProperty'
         driver2Id:
-          $ref: '#/components/schemas/DriverIdObject'
+          $ref: '#/components/schemas/DriverId'
         driver2WorkingState:
           $ref: '#/components/schemas/DriverWorkingStateProperty'
         ambientAirTemperature:
@@ -1259,7 +1259,7 @@ components:
                       description: The static vertical load of a trailer axle in kilograms.
                         The load is sent in the RGE22 message of ISO11992-2.
                       example: 456.5
-    UptimeDataObject:
+    UptimeData:
       required:
       - tellTaleInfo
       type: object
@@ -1268,7 +1268,7 @@ components:
           type: array
           description: List of tell tales with the actual status for each tell tale.
           items:
-            $ref: '#/components/schemas/TellTaleObject'
+            $ref: '#/components/schemas/TellTale'
         serviceDistance:
           type: integer
           description: The distance in meter to the next service
@@ -1347,7 +1347,7 @@ components:
             Used mainly for buses.
           format: int64
           example: 234000
-    TriggerObject:
+    Trigger:
       required:
       - context
       - triggerType
@@ -1404,13 +1404,13 @@ components:
           items:
             type: string
         driverId:
-          $ref: '#/components/schemas/DriverIdObject'
+          $ref: '#/components/schemas/DriverId'
         ptoId:
           type: string
           description: The id of a PTO. This is only set if the TriggerType = PTO_ENABLED
             or PTO_DISABLED
         tellTaleInfo:
-          $ref: '#/components/schemas/TellTaleObject'
+          $ref: '#/components/schemas/TellTale'
         chargingStatusInfo:
           type: object
           properties:
@@ -1461,7 +1461,7 @@ components:
               example: VEHICLE_NOT_IN_POSITION
           description: Additional information can be provided if the trigger type
             is BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE.
-    DriverIdObject:
+    DriverId:
       type: object
       properties:
         tachoDriverIdentification:
@@ -1520,7 +1520,7 @@ components:
               type: string
               description: An OEM specific driver id.
               example: ABC-123-DEF
-    TellTaleObject:
+    TellTale:
       required:
       - state
       - tellTale
@@ -1618,7 +1618,7 @@ components:
           - RESERVED_5
           - RESERVED_6
           - NOT_AVAILABLE
-    GNSSPositionObject:
+    GNSSPosition:
       required:
       - latitude
       - longitude
@@ -1653,7 +1653,7 @@ components:
           type: string
           description: The time of the position data in iso8601 format.
           format: date-time
-    LabelObject:
+    Label:
       type: object
       properties:
         label:
@@ -1673,7 +1673,7 @@ components:
         watthours:
           type: integer
           format: int64
-    FromToClassObject:
+    FromToClass:
       type: object
       properties:
         from:
@@ -1697,7 +1697,7 @@ components:
         watthours:
           type: integer
           format: int64
-    FromToClassObjectCombustion:
+    FromToClassCombustion:
       type: object
       properties:
         from:
@@ -1718,7 +1718,7 @@ components:
         kilograms:
           type: integer
           format: int64
-    FromToClassObjectElectrical:
+    FromToClassElectrical:
       type: object
       properties:
         from:
@@ -1773,7 +1773,7 @@ components:
       content:
         'application/json':
           schema:
-            $ref: '#/components/schemas/ErrorObject'
+            $ref: '#/components/schemas/Error'
           examples:
             badRequest:
               $ref: '#/components/examples/BadRequest'
@@ -1794,7 +1794,7 @@ components:
       content:
         'application/json':
           schema:
-            $ref: '#/components/schemas/ErrorObject'
+            $ref: '#/components/schemas/Error'
           examples:
             badRequest:
               $ref: '#/components/examples/Forbidden'
@@ -1804,7 +1804,7 @@ components:
       content:
         'application/json':
           schema:
-            $ref: '#/components/schemas/ErrorObject'
+            $ref: '#/components/schemas/Error'
           examples:
             badRequest:
               $ref: '#/components/examples/NotAcceptable'
@@ -1821,7 +1821,7 @@ components:
       content:
         'application/json':
           schema:
-            $ref: '#/components/schemas/ErrorObject'
+            $ref: '#/components/schemas/Error'
           examples:
             badRequest:
               $ref: '#/components/examples/NotFound'
@@ -1833,7 +1833,7 @@ components:
       content:
         'application/json':
           schema:
-            $ref: '#/components/schemas/ErrorObject'
+            $ref: '#/components/schemas/Error'
           examples:
             badRequest:
               $ref: '#/components/examples/TooManyRequests'
@@ -1853,7 +1853,7 @@ components:
       content:
         'application/json':
           schema:
-            $ref: '#/components/schemas/ErrorObject'
+            $ref: '#/components/schemas/Error'
           examples:
             badRequest:
               $ref: '#/components/examples/Unathorized'

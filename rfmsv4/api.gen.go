@@ -260,28 +260,28 @@ const (
 	GetVehiclestatusesParamsContentFilterUPTIME      GetVehiclestatusesParamsContentFilter = "UPTIME"
 )
 
-// AccumulatedDataObject defines model for AccumulatedDataObject.
-type AccumulatedDataObject struct {
+// AccumulatedData defines model for AccumulatedData.
+type AccumulatedData struct {
 	// AccelerationClass In m/s2 Minimum 13 classes. ], -1.1] ]-1.1, -0.9] ]-0.9, -0.7] ]-0.7, -0.5] ]-0.5, -0.3] ]-0.3, -0.1] ]-0.1, 0.1[ [0.1, 0.3[ [0.3, 0.5[ [0.5, 0.7[ [0.7, 0.9[ [0.9, 1.1[ [1.1, [
-	AccelerationClass *[]FromToClassObject `json:"accelerationClass,omitempty"`
+	AccelerationClass *[]FromToClass `json:"accelerationClass,omitempty"`
 
 	// AccelerationDuringBrakeClass In m/s2 Minimum 13 classes. ], -1.1] ]-1.1, -0.9] ]-0.9, -0.7] ]-0.7, -0.5] ]-0.5, -0.3] ]-0.3, -0.1] ]-0.1, 0.1[ [0.1, 0.3[ [0.3, 0.5[ [0.5, 0.7[ [0.7, 0.9[ [0.9, 1.1[ [1.1, [
-	AccelerationDuringBrakeClass *[]FromToClassObject `json:"accelerationDuringBrakeClass,omitempty"`
+	AccelerationDuringBrakeClass *[]FromToClass `json:"accelerationDuringBrakeClass,omitempty"`
 
 	// AccelerationPedalPositionClass In percent. Minimum 5 classes [0, 20[ [20, 40[ [40, 60[ [60, 80[ [80, 100]
-	AccelerationPedalPositionClass *[]FromToClassObject `json:"accelerationPedalPositionClass,omitempty"`
+	AccelerationPedalPositionClass *[]FromToClass `json:"accelerationPedalPositionClass,omitempty"`
 
 	// BrakePedalCounterSpeedOverZero The total number of times the brake pedal has been used while the vehicle was driving.
 	BrakePedalCounterSpeedOverZero *int64 `json:"brakePedalCounterSpeedOverZero,omitempty"`
 
 	// BrakePedalPositionClass In percent. Minimum 5 classes [0, 20[ [20, 40[ [40, 60[ [60, 80[ [80, 100]
-	BrakePedalPositionClass *[]FromToClassObject `json:"brakePedalPositionClass,omitempty"`
+	BrakePedalPositionClass *[]FromToClass `json:"brakePedalPositionClass,omitempty"`
 
 	// ChairliftCounter The total number of times the chairlift has been outside the bus. This is mainly used for Buses
 	ChairliftCounter *int64 `json:"chairliftCounter,omitempty"`
 
 	// CurrentGearClass The currently used gear One class per gear. Neutral is also a gear. Park is also a gear. This is formatted according to SPN 523, supplied as a decimal value. Example 0 = Neutral, 1 = 1:st gear... This is mainly used for Buses.
-	CurrentGearClass *[]LabelObject `json:"currentGearClass,omitempty"`
+	CurrentGearClass *[]Label `json:"currentGearClass,omitempty"`
 
 	// DistanceBrakePedalActiveSpeedOverZero The total distance the vehicle has driven where the brake pedal has been used. Unit Meters.
 	DistanceBrakePedalActiveSpeedOverZero *int64 `json:"distanceBrakePedalActiveSpeedOverZero,omitempty"`
@@ -290,7 +290,7 @@ type AccumulatedDataObject struct {
 	DistanceCruiseControlActive *int64 `json:"distanceCruiseControlActive,omitempty"`
 
 	// DrivingWithoutTorqueClass Driving without torque, with gear (clutch is engaged) Labels DRIVING_WITHOUT_TORQUE
-	DrivingWithoutTorqueClass *[]LabelObject `json:"drivingWithoutTorqueClass,omitempty"`
+	DrivingWithoutTorqueClass *[]Label `json:"drivingWithoutTorqueClass,omitempty"`
 
 	// DurationCruiseControlActive The time the vehicle has been driven with cruise control active
 	DurationCruiseControlActive *int64 `json:"durationCruiseControlActive,omitempty"`
@@ -314,22 +314,22 @@ type AccumulatedDataObject struct {
 	ElectricEnergyWheelbasedSpeedZero *int64 `json:"electricEnergyWheelbasedSpeedZero,omitempty"`
 
 	// ElectricMotorTorqueAtCurrentSpeedClass In percent (Engine Percent Load At Current Speed). Minimum 10 classes [0, 10[ [10, 20[ [20, 30[ [30, 40[ [40, 50[ [50, 60[ [60, 70[ [70, 80[ [80, 90[ [90, 100]
-	ElectricMotorTorqueAtCurrentSpeedClass *[]FromToClassObjectElectrical `json:"electricMotorTorqueAtCurrentSpeedClass,omitempty"`
+	ElectricMotorTorqueAtCurrentSpeedClass *[]FromToClassElectrical `json:"electricMotorTorqueAtCurrentSpeedClass,omitempty"`
 
 	// ElectricMotorTorqueClass In percent (Actual Engine-Percent Torque). Minimum 10 classes [0, 10[ [10, 20[ [20, 30[ [30, 40[ [40, 50[ [50, 60[ [60, 70[ [70, 80[ [80, 90[ [90, 100]
-	ElectricMotorTorqueClass *[]FromToClassObjectElectrical `json:"electricMotorTorqueClass,omitempty"`
+	ElectricMotorTorqueClass *[]FromToClassElectrical `json:"electricMotorTorqueClass,omitempty"`
 
 	// ElectricPowerRecuperationClass Classes refer to the recuperated electric power in kilowatt Minimum 11 classes [0, 100[ [100, 200[ [200, 300[ ... [900, 1000[ [1000, [
-	ElectricPowerRecuperationClass *[]FromToClassObjectElectrical `json:"electricPowerRecuperationClass,omitempty"`
+	ElectricPowerRecuperationClass *[]FromToClassElectrical `json:"electricPowerRecuperationClass,omitempty"`
 
 	// EngineSpeedClass Classes refer to the RPM of the combustion engine. Only mandatory if the vehicle has a combustion engine for propulsion. Minimum 10 classes [0, 400[ [400, 800[ [800, 1200[ [1200, 1600[ [1600, 2000[ [2000, 2400[ [2400, 2800[ [2800, 3200[ [3200, 3600[ [3600, [ Note: Engine on (RPM>0 or electric motor in crank mode)
-	EngineSpeedClass *[]FromToClassObject `json:"engineSpeedClass,omitempty"`
+	EngineSpeedClass *[]FromToClass `json:"engineSpeedClass,omitempty"`
 
 	// EngineTorqueAtCurrentSpeedClass In percent based on EEC2 value (Engine Percent Load At Current Speed). Minimum 10 classes [0, 10[ [10, 20[ [20, 30[ [30, 40[ [40, 50[ [50, 60[ [60, 70[ [70, 80[ [80, 90[ [90, 100]
-	EngineTorqueAtCurrentSpeedClass *[]FromToClassObjectCombustion `json:"engineTorqueAtCurrentSpeedClass,omitempty"`
+	EngineTorqueAtCurrentSpeedClass *[]FromToClassCombustion `json:"engineTorqueAtCurrentSpeedClass,omitempty"`
 
 	// EngineTorqueClass In percent based on EEC1 value (Actual Engine-Percent Torque). Minimum 10 classes [0, 10[ [10, 20[ [20, 30[ [30, 40[ [40, 50[ [50, 60[ [60, 70[ [70, 80[ [80, 90[ [90, 100]
-	EngineTorqueClass *[]FromToClassObjectCombustion `json:"engineTorqueClass,omitempty"`
+	EngineTorqueClass *[]FromToClassCombustion `json:"engineTorqueClass,omitempty"`
 
 	// FuelConsumptionDuringCruiseActive The fuel the vehicle has consumed while driven with cruise control active, in millilitres
 	FuelConsumptionDuringCruiseActive *int64 `json:"fuelConsumptionDuringCruiseActive,omitempty"`
@@ -350,7 +350,7 @@ type AccumulatedDataObject struct {
 	FuelWheelbasedSpeedZeroGaseous *int64 `json:"fuelWheelbasedSpeedZeroGaseous,omitempty"`
 
 	// HighAccelerationClass In m/s2 Minimum 11 classes ], -3.0] ]-3.0, -2.5] ]-2.5, -2.0] ]-2.0, -1.5] ]-1.5, -1.1] ]-1.1, 1.1[ [1.1, 1.5[ [1.5, 2.0[ [2.0, 2.5[ [2.5, 3.0[ [3.0, [
-	HighAccelerationClass *[]FromToClassObject `json:"highAccelerationClass,omitempty"`
+	HighAccelerationClass *[]FromToClass `json:"highAccelerationClass,omitempty"`
 
 	// KneelingCounter The total number of times the bus has knelt.
 	KneelingCounter *int64 `json:"kneelingCounter,omitempty"`
@@ -364,19 +364,19 @@ type AccumulatedDataObject struct {
 	//  Label WHEELBASED_SPEED_OVER_ZERO
 	//  At least one PTO active during wheelbased speed>0
 	//  Counters for time (seconds), distance (meter) and consumption (millilitres, kilograms, watt-hours)
-	PtoActiveClass *[]LabelObject `json:"ptoActiveClass,omitempty"`
+	PtoActiveClass *[]Label `json:"ptoActiveClass,omitempty"`
 
 	// RetarderTorqueClass In percent (how the retarder is used as a positive value). Minimum 5 classes ]0, 20[ [20, 40[ [40, 60[ [60, 80[ [80, 100]
-	RetarderTorqueClass *[]FromToClassObject `json:"retarderTorqueClass,omitempty"`
+	RetarderTorqueClass *[]FromToClass `json:"retarderTorqueClass,omitempty"`
 
 	// SelectedGearClass The currently selected gear One class per gear. Neutral is also a gear. Park is also a gear. This is formatted according to SPN 524, supplied as a decimal value. Example 0 = Neutral, 1 = 1:st gear... This is mainly used for Buses.
-	SelectedGearClass *[]LabelObject `json:"selectedGearClass,omitempty"`
+	SelectedGearClass *[]Label `json:"selectedGearClass,omitempty"`
 
 	// StopRequestCounter The total number of stop requests made. This is mainly used for Buses
 	StopRequestCounter *int64 `json:"stopRequestCounter,omitempty"`
 
 	// VehicleSpeedClass In km/h Minimum 40 classes. [0, 4[ [4, 8[ [8, 12[ [12, 16[ [16, 20[ [20, 24[ ... [156, [ Engine on (RPM>0 or electric motor in crank mode)
-	VehicleSpeedClass *[]FromToClassObject `json:"vehicleSpeedClass,omitempty"`
+	VehicleSpeedClass *[]FromToClass `json:"vehicleSpeedClass,omitempty"`
 }
 
 // AlternatorStatus defines model for AlternatorStatus.
@@ -435,8 +435,8 @@ type DoorOpenStatus string
 // DriverAuthenticationType Code to distinguish different types of equipment for the tachograph application. See description of the field 'DriverAuthenticationEquipment' in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
 type DriverAuthenticationType string
 
-// DriverIDObject defines model for DriverIdObject.
-type DriverIDObject struct {
+// DriverID defines model for DriverId.
+type DriverID struct {
 	OemDriverIdentification *struct {
 		// IDType Contains an optional id type (e.g. pin, USB, encrypted EU id...)
 		IDType *string `json:"idType,omitempty"`
@@ -468,8 +468,8 @@ type DriverWorkingState string
 // DriverWorkingStateProperty Tachograph Working state of the driver
 type DriverWorkingStateProperty = DriverWorkingState
 
-// ErrorObject Optional responses for error codes, detailing the error if needed
-type ErrorObject struct {
+// Error Optional responses for error codes, detailing the error if needed
+type Error struct {
 	// Error An identifier for this error
 	Error *string `json:"error,omitempty"`
 
@@ -480,8 +480,8 @@ type ErrorObject struct {
 	ErrorURI *string `json:"error_uri,omitempty"`
 }
 
-// FromToClassObject defines model for FromToClassObject.
-type FromToClassObject struct {
+// FromToClass defines model for FromToClass.
+type FromToClass struct {
 	From        *float64 `json:"from,omitempty"`
 	Kilograms   *int64   `json:"kilograms,omitempty"`
 	Meters      *int64   `json:"meters,omitempty"`
@@ -491,8 +491,8 @@ type FromToClassObject struct {
 	Watthours   *int64   `json:"watthours,omitempty"`
 }
 
-// FromToClassObjectCombustion defines model for FromToClassObjectCombustion.
-type FromToClassObjectCombustion struct {
+// FromToClassCombustion defines model for FromToClassCombustion.
+type FromToClassCombustion struct {
 	From        *float64 `json:"from,omitempty"`
 	Kilograms   *int64   `json:"kilograms,omitempty"`
 	Meters      *int64   `json:"meters,omitempty"`
@@ -501,8 +501,8 @@ type FromToClassObjectCombustion struct {
 	To          *float64 `json:"to,omitempty"`
 }
 
-// FromToClassObjectElectrical defines model for FromToClassObjectElectrical.
-type FromToClassObjectElectrical struct {
+// FromToClassElectrical defines model for FromToClassElectrical.
+type FromToClassElectrical struct {
 	From      *float64 `json:"from,omitempty"`
 	Meters    *int64   `json:"meters,omitempty"`
 	Seconds   *int64   `json:"seconds,omitempty"`
@@ -510,8 +510,8 @@ type FromToClassObjectElectrical struct {
 	Watthours *int64   `json:"watthours,omitempty"`
 }
 
-// GNSSPositionObject defines model for GNSSPositionObject.
-type GNSSPositionObject struct {
+// GNSSPosition defines model for GNSSPosition.
+type GNSSPosition struct {
 	// Altitude The altitude of the vehicle. Where 0 is sea level, negative values below sealevel and positive above sealevel. Unit in meters.
 	Altitude *int `json:"altitude,omitempty"`
 
@@ -531,8 +531,8 @@ type GNSSPositionObject struct {
 	Speed *float64 `json:"speed,omitempty"`
 }
 
-// LabelObject defines model for LabelObject.
-type LabelObject struct {
+// Label defines model for Label.
+type Label struct {
 	Kilograms   *int64  `json:"kilograms,omitempty"`
 	Label       *string `json:"label,omitempty"`
 	Meters      *int64  `json:"meters,omitempty"`
@@ -544,8 +544,8 @@ type LabelObject struct {
 // ReceivedDateTimeProperty Reception at Server. To be used for handling of "more data available" in iso8601 format.
 type ReceivedDateTimeProperty = time.Time
 
-// SnapshotDataObject defines model for SnapshotDataObject.
-type SnapshotDataObject struct {
+// SnapshotData defines model for SnapshotData.
+type SnapshotData struct {
 	// AmbientAirTemperature The Ambient air temperature in Celsius
 	AmbientAirTemperature *float64 `json:"ambientAirTemperature,omitempty"`
 
@@ -583,7 +583,7 @@ type SnapshotDataObject struct {
 
 	// Driver1WorkingState Tachograph Working state of the driver
 	Driver1WorkingState *DriverWorkingStateProperty `json:"driver1WorkingState,omitempty"`
-	Driver2ID           *DriverIDObject             `json:"driver2Id,omitempty"`
+	Driver2ID           *DriverID                   `json:"driver2Id,omitempty"`
 
 	// Driver2WorkingState Tachograph Working state of the driver
 	Driver2WorkingState *DriverWorkingStateProperty `json:"driver2WorkingState,omitempty"`
@@ -619,8 +619,8 @@ type SnapshotDataObject struct {
 	FuelLevel2 *float64 `json:"fuelLevel2,omitempty"`
 
 	// FuelType Type of fuel currently being utilized by the vehicle acc. SPN 5837
-	FuelType     *string             `json:"fuelType,omitempty"`
-	GnssPosition *GNSSPositionObject `json:"gnssPosition,omitempty"`
+	FuelType     *string       `json:"fuelType,omitempty"`
+	GnssPosition *GNSSPosition `json:"gnssPosition,omitempty"`
 
 	// HybridBatteryPackRemainingCharge Indicates the hybrid battery pack remaining charge.
 	//  0% means no charge remaining,
@@ -682,8 +682,8 @@ type SnapshotDataObject struct {
 // Status2OfDoors Composite indication of all bus door statuses. Bus specific parameter
 type Status2OfDoors string
 
-// TellTaleObject defines model for TellTaleObject.
-type TellTaleObject struct {
+// TellTale defines model for TellTale.
+type TellTale struct {
 	// OemTellTale The OemTellTale is only set when the TellTale == OEM_SPECIFIC_TELL_TALE. This is an OEM specific string defining a tell tale in the OEM context.
 	OemTellTale *string `json:"oemTellTale,omitempty"`
 
@@ -701,7 +701,7 @@ type TellTaleType string
 // TrailerType Indicates the type of the trailer. The type is sent in the EBS24 message of ISO 11992-2.
 type TrailerType string
 
-// TriggerObject This description is placed here due to limitations of describing references in OpenAPI
+// Trigger This description is placed here due to limitations of describing references in OpenAPI
 //
 //	Property __driverId__:
 //	The driver id of driver. (independant whether it is driver or Co-driver)
@@ -713,7 +713,7 @@ type TrailerType string
 //	Property __tellTaleInfo__:
 //	The tell tale(s) that triggered this message.
 //	This is only set if the TriggerType = TELL_TALE
-type TriggerObject struct {
+type Trigger struct {
 	// ChargingConnectionStatusInfo Additional information can be provided if the trigger type is BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE.
 	ChargingConnectionStatusInfo *struct {
 		// Event CONNECTING - Vehicle is being connected to a charger
@@ -743,12 +743,12 @@ type TriggerObject struct {
 	} `json:"chargingStatusInfo,omitempty"`
 
 	// Context The context defines if this is part of the standard or OEM specific. rFMS standard values VOLVO TRUCKS, SCANIA, DAIMLER, IVECO, DAF, MAN, RENAULT TRUCKS, VDL, VOLVO BUSES, IVECO BUS, IRISBUS If the Trigger is defined in the rFMS standard, the Context = RFMS
-	Context  string          `json:"context"`
-	DriverID *DriverIDObject `json:"driverId,omitempty"`
+	Context  string    `json:"context"`
+	DriverID *DriverID `json:"driverId,omitempty"`
 
 	// PtoID The id of a PTO. This is only set if the TriggerType = PTO_ENABLED or PTO_DISABLED
-	PtoID        *string         `json:"ptoId,omitempty"`
-	TellTaleInfo *TellTaleObject `json:"tellTaleInfo,omitempty"`
+	PtoID        *string   `json:"ptoId,omitempty"`
+	TellTaleInfo *TellTale `json:"tellTaleInfo,omitempty"`
 
 	// TriggerInfo Additional TriggerInfo content for OEM specific triggers E.g. TRAILER_ATTACHED_TRIGGER [id of trailer]
 	TriggerInfo *[]string `json:"triggerInfo,omitempty"`
@@ -799,8 +799,8 @@ type TriggerObject struct {
 //	TRAILER_DISCONNECTED - One or several trailers were disconnected
 type TriggerType string
 
-// UptimeDataObject defines model for UptimeDataObject.
-type UptimeDataObject struct {
+// UptimeData defines model for UptimeData.
+type UptimeData struct {
 	// AlternatorInfo The alternator status of the up to 4 alternators. Used mainly for buses.
 	AlternatorInfo *struct {
 		AlternatorNumber *int64            `json:"alternatorNumber,omitempty"`
@@ -841,11 +841,11 @@ type UptimeDataObject struct {
 	ServiceDistance *int64 `json:"serviceDistance,omitempty"`
 
 	// TellTaleInfo List of tell tales with the actual status for each tell tale.
-	TellTaleInfo []TellTaleObject `json:"tellTaleInfo"`
+	TellTaleInfo []TellTale `json:"tellTaleInfo"`
 }
 
-// VehicleObject defines model for VehicleObject.
-type VehicleObject struct {
+// Vehicle defines model for Vehicle.
+type Vehicle struct {
 	// AuthorizedPaths Paths that the client is authorized to call
 	AuthorizedPaths *[]string `json:"authorizedPaths,omitempty"`
 
@@ -932,11 +932,11 @@ type VehicleObject struct {
 	Vin VinProperty `json:"vin"`
 }
 
-// VehiclePositionObject defines model for VehiclePositionObject.
-type VehiclePositionObject struct {
+// VehiclePosition defines model for VehiclePosition.
+type VehiclePosition struct {
 	// CreatedDateTime When the data was retrieved in the vehicle in iso8601 format.
 	CreatedDateTime CreatedDateTimeProperty `json:"createdDateTime"`
-	GnssPosition    *GNSSPositionObject     `json:"gnssPosition,omitempty"`
+	GnssPosition    *GNSSPosition           `json:"gnssPosition,omitempty"`
 
 	// ReceivedDateTime Reception at Server. To be used for handling of "more data available" in iso8601 format.
 	ReceivedDateTime ReceivedDateTimeProperty `json:"receivedDateTime"`
@@ -955,7 +955,7 @@ type VehiclePositionObject struct {
 	//  Property __tellTaleInfo__:
 	//  The tell tale(s) that triggered this message.
 	//  This is only set if the TriggerType = TELL_TALE
-	TriggerType TriggerObject `json:"triggerType"`
+	TriggerType Trigger `json:"triggerType"`
 
 	// Vin vehicle identification number. See ISO 3779 (17 characters)
 	Vin VinProperty `json:"vin"`
@@ -964,8 +964,8 @@ type VehiclePositionObject struct {
 	WheelBasedSpeed *float64 `json:"wheelBasedSpeed,omitempty"`
 }
 
-// VehiclePositionResponseObject defines model for VehiclePositionResponseObject.
-type VehiclePositionResponseObject struct {
+// VehiclePositionResponse defines model for VehiclePositionResponse.
+type VehiclePositionResponse struct {
 	// MoreDataAvailable This will be set to true if the result set was too large to be sent back in one reply. A new request must be sent to get the rest of the vehicle positions, where the starttime parameter must be supplied. The starttime should be set to the latest ReceivedDateTime + 1 second of the last vehicle in the result set of this message.
 	MoreDataAvailable bool `json:"moreDataAvailable"`
 
@@ -975,25 +975,25 @@ type VehiclePositionResponseObject struct {
 	// RequestServerDateTime Time to be used to ask for historical data at customers (for starttime), to solve the problem of having different times at server and clients. This is the time at the server when this request was received. To avoid losing any messages or get duplicates, this is the time that should be supplied in the startTime parameter in the next request in iso8601 format.
 	RequestServerDateTime   time.Time `json:"requestServerDateTime"`
 	VehiclePositionResponse struct {
-		VehiclePositions *[]VehiclePositionObject `json:"vehiclePositions,omitempty"`
+		VehiclePositions *[]VehiclePosition `json:"vehiclePositions,omitempty"`
 	} `json:"vehiclePositionResponse"`
 }
 
-// VehicleResponseObject defines model for VehicleResponseObject.
-type VehicleResponseObject struct {
+// VehicleResponse defines model for VehicleResponse.
+type VehicleResponse struct {
 	// MoreDataAvailable This will be set to true if the result set was too large to be sent back in one reply. A new request must be sent to get the rest of the vehicles, where the lastVin parameter must be supplied. The lastVin should be set to the VIN of the last vehicle in the result set of this message.
 	MoreDataAvailable bool `json:"moreDataAvailable"`
 
 	// MoreDataAvailableLink Populated with the link to the next part of the result when moreDataAvailable is true. The link is relative, i.e. starts with /rfms/vehicles, and preserves any query parameters from the original request.
 	MoreDataAvailableLink *string `json:"moreDataAvailableLink,omitempty"`
 	VehicleResponse       struct {
-		Vehicles *[]VehicleObject `json:"vehicles,omitempty"`
+		Vehicles *[]Vehicle `json:"vehicles,omitempty"`
 	} `json:"vehicleResponse"`
 }
 
-// VehicleStatusObject defines model for VehicleStatusObject.
-type VehicleStatusObject struct {
-	AccumulatedData *AccumulatedDataObject `json:"accumulatedData,omitempty"`
+// VehicleStatus defines model for VehicleStatus.
+type VehicleStatus struct {
+	AccumulatedData *AccumulatedData `json:"accumulatedData,omitempty"`
 
 	// CreatedDateTime When the data was retrieved in the vehicle in iso8601 format.
 	CreatedDateTime CreatedDateTimeProperty `json:"createdDateTime"`
@@ -1005,7 +1005,7 @@ type VehicleStatusObject struct {
 		DoorNumber        *int               `json:"DoorNumber,omitempty"`
 		DoorOpenStatus    *DoorOpenStatus    `json:"DoorOpenStatus,omitempty"`
 	} `json:"doorStatus,omitempty"`
-	Driver1ID *DriverIDObject `json:"driver1Id,omitempty"`
+	Driver1ID *DriverID `json:"driver1Id,omitempty"`
 
 	// EngineTotalFuelUsed The total fuel the vehicle has used during its lifetime in MilliLitres. At least one of engineTotalFuelUsed, totalFuelUsedGaseous or totalElectricEnergyUsed is mandatory.
 	EngineTotalFuelUsed *int64 `json:"engineTotalFuelUsed,omitempty"`
@@ -1018,7 +1018,7 @@ type VehicleStatusObject struct {
 
 	// ReceivedDateTime Reception at Server. To be used for handling of "more data available" in iso8601 format.
 	ReceivedDateTime ReceivedDateTimeProperty `json:"receivedDateTime"`
-	SnapshotData     *SnapshotDataObject      `json:"snapshotData,omitempty"`
+	SnapshotData     *SnapshotData            `json:"snapshotData,omitempty"`
 
 	// Status2OfDoors Composite indication of all bus door statuses. Bus specific parameter
 	Status2OfDoors *Status2OfDoors `json:"status2OfDoors,omitempty"`
@@ -1046,15 +1046,15 @@ type VehicleStatusObject struct {
 	//  Property __tellTaleInfo__:
 	//  The tell tale(s) that triggered this message.
 	//  This is only set if the TriggerType = TELL_TALE
-	TriggerType TriggerObject     `json:"triggerType"`
-	UptimeData  *UptimeDataObject `json:"uptimeData,omitempty"`
+	TriggerType Trigger     `json:"triggerType"`
+	UptimeData  *UptimeData `json:"uptimeData,omitempty"`
 
 	// Vin vehicle identification number. See ISO 3779 (17 characters)
 	Vin VinProperty `json:"vin"`
 }
 
-// VehicleStatusResponseObject defines model for VehicleStatusResponseObject.
-type VehicleStatusResponseObject struct {
+// VehicleStatusResponse defines model for VehicleStatusResponse.
+type VehicleStatusResponse struct {
 	// MoreDataAvailable This will be set to true if the result set was too large to be sent back in one reply. A new request must be done to get the rest of the vehicle statuses, where the starttime parameter must be supplied. The starttime should be set to the ReceivedDateTime + 1 second of the last vehicle in the result set of this message.
 	MoreDataAvailable bool `json:"moreDataAvailable"`
 
@@ -1064,7 +1064,7 @@ type VehicleStatusResponseObject struct {
 	// RequestServerDateTime Time in UTC to be used to ask for historical data (for starttime), to solve the problem of having different times at server and clients. This is the time at the server when this request was received. To avoid losing any messages or get duplicates, this is the time that should be supplied in the startTime parameter in the next request in iso8601 format.
 	RequestServerDateTime time.Time `json:"requestServerDateTime"`
 	VehicleStatusResponse struct {
-		VehicleStatuses *[]VehicleStatusObject `json:"vehicleStatuses,omitempty"`
+		VehicleStatuses *[]VehicleStatus `json:"vehicleStatuses,omitempty"`
 	} `json:"vehicleStatusResponse"`
 }
 
@@ -1090,22 +1090,22 @@ type Vin = string
 type XCorrelationID = string
 
 // BadRequest Optional responses for error codes, detailing the error if needed
-type BadRequest = ErrorObject
+type BadRequest = Error
 
 // Forbidden Optional responses for error codes, detailing the error if needed
-type Forbidden = ErrorObject
+type Forbidden = Error
 
 // NotAcceptable Optional responses for error codes, detailing the error if needed
-type NotAcceptable = ErrorObject
+type NotAcceptable = Error
 
 // NotFound Optional responses for error codes, detailing the error if needed
-type NotFound = ErrorObject
+type NotFound = Error
 
 // TooManyRequests Optional responses for error codes, detailing the error if needed
-type TooManyRequests = ErrorObject
+type TooManyRequests = Error
 
 // Unauthorized Optional responses for error codes, detailing the error if needed
-type Unauthorized = ErrorObject
+type Unauthorized = Error
 
 // GetVehiclepositionsParams defines parameters for GetVehiclepositions.
 type GetVehiclepositionsParams struct {

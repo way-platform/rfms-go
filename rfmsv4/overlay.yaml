@@ -6,7 +6,9 @@ info:
 
 actions:
 
-# TriggerType enum
+- target: $.components.securitySchemes
+  remove: true # TODO: Figure out why this is not being removed.
+
 - target: $.components.schemas
   update:
     TriggerType:
@@ -53,7 +55,7 @@ actions:
         - TRAILER_DISCONNECTED
       example: IGNITION_ON
 
-- target: $.components.schemas.TriggerObject.properties
+- target: $.components.schemas.Trigger.properties
   update:
     triggerType:
       $ref: '#/components/schemas/TriggerType'
@@ -81,7 +83,7 @@ actions:
         - NOT_AVAILABLE
       example: ALL_DOORS_DISABLED
 
-- target: $.components.schemas.VehicleStatusObject.properties
+- target: $.components.schemas.VehicleStatus.properties
   update:
     status2OfDoors:
       $ref: '#/components/schemas/Status2OfDoors'
@@ -120,7 +122,7 @@ actions:
         - NOT_AVAILABLE
       example: UNLOCKED
 
-- target: $.components.schemas.VehicleStatusObject.properties.doorStatus.items.properties
+- target: $.components.schemas.VehicleStatus.properties.doorStatus.items.properties
   update:
     DoorEnabledStatus:
       $ref: '#/components/schemas/DoorEnabledStatus'
@@ -150,7 +152,7 @@ actions:
         - NOT_AVAILABLE
       example: CHARGING
 
-- target: $.components.schemas.SnapshotDataObject.properties
+- target: $.components.schemas.SnapshotData.properties
   update:
     batteryPackChargingStatus:
       $ref: '#/components/schemas/BatteryPackChargingStatus'
@@ -175,7 +177,7 @@ actions:
         - NOT_AVAILABLE
       example: ERROR
 
-- target: $.components.schemas.SnapshotDataObject.properties
+- target: $.components.schemas.SnapshotData.properties
   update:
     batteryPackChargingConnectionStatus:
       $ref: '#/components/schemas/BatteryPackChargingConnectionStatus'
@@ -216,7 +218,7 @@ actions:
         - MOTION_SENSOR
       example: DRIVER_CARD
 
-- target: $.components.schemas.DriverIdObject.properties.tachoDriverIdentification.properties
+- target: $.components.schemas.DriverId.properties.tachoDriverIdentification.properties
   update:
     driverAuthenticationEquipment:
       $ref: '#/components/schemas/DriverAuthenticationType'
@@ -299,7 +301,7 @@ actions:
         - OEM_SPECIFIC_TELL_TALE
       example: FUEL_LEVEL
 
-- target: $.components.schemas.TellTaleObject.properties
+- target: $.components.schemas.TellTale.properties
   update:
     tellTale:
       $ref: '#/components/schemas/TellTaleType'
@@ -320,7 +322,7 @@ actions:
         - NOT_AVAILABLE
       example: YELLOW
 
-- target: $.components.schemas.TellTaleObject.properties
+- target: $.components.schemas.TellTale.properties
   update:
     state:
       $ref: '#/components/schemas/TellTaleState'
@@ -343,7 +345,7 @@ actions:
         - UNKNOWN
       example: SEMI_TRAILER
 
-- target: $.components.schemas.SnapshotDataObject.properties.trailers.items.properties
+- target: $.components.schemas.SnapshotData.properties.trailers.items.properties
   update:
     trailerType:
       $ref: '#/components/schemas/TrailerType'
@@ -370,7 +372,7 @@ actions:
         - CHARGING_LEVEL
       example: ERROR
 
-- target: $.components.schemas.TriggerObject.properties.chargingStatusInfo.properties
+- target: $.components.schemas.Trigger.properties.chargingStatusInfo.properties
   update:
     event:
       $ref: '#/components/schemas/ChargingStatusEvent'
@@ -392,7 +394,7 @@ actions:
         - ERROR
       example: ERROR
 
-- target: $.components.schemas.TriggerObject.properties.chargingConnectionStatusInfo.properties
+- target: $.components.schemas.Trigger.properties.chargingConnectionStatusInfo.properties
   update:
     event:
       $ref: '#/components/schemas/ChargingConnectionStatusEvent'
@@ -409,7 +411,7 @@ actions:
         - NOT_AVAILABLE
       example: CHARGING
 
-- target: $.components.schemas.UptimeDataObject.properties.alternatorInfo.properties
+- target: $.components.schemas.UptimeData.properties.alternatorInfo.properties
   update:
     alternatorStatus:
       $ref: '#/components/schemas/AlternatorStatus'
