@@ -19,7 +19,7 @@ type ListVehiclesResponse struct {
 	// Raw response body.
 	Raw json.RawMessage `json:"-"`
 	// Vehicles in the response.
-	Vehicles []json.RawMessage `json:"vehicles,omitempty"`
+	Vehicles []Vehicle `json:"vehicles,omitempty"`
 	// MoreDataAvailable indicates if there is more data available.
 	MoreDataAvailable bool `json:"moreDataAvailable,omitempty"`
 	// MoreDataAvailableLink is the link to the next page of data.
