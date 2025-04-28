@@ -2,17 +2,17 @@ package rfms
 
 // Known rFMS OEMs.
 const (
-	Scania      = "SCANIA"
-	VolvoTrucks = "VOLVO TRUCKS"
+	DAF         = "DAF"
 	Daimler     = "DAIMLER"
+	Irisbus     = "IRISBUS"
 	Iveco       = "IVECO"
-	Daf         = "DAF"
-	Man         = "MAN"
+	IvecoBuses  = "IVECO BUS"
+	MAN         = "MAN"
 	Renault     = "RENAULT TRUCKS"
+	Scania      = "SCANIA"
 	VDL         = "VDL"
 	VolvoBuses  = "VOLVO BUSES"
-	IvecoBuses  = "IVECO BUS"
-	Irisbus     = "IRISBUS"
+	VolvoTrucks = "VOLVO TRUCKS"
 )
 
 // Known rFMS base URLs.
