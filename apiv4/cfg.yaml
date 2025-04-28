@@ -3,3 +3,5 @@ package: apiv4
 output: api.gen.go
 generate:
   models: true
+compatibility:
+  always-prefix-enum-values: true
