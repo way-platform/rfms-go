@@ -225,8 +225,8 @@ type DoorStatus struct {
 // DriverAuthenticationType defines model for DriverAuthenticationType.
 type DriverAuthenticationType string
 
-// DriverId defines model for DriverId.
-type DriverId struct {
+// DriverID defines model for DriverId.
+type DriverID struct {
 	OemDriverIdentification   *OemDriverIdentification   `json:"OemDriverIdentification,omitempty"`
 	TachoDriverIdentification *TachoDriverIdentification `json:"TachoDriverIdentification,omitempty"`
 }
@@ -273,7 +273,7 @@ type LabelClasses struct {
 
 // OemDriverIdentification defines model for OemDriverIdentification.
 type OemDriverIdentification struct {
-	IdType                  *string `json:"IdType,omitempty"`
+	IDType                  *string `json:"IdType,omitempty"`
 	OemDriverIdentification string  `json:"OemDriverIdentification"`
 }
 
@@ -289,7 +289,7 @@ type Snapshot struct {
 	AmbientAirTemperature *float64            `json:"AmbientAirTemperature,omitempty"`
 	CatalystFuelLevel     *float64            `json:"CatalystFuelLevel,omitempty"`
 	Driver1WorkingState   *DriverWorkingState `json:"Driver1WorkingState,omitempty"`
-	Driver2Id             *DriverId           `json:"Driver2Id,omitempty"`
+	Driver2ID             *DriverID           `json:"Driver2Id,omitempty"`
 	Driver2WorkingState   *DriverWorkingState `json:"Driver2WorkingState,omitempty"`
 	EngineSpeed           *float64            `json:"EngineSpeed,omitempty"`
 	FuelLevel1            *float64            `json:"FuelLevel1,omitempty"`
@@ -325,8 +325,8 @@ type TellTaleType string
 // Trigger defines model for Trigger.
 type Trigger struct {
 	Context      string          `json:"Context"`
-	DriverId     *DriverId       `json:"DriverId,omitempty"`
-	PtoId        *string         `json:"PtoId,omitempty"`
+	DriverID     *DriverID       `json:"DriverId,omitempty"`
+	PtoID        *string         `json:"PtoId,omitempty"`
 	TellTaleInfo *[]TellTaleInfo `json:"TellTaleInfo,omitempty"`
 	Trigger      TriggerType     `json:"Trigger"`
 	TriggerInfo  *[]string       `json:"TriggerInfo,omitempty"`
@@ -394,7 +394,7 @@ type VehicleStatus struct {
 	AccumulatedData               *Accumulated    `json:"AccumulatedData,omitempty"`
 	CreatedDateTime               time.Time       `json:"CreatedDateTime"`
 	DoorStatus                    *[]DoorStatus   `json:"DoorStatus,omitempty"`
-	Driver1Id                     *DriverId       `json:"Driver1Id,omitempty"`
+	Driver1ID                     *DriverID       `json:"Driver1Id,omitempty"`
 	EngineTotalFuelUsed           *int64          `json:"EngineTotalFuelUsed,omitempty"`
 	GrossCombinationVehicleWeight *int            `json:"GrossCombinationVehicleWeight,omitempty"`
 	HRTotalVehicleDistance        *int64          `json:"HRTotalVehicleDistance,omitempty"`

@@ -8,3 +8,4 @@ compatibility:
 output-options:
   overlay:
     path: overlay.yaml
+  name-normalizer: ToCamelCaseWithInitialisms
