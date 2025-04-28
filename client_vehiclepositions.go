@@ -7,6 +7,8 @@ import (
 	"io"
 	"net/http"
 	"time"
+
+	"github.com/way-platform/rfms-go/v4/rfmsv4"
 )
 
 type ListVehiclePositionsRequest struct {
@@ -30,7 +32,7 @@ type ListVehiclePositionsResponse struct {
 	// Raw response body.
 	Raw json.RawMessage `json:"-"`
 	// VehiclePositions in the response.
-	VehiclePositions []VehiclePosition `json:"vehiclePositions,omitempty"`
+	VehiclePositions []rfmsv4.VehiclePosition `json:"vehiclePositions,omitempty"`
 	// MoreDataAvailable indicates if there is more data available.
 	MoreDataAvailable bool `json:"moreDataAvailable,omitempty"`
 	// MoreDataAvailableLink is the link to the next page of data.
@@ -90,33 +92,30 @@ func (c *Client) ListVehiclePositions(
 	if err != nil {
 		return nil, fmt.Errorf("read response body: %w", err)
 	}
-	var responseBody struct {
-		VehiclePositionResponse ListVehiclePositionsResponse `json:"vehiclePositionResponse"`
-		MoreDataAvailable       bool                         `json:"moreDataAvailable"`
-		MoreDataAvailableLink   string                       `json:"moreDataAvailableLink,omitempty"`
-		RequestServerDateTime   Time                         `json:"requestServerDateTime"`
-	}
+	var responseBody rfmsv4.VehiclePositionsResponse
 	if err := json.Unmarshal(data, &responseBody); err != nil {
 		return nil, fmt.Errorf("unmarshal response body: %w", err)
 	}
-	var rawPositions struct {
-		VehiclePositionResponse struct {
-			VehiclePositions []json.RawMessage `json:"vehiclePositions"`
-		} `json:"vehiclePositionResponse"`
-	}
-	if err := json.Unmarshal(data, &rawPositions); err != nil {
-		return nil, fmt.Errorf("unmarshal raw vehicle positions: %w", err)
-	}
+	// var rawPositions struct {
+	// 	VehiclePositionResponse struct {
+	// 		VehiclePositions []json.RawMessage `json:"vehiclePositions"`
+	// 	} `json:"vehiclePositionResponse"`
+	// }
+	// if err := json.Unmarshal(data, &rawPositions); err != nil {
+	// 	return nil, fmt.Errorf("unmarshal raw vehicle positions: %w", err)
+	// }
 	// Set raw data and propagate MoreDataAvailable/Link and RequestServerDateTime
-	responseBody.VehiclePositionResponse.Raw = data
-	responseBody.VehiclePositionResponse.MoreDataAvailable = responseBody.MoreDataAvailable
-	responseBody.VehiclePositionResponse.MoreDataAvailableLink = responseBody.MoreDataAvailableLink
-	responseBody.VehiclePositionResponse.RequestServerDateTime = responseBody.RequestServerDateTime
+	// responseBody.VehiclePositionResponse.Raw = data
+	// responseBody.VehiclePositionResponse.MoreDataAvailable = responseBody.MoreDataAvailable
+	// responseBody.VehiclePositionResponse.MoreDataAvailableLink = responseBody.MoreDataAvailableLink
+	// responseBody.VehiclePositionResponse.RequestServerDateTime = responseBody.RequestServerDateTime
 	// Set raw data for individual vehicle positions
-	for i, rawPosition := range rawPositions.VehiclePositionResponse.VehiclePositions {
-		if i < len(responseBody.VehiclePositionResponse.VehiclePositions) {
-			responseBody.VehiclePositionResponse.VehiclePositions[i].Raw = rawPosition
-		}
-	}
-	return &responseBody.VehiclePositionResponse, nil
+	// for i, rawPosition := range rawPositions.VehiclePositionResponse.VehiclePositions {
+	// 	if i < len(responseBody.VehiclePositionResponse.VehiclePositions) {
+	// 		responseBody.VehiclePositionResponse.VehiclePositions[i].Raw = rawPosition
+	// 	}
+	// }
+	return &ListVehiclePositionsResponse{
+		VehiclePositions: *responseBody.VehiclePositionResponse.VehiclePositions,
+	}, nil
 }

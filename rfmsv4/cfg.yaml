@@ -14,3 +14,4 @@ output-options:
   additional-initialisms:
     - VIN
     - OEM
+    - GNSS

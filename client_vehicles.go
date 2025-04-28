@@ -8,7 +8,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/way-platform/rfms-go/v4/rfmsv2"
+	"github.com/way-platform/rfms-go/v4/rfmsv4"
 )
 
 // ListVehiclesRequest is the request for the [Client.ListVehicles] method.
@@ -22,7 +22,7 @@ type ListVehiclesResponse struct {
 	// Raw response body.
 	Raw json.RawMessage `json:"-"`
 	// Vehicles in the response.
-	Vehicles []*rfmsv2.Vehicle `json:"vehicles,omitzero"`
+	Vehicles []rfmsv4.Vehicle `json:"vehicles,omitzero"`
 	// MoreDataAvailable indicates if there is more data available.
 	MoreDataAvailable bool `json:"moreDataAvailable,omitempty"`
 }
@@ -38,8 +38,8 @@ func (c *Client) ListVehicles(ctx context.Context, request *ListVehiclesRequest)
 	if err != nil {
 		return nil, fmt.Errorf("create request: %w", err)
 	}
-	// req.Header.Set("Accept", "application/json; rfms=vehicles.v4.0")
-	req.Header.Set("Accept", "application/vnd.fmsstandard.com.Vehicles.v2.1+json")
+	req.Header.Set("Accept", "application/json; rfms=vehicles.v4.0")
+	// req.Header.Set("Accept", "application/vnd.fmsstandard.com.Vehicles.v2.1+json")
 	q := req.URL.Query()
 	if request != nil && request.LastVIN != "" {
 		q.Set("lastVin", request.LastVIN)
@@ -57,10 +57,7 @@ func (c *Client) ListVehicles(ctx context.Context, request *ListVehiclesRequest)
 	if err != nil {
 		return nil, fmt.Errorf("read response body: %w", err)
 	}
-	var responseBody struct {
-		Vehicles          []*rfmsv2.Vehicle `json:"Vehicle"`
-		MoreDataAvailable bool              `json:"MoreDataAvailable"`
-	}
+	var responseBody rfmsv4.VehiclesResponse
 	log.Println(string(data))
 	if err := json.Unmarshal(data, &responseBody); err != nil {
 		return nil, fmt.Errorf("unmarshal response body: %w", err)
@@ -78,7 +75,7 @@ func (c *Client) ListVehicles(ctx context.Context, request *ListVehiclesRequest)
 	// 	responseBody.VehicleResponse.Vehicles[i].Raw = rawVehicle
 	// }
 	return &ListVehiclesResponse{
-		Vehicles:          responseBody.Vehicles,
+		Vehicles:          *responseBody.VehicleResponse.Vehicles,
 		MoreDataAvailable: responseBody.MoreDataAvailable,
 	}, nil
 }
