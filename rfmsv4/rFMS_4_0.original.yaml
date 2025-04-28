@@ -28,7 +28,7 @@ paths:
           content:
             'application/json; rfms=vehicles.v4.0':
               schema:
-                $ref: '#/components/schemas/VehicleResponse'
+                $ref: '#/components/schemas/VehicleResponseObject'
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -57,20 +57,20 @@ paths:
         If a request is made for data in a period where no data has been received, an empty
         list will be returned.
         The max number of items returned in one call is OEM specific.
-
+        
         It is mandatory to either supply the starttime (for historical requests) or latestOnly
         (for getting the latest data). If none of these parameters are set, a HTTP 400 error
         will be returned indicating that the parameters supplied are invalid.
-
+        
         If latestOnly and starttime and/or stoptime are set, a HTTP 400 error will be returned
         indicating that the parameters supplied are invalid.
-
+        
         If the moreDataAvailable is set to true in the response and the latestOnly was set to
         true in the request then the next request shall state the last received VIN to get the
         full set. The vehicles are always returned in the same order, when using latestOnly.
-        The ordering is OEM specific.
+        The ordering is OEM specific. 
         Otherwise use the last ReceivedDateTime + 1 second of the last vehicle from the last
-        response using it as the starttime parameter in the next request.
+        response using it as the starttime parameter in the next request.      
       parameters:
       - $ref: "#/components/parameters/xCorrelationId"
       - $ref: "#/components/parameters/datetype"
@@ -96,7 +96,27 @@ paths:
           in the Trigger filter chapter in the API documentation.
         required: false
         schema:
-          $ref: '#/components/schemas/TriggerType'
+          type: string
+          enum:
+          - TIMER
+          - TELL_TALE
+          - DRIVER_LOGIN
+          - DRIVER_LOGOUT
+          - IGNITION_ON
+          - IGNITION_OFF
+          - ENGINE_ON
+          - ENGINE_OFF
+          - PTO_ENABLED
+          - PTO_DISABLED
+          - DISTANCE_TRAVELLED
+          - DRIVER_1_WORKING_STATE_CHANGED
+          - DRIVER_2_WORKING_STATE_CHANGED
+          - FUEL_TYPE_CHANGE
+          - PARKING_BRAKE_SWITCH_CHANGE
+          - BATTERY_PACK_CHARGING_STATUS_CHANGE
+          - BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE
+          - TRAILER_CONNECTED
+          - TRAILER_DISCONNECTED
       - $ref: "#/components/parameters/lastVin"
       responses:
         200:
@@ -104,7 +124,7 @@ paths:
           content:
             'application/json; rfms=vehiclepositions.v4.0':
               schema:
-                $ref: '#/components/schemas/VehiclePositionResponse'
+                $ref: '#/components/schemas/VehiclePositionResponseObject'
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -132,14 +152,14 @@ paths:
         If a request is made for data in a period where no data has been received, an empty
         list will be returned.
         The max number of items returned in one call is OEM specific.
-
+        
         It is mandatory to either supply the starttime (for historical requests) or latestOnly
         (for getting the latest data). If neither of these parameters is set, a HTTP 400 error
         will be returned indicating that the parameters supplied are invalid.
-
+        
         If latestOnly and starttime and/or stoptime are set, a HTTP 400 error will be returned
         indicating that the parameters supplied are invalid.
-
+        
         If the moreDataAvailable is set to true in the response and the latestOnly was set to true
         in the request then the next request shall state the last received VIN to get the full set.
         The vehicles are always returned in the same order, when using latestOnly. The ordering is
@@ -186,7 +206,27 @@ paths:
         schema:
           type: array
           items:
-            $ref: '#/components/schemas/TriggerType'
+            type: string
+            enum:
+            - TIMER
+            - TELL_TALE
+            - DRIVER_LOGIN
+            - DRIVER_LOGOUT
+            - IGNITION_ON
+            - IGNITION_OFF
+            - ENGINE_ON
+            - ENGINE_OFF
+            - PTO_ENABLED
+            - PTO_DISABLED
+            - DISTANCE_TRAVELLED
+            - DRIVER_1_WORKING_STATE_CHANGED
+            - DRIVER_2_WORKING_STATE_CHANGED
+            - FUEL_TYPE_CHANGE
+            - PARKING_BRAKE_SWITCH_CHANGE
+            - BATTERY_PACK_CHARGING_STATUS_CHANGE
+            - BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE
+            - TRAILER_CONNECTED
+            - TRAILER_DISCONNECTED
       - name: latestOnly
         in: query
         description: >-
@@ -206,7 +246,7 @@ paths:
           content:
             'application/json; rfms=vehiclestatuses.v4.0':
               schema:
-                $ref: '#/components/schemas/VehicleStatusResponse'
+                $ref: '#/components/schemas/VehicleStatusResponseObject'
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -219,10 +259,10 @@ paths:
           $ref: "#/components/responses/NotAcceptable"
         429:
           $ref: "#/components/responses/TooManyRequests"
-
+          
 components:
   schemas:
-    Error:
+    ErrorObject:
       type: object
       properties:
         error:
@@ -238,7 +278,7 @@ components:
           description: A URI providing more information
           example: https://oem.com/rfms/UnsupportedAcceptParameter.html
       description: Optional responses for error codes, detailing the error if needed
-    VehicleResponse:
+    VehicleResponseObject:
       required:
       - moreDataAvailable
       - vehicleResponse
@@ -250,7 +290,7 @@ components:
             vehicles:
               type: array
               items:
-                $ref: '#/components/schemas/Vehicle'
+                $ref: '#/components/schemas/VehicleObject'
         moreDataAvailable:
           type: boolean
           description: This will be set to true if the result set was too large to
@@ -264,7 +304,7 @@ components:
             moreDataAvailable is true. The link is relative, i.e. starts with /rfms/vehicles,
             and preserves any query parameters from the original request.
           example: /rfms/vehicles?lastVin=ABC12345678901234
-    Vehicle:
+    VehicleObject:
       required:
       - vin
       type: object
@@ -358,7 +398,7 @@ components:
         tachographType:
           type: string
           description: "The type of tachograph in the vehicle.
-            rFMS standard values MTCO, DTCO, TSU, DTCO_G1, DTCO_G2, NONE\n
+            rFMS standard values MTCO, DTCO, TSU, DTCO_G1, DTCO_G2, NONE\n 
             DTCO - Digital tachograph, unknown generation\n
             DTCO_G1 - Digital tachograph generation 1\n
             DTCO_G2 - Digital tachograph generation 2\n
@@ -398,7 +438,7 @@ components:
           - /vehiclepositions
           items:
             type: string
-    VehiclePositionResponse:
+    VehiclePositionResponseObject:
       required:
       - moreDataAvailable
       - requestServerDateTime
@@ -411,7 +451,7 @@ components:
             vehiclePositions:
               type: array
               items:
-                $ref: '#/components/schemas/VehiclePosition'
+                $ref: '#/components/schemas/VehiclePositionObject'
         moreDataAvailable:
           type: boolean
           description: This will be set to true if the result set was too large to
@@ -434,7 +474,7 @@ components:
             should be supplied in the startTime parameter in the next request in iso8601
             format.
           format: date-time
-    VehiclePosition:
+    VehiclePositionObject:
       required:
       - createdDateTime
       - receivedDateTime
@@ -445,13 +485,13 @@ components:
         vin:
           $ref: '#/components/schemas/VinProperty'
         triggerType:
-          $ref: '#/components/schemas/Trigger'
+          $ref: '#/components/schemas/TriggerObject'
         createdDateTime:
           $ref: '#/components/schemas/CreatedDateTimeProperty'
         receivedDateTime:
           $ref: '#/components/schemas/ReceivedDateTimeProperty'
         gnssPosition:
-          $ref: '#/components/schemas/GNSSPosition'
+          $ref: '#/components/schemas/GNSSPositionObject'
         wheelBasedSpeed:
           type: number
           description: Wheel-Based Vehicle Speed in km/h (Speed of the vehicle as
@@ -464,7 +504,7 @@ components:
             by the tachograph)
           format: double
           example: 54.1
-    VehicleStatusResponse:
+    VehicleStatusResponseObject:
       required:
       - moreDataAvailable
       - requestServerDateTime
@@ -477,7 +517,7 @@ components:
             vehicleStatuses:
               type: array
               items:
-                $ref: '#/components/schemas/VehicleStatus'
+                $ref: '#/components/schemas/VehicleStatusObject'
         moreDataAvailable:
           type: boolean
           description: This will be set to true if the result set was too large to
@@ -499,7 +539,7 @@ components:
             losing any messages or get duplicates, this is the time that should be
             supplied in the startTime parameter in the next request in iso8601 format.
           format: date-time
-    VehicleStatus:
+    VehicleStatusObject:
       required:
       - createdDateTime
       - receivedDateTime
@@ -510,7 +550,7 @@ components:
         vin:
           $ref: '#/components/schemas/VinProperty'
         triggerType:
-          $ref: '#/components/schemas/Trigger'
+          $ref: '#/components/schemas/TriggerObject'
         createdDateTime:
           $ref: '#/components/schemas/CreatedDateTimeProperty'
         receivedDateTime:
@@ -535,7 +575,7 @@ components:
           format: double
           example: 987.6
         driver1Id:
-          $ref: '#/components/schemas/DriverId'
+          $ref: '#/components/schemas/DriverIdObject'
         grossCombinationVehicleWeight:
           type: integer
           description: The full vehicle weight in kg
@@ -607,12 +647,12 @@ components:
                 type: integer
                 example: 1
         accumulatedData:
-          $ref: '#/components/schemas/AccumulatedData'
+          $ref: '#/components/schemas/AccumulatedDataObject'
         snapshotData:
-          $ref: '#/components/schemas/SnapshotData'
+          $ref: '#/components/schemas/SnapshotDataObject'
         uptimeData:
-          $ref: '#/components/schemas/UptimeData'
-    AccumulatedData:
+          $ref: '#/components/schemas/UptimeDataObject'
+    AccumulatedDataObject:
       type: object
       properties:
         durationWheelbasedSpeedOverZero:
@@ -716,7 +756,7 @@ components:
             kilograms: 2345
             watthours: 287588
           items:
-            $ref: '#/components/schemas/Label'
+            $ref: '#/components/schemas/LabelObject'
         brakePedalCounterSpeedOverZero:
           type: integer
           description: The total number of times the brake pedal has been used while
@@ -742,7 +782,7 @@ components:
             kilograms: 564743
             watthours: 9897354
           items:
-            $ref: '#/components/schemas/FromToClass'
+            $ref: '#/components/schemas/FromToClassObject'
         brakePedalPositionClass:
           type: array
           description: In percent. Minimum 5 classes [0, 20[ [20, 40[ [40, 60[ [60,
@@ -756,7 +796,7 @@ components:
             kilograms: 564743
             watthours: 9897354
           items:
-            $ref: '#/components/schemas/FromToClass'
+            $ref: '#/components/schemas/FromToClassObject'
         accelerationClass:
           type: array
           description: In m/s2 Minimum 13 classes. ], -1.1] ]-1.1, -0.9] ]-0.9, -0.7]
@@ -771,7 +811,7 @@ components:
             kilograms: 564743
             watthours: 9897354
           items:
-            $ref: '#/components/schemas/FromToClass'
+            $ref: '#/components/schemas/FromToClassObject'
         highAccelerationClass:
           type: array
           description: In m/s2 Minimum 11 classes ], -3.0] ]-3.0, -2.5] ]-2.5, -2.0]
@@ -786,7 +826,7 @@ components:
             kilograms: 564743
             watthours: 9897354
           items:
-            $ref: '#/components/schemas/FromToClass'
+            $ref: '#/components/schemas/FromToClassObject'
         retarderTorqueClass:
           type: array
           description: In percent (how the retarder is used as a positive value).
@@ -800,7 +840,7 @@ components:
             kilograms: 564743
             watthours: 9897354
           items:
-            $ref: '#/components/schemas/FromToClass'
+            $ref: '#/components/schemas/FromToClassObject'
         drivingWithoutTorqueClass:
           type: array
           description: Driving without torque, with gear (clutch is engaged) Labels
@@ -813,7 +853,7 @@ components:
             kilograms: 2345
             watthours: 287588
           items:
-            $ref: '#/components/schemas/Label'
+            $ref: '#/components/schemas/LabelObject'
         engineTorqueClass:
           type: array
           description: In percent based on EEC1 value (Actual Engine-Percent Torque).
@@ -827,7 +867,7 @@ components:
             milliLitres: 678345
             kilograms: 2345
           items:
-            $ref: '#/components/schemas/FromToClassCombustion'
+            $ref: '#/components/schemas/FromToClassObjectCombustion'
         electricMotorTorqueClass:
           type: array
           description: In percent (Actual Engine-Percent Torque). Minimum 10 classes
@@ -840,7 +880,7 @@ components:
             meters: 345678
             watthours: 6778345
           items:
-            $ref: '#/components/schemas/FromToClassElectrical'
+            $ref: '#/components/schemas/FromToClassObjectElectrical'
         engineTorqueAtCurrentSpeedClass:
           type: array
           description: In percent based on EEC2 value (Engine Percent Load At Current
@@ -854,7 +894,7 @@ components:
             milliLitres: 678345
             kilograms: 234545
           items:
-            $ref: '#/components/schemas/FromToClassCombustion'
+            $ref: '#/components/schemas/FromToClassObjectCombustion'
         electricMotorTorqueAtCurrentSpeedClass:
           type: array
           description: In percent (Engine Percent Load At Current Speed). Minimum
@@ -867,7 +907,7 @@ components:
             meters: 345678
             watthours: 6784345
           items:
-            $ref: '#/components/schemas/FromToClassElectrical'
+            $ref: '#/components/schemas/FromToClassObjectElectrical'
         vehicleSpeedClass:
           type: array
           description: In km/h Minimum 40 classes. [0, 4[ [4, 8[ [8, 12[ [12, 16[
@@ -882,7 +922,7 @@ components:
             kilograms: 564743
             watthours: 9897354
           items:
-            $ref: '#/components/schemas/FromToClass'
+            $ref: '#/components/schemas/FromToClassObject'
         engineSpeedClass:
           type: array
           description: "Classes refer to the RPM of the combustion engine. Only mandatory
@@ -899,7 +939,7 @@ components:
             kilograms: 564743
             watthours: 9897354
           items:
-            $ref: '#/components/schemas/FromToClass'
+            $ref: '#/components/schemas/FromToClassObject'
         accelerationDuringBrakeClass:
           type: array
           description: In m/s2 Minimum 13 classes. ], -1.1] ]-1.1, -0.9] ]-0.9, -0.7]
@@ -914,7 +954,7 @@ components:
             kilograms: 564743
             watthours: 9897354
           items:
-            $ref: '#/components/schemas/FromToClass'
+            $ref: '#/components/schemas/FromToClassObject'
         selectedGearClass:
           type: array
           description: The currently selected gear One class per gear. Neutral is
@@ -929,7 +969,7 @@ components:
             kilograms: 5647
             watthours: 98973
           items:
-            $ref: '#/components/schemas/Label'
+            $ref: '#/components/schemas/LabelObject'
         currentGearClass:
           type: array
           description: The currently used gear One class per gear. Neutral is also
@@ -944,7 +984,7 @@ components:
             kilograms: 5647
             watthours: 98973
           items:
-            $ref: '#/components/schemas/Label'
+            $ref: '#/components/schemas/LabelObject'
         chairliftCounter:
           type: integer
           description: The total number of times the chairlift has been outside the
@@ -980,12 +1020,12 @@ components:
             meters: 345678
             watthours: 4353945
           items:
-            $ref: '#/components/schemas/FromToClassElectrical'
-    SnapshotData:
+            $ref: '#/components/schemas/FromToClassObjectElectrical'
+    SnapshotDataObject:
       type: object
       properties:
         gnssPosition:
-          $ref: '#/components/schemas/GNSSPosition'
+          $ref: '#/components/schemas/GNSSPositionObject'
         wheelBasedSpeed:
           type: number
           description: The vehicle wheelbased speed
@@ -1034,7 +1074,7 @@ components:
         driver1WorkingState:
           $ref: '#/components/schemas/DriverWorkingStateProperty'
         driver2Id:
-          $ref: '#/components/schemas/DriverId'
+          $ref: '#/components/schemas/DriverIdObject'
         driver2WorkingState:
           $ref: '#/components/schemas/DriverWorkingStateProperty'
         ambientAirTemperature:
@@ -1219,7 +1259,7 @@ components:
                       description: The static vertical load of a trailer axle in kilograms.
                         The load is sent in the RGE22 message of ISO11992-2.
                       example: 456.5
-    UptimeData:
+    UptimeDataObject:
       required:
       - tellTaleInfo
       type: object
@@ -1228,7 +1268,7 @@ components:
           type: array
           description: List of tell tales with the actual status for each tell tale.
           items:
-            $ref: '#/components/schemas/TellTale'
+            $ref: '#/components/schemas/TellTaleObject'
         serviceDistance:
           type: integer
           description: The distance in meter to the next service
@@ -1307,7 +1347,7 @@ components:
             Used mainly for buses.
           format: int64
           example: 234000
-    Trigger:
+    TriggerObject:
       required:
       - context
       - triggerType
@@ -1326,7 +1366,28 @@ components:
         This is only set if the TriggerType = TELL_TALE"
       properties:
         triggerType:
-          $ref: '#/components/schemas/TriggerType'
+          type: string
+          description: "Trigger types for Context=RFMS:\n
+            TIMER - Data was sent due to a timer trigger. (Timer value set outside rFMS scope)\n
+            IGNITION_ON - Data was sent due to an ignition on\n
+            IGNITION_OFF - Data was sent due to an ignition off\n
+            PTO_ENABLED - Data was sent due to that a PTO was enabled, will be sent for each PTO that gets enabled\n
+            PTO_DISABLED - Data was sent due to that a PTO was disabled, will be sent for each PTO that gets disabled.\n
+            DRIVER_LOGIN - Data was sent due to a successful driver login.\n
+            DRIVER_LOGOUT - Data was sent due to a driver logout\n
+            TELL_TALE - Data was sent due to that at least one tell tale changed state\n
+            ENGINE_ON - Data was sent due to an engine on. For electric motor crank is on\n
+            ENGINE_OFF - Data was sent due to an engine off. For electric motor crank is off\n
+            DRIVER_1_WORKING_STATE_CHANGED - Data was sent due to that driver 1 changed working state\n
+            DRIVER_2_WORKING_STATE_CHANGED - Data was sent due to that driver 2 changed working state\n
+            DISTANCE_TRAVELLED - Data was sent due to that a set distance was travelled. (Distance set outside rFMS scope)\n
+            FUEL_TYPE_CHANGE - Data was sent due to that the type of fuel currently being utilized by the vehicle changed\n
+            PARKING_BRAKE_SWITCH_CHANGE - Data was sent due to that the parking brake state has changed\n
+            BATTERY_PACK_CHARGING_STATUS_CHANGE - Data was sent due to a change in the battery pack charging status.\n
+            BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE - Data was sent due to a change in the battery pack charging connection status.\n
+            TRAILER_CONNECTED - One or several trailers were connected\n
+            TRAILER_DISCONNECTED - One or several trailers were disconnected"
+          example: IGNITION_ON
         context:
           type: string
           description: The context defines if this is part of the standard or OEM
@@ -1343,13 +1404,13 @@ components:
           items:
             type: string
         driverId:
-          $ref: '#/components/schemas/DriverId'
+          $ref: '#/components/schemas/DriverIdObject'
         ptoId:
           type: string
           description: The id of a PTO. This is only set if the TriggerType = PTO_ENABLED
             or PTO_DISABLED
         tellTaleInfo:
-          $ref: '#/components/schemas/TellTale'
+          $ref: '#/components/schemas/TellTaleObject'
         chargingStatusInfo:
           type: object
           properties:
@@ -1400,7 +1461,7 @@ components:
               example: VEHICLE_NOT_IN_POSITION
           description: Additional information can be provided if the trigger type
             is BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE.
-    DriverId:
+    DriverIdObject:
       type: object
       properties:
         tachoDriverIdentification:
@@ -1459,7 +1520,7 @@ components:
               type: string
               description: An OEM specific driver id.
               example: ABC-123-DEF
-    TellTale:
+    TellTaleObject:
       required:
       - state
       - tellTale
@@ -1557,7 +1618,7 @@ components:
           - RESERVED_5
           - RESERVED_6
           - NOT_AVAILABLE
-    GNSSPosition:
+    GNSSPositionObject:
       required:
       - latitude
       - longitude
@@ -1592,7 +1653,7 @@ components:
           type: string
           description: The time of the position data in iso8601 format.
           format: date-time
-    Label:
+    LabelObject:
       type: object
       properties:
         label:
@@ -1612,7 +1673,7 @@ components:
         watthours:
           type: integer
           format: int64
-    FromToClass:
+    FromToClassObject:
       type: object
       properties:
         from:
@@ -1636,7 +1697,7 @@ components:
         watthours:
           type: integer
           format: int64
-    FromToClassCombustion:
+    FromToClassObjectCombustion:
       type: object
       properties:
         from:
@@ -1657,7 +1718,7 @@ components:
         kilograms:
           type: integer
           format: int64
-    FromToClassElectrical:
+    FromToClassObjectElectrical:
       type: object
       properties:
         from:
@@ -1699,52 +1760,9 @@ components:
       - DRIVE
       - ERROR
       - NOT_AVAILABLE
-    TriggerType:
-      type: string
-      description: "Defines the different types of triggers that can cause vehicle data to be reported.\n
-        TIMER - Data was sent due to a timer trigger. (Timer value set outside rFMS scope)\n
-        TELL_TALE - Data was sent due to that at least one tell tale changed state\n
-        DRIVER_LOGIN - Data was sent due to a successful driver login\n
-        DRIVER_LOGOUT - Data was sent due to a driver logout\n
-        IGNITION_ON - Data was sent due to an ignition on\n
-        IGNITION_OFF - Data was sent due to an ignition off\n
-        ENGINE_ON - Data was sent due to an engine on. For electric motor crank is on\n
-        ENGINE_OFF - Data was sent due to an engine off. For electric motor crank is off\n
-        PTO_ENABLED - Data was sent due to that a PTO was enabled, will be sent for each PTO that gets enabled\n
-        PTO_DISABLED - Data was sent due to that a PTO was disabled, will be sent for each PTO that gets disabled\n
-        DISTANCE_TRAVELLED - Data was sent due to that a set distance was travelled. (Distance set outside rFMS scope)\n
-        DRIVER_1_WORKING_STATE_CHANGED - Data was sent due to that driver 1 changed working state\n
-        DRIVER_2_WORKING_STATE_CHANGED - Data was sent due to that driver 2 changed working state\n
-        FUEL_TYPE_CHANGE - Data was sent due to that the type of fuel currently being utilized by the vehicle changed\n
-        PARKING_BRAKE_SWITCH_CHANGE - Data was sent due to that the parking brake state has changed\n
-        BATTERY_PACK_CHARGING_STATUS_CHANGE - Data was sent due to a change in the battery pack charging status\n
-        BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE - Data was sent due to a change in the battery pack charging connection status\n
-        TRAILER_CONNECTED - One or several trailers were connected\n
-        TRAILER_DISCONNECTED - One or several trailers were disconnected"
-      example: IGNITION_ON
-      enum:
-      - TIMER
-      - TELL_TALE
-      - DRIVER_LOGIN
-      - DRIVER_LOGOUT
-      - IGNITION_ON
-      - IGNITION_OFF
-      - ENGINE_ON
-      - ENGINE_OFF
-      - PTO_ENABLED
-      - PTO_DISABLED
-      - DISTANCE_TRAVELLED
-      - DRIVER_1_WORKING_STATE_CHANGED
-      - DRIVER_2_WORKING_STATE_CHANGED
-      - FUEL_TYPE_CHANGE
-      - PARKING_BRAKE_SWITCH_CHANGE
-      - BATTERY_PACK_CHARGING_STATUS_CHANGE
-      - BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE
-      - TRAILER_CONNECTED
-      - TRAILER_DISCONNECTED
   responses:
     BadRequest:
-      description: "The server cannot or will not process the request due to an apparent client error
+      description: "The server cannot or will not process the request due to an apparent client error 
         (e.g., malformed request syntax, invalid request message framing, or deceptive request routing)\n
         Possible reason: Mandatory field missing, e.g. Authentication Header empty or missing\n
         The comments for the 4xx codes are from the Wikipedia article
@@ -1755,11 +1773,11 @@ components:
       content:
         'application/json':
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorObject'
           examples:
             badRequest:
               $ref: '#/components/examples/BadRequest'
-
+              
     Forbidden:
       description: "The request was a valid request, but the server is refusing to respond to it. Unlike
         a 401 Unauthorized response, authenticating will make no difference. On servers where
@@ -1776,7 +1794,7 @@ components:
       content:
         'application/json':
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorObject'
           examples:
             badRequest:
               $ref: '#/components/examples/Forbidden'
@@ -1786,13 +1804,13 @@ components:
       content:
         'application/json':
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorObject'
           examples:
             badRequest:
               $ref: '#/components/examples/NotAcceptable'
-
+            
     NotFound:
-      description: "The requested resource could not be found but may be available again in the future.
+      description: "The requested resource could not be found but may be available again in the future. 
         Subsequent requests by the client are permissible\n
         Possible reason: vehicle unknown and/or rFMS-Version not supported\n
         The comments for the 4xx codes are from the Wikipedia article
@@ -1803,7 +1821,7 @@ components:
       content:
         'application/json':
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorObject'
           examples:
             badRequest:
               $ref: '#/components/examples/NotFound'
@@ -1811,15 +1829,15 @@ components:
     TooManyRequests:
       description: >-
         The user has sent too many requests in a given amount of time. Intended for use with rate limiting schemes
-        Possible reason Request sent too often and/or Max concurrent calls
+        Possible reason Request sent too often and/or Max concurrent calls 
       content:
         'application/json':
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorObject'
           examples:
             badRequest:
               $ref: '#/components/examples/TooManyRequests'
-
+            
     Unauthorized:
       description: "Similar to 403 Forbidden, but specifically for use when authentication is required
         and has failed or has not yet been provided. The response must include a WWW-Authenticate header
@@ -1835,11 +1853,11 @@ components:
       content:
         'application/json':
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorObject'
           examples:
             badRequest:
               $ref: '#/components/examples/Unathorized'
-
+               
   examples:
     BadRequest:
       summary: Bad request example
@@ -1877,7 +1895,7 @@ components:
         error: InvalidAccessToken
         error_description: "The provided access token is not valid"
         error_uri: "https://oem.com/rfms/InvalidAccessToken.html"
-
+            
   parameters:
     xCorrelationId:
       name: X-Correlation-Id
@@ -1942,7 +1960,7 @@ components:
       required: false
       schema:
         type: string
-
+        
   securitySchemes:
     oauth2AuthCode:
       type: oauth2
