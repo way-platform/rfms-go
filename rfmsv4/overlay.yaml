@@ -1,0 +1,415 @@
+overlay: 1.0.0
+
+info:
+  title: Overlay for the rFMS v4.0 API
+  version: 1.0.0
+
+actions:
+
+# TriggerType enum
+- target: $.components.schemas
+  update:
+    TriggerType:
+      type: string
+      description: "Trigger types for Context=RFMS:\n
+        TIMER - Data was sent due to a timer trigger. (Timer value set outside rFMS scope)\n
+        IGNITION_ON - Data was sent due to an ignition on\n
+        IGNITION_OFF - Data was sent due to an ignition off\n
+        PTO_ENABLED - Data was sent due to that a PTO was enabled, will be sent for each PTO that gets enabled\n
+        PTO_DISABLED - Data was sent due to that a PTO was disabled, will be sent for each PTO that gets disabled.\n
+        DRIVER_LOGIN - Data was sent due to a successful driver login.\n
+        DRIVER_LOGOUT - Data was sent due to a driver logout\n
+        TELL_TALE - Data was sent due to that at least one tell tale changed state\n
+        ENGINE_ON - Data was sent due to an engine on. For electric motor crank is on\n
+        ENGINE_OFF - Data was sent due to an engine off. For electric motor crank is off\n
+        DRIVER_1_WORKING_STATE_CHANGED - Data was sent due to that driver 1 changed working state\n
+        DRIVER_2_WORKING_STATE_CHANGED - Data was sent due to that driver 2 changed working state\n
+        DISTANCE_TRAVELLED - Data was sent due to that a set distance was travelled. (Distance set outside rFMS scope)\n
+        FUEL_TYPE_CHANGE - Data was sent due to that the type of fuel currently being utilized by the vehicle changed\n
+        PARKING_BRAKE_SWITCH_CHANGE - Data was sent due to that the parking brake state has changed\n
+        BATTERY_PACK_CHARGING_STATUS_CHANGE - Data was sent due to a change in the battery pack charging status.\n
+        BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE - Data was sent due to a change in the battery pack charging connection status.\n
+        TRAILER_CONNECTED - One or several trailers were connected\n
+        TRAILER_DISCONNECTED - One or several trailers were disconnected"
+      enum:
+        - TIMER
+        - TELL_TALE
+        - DRIVER_LOGIN
+        - DRIVER_LOGOUT
+        - IGNITION_ON
+        - IGNITION_OFF
+        - ENGINE_ON
+        - ENGINE_OFF
+        - PTO_ENABLED
+        - PTO_DISABLED
+        - DISTANCE_TRAVELLED
+        - DRIVER_1_WORKING_STATE_CHANGED
+        - DRIVER_2_WORKING_STATE_CHANGED
+        - FUEL_TYPE_CHANGE
+        - PARKING_BRAKE_SWITCH_CHANGE
+        - BATTERY_PACK_CHARGING_STATUS_CHANGE
+        - BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE
+        - TRAILER_CONNECTED
+        - TRAILER_DISCONNECTED
+      example: IGNITION_ON
+
+- target: $.components.schemas.TriggerObject.properties
+  update:
+    triggerType:
+      $ref: '#/components/schemas/TriggerType'
+
+- target: $.paths./vehiclepositions.get.parameters[6].schema
+  update:
+    type: string
+    $ref: '#/components/schemas/TriggerType'
+
+- target: $.paths./vehiclestatuses.get.parameters[6].schema.items
+  update:
+    type: string
+    $ref: '#/components/schemas/TriggerType'
+
+# Status2OfDoors enum
+- target: $.components.schemas
+  update:
+    Status2OfDoors:
+      type: string
+      description: Composite indication of all bus door statuses. Bus specific parameter
+      enum:
+        - ALL_DOORS_DISABLED
+        - AT_LEAST_ONE_DOOR_ENABLED
+        - ERROR
+        - NOT_AVAILABLE
+      example: ALL_DOORS_DISABLED
+
+- target: $.components.schemas.VehicleStatusObject.properties
+  update:
+    status2OfDoors:
+      $ref: '#/components/schemas/Status2OfDoors'
+
+# Door status enums
+- target: $.components.schemas
+  update:
+    DoorEnabledStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+        - ERROR
+        - NOT_AVAILABLE
+      example: ENABLED
+
+- target: $.components.schemas
+  update:
+    DoorOpenStatus:
+      type: string
+      enum:
+        - CLOSED
+        - OPEN
+        - ERROR
+        - NOT_AVAILABLE
+      example: CLOSED
+
+- target: $.components.schemas
+  update:
+    DoorLockStatus:
+      type: string
+      enum:
+        - UNLOCKED
+        - LOCKED
+        - ERROR
+        - NOT_AVAILABLE
+      example: UNLOCKED
+
+- target: $.components.schemas.VehicleStatusObject.properties.doorStatus.items.properties
+  update:
+    DoorEnabledStatus:
+      $ref: '#/components/schemas/DoorEnabledStatus'
+    DoorOpenStatus:
+      $ref: '#/components/schemas/DoorOpenStatus'
+    DoorLockStatus:
+      $ref: '#/components/schemas/DoorLockStatus'
+
+# Battery charging status enums
+- target: $.components.schemas
+  update:
+    BatteryPackChargingStatus:
+      type: string
+      description: "Indicates the charging status of the battery pack. Recuperation is excluded.\n
+        Not charging - No charging\n
+        Charging - Charging ongoing (AC or DC is unknown)\n
+        Charging AC - AC charging ongoing\n
+        Charging DC - DC charging ongoing\n
+        Error - An error occurred when charging\n
+        Not available - Charging status is not available"
+      enum:
+        - NOT_CHARGING
+        - CHARGING
+        - CHARGING_AC
+        - CHARGING_DC
+        - ERROR
+        - NOT_AVAILABLE
+      example: CHARGING
+
+- target: $.components.schemas.SnapshotDataObject.properties
+  update:
+    batteryPackChargingStatus:
+      $ref: '#/components/schemas/BatteryPackChargingStatus'
+
+- target: $.components.schemas
+  update:
+    BatteryPackChargingConnectionStatus:
+      type: string
+      description: "Indicates the charging connection status of the battery pack.\n
+        Connecting - A charger is being connected\n
+        Connected - A charger is connected\n
+        Disconnecting - A charger is being disconnected\n
+        Disconnected - No charger is connected\n
+        Error - An error occurred when connecting or disconnecting\n
+        Not available - Charging connection status is not available"
+      enum:
+        - CONNECTING
+        - CONNECTED
+        - DISCONNECTING
+        - DISCONNECTED
+        - ERROR
+        - NOT_AVAILABLE
+      example: ERROR
+
+- target: $.components.schemas.SnapshotDataObject.properties
+  update:
+    batteryPackChargingConnectionStatus:
+      $ref: '#/components/schemas/BatteryPackChargingConnectionStatus'
+
+# Driver working state
+- target: $.components.schemas
+  update:
+    DriverWorkingState:
+      type: string
+      description: Tachograph Working state of the driver
+      enum:
+        - REST
+        - DRIVER_AVAILABLE
+        - WORK
+        - DRIVE
+        - ERROR
+        - NOT_AVAILABLE
+      example: DRIVE
+
+- target: $.components.schemas
+  update:
+    DriverWorkingStateProperty:
+      $ref: '#/components/schemas/DriverWorkingState'
+
+# Driver authentication equipment
+- target: $.components.schemas
+  update:
+    DriverAuthenticationType:
+      type: string
+      description: Code to distinguish different types of equipment for the tachograph application. See description of the field 'DriverAuthenticationEquipment' in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
+      enum:
+        - RESERVED
+        - DRIVER_CARD
+        - CONTROL_CARD
+        - COMPANY_CARD
+        - MANUFACTURING_CARD
+        - VEHICLE_UNIT
+        - MOTION_SENSOR
+      example: DRIVER_CARD
+
+- target: $.components.schemas.DriverIdObject.properties.tachoDriverIdentification.properties
+  update:
+    driverAuthenticationEquipment:
+      $ref: '#/components/schemas/DriverAuthenticationType'
+
+# TellTale enums
+- target: $.components.schemas
+  update:
+    TellTaleType:
+      type: string
+      enum:
+        - COOLING_AIR_CONDITIONING
+        - HIGH_BEAM_MAIN_BEAM
+        - LOW_BEAM_DIPPED_BEAM
+        - TURN_SIGNALS
+        - HAZARD_WARNING
+        - PROVISIONING_HANDICAPPED_PERSON
+        - PARKING_BRAKE
+        - BRAKE_MALFUNCTION
+        - HATCH_OPEN
+        - FUEL_LEVEL
+        - ENGINE_COOLANT_TEMPERATURE
+        - BATTERY_CHARGING_CONDITION
+        - ENGINE_OIL
+        - POSITION_LIGHTS
+        - FRONT_FOG_LIGHT
+        - REAR_FOG_LIGHT
+        - PARKING_HEATER
+        - ENGINE_MIL_INDICATOR
+        - SERVICE_CALL_FOR_MAINTENANCE
+        - TRANSMISSION_FLUID_TEMPERATURE
+        - TRANSMISSION_MALFUNCTION
+        - ANTI_LOCK_BRAKE_FAILURE
+        - WORN_BRAKE_LININGS
+        - WINDSCREEN_WASHER_FLUID
+        - TIRE_MALFUNCTION
+        - GENERAL_FAILURE
+        - ENGINE_OIL_TEMPERATURE
+        - ENGINE_OIL_LEVEL
+        - ENGINE_COOLANT_LEVEL
+        - STEERING_FLUID_LEVEL
+        - STEERING_FAILURE
+        - HEIGHT_CONTROL
+        - RETARDER
+        - ENGINE_EMISSION_FAILURE
+        - ESC_INDICATOR
+        - BRAKE_LIGHTS
+        - ARTICULATION
+        - STOP_REQUEST
+        - PRAM_REQUEST
+        - BUS_STOP_BRAKE
+        - ADBLUE_LEVEL
+        - RAISING
+        - LOWERING
+        - KNEELING
+        - ENGINE_COMPARTMENT_TEMPERATURE
+        - AUXILLARY_AIR_PRESSURE
+        - AIR_FILTER_CLOGGED
+        - FUEL_FILTER_DIFF_PRESSURE
+        - SEAT_BELT
+        - EBS
+        - LANE_DEPARTURE_INDICATOR
+        - ADVANCED_EMERGENCY_BREAKING
+        - ACC
+        - TRAILER_CONNECTED
+        - ABS_TRAILER
+        - AIRBAG
+        - EBS_TRAILER_1_2
+        - TACHOGRAPH_INDICATOR
+        - ESC_SWITCHED_OFF
+        - LANE_DEPARTURE_WARNING_SWITCHED_OFF
+        - ENGINE_EMISSION_FILTER_SOOT_FILTER
+        - ELECTRIC_MOTOR_FAILURES
+        - ADBLUE_TAMPERING
+        - MULTIPLEX_SYSTEM
+        - BATTERY_PACK
+        - HIGH_VOLTAGE_SYSTEM_CAUTION
+        - BATTERY_PACK_TEMPERATURE
+        - LIMITED_PERFORMANCE_ELECTRIC_MOTOR
+        - BATTERY_PACK_COOLING
+        - OEM_SPECIFIC_TELL_TALE
+      example: FUEL_LEVEL
+
+- target: $.components.schemas.TellTaleObject.properties
+  update:
+    tellTale:
+      $ref: '#/components/schemas/TellTaleType'
+
+- target: $.components.schemas
+  update:
+    TellTaleState:
+      type: string
+      description: The current state of the tell tale.
+      enum:
+        - RED
+        - YELLOW
+        - INFO
+        - OFF
+        - RESERVED_4
+        - RESERVED_5
+        - RESERVED_6
+        - NOT_AVAILABLE
+      example: YELLOW
+
+- target: $.components.schemas.TellTaleObject.properties
+  update:
+    state:
+      $ref: '#/components/schemas/TellTaleState'
+
+# Trailer type enum
+- target: $.components.schemas
+  update:
+    TrailerType:
+      type: string
+      description: Indicates the type of the trailer. The type is sent in the EBS24 message of ISO 11992-2.
+      enum:
+        - SEMI_TRAILER
+        - CENTRE_AXLE_TRAILER
+        - FULL_TRAILER
+        - CONVERTER_DOLLY
+        - LINK_TRAILER
+        - TOWING_SEMI_TRAILER
+        - TOWING_CENTRE_AXLE_TRAILER
+        - TOWING_FULL_TRAILER
+        - UNKNOWN
+      example: SEMI_TRAILER
+
+- target: $.components.schemas.SnapshotDataObject.properties.trailers.items.properties
+  update:
+    trailerType:
+      $ref: '#/components/schemas/TrailerType'
+
+# Charging status event enums
+- target: $.components.schemas
+  update:
+    ChargingStatusEvent:
+      type: string
+      description: "CHARGING_STARTED - Charging has started\n
+        CHARGING_COMPLETED - Charging is completed\n
+        CHARGING_INTERRUPTED - Charging has been interrupted (no error)\n
+        ERROR - An error occurred when charging\n
+        ESTIMATED_COMPLETION_TIME_CHANGED - The estimated time for completed charging has changed. (Threshold is outside scope of rFMS)\n
+        TIMER - A predefined time has passed since last charge status update. (Frequency is outside the scope of rFMS)\n
+        CHARGING_LEVEL - The charging level has reached a predefined level. (Charging levels are outside the scope of rFMS)"
+      enum:
+        - CHARGING_STARTED
+        - CHARGING_COMPLETED
+        - CHARGING_INTERRUPTED
+        - ERROR
+        - ESTIMATED_COMPLETION_TIME_CHANGED
+        - TIMER
+        - CHARGING_LEVEL
+      example: ERROR
+
+- target: $.components.schemas.TriggerObject.properties.chargingStatusInfo.properties
+  update:
+    event:
+      $ref: '#/components/schemas/ChargingStatusEvent'
+
+- target: $.components.schemas
+  update:
+    ChargingConnectionStatusEvent:
+      type: string
+      description: "CONNECTING - Vehicle is being connected to a charger\n
+        CONNECTED - Vehicle is connected to a charger\n
+        DISCONNECTING - Vehicle is being disconnected from the charger\n
+        DISCONNECTED - Vehicle is not connected to a charger\n
+        ERROR - An error occurred"
+      enum:
+        - CONNECTING
+        - CONNECTED
+        - DISCONNECTING
+        - DISCONNECTED
+        - ERROR
+      example: ERROR
+
+- target: $.components.schemas.TriggerObject.properties.chargingConnectionStatusInfo.properties
+  update:
+    event:
+      $ref: '#/components/schemas/ChargingConnectionStatusEvent'
+
+# Alternator status enum
+- target: $.components.schemas
+  update:
+    AlternatorStatus:
+      type: string
+      enum:
+        - NOT_CHARGING
+        - CHARGING
+        - ERROR
+        - NOT_AVAILABLE
+      example: CHARGING
+
+- target: $.components.schemas.UptimeDataObject.properties.alternatorInfo.properties
+  update:
+    alternatorStatus:
+      $ref: '#/components/schemas/AlternatorStatus'

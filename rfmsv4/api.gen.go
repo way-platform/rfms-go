@@ -12,204 +12,227 @@ const (
 	Oauth2ClientCredentialScopes = "oauth2ClientCredential.Scopes"
 )
 
-// Defines values for DriverIdObjectTachoDriverIdentificationDriverAuthenticationEquipment.
+// Defines values for AlternatorStatus.
 const (
-	DriverIdObjectTachoDriverIdentificationDriverAuthenticationEquipmentCOMPANYCARD       DriverIdObjectTachoDriverIdentificationDriverAuthenticationEquipment = "COMPANY_CARD"
-	DriverIdObjectTachoDriverIdentificationDriverAuthenticationEquipmentCONTROLCARD       DriverIdObjectTachoDriverIdentificationDriverAuthenticationEquipment = "CONTROL_CARD"
-	DriverIdObjectTachoDriverIdentificationDriverAuthenticationEquipmentDRIVERCARD        DriverIdObjectTachoDriverIdentificationDriverAuthenticationEquipment = "DRIVER_CARD"
-	DriverIdObjectTachoDriverIdentificationDriverAuthenticationEquipmentMANUFACTURINGCARD DriverIdObjectTachoDriverIdentificationDriverAuthenticationEquipment = "MANUFACTURING_CARD"
-	DriverIdObjectTachoDriverIdentificationDriverAuthenticationEquipmentMOTIONSENSOR      DriverIdObjectTachoDriverIdentificationDriverAuthenticationEquipment = "MOTION_SENSOR"
-	DriverIdObjectTachoDriverIdentificationDriverAuthenticationEquipmentRESERVED          DriverIdObjectTachoDriverIdentificationDriverAuthenticationEquipment = "RESERVED"
-	DriverIdObjectTachoDriverIdentificationDriverAuthenticationEquipmentVEHICLEUNIT       DriverIdObjectTachoDriverIdentificationDriverAuthenticationEquipment = "VEHICLE_UNIT"
+	AlternatorStatusCHARGING     AlternatorStatus = "CHARGING"
+	AlternatorStatusERROR        AlternatorStatus = "ERROR"
+	AlternatorStatusNOTAVAILABLE AlternatorStatus = "NOT_AVAILABLE"
+	AlternatorStatusNOTCHARGING  AlternatorStatus = "NOT_CHARGING"
 )
 
-// Defines values for DriverWorkingStateProperty.
+// Defines values for BatteryPackChargingConnectionStatus.
 const (
-	DriverWorkingStatePropertyDRIVE           DriverWorkingStateProperty = "DRIVE"
-	DriverWorkingStatePropertyDRIVERAVAILABLE DriverWorkingStateProperty = "DRIVER_AVAILABLE"
-	DriverWorkingStatePropertyERROR           DriverWorkingStateProperty = "ERROR"
-	DriverWorkingStatePropertyNOTAVAILABLE    DriverWorkingStateProperty = "NOT_AVAILABLE"
-	DriverWorkingStatePropertyREST            DriverWorkingStateProperty = "REST"
-	DriverWorkingStatePropertyWORK            DriverWorkingStateProperty = "WORK"
+	BatteryPackChargingConnectionStatusCONNECTED     BatteryPackChargingConnectionStatus = "CONNECTED"
+	BatteryPackChargingConnectionStatusCONNECTING    BatteryPackChargingConnectionStatus = "CONNECTING"
+	BatteryPackChargingConnectionStatusDISCONNECTED  BatteryPackChargingConnectionStatus = "DISCONNECTED"
+	BatteryPackChargingConnectionStatusDISCONNECTING BatteryPackChargingConnectionStatus = "DISCONNECTING"
+	BatteryPackChargingConnectionStatusERROR         BatteryPackChargingConnectionStatus = "ERROR"
+	BatteryPackChargingConnectionStatusNOTAVAILABLE  BatteryPackChargingConnectionStatus = "NOT_AVAILABLE"
 )
 
-// Defines values for SnapshotDataObjectBatteryPackChargingConnectionStatus.
+// Defines values for BatteryPackChargingStatus.
 const (
-	SnapshotDataObjectBatteryPackChargingConnectionStatusCONNECTED     SnapshotDataObjectBatteryPackChargingConnectionStatus = "CONNECTED"
-	SnapshotDataObjectBatteryPackChargingConnectionStatusCONNECTING    SnapshotDataObjectBatteryPackChargingConnectionStatus = "CONNECTING"
-	SnapshotDataObjectBatteryPackChargingConnectionStatusDISCONNECTED  SnapshotDataObjectBatteryPackChargingConnectionStatus = "DISCONNECTED"
-	SnapshotDataObjectBatteryPackChargingConnectionStatusDISCONNECTING SnapshotDataObjectBatteryPackChargingConnectionStatus = "DISCONNECTING"
-	SnapshotDataObjectBatteryPackChargingConnectionStatusERROR         SnapshotDataObjectBatteryPackChargingConnectionStatus = "ERROR"
-	SnapshotDataObjectBatteryPackChargingConnectionStatusNOTAVAILABLE  SnapshotDataObjectBatteryPackChargingConnectionStatus = "NOT_AVAILABLE"
+	BatteryPackChargingStatusCHARGING     BatteryPackChargingStatus = "CHARGING"
+	BatteryPackChargingStatusCHARGINGAC   BatteryPackChargingStatus = "CHARGING_AC"
+	BatteryPackChargingStatusCHARGINGDC   BatteryPackChargingStatus = "CHARGING_DC"
+	BatteryPackChargingStatusERROR        BatteryPackChargingStatus = "ERROR"
+	BatteryPackChargingStatusNOTAVAILABLE BatteryPackChargingStatus = "NOT_AVAILABLE"
+	BatteryPackChargingStatusNOTCHARGING  BatteryPackChargingStatus = "NOT_CHARGING"
 )
 
-// Defines values for SnapshotDataObjectBatteryPackChargingStatus.
+// Defines values for ChargingConnectionStatusEvent.
 const (
-	SnapshotDataObjectBatteryPackChargingStatusCHARGING     SnapshotDataObjectBatteryPackChargingStatus = "CHARGING"
-	SnapshotDataObjectBatteryPackChargingStatusCHARGINGAC   SnapshotDataObjectBatteryPackChargingStatus = "CHARGING_AC"
-	SnapshotDataObjectBatteryPackChargingStatusCHARGINGDC   SnapshotDataObjectBatteryPackChargingStatus = "CHARGING_DC"
-	SnapshotDataObjectBatteryPackChargingStatusERROR        SnapshotDataObjectBatteryPackChargingStatus = "ERROR"
-	SnapshotDataObjectBatteryPackChargingStatusNOTAVAILABLE SnapshotDataObjectBatteryPackChargingStatus = "NOT_AVAILABLE"
-	SnapshotDataObjectBatteryPackChargingStatusNOTCHARGING  SnapshotDataObjectBatteryPackChargingStatus = "NOT_CHARGING"
+	ChargingConnectionStatusEventCONNECTED     ChargingConnectionStatusEvent = "CONNECTED"
+	ChargingConnectionStatusEventCONNECTING    ChargingConnectionStatusEvent = "CONNECTING"
+	ChargingConnectionStatusEventDISCONNECTED  ChargingConnectionStatusEvent = "DISCONNECTED"
+	ChargingConnectionStatusEventDISCONNECTING ChargingConnectionStatusEvent = "DISCONNECTING"
+	ChargingConnectionStatusEventERROR         ChargingConnectionStatusEvent = "ERROR"
 )
 
-// Defines values for SnapshotDataObjectTrailersTrailerType.
+// Defines values for ChargingStatusEvent.
 const (
-	SnapshotDataObjectTrailersTrailerTypeCENTREAXLETRAILER       SnapshotDataObjectTrailersTrailerType = "CENTRE_AXLE_TRAILER"
-	SnapshotDataObjectTrailersTrailerTypeCONVERTERDOLLY          SnapshotDataObjectTrailersTrailerType = "CONVERTER_DOLLY"
-	SnapshotDataObjectTrailersTrailerTypeFULLTRAILER             SnapshotDataObjectTrailersTrailerType = "FULL_TRAILER"
-	SnapshotDataObjectTrailersTrailerTypeLINKTRAILER             SnapshotDataObjectTrailersTrailerType = "LINK_TRAILER"
-	SnapshotDataObjectTrailersTrailerTypeSEMITRAILER             SnapshotDataObjectTrailersTrailerType = "SEMI_TRAILER"
-	SnapshotDataObjectTrailersTrailerTypeTOWINGCENTREAXLETRAILER SnapshotDataObjectTrailersTrailerType = "TOWING_CENTRE_AXLE_TRAILER"
-	SnapshotDataObjectTrailersTrailerTypeTOWINGFULLTRAILER       SnapshotDataObjectTrailersTrailerType = "TOWING_FULL_TRAILER"
-	SnapshotDataObjectTrailersTrailerTypeTOWINGSEMITRAILER       SnapshotDataObjectTrailersTrailerType = "TOWING_SEMI_TRAILER"
-	SnapshotDataObjectTrailersTrailerTypeUNKNOWN                 SnapshotDataObjectTrailersTrailerType = "UNKNOWN"
+	ChargingStatusEventCHARGINGCOMPLETED              ChargingStatusEvent = "CHARGING_COMPLETED"
+	ChargingStatusEventCHARGINGINTERRUPTED            ChargingStatusEvent = "CHARGING_INTERRUPTED"
+	ChargingStatusEventCHARGINGLEVEL                  ChargingStatusEvent = "CHARGING_LEVEL"
+	ChargingStatusEventCHARGINGSTARTED                ChargingStatusEvent = "CHARGING_STARTED"
+	ChargingStatusEventERROR                          ChargingStatusEvent = "ERROR"
+	ChargingStatusEventESTIMATEDCOMPLETIONTIMECHANGED ChargingStatusEvent = "ESTIMATED_COMPLETION_TIME_CHANGED"
+	ChargingStatusEventTIMER                          ChargingStatusEvent = "TIMER"
 )
 
-// Defines values for TellTaleObjectState.
+// Defines values for DoorEnabledStatus.
 const (
-	TellTaleObjectStateINFO         TellTaleObjectState = "INFO"
-	TellTaleObjectStateNOTAVAILABLE TellTaleObjectState = "NOT_AVAILABLE"
-	TellTaleObjectStateOFF          TellTaleObjectState = "OFF"
-	TellTaleObjectStateRED          TellTaleObjectState = "RED"
-	TellTaleObjectStateRESERVED4    TellTaleObjectState = "RESERVED_4"
-	TellTaleObjectStateRESERVED5    TellTaleObjectState = "RESERVED_5"
-	TellTaleObjectStateRESERVED6    TellTaleObjectState = "RESERVED_6"
-	TellTaleObjectStateYELLOW       TellTaleObjectState = "YELLOW"
+	DoorEnabledStatusDISABLED     DoorEnabledStatus = "DISABLED"
+	DoorEnabledStatusENABLED      DoorEnabledStatus = "ENABLED"
+	DoorEnabledStatusERROR        DoorEnabledStatus = "ERROR"
+	DoorEnabledStatusNOTAVAILABLE DoorEnabledStatus = "NOT_AVAILABLE"
 )
 
-// Defines values for TellTaleObjectTellTale.
+// Defines values for DoorLockStatus.
 const (
-	TellTaleObjectTellTaleABSTRAILER                      TellTaleObjectTellTale = "ABS_TRAILER"
-	TellTaleObjectTellTaleACC                             TellTaleObjectTellTale = "ACC"
-	TellTaleObjectTellTaleADBLUELEVEL                     TellTaleObjectTellTale = "ADBLUE_LEVEL"
-	TellTaleObjectTellTaleADBLUETAMPERING                 TellTaleObjectTellTale = "ADBLUE_TAMPERING"
-	TellTaleObjectTellTaleADVANCEDEMERGENCYBREAKING       TellTaleObjectTellTale = "ADVANCED_EMERGENCY_BREAKING"
-	TellTaleObjectTellTaleAIRBAG                          TellTaleObjectTellTale = "AIRBAG"
-	TellTaleObjectTellTaleAIRFILTERCLOGGED                TellTaleObjectTellTale = "AIR_FILTER_CLOGGED"
-	TellTaleObjectTellTaleANTILOCKBRAKEFAILURE            TellTaleObjectTellTale = "ANTI_LOCK_BRAKE_FAILURE"
-	TellTaleObjectTellTaleARTICULATION                    TellTaleObjectTellTale = "ARTICULATION"
-	TellTaleObjectTellTaleAUXILLARYAIRPRESSURE            TellTaleObjectTellTale = "AUXILLARY_AIR_PRESSURE"
-	TellTaleObjectTellTaleBATTERYCHARGINGCONDITION        TellTaleObjectTellTale = "BATTERY_CHARGING_CONDITION"
-	TellTaleObjectTellTaleBATTERYPACK                     TellTaleObjectTellTale = "BATTERY_PACK"
-	TellTaleObjectTellTaleBATTERYPACKCOOLING              TellTaleObjectTellTale = "BATTERY_PACK_COOLING"
-	TellTaleObjectTellTaleBATTERYPACKTEMPERATURE          TellTaleObjectTellTale = "BATTERY_PACK_TEMPERATURE"
-	TellTaleObjectTellTaleBRAKELIGHTS                     TellTaleObjectTellTale = "BRAKE_LIGHTS"
-	TellTaleObjectTellTaleBRAKEMALFUNCTION                TellTaleObjectTellTale = "BRAKE_MALFUNCTION"
-	TellTaleObjectTellTaleBUSSTOPBRAKE                    TellTaleObjectTellTale = "BUS_STOP_BRAKE"
-	TellTaleObjectTellTaleCOOLINGAIRCONDITIONING          TellTaleObjectTellTale = "COOLING_AIR_CONDITIONING"
-	TellTaleObjectTellTaleEBS                             TellTaleObjectTellTale = "EBS"
-	TellTaleObjectTellTaleEBSTRAILER12                    TellTaleObjectTellTale = "EBS_TRAILER_1_2"
-	TellTaleObjectTellTaleELECTRICMOTORFAILURES           TellTaleObjectTellTale = "ELECTRIC_MOTOR_FAILURES"
-	TellTaleObjectTellTaleENGINECOMPARTMENTTEMPERATURE    TellTaleObjectTellTale = "ENGINE_COMPARTMENT_TEMPERATURE"
-	TellTaleObjectTellTaleENGINECOOLANTLEVEL              TellTaleObjectTellTale = "ENGINE_COOLANT_LEVEL"
-	TellTaleObjectTellTaleENGINECOOLANTTEMPERATURE        TellTaleObjectTellTale = "ENGINE_COOLANT_TEMPERATURE"
-	TellTaleObjectTellTaleENGINEEMISSIONFAILURE           TellTaleObjectTellTale = "ENGINE_EMISSION_FAILURE"
-	TellTaleObjectTellTaleENGINEEMISSIONFILTERSOOTFILTER  TellTaleObjectTellTale = "ENGINE_EMISSION_FILTER_SOOT_FILTER"
-	TellTaleObjectTellTaleENGINEMILINDICATOR              TellTaleObjectTellTale = "ENGINE_MIL_INDICATOR"
-	TellTaleObjectTellTaleENGINEOIL                       TellTaleObjectTellTale = "ENGINE_OIL"
-	TellTaleObjectTellTaleENGINEOILLEVEL                  TellTaleObjectTellTale = "ENGINE_OIL_LEVEL"
-	TellTaleObjectTellTaleENGINEOILTEMPERATURE            TellTaleObjectTellTale = "ENGINE_OIL_TEMPERATURE"
-	TellTaleObjectTellTaleESCINDICATOR                    TellTaleObjectTellTale = "ESC_INDICATOR"
-	TellTaleObjectTellTaleESCSWITCHEDOFF                  TellTaleObjectTellTale = "ESC_SWITCHED_OFF"
-	TellTaleObjectTellTaleFRONTFOGLIGHT                   TellTaleObjectTellTale = "FRONT_FOG_LIGHT"
-	TellTaleObjectTellTaleFUELFILTERDIFFPRESSURE          TellTaleObjectTellTale = "FUEL_FILTER_DIFF_PRESSURE"
-	TellTaleObjectTellTaleFUELLEVEL                       TellTaleObjectTellTale = "FUEL_LEVEL"
-	TellTaleObjectTellTaleGENERALFAILURE                  TellTaleObjectTellTale = "GENERAL_FAILURE"
-	TellTaleObjectTellTaleHATCHOPEN                       TellTaleObjectTellTale = "HATCH_OPEN"
-	TellTaleObjectTellTaleHAZARDWARNING                   TellTaleObjectTellTale = "HAZARD_WARNING"
-	TellTaleObjectTellTaleHEIGHTCONTROL                   TellTaleObjectTellTale = "HEIGHT_CONTROL"
-	TellTaleObjectTellTaleHIGHBEAMMAINBEAM                TellTaleObjectTellTale = "HIGH_BEAM_MAIN_BEAM"
-	TellTaleObjectTellTaleHIGHVOLTAGESYSTEMCAUTION        TellTaleObjectTellTale = "HIGH_VOLTAGE_SYSTEM_CAUTION"
-	TellTaleObjectTellTaleKNEELING                        TellTaleObjectTellTale = "KNEELING"
-	TellTaleObjectTellTaleLANEDEPARTUREINDICATOR          TellTaleObjectTellTale = "LANE_DEPARTURE_INDICATOR"
-	TellTaleObjectTellTaleLANEDEPARTUREWARNINGSWITCHEDOFF TellTaleObjectTellTale = "LANE_DEPARTURE_WARNING_SWITCHED_OFF"
-	TellTaleObjectTellTaleLIMITEDPERFORMANCEELECTRICMOTOR TellTaleObjectTellTale = "LIMITED_PERFORMANCE_ELECTRIC_MOTOR"
-	TellTaleObjectTellTaleLOWBEAMDIPPEDBEAM               TellTaleObjectTellTale = "LOW_BEAM_DIPPED_BEAM"
-	TellTaleObjectTellTaleLOWERING                        TellTaleObjectTellTale = "LOWERING"
-	TellTaleObjectTellTaleMULTIPLEXSYSTEM                 TellTaleObjectTellTale = "MULTIPLEX_SYSTEM"
-	TellTaleObjectTellTaleOEMSPECIFICTELLTALE             TellTaleObjectTellTale = "OEM_SPECIFIC_TELL_TALE"
-	TellTaleObjectTellTalePARKINGBRAKE                    TellTaleObjectTellTale = "PARKING_BRAKE"
-	TellTaleObjectTellTalePARKINGHEATER                   TellTaleObjectTellTale = "PARKING_HEATER"
-	TellTaleObjectTellTalePOSITIONLIGHTS                  TellTaleObjectTellTale = "POSITION_LIGHTS"
-	TellTaleObjectTellTalePRAMREQUEST                     TellTaleObjectTellTale = "PRAM_REQUEST"
-	TellTaleObjectTellTalePROVISIONINGHANDICAPPEDPERSON   TellTaleObjectTellTale = "PROVISIONING_HANDICAPPED_PERSON"
-	TellTaleObjectTellTaleRAISING                         TellTaleObjectTellTale = "RAISING"
-	TellTaleObjectTellTaleREARFOGLIGHT                    TellTaleObjectTellTale = "REAR_FOG_LIGHT"
-	TellTaleObjectTellTaleRETARDER                        TellTaleObjectTellTale = "RETARDER"
-	TellTaleObjectTellTaleSEATBELT                        TellTaleObjectTellTale = "SEAT_BELT"
-	TellTaleObjectTellTaleSERVICECALLFORMAINTENANCE       TellTaleObjectTellTale = "SERVICE_CALL_FOR_MAINTENANCE"
-	TellTaleObjectTellTaleSTEERINGFAILURE                 TellTaleObjectTellTale = "STEERING_FAILURE"
-	TellTaleObjectTellTaleSTEERINGFLUIDLEVEL              TellTaleObjectTellTale = "STEERING_FLUID_LEVEL"
-	TellTaleObjectTellTaleSTOPREQUEST                     TellTaleObjectTellTale = "STOP_REQUEST"
-	TellTaleObjectTellTaleTACHOGRAPHINDICATOR             TellTaleObjectTellTale = "TACHOGRAPH_INDICATOR"
-	TellTaleObjectTellTaleTIREMALFUNCTION                 TellTaleObjectTellTale = "TIRE_MALFUNCTION"
-	TellTaleObjectTellTaleTRAILERCONNECTED                TellTaleObjectTellTale = "TRAILER_CONNECTED"
-	TellTaleObjectTellTaleTRANSMISSIONFLUIDTEMPERATURE    TellTaleObjectTellTale = "TRANSMISSION_FLUID_TEMPERATURE"
-	TellTaleObjectTellTaleTRANSMISSIONMALFUNCTION         TellTaleObjectTellTale = "TRANSMISSION_MALFUNCTION"
-	TellTaleObjectTellTaleTURNSIGNALS                     TellTaleObjectTellTale = "TURN_SIGNALS"
-	TellTaleObjectTellTaleWINDSCREENWASHERFLUID           TellTaleObjectTellTale = "WINDSCREEN_WASHER_FLUID"
-	TellTaleObjectTellTaleWORNBRAKELININGS                TellTaleObjectTellTale = "WORN_BRAKE_LININGS"
+	DoorLockStatusERROR        DoorLockStatus = "ERROR"
+	DoorLockStatusLOCKED       DoorLockStatus = "LOCKED"
+	DoorLockStatusNOTAVAILABLE DoorLockStatus = "NOT_AVAILABLE"
+	DoorLockStatusUNLOCKED     DoorLockStatus = "UNLOCKED"
 )
 
-// Defines values for TriggerObjectChargingConnectionStatusInfoEvent.
+// Defines values for DoorOpenStatus.
 const (
-	TriggerObjectChargingConnectionStatusInfoEventCONNECTED     TriggerObjectChargingConnectionStatusInfoEvent = "CONNECTED"
-	TriggerObjectChargingConnectionStatusInfoEventCONNECTING    TriggerObjectChargingConnectionStatusInfoEvent = "CONNECTING"
-	TriggerObjectChargingConnectionStatusInfoEventDISCONNECTED  TriggerObjectChargingConnectionStatusInfoEvent = "DISCONNECTED"
-	TriggerObjectChargingConnectionStatusInfoEventDISCONNECTING TriggerObjectChargingConnectionStatusInfoEvent = "DISCONNECTING"
-	TriggerObjectChargingConnectionStatusInfoEventERROR         TriggerObjectChargingConnectionStatusInfoEvent = "ERROR"
+	DoorOpenStatusCLOSED       DoorOpenStatus = "CLOSED"
+	DoorOpenStatusERROR        DoorOpenStatus = "ERROR"
+	DoorOpenStatusNOTAVAILABLE DoorOpenStatus = "NOT_AVAILABLE"
+	DoorOpenStatusOPEN         DoorOpenStatus = "OPEN"
 )
 
-// Defines values for TriggerObjectChargingStatusInfoEvent.
+// Defines values for DriverAuthenticationType.
 const (
-	TriggerObjectChargingStatusInfoEventCHARGINGCOMPLETED              TriggerObjectChargingStatusInfoEvent = "CHARGING_COMPLETED"
-	TriggerObjectChargingStatusInfoEventCHARGINGINTERRUPTED            TriggerObjectChargingStatusInfoEvent = "CHARGING_INTERRUPTED"
-	TriggerObjectChargingStatusInfoEventCHARGINGLEVEL                  TriggerObjectChargingStatusInfoEvent = "CHARGING_LEVEL"
-	TriggerObjectChargingStatusInfoEventCHARGINGSTARTED                TriggerObjectChargingStatusInfoEvent = "CHARGING_STARTED"
-	TriggerObjectChargingStatusInfoEventERROR                          TriggerObjectChargingStatusInfoEvent = "ERROR"
-	TriggerObjectChargingStatusInfoEventESTIMATEDCOMPLETIONTIMECHANGED TriggerObjectChargingStatusInfoEvent = "ESTIMATED_COMPLETION_TIME_CHANGED"
-	TriggerObjectChargingStatusInfoEventTIMER                          TriggerObjectChargingStatusInfoEvent = "TIMER"
+	DriverAuthenticationTypeCOMPANYCARD       DriverAuthenticationType = "COMPANY_CARD"
+	DriverAuthenticationTypeCONTROLCARD       DriverAuthenticationType = "CONTROL_CARD"
+	DriverAuthenticationTypeDRIVERCARD        DriverAuthenticationType = "DRIVER_CARD"
+	DriverAuthenticationTypeMANUFACTURINGCARD DriverAuthenticationType = "MANUFACTURING_CARD"
+	DriverAuthenticationTypeMOTIONSENSOR      DriverAuthenticationType = "MOTION_SENSOR"
+	DriverAuthenticationTypeRESERVED          DriverAuthenticationType = "RESERVED"
+	DriverAuthenticationTypeVEHICLEUNIT       DriverAuthenticationType = "VEHICLE_UNIT"
 )
 
-// Defines values for UptimeDataObjectAlternatorInfoAlternatorStatus.
+// Defines values for DriverWorkingState.
 const (
-	UptimeDataObjectAlternatorInfoAlternatorStatusCHARGING     UptimeDataObjectAlternatorInfoAlternatorStatus = "CHARGING"
-	UptimeDataObjectAlternatorInfoAlternatorStatusERROR        UptimeDataObjectAlternatorInfoAlternatorStatus = "ERROR"
-	UptimeDataObjectAlternatorInfoAlternatorStatusNOTAVAILABLE UptimeDataObjectAlternatorInfoAlternatorStatus = "NOT_AVAILABLE"
-	UptimeDataObjectAlternatorInfoAlternatorStatusNOTCHARGING  UptimeDataObjectAlternatorInfoAlternatorStatus = "NOT_CHARGING"
+	DriverWorkingStateDRIVE           DriverWorkingState = "DRIVE"
+	DriverWorkingStateDRIVERAVAILABLE DriverWorkingState = "DRIVER_AVAILABLE"
+	DriverWorkingStateERROR           DriverWorkingState = "ERROR"
+	DriverWorkingStateNOTAVAILABLE    DriverWorkingState = "NOT_AVAILABLE"
+	DriverWorkingStateREST            DriverWorkingState = "REST"
+	DriverWorkingStateWORK            DriverWorkingState = "WORK"
 )
 
-// Defines values for VehicleStatusObjectDoorStatusDoorEnabledStatus.
+// Defines values for Status2OfDoors.
 const (
-	VehicleStatusObjectDoorStatusDoorEnabledStatusDISABLED     VehicleStatusObjectDoorStatusDoorEnabledStatus = "DISABLED"
-	VehicleStatusObjectDoorStatusDoorEnabledStatusENABLED      VehicleStatusObjectDoorStatusDoorEnabledStatus = "ENABLED"
-	VehicleStatusObjectDoorStatusDoorEnabledStatusERROR        VehicleStatusObjectDoorStatusDoorEnabledStatus = "ERROR"
-	VehicleStatusObjectDoorStatusDoorEnabledStatusNOTAVAILABLE VehicleStatusObjectDoorStatusDoorEnabledStatus = "NOT_AVAILABLE"
+	Status2OfDoorsALLDOORSDISABLED      Status2OfDoors = "ALL_DOORS_DISABLED"
+	Status2OfDoorsATLEASTONEDOORENABLED Status2OfDoors = "AT_LEAST_ONE_DOOR_ENABLED"
+	Status2OfDoorsERROR                 Status2OfDoors = "ERROR"
+	Status2OfDoorsNOTAVAILABLE          Status2OfDoors = "NOT_AVAILABLE"
 )
 
-// Defines values for VehicleStatusObjectDoorStatusDoorLockStatus.
+// Defines values for TellTaleState.
 const (
-	VehicleStatusObjectDoorStatusDoorLockStatusERROR        VehicleStatusObjectDoorStatusDoorLockStatus = "ERROR"
-	VehicleStatusObjectDoorStatusDoorLockStatusLOCKED       VehicleStatusObjectDoorStatusDoorLockStatus = "LOCKED"
-	VehicleStatusObjectDoorStatusDoorLockStatusNOTAVAILABLE VehicleStatusObjectDoorStatusDoorLockStatus = "NOT_AVAILABLE"
-	VehicleStatusObjectDoorStatusDoorLockStatusUNLOCKED     VehicleStatusObjectDoorStatusDoorLockStatus = "UNLOCKED"
+	TellTaleStateINFO         TellTaleState = "INFO"
+	TellTaleStateNOTAVAILABLE TellTaleState = "NOT_AVAILABLE"
+	TellTaleStateOFF          TellTaleState = "OFF"
+	TellTaleStateRED          TellTaleState = "RED"
+	TellTaleStateRESERVED4    TellTaleState = "RESERVED_4"
+	TellTaleStateRESERVED5    TellTaleState = "RESERVED_5"
+	TellTaleStateRESERVED6    TellTaleState = "RESERVED_6"
+	TellTaleStateYELLOW       TellTaleState = "YELLOW"
 )
 
-// Defines values for VehicleStatusObjectDoorStatusDoorOpenStatus.
+// Defines values for TellTaleType.
 const (
-	VehicleStatusObjectDoorStatusDoorOpenStatusCLOSED       VehicleStatusObjectDoorStatusDoorOpenStatus = "CLOSED"
-	VehicleStatusObjectDoorStatusDoorOpenStatusERROR        VehicleStatusObjectDoorStatusDoorOpenStatus = "ERROR"
-	VehicleStatusObjectDoorStatusDoorOpenStatusNOTAVAILABLE VehicleStatusObjectDoorStatusDoorOpenStatus = "NOT_AVAILABLE"
-	VehicleStatusObjectDoorStatusDoorOpenStatusOPEN         VehicleStatusObjectDoorStatusDoorOpenStatus = "OPEN"
+	TellTaleTypeABSTRAILER                      TellTaleType = "ABS_TRAILER"
+	TellTaleTypeACC                             TellTaleType = "ACC"
+	TellTaleTypeADBLUELEVEL                     TellTaleType = "ADBLUE_LEVEL"
+	TellTaleTypeADBLUETAMPERING                 TellTaleType = "ADBLUE_TAMPERING"
+	TellTaleTypeADVANCEDEMERGENCYBREAKING       TellTaleType = "ADVANCED_EMERGENCY_BREAKING"
+	TellTaleTypeAIRBAG                          TellTaleType = "AIRBAG"
+	TellTaleTypeAIRFILTERCLOGGED                TellTaleType = "AIR_FILTER_CLOGGED"
+	TellTaleTypeANTILOCKBRAKEFAILURE            TellTaleType = "ANTI_LOCK_BRAKE_FAILURE"
+	TellTaleTypeARTICULATION                    TellTaleType = "ARTICULATION"
+	TellTaleTypeAUXILLARYAIRPRESSURE            TellTaleType = "AUXILLARY_AIR_PRESSURE"
+	TellTaleTypeBATTERYCHARGINGCONDITION        TellTaleType = "BATTERY_CHARGING_CONDITION"
+	TellTaleTypeBATTERYPACK                     TellTaleType = "BATTERY_PACK"
+	TellTaleTypeBATTERYPACKCOOLING              TellTaleType = "BATTERY_PACK_COOLING"
+	TellTaleTypeBATTERYPACKTEMPERATURE          TellTaleType = "BATTERY_PACK_TEMPERATURE"
+	TellTaleTypeBRAKELIGHTS                     TellTaleType = "BRAKE_LIGHTS"
+	TellTaleTypeBRAKEMALFUNCTION                TellTaleType = "BRAKE_MALFUNCTION"
+	TellTaleTypeBUSSTOPBRAKE                    TellTaleType = "BUS_STOP_BRAKE"
+	TellTaleTypeCOOLINGAIRCONDITIONING          TellTaleType = "COOLING_AIR_CONDITIONING"
+	TellTaleTypeEBS                             TellTaleType = "EBS"
+	TellTaleTypeEBSTRAILER12                    TellTaleType = "EBS_TRAILER_1_2"
+	TellTaleTypeELECTRICMOTORFAILURES           TellTaleType = "ELECTRIC_MOTOR_FAILURES"
+	TellTaleTypeENGINECOMPARTMENTTEMPERATURE    TellTaleType = "ENGINE_COMPARTMENT_TEMPERATURE"
+	TellTaleTypeENGINECOOLANTLEVEL              TellTaleType = "ENGINE_COOLANT_LEVEL"
+	TellTaleTypeENGINECOOLANTTEMPERATURE        TellTaleType = "ENGINE_COOLANT_TEMPERATURE"
+	TellTaleTypeENGINEEMISSIONFAILURE           TellTaleType = "ENGINE_EMISSION_FAILURE"
+	TellTaleTypeENGINEEMISSIONFILTERSOOTFILTER  TellTaleType = "ENGINE_EMISSION_FILTER_SOOT_FILTER"
+	TellTaleTypeENGINEMILINDICATOR              TellTaleType = "ENGINE_MIL_INDICATOR"
+	TellTaleTypeENGINEOIL                       TellTaleType = "ENGINE_OIL"
+	TellTaleTypeENGINEOILLEVEL                  TellTaleType = "ENGINE_OIL_LEVEL"
+	TellTaleTypeENGINEOILTEMPERATURE            TellTaleType = "ENGINE_OIL_TEMPERATURE"
+	TellTaleTypeESCINDICATOR                    TellTaleType = "ESC_INDICATOR"
+	TellTaleTypeESCSWITCHEDOFF                  TellTaleType = "ESC_SWITCHED_OFF"
+	TellTaleTypeFRONTFOGLIGHT                   TellTaleType = "FRONT_FOG_LIGHT"
+	TellTaleTypeFUELFILTERDIFFPRESSURE          TellTaleType = "FUEL_FILTER_DIFF_PRESSURE"
+	TellTaleTypeFUELLEVEL                       TellTaleType = "FUEL_LEVEL"
+	TellTaleTypeGENERALFAILURE                  TellTaleType = "GENERAL_FAILURE"
+	TellTaleTypeHATCHOPEN                       TellTaleType = "HATCH_OPEN"
+	TellTaleTypeHAZARDWARNING                   TellTaleType = "HAZARD_WARNING"
+	TellTaleTypeHEIGHTCONTROL                   TellTaleType = "HEIGHT_CONTROL"
+	TellTaleTypeHIGHBEAMMAINBEAM                TellTaleType = "HIGH_BEAM_MAIN_BEAM"
+	TellTaleTypeHIGHVOLTAGESYSTEMCAUTION        TellTaleType = "HIGH_VOLTAGE_SYSTEM_CAUTION"
+	TellTaleTypeKNEELING                        TellTaleType = "KNEELING"
+	TellTaleTypeLANEDEPARTUREINDICATOR          TellTaleType = "LANE_DEPARTURE_INDICATOR"
+	TellTaleTypeLANEDEPARTUREWARNINGSWITCHEDOFF TellTaleType = "LANE_DEPARTURE_WARNING_SWITCHED_OFF"
+	TellTaleTypeLIMITEDPERFORMANCEELECTRICMOTOR TellTaleType = "LIMITED_PERFORMANCE_ELECTRIC_MOTOR"
+	TellTaleTypeLOWBEAMDIPPEDBEAM               TellTaleType = "LOW_BEAM_DIPPED_BEAM"
+	TellTaleTypeLOWERING                        TellTaleType = "LOWERING"
+	TellTaleTypeMULTIPLEXSYSTEM                 TellTaleType = "MULTIPLEX_SYSTEM"
+	TellTaleTypeOEMSPECIFICTELLTALE             TellTaleType = "OEM_SPECIFIC_TELL_TALE"
+	TellTaleTypePARKINGBRAKE                    TellTaleType = "PARKING_BRAKE"
+	TellTaleTypePARKINGHEATER                   TellTaleType = "PARKING_HEATER"
+	TellTaleTypePOSITIONLIGHTS                  TellTaleType = "POSITION_LIGHTS"
+	TellTaleTypePRAMREQUEST                     TellTaleType = "PRAM_REQUEST"
+	TellTaleTypePROVISIONINGHANDICAPPEDPERSON   TellTaleType = "PROVISIONING_HANDICAPPED_PERSON"
+	TellTaleTypeRAISING                         TellTaleType = "RAISING"
+	TellTaleTypeREARFOGLIGHT                    TellTaleType = "REAR_FOG_LIGHT"
+	TellTaleTypeRETARDER                        TellTaleType = "RETARDER"
+	TellTaleTypeSEATBELT                        TellTaleType = "SEAT_BELT"
+	TellTaleTypeSERVICECALLFORMAINTENANCE       TellTaleType = "SERVICE_CALL_FOR_MAINTENANCE"
+	TellTaleTypeSTEERINGFAILURE                 TellTaleType = "STEERING_FAILURE"
+	TellTaleTypeSTEERINGFLUIDLEVEL              TellTaleType = "STEERING_FLUID_LEVEL"
+	TellTaleTypeSTOPREQUEST                     TellTaleType = "STOP_REQUEST"
+	TellTaleTypeTACHOGRAPHINDICATOR             TellTaleType = "TACHOGRAPH_INDICATOR"
+	TellTaleTypeTIREMALFUNCTION                 TellTaleType = "TIRE_MALFUNCTION"
+	TellTaleTypeTRAILERCONNECTED                TellTaleType = "TRAILER_CONNECTED"
+	TellTaleTypeTRANSMISSIONFLUIDTEMPERATURE    TellTaleType = "TRANSMISSION_FLUID_TEMPERATURE"
+	TellTaleTypeTRANSMISSIONMALFUNCTION         TellTaleType = "TRANSMISSION_MALFUNCTION"
+	TellTaleTypeTURNSIGNALS                     TellTaleType = "TURN_SIGNALS"
+	TellTaleTypeWINDSCREENWASHERFLUID           TellTaleType = "WINDSCREEN_WASHER_FLUID"
+	TellTaleTypeWORNBRAKELININGS                TellTaleType = "WORN_BRAKE_LININGS"
 )
 
-// Defines values for VehicleStatusObjectStatus2OfDoors.
+// Defines values for TrailerType.
 const (
-	VehicleStatusObjectStatus2OfDoorsALLDOORSDISABLED      VehicleStatusObjectStatus2OfDoors = "ALL_DOORS_DISABLED"
-	VehicleStatusObjectStatus2OfDoorsATLEASTONEDOORENABLED VehicleStatusObjectStatus2OfDoors = "AT_LEAST_ONE_DOOR_ENABLED"
-	VehicleStatusObjectStatus2OfDoorsERROR                 VehicleStatusObjectStatus2OfDoors = "ERROR"
-	VehicleStatusObjectStatus2OfDoorsNOTAVAILABLE          VehicleStatusObjectStatus2OfDoors = "NOT_AVAILABLE"
+	TrailerTypeCENTREAXLETRAILER       TrailerType = "CENTRE_AXLE_TRAILER"
+	TrailerTypeCONVERTERDOLLY          TrailerType = "CONVERTER_DOLLY"
+	TrailerTypeFULLTRAILER             TrailerType = "FULL_TRAILER"
+	TrailerTypeLINKTRAILER             TrailerType = "LINK_TRAILER"
+	TrailerTypeSEMITRAILER             TrailerType = "SEMI_TRAILER"
+	TrailerTypeTOWINGCENTREAXLETRAILER TrailerType = "TOWING_CENTRE_AXLE_TRAILER"
+	TrailerTypeTOWINGFULLTRAILER       TrailerType = "TOWING_FULL_TRAILER"
+	TrailerTypeTOWINGSEMITRAILER       TrailerType = "TOWING_SEMI_TRAILER"
+	TrailerTypeUNKNOWN                 TrailerType = "UNKNOWN"
+)
+
+// Defines values for TriggerType.
+const (
+	TriggerTypeBATTERYPACKCHARGINGCONNECTIONSTATUSCHANGE TriggerType = "BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE"
+	TriggerTypeBATTERYPACKCHARGINGSTATUSCHANGE           TriggerType = "BATTERY_PACK_CHARGING_STATUS_CHANGE"
+	TriggerTypeDISTANCETRAVELLED                         TriggerType = "DISTANCE_TRAVELLED"
+	TriggerTypeDRIVER1WORKINGSTATECHANGED                TriggerType = "DRIVER_1_WORKING_STATE_CHANGED"
+	TriggerTypeDRIVER2WORKINGSTATECHANGED                TriggerType = "DRIVER_2_WORKING_STATE_CHANGED"
+	TriggerTypeDRIVERLOGIN                               TriggerType = "DRIVER_LOGIN"
+	TriggerTypeDRIVERLOGOUT                              TriggerType = "DRIVER_LOGOUT"
+	TriggerTypeENGINEOFF                                 TriggerType = "ENGINE_OFF"
+	TriggerTypeENGINEON                                  TriggerType = "ENGINE_ON"
+	TriggerTypeFUELTYPECHANGE                            TriggerType = "FUEL_TYPE_CHANGE"
+	TriggerTypeIGNITIONOFF                               TriggerType = "IGNITION_OFF"
+	TriggerTypeIGNITIONON                                TriggerType = "IGNITION_ON"
+	TriggerTypePARKINGBRAKESWITCHCHANGE                  TriggerType = "PARKING_BRAKE_SWITCH_CHANGE"
+	TriggerTypePTODISABLED                               TriggerType = "PTO_DISABLED"
+	TriggerTypePTOENABLED                                TriggerType = "PTO_ENABLED"
+	TriggerTypeTELLTALE                                  TriggerType = "TELL_TALE"
+	TriggerTypeTIMER                                     TriggerType = "TIMER"
+	TriggerTypeTRAILERCONNECTED                          TriggerType = "TRAILER_CONNECTED"
+	TriggerTypeTRAILERDISCONNECTED                       TriggerType = "TRAILER_DISCONNECTED"
 )
 
 // Defines values for Datetype.
@@ -224,29 +247,6 @@ const (
 	GetVehiclepositionsParamsDatetypeReceived GetVehiclepositionsParamsDatetype = "received"
 )
 
-// Defines values for GetVehiclepositionsParamsTriggerFilter.
-const (
-	GetVehiclepositionsParamsTriggerFilterBATTERYPACKCHARGINGCONNECTIONSTATUSCHANGE GetVehiclepositionsParamsTriggerFilter = "BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE"
-	GetVehiclepositionsParamsTriggerFilterBATTERYPACKCHARGINGSTATUSCHANGE           GetVehiclepositionsParamsTriggerFilter = "BATTERY_PACK_CHARGING_STATUS_CHANGE"
-	GetVehiclepositionsParamsTriggerFilterDISTANCETRAVELLED                         GetVehiclepositionsParamsTriggerFilter = "DISTANCE_TRAVELLED"
-	GetVehiclepositionsParamsTriggerFilterDRIVER1WORKINGSTATECHANGED                GetVehiclepositionsParamsTriggerFilter = "DRIVER_1_WORKING_STATE_CHANGED"
-	GetVehiclepositionsParamsTriggerFilterDRIVER2WORKINGSTATECHANGED                GetVehiclepositionsParamsTriggerFilter = "DRIVER_2_WORKING_STATE_CHANGED"
-	GetVehiclepositionsParamsTriggerFilterDRIVERLOGIN                               GetVehiclepositionsParamsTriggerFilter = "DRIVER_LOGIN"
-	GetVehiclepositionsParamsTriggerFilterDRIVERLOGOUT                              GetVehiclepositionsParamsTriggerFilter = "DRIVER_LOGOUT"
-	GetVehiclepositionsParamsTriggerFilterENGINEOFF                                 GetVehiclepositionsParamsTriggerFilter = "ENGINE_OFF"
-	GetVehiclepositionsParamsTriggerFilterENGINEON                                  GetVehiclepositionsParamsTriggerFilter = "ENGINE_ON"
-	GetVehiclepositionsParamsTriggerFilterFUELTYPECHANGE                            GetVehiclepositionsParamsTriggerFilter = "FUEL_TYPE_CHANGE"
-	GetVehiclepositionsParamsTriggerFilterIGNITIONOFF                               GetVehiclepositionsParamsTriggerFilter = "IGNITION_OFF"
-	GetVehiclepositionsParamsTriggerFilterIGNITIONON                                GetVehiclepositionsParamsTriggerFilter = "IGNITION_ON"
-	GetVehiclepositionsParamsTriggerFilterPARKINGBRAKESWITCHCHANGE                  GetVehiclepositionsParamsTriggerFilter = "PARKING_BRAKE_SWITCH_CHANGE"
-	GetVehiclepositionsParamsTriggerFilterPTODISABLED                               GetVehiclepositionsParamsTriggerFilter = "PTO_DISABLED"
-	GetVehiclepositionsParamsTriggerFilterPTOENABLED                                GetVehiclepositionsParamsTriggerFilter = "PTO_ENABLED"
-	GetVehiclepositionsParamsTriggerFilterTELLTALE                                  GetVehiclepositionsParamsTriggerFilter = "TELL_TALE"
-	GetVehiclepositionsParamsTriggerFilterTIMER                                     GetVehiclepositionsParamsTriggerFilter = "TIMER"
-	GetVehiclepositionsParamsTriggerFilterTRAILERCONNECTED                          GetVehiclepositionsParamsTriggerFilter = "TRAILER_CONNECTED"
-	GetVehiclepositionsParamsTriggerFilterTRAILERDISCONNECTED                       GetVehiclepositionsParamsTriggerFilter = "TRAILER_DISCONNECTED"
-)
-
 // Defines values for GetVehiclestatusesParamsDatetype.
 const (
 	GetVehiclestatusesParamsDatetypeCreated  GetVehiclestatusesParamsDatetype = "created"
@@ -258,29 +258,6 @@ const (
 	GetVehiclestatusesParamsContentFilterACCUMULATED GetVehiclestatusesParamsContentFilter = "ACCUMULATED"
 	GetVehiclestatusesParamsContentFilterSNAPSHOT    GetVehiclestatusesParamsContentFilter = "SNAPSHOT"
 	GetVehiclestatusesParamsContentFilterUPTIME      GetVehiclestatusesParamsContentFilter = "UPTIME"
-)
-
-// Defines values for GetVehiclestatusesParamsTriggerFilter.
-const (
-	GetVehiclestatusesParamsTriggerFilterBATTERYPACKCHARGINGCONNECTIONSTATUSCHANGE GetVehiclestatusesParamsTriggerFilter = "BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE"
-	GetVehiclestatusesParamsTriggerFilterBATTERYPACKCHARGINGSTATUSCHANGE           GetVehiclestatusesParamsTriggerFilter = "BATTERY_PACK_CHARGING_STATUS_CHANGE"
-	GetVehiclestatusesParamsTriggerFilterDISTANCETRAVELLED                         GetVehiclestatusesParamsTriggerFilter = "DISTANCE_TRAVELLED"
-	GetVehiclestatusesParamsTriggerFilterDRIVER1WORKINGSTATECHANGED                GetVehiclestatusesParamsTriggerFilter = "DRIVER_1_WORKING_STATE_CHANGED"
-	GetVehiclestatusesParamsTriggerFilterDRIVER2WORKINGSTATECHANGED                GetVehiclestatusesParamsTriggerFilter = "DRIVER_2_WORKING_STATE_CHANGED"
-	GetVehiclestatusesParamsTriggerFilterDRIVERLOGIN                               GetVehiclestatusesParamsTriggerFilter = "DRIVER_LOGIN"
-	GetVehiclestatusesParamsTriggerFilterDRIVERLOGOUT                              GetVehiclestatusesParamsTriggerFilter = "DRIVER_LOGOUT"
-	GetVehiclestatusesParamsTriggerFilterENGINEOFF                                 GetVehiclestatusesParamsTriggerFilter = "ENGINE_OFF"
-	GetVehiclestatusesParamsTriggerFilterENGINEON                                  GetVehiclestatusesParamsTriggerFilter = "ENGINE_ON"
-	GetVehiclestatusesParamsTriggerFilterFUELTYPECHANGE                            GetVehiclestatusesParamsTriggerFilter = "FUEL_TYPE_CHANGE"
-	GetVehiclestatusesParamsTriggerFilterIGNITIONOFF                               GetVehiclestatusesParamsTriggerFilter = "IGNITION_OFF"
-	GetVehiclestatusesParamsTriggerFilterIGNITIONON                                GetVehiclestatusesParamsTriggerFilter = "IGNITION_ON"
-	GetVehiclestatusesParamsTriggerFilterPARKINGBRAKESWITCHCHANGE                  GetVehiclestatusesParamsTriggerFilter = "PARKING_BRAKE_SWITCH_CHANGE"
-	GetVehiclestatusesParamsTriggerFilterPTODISABLED                               GetVehiclestatusesParamsTriggerFilter = "PTO_DISABLED"
-	GetVehiclestatusesParamsTriggerFilterPTOENABLED                                GetVehiclestatusesParamsTriggerFilter = "PTO_ENABLED"
-	GetVehiclestatusesParamsTriggerFilterTELLTALE                                  GetVehiclestatusesParamsTriggerFilter = "TELL_TALE"
-	GetVehiclestatusesParamsTriggerFilterTIMER                                     GetVehiclestatusesParamsTriggerFilter = "TIMER"
-	GetVehiclestatusesParamsTriggerFilterTRAILERCONNECTED                          GetVehiclestatusesParamsTriggerFilter = "TRAILER_CONNECTED"
-	GetVehiclestatusesParamsTriggerFilterTRAILERDISCONNECTED                       GetVehiclestatusesParamsTriggerFilter = "TRAILER_DISCONNECTED"
 )
 
 // AccumulatedDataObject defines model for AccumulatedDataObject.
@@ -402,14 +379,67 @@ type AccumulatedDataObject struct {
 	VehicleSpeedClass *[]FromToClassObject `json:"vehicleSpeedClass,omitempty"`
 }
 
+// AlternatorStatus defines model for AlternatorStatus.
+type AlternatorStatus string
+
+// BatteryPackChargingConnectionStatus Indicates the charging connection status of the battery pack.
+//
+//	Connecting - A charger is being connected
+//	Connected - A charger is connected
+//	Disconnecting - A charger is being disconnected
+//	Disconnected - No charger is connected
+//	Error - An error occurred when connecting or disconnecting
+//	Not available - Charging connection status is not available
+type BatteryPackChargingConnectionStatus string
+
+// BatteryPackChargingStatus Indicates the charging status of the battery pack. Recuperation is excluded.
+//
+//	Not charging - No charging
+//	Charging - Charging ongoing (AC or DC is unknown)
+//	Charging AC - AC charging ongoing
+//	Charging DC - DC charging ongoing
+//	Error - An error occurred when charging
+//	Not available - Charging status is not available
+type BatteryPackChargingStatus string
+
+// ChargingConnectionStatusEvent CONNECTING - Vehicle is being connected to a charger
+//
+//	CONNECTED - Vehicle is connected to a charger
+//	DISCONNECTING - Vehicle is being disconnected from the charger
+//	DISCONNECTED - Vehicle is not connected to a charger
+//	ERROR - An error occurred
+type ChargingConnectionStatusEvent string
+
+// ChargingStatusEvent CHARGING_STARTED - Charging has started
+//
+//	CHARGING_COMPLETED - Charging is completed
+//	CHARGING_INTERRUPTED - Charging has been interrupted (no error)
+//	ERROR - An error occurred when charging
+//	ESTIMATED_COMPLETION_TIME_CHANGED - The estimated time for completed charging has changed. (Threshold is outside scope of rFMS)
+//	TIMER - A predefined time has passed since last charge status update. (Frequency is outside the scope of rFMS)
+//	CHARGING_LEVEL - The charging level has reached a predefined level. (Charging levels are outside the scope of rFMS)
+type ChargingStatusEvent string
+
 // CreatedDateTimeProperty When the data was retrieved in the vehicle in iso8601 format.
 type CreatedDateTimeProperty = time.Time
 
-// DriverIdObject defines model for DriverIdObject.
-type DriverIdObject struct {
+// DoorEnabledStatus defines model for DoorEnabledStatus.
+type DoorEnabledStatus string
+
+// DoorLockStatus defines model for DoorLockStatus.
+type DoorLockStatus string
+
+// DoorOpenStatus defines model for DoorOpenStatus.
+type DoorOpenStatus string
+
+// DriverAuthenticationType Code to distinguish different types of equipment for the tachograph application. See description of the field 'DriverAuthenticationEquipment' in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
+type DriverAuthenticationType string
+
+// DriverIDObject defines model for DriverIdObject.
+type DriverIDObject struct {
 	OemDriverIdentification *struct {
-		// IdType Contains an optional id type (e.g. pin, USB, encrypted EU id...)
-		IdType *string `json:"idType,omitempty"`
+		// IDType Contains an optional id type (e.g. pin, USB, encrypted EU id...)
+		IDType *string `json:"idType,omitempty"`
 
 		// OemDriverIdentification An OEM specific driver id.
 		OemDriverIdentification *string `json:"oemDriverIdentification,omitempty"`
@@ -425,18 +455,18 @@ type DriverIdObject struct {
 		CardReplacementIndex *string `json:"cardReplacementIndex,omitempty"`
 
 		// DriverAuthenticationEquipment Code to distinguish different types of equipment for the tachograph application. See description of the field 'DriverAuthenticationEquipment' in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
-		DriverAuthenticationEquipment *DriverIdObjectTachoDriverIdentificationDriverAuthenticationEquipment `json:"driverAuthenticationEquipment,omitempty"`
+		DriverAuthenticationEquipment *DriverAuthenticationType `json:"driverAuthenticationEquipment,omitempty"`
 
 		// DriverIdentification The unique identification of a driver in a Member State. This fields is formatted according the definition for driverIdentification in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
 		DriverIdentification string `json:"driverIdentification"`
 	} `json:"tachoDriverIdentification,omitempty"`
 }
 
-// DriverIdObjectTachoDriverIdentificationDriverAuthenticationEquipment Code to distinguish different types of equipment for the tachograph application. See description of the field 'DriverAuthenticationEquipment' in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
-type DriverIdObjectTachoDriverIdentificationDriverAuthenticationEquipment string
+// DriverWorkingState Tachograph Working state of the driver
+type DriverWorkingState string
 
 // DriverWorkingStateProperty Tachograph Working state of the driver
-type DriverWorkingStateProperty string
+type DriverWorkingStateProperty = DriverWorkingState
 
 // ErrorObject Optional responses for error codes, detailing the error if needed
 type ErrorObject struct {
@@ -446,8 +476,8 @@ type ErrorObject struct {
 	// ErrorDescription A description of the error
 	ErrorDescription *string `json:"error_description,omitempty"`
 
-	// ErrorUri A URI providing more information
-	ErrorUri *string `json:"error_uri,omitempty"`
+	// ErrorURI A URI providing more information
+	ErrorURI *string `json:"error_uri,omitempty"`
 }
 
 // FromToClassObject defines model for FromToClassObject.
@@ -526,7 +556,7 @@ type SnapshotDataObject struct {
 	//  Disconnected - No charger is connected
 	//  Error - An error occurred when connecting or disconnecting
 	//  Not available - Charging connection status is not available
-	BatteryPackChargingConnectionStatus *SnapshotDataObjectBatteryPackChargingConnectionStatus `json:"batteryPackChargingConnectionStatus,omitempty"`
+	BatteryPackChargingConnectionStatus *BatteryPackChargingConnectionStatus `json:"batteryPackChargingConnectionStatus,omitempty"`
 
 	// BatteryPackChargingDevice Device used to charge the battery pack. Standard rFMS values taken from ISO 15118 (OEM can have additional values):
 	//  ACD - Automatic Connection Device
@@ -546,14 +576,14 @@ type SnapshotDataObject struct {
 	//  Charging DC - DC charging ongoing
 	//  Error - An error occurred when charging
 	//  Not available - Charging status is not available
-	BatteryPackChargingStatus *SnapshotDataObjectBatteryPackChargingStatus `json:"batteryPackChargingStatus,omitempty"`
+	BatteryPackChargingStatus *BatteryPackChargingStatus `json:"batteryPackChargingStatus,omitempty"`
 
 	// CatalystFuelLevel The adblue level percentage
 	CatalystFuelLevel *float64 `json:"catalystFuelLevel,omitempty"`
 
 	// Driver1WorkingState Tachograph Working state of the driver
 	Driver1WorkingState *DriverWorkingStateProperty `json:"driver1WorkingState,omitempty"`
-	Driver2Id           *DriverIdObject             `json:"driver2Id,omitempty"`
+	Driver2ID           *DriverIDObject             `json:"driver2Id,omitempty"`
 
 	// Driver2WorkingState Tachograph Working state of the driver
 	Driver2WorkingState *DriverWorkingStateProperty `json:"driver2WorkingState,omitempty"`
@@ -629,8 +659,8 @@ type SnapshotDataObject struct {
 		// TrailerNo Trailer number from 1 to 5, 1 being closest to the truck, according to ISO 11992-2.
 		TrailerNo *int `json:"trailerNo,omitempty"`
 
-		// TrailerType Indicates the type of the trailer. The type is sent in the EBS24 message of  ISO 11992-2.
-		TrailerType *SnapshotDataObjectTrailersTrailerType `json:"trailerType,omitempty"`
+		// TrailerType Indicates the type of the trailer. The type is sent in the EBS24 message of ISO 11992-2.
+		TrailerType *TrailerType `json:"trailerType,omitempty"`
 
 		// TrailerVin The vehicle identification number of the trailer. See ISO 3779 (17 characters) If the trailerIdentificationData is reporting a true VIN, trailerVin will have the same value. If it is possible to map the trailerIdentificationData to a true VIN using other sources, the value can be provided here.
 		TrailerVin *string `json:"trailerVin,omitempty"`
@@ -649,28 +679,8 @@ type SnapshotDataObject struct {
 	WheelBasedSpeed *float64 `json:"wheelBasedSpeed,omitempty"`
 }
 
-// SnapshotDataObjectBatteryPackChargingConnectionStatus Indicates the charging connection status of the battery pack.
-//
-//	Connecting - A charger is being connected
-//	Connected - A charger is connected
-//	Disconnecting - A charger is being disconnected
-//	Disconnected - No charger is connected
-//	Error - An error occurred when connecting or disconnecting
-//	Not available - Charging connection status is not available
-type SnapshotDataObjectBatteryPackChargingConnectionStatus string
-
-// SnapshotDataObjectBatteryPackChargingStatus Indicates the charging status of the battery pack. Recuperation is excluded.
-//
-//	Not charging - No charging
-//	Charging - Charging ongoing (AC or DC is unknown)
-//	Charging AC - AC charging ongoing
-//	Charging DC - DC charging ongoing
-//	Error - An error occurred when charging
-//	Not available - Charging status is not available
-type SnapshotDataObjectBatteryPackChargingStatus string
-
-// SnapshotDataObjectTrailersTrailerType Indicates the type of the trailer. The type is sent in the EBS24 message of  ISO 11992-2.
-type SnapshotDataObjectTrailersTrailerType string
+// Status2OfDoors Composite indication of all bus door statuses. Bus specific parameter
+type Status2OfDoors string
 
 // TellTaleObject defines model for TellTaleObject.
 type TellTaleObject struct {
@@ -678,15 +688,18 @@ type TellTaleObject struct {
 	OemTellTale *string `json:"oemTellTale,omitempty"`
 
 	// State The current state of the tell tale.
-	State    TellTaleObjectState    `json:"state"`
-	TellTale TellTaleObjectTellTale `json:"tellTale"`
+	State    TellTaleState `json:"state"`
+	TellTale TellTaleType  `json:"tellTale"`
 }
 
-// TellTaleObjectState The current state of the tell tale.
-type TellTaleObjectState string
+// TellTaleState The current state of the tell tale.
+type TellTaleState string
 
-// TellTaleObjectTellTale defines model for TellTaleObject.TellTale.
-type TellTaleObjectTellTale string
+// TellTaleType defines model for TellTaleType.
+type TellTaleType string
+
+// TrailerType Indicates the type of the trailer. The type is sent in the EBS24 message of ISO 11992-2.
+type TrailerType string
 
 // TriggerObject This description is placed here due to limitations of describing references in OpenAPI
 //
@@ -708,7 +721,7 @@ type TriggerObject struct {
 		//  DISCONNECTING - Vehicle is being disconnected from the charger
 		//  DISCONNECTED - Vehicle is not connected to a charger
 		//  ERROR - An error occurred
-		Event *TriggerObjectChargingConnectionStatusInfoEvent `json:"event,omitempty"`
+		Event *ChargingConnectionStatusEvent `json:"event,omitempty"`
 
 		// EventDetail Details regarding the event. Content is OEM specific
 		EventDetail *string `json:"eventDetail,omitempty"`
@@ -723,7 +736,7 @@ type TriggerObject struct {
 		//  ESTIMATED_COMPLETION_TIME_CHANGED - The estimated time for completed charging has changed. (Threshold is outside scope of rFMS)
 		//  TIMER - A predefined time has passed since last charge status update. (Frequency is outside the scope of rFMS)
 		//  CHARGING_LEVEL - The charging level has reached a predefined level. (Charging levels are outside the scope of rFMS)
-		Event *TriggerObjectChargingStatusInfoEvent `json:"event,omitempty"`
+		Event *ChargingStatusEvent `json:"event,omitempty"`
 
 		// EventDetail Details regarding the event. Content is OEM specific
 		EventDetail *string `json:"eventDetail,omitempty"`
@@ -731,10 +744,10 @@ type TriggerObject struct {
 
 	// Context The context defines if this is part of the standard or OEM specific. rFMS standard values VOLVO TRUCKS, SCANIA, DAIMLER, IVECO, DAF, MAN, RENAULT TRUCKS, VDL, VOLVO BUSES, IVECO BUS, IRISBUS If the Trigger is defined in the rFMS standard, the Context = RFMS
 	Context  string          `json:"context"`
-	DriverId *DriverIdObject `json:"driverId,omitempty"`
+	DriverID *DriverIDObject `json:"driverId,omitempty"`
 
-	// PtoId The id of a PTO. This is only set if the TriggerType = PTO_ENABLED or PTO_DISABLED
-	PtoId        *string         `json:"ptoId,omitempty"`
+	// PtoID The id of a PTO. This is only set if the TriggerType = PTO_ENABLED or PTO_DISABLED
+	PtoID        *string         `json:"ptoId,omitempty"`
 	TellTaleInfo *TellTaleObject `json:"tellTaleInfo,omitempty"`
 
 	// TriggerInfo Additional TriggerInfo content for OEM specific triggers E.g. TRAILER_ATTACHED_TRIGGER [id of trailer]
@@ -760,33 +773,38 @@ type TriggerObject struct {
 	//  BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE - Data was sent due to a change in the battery pack charging connection status.
 	//  TRAILER_CONNECTED - One or several trailers were connected
 	//  TRAILER_DISCONNECTED - One or several trailers were disconnected
-	TriggerType string `json:"triggerType"`
+	TriggerType TriggerType `json:"triggerType"`
 }
 
-// TriggerObjectChargingConnectionStatusInfoEvent CONNECTING - Vehicle is being connected to a charger
+// TriggerType Trigger types for Context=RFMS:
 //
-//	CONNECTED - Vehicle is connected to a charger
-//	DISCONNECTING - Vehicle is being disconnected from the charger
-//	DISCONNECTED - Vehicle is not connected to a charger
-//	ERROR - An error occurred
-type TriggerObjectChargingConnectionStatusInfoEvent string
-
-// TriggerObjectChargingStatusInfoEvent CHARGING_STARTED - Charging has started
-//
-//	CHARGING_COMPLETED - Charging is completed
-//	CHARGING_INTERRUPTED - Charging has been interrupted (no error)
-//	ERROR - An error occurred when charging
-//	ESTIMATED_COMPLETION_TIME_CHANGED - The estimated time for completed charging has changed. (Threshold is outside scope of rFMS)
-//	TIMER - A predefined time has passed since last charge status update. (Frequency is outside the scope of rFMS)
-//	CHARGING_LEVEL - The charging level has reached a predefined level. (Charging levels are outside the scope of rFMS)
-type TriggerObjectChargingStatusInfoEvent string
+//	TIMER - Data was sent due to a timer trigger. (Timer value set outside rFMS scope)
+//	IGNITION_ON - Data was sent due to an ignition on
+//	IGNITION_OFF - Data was sent due to an ignition off
+//	PTO_ENABLED - Data was sent due to that a PTO was enabled, will be sent for each PTO that gets enabled
+//	PTO_DISABLED - Data was sent due to that a PTO was disabled, will be sent for each PTO that gets disabled.
+//	DRIVER_LOGIN - Data was sent due to a successful driver login.
+//	DRIVER_LOGOUT - Data was sent due to a driver logout
+//	TELL_TALE - Data was sent due to that at least one tell tale changed state
+//	ENGINE_ON - Data was sent due to an engine on. For electric motor crank is on
+//	ENGINE_OFF - Data was sent due to an engine off. For electric motor crank is off
+//	DRIVER_1_WORKING_STATE_CHANGED - Data was sent due to that driver 1 changed working state
+//	DRIVER_2_WORKING_STATE_CHANGED - Data was sent due to that driver 2 changed working state
+//	DISTANCE_TRAVELLED - Data was sent due to that a set distance was travelled. (Distance set outside rFMS scope)
+//	FUEL_TYPE_CHANGE - Data was sent due to that the type of fuel currently being utilized by the vehicle changed
+//	PARKING_BRAKE_SWITCH_CHANGE - Data was sent due to that the parking brake state has changed
+//	BATTERY_PACK_CHARGING_STATUS_CHANGE - Data was sent due to a change in the battery pack charging status.
+//	BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE - Data was sent due to a change in the battery pack charging connection status.
+//	TRAILER_CONNECTED - One or several trailers were connected
+//	TRAILER_DISCONNECTED - One or several trailers were disconnected
+type TriggerType string
 
 // UptimeDataObject defines model for UptimeDataObject.
 type UptimeDataObject struct {
 	// AlternatorInfo The alternator status of the up to 4 alternators. Used mainly for buses.
 	AlternatorInfo *struct {
-		AlternatorNumber *int64                                          `json:"alternatorNumber,omitempty"`
-		AlternatorStatus *UptimeDataObjectAlternatorInfoAlternatorStatus `json:"alternatorStatus,omitempty"`
+		AlternatorNumber *int64            `json:"alternatorNumber,omitempty"`
+		AlternatorStatus *AlternatorStatus `json:"alternatorStatus,omitempty"`
 	} `json:"alternatorInfo,omitempty"`
 
 	// BellowPressureFrontAxleLeft The bellow pressure in the front axle left side in Pascal. Used mainly for buses.
@@ -825,9 +843,6 @@ type UptimeDataObject struct {
 	// TellTaleInfo List of tell tales with the actual status for each tell tale.
 	TellTaleInfo []TellTaleObject `json:"tellTaleInfo"`
 }
-
-// UptimeDataObjectAlternatorInfoAlternatorStatus defines model for UptimeDataObject.AlternatorInfo.AlternatorStatus.
-type UptimeDataObjectAlternatorInfoAlternatorStatus string
 
 // VehicleObject defines model for VehicleObject.
 type VehicleObject struct {
@@ -985,12 +1000,12 @@ type VehicleStatusObject struct {
 
 	// DoorStatus Individual status for each door. Bus specific parameter
 	DoorStatus *[]struct {
-		DoorEnabledStatus *VehicleStatusObjectDoorStatusDoorEnabledStatus `json:"DoorEnabledStatus,omitempty"`
-		DoorLockStatus    *VehicleStatusObjectDoorStatusDoorLockStatus    `json:"DoorLockStatus,omitempty"`
-		DoorNumber        *int                                            `json:"DoorNumber,omitempty"`
-		DoorOpenStatus    *VehicleStatusObjectDoorStatusDoorOpenStatus    `json:"DoorOpenStatus,omitempty"`
+		DoorEnabledStatus *DoorEnabledStatus `json:"DoorEnabledStatus,omitempty"`
+		DoorLockStatus    *DoorLockStatus    `json:"DoorLockStatus,omitempty"`
+		DoorNumber        *int               `json:"DoorNumber,omitempty"`
+		DoorOpenStatus    *DoorOpenStatus    `json:"DoorOpenStatus,omitempty"`
 	} `json:"doorStatus,omitempty"`
-	Driver1Id *DriverIdObject `json:"driver1Id,omitempty"`
+	Driver1ID *DriverIDObject `json:"driver1Id,omitempty"`
 
 	// EngineTotalFuelUsed The total fuel the vehicle has used during its lifetime in MilliLitres. At least one of engineTotalFuelUsed, totalFuelUsedGaseous or totalElectricEnergyUsed is mandatory.
 	EngineTotalFuelUsed *int64 `json:"engineTotalFuelUsed,omitempty"`
@@ -1006,7 +1021,7 @@ type VehicleStatusObject struct {
 	SnapshotData     *SnapshotDataObject      `json:"snapshotData,omitempty"`
 
 	// Status2OfDoors Composite indication of all bus door statuses. Bus specific parameter
-	Status2OfDoors *VehicleStatusObjectStatus2OfDoors `json:"status2OfDoors,omitempty"`
+	Status2OfDoors *Status2OfDoors `json:"status2OfDoors,omitempty"`
 
 	// TotalElectricEnergyUsed Total electric energy consumed by the vehicle, excluding when plugged in (vehicle coupler) for charging, (incl. motor, PTO, cooling, etc.) in watt hours. Recuperation is subtracted from the value.  At least one of engineTotalFuelUsed, totalFuelUsedGaseous or totalElectricEnergyUsed is mandatory.
 	TotalElectricEnergyUsed *int64 `json:"totalElectricEnergyUsed,omitempty"`
@@ -1037,18 +1052,6 @@ type VehicleStatusObject struct {
 	// Vin vehicle identification number. See ISO 3779 (17 characters)
 	Vin VinProperty `json:"vin"`
 }
-
-// VehicleStatusObjectDoorStatusDoorEnabledStatus defines model for VehicleStatusObject.DoorStatus.DoorEnabledStatus.
-type VehicleStatusObjectDoorStatusDoorEnabledStatus string
-
-// VehicleStatusObjectDoorStatusDoorLockStatus defines model for VehicleStatusObject.DoorStatus.DoorLockStatus.
-type VehicleStatusObjectDoorStatusDoorLockStatus string
-
-// VehicleStatusObjectDoorStatusDoorOpenStatus defines model for VehicleStatusObject.DoorStatus.DoorOpenStatus.
-type VehicleStatusObjectDoorStatusDoorOpenStatus string
-
-// VehicleStatusObjectStatus2OfDoors Composite indication of all bus door statuses. Bus specific parameter
-type VehicleStatusObjectStatus2OfDoors string
 
 // VehicleStatusResponseObject defines model for VehicleStatusResponseObject.
 type VehicleStatusResponseObject struct {
@@ -1083,8 +1086,8 @@ type Stoptime = time.Time
 // Vin defines model for vin.
 type Vin = string
 
-// XCorrelationId defines model for xCorrelationId.
-type XCorrelationId = string
+// XCorrelationID defines model for xCorrelationId.
+type XCorrelationID = string
 
 // BadRequest Optional responses for error codes, detailing the error if needed
 type BadRequest = ErrorObject
@@ -1122,28 +1125,25 @@ type GetVehiclepositionsParams struct {
 	LatestOnly *bool `form:"latestOnly,omitempty" json:"latestOnly,omitempty"`
 
 	// TriggerFilter Will only return data reports that was triggered by the trigger defined by the filter. Detailed information for this parameter can be found in the Trigger filter chapter in the API documentation.
-	TriggerFilter *GetVehiclepositionsParamsTriggerFilter `form:"triggerFilter,omitempty" json:"triggerFilter,omitempty"`
+	TriggerFilter *TriggerType `form:"triggerFilter,omitempty" json:"triggerFilter,omitempty"`
 
 	// LastVin The response will return the next block of vehicles not including the one with the given VIN. When the last call to the vehicle list function had MoreDataAvailable-parameter set to true you must supply the VIN of the last item in the list as lastVin parameter in the next call.
 	LastVin *LastVin `form:"lastVin,omitempty" json:"lastVin,omitempty"`
 
-	// XCorrelationId A client unique request id used for fault tracing at the API supplier. This shall be unique for each request if used. Max 40 characters.
-	XCorrelationId *XCorrelationId `json:"X-Correlation-Id,omitempty"`
+	// XCorrelationID A client unique request id used for fault tracing at the API supplier. This shall be unique for each request if used. Max 40 characters.
+	XCorrelationID *XCorrelationID `json:"X-Correlation-Id,omitempty"`
 }
 
 // GetVehiclepositionsParamsDatetype defines parameters for GetVehiclepositions.
 type GetVehiclepositionsParamsDatetype string
-
-// GetVehiclepositionsParamsTriggerFilter defines parameters for GetVehiclepositions.
-type GetVehiclepositionsParamsTriggerFilter string
 
 // GetVehiclesParams defines parameters for GetVehicles.
 type GetVehiclesParams struct {
 	// LastVin The response will return the next block of vehicles not including the one with the given VIN. When the last call to the vehicle list function had MoreDataAvailable-parameter set to true you must supply the VIN of the last item in the list as lastVin parameter in the next call.
 	LastVin *LastVin `form:"lastVin,omitempty" json:"lastVin,omitempty"`
 
-	// XCorrelationId A client unique request id used for fault tracing at the API supplier. This shall be unique for each request if used. Max 40 characters.
-	XCorrelationId *XCorrelationId `json:"X-Correlation-Id,omitempty"`
+	// XCorrelationID A client unique request id used for fault tracing at the API supplier. This shall be unique for each request if used. Max 40 characters.
+	XCorrelationID *XCorrelationID `json:"X-Correlation-Id,omitempty"`
 }
 
 // GetVehiclestatusesParams defines parameters for GetVehiclestatuses.
@@ -1164,7 +1164,7 @@ type GetVehiclestatusesParams struct {
 	ContentFilter *[]GetVehiclestatusesParamsContentFilter `form:"contentFilter,omitempty" json:"contentFilter,omitempty"`
 
 	// TriggerFilter Will only return data reports that were triggered by the triggers defined by the filter. Detailed information for this parameter can be found in the Trigger filter chapter in the API documentation. If this filter parameter isn't supplied the returned data reports contain data reports triggered by any trigger.
-	TriggerFilter *[]GetVehiclestatusesParamsTriggerFilter `form:"triggerFilter,omitempty" json:"triggerFilter,omitempty"`
+	TriggerFilter *[]TriggerType `form:"triggerFilter,omitempty" json:"triggerFilter,omitempty"`
 
 	// LatestOnly If this value is set to true only the last latest vehicle status event, matching the trigger filter (if used), is returned for each vehicle in the response. If this value is set to false (or not present) all vehicle status events matching the starttime/stoptime criteria is returned for each vehicle in the response.
 	LatestOnly *bool `form:"latestOnly,omitempty" json:"latestOnly,omitempty"`
@@ -1172,8 +1172,8 @@ type GetVehiclestatusesParams struct {
 	// LastVin The response will return the next block of vehicles not including the one with the given VIN. When the last call to the vehicle list function had MoreDataAvailable-parameter set to true you must supply the VIN of the last item in the list as lastVin parameter in the next call.
 	LastVin *LastVin `form:"lastVin,omitempty" json:"lastVin,omitempty"`
 
-	// XCorrelationId A client unique request id used for fault tracing at the API supplier. This shall be unique for each request if used. Max 40 characters.
-	XCorrelationId *XCorrelationId `json:"X-Correlation-Id,omitempty"`
+	// XCorrelationID A client unique request id used for fault tracing at the API supplier. This shall be unique for each request if used. Max 40 characters.
+	XCorrelationID *XCorrelationID `json:"X-Correlation-Id,omitempty"`
 }
 
 // GetVehiclestatusesParamsDatetype defines parameters for GetVehiclestatuses.
@@ -1181,6 +1181,3 @@ type GetVehiclestatusesParamsDatetype string
 
 // GetVehiclestatusesParamsContentFilter defines parameters for GetVehiclestatuses.
 type GetVehiclestatusesParamsContentFilter string
-
-// GetVehiclestatusesParamsTriggerFilter defines parameters for GetVehiclestatuses.
-type GetVehiclestatusesParamsTriggerFilter string

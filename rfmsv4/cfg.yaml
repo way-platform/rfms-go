@@ -5,3 +5,7 @@ generate:
   models: true
 compatibility:
   always-prefix-enum-values: true
+output-options:
+  overlay:
+    path: overlay.yaml
+  name-normalizer: ToCamelCaseWithInitialisms
