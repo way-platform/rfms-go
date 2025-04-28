@@ -53,7 +53,11 @@ func newVehiclesCommand() *cobra.Command {
 				return err
 			}
 			for _, vehicle := range response.Vehicles {
-				printRawJSON(cmd, vehicle.Raw)
+				cmd.Println(vehicle.VIN)
+				if vehicle.EmissionLevel != nil {
+					cmd.Println(*vehicle.EmissionLevel)
+				}
+				// printRawJSON(cmd, vehicle.Raw)
 			}
 			moreDataAvailable = response.MoreDataAvailable
 			lastVIN = response.Vehicles[len(response.Vehicles)-1].VIN

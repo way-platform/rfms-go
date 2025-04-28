@@ -5,7 +5,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
+
+	"github.com/way-platform/rfms-go/v4/rfmsv2"
 )
 
 // ListVehiclesRequest is the request for the [Client.ListVehicles] method.
@@ -19,11 +22,9 @@ type ListVehiclesResponse struct {
 	// Raw response body.
 	Raw json.RawMessage `json:"-"`
 	// Vehicles in the response.
-	Vehicles []Vehicle `json:"vehicles,omitempty"`
+	Vehicles []*rfmsv2.Vehicle `json:"vehicles,omitzero"`
 	// MoreDataAvailable indicates if there is more data available.
 	MoreDataAvailable bool `json:"moreDataAvailable,omitempty"`
-	// MoreDataAvailableLink is the link to the next page of data.
-	MoreDataAvailableLink string `json:"moreDataAvailableLink,omitempty"`
 }
 
 // ListVehicles implements the rFMS API method "GET /vehicles".
@@ -37,7 +38,8 @@ func (c *Client) ListVehicles(ctx context.Context, request *ListVehiclesRequest)
 	if err != nil {
 		return nil, fmt.Errorf("create request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json; rfms=vehicles.v4.0")
+	// req.Header.Set("Accept", "application/json; rfms=vehicles.v4.0")
+	req.Header.Set("Accept", "application/vnd.fmsstandard.com.Vehicles.v2.1+json")
 	q := req.URL.Query()
 	if request != nil && request.LastVIN != "" {
 		q.Set("lastVin", request.LastVIN)
@@ -56,22 +58,27 @@ func (c *Client) ListVehicles(ctx context.Context, request *ListVehiclesRequest)
 		return nil, fmt.Errorf("read response body: %w", err)
 	}
 	var responseBody struct {
-		VehicleResponse ListVehiclesResponse `json:"vehicleResponse"`
+		Vehicles          []*rfmsv2.Vehicle `json:"Vehicle"`
+		MoreDataAvailable bool              `json:"MoreDataAvailable"`
 	}
+	log.Println(string(data))
 	if err := json.Unmarshal(data, &responseBody); err != nil {
 		return nil, fmt.Errorf("unmarshal response body: %w", err)
 	}
-	var rawVehicles struct {
-		VehicleResponse struct {
-			Vehicles []json.RawMessage `json:"vehicles"`
-		} `json:"vehicleResponse"`
-	}
-	if err := json.Unmarshal(data, &rawVehicles); err != nil {
-		return nil, fmt.Errorf("unmarshal response body: %w", err)
-	}
-	responseBody.VehicleResponse.Raw = data
-	for i, rawVehicle := range rawVehicles.VehicleResponse.Vehicles {
-		responseBody.VehicleResponse.Vehicles[i].Raw = rawVehicle
-	}
-	return &responseBody.VehicleResponse, nil
+	// var rawVehicles struct {
+	// 	VehicleResponse struct {
+	// 		Vehicles []json.RawMessage `json:"vehicles"`
+	// 	} `json:"vehicleResponse"`
+	// }
+	// if err := json.Unmarshal(data, &rawVehicles); err != nil {
+	// 	return nil, fmt.Errorf("unmarshal response body: %w", err)
+	// }
+	// responseBody.VehicleResponse.Raw = data
+	// for i, rawVehicle := range rawVehicles.VehicleResponse.Vehicles {
+	// 	responseBody.VehicleResponse.Vehicles[i].Raw = rawVehicle
+	// }
+	return &ListVehiclesResponse{
+		Vehicles:          responseBody.Vehicles,
+		MoreDataAvailable: responseBody.MoreDataAvailable,
+	}, nil
 }
