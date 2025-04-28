@@ -7,11 +7,6 @@ import (
 	"time"
 )
 
-const (
-	Oauth2AuthCodeScopes         = "oauth2AuthCode.Scopes"
-	Oauth2ClientCredentialScopes = "oauth2ClientCredential.Scopes"
-)
-
 // Defines values for AlternatorStatus.
 const (
 	AlternatorStatusCHARGING     AlternatorStatus = "CHARGING"
@@ -239,13 +234,6 @@ const (
 	TriggerTypeTIMER                                     TriggerType = "TIMER"
 	TriggerTypeTRAILERCONNECTED                          TriggerType = "TRAILER_CONNECTED"
 	TriggerTypeTRAILERDISCONNECTED                       TriggerType = "TRAILER_DISCONNECTED"
-)
-
-// Defines values for GetVehiclestatusesParamsContentFilter.
-const (
-	GetVehiclestatusesParamsContentFilterACCUMULATED GetVehiclestatusesParamsContentFilter = "ACCUMULATED"
-	GetVehiclestatusesParamsContentFilterSNAPSHOT    GetVehiclestatusesParamsContentFilter = "SNAPSHOT"
-	GetVehiclestatusesParamsContentFilterUPTIME      GetVehiclestatusesParamsContentFilter = "UPTIME"
 )
 
 // AccumulatedData defines model for AccumulatedData.
@@ -1130,72 +1118,3 @@ type TooManyRequests = Error
 
 // Unauthorized Optional responses for error codes, detailing the error if needed
 type Unauthorized = Error
-
-// GetVehiclepositionsParams defines parameters for GetVehiclepositions.
-type GetVehiclepositionsParams struct {
-	// Datetype The start/stop times are compared to the created or received time of the position reports. If this isn't supplied all times are received times.
-	Datetype *Datetype `form:"datetype,omitempty" json:"datetype,omitempty"`
-
-	// Starttime Only the data created/received at or after this time should be returned. (i.e. >= starttime)
-	Starttime *Starttime `form:"starttime,omitempty" json:"starttime,omitempty"`
-
-	// Stoptime Only the data created/received before this time should be returned. (i.e. < stoptime)
-	Stoptime *Stoptime `form:"stoptime,omitempty" json:"stoptime,omitempty"`
-
-	// VIN Only the data created by the vehicle with this VIN should be returned
-	VIN *VIN `form:"vin,omitempty" json:"vin,omitempty"`
-
-	// LatestOnly If this value is set to true only the last latest position, matching the trigger filter (if used), is returned for each vehicle in the response. If this value is set to false (or not present) all positions matching the starttime/stoptime criteria is returned for each vehicle in the response.
-	LatestOnly *bool `form:"latestOnly,omitempty" json:"latestOnly,omitempty"`
-
-	// TriggerFilter Will only return data reports that was triggered by the trigger defined by the filter. Detailed information for this parameter can be found in the Trigger filter chapter in the API documentation.
-	TriggerFilter *TriggerType `form:"triggerFilter,omitempty" json:"triggerFilter,omitempty"`
-
-	// LastVIN The response will return the next block of vehicles not including the one with the given VIN. When the last call to the vehicle list function had MoreDataAvailable-parameter set to true you must supply the VIN of the last item in the list as lastVin parameter in the next call.
-	LastVIN *LastVIN `form:"lastVin,omitempty" json:"lastVin,omitempty"`
-
-	// XCorrelationID A client unique request id used for fault tracing at the API supplier. This shall be unique for each request if used. Max 40 characters.
-	XCorrelationID *XCorrelationID `json:"X-Correlation-Id,omitempty"`
-}
-
-// GetVehiclesParams defines parameters for GetVehicles.
-type GetVehiclesParams struct {
-	// LastVIN The response will return the next block of vehicles not including the one with the given VIN. When the last call to the vehicle list function had MoreDataAvailable-parameter set to true you must supply the VIN of the last item in the list as lastVin parameter in the next call.
-	LastVIN *LastVIN `form:"lastVin,omitempty" json:"lastVin,omitempty"`
-
-	// XCorrelationID A client unique request id used for fault tracing at the API supplier. This shall be unique for each request if used. Max 40 characters.
-	XCorrelationID *XCorrelationID `json:"X-Correlation-Id,omitempty"`
-}
-
-// GetVehiclestatusesParams defines parameters for GetVehiclestatuses.
-type GetVehiclestatusesParams struct {
-	// Datetype The start/stop times are compared to the created or received time of the position reports. If this isn't supplied all times are received times.
-	Datetype *Datetype `form:"datetype,omitempty" json:"datetype,omitempty"`
-
-	// Starttime Only the data created/received at or after this time should be returned. (i.e. >= starttime)
-	Starttime *Starttime `form:"starttime,omitempty" json:"starttime,omitempty"`
-
-	// Stoptime Only the data created/received before this time should be returned. (i.e. < stoptime)
-	Stoptime *Stoptime `form:"stoptime,omitempty" json:"stoptime,omitempty"`
-
-	// VIN Only the data created by the vehicle with this VIN should be returned
-	VIN *VIN `form:"vin,omitempty" json:"vin,omitempty"`
-
-	// ContentFilter Will only return data reports that contain information in the area defined by the filters. Detailed information for this parameter can be found in the Content chapter. If this filter parameter isn't supplied the returned reports contain all available blocks. If the content filter is set and the latestOnly is set to true then the response will be the last received data containing the data set in the content filter
-	ContentFilter *[]GetVehiclestatusesParamsContentFilter `form:"contentFilter,omitempty" json:"contentFilter,omitempty"`
-
-	// TriggerFilter Will only return data reports that were triggered by the triggers defined by the filter. Detailed information for this parameter can be found in the Trigger filter chapter in the API documentation. If this filter parameter isn't supplied the returned data reports contain data reports triggered by any trigger.
-	TriggerFilter *[]TriggerType `form:"triggerFilter,omitempty" json:"triggerFilter,omitempty"`
-
-	// LatestOnly If this value is set to true only the last latest vehicle status event, matching the trigger filter (if used), is returned for each vehicle in the response. If this value is set to false (or not present) all vehicle status events matching the starttime/stoptime criteria is returned for each vehicle in the response.
-	LatestOnly *bool `form:"latestOnly,omitempty" json:"latestOnly,omitempty"`
-
-	// LastVIN The response will return the next block of vehicles not including the one with the given VIN. When the last call to the vehicle list function had MoreDataAvailable-parameter set to true you must supply the VIN of the last item in the list as lastVin parameter in the next call.
-	LastVIN *LastVIN `form:"lastVin,omitempty" json:"lastVin,omitempty"`
-
-	// XCorrelationID A client unique request id used for fault tracing at the API supplier. This shall be unique for each request if used. Max 40 characters.
-	XCorrelationID *XCorrelationID `json:"X-Correlation-Id,omitempty"`
-}
-
-// GetVehiclestatusesParamsContentFilter defines parameters for GetVehiclestatuses.
-type GetVehiclestatusesParamsContentFilter string

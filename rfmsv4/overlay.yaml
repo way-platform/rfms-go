@@ -6,6 +6,9 @@ info:
 
 actions:
 
+- target: $.paths
+  remove: true # TODO: Figure out why this is not being removed.
+
 - target: $.components.securitySchemes
   remove: true # TODO: Figure out why this is not being removed.
 
@@ -344,16 +347,6 @@ actions:
   update:
     triggerType:
       $ref: '#/components/schemas/TriggerType'
-
-- target: $.paths./vehiclepositions.get.parameters[6].schema
-  update:
-    type: string
-    $ref: '#/components/schemas/TriggerType'
-
-- target: $.paths./vehiclestatuses.get.parameters[6].schema.items
-  update:
-    type: string
-    $ref: '#/components/schemas/TriggerType'
 
 # Status2OfDoors enum
 - target: $.components.schemas
