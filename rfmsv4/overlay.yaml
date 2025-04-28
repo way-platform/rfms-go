@@ -663,3 +663,7 @@ actions:
         - ERROR
         - NOT_AVAILABLE
       example: CHARGING
+
+- target: $.components.schemas.GNSSPosition.properties.heading
+  update:
+    x-go-type: Int

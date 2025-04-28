@@ -537,7 +537,7 @@ type GNSSPosition struct {
 	Altitude *int `json:"altitude,omitempty"`
 
 	// Heading The direction of the vehicle (0-359)
-	Heading *string `json:"heading,omitempty"`
+	Heading *Int `json:"heading,omitempty"`
 
 	// Latitude Latitude (WGS84 based)
 	Latitude float64 `json:"latitude"`
