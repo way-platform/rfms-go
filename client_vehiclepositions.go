@@ -54,7 +54,14 @@ func (c *Client) ListVehiclePositions(
 	if err != nil {
 		return nil, fmt.Errorf("create request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json; rfms=vehiclepositions.v4.0")
+	switch c.apiVersion {
+	case Version4:
+		req.Header.Set("Accept", "application/json; rfms=vehiclepositions.v4.0")
+	case Version21:
+		req.Header.Set("Accept", "application/vnd.fmsstandard.com.vehiclepositions.v2.1+json; UTF-8")
+	default:
+		return nil, fmt.Errorf("unsupported API version: %s", c.apiVersion)
+	}
 	q := req.URL.Query()
 	if request != nil {
 		if request.LastVIN != "" {

@@ -38,8 +38,14 @@ func (c *Client) ListVehicles(ctx context.Context, request *ListVehiclesRequest)
 	if err != nil {
 		return nil, fmt.Errorf("create request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json; rfms=vehicles.v4.0")
-	// req.Header.Set("Accept", "application/vnd.fmsstandard.com.Vehicles.v2.1+json")
+	switch c.apiVersion {
+	case Version4:
+		req.Header.Set("Accept", "application/json; rfms=vehicles.v4.0")
+	case Version21:
+		req.Header.Set("Accept", "application/vnd.fmsstandard.com.Vehicles.v2.1+json; UTF-8")
+	default:
+		return nil, fmt.Errorf("unsupported API version: %s", c.apiVersion)
+	}
 	q := req.URL.Query()
 	if request != nil && request.LastVIN != "" {
 		q.Set("lastVin", request.LastVIN)

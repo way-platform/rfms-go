@@ -4,15 +4,15 @@ import "net/http"
 
 // ClientConfig is the configuration for a [Client].
 type ClientConfig struct {
-	baseURL   string
-	transport http.RoundTripper
+	apiVersion Version
+	transport  http.RoundTripper
 }
 
 // newClientConfig creates a new default [ClientConfig].
-func newClientConfig(baseURL string) ClientConfig {
+func newClientConfig() ClientConfig {
 	return ClientConfig{
-		baseURL:   baseURL,
-		transport: http.DefaultTransport,
+		apiVersion: Version4,
+		transport:  http.DefaultTransport,
 	}
 }
 
@@ -23,6 +23,13 @@ type ClientOption func(*ClientConfig)
 func WithTransport(transport http.RoundTripper) ClientOption {
 	return func(cc *ClientConfig) {
 		cc.transport = transport
+	}
+}
+
+// WithVersion sets the rFMS API version for the [Client].
+func WithVersion(apiVersion Version) ClientOption {
+	return func(cc *ClientConfig) {
+		cc.apiVersion = apiVersion
 	}
 }
 
