@@ -11,218 +11,218 @@ const (
 	BasicAuthScopes = "basicAuth.Scopes"
 )
 
-// Defines values for AlternatorInfoTypeAlternatorStatus.
+// Defines values for ComFmsStandardRfmsV21AlternatorInfoTypeAlternatorStatus.
 const (
-	AlternatorInfoTypeAlternatorStatusCHARGING     AlternatorInfoTypeAlternatorStatus = "CHARGING"
-	AlternatorInfoTypeAlternatorStatusERROR        AlternatorInfoTypeAlternatorStatus = "ERROR"
-	AlternatorInfoTypeAlternatorStatusNOTAVAILABLE AlternatorInfoTypeAlternatorStatus = "NOT_AVAILABLE"
-	AlternatorInfoTypeAlternatorStatusNOTCHARGING  AlternatorInfoTypeAlternatorStatus = "NOT_CHARGING"
+	ComFmsStandardRfmsV21AlternatorInfoTypeAlternatorStatusCHARGING     ComFmsStandardRfmsV21AlternatorInfoTypeAlternatorStatus = "CHARGING"
+	ComFmsStandardRfmsV21AlternatorInfoTypeAlternatorStatusERROR        ComFmsStandardRfmsV21AlternatorInfoTypeAlternatorStatus = "ERROR"
+	ComFmsStandardRfmsV21AlternatorInfoTypeAlternatorStatusNOTAVAILABLE ComFmsStandardRfmsV21AlternatorInfoTypeAlternatorStatus = "NOT_AVAILABLE"
+	ComFmsStandardRfmsV21AlternatorInfoTypeAlternatorStatusNOTCHARGING  ComFmsStandardRfmsV21AlternatorInfoTypeAlternatorStatus = "NOT_CHARGING"
 )
 
-// Defines values for DoorStatusTypeDoorEnabledStatus.
+// Defines values for ComFmsStandardRfmsV21DoorStatusTypeDoorEnabledStatus.
 const (
-	DoorStatusTypeDoorEnabledStatusDISABLED     DoorStatusTypeDoorEnabledStatus = "DISABLED"
-	DoorStatusTypeDoorEnabledStatusENABLED      DoorStatusTypeDoorEnabledStatus = "ENABLED"
-	DoorStatusTypeDoorEnabledStatusERROR        DoorStatusTypeDoorEnabledStatus = "ERROR"
-	DoorStatusTypeDoorEnabledStatusNOTAVAILABLE DoorStatusTypeDoorEnabledStatus = "NOT_AVAILABLE"
+	ComFmsStandardRfmsV21DoorStatusTypeDoorEnabledStatusDISABLED     ComFmsStandardRfmsV21DoorStatusTypeDoorEnabledStatus = "DISABLED"
+	ComFmsStandardRfmsV21DoorStatusTypeDoorEnabledStatusENABLED      ComFmsStandardRfmsV21DoorStatusTypeDoorEnabledStatus = "ENABLED"
+	ComFmsStandardRfmsV21DoorStatusTypeDoorEnabledStatusERROR        ComFmsStandardRfmsV21DoorStatusTypeDoorEnabledStatus = "ERROR"
+	ComFmsStandardRfmsV21DoorStatusTypeDoorEnabledStatusNOTAVAILABLE ComFmsStandardRfmsV21DoorStatusTypeDoorEnabledStatus = "NOT_AVAILABLE"
 )
 
-// Defines values for DoorStatusTypeDoorLockStatus.
+// Defines values for ComFmsStandardRfmsV21DoorStatusTypeDoorLockStatus.
 const (
-	DoorStatusTypeDoorLockStatusERROR        DoorStatusTypeDoorLockStatus = "ERROR"
-	DoorStatusTypeDoorLockStatusLOCKED       DoorStatusTypeDoorLockStatus = "LOCKED"
-	DoorStatusTypeDoorLockStatusNOTAVAILABLE DoorStatusTypeDoorLockStatus = "NOT_AVAILABLE"
-	DoorStatusTypeDoorLockStatusUNLOCKED     DoorStatusTypeDoorLockStatus = "UNLOCKED"
+	ComFmsStandardRfmsV21DoorStatusTypeDoorLockStatusERROR        ComFmsStandardRfmsV21DoorStatusTypeDoorLockStatus = "ERROR"
+	ComFmsStandardRfmsV21DoorStatusTypeDoorLockStatusLOCKED       ComFmsStandardRfmsV21DoorStatusTypeDoorLockStatus = "LOCKED"
+	ComFmsStandardRfmsV21DoorStatusTypeDoorLockStatusNOTAVAILABLE ComFmsStandardRfmsV21DoorStatusTypeDoorLockStatus = "NOT_AVAILABLE"
+	ComFmsStandardRfmsV21DoorStatusTypeDoorLockStatusUNLOCKED     ComFmsStandardRfmsV21DoorStatusTypeDoorLockStatus = "UNLOCKED"
 )
 
-// Defines values for DoorStatusTypeDoorOpenStatus.
+// Defines values for ComFmsStandardRfmsV21DoorStatusTypeDoorOpenStatus.
 const (
-	DoorStatusTypeDoorOpenStatusCLOSED       DoorStatusTypeDoorOpenStatus = "CLOSED"
-	DoorStatusTypeDoorOpenStatusERROR        DoorStatusTypeDoorOpenStatus = "ERROR"
-	DoorStatusTypeDoorOpenStatusNOTAVAILABLE DoorStatusTypeDoorOpenStatus = "NOT_AVAILABLE"
-	DoorStatusTypeDoorOpenStatusOPEN         DoorStatusTypeDoorOpenStatus = "OPEN"
+	ComFmsStandardRfmsV21DoorStatusTypeDoorOpenStatusCLOSED       ComFmsStandardRfmsV21DoorStatusTypeDoorOpenStatus = "CLOSED"
+	ComFmsStandardRfmsV21DoorStatusTypeDoorOpenStatusERROR        ComFmsStandardRfmsV21DoorStatusTypeDoorOpenStatus = "ERROR"
+	ComFmsStandardRfmsV21DoorStatusTypeDoorOpenStatusNOTAVAILABLE ComFmsStandardRfmsV21DoorStatusTypeDoorOpenStatus = "NOT_AVAILABLE"
+	ComFmsStandardRfmsV21DoorStatusTypeDoorOpenStatusOPEN         ComFmsStandardRfmsV21DoorStatusTypeDoorOpenStatus = "OPEN"
 )
 
-// Defines values for SnapshotTypeDriver1WorkingState.
+// Defines values for ComFmsStandardRfmsV21SnapshotTypeDriver1WorkingState.
 const (
-	SnapshotTypeDriver1WorkingStateDRIVE           SnapshotTypeDriver1WorkingState = "DRIVE"
-	SnapshotTypeDriver1WorkingStateDRIVERAVAILABLE SnapshotTypeDriver1WorkingState = "DRIVER_AVAILABLE"
-	SnapshotTypeDriver1WorkingStateERROR           SnapshotTypeDriver1WorkingState = "ERROR"
-	SnapshotTypeDriver1WorkingStateNOTAVAILABLE    SnapshotTypeDriver1WorkingState = "NOT_AVAILABLE"
-	SnapshotTypeDriver1WorkingStateREST            SnapshotTypeDriver1WorkingState = "REST"
-	SnapshotTypeDriver1WorkingStateWORK            SnapshotTypeDriver1WorkingState = "WORK"
+	ComFmsStandardRfmsV21SnapshotTypeDriver1WorkingStateDRIVE           ComFmsStandardRfmsV21SnapshotTypeDriver1WorkingState = "DRIVE"
+	ComFmsStandardRfmsV21SnapshotTypeDriver1WorkingStateDRIVERAVAILABLE ComFmsStandardRfmsV21SnapshotTypeDriver1WorkingState = "DRIVER_AVAILABLE"
+	ComFmsStandardRfmsV21SnapshotTypeDriver1WorkingStateERROR           ComFmsStandardRfmsV21SnapshotTypeDriver1WorkingState = "ERROR"
+	ComFmsStandardRfmsV21SnapshotTypeDriver1WorkingStateNOTAVAILABLE    ComFmsStandardRfmsV21SnapshotTypeDriver1WorkingState = "NOT_AVAILABLE"
+	ComFmsStandardRfmsV21SnapshotTypeDriver1WorkingStateREST            ComFmsStandardRfmsV21SnapshotTypeDriver1WorkingState = "REST"
+	ComFmsStandardRfmsV21SnapshotTypeDriver1WorkingStateWORK            ComFmsStandardRfmsV21SnapshotTypeDriver1WorkingState = "WORK"
 )
 
-// Defines values for SnapshotTypeDriver2WorkingState.
+// Defines values for ComFmsStandardRfmsV21SnapshotTypeDriver2WorkingState.
 const (
-	SnapshotTypeDriver2WorkingStateDRIVE           SnapshotTypeDriver2WorkingState = "DRIVE"
-	SnapshotTypeDriver2WorkingStateDRIVERAVAILABLE SnapshotTypeDriver2WorkingState = "DRIVER_AVAILABLE"
-	SnapshotTypeDriver2WorkingStateERROR           SnapshotTypeDriver2WorkingState = "ERROR"
-	SnapshotTypeDriver2WorkingStateNOTAVAILABLE    SnapshotTypeDriver2WorkingState = "NOT_AVAILABLE"
-	SnapshotTypeDriver2WorkingStateREST            SnapshotTypeDriver2WorkingState = "REST"
-	SnapshotTypeDriver2WorkingStateWORK            SnapshotTypeDriver2WorkingState = "WORK"
+	ComFmsStandardRfmsV21SnapshotTypeDriver2WorkingStateDRIVE           ComFmsStandardRfmsV21SnapshotTypeDriver2WorkingState = "DRIVE"
+	ComFmsStandardRfmsV21SnapshotTypeDriver2WorkingStateDRIVERAVAILABLE ComFmsStandardRfmsV21SnapshotTypeDriver2WorkingState = "DRIVER_AVAILABLE"
+	ComFmsStandardRfmsV21SnapshotTypeDriver2WorkingStateERROR           ComFmsStandardRfmsV21SnapshotTypeDriver2WorkingState = "ERROR"
+	ComFmsStandardRfmsV21SnapshotTypeDriver2WorkingStateNOTAVAILABLE    ComFmsStandardRfmsV21SnapshotTypeDriver2WorkingState = "NOT_AVAILABLE"
+	ComFmsStandardRfmsV21SnapshotTypeDriver2WorkingStateREST            ComFmsStandardRfmsV21SnapshotTypeDriver2WorkingState = "REST"
+	ComFmsStandardRfmsV21SnapshotTypeDriver2WorkingStateWORK            ComFmsStandardRfmsV21SnapshotTypeDriver2WorkingState = "WORK"
 )
 
-// Defines values for TachoDriverIdentificationTypeDriverAuthenticationEquipment.
+// Defines values for ComFmsStandardRfmsV21TachoDriverIdentificationTypeDriverAuthenticationEquipment.
 const (
-	COMPANYCARD       TachoDriverIdentificationTypeDriverAuthenticationEquipment = "COMPANY_CARD"
-	CONTROLCARD       TachoDriverIdentificationTypeDriverAuthenticationEquipment = "CONTROL_CARD"
-	DRIVERCARD        TachoDriverIdentificationTypeDriverAuthenticationEquipment = "DRIVER_CARD"
-	MANUFACTURINGCARD TachoDriverIdentificationTypeDriverAuthenticationEquipment = "MANUFACTURING_CARD"
-	MOTIONSENSOR      TachoDriverIdentificationTypeDriverAuthenticationEquipment = "MOTION_SENSOR"
-	RESERVED          TachoDriverIdentificationTypeDriverAuthenticationEquipment = "RESERVED"
-	VEHICLEUNIT       TachoDriverIdentificationTypeDriverAuthenticationEquipment = "VEHICLE_UNIT"
+	COMPANYCARD       ComFmsStandardRfmsV21TachoDriverIdentificationTypeDriverAuthenticationEquipment = "COMPANY_CARD"
+	CONTROLCARD       ComFmsStandardRfmsV21TachoDriverIdentificationTypeDriverAuthenticationEquipment = "CONTROL_CARD"
+	DRIVERCARD        ComFmsStandardRfmsV21TachoDriverIdentificationTypeDriverAuthenticationEquipment = "DRIVER_CARD"
+	MANUFACTURINGCARD ComFmsStandardRfmsV21TachoDriverIdentificationTypeDriverAuthenticationEquipment = "MANUFACTURING_CARD"
+	MOTIONSENSOR      ComFmsStandardRfmsV21TachoDriverIdentificationTypeDriverAuthenticationEquipment = "MOTION_SENSOR"
+	RESERVED          ComFmsStandardRfmsV21TachoDriverIdentificationTypeDriverAuthenticationEquipment = "RESERVED"
+	VEHICLEUNIT       ComFmsStandardRfmsV21TachoDriverIdentificationTypeDriverAuthenticationEquipment = "VEHICLE_UNIT"
 )
 
-// Defines values for TellTaleInfoTypeState.
+// Defines values for ComFmsStandardRfmsV21TellTaleInfoTypeState.
 const (
-	TellTaleInfoTypeStateINFO         TellTaleInfoTypeState = "INFO"
-	TellTaleInfoTypeStateNOTAVAILABLE TellTaleInfoTypeState = "NOT_AVAILABLE"
-	TellTaleInfoTypeStateOFF          TellTaleInfoTypeState = "OFF"
-	TellTaleInfoTypeStateRED          TellTaleInfoTypeState = "RED"
-	TellTaleInfoTypeStateRESERVED4    TellTaleInfoTypeState = "RESERVED_4"
-	TellTaleInfoTypeStateRESERVED5    TellTaleInfoTypeState = "RESERVED_5"
-	TellTaleInfoTypeStateRESERVED6    TellTaleInfoTypeState = "RESERVED_6"
-	TellTaleInfoTypeStateYELLOW       TellTaleInfoTypeState = "YELLOW"
+	ComFmsStandardRfmsV21TellTaleInfoTypeStateINFO         ComFmsStandardRfmsV21TellTaleInfoTypeState = "INFO"
+	ComFmsStandardRfmsV21TellTaleInfoTypeStateNOTAVAILABLE ComFmsStandardRfmsV21TellTaleInfoTypeState = "NOT_AVAILABLE"
+	ComFmsStandardRfmsV21TellTaleInfoTypeStateOFF          ComFmsStandardRfmsV21TellTaleInfoTypeState = "OFF"
+	ComFmsStandardRfmsV21TellTaleInfoTypeStateRED          ComFmsStandardRfmsV21TellTaleInfoTypeState = "RED"
+	ComFmsStandardRfmsV21TellTaleInfoTypeStateRESERVED4    ComFmsStandardRfmsV21TellTaleInfoTypeState = "RESERVED_4"
+	ComFmsStandardRfmsV21TellTaleInfoTypeStateRESERVED5    ComFmsStandardRfmsV21TellTaleInfoTypeState = "RESERVED_5"
+	ComFmsStandardRfmsV21TellTaleInfoTypeStateRESERVED6    ComFmsStandardRfmsV21TellTaleInfoTypeState = "RESERVED_6"
+	ComFmsStandardRfmsV21TellTaleInfoTypeStateYELLOW       ComFmsStandardRfmsV21TellTaleInfoTypeState = "YELLOW"
 )
 
-// Defines values for TellTaleInfoTypeTellTale.
+// Defines values for ComFmsStandardRfmsV21TellTaleInfoTypeTellTale.
 const (
-	ABSTRAILER                      TellTaleInfoTypeTellTale = "ABS_TRAILER"
-	ACC                             TellTaleInfoTypeTellTale = "ACC"
-	ADBLUELEVEL                     TellTaleInfoTypeTellTale = "ADBLUE_LEVEL"
-	ADVANCEDEMERGENCYBREAKING       TellTaleInfoTypeTellTale = "ADVANCED_EMERGENCY_BREAKING"
-	AIRBAG                          TellTaleInfoTypeTellTale = "AIRBAG"
-	AIRFILTERCLOGGED                TellTaleInfoTypeTellTale = "AIR_FILTER_CLOGGED"
-	ANTILOCKBRAKEFAILURE            TellTaleInfoTypeTellTale = "ANTI_LOCK_BRAKE_FAILURE"
-	ARTICULATION                    TellTaleInfoTypeTellTale = "ARTICULATION"
-	AUXILLARYAIRPRESSURE            TellTaleInfoTypeTellTale = "AUXILLARY_AIR_PRESSURE"
-	BATTERYCHARGINGCONDITION        TellTaleInfoTypeTellTale = "BATTERY_CHARGING_CONDITION"
-	BRAKELIGHTS                     TellTaleInfoTypeTellTale = "BRAKE_LIGHTS"
-	BRAKEMALFUNCTION                TellTaleInfoTypeTellTale = "BRAKE_MALFUNCTION"
-	BUSSTOPBRAKE                    TellTaleInfoTypeTellTale = "BUS_STOP_BRAKE"
-	COOLINGAIRCONDITIONING          TellTaleInfoTypeTellTale = "COOLING_AIR_CONDITIONING"
-	EBS                             TellTaleInfoTypeTellTale = "EBS"
-	EBSTRAILER12                    TellTaleInfoTypeTellTale = "EBS_TRAILER_1_2"
-	ENGINECOMPARTMENTTEMPERATURE    TellTaleInfoTypeTellTale = "ENGINE_COMPARTMENT_TEMPERATURE"
-	ENGINECOOLANTLEVEL              TellTaleInfoTypeTellTale = "ENGINE_COOLANT_LEVEL"
-	ENGINECOOLANTTEMPERATURE        TellTaleInfoTypeTellTale = "ENGINE_COOLANT_TEMPERATURE"
-	ENGINEEMISSIONFAILURE           TellTaleInfoTypeTellTale = "ENGINE_EMISSION_FAILURE"
-	ENGINEMILINDICATOR              TellTaleInfoTypeTellTale = "ENGINE_MIL_INDICATOR"
-	ENGINEOIL                       TellTaleInfoTypeTellTale = "ENGINE_OIL"
-	ENGINEOILLEVEL                  TellTaleInfoTypeTellTale = "ENGINE_OIL_LEVEL"
-	ENGINEOILTEMPERATURE            TellTaleInfoTypeTellTale = "ENGINE_OIL_TEMPERATURE"
-	ESCINDICATOR                    TellTaleInfoTypeTellTale = "ESC_INDICATOR"
-	ESCSWITCHEDOFF                  TellTaleInfoTypeTellTale = "ESC_SWITCHED_OFF"
-	FRONTFOGLIGHT                   TellTaleInfoTypeTellTale = "FRONT_FOG_LIGHT"
-	FUELFILTERDIFFPRESSURE          TellTaleInfoTypeTellTale = "FUEL_FILTER_DIFF_PRESSURE"
-	FUELLEVEL                       TellTaleInfoTypeTellTale = "FUEL_LEVEL"
-	GENERALFAILURE                  TellTaleInfoTypeTellTale = "GENERAL_FAILURE"
-	HATCHOPEN                       TellTaleInfoTypeTellTale = "HATCH_OPEN"
-	HAZARDWARNING                   TellTaleInfoTypeTellTale = "HAZARD_WARNING"
-	HEIGHTCONTROL                   TellTaleInfoTypeTellTale = "HEIGHT_CONTROL"
-	HIGHBEAMMAINBEAM                TellTaleInfoTypeTellTale = "HIGH_BEAM_MAIN_BEAM"
-	KNEELING                        TellTaleInfoTypeTellTale = "KNEELING"
-	LANEDEPARTUREINDICATOR          TellTaleInfoTypeTellTale = "LANE_DEPARTURE_INDICATOR"
-	LANEDEPARTUREWARNINGSWITCHEDOFF TellTaleInfoTypeTellTale = "LANE_DEPARTURE_WARNING_SWITCHED_OFF"
-	LOWBEAMDIPPEDBEAM               TellTaleInfoTypeTellTale = "LOW_BEAM_DIPPED_BEAM"
-	LOWERING                        TellTaleInfoTypeTellTale = "LOWERING"
-	OEMSPECIFICTELLTALE             TellTaleInfoTypeTellTale = "OEM_SPECIFIC_TELL_TALE"
-	PARKINGBRAKE                    TellTaleInfoTypeTellTale = "PARKING_BRAKE"
-	PARKINGHEATER                   TellTaleInfoTypeTellTale = "PARKING_HEATER"
-	POSITIONLIGHTS                  TellTaleInfoTypeTellTale = "POSITION_LIGHTS"
-	PRAMREQUEST                     TellTaleInfoTypeTellTale = "PRAM_REQUEST"
-	PROVISIONINGHANDICAPPEDPERSON   TellTaleInfoTypeTellTale = "PROVISIONING_HANDICAPPED_PERSON"
-	RAISING                         TellTaleInfoTypeTellTale = "RAISING"
-	REARFOGLIGHT                    TellTaleInfoTypeTellTale = "REAR_FOG_LIGHT"
-	RETARDER                        TellTaleInfoTypeTellTale = "RETARDER"
-	SEATBELT                        TellTaleInfoTypeTellTale = "SEAT_BELT"
-	SERVICECALLFORMAINTENANCE       TellTaleInfoTypeTellTale = "SERVICE_CALL_FOR_MAINTENANCE"
-	STEERINGFAILURE                 TellTaleInfoTypeTellTale = "STEERING_FAILURE"
-	STEERINGFLUIDLEVEL              TellTaleInfoTypeTellTale = "STEERING_FLUID_LEVEL"
-	STOPREQUEST                     TellTaleInfoTypeTellTale = "STOP_REQUEST"
-	TACHOGRAPHINDICATOR             TellTaleInfoTypeTellTale = "TACHOGRAPH_INDICATOR"
-	TIREMALFUNCTION                 TellTaleInfoTypeTellTale = "TIRE_MALFUNCTION"
-	TRAILERCONNECTED                TellTaleInfoTypeTellTale = "TRAILER_CONNECTED"
-	TRANSMISSIONFLUIDTEMPERATURE    TellTaleInfoTypeTellTale = "TRANSMISSION_FLUID_TEMPERATURE"
-	TRANSMISSIONMALFUNCTION         TellTaleInfoTypeTellTale = "TRANSMISSION_MALFUNCTION"
-	TURNSIGNALS                     TellTaleInfoTypeTellTale = "TURN_SIGNALS"
-	WINDSCREENWASHERFLUID           TellTaleInfoTypeTellTale = "WINDSCREEN_WASHER_FLUID"
-	WORNBRAKELININGS                TellTaleInfoTypeTellTale = "WORN_BRAKE_LININGS"
+	ABSTRAILER                      ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "ABS_TRAILER"
+	ACC                             ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "ACC"
+	ADBLUELEVEL                     ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "ADBLUE_LEVEL"
+	ADVANCEDEMERGENCYBREAKING       ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "ADVANCED_EMERGENCY_BREAKING"
+	AIRBAG                          ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "AIRBAG"
+	AIRFILTERCLOGGED                ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "AIR_FILTER_CLOGGED"
+	ANTILOCKBRAKEFAILURE            ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "ANTI_LOCK_BRAKE_FAILURE"
+	ARTICULATION                    ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "ARTICULATION"
+	AUXILLARYAIRPRESSURE            ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "AUXILLARY_AIR_PRESSURE"
+	BATTERYCHARGINGCONDITION        ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "BATTERY_CHARGING_CONDITION"
+	BRAKELIGHTS                     ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "BRAKE_LIGHTS"
+	BRAKEMALFUNCTION                ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "BRAKE_MALFUNCTION"
+	BUSSTOPBRAKE                    ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "BUS_STOP_BRAKE"
+	COOLINGAIRCONDITIONING          ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "COOLING_AIR_CONDITIONING"
+	EBS                             ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "EBS"
+	EBSTRAILER12                    ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "EBS_TRAILER_1_2"
+	ENGINECOMPARTMENTTEMPERATURE    ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "ENGINE_COMPARTMENT_TEMPERATURE"
+	ENGINECOOLANTLEVEL              ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "ENGINE_COOLANT_LEVEL"
+	ENGINECOOLANTTEMPERATURE        ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "ENGINE_COOLANT_TEMPERATURE"
+	ENGINEEMISSIONFAILURE           ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "ENGINE_EMISSION_FAILURE"
+	ENGINEMILINDICATOR              ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "ENGINE_MIL_INDICATOR"
+	ENGINEOIL                       ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "ENGINE_OIL"
+	ENGINEOILLEVEL                  ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "ENGINE_OIL_LEVEL"
+	ENGINEOILTEMPERATURE            ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "ENGINE_OIL_TEMPERATURE"
+	ESCINDICATOR                    ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "ESC_INDICATOR"
+	ESCSWITCHEDOFF                  ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "ESC_SWITCHED_OFF"
+	FRONTFOGLIGHT                   ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "FRONT_FOG_LIGHT"
+	FUELFILTERDIFFPRESSURE          ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "FUEL_FILTER_DIFF_PRESSURE"
+	FUELLEVEL                       ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "FUEL_LEVEL"
+	GENERALFAILURE                  ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "GENERAL_FAILURE"
+	HATCHOPEN                       ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "HATCH_OPEN"
+	HAZARDWARNING                   ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "HAZARD_WARNING"
+	HEIGHTCONTROL                   ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "HEIGHT_CONTROL"
+	HIGHBEAMMAINBEAM                ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "HIGH_BEAM_MAIN_BEAM"
+	KNEELING                        ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "KNEELING"
+	LANEDEPARTUREINDICATOR          ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "LANE_DEPARTURE_INDICATOR"
+	LANEDEPARTUREWARNINGSWITCHEDOFF ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "LANE_DEPARTURE_WARNING_SWITCHED_OFF"
+	LOWBEAMDIPPEDBEAM               ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "LOW_BEAM_DIPPED_BEAM"
+	LOWERING                        ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "LOWERING"
+	OEMSPECIFICTELLTALE             ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "OEM_SPECIFIC_TELL_TALE"
+	PARKINGBRAKE                    ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "PARKING_BRAKE"
+	PARKINGHEATER                   ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "PARKING_HEATER"
+	POSITIONLIGHTS                  ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "POSITION_LIGHTS"
+	PRAMREQUEST                     ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "PRAM_REQUEST"
+	PROVISIONINGHANDICAPPEDPERSON   ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "PROVISIONING_HANDICAPPED_PERSON"
+	RAISING                         ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "RAISING"
+	REARFOGLIGHT                    ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "REAR_FOG_LIGHT"
+	RETARDER                        ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "RETARDER"
+	SEATBELT                        ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "SEAT_BELT"
+	SERVICECALLFORMAINTENANCE       ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "SERVICE_CALL_FOR_MAINTENANCE"
+	STEERINGFAILURE                 ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "STEERING_FAILURE"
+	STEERINGFLUIDLEVEL              ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "STEERING_FLUID_LEVEL"
+	STOPREQUEST                     ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "STOP_REQUEST"
+	TACHOGRAPHINDICATOR             ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "TACHOGRAPH_INDICATOR"
+	TIREMALFUNCTION                 ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "TIRE_MALFUNCTION"
+	TRAILERCONNECTED                ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "TRAILER_CONNECTED"
+	TRANSMISSIONFLUIDTEMPERATURE    ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "TRANSMISSION_FLUID_TEMPERATURE"
+	TRANSMISSIONMALFUNCTION         ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "TRANSMISSION_MALFUNCTION"
+	TURNSIGNALS                     ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "TURN_SIGNALS"
+	WINDSCREENWASHERFLUID           ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "WINDSCREEN_WASHER_FLUID"
+	WORNBRAKELININGS                ComFmsStandardRfmsV21TellTaleInfoTypeTellTale = "WORN_BRAKE_LININGS"
 )
 
-// Defines values for VehicleStatusTypeStatus2OfDoors.
+// Defines values for ComFmsStandardRfmsV21VehicleStatusTypeStatus2OfDoors.
 const (
-	VehicleStatusTypeStatus2OfDoorsALLDOORSDISABLED      VehicleStatusTypeStatus2OfDoors = "ALL_DOORS_DISABLED"
-	VehicleStatusTypeStatus2OfDoorsATLEASTONEDOORENABLED VehicleStatusTypeStatus2OfDoors = "AT_LEAST_ONE_DOOR_ENABLED"
-	VehicleStatusTypeStatus2OfDoorsERROR                 VehicleStatusTypeStatus2OfDoors = "ERROR"
-	VehicleStatusTypeStatus2OfDoorsNOTAVAILABLE          VehicleStatusTypeStatus2OfDoors = "NOT_AVAILABLE"
+	ComFmsStandardRfmsV21VehicleStatusTypeStatus2OfDoorsALLDOORSDISABLED      ComFmsStandardRfmsV21VehicleStatusTypeStatus2OfDoors = "ALL_DOORS_DISABLED"
+	ComFmsStandardRfmsV21VehicleStatusTypeStatus2OfDoorsATLEASTONEDOORENABLED ComFmsStandardRfmsV21VehicleStatusTypeStatus2OfDoors = "AT_LEAST_ONE_DOOR_ENABLED"
+	ComFmsStandardRfmsV21VehicleStatusTypeStatus2OfDoorsERROR                 ComFmsStandardRfmsV21VehicleStatusTypeStatus2OfDoors = "ERROR"
+	ComFmsStandardRfmsV21VehicleStatusTypeStatus2OfDoorsNOTAVAILABLE          ComFmsStandardRfmsV21VehicleStatusTypeStatus2OfDoors = "NOT_AVAILABLE"
 )
 
-// AccumulatedType defines model for AccumulatedType.
-type AccumulatedType struct {
-	AccelerationClass                     *FromToClassesType `json:"AccelerationClass,omitempty"`
-	AccelerationDuringBrakeClass          *FromToClassesType `json:"AccelerationDuringBrakeClass,omitempty"`
-	AccelerationPedalPositionClass        *FromToClassesType `json:"AccelerationPedalPositionClass,omitempty"`
-	BrakePedalCounterSpeedOverZero        *int64             `json:"BrakePedalCounterSpeedOverZero,omitempty"`
-	ChairliftCounter                      *int64             `json:"ChairliftCounter,omitempty"`
-	CurrentGearClass                      *LabelClassesType  `json:"CurrentGearClass,omitempty"`
-	DistanceBrakePedalActiveSpeedOverZero *int64             `json:"DistanceBrakePedalActiveSpeedOverZero,omitempty"`
-	DistanceCruiseControlActive           *int64             `json:"DistanceCruiseControlActive,omitempty"`
-	DrivingWithoutTorqueClass             *LabelClassesType  `json:"DrivingWithoutTorqueClass,omitempty"`
-	DurationCruiseControlActive           *int64             `json:"DurationCruiseControlActive,omitempty"`
-	DurationWheelbaseSpeedOverZero        *int64             `json:"DurationWheelbaseSpeedOverZero,omitempty"`
-	DurationWheelbaseSpeedZero            *int64             `json:"DurationWheelbaseSpeedZero,omitempty"`
-	EngineSpeedClass                      *FromToClassesType `json:"EngineSpeedClass,omitempty"`
-	EngineTorqueAtCurrentSpeedClass       *FromToClassesType `json:"EngineTorqueAtCurrentSpeedClass,omitempty"`
-	EngineTorqueClass                     *FromToClassesType `json:"EngineTorqueClass,omitempty"`
-	FuelConsumptionCruiseControlActive    *int64             `json:"FuelConsumptionCruiseControlActive,omitempty"`
-	FuelWheelbaseSpeedOverZero            *int64             `json:"FuelWheelbaseSpeedOverZero,omitempty"`
-	FuelWheelbaseSpeedZero                *int64             `json:"FuelWheelbaseSpeedZero,omitempty"`
-	HighAccelerationClass                 *FromToClassesType `json:"HighAccelerationClass,omitempty"`
-	KneelingCounter                       *int64             `json:"KneelingCounter,omitempty"`
-	PramRequestCounter                    *int64             `json:"PramRequestCounter,omitempty"`
-	PtoActiveClass                        *LabelClassesType  `json:"PtoActiveClass,omitempty"`
-	RetarderTorqueClass                   *FromToClassesType `json:"RetarderTorqueClass,omitempty"`
-	SelectedGearClass                     *LabelClassesType  `json:"SelectedGearClass,omitempty"`
-	StopRequestCounter                    *int64             `json:"StopRequestCounter,omitempty"`
-	VehicleSpeedClass                     *FromToClassesType `json:"VehicleSpeedClass,omitempty"`
+// ComFmsStandardRfmsV21AccumulatedType defines model for com.fms_standard.rfms.v2_1.AccumulatedType.
+type ComFmsStandardRfmsV21AccumulatedType struct {
+	AccelerationClass                     *ComFmsStandardRfmsV21FromToClassesType `json:"AccelerationClass,omitempty"`
+	AccelerationDuringBrakeClass          *ComFmsStandardRfmsV21FromToClassesType `json:"AccelerationDuringBrakeClass,omitempty"`
+	AccelerationPedalPositionClass        *ComFmsStandardRfmsV21FromToClassesType `json:"AccelerationPedalPositionClass,omitempty"`
+	BrakePedalCounterSpeedOverZero        *int64                                  `json:"BrakePedalCounterSpeedOverZero,omitempty"`
+	ChairliftCounter                      *int64                                  `json:"ChairliftCounter,omitempty"`
+	CurrentGearClass                      *ComFmsStandardRfmsV21LabelClassesType  `json:"CurrentGearClass,omitempty"`
+	DistanceBrakePedalActiveSpeedOverZero *int64                                  `json:"DistanceBrakePedalActiveSpeedOverZero,omitempty"`
+	DistanceCruiseControlActive           *int64                                  `json:"DistanceCruiseControlActive,omitempty"`
+	DrivingWithoutTorqueClass             *ComFmsStandardRfmsV21LabelClassesType  `json:"DrivingWithoutTorqueClass,omitempty"`
+	DurationCruiseControlActive           *int64                                  `json:"DurationCruiseControlActive,omitempty"`
+	DurationWheelbaseSpeedOverZero        *int64                                  `json:"DurationWheelbaseSpeedOverZero,omitempty"`
+	DurationWheelbaseSpeedZero            *int64                                  `json:"DurationWheelbaseSpeedZero,omitempty"`
+	EngineSpeedClass                      *ComFmsStandardRfmsV21FromToClassesType `json:"EngineSpeedClass,omitempty"`
+	EngineTorqueAtCurrentSpeedClass       *ComFmsStandardRfmsV21FromToClassesType `json:"EngineTorqueAtCurrentSpeedClass,omitempty"`
+	EngineTorqueClass                     *ComFmsStandardRfmsV21FromToClassesType `json:"EngineTorqueClass,omitempty"`
+	FuelConsumptionCruiseControlActive    *int64                                  `json:"FuelConsumptionCruiseControlActive,omitempty"`
+	FuelWheelbaseSpeedOverZero            *int64                                  `json:"FuelWheelbaseSpeedOverZero,omitempty"`
+	FuelWheelbaseSpeedZero                *int64                                  `json:"FuelWheelbaseSpeedZero,omitempty"`
+	HighAccelerationClass                 *ComFmsStandardRfmsV21FromToClassesType `json:"HighAccelerationClass,omitempty"`
+	KneelingCounter                       *int64                                  `json:"KneelingCounter,omitempty"`
+	PramRequestCounter                    *int64                                  `json:"PramRequestCounter,omitempty"`
+	PtoActiveClass                        *ComFmsStandardRfmsV21LabelClassesType  `json:"PtoActiveClass,omitempty"`
+	RetarderTorqueClass                   *ComFmsStandardRfmsV21FromToClassesType `json:"RetarderTorqueClass,omitempty"`
+	SelectedGearClass                     *ComFmsStandardRfmsV21LabelClassesType  `json:"SelectedGearClass,omitempty"`
+	StopRequestCounter                    *int64                                  `json:"StopRequestCounter,omitempty"`
+	VehicleSpeedClass                     *ComFmsStandardRfmsV21FromToClassesType `json:"VehicleSpeedClass,omitempty"`
 }
 
-// AlternatorInfoType defines model for AlternatorInfoType.
-type AlternatorInfoType struct {
-	AlternatorNumber *int64                             `json:"AlternatorNumber,omitempty"`
-	AlternatorStatus AlternatorInfoTypeAlternatorStatus `json:"AlternatorStatus"`
+// ComFmsStandardRfmsV21AlternatorInfoType defines model for com.fms_standard.rfms.v2_1.AlternatorInfoType.
+type ComFmsStandardRfmsV21AlternatorInfoType struct {
+	AlternatorNumber *int64                                                  `json:"AlternatorNumber,omitempty"`
+	AlternatorStatus ComFmsStandardRfmsV21AlternatorInfoTypeAlternatorStatus `json:"AlternatorStatus"`
 }
 
-// AlternatorInfoTypeAlternatorStatus defines model for AlternatorInfoType.AlternatorStatus.
-type AlternatorInfoTypeAlternatorStatus string
+// ComFmsStandardRfmsV21AlternatorInfoTypeAlternatorStatus defines model for ComFmsStandardRfmsV21AlternatorInfoType.AlternatorStatus.
+type ComFmsStandardRfmsV21AlternatorInfoTypeAlternatorStatus string
 
-// DoorStatusType defines model for DoorStatusType.
-type DoorStatusType struct {
-	DoorEnabledStatus *DoorStatusTypeDoorEnabledStatus `json:"DoorEnabledStatus,omitempty"`
-	DoorLockStatus    *DoorStatusTypeDoorLockStatus    `json:"DoorLockStatus,omitempty"`
-	DoorNumber        *int64                           `json:"DoorNumber,omitempty"`
-	DoorOpenStatus    *DoorStatusTypeDoorOpenStatus    `json:"DoorOpenStatus,omitempty"`
+// ComFmsStandardRfmsV21DoorStatusType defines model for com.fms_standard.rfms.v2_1.DoorStatusType.
+type ComFmsStandardRfmsV21DoorStatusType struct {
+	DoorEnabledStatus *ComFmsStandardRfmsV21DoorStatusTypeDoorEnabledStatus `json:"DoorEnabledStatus,omitempty"`
+	DoorLockStatus    *ComFmsStandardRfmsV21DoorStatusTypeDoorLockStatus    `json:"DoorLockStatus,omitempty"`
+	DoorNumber        *int64                                                `json:"DoorNumber,omitempty"`
+	DoorOpenStatus    *ComFmsStandardRfmsV21DoorStatusTypeDoorOpenStatus    `json:"DoorOpenStatus,omitempty"`
 }
 
-// DoorStatusTypeDoorEnabledStatus defines model for DoorStatusType.DoorEnabledStatus.
-type DoorStatusTypeDoorEnabledStatus string
+// ComFmsStandardRfmsV21DoorStatusTypeDoorEnabledStatus defines model for ComFmsStandardRfmsV21DoorStatusType.DoorEnabledStatus.
+type ComFmsStandardRfmsV21DoorStatusTypeDoorEnabledStatus string
 
-// DoorStatusTypeDoorLockStatus defines model for DoorStatusType.DoorLockStatus.
-type DoorStatusTypeDoorLockStatus string
+// ComFmsStandardRfmsV21DoorStatusTypeDoorLockStatus defines model for ComFmsStandardRfmsV21DoorStatusType.DoorLockStatus.
+type ComFmsStandardRfmsV21DoorStatusTypeDoorLockStatus string
 
-// DoorStatusTypeDoorOpenStatus defines model for DoorStatusType.DoorOpenStatus.
-type DoorStatusTypeDoorOpenStatus string
+// ComFmsStandardRfmsV21DoorStatusTypeDoorOpenStatus defines model for ComFmsStandardRfmsV21DoorStatusType.DoorOpenStatus.
+type ComFmsStandardRfmsV21DoorStatusTypeDoorOpenStatus string
 
-// DriverIdType defines model for DriverIdType.
-type DriverIdType struct {
-	OemDriverIdentification   *OemDriverIdentificationType   `json:"OemDriverIdentification,omitempty"`
-	TachoDriverIdentification *TachoDriverIdentificationType `json:"TachoDriverIdentification,omitempty"`
+// ComFmsStandardRfmsV21DriverIdType defines model for com.fms_standard.rfms.v2_1.DriverIdType.
+type ComFmsStandardRfmsV21DriverIdType struct {
+	OemDriverIdentification   *ComFmsStandardRfmsV21OemDriverIdentificationType   `json:"OemDriverIdentification,omitempty"`
+	TachoDriverIdentification *ComFmsStandardRfmsV21TachoDriverIdentificationType `json:"TachoDriverIdentification,omitempty"`
 }
 
-// FromToClassType defines model for FromToClassType.
-type FromToClassType struct {
+// ComFmsStandardRfmsV21FromToClassType defines model for com.fms_standard.rfms.v2_1.FromToClassType.
+type ComFmsStandardRfmsV21FromToClassType struct {
 	From        *float64 `json:"From,omitempty"`
 	Meters      *int64   `json:"Meters,omitempty"`
 	MilliLitres *int64   `json:"MilliLitres,omitempty"`
@@ -230,13 +230,13 @@ type FromToClassType struct {
 	To          *float64 `json:"To,omitempty"`
 }
 
-// FromToClassesType defines model for FromToClassesType.
-type FromToClassesType struct {
-	Value *[]FromToClassType `json:"Value,omitempty"`
+// ComFmsStandardRfmsV21FromToClassesType defines model for com.fms_standard.rfms.v2_1.FromToClassesType.
+type ComFmsStandardRfmsV21FromToClassesType struct {
+	Value *[]ComFmsStandardRfmsV21FromToClassType `json:"Value,omitempty"`
 }
 
-// GNSSPositionType defines model for GNSSPositionType.
-type GNSSPositionType struct {
+// ComFmsStandardRfmsV21GNSSPositionType defines model for com.fms_standard.rfms.v2_1.GNSSPositionType.
+type ComFmsStandardRfmsV21GNSSPositionType struct {
 	Altitude         *int64    `json:"Altitude,omitempty"`
 	Heading          *int32    `json:"Heading,omitempty"`
 	Latitude         *float64  `json:"Latitude,omitempty"`
@@ -245,172 +245,172 @@ type GNSSPositionType struct {
 	Speed            *float64  `json:"Speed,omitempty"`
 }
 
-// LabelClassType defines model for LabelClassType.
-type LabelClassType struct {
+// ComFmsStandardRfmsV21LabelClassType defines model for com.fms_standard.rfms.v2_1.LabelClassType.
+type ComFmsStandardRfmsV21LabelClassType struct {
 	Label       string `json:"Label"`
 	Meters      *int64 `json:"Meters,omitempty"`
 	MilliLitres *int64 `json:"MilliLitres,omitempty"`
 	Seconds     *int64 `json:"Seconds,omitempty"`
 }
 
-// LabelClassesType defines model for LabelClassesType.
-type LabelClassesType struct {
-	Value *[]LabelClassType `json:"Value,omitempty"`
+// ComFmsStandardRfmsV21LabelClassesType defines model for com.fms_standard.rfms.v2_1.LabelClassesType.
+type ComFmsStandardRfmsV21LabelClassesType struct {
+	Value *[]ComFmsStandardRfmsV21LabelClassType `json:"Value,omitempty"`
 }
 
-// OemDriverIdentificationType defines model for OemDriverIdentificationType.
-type OemDriverIdentificationType struct {
+// ComFmsStandardRfmsV21OemDriverIdentificationType defines model for com.fms_standard.rfms.v2_1.OemDriverIdentificationType.
+type ComFmsStandardRfmsV21OemDriverIdentificationType struct {
 	IdType                  *string `json:"IdType,omitempty"`
 	OemDriverIdentification string  `json:"OemDriverIdentification"`
 }
 
-// ProductionDateType defines model for ProductionDateType.
-type ProductionDateType struct {
+// ComFmsStandardRfmsV21ProductionDateType defines model for com.fms_standard.rfms.v2_1.ProductionDateType.
+type ComFmsStandardRfmsV21ProductionDateType struct {
 	Day   *int32 `json:"Day,omitempty"`
 	Month *int32 `json:"Month,omitempty"`
 	Year  *int32 `json:"Year,omitempty"`
 }
 
-// SnapshotType defines model for SnapshotType.
-type SnapshotType struct {
-	AmbientAirTemperature *float64                         `json:"AmbientAirTemperature,omitempty"`
-	CatalystFuelLevel     *float64                         `json:"CatalystFuelLevel,omitempty"`
-	Driver1WorkingState   *SnapshotTypeDriver1WorkingState `json:"Driver1WorkingState,omitempty"`
-	Driver2Id             *DriverIdType                    `json:"Driver2Id,omitempty"`
-	Driver2WorkingState   *SnapshotTypeDriver2WorkingState `json:"Driver2WorkingState,omitempty"`
-	EngineSpeed           *float64                         `json:"EngineSpeed,omitempty"`
-	FuelLevel1            *float64                         `json:"FuelLevel1,omitempty"`
-	GNSSPosition          *GNSSPositionType                `json:"GNSSPosition,omitempty"`
-	TachographSpeed       *float64                         `json:"TachographSpeed,omitempty"`
-	WheelBasedSpeed       *float64                         `json:"WheelBasedSpeed,omitempty"`
+// ComFmsStandardRfmsV21SnapshotType defines model for com.fms_standard.rfms.v2_1.SnapshotType.
+type ComFmsStandardRfmsV21SnapshotType struct {
+	AmbientAirTemperature *float64                                              `json:"AmbientAirTemperature,omitempty"`
+	CatalystFuelLevel     *float64                                              `json:"CatalystFuelLevel,omitempty"`
+	Driver1WorkingState   *ComFmsStandardRfmsV21SnapshotTypeDriver1WorkingState `json:"Driver1WorkingState,omitempty"`
+	Driver2Id             *ComFmsStandardRfmsV21DriverIdType                    `json:"Driver2Id,omitempty"`
+	Driver2WorkingState   *ComFmsStandardRfmsV21SnapshotTypeDriver2WorkingState `json:"Driver2WorkingState,omitempty"`
+	EngineSpeed           *float64                                              `json:"EngineSpeed,omitempty"`
+	FuelLevel1            *float64                                              `json:"FuelLevel1,omitempty"`
+	GNSSPosition          *ComFmsStandardRfmsV21GNSSPositionType                `json:"GNSSPosition,omitempty"`
+	TachographSpeed       *float64                                              `json:"TachographSpeed,omitempty"`
+	WheelBasedSpeed       *float64                                              `json:"WheelBasedSpeed,omitempty"`
 }
 
-// SnapshotTypeDriver1WorkingState defines model for SnapshotType.Driver1WorkingState.
-type SnapshotTypeDriver1WorkingState string
+// ComFmsStandardRfmsV21SnapshotTypeDriver1WorkingState defines model for ComFmsStandardRfmsV21SnapshotType.Driver1WorkingState.
+type ComFmsStandardRfmsV21SnapshotTypeDriver1WorkingState string
 
-// SnapshotTypeDriver2WorkingState defines model for SnapshotType.Driver2WorkingState.
-type SnapshotTypeDriver2WorkingState string
+// ComFmsStandardRfmsV21SnapshotTypeDriver2WorkingState defines model for ComFmsStandardRfmsV21SnapshotType.Driver2WorkingState.
+type ComFmsStandardRfmsV21SnapshotTypeDriver2WorkingState string
 
-// TachoDriverIdentificationType defines model for TachoDriverIdentificationType.
-type TachoDriverIdentificationType struct {
-	CardIssuingMemberState        string                                                      `json:"CardIssuingMemberState"`
-	CardRenewalIndex              *string                                                     `json:"CardRenewalIndex,omitempty"`
-	CardReplacementIndex          *string                                                     `json:"CardReplacementIndex,omitempty"`
-	DriverAuthenticationEquipment *TachoDriverIdentificationTypeDriverAuthenticationEquipment `json:"DriverAuthenticationEquipment,omitempty"`
-	DriverIdentification          string                                                      `json:"DriverIdentification"`
+// ComFmsStandardRfmsV21TachoDriverIdentificationType defines model for com.fms_standard.rfms.v2_1.TachoDriverIdentificationType.
+type ComFmsStandardRfmsV21TachoDriverIdentificationType struct {
+	CardIssuingMemberState        string                                                                           `json:"CardIssuingMemberState"`
+	CardRenewalIndex              *string                                                                          `json:"CardRenewalIndex,omitempty"`
+	CardReplacementIndex          *string                                                                          `json:"CardReplacementIndex,omitempty"`
+	DriverAuthenticationEquipment *ComFmsStandardRfmsV21TachoDriverIdentificationTypeDriverAuthenticationEquipment `json:"DriverAuthenticationEquipment,omitempty"`
+	DriverIdentification          string                                                                           `json:"DriverIdentification"`
 }
 
-// TachoDriverIdentificationTypeDriverAuthenticationEquipment defines model for TachoDriverIdentificationType.DriverAuthenticationEquipment.
-type TachoDriverIdentificationTypeDriverAuthenticationEquipment string
+// ComFmsStandardRfmsV21TachoDriverIdentificationTypeDriverAuthenticationEquipment defines model for ComFmsStandardRfmsV21TachoDriverIdentificationType.DriverAuthenticationEquipment.
+type ComFmsStandardRfmsV21TachoDriverIdentificationTypeDriverAuthenticationEquipment string
 
-// TellTaleInfoType defines model for TellTaleInfoType.
-type TellTaleInfoType struct {
-	State    TellTaleInfoTypeState    `json:"State"`
-	TellTale TellTaleInfoTypeTellTale `json:"TellTale"`
+// ComFmsStandardRfmsV21TellTaleInfoType defines model for com.fms_standard.rfms.v2_1.TellTaleInfoType.
+type ComFmsStandardRfmsV21TellTaleInfoType struct {
+	State    ComFmsStandardRfmsV21TellTaleInfoTypeState    `json:"State"`
+	TellTale ComFmsStandardRfmsV21TellTaleInfoTypeTellTale `json:"TellTale"`
 }
 
-// TellTaleInfoTypeState defines model for TellTaleInfoType.State.
-type TellTaleInfoTypeState string
+// ComFmsStandardRfmsV21TellTaleInfoTypeState defines model for ComFmsStandardRfmsV21TellTaleInfoType.State.
+type ComFmsStandardRfmsV21TellTaleInfoTypeState string
 
-// TellTaleInfoTypeTellTale defines model for TellTaleInfoType.TellTale.
-type TellTaleInfoTypeTellTale string
+// ComFmsStandardRfmsV21TellTaleInfoTypeTellTale defines model for ComFmsStandardRfmsV21TellTaleInfoType.TellTale.
+type ComFmsStandardRfmsV21TellTaleInfoTypeTellTale string
 
-// TriggerType defines model for TriggerType.
-type TriggerType struct {
-	Context      string              `json:"Context"`
-	DriverId     *DriverIdType       `json:"DriverId,omitempty"`
-	PtoId        *string             `json:"PtoId,omitempty"`
-	TellTaleInfo *[]TellTaleInfoType `json:"TellTaleInfo,omitempty"`
-	TriggerInfo  *[]string           `json:"TriggerInfo,omitempty"`
-	TriggerType  string              `json:"TriggerType"`
+// ComFmsStandardRfmsV21TriggerType defines model for com.fms_standard.rfms.v2_1.TriggerType.
+type ComFmsStandardRfmsV21TriggerType struct {
+	Context      string                                   `json:"Context"`
+	DriverId     *ComFmsStandardRfmsV21DriverIdType       `json:"DriverId,omitempty"`
+	PtoId        *string                                  `json:"PtoId,omitempty"`
+	TellTaleInfo *[]ComFmsStandardRfmsV21TellTaleInfoType `json:"TellTaleInfo,omitempty"`
+	TriggerInfo  *[]string                                `json:"TriggerInfo,omitempty"`
+	TriggerType  string                                   `json:"TriggerType"`
 }
 
-// UptimeType defines model for UptimeType.
-type UptimeType struct {
-	AlternatorInfo                  *[]AlternatorInfoType `json:"AlternatorInfo,omitempty"`
-	BellowPressureFrontAxleLeft     *int64                `json:"BellowPressureFrontAxleLeft,omitempty"`
-	BellowPressureFrontAxleRight    *int64                `json:"BellowPressureFrontAxleRight,omitempty"`
-	BellowPressureRearAxleLeft      *int64                `json:"BellowPressureRearAxleLeft,omitempty"`
-	BellowPressureRearAxleRight     *int64                `json:"BellowPressureRearAxleRight,omitempty"`
-	DurationAtLeastOneDoorOpen      *int64                `json:"DurationAtLeastOneDoorOpen,omitempty"`
-	EngineCoolantTemperature        *float64              `json:"EngineCoolantTemperature,omitempty"`
-	ServiceBrakeAirPressureCircuit1 *int64                `json:"ServiceBrakeAirPressureCircuit1,omitempty"`
-	ServiceBrakeAirPressureCircuit2 *int64                `json:"ServiceBrakeAirPressureCircuit2,omitempty"`
-	ServiceDistance                 *int64                `json:"ServiceDistance,omitempty"`
-	TellTaleInfo                    *[]TellTaleInfoType   `json:"TellTaleInfo,omitempty"`
+// ComFmsStandardRfmsV21UptimeType defines model for com.fms_standard.rfms.v2_1.UptimeType.
+type ComFmsStandardRfmsV21UptimeType struct {
+	AlternatorInfo                  *[]ComFmsStandardRfmsV21AlternatorInfoType `json:"AlternatorInfo,omitempty"`
+	BellowPressureFrontAxleLeft     *int64                                     `json:"BellowPressureFrontAxleLeft,omitempty"`
+	BellowPressureFrontAxleRight    *int64                                     `json:"BellowPressureFrontAxleRight,omitempty"`
+	BellowPressureRearAxleLeft      *int64                                     `json:"BellowPressureRearAxleLeft,omitempty"`
+	BellowPressureRearAxleRight     *int64                                     `json:"BellowPressureRearAxleRight,omitempty"`
+	DurationAtLeastOneDoorOpen      *int64                                     `json:"DurationAtLeastOneDoorOpen,omitempty"`
+	EngineCoolantTemperature        *float64                                   `json:"EngineCoolantTemperature,omitempty"`
+	ServiceBrakeAirPressureCircuit1 *int64                                     `json:"ServiceBrakeAirPressureCircuit1,omitempty"`
+	ServiceBrakeAirPressureCircuit2 *int64                                     `json:"ServiceBrakeAirPressureCircuit2,omitempty"`
+	ServiceDistance                 *int64                                     `json:"ServiceDistance,omitempty"`
+	TellTaleInfo                    *[]ComFmsStandardRfmsV21TellTaleInfoType   `json:"TellTaleInfo,omitempty"`
 }
 
-// VehiclePositionType defines model for VehiclePositionType.
-type VehiclePositionType struct {
-	CreatedDateTime  time.Time         `json:"CreatedDateTime"`
-	GNSSPosition     *GNSSPositionType `json:"GNSSPosition,omitempty"`
-	ReceivedDateTime time.Time         `json:"ReceivedDateTime"`
-	TachographSpeed  *float64          `json:"TachographSpeed,omitempty"`
-	TriggerType      TriggerType       `json:"TriggerType"`
-	VIN              string            `json:"VIN"`
-	WheelBasedSpeed  *float64          `json:"WheelBasedSpeed,omitempty"`
+// ComFmsStandardRfmsV21VehiclePositionType defines model for com.fms_standard.rfms.v2_1.VehiclePositionType.
+type ComFmsStandardRfmsV21VehiclePositionType struct {
+	CreatedDateTime  time.Time                              `json:"CreatedDateTime"`
+	GNSSPosition     *ComFmsStandardRfmsV21GNSSPositionType `json:"GNSSPosition,omitempty"`
+	ReceivedDateTime time.Time                              `json:"ReceivedDateTime"`
+	TachographSpeed  *float64                               `json:"TachographSpeed,omitempty"`
+	TriggerType      ComFmsStandardRfmsV21TriggerType       `json:"TriggerType"`
+	VIN              string                                 `json:"VIN"`
+	WheelBasedSpeed  *float64                               `json:"WheelBasedSpeed,omitempty"`
 }
 
-// VehiclePositions defines model for VehiclePositions.
-type VehiclePositions struct {
-	MoreDataAvailable     *bool                  `json:"MoreDataAvailable,omitempty"`
-	RequestServerDateTime time.Time              `json:"RequestServerDateTime"`
-	VehiclePosition       *[]VehiclePositionType `json:"VehiclePosition,omitempty"`
+// ComFmsStandardRfmsV21VehiclePositions defines model for com.fms_standard.rfms.v2_1.VehiclePositions.
+type ComFmsStandardRfmsV21VehiclePositions struct {
+	MoreDataAvailable     *bool                                       `json:"MoreDataAvailable,omitempty"`
+	RequestServerDateTime time.Time                                   `json:"RequestServerDateTime"`
+	VehiclePosition       *[]ComFmsStandardRfmsV21VehiclePositionType `json:"VehiclePosition,omitempty"`
 }
 
-// VehicleStatusType defines model for VehicleStatusType.
-type VehicleStatusType struct {
-	AccumulatedData               *AccumulatedType                 `json:"AccumulatedData,omitempty"`
-	CreatedDateTime               time.Time                        `json:"CreatedDateTime"`
-	DoorStatus                    *[]DoorStatusType                `json:"DoorStatus,omitempty"`
-	Driver1Id                     *DriverIdType                    `json:"Driver1Id,omitempty"`
-	EngineTotalFuelUsed           *int64                           `json:"EngineTotalFuelUsed,omitempty"`
-	GrossCombinationVehicleWeight *int                             `json:"GrossCombinationVehicleWeight,omitempty"`
-	HRTotalVehicleDistance        *int64                           `json:"HRTotalVehicleDistance,omitempty"`
-	ReceivedDateTime              time.Time                        `json:"ReceivedDateTime"`
-	SnapshotData                  *SnapshotType                    `json:"SnapshotData,omitempty"`
-	Status2OfDoors                *VehicleStatusTypeStatus2OfDoors `json:"Status2OfDoors,omitempty"`
-	TotalEngineHours              *float64                         `json:"TotalEngineHours,omitempty"`
-	TriggerType                   TriggerType                      `json:"TriggerType"`
-	UptimeData                    *UptimeType                      `json:"UptimeData,omitempty"`
-	Vin                           string                           `json:"Vin"`
+// ComFmsStandardRfmsV21VehicleStatusType defines model for com.fms_standard.rfms.v2_1.VehicleStatusType.
+type ComFmsStandardRfmsV21VehicleStatusType struct {
+	AccumulatedData               *ComFmsStandardRfmsV21AccumulatedType                 `json:"AccumulatedData,omitempty"`
+	CreatedDateTime               time.Time                                             `json:"CreatedDateTime"`
+	DoorStatus                    *[]ComFmsStandardRfmsV21DoorStatusType                `json:"DoorStatus,omitempty"`
+	Driver1Id                     *ComFmsStandardRfmsV21DriverIdType                    `json:"Driver1Id,omitempty"`
+	EngineTotalFuelUsed           *int64                                                `json:"EngineTotalFuelUsed,omitempty"`
+	GrossCombinationVehicleWeight *int                                                  `json:"GrossCombinationVehicleWeight,omitempty"`
+	HRTotalVehicleDistance        *int64                                                `json:"HRTotalVehicleDistance,omitempty"`
+	ReceivedDateTime              time.Time                                             `json:"ReceivedDateTime"`
+	SnapshotData                  *ComFmsStandardRfmsV21SnapshotType                    `json:"SnapshotData,omitempty"`
+	Status2OfDoors                *ComFmsStandardRfmsV21VehicleStatusTypeStatus2OfDoors `json:"Status2OfDoors,omitempty"`
+	TotalEngineHours              *float64                                              `json:"TotalEngineHours,omitempty"`
+	TriggerType                   ComFmsStandardRfmsV21TriggerType                      `json:"TriggerType"`
+	UptimeData                    *ComFmsStandardRfmsV21UptimeType                      `json:"UptimeData,omitempty"`
+	Vin                           string                                                `json:"Vin"`
 }
 
-// VehicleStatusTypeStatus2OfDoors defines model for VehicleStatusType.Status2OfDoors.
-type VehicleStatusTypeStatus2OfDoors string
+// ComFmsStandardRfmsV21VehicleStatusTypeStatus2OfDoors defines model for ComFmsStandardRfmsV21VehicleStatusType.Status2OfDoors.
+type ComFmsStandardRfmsV21VehicleStatusTypeStatus2OfDoors string
 
-// VehicleStatuses defines model for VehicleStatuses.
-type VehicleStatuses struct {
-	MoreDataAvailable     *bool                `json:"MoreDataAvailable,omitempty"`
-	RequestServerDateTime time.Time            `json:"RequestServerDateTime"`
-	VehicleStatus         *[]VehicleStatusType `json:"VehicleStatus,omitempty"`
+// ComFmsStandardRfmsV21VehicleStatuses defines model for com.fms_standard.rfms.v2_1.VehicleStatuses.
+type ComFmsStandardRfmsV21VehicleStatuses struct {
+	MoreDataAvailable     *bool                                     `json:"MoreDataAvailable,omitempty"`
+	RequestServerDateTime time.Time                                 `json:"RequestServerDateTime"`
+	VehicleStatus         *[]ComFmsStandardRfmsV21VehicleStatusType `json:"VehicleStatus,omitempty"`
 }
 
-// VehicleType defines model for VehicleType.
-type VehicleType struct {
-	BodyType            *string             `json:"BodyType,omitempty"`
-	Brand               *string             `json:"Brand,omitempty"`
-	ChassisType         *string             `json:"ChassisType,omitempty"`
-	CustomerVehicleName *string             `json:"CustomerVehicleName,omitempty"`
-	DoorConfiguration   *[]int32            `json:"DoorConfiguration,omitempty"`
-	EmissionLevel       *string             `json:"EmissionLevel,omitempty"`
-	GearboxType         *string             `json:"GearboxType,omitempty"`
-	HasRampOrLift       *bool               `json:"HasRampOrLift,omitempty"`
-	Model               *string             `json:"Model,omitempty"`
-	NoOfAxles           *int32              `json:"NoOfAxles,omitempty"`
-	PossibleFuelType    *[]string           `json:"PossibleFuelType,omitempty"`
-	ProductionDate      *ProductionDateType `json:"ProductionDate,omitempty"`
-	TachographType      *string             `json:"TachographType,omitempty"`
-	TellTaleCode        *string             `json:"TellTaleCode,omitempty"`
-	TotalFuelTankVolume *int64              `json:"TotalFuelTankVolume,omitempty"`
-	Type                *string             `json:"Type,omitempty"`
-	VIN                 string              `json:"VIN"`
+// ComFmsStandardRfmsV21VehicleType defines model for com.fms_standard.rfms.v2_1.VehicleType.
+type ComFmsStandardRfmsV21VehicleType struct {
+	BodyType            *string                                  `json:"BodyType,omitempty"`
+	Brand               *string                                  `json:"Brand,omitempty"`
+	ChassisType         *string                                  `json:"ChassisType,omitempty"`
+	CustomerVehicleName *string                                  `json:"CustomerVehicleName,omitempty"`
+	DoorConfiguration   *[]int32                                 `json:"DoorConfiguration,omitempty"`
+	EmissionLevel       *string                                  `json:"EmissionLevel,omitempty"`
+	GearboxType         *string                                  `json:"GearboxType,omitempty"`
+	HasRampOrLift       *bool                                    `json:"HasRampOrLift,omitempty"`
+	Model               *string                                  `json:"Model,omitempty"`
+	NoOfAxles           *int32                                   `json:"NoOfAxles,omitempty"`
+	PossibleFuelType    *[]string                                `json:"PossibleFuelType,omitempty"`
+	ProductionDate      *ComFmsStandardRfmsV21ProductionDateType `json:"ProductionDate,omitempty"`
+	TachographType      *string                                  `json:"TachographType,omitempty"`
+	TellTaleCode        *string                                  `json:"TellTaleCode,omitempty"`
+	TotalFuelTankVolume *int64                                   `json:"TotalFuelTankVolume,omitempty"`
+	Type                *string                                  `json:"Type,omitempty"`
+	VIN                 string                                   `json:"VIN"`
 }
 
-// Vehicles defines model for Vehicles.
-type Vehicles struct {
-	MoreDataAvailable *bool          `json:"MoreDataAvailable,omitempty"`
-	Vehicle           *[]VehicleType `json:"Vehicle,omitempty"`
+// ComFmsStandardRfmsV21Vehicles defines model for com.fms_standard.rfms.v2_1.Vehicles.
+type ComFmsStandardRfmsV21Vehicles struct {
+	MoreDataAvailable *bool                               `json:"MoreDataAvailable,omitempty"`
+	Vehicle           *[]ComFmsStandardRfmsV21VehicleType `json:"Vehicle,omitempty"`
 }
 
 // GetVehiclePosition210UsingGET1Params defines parameters for GetVehiclePosition210UsingGET1.

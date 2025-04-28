@@ -98,10 +98,10 @@ paths:
           content:
             application/vnd.fmsstandard.com.Vehiclepositions.v2.1+xml:
               schema:
-                $ref: "#/components/schemas/VehiclePositions"
+                $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.VehiclePositions"
             application/vnd.fmsstandard.com.Vehiclepositions.v2.1+json:
               schema:
-                $ref: "#/components/schemas/VehiclePositions"
+                $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.VehiclePositions"
         "400":
           description: Bad Request
         "401":
@@ -247,10 +247,10 @@ paths:
           content:
             application/vnd.fmsstandard.com.Vehiclestatuses.v2.1+xml:
               schema:
-                $ref: "#/components/schemas/VehicleStatuses"
+                $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.VehicleStatuses"
             application/vnd.fmsstandard.com.Vehiclestatuses.v2.1+json:
               schema:
-                $ref: "#/components/schemas/VehicleStatuses"
+                $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.VehicleStatuses"
         "400":
           description: Bad Request
         "401":
@@ -298,10 +298,10 @@ paths:
           content:
             application/vnd.fmsstandard.com.Vehicles.v2.1+json:
               schema:
-                $ref: "#/components/schemas/Vehicles"
+                $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.Vehicles"
             application/vnd.fmsstandard.com.Vehicles.v2.1+xml:
               schema:
-                $ref: "#/components/schemas/Vehicles"
+                $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.Vehicles"
         "400":
           description: Bad Request
         "401":
@@ -327,15 +327,15 @@ components:
       type: http
       scheme: basic
   schemas:
-    AccumulatedType:
+    com.fms_standard.rfms.v2_1.AccumulatedType:
       type: object
       properties:
         AccelerationClass:
-          $ref: "#/components/schemas/FromToClassesType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.FromToClassesType"
         AccelerationDuringBrakeClass:
-          $ref: "#/components/schemas/FromToClassesType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.FromToClassesType"
         AccelerationPedalPositionClass:
-          $ref: "#/components/schemas/FromToClassesType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.FromToClassesType"
         BrakePedalCounterSpeedOverZero:
           type: integer
           format: int64
@@ -347,7 +347,7 @@ components:
           description: ""
           example: 0
         CurrentGearClass:
-          $ref: "#/components/schemas/LabelClassesType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.LabelClassesType"
         DistanceBrakePedalActiveSpeedOverZero:
           type: integer
           format: int64
@@ -359,7 +359,7 @@ components:
           description: ""
           example: 7330
         DrivingWithoutTorqueClass:
-          $ref: "#/components/schemas/LabelClassesType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.LabelClassesType"
         DurationCruiseControlActive:
           type: integer
           format: int64
@@ -376,11 +376,11 @@ components:
           description: ""
           example: 240
         EngineSpeedClass:
-          $ref: "#/components/schemas/FromToClassesType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.FromToClassesType"
         EngineTorqueAtCurrentSpeedClass:
-          $ref: "#/components/schemas/FromToClassesType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.FromToClassesType"
         EngineTorqueClass:
-          $ref: "#/components/schemas/FromToClassesType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.FromToClassesType"
         FuelConsumptionCruiseControlActive:
           type: integer
           format: int64
@@ -397,7 +397,7 @@ components:
           description: ""
           example: 350
         HighAccelerationClass:
-          $ref: "#/components/schemas/FromToClassesType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.FromToClassesType"
         KneelingCounter:
           type: integer
           format: int64
@@ -409,19 +409,19 @@ components:
           description: ""
           example: 0
         PtoActiveClass:
-          $ref: "#/components/schemas/LabelClassesType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.LabelClassesType"
         RetarderTorqueClass:
-          $ref: "#/components/schemas/FromToClassesType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.FromToClassesType"
         SelectedGearClass:
-          $ref: "#/components/schemas/LabelClassesType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.LabelClassesType"
         StopRequestCounter:
           type: integer
           format: int64
           description: ""
           example: 0
         VehicleSpeedClass:
-          $ref: "#/components/schemas/FromToClassesType"
-    AlternatorInfoType:
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.FromToClassesType"
+    com.fms_standard.rfms.v2_1.AlternatorInfoType:
       type: object
       required:
         - AlternatorStatus
@@ -440,7 +440,7 @@ components:
             - ERROR
             - NOT_AVAILABLE
           example: NOT_CHARGING
-    DoorStatusType:
+    com.fms_standard.rfms.v2_1.DoorStatusType:
       type: object
       properties:
         DoorEnabledStatus:
@@ -475,16 +475,16 @@ components:
             - ERROR
             - NOT_AVAILABLE
           example: NOT_AVAILABLE
-    DriverIdType:
+    com.fms_standard.rfms.v2_1.DriverIdType:
       type: object
       properties:
         OemDriverIdentification:
-          $ref: "#/components/schemas/OemDriverIdentificationT\
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.OemDriverIdentificationT\
             ype"
         TachoDriverIdentification:
-          $ref: "#/components/schemas/TachoDriverIdentificatio\
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.TachoDriverIdentificatio\
             nType"
-    FromToClassType:
+    com.fms_standard.rfms.v2_1.FromToClassType:
       type: object
       properties:
         From:
@@ -512,15 +512,15 @@ components:
           format: double
           description: ""
           example: 3
-    FromToClassesType:
+    com.fms_standard.rfms.v2_1.FromToClassesType:
       type: object
       properties:
         Value:
           type: array
           description: ""
           items:
-            $ref: "#/components/schemas/FromToClassType"
-    GNSSPositionType:
+            $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.FromToClassType"
+    com.fms_standard.rfms.v2_1.GNSSPositionType:
       type: object
       required:
         - PositionDateTime
@@ -555,7 +555,7 @@ components:
           format: double
           description: ""
           example: 90
-    LabelClassType:
+    com.fms_standard.rfms.v2_1.LabelClassType:
       type: object
       required:
         - Label
@@ -579,15 +579,15 @@ components:
           format: int64
           description: ""
           example: 93
-    LabelClassesType:
+    com.fms_standard.rfms.v2_1.LabelClassesType:
       type: object
       properties:
         Value:
           type: array
           description: ""
           items:
-            $ref: "#/components/schemas/LabelClassType"
-    OemDriverIdentificationType:
+            $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.LabelClassType"
+    com.fms_standard.rfms.v2_1.OemDriverIdentificationType:
       type: object
       required:
         - OemDriverIdentification
@@ -600,7 +600,7 @@ components:
           type: string
           description: ""
           example: Driver1
-    ProductionDateType:
+    com.fms_standard.rfms.v2_1.ProductionDateType:
       type: object
       properties:
         Day:
@@ -618,7 +618,7 @@ components:
           format: int32
           description: ""
           example: 2017
-    SnapshotType:
+    com.fms_standard.rfms.v2_1.SnapshotType:
       type: object
       properties:
         AmbientAirTemperature:
@@ -643,7 +643,7 @@ components:
             - NOT_AVAILABLE
           example: DRIVE
         Driver2Id:
-          $ref: "#/components/schemas/DriverIdType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.DriverIdType"
         Driver2WorkingState:
           type: string
           description: ""
@@ -666,7 +666,7 @@ components:
           description: ""
           example: 23.6
         GNSSPosition:
-          $ref: "#/components/schemas/GNSSPositionType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.GNSSPositionType"
         TachographSpeed:
           type: number
           format: double
@@ -677,7 +677,7 @@ components:
           format: double
           description: ""
           example: 90
-    TachoDriverIdentificationType:
+    com.fms_standard.rfms.v2_1.TachoDriverIdentificationType:
       type: object
       required:
         - CardIssuingMemberState
@@ -711,7 +711,7 @@ components:
           type: string
           description: ""
           example: DB051241420307
-    TellTaleInfoType:
+    com.fms_standard.rfms.v2_1.TellTaleInfoType:
       type: object
       required:
         - State
@@ -796,7 +796,7 @@ components:
             - LANE_DEPARTURE_WARNING_SWITCHED_OFF
             - OEM_SPECIFIC_TELL_TALE
           example: ENGINE_OIL_LEVEL
-    TriggerType:
+    com.fms_standard.rfms.v2_1.TriggerType:
       type: object
       required:
         - Context
@@ -807,7 +807,7 @@ components:
           description: ""
           example: RFMS
         DriverId:
-          $ref: "#/components/schemas/DriverIdType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.DriverIdType"
         PtoId:
           type: string
           description: ""
@@ -816,7 +816,7 @@ components:
           type: array
           description: ""
           items:
-            $ref: "#/components/schemas/TellTaleInfoType"
+            $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.TellTaleInfoType"
         TriggerInfo:
           type: array
           description: ""
@@ -827,14 +827,14 @@ components:
           type: string
           description: ""
           example: TIMER
-    UptimeType:
+    com.fms_standard.rfms.v2_1.UptimeType:
       type: object
       properties:
         AlternatorInfo:
           type: array
           description: ""
           items:
-            $ref: "#/components/schemas/AlternatorInfoType"
+            $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.AlternatorInfoType"
         BellowPressureFrontAxleLeft:
           type: integer
           format: int64
@@ -884,8 +884,8 @@ components:
           type: array
           description: ""
           items:
-            $ref: "#/components/schemas/TellTaleInfoType"
-    VehiclePositionType:
+            $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.TellTaleInfoType"
+    com.fms_standard.rfms.v2_1.VehiclePositionType:
       type: object
       required:
         - CreatedDateTime
@@ -899,7 +899,7 @@ components:
           description: ""
           example: 2018-03-26T13:50:15.000Z
         GNSSPosition:
-          $ref: "#/components/schemas/GNSSPositionType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.GNSSPositionType"
         ReceivedDateTime:
           type: string
           format: date-time
@@ -911,7 +911,7 @@ components:
           description: ""
           example: 52.4
         TriggerType:
-          $ref: "#/components/schemas/TriggerType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.TriggerType"
         VIN:
           type: string
           description: ""
@@ -921,7 +921,7 @@ components:
           format: double
           description: ""
           example: 52.4
-    VehiclePositions:
+    com.fms_standard.rfms.v2_1.VehiclePositions:
       type: object
       required:
         - RequestServerDateTime
@@ -939,8 +939,8 @@ components:
           type: array
           description: ""
           items:
-            $ref: "#/components/schemas/VehiclePositionType"
-    VehicleStatusType:
+            $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.VehiclePositionType"
+    com.fms_standard.rfms.v2_1.VehicleStatusType:
       type: object
       required:
         - CreatedDateTime
@@ -949,7 +949,7 @@ components:
         - Vin
       properties:
         AccumulatedData:
-          $ref: "#/components/schemas/AccumulatedType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.AccumulatedType"
         CreatedDateTime:
           type: string
           format: date-time
@@ -959,9 +959,9 @@ components:
           type: array
           description: ""
           items:
-            $ref: "#/components/schemas/DoorStatusType"
+            $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.DoorStatusType"
         Driver1Id:
-          $ref: "#/components/schemas/DriverIdType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.DriverIdType"
         EngineTotalFuelUsed:
           type: integer
           format: int64
@@ -982,7 +982,7 @@ components:
           description: ""
           example: 2018-03-26T13:50:17.424Z
         SnapshotData:
-          $ref: "#/components/schemas/SnapshotType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.SnapshotType"
         Status2OfDoors:
           type: string
           description: ""
@@ -998,14 +998,14 @@ components:
           description: ""
           example: 681.2
         TriggerType:
-          $ref: "#/components/schemas/TriggerType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.TriggerType"
         UptimeData:
-          $ref: "#/components/schemas/UptimeType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.UptimeType"
         Vin:
           type: string
           description: ""
           example: Z00SC0000HQ000126
-    VehicleStatuses:
+    com.fms_standard.rfms.v2_1.VehicleStatuses:
       type: object
       required:
         - RequestServerDateTime
@@ -1023,8 +1023,8 @@ components:
           type: array
           description: ""
           items:
-            $ref: "#/components/schemas/VehicleStatusType"
-    VehicleType:
+            $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.VehicleStatusType"
+    com.fms_standard.rfms.v2_1.VehicleType:
       type: object
       required:
         - VIN
@@ -1080,7 +1080,7 @@ components:
             type: string
             example: 1A
         ProductionDate:
-          $ref: "#/components/schemas/ProductionDateType"
+          $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.ProductionDateType"
         TachographType:
           type: string
           description: ""
@@ -1102,7 +1102,7 @@ components:
           type: string
           description: ""
           example: Z00SC0000HQ000126
-    Vehicles:
+    com.fms_standard.rfms.v2_1.Vehicles:
       type: object
       properties:
         MoreDataAvailable:
@@ -1113,4 +1113,4 @@ components:
           type: array
           description: ""
           items:
-            $ref: "#/components/schemas/VehicleType"
+            $ref: "#/components/schemas/com.fms_standard.rfms.v2_1.VehicleType"

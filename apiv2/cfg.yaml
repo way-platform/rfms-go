@@ -3,3 +3,6 @@ package: apiv2
 output: api.gen.go
 generate:
   models: true
+output-options:
+  overlay:
+    path: overlay.yaml

@@ -1,0 +1,77 @@
+overlay: 1.0.0
+info:
+  title: Overlay for the Volvo Trucks rFMS v2.1 API
+  version: 1.0.0
+extends: './volvotrucks.yaml'
+actions:
+  # Rename all schemas to remove the prefix
+  - target: components.schemas
+    action: rename
+    oldNames:
+      - com.fms_standard.rfms.v2_1.AccumulatedType
+      - com.fms_standard.rfms.v2_1.AlternatorInfoType
+      - com.fms_standard.rfms.v2_1.DoorStatusType
+      - com.fms_standard.rfms.v2_1.DriverIdType
+      - com.fms_standard.rfms.v2_1.FromToClassType
+      - com.fms_standard.rfms.v2_1.FromToClassesType
+      - com.fms_standard.rfms.v2_1.GNSSPositionType
+      - com.fms_standard.rfms.v2_1.LabelClassType
+      - com.fms_standard.rfms.v2_1.LabelClassesType
+      - com.fms_standard.rfms.v2_1.OemDriverIdentificationType
+      - com.fms_standard.rfms.v2_1.ProductionDateType
+      - com.fms_standard.rfms.v2_1.SnapshotType
+      - com.fms_standard.rfms.v2_1.TachoDriverIdentificationType
+      - com.fms_standard.rfms.v2_1.TellTaleInfoType
+      - com.fms_standard.rfms.v2_1.TriggerType
+      - com.fms_standard.rfms.v2_1.UptimeType
+      - com.fms_standard.rfms.v2_1.VehiclePositionType
+      - com.fms_standard.rfms.v2_1.VehiclePositions
+      - com.fms_standard.rfms.v2_1.VehicleStatusType
+      - com.fms_standard.rfms.v2_1.VehicleStatuses
+      - com.fms_standard.rfms.v2_1.VehicleType
+      - com.fms_standard.rfms.v2_1.Vehicles
+    newNames:
+      - AccumulatedType
+      - AlternatorInfoType
+      - DoorStatusType
+      - DriverIdType
+      - FromToClassType
+      - FromToClassesType
+      - GNSSPositionType
+      - LabelClassType
+      - LabelClassesType
+      - OemDriverIdentificationType
+      - ProductionDateType
+      - SnapshotType
+      - TachoDriverIdentificationType
+      - TellTaleInfoType
+      - TriggerType
+      - UptimeType
+      - VehiclePositionType
+      - VehiclePositions
+      - VehicleStatusType
+      - VehicleStatuses
+      - VehicleType
+      - Vehicles
+
+  # Update all $ref values across the entire specification
+  - target: $..$ref
+    action: replace
+    pattern: "#/components/schemas/com.fms_standard.rfms.v2_1."
+    replacement: "#/components/schemas/"
+
+  # Ensure we catch any references in specific locations that might be missed
+  - target: $.paths..schema.$ref
+    action: replace
+    pattern: "#/components/schemas/com.fms_standard.rfms.v2_1."
+    replacement: "#/components/schemas/"
+
+  - target: $.components.schemas..items.$ref
+    action: replace
+    pattern: "#/components/schemas/com.fms_standard.rfms.v2_1."
+    replacement: "#/components/schemas/"
+
+  - target: $.components.schemas..properties.*.$ref
+    action: replace
+    pattern: "#/components/schemas/com.fms_standard.rfms.v2_1."
+    replacement: "#/components/schemas/"
