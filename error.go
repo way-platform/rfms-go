@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"strconv"
 	"time"
+
+	"github.com/way-platform/rfms-go/v4/rfmsv4"
 )
 
 // Error is an error returned by the rFMS API.
@@ -29,18 +31,6 @@ type Error struct {
 	ErrorURI string
 }
 
-// ErrorObject Optional responses for error codes, detailing the error if needed
-type ErrorObject struct {
-	// Error An identifier for this error
-	Error *string `json:"error,omitempty"`
-
-	// ErrorDescription A description of the error
-	ErrorDescription *string `json:"error_description,omitempty"`
-
-	// ErrorUri A URI providing more information
-	ErrorUri *string `json:"error_uri,omitempty"`
-}
-
 func newHTTPError(resp *http.Response) *Error {
 	result := &Error{
 		Method:     resp.Request.Method,
@@ -49,15 +39,17 @@ func newHTTPError(resp *http.Response) *Error {
 		StatusCode: resp.StatusCode,
 	}
 	if data, err := io.ReadAll(resp.Body); err == nil {
-		var body struct {
-			Error            string `json:"error"`
-			ErrorDescription string `json:"error_description"`
-			ErrorURI         string `json:"error_uri"`
-		}
+		var body rfmsv4.Error
 		if err := json.Unmarshal(data, &body); err == nil {
-			result.Identifier = body.Error
-			result.Description = body.ErrorDescription
-			result.ErrorURI = body.ErrorURI
+			if body.Error != nil {
+				result.Identifier = *body.Error
+			}
+			if body.ErrorDescription != nil {
+				result.Description = *body.ErrorDescription
+			}
+			if body.ErrorURI != nil {
+				result.ErrorURI = *body.ErrorURI
+			}
 		}
 	}
 	if retryAfterHeader := resp.Header.Get("Retry-After"); retryAfterHeader != "" {
