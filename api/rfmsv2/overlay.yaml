@@ -56,12 +56,12 @@ actions:
         - REST
         - WORK
 
-- target: $.components.schemas.Snapshot.properties
+- target: $.components.schemas.SnapshotData.properties
   update:
     Driver1WorkingState:
       $ref: '#/components/schemas/DriverWorkingState'
 
-- target: $.components.schemas.Snapshot.properties
+- target: $.components.schemas.SnapshotData.properties
   update:
     Driver2WorkingState:
       $ref: '#/components/schemas/DriverWorkingState'

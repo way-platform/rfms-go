@@ -2,7 +2,7 @@ s/com.fms_standard.rfms.v2_1.Vehicles/com.fms_standard.rfms.v2_1.VehiclesRespons
 s/com.fms_standard.rfms.v2_1.VehicleStatuses/com.fms_standard.rfms.v2_1.VehicleStatusesResponse/g
 s/com.fms_standard.rfms.v2_1.VehiclePositions/com.fms_standard.rfms.v2_1.VehiclePositionsResponse/g
 s/com\.fms_standard\.rfms\.v2_1\.//g
-s/AccumulatedType/Accumulated/g
+s/AccumulatedType/AccumulatedData/g
 s/AlternatorInfoType/AlternatorInfo/g
 s/DoorStatusType/DoorStatus/g
 s/DriverIdType/DriverId/g
@@ -13,11 +13,11 @@ s/LabelClassType/LabelClass/g
 s/LabelClassesType/LabelClasses/g
 s/OemDriverIdentificationType/OemDriverIdentification/g
 s/ProductionDateType/Date/g
-s/SnapshotType/Snapshot/g
+s/SnapshotType/SnapshotData/g
 s/TachoDriverIdentificationType/TachoDriverIdentification/g
 s/TellTaleInfoType/TellTaleInfo/g
 s/TriggerType/Trigger/g
-s/UptimeType/Uptime/g
+s/UptimeType/UptimeData/g
 s/VehiclePositionType/VehiclePosition/g
 s/VehicleStatusType/VehicleStatus/g
 s/VehicleType/Vehicle/g

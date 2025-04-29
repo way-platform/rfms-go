@@ -430,9 +430,6 @@ type ChargingStatusInfo struct {
 	EventDetail *string `json:"eventDetail,omitempty"`
 }
 
-// CreatedDateTimeProperty When the data was retrieved in the vehicle in iso8601 format.
-type CreatedDateTimeProperty = Time
-
 // Date Indicates when the vehicle was produced.
 type Date struct {
 	// Day Day of the month where first day of the month is 1
@@ -574,9 +571,6 @@ type OEMDriverIdentification struct {
 	// OEMDriverIdentification An OEM specific driver id.
 	OEMDriverIdentification *string `json:"oemDriverIdentification,omitempty"`
 }
-
-// ReceivedDateTimeProperty Reception at Server. To be used for handling of "more data available" in iso8601 format.
-type ReceivedDateTimeProperty = Time
 
 // SnapshotData defines model for SnapshotData.
 type SnapshotData struct {
@@ -943,7 +937,7 @@ type Vehicle struct {
 	Type *string `json:"type,omitempty"`
 
 	// VIN vehicle identification number. See ISO 3779 (17 characters)
-	VIN VINProperty `json:"vin"`
+	VIN string `json:"vin"`
 }
 
 // VehicleAxle defines model for VehicleAxle.
@@ -958,11 +952,11 @@ type VehicleAxle struct {
 // VehiclePosition defines model for VehiclePosition.
 type VehiclePosition struct {
 	// CreatedDateTime When the data was retrieved in the vehicle in iso8601 format.
-	CreatedDateTime CreatedDateTimeProperty `json:"createdDateTime"`
-	GNSSPosition    *GNSSPosition           `json:"gnssPosition,omitempty"`
+	CreatedDateTime Time          `json:"createdDateTime"`
+	GNSSPosition    *GNSSPosition `json:"gnssPosition,omitempty"`
 
 	// ReceivedDateTime Reception at Server. To be used for handling of "more data available" in iso8601 format.
-	ReceivedDateTime ReceivedDateTimeProperty `json:"receivedDateTime"`
+	ReceivedDateTime Time `json:"receivedDateTime"`
 
 	// TachographSpeed Tachograph vehicle speed in km/h (Speed of the vehicle registered by the tachograph)
 	TachographSpeed *float64 `json:"tachographSpeed,omitempty"`
@@ -981,7 +975,7 @@ type VehiclePosition struct {
 	TriggerType Trigger `json:"triggerType"`
 
 	// VIN vehicle identification number. See ISO 3779 (17 characters)
-	VIN VINProperty `json:"vin"`
+	VIN string `json:"vin"`
 
 	// WheelBasedSpeed Wheel-Based Vehicle Speed in km/h (Speed of the vehicle as calculated from wheel or tailshaft speed)
 	WheelBasedSpeed *float64 `json:"wheelBasedSpeed,omitempty"`
@@ -1007,7 +1001,7 @@ type VehicleStatus struct {
 	AccumulatedData *AccumulatedData `json:"accumulatedData,omitempty"`
 
 	// CreatedDateTime When the data was retrieved in the vehicle in iso8601 format.
-	CreatedDateTime CreatedDateTimeProperty `json:"createdDateTime"`
+	CreatedDateTime Time `json:"createdDateTime"`
 
 	// DoorStatus Individual status for each door. Bus specific parameter
 	DoorStatus []DoorStatus `json:"doorStatus,omitempty"`
@@ -1023,8 +1017,8 @@ type VehicleStatus struct {
 	HrTotalVehicleDistance *int64 `json:"hrTotalVehicleDistance,omitempty"`
 
 	// ReceivedDateTime Reception at Server. To be used for handling of "more data available" in iso8601 format.
-	ReceivedDateTime ReceivedDateTimeProperty `json:"receivedDateTime"`
-	SnapshotData     *SnapshotData            `json:"snapshotData,omitempty"`
+	ReceivedDateTime Time          `json:"receivedDateTime"`
+	SnapshotData     *SnapshotData `json:"snapshotData,omitempty"`
 
 	// Status2OfDoors Composite indication of all bus door statuses. Bus specific parameter
 	Status2OfDoors *Status2OfDoors `json:"status2OfDoors,omitempty"`
@@ -1056,7 +1050,7 @@ type VehicleStatus struct {
 	UptimeData  *UptimeData `json:"uptimeData,omitempty"`
 
 	// VIN vehicle identification number. See ISO 3779 (17 characters)
-	VIN VINProperty `json:"vin"`
+	VIN string `json:"vin"`
 }
 
 // VehicleStatusesResponse defines model for VehicleStatusesResponse.
@@ -1085,24 +1079,3 @@ type VehiclesResponse struct {
 		Vehicles []Vehicle `json:"vehicles,omitempty"`
 	} `json:"vehicleResponse"`
 }
-
-// VINProperty vehicle identification number. See ISO 3779 (17 characters)
-type VINProperty = string
-
-// BadRequest Optional responses for error codes, detailing the error if needed
-type BadRequest = Error
-
-// Forbidden Optional responses for error codes, detailing the error if needed
-type Forbidden = Error
-
-// NotAcceptable Optional responses for error codes, detailing the error if needed
-type NotAcceptable = Error
-
-// NotFound Optional responses for error codes, detailing the error if needed
-type NotFound = Error
-
-// TooManyRequests Optional responses for error codes, detailing the error if needed
-type TooManyRequests = Error
-
-// Unauthorized Optional responses for error codes, detailing the error if needed
-type Unauthorized = Error

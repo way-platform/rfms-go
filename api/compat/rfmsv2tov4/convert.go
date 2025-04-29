@@ -31,21 +31,70 @@ func ConvertVehicle(v2 *rfmsv2.Vehicle) *rfmsv4.Vehicle {
 // ConvertVehiclePosition converts an [rfmsv2.VehiclePosition] to an [rfmsv4.VehiclePosition].
 func ConvertVehiclePosition(v2 *rfmsv2.VehiclePosition) *rfmsv4.VehiclePosition {
 	var v4 rfmsv4.VehiclePosition
-	v4.CreatedDateTime = v2.CreatedDateTime
+	v4.CreatedDateTime = rfmsv4.Time(v2.CreatedDateTime)
 	v4.GNSSPosition = convertGNSSPosition(v2.GNSSPosition)
-	v4.ReceivedDateTime = v2.ReceivedDateTime
+	v4.ReceivedDateTime = rfmsv4.Time(v2.ReceivedDateTime)
 	v4.TachographSpeed = v2.TachographSpeed
-	v4.Trigger = convertTrigger(v2.Trigger)
+	v4.TriggerType = *convertTrigger(&v2.Trigger)
 	v4.VIN = v2.VIN
 	v4.WheelBasedSpeed = v2.WheelBasedSpeed
 	return &v4
 }
 
 // ConvertVehicleStatus converts an [rfmsv2.VehicleStatus] to an [rfmsv4.VehicleStatus].
-func ConvertVehicleStatus(status *rfmsv2.VehicleStatus) *rfmsv4.VehicleStatus {
-	var result rfmsv4.VehicleStatus
+func ConvertVehicleStatus(v2 *rfmsv2.VehicleStatus) *rfmsv4.VehicleStatus {
+	var v4 rfmsv4.VehicleStatus
+	v4.AccumulatedData = convertAccumulatedData(v2.AccumulatedData)
+	v4.CreatedDateTime = rfmsv4.Time(v2.CreatedDateTime)
+	v4.DoorStatus = convertDoorStatus(v2.DoorStatus)
+	v4.Driver1ID = convertDriverID(v2.Driver1ID)
+	v4.EngineTotalFuelUsed = v2.EngineTotalFuelUsed
+	v4.GrossCombinationVehicleWeight = v2.GrossCombinationVehicleWeight
+	v4.HrTotalVehicleDistance = v2.HRTotalVehicleDistance
+	v4.ReceivedDateTime = rfmsv4.Time(v2.ReceivedDateTime)
+	v4.SnapshotData = convertSnapshotData(v2.SnapshotData)
+	v4.Status2OfDoors = convertStatus2OfDoors(v2.Status2OfDoors)
+	v4.TotalEngineHours = v2.TotalEngineHours
+	v4.TriggerType = *convertTrigger(&v2.Trigger)
+	v4.UptimeData = convertUptimeData(v2.UptimeData)
+	v4.VIN = v2.VIN
+	return &v4
+}
+
+func convertUptimeData(v2 *rfmsv2.UptimeData) *rfmsv4.UptimeData {
+	var v4 rfmsv4.UptimeData
 	// TODO: Implement me.
-	return &result
+	return &v4
+}
+
+func convertStatus2OfDoors(v2 *rfmsv2.Status2OfDoors) *rfmsv4.Status2OfDoors {
+	var v4 rfmsv4.Status2OfDoors
+	// TODO: Implement me.
+	return &v4
+}
+
+func convertSnapshotData(v2 *rfmsv2.SnapshotData) *rfmsv4.SnapshotData {
+	var v4 rfmsv4.SnapshotData
+	// TODO: Implement me.
+	return &v4
+}
+
+func convertDriverID(v2 *rfmsv2.DriverID) *rfmsv4.DriverID {
+	var v4 rfmsv4.DriverID
+	// TODO: Implement me.
+	return &v4
+}
+
+func convertDoorStatus(v2 []rfmsv2.DoorStatus) []rfmsv4.DoorStatus {
+	var v4 []rfmsv4.DoorStatus
+	// TODO: Implement me.
+	return v4
+}
+
+func convertAccumulatedData(v2 *rfmsv2.AccumulatedData) *rfmsv4.AccumulatedData {
+	var v4 rfmsv4.AccumulatedData
+	// TODO: Implement me.
+	return &v4
 }
 
 func convertDate(date *rfmsv2.Date) *rfmsv4.Date {
@@ -58,10 +107,12 @@ func convertDate(date *rfmsv2.Date) *rfmsv4.Date {
 
 func convertGNSSPosition(v2 *rfmsv2.GNSSPosition) *rfmsv4.GNSSPosition {
 	var v4 rfmsv4.GNSSPosition
+	// TODO: Implement me.
 	return &v4
 }
 
 func convertTrigger(v2 *rfmsv2.Trigger) *rfmsv4.Trigger {
 	var v4 rfmsv4.Trigger
+	// TODO: Implement me.
 	return &v4
 }

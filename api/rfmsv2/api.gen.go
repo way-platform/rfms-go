@@ -162,8 +162,8 @@ const (
 	TriggerTypeTIMER                      TriggerType = "TIMER"
 )
 
-// Accumulated defines model for Accumulated.
-type Accumulated struct {
+// AccumulatedData defines model for AccumulatedData.
+type AccumulatedData struct {
 	AccelerationClass                     *FromToClasses `json:"AccelerationClass,omitempty"`
 	AccelerationDuringBrakeClass          *FromToClasses `json:"AccelerationDuringBrakeClass,omitempty"`
 	AccelerationPedalPositionClass        *FromToClasses `json:"AccelerationPedalPositionClass,omitempty"`
@@ -280,8 +280,8 @@ type OEMDriverIdentification struct {
 	OEMDriverIdentification string  `json:"OemDriverIdentification"`
 }
 
-// Snapshot defines model for Snapshot.
-type Snapshot struct {
+// SnapshotData defines model for SnapshotData.
+type SnapshotData struct {
 	AmbientAirTemperature *float64            `json:"AmbientAirTemperature,omitempty"`
 	CatalystFuelLevel     *float64            `json:"CatalystFuelLevel,omitempty"`
 	Driver1WorkingState   *DriverWorkingState `json:"Driver1WorkingState,omitempty"`
@@ -331,8 +331,8 @@ type Trigger struct {
 // TriggerType defines model for TriggerType.
 type TriggerType string
 
-// Uptime defines model for Uptime.
-type Uptime struct {
+// UptimeData defines model for UptimeData.
+type UptimeData struct {
 	AlternatorInfo                  []AlternatorInfo `json:"AlternatorInfo,omitempty"`
 	BellowPressureFrontAxleLeft     *int64           `json:"BellowPressureFrontAxleLeft,omitempty"`
 	BellowPressureFrontAxleRight    *int64           `json:"BellowPressureFrontAxleRight,omitempty"`
@@ -387,20 +387,20 @@ type VehiclePositionsResponse struct {
 
 // VehicleStatus defines model for VehicleStatus.
 type VehicleStatus struct {
-	AccumulatedData               *Accumulated    `json:"AccumulatedData,omitempty"`
-	CreatedDateTime               time.Time       `json:"CreatedDateTime"`
-	DoorStatus                    []DoorStatus    `json:"DoorStatus,omitempty"`
-	Driver1ID                     *DriverID       `json:"Driver1Id,omitempty"`
-	EngineTotalFuelUsed           *int64          `json:"EngineTotalFuelUsed,omitempty"`
-	GrossCombinationVehicleWeight *int32          `json:"GrossCombinationVehicleWeight,omitempty"`
-	HRTotalVehicleDistance        *int64          `json:"HRTotalVehicleDistance,omitempty"`
-	ReceivedDateTime              time.Time       `json:"ReceivedDateTime"`
-	SnapshotData                  *Snapshot       `json:"SnapshotData,omitempty"`
-	Status2OfDoors                *Status2OfDoors `json:"Status2OfDoors,omitempty"`
-	TotalEngineHours              *float64        `json:"TotalEngineHours,omitempty"`
-	Trigger                       Trigger         `json:"Trigger"`
-	UptimeData                    *Uptime         `json:"UptimeData,omitempty"`
-	VIN                           string          `json:"Vin"`
+	AccumulatedData               *AccumulatedData `json:"AccumulatedData,omitempty"`
+	CreatedDateTime               time.Time        `json:"CreatedDateTime"`
+	DoorStatus                    []DoorStatus     `json:"DoorStatus,omitempty"`
+	Driver1ID                     *DriverID        `json:"Driver1Id,omitempty"`
+	EngineTotalFuelUsed           *int64           `json:"EngineTotalFuelUsed,omitempty"`
+	GrossCombinationVehicleWeight *int32           `json:"GrossCombinationVehicleWeight,omitempty"`
+	HRTotalVehicleDistance        *int64           `json:"HRTotalVehicleDistance,omitempty"`
+	ReceivedDateTime              time.Time        `json:"ReceivedDateTime"`
+	SnapshotData                  *SnapshotData    `json:"SnapshotData,omitempty"`
+	Status2OfDoors                *Status2OfDoors  `json:"Status2OfDoors,omitempty"`
+	TotalEngineHours              *float64         `json:"TotalEngineHours,omitempty"`
+	Trigger                       Trigger          `json:"Trigger"`
+	UptimeData                    *UptimeData      `json:"UptimeData,omitempty"`
+	VIN                           string           `json:"Vin"`
 }
 
 // VehicleStatusesResponse defines model for VehicleStatusesResponse.

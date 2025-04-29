@@ -327,7 +327,7 @@ components:
       type: http
       scheme: basic
   schemas:
-    Accumulated:
+    AccumulatedData:
       type: object
       properties:
         AccelerationClass:
@@ -616,7 +616,7 @@ components:
           format: int32
           description: ""
           example: 2017
-    Snapshot:
+    SnapshotData:
       type: object
       properties:
         AmbientAirTemperature:
@@ -825,7 +825,7 @@ components:
           type: string
           description: ""
           example: TIMER
-    Uptime:
+    UptimeData:
       type: object
       properties:
         AlternatorInfo:
@@ -947,7 +947,7 @@ components:
         - Vin
       properties:
         AccumulatedData:
-          $ref: "#/components/schemas/Accumulated"
+          $ref: "#/components/schemas/AccumulatedData"
         CreatedDateTime:
           type: string
           format: date-time
@@ -980,7 +980,7 @@ components:
           description: ""
           example: 2018-03-26T13:50:17.424Z
         SnapshotData:
-          $ref: "#/components/schemas/Snapshot"
+          $ref: "#/components/schemas/SnapshotData"
         Status2OfDoors:
           type: string
           description: ""
@@ -998,7 +998,7 @@ components:
         Trigger:
           $ref: "#/components/schemas/Trigger"
         UptimeData:
-          $ref: "#/components/schemas/Uptime"
+          $ref: "#/components/schemas/UptimeData"
         Vin:
           type: string
           description: ""
