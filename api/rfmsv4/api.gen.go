@@ -436,11 +436,11 @@ type CreatedDateTimeProperty = Time
 // Date Indicates when the vehicle was produced.
 type Date struct {
 	// Day Day of the month where first day of the month is 1
-	Day *int `json:"day,omitempty"`
+	Day *int32 `json:"day,omitempty"`
 
 	// Month Month of the year, where January is value 1
-	Month *int `json:"month,omitempty"`
-	Year  *int `json:"year,omitempty"`
+	Month *int32 `json:"month,omitempty"`
+	Year  *int32 `json:"year,omitempty"`
 }
 
 // DoorEnabledStatus defines model for DoorEnabledStatus.
@@ -535,7 +535,7 @@ type FromToClassElectrical struct {
 // GNSSPosition defines model for GNSSPosition.
 type GNSSPosition struct {
 	// Altitude The altitude of the vehicle. Where 0 is sea level, negative values below sealevel and positive above sealevel. Unit in meters.
-	Altitude *int `json:"altitude,omitempty"`
+	Altitude *int32 `json:"altitude,omitempty"`
 
 	// Heading The direction of the vehicle (0-359)
 	Heading *Int `json:"heading,omitempty"`
@@ -880,7 +880,7 @@ type Vehicle struct {
 	CustomerVehicleName *string `json:"customerVehicleName,omitempty"`
 
 	// DoorConfiguration The door configuration. The door order definition is OEM specific. E.g. [1, 2, 2] means the bus has 3 doors: 1 front door, double doors for door 2 and 3. This is used mainly for buses.
-	DoorConfiguration []int `json:"doorConfiguration,omitempty"`
+	DoorConfiguration []int32 `json:"doorConfiguration,omitempty"`
 
 	// EmissionLevel The emission level this vehicle supports. Possible values:
 	//  European Union, Heavy-Duty Truck and Bus Engines:
@@ -907,7 +907,7 @@ type Vehicle struct {
 	Model *string `json:"model,omitempty"`
 
 	// NoOfAxles Number of axles on the vehicle. This is used mainly for buses
-	NoOfAxles *int `json:"noOfAxles,omitempty"`
+	NoOfAxles *int32 `json:"noOfAxles,omitempty"`
 
 	// PossibleFuelType The possible fuel types supported by this vehicle, formatted as the HEX id number according to SPN 5837. This does NOT indicate which fuel type that is presently being used.
 	PossibleFuelType []string `json:"possibleFuelType,omitempty"`
@@ -931,13 +931,13 @@ type Vehicle struct {
 	TellTaleCode *string `json:"tellTaleCode,omitempty"`
 
 	// TotalBatteryPackCapacity Total battery pack capacity in watt hours.
-	TotalBatteryPackCapacity *int `json:"totalBatteryPackCapacity,omitempty"`
+	TotalBatteryPackCapacity *int32 `json:"totalBatteryPackCapacity,omitempty"`
 
 	// TotalFuelTankCapacityGaseous Total gas tank capacity for all tanks in kilograms.
-	TotalFuelTankCapacityGaseous *int `json:"totalFuelTankCapacityGaseous,omitempty"`
+	TotalFuelTankCapacityGaseous *int32 `json:"totalFuelTankCapacityGaseous,omitempty"`
 
 	// TotalFuelTankVolume Total fuel tank volume for all tanks in milliltres.
-	TotalFuelTankVolume *int `json:"totalFuelTankVolume,omitempty"`
+	TotalFuelTankVolume *int32 `json:"totalFuelTankVolume,omitempty"`
 
 	// Type Indicates the type of vehicle. rFMS standard values TRUCK, BUS, VAN
 	Type *string `json:"type,omitempty"`
@@ -1017,7 +1017,7 @@ type VehicleStatus struct {
 	EngineTotalFuelUsed *int64 `json:"engineTotalFuelUsed,omitempty"`
 
 	// GrossCombinationVehicleWeight The full vehicle weight in kg
-	GrossCombinationVehicleWeight *int `json:"grossCombinationVehicleWeight,omitempty"`
+	GrossCombinationVehicleWeight *int32 `json:"grossCombinationVehicleWeight,omitempty"`
 
 	// HrTotalVehicleDistance Accumulated distance travelled by the vehicle during its operation in meter
 	HrTotalVehicleDistance *int64 `json:"hrTotalVehicleDistance,omitempty"`

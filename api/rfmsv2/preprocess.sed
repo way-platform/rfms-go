@@ -12,7 +12,7 @@ s/GNSSPositionType/GNSSPosition/g
 s/LabelClassType/LabelClass/g
 s/LabelClassesType/LabelClasses/g
 s/OemDriverIdentificationType/OemDriverIdentification/g
-s/ProductionDateType/ProductionDate/g
+s/ProductionDateType/Date/g
 s/SnapshotType/Snapshot/g
 s/TachoDriverIdentificationType/TachoDriverIdentification/g
 s/TellTaleInfoType/TellTaleInfo/g

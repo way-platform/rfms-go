@@ -7,10 +7,22 @@ info:
 actions:
 
 - target: $.paths
+  description: "Skip code generation for requests"
   remove: true
 
 - target: $.components.securitySchemes
+  description: "Skip code generation for security schemes"
   remove: true
+
+- target: $..[?(@.type=="array")]
+  description: "Skip pointer to Go slices"
+  update:
+    x-go-type-skip-optional-pointer: true
+
+- target: $..[?(@.type=="integer" && !@.format)]
+  description: "Default integers to int32 if no format is provided"
+  update:
+    format: int32
 
 - target: $.components.schemas
   update:
@@ -21,6 +33,11 @@ actions:
         - OPEN
         - ERROR
         - NOT_AVAILABLE
+
+- target: $.components.schemas.Vehicle.properties.TotalFuelTankVolume
+  description: "Harmonize totalFuelTankVolume with v4"
+  update:
+    format: int32
 
 - target: $.components.schemas.DoorStatus.properties
   update:

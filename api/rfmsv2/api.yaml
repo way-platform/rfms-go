@@ -598,7 +598,7 @@ components:
           type: string
           description: ""
           example: Driver1
-    ProductionDate:
+    Date:
       type: object
       properties:
         Day:
@@ -1078,7 +1078,7 @@ components:
             type: string
             example: 1A
         ProductionDate:
-          $ref: "#/components/schemas/ProductionDate"
+          $ref: "#/components/schemas/Date"
         TachographType:
           type: string
           description: ""
