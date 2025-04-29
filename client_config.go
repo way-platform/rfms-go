@@ -76,3 +76,21 @@ func WithReuseTokenAuth(credentials TokenCredentials) ClientOption {
 		}
 	}
 }
+
+// WithScania configures the [Client] to use the Scania rFMS v4 API.
+func WithScania(clientID string, clientSecret string) ClientOption {
+	return func(cc *ClientConfig) {
+		WithBaseURL(ScaniaBaseURL)(cc)
+		WithScaniaAuth(clientID, clientSecret)(cc)
+		WithVersion(Version4)(cc)
+	}
+}
+
+// WithVolvoTrucks configures the [Client] to use the Volvo Trucks rFMS v2.1 API.
+func WithVolvoTrucks(username string, password string) ClientOption {
+	return func(cc *ClientConfig) {
+		WithBaseURL(VolvoTrucksBaseURL)(cc)
+		WithBasicAuth(username, password)(cc)
+		WithVersion(Version21)(cc)
+	}
+}
