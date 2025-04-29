@@ -7,24 +7,40 @@ info:
 actions:
 
 - target: $.paths
+  description: "Skip code generation for requests"
   remove: true
 
 - target: $.components.securitySchemes
+  description: "Skip code generation for security schemes"
+  remove: true
+
+- target: $.components.parameters
+  description: "Skip code generation for request parameters"
   remove: true
 
 - target: $..[?(@.format=="date-time")]
+  description: "Use custom type to handle non-conformance with RFC3339"
   update:
     x-go-type: Time
 
-- target: $.components.schemas.Vehicle.properties
+- target: $..[?(@.type=="array")]
+  description: "Skip pointer to Go slices"
   update:
-    registrationNumber:
-      type: string
-      description: "The registration number (license plate) of the vehicle. This is a Scania-specific field."
-      example: "ABC123"
+    x-go-type-skip-optional-pointer: true
 
 - target: $.components.schemas
+  description: "Add Scania-specific fields"
   update:
+    Vehicle:
+      properties:
+        registrationNumber:
+          type: string
+          description: "The registration number (license plate) of the vehicle. This is a Scania-specific field."
+          example: "ABC123"
+    SnapshotData:
+      properties:
+        ignition:
+          $ref: '#/components/schemas/IgnitionState'
     IgnitionState:
       type: string
       description: "The ignition state of the vehicle. This is a Scania-specific field."
@@ -34,27 +50,8 @@ actions:
         - ERROR
         - NOT_AVAILABLE
 
-- target: $.components.schemas.SnapshotData.properties
-  update:
-    ignition:
-      $ref: '#/components/schemas/IgnitionState'
-
-# Parameter enums
 - target: $.components.schemas
-  update:
-    DateType:
-      type: string
-      description: The start/stop times are compared to the created or received time of the position reports. If this isn't supplied all times are received times.
-      enum:
-        - created
-        - received
-      default: received
-
-- target: $.components.parameters.datetype.schema
-  update:
-    $ref: '#/components/schemas/DateType'
-
-- target: $.components.schemas
+  description: "Add Date component"
   update:
     Date:
       type: object
@@ -71,14 +68,14 @@ actions:
           type: integer
           example: 2018
       description: Indicates when the vehicle was produced.
-
-- target: $.components.schemas.Vehicle.properties
-  update:
-    productionDate:
-      $ref: '#/components/schemas/Date'
+    Vehicle:
+      properties:
+        productionDate:
+          $ref: '#/components/schemas/Date'
 
 # TachoDriverIdentification component
 - target: $.components.schemas
+  description: "Add TachoDriverIdentification component"
   update:
     TachoDriverIdentification:
       required:
@@ -104,11 +101,10 @@ actions:
           type: string
           description: 'A card renewal index. This fields is formatted according the definition for CardRenewalIndex (chap 2.25) in: COMMISSION REGULATION (EC) No 1360/2002 Annex 1b'
           example: "0"
-
-- target: $.components.schemas.DriverId.properties
-  update:
-    tachoDriverIdentification:
-      $ref: '#/components/schemas/TachoDriverIdentification'
+    DriverId:
+      properties:
+        tachoDriverIdentification:
+          $ref: '#/components/schemas/TachoDriverIdentification'
 
 # OemDriverIdentification component
 - target: $.components.schemas
