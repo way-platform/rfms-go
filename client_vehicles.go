@@ -8,7 +8,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/way-platform/rfms-go/v4/rfmsv4"
+	"github.com/way-platform/rfms-go/v4/api/rfmsv4"
 )
 
 // VehiclesRequest is the request for the [Client.Vehicles] method.
@@ -81,7 +81,7 @@ func (c *Client) Vehicles(ctx context.Context, request *VehiclesRequest) (_ *Veh
 	// 	responseBody.VehicleResponse.Vehicles[i].Raw = rawVehicle
 	// }
 	return &VehiclesResponse{
-		Vehicles:          *responseBody.VehicleResponse.Vehicles,
+		Vehicles:          responseBody.VehicleResponse.Vehicles,
 		MoreDataAvailable: responseBody.MoreDataAvailable,
 	}, nil
 }

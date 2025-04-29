@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/way-platform/rfms-go/v4/rfmsv4"
+	"github.com/way-platform/rfms-go/v4/api/rfmsv4"
 )
 
 type VehicleStatusesRequest struct {
@@ -41,7 +41,7 @@ type VehicleStatusesResponse struct {
 	// MoreDataAvailableLink is the link to the next page of data.
 	MoreDataAvailableLink string `json:"moreDataAvailableLink,omitempty"`
 	// RequestServerDateTime is the server time when the request was received.
-	RequestServerDateTime time.Time `json:"requestServerDateTime,omitempty"`
+	RequestServerDateTime time.Time `json:"requestServerDateTime,omitzero"`
 }
 
 func (c *Client) VehicleStatuses(
@@ -126,6 +126,6 @@ func (c *Client) VehicleStatuses(
 	// responseBody.VehicleStatusResponse.MoreDataAvailableLink = responseBody.MoreDataAvailableLink
 	// responseBody.VehicleStatusResponse.RequestServerDateTime = responseBody.RequestServerDateTime
 	return &VehicleStatusesResponse{
-		VehicleStatuses: *responseBody.VehicleStatusResponse.VehicleStatuses,
+		VehicleStatuses: responseBody.VehicleStatusResponse.VehicleStatuses,
 	}, nil
 }

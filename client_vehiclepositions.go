@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/way-platform/rfms-go/v4/rfmsv4"
+	"github.com/way-platform/rfms-go/v4/api/rfmsv4"
 )
 
 type VehiclePositionsRequest struct {
@@ -123,6 +123,6 @@ func (c *Client) VehiclePositions(
 	// 	}
 	// }
 	return &VehiclePositionsResponse{
-		VehiclePositions: *responseBody.VehiclePositionResponse.VehiclePositions,
+		VehiclePositions: responseBody.VehiclePositionResponse.VehiclePositions,
 	}, nil
 }
