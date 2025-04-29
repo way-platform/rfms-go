@@ -17,3 +17,8 @@ func (i *Int) UnmarshalJSON(data []byte) error {
 	*i = Int(value)
 	return nil
 }
+
+// MarshalJSON implements the [json.Marshaler] interface.
+func (i Int) MarshalJSON() ([]byte, error) {
+	return append(append([]byte{'"'}, []byte(strconv.Itoa(int(i)))...), '"'), nil
+}

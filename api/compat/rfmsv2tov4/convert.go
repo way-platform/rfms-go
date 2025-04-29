@@ -63,8 +63,29 @@ func ConvertVehicleStatus(v2 *rfmsv2.VehicleStatus) *rfmsv4.VehicleStatus {
 
 func convertUptimeData(v2 *rfmsv2.UptimeData) *rfmsv4.UptimeData {
 	var v4 rfmsv4.UptimeData
-	// TODO: Implement me.
+	v4.AlternatorInfo = convertAlternatorInfo(v2.AlternatorInfo)
+	v4.BellowPressureFrontAxleLeft = v2.BellowPressureFrontAxleLeft
+	v4.BellowPressureFrontAxleRight = v2.BellowPressureFrontAxleRight
+	v4.BellowPressureRearAxleLeft = v2.BellowPressureRearAxleLeft
+	v4.BellowPressureRearAxleRight = v2.BellowPressureRearAxleRight
+	v4.DurationAtLeastOneDoorOpen = v2.DurationAtLeastOneDoorOpen
+	v4.EngineCoolantTemperature = v2.EngineCoolantTemperature
+	v4.ServiceBrakeAirPressureCircuit1 = v2.ServiceBrakeAirPressureCircuit1
+	v4.ServiceBrakeAirPressureCircuit2 = v2.ServiceBrakeAirPressureCircuit2
+	v4.ServiceDistance = v2.ServiceDistance
+	v4.TellTaleInfo = convertTellTaleInfo(v2.TellTaleInfo)
 	return &v4
+}
+
+func convertTellTaleInfo(v2 []rfmsv2.TellTaleInfo) []rfmsv4.TellTaleInfo {
+	var result []rfmsv4.TellTaleInfo
+	return result
+}
+
+func convertAlternatorInfo(v2 []rfmsv2.AlternatorInfo) *rfmsv4.AlternatorInfo {
+	var result rfmsv4.AlternatorInfo
+	// TODO: Implement me.
+	return &result
 }
 
 func convertStatus2OfDoors(v2 *rfmsv2.Status2OfDoors) *rfmsv4.Status2OfDoors {

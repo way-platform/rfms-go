@@ -1268,7 +1268,7 @@ components:
           type: array
           description: List of tell tales with the actual status for each tell tale.
           items:
-            $ref: '#/components/schemas/TellTale'
+            $ref: '#/components/schemas/TellTaleInfo'
         serviceDistance:
           type: integer
           description: The distance in meter to the next service
@@ -1410,7 +1410,7 @@ components:
           description: The id of a PTO. This is only set if the TriggerType = PTO_ENABLED
             or PTO_DISABLED
         tellTaleInfo:
-          $ref: '#/components/schemas/TellTale'
+          $ref: '#/components/schemas/TellTaleInfo'
         chargingStatusInfo:
           type: object
           properties:
@@ -1520,7 +1520,7 @@ components:
               type: string
               description: An OEM specific driver id.
               example: ABC-123-DEF
-    TellTale:
+    TellTaleInfo:
       required:
       - state
       - tellTale

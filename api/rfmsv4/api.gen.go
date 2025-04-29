@@ -686,8 +686,8 @@ type TachoDriverIdentification struct {
 	DriverIdentification string `json:"driverIdentification"`
 }
 
-// TellTale defines model for TellTale.
-type TellTale struct {
+// TellTaleInfo defines model for TellTaleInfo.
+type TellTaleInfo struct {
 	// OEMTellTale The OemTellTale is only set when the TellTale == OEM_SPECIFIC_TELL_TALE. This is an OEM specific string defining a tell tale in the OEM context.
 	OEMTellTale *string `json:"oemTellTale,omitempty"`
 
@@ -762,8 +762,8 @@ type Trigger struct {
 	DriverID *DriverID `json:"driverId,omitempty"`
 
 	// PtoID The id of a PTO. This is only set if the TriggerType = PTO_ENABLED or PTO_DISABLED
-	PtoID        *string   `json:"ptoId,omitempty"`
-	TellTaleInfo *TellTale `json:"tellTaleInfo,omitempty"`
+	PtoID        *string       `json:"ptoId,omitempty"`
+	TellTaleInfo *TellTaleInfo `json:"tellTaleInfo,omitempty"`
 
 	// TriggerInfo Additional TriggerInfo content for OEM specific triggers E.g. TRAILER_ATTACHED_TRIGGER [id of trailer]
 	TriggerInfo []string `json:"triggerInfo,omitempty"`
@@ -853,7 +853,7 @@ type UptimeData struct {
 	ServiceDistance *int64 `json:"serviceDistance,omitempty"`
 
 	// TellTaleInfo List of tell tales with the actual status for each tell tale.
-	TellTaleInfo []TellTale `json:"tellTaleInfo"`
+	TellTaleInfo []TellTaleInfo `json:"tellTaleInfo"`
 }
 
 // Vehicle defines model for Vehicle.

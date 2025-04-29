@@ -679,7 +679,7 @@ actions:
         - OEM_SPECIFIC_TELL_TALE
       example: FUEL_LEVEL
 
-- target: $.components.schemas.TellTale.properties
+- target: $.components.schemas.TellTaleInfo.properties
   update:
     tellTale:
       $ref: '#/components/schemas/TellTaleType'
@@ -700,7 +700,7 @@ actions:
         - NOT_AVAILABLE
       example: YELLOW
 
-- target: $.components.schemas.TellTale.properties
+- target: $.components.schemas.TellTaleInfo.properties
   update:
     state:
       $ref: '#/components/schemas/TellTaleState'
