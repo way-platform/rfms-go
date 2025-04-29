@@ -29,10 +29,16 @@ func ConvertVehicle(v2 *rfmsv2.Vehicle) *rfmsv4.Vehicle {
 }
 
 // ConvertVehiclePosition converts an [rfmsv2.VehiclePosition] to an [rfmsv4.VehiclePosition].
-func ConvertVehiclePosition(position *rfmsv2.VehiclePosition) *rfmsv4.VehiclePosition {
-	var result rfmsv4.VehiclePosition
-	// TODO: Implement me.
-	return &result
+func ConvertVehiclePosition(v2 *rfmsv2.VehiclePosition) *rfmsv4.VehiclePosition {
+	var v4 rfmsv4.VehiclePosition
+	v4.CreatedDateTime = v2.CreatedDateTime
+	v4.GNSSPosition = convertGNSSPosition(v2.GNSSPosition)
+	v4.ReceivedDateTime = v2.ReceivedDateTime
+	v4.TachographSpeed = v2.TachographSpeed
+	v4.Trigger = convertTrigger(v2.Trigger)
+	v4.VIN = v2.VIN
+	v4.WheelBasedSpeed = v2.WheelBasedSpeed
+	return &v4
 }
 
 // ConvertVehicleStatus converts an [rfmsv2.VehicleStatus] to an [rfmsv4.VehicleStatus].
@@ -48,4 +54,14 @@ func convertDate(date *rfmsv2.Date) *rfmsv4.Date {
 	result.Month = date.Month
 	result.Year = date.Year
 	return &result
+}
+
+func convertGNSSPosition(v2 *rfmsv2.GNSSPosition) *rfmsv4.GNSSPosition {
+	var v4 rfmsv4.GNSSPosition
+	return &v4
+}
+
+func convertTrigger(v2 *rfmsv2.Trigger) *rfmsv4.Trigger {
+	var v4 rfmsv4.Trigger
+	return &v4
 }
