@@ -22,6 +22,7 @@ actions:
   description: "Use custom type to handle non-conformance with RFC3339"
   update:
     x-go-type: Time
+    # TODO: Add omitzero and remove optional pointer when implemented in oapi-codegen.
 
 - target: $..[?(@.type=="array")]
   description: "Skip pointer to Go slices"
