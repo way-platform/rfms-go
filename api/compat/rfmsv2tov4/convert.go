@@ -35,7 +35,7 @@ func ConvertVehiclePosition(v2 *rfmsv2.VehiclePosition) *rfmsv4.VehiclePosition 
 	v4.GNSSPosition = convertGNSSPosition(v2.GNSSPosition)
 	v4.ReceivedDateTime = rfmsv4.Time(v2.ReceivedDateTime)
 	v4.TachographSpeed = v2.TachographSpeed
-	v4.TriggerType = *convertTrigger(&v2.Trigger)
+	v4.TriggerType = convertTrigger(v2.Trigger)
 	v4.VIN = v2.VIN
 	v4.WheelBasedSpeed = v2.WheelBasedSpeed
 	return &v4
@@ -55,7 +55,7 @@ func ConvertVehicleStatus(v2 *rfmsv2.VehicleStatus) *rfmsv4.VehicleStatus {
 	v4.SnapshotData = convertSnapshotData(v2.SnapshotData)
 	v4.Status2OfDoors = convertStatus2OfDoors(v2.Status2OfDoors)
 	v4.TotalEngineHours = v2.TotalEngineHours
-	v4.TriggerType = *convertTrigger(&v2.Trigger)
+	v4.TriggerType = convertTrigger(v2.Trigger)
 	v4.UptimeData = convertUptimeData(v2.UptimeData)
 	v4.VIN = v2.VIN
 	return &v4
@@ -88,10 +88,8 @@ func convertAlternatorInfo(v2 []rfmsv2.AlternatorInfo) *rfmsv4.AlternatorInfo {
 	return &result
 }
 
-func convertStatus2OfDoors(v2 *rfmsv2.Status2OfDoors) *rfmsv4.Status2OfDoors {
-	var v4 rfmsv4.Status2OfDoors
-	// TODO: Implement me.
-	return &v4
+func convertStatus2OfDoors(v2 rfmsv2.Status2OfDoors) rfmsv4.Status2OfDoors {
+	return ""
 }
 
 func convertSnapshotData(v2 *rfmsv2.SnapshotData) *rfmsv4.SnapshotData {

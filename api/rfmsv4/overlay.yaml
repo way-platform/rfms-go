@@ -22,22 +22,6 @@ actions:
   description: "Skip code generation for request parameters"
   remove: true
 
-- target: $..[?(@.type=="array")]
-  description: "Skip pointer to Go slices"
-  update:
-    x-go-type-skip-optional-pointer: true
-
-- target: $..[?(@.type=="integer" && !@.format)]
-  description: "Default integers to int32 if no format is provided"
-  update:
-    format: int32
-
-- target: $..[?(@.format=="date-time")]
-  description: "Use custom type to handle non-conformance with RFC3339"
-  update:
-    x-go-type: Time
-    # TODO: Add omitzero and remove optional pointer when implemented in oapi-codegen.
-
 # Inline VinProperty in all references
 - target: $.components.schemas.Vehicle.properties.vin
   description: "Inline VinProperty definition"
@@ -777,3 +761,50 @@ actions:
 - target: $.components.schemas.GNSSPosition.properties.heading
   update:
     x-go-type: Int
+
+- target: $..[?(@.type=="array")]
+  description: "Skip pointer to Go slices"
+  update:
+    x-go-type-skip-optional-pointer: true
+
+- target: $..[?(@.required)]
+  description: "Remove required from all fields"
+  update:
+    required: null
+
+- target: $..[?(@.type=="integer" && !@.format)]
+  description: "Default integers to int32 if no format is provided"
+  update:
+    format: int32
+
+- target: $..[?(@.type=="string" && @.format=="date-time")]
+  description: "Use custom type to handle non-conformance with RFC3339"
+  update:
+    x-go-type: Time
+
+- target: $..[?(@.type=="string")]
+  description: "Skip optional pointer for strings"
+  update:
+    x-go-type-skip-optional-pointer: true
+
+- target: $.components.schemas
+  description: "Skip optional pointer on request fields"
+  update:
+    VehiclesResponse:
+      properties:
+        vehicleResponse:
+          x-go-type-skip-optional-pointer: true
+        moreDataAvailable:
+          x-go-type-skip-optional-pointer: true
+    VehicleStatusesResponse:
+      properties:
+        vehicleStatusResponse:
+          x-go-type-skip-optional-pointer: true
+        moreDataAvailable:
+          x-go-type-skip-optional-pointer: true
+    VehiclePositionsResponse:
+      properties:
+        vehiclePositionResponse:
+          x-go-type-skip-optional-pointer: true
+        moreDataAvailable:
+          x-go-type-skip-optional-pointer: true

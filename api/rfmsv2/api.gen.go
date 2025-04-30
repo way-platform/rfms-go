@@ -195,7 +195,7 @@ type AccumulatedData struct {
 // AlternatorInfo defines model for AlternatorInfo.
 type AlternatorInfo struct {
 	AlternatorNumber *int64           `json:"AlternatorNumber,omitempty"`
-	AlternatorStatus AlternatorStatus `json:"AlternatorStatus"`
+	AlternatorStatus AlternatorStatus `json:"AlternatorStatus,omitempty"`
 }
 
 // AlternatorStatus defines model for AlternatorStatus.
@@ -219,10 +219,10 @@ type DoorOpenStatus string
 
 // DoorStatus defines model for DoorStatus.
 type DoorStatus struct {
-	DoorEnabledStatus *DoorEnabledStatus `json:"DoorEnabledStatus,omitempty"`
-	DoorLockStatus    *DoorLockStatus    `json:"DoorLockStatus,omitempty"`
-	DoorNumber        *int64             `json:"DoorNumber,omitempty"`
-	DoorOpenStatus    *DoorOpenStatus    `json:"DoorOpenStatus,omitempty"`
+	DoorEnabledStatus DoorEnabledStatus `json:"DoorEnabledStatus,omitempty"`
+	DoorLockStatus    DoorLockStatus    `json:"DoorLockStatus,omitempty"`
+	DoorNumber        *int64            `json:"DoorNumber,omitempty"`
+	DoorOpenStatus    DoorOpenStatus    `json:"DoorOpenStatus,omitempty"`
 }
 
 // DriverAuthenticationType defines model for DriverAuthenticationType.
@@ -257,13 +257,13 @@ type GNSSPosition struct {
 	Heading          *int32    `json:"Heading,omitempty"`
 	Latitude         *float64  `json:"Latitude,omitempty"`
 	Longitude        *float64  `json:"Longitude,omitempty"`
-	PositionDateTime time.Time `json:"PositionDateTime"`
+	PositionDateTime time.Time `json:"PositionDateTime,omitzero"`
 	Speed            *float64  `json:"Speed,omitempty"`
 }
 
 // LabelClass defines model for LabelClass.
 type LabelClass struct {
-	Label       string `json:"Label"`
+	Label       string `json:"Label,omitempty"`
 	Meters      *int64 `json:"Meters,omitempty"`
 	MilliLitres *int64 `json:"MilliLitres,omitempty"`
 	Seconds     *int64 `json:"Seconds,omitempty"`
@@ -276,22 +276,22 @@ type LabelClasses struct {
 
 // OEMDriverIdentification defines model for OemDriverIdentification.
 type OEMDriverIdentification struct {
-	IDType                  *string `json:"IdType,omitempty"`
-	OEMDriverIdentification string  `json:"OemDriverIdentification"`
+	IDType                  string `json:"IdType,omitempty"`
+	OEMDriverIdentification string `json:"OemDriverIdentification,omitempty"`
 }
 
 // SnapshotData defines model for SnapshotData.
 type SnapshotData struct {
-	AmbientAirTemperature *float64            `json:"AmbientAirTemperature,omitempty"`
-	CatalystFuelLevel     *float64            `json:"CatalystFuelLevel,omitempty"`
-	Driver1WorkingState   *DriverWorkingState `json:"Driver1WorkingState,omitempty"`
-	Driver2ID             *DriverID           `json:"Driver2Id,omitempty"`
-	Driver2WorkingState   *DriverWorkingState `json:"Driver2WorkingState,omitempty"`
-	EngineSpeed           *float64            `json:"EngineSpeed,omitempty"`
-	FuelLevel1            *float64            `json:"FuelLevel1,omitempty"`
-	GNSSPosition          *GNSSPosition       `json:"GNSSPosition,omitempty"`
-	TachographSpeed       *float64            `json:"TachographSpeed,omitempty"`
-	WheelBasedSpeed       *float64            `json:"WheelBasedSpeed,omitempty"`
+	AmbientAirTemperature *float64           `json:"AmbientAirTemperature,omitempty"`
+	CatalystFuelLevel     *float64           `json:"CatalystFuelLevel,omitempty"`
+	Driver1WorkingState   DriverWorkingState `json:"Driver1WorkingState,omitempty"`
+	Driver2ID             *DriverID          `json:"Driver2Id,omitempty"`
+	Driver2WorkingState   DriverWorkingState `json:"Driver2WorkingState,omitempty"`
+	EngineSpeed           *float64           `json:"EngineSpeed,omitempty"`
+	FuelLevel1            *float64           `json:"FuelLevel1,omitempty"`
+	GNSSPosition          *GNSSPosition      `json:"GNSSPosition,omitempty"`
+	TachographSpeed       *float64           `json:"TachographSpeed,omitempty"`
+	WheelBasedSpeed       *float64           `json:"WheelBasedSpeed,omitempty"`
 }
 
 // Status2OfDoors defines model for Status2OfDoors.
@@ -299,17 +299,17 @@ type Status2OfDoors string
 
 // TachoDriverIdentification defines model for TachoDriverIdentification.
 type TachoDriverIdentification struct {
-	CardIssuingMemberState        string                    `json:"CardIssuingMemberState"`
-	CardRenewalIndex              *string                   `json:"CardRenewalIndex,omitempty"`
-	CardReplacementIndex          *string                   `json:"CardReplacementIndex,omitempty"`
-	DriverAuthenticationEquipment *DriverAuthenticationType `json:"DriverAuthenticationEquipment,omitempty"`
-	DriverIdentification          string                    `json:"DriverIdentification"`
+	CardIssuingMemberState        string                   `json:"CardIssuingMemberState,omitempty"`
+	CardRenewalIndex              string                   `json:"CardRenewalIndex,omitempty"`
+	CardReplacementIndex          string                   `json:"CardReplacementIndex,omitempty"`
+	DriverAuthenticationEquipment DriverAuthenticationType `json:"DriverAuthenticationEquipment,omitempty"`
+	DriverIdentification          string                   `json:"DriverIdentification,omitempty"`
 }
 
 // TellTaleInfo defines model for TellTaleInfo.
 type TellTaleInfo struct {
-	State    TellTaleState `json:"State"`
-	TellTale TellTaleType  `json:"TellTale"`
+	State    TellTaleState `json:"State,omitempty"`
+	TellTale TellTaleType  `json:"TellTale,omitempty"`
 }
 
 // TellTaleState defines model for TellTaleState.
@@ -320,11 +320,11 @@ type TellTaleType string
 
 // Trigger defines model for Trigger.
 type Trigger struct {
-	Context      string         `json:"Context"`
+	Context      string         `json:"Context,omitempty"`
 	DriverID     *DriverID      `json:"DriverId,omitempty"`
-	PtoID        *string        `json:"PtoId,omitempty"`
+	PtoID        string         `json:"PtoId,omitempty"`
 	TellTaleInfo []TellTaleInfo `json:"TellTaleInfo,omitempty"`
-	Trigger      TriggerType    `json:"Trigger"`
+	Trigger      TriggerType    `json:"Trigger,omitempty"`
 	TriggerInfo  []string       `json:"TriggerInfo,omitempty"`
 }
 
@@ -348,70 +348,70 @@ type UptimeData struct {
 
 // Vehicle defines model for Vehicle.
 type Vehicle struct {
-	BodyType            *string  `json:"BodyType,omitempty"`
-	Brand               *string  `json:"Brand,omitempty"`
-	ChassisType         *string  `json:"ChassisType,omitempty"`
-	CustomerVehicleName *string  `json:"CustomerVehicleName,omitempty"`
+	BodyType            string   `json:"BodyType,omitempty"`
+	Brand               string   `json:"Brand,omitempty"`
+	ChassisType         string   `json:"ChassisType,omitempty"`
+	CustomerVehicleName string   `json:"CustomerVehicleName,omitempty"`
 	DoorConfiguration   []int32  `json:"DoorConfiguration,omitempty"`
-	EmissionLevel       *string  `json:"EmissionLevel,omitempty"`
-	GearboxType         *string  `json:"GearboxType,omitempty"`
+	EmissionLevel       string   `json:"EmissionLevel,omitempty"`
+	GearboxType         string   `json:"GearboxType,omitempty"`
 	HasRampOrLift       *bool    `json:"HasRampOrLift,omitempty"`
-	Model               *string  `json:"Model,omitempty"`
+	Model               string   `json:"Model,omitempty"`
 	NoOfAxles           *int32   `json:"NoOfAxles,omitempty"`
 	PossibleFuelType    []string `json:"PossibleFuelType,omitempty"`
 	ProductionDate      *Date    `json:"ProductionDate,omitempty"`
-	TachographType      *string  `json:"TachographType,omitempty"`
-	TellTaleCode        *string  `json:"TellTaleCode,omitempty"`
+	TachographType      string   `json:"TachographType,omitempty"`
+	TellTaleCode        string   `json:"TellTaleCode,omitempty"`
 	TotalFuelTankVolume *int32   `json:"TotalFuelTankVolume,omitempty"`
-	Type                *string  `json:"Type,omitempty"`
-	VIN                 string   `json:"VIN"`
+	Type                string   `json:"Type,omitempty"`
+	VIN                 string   `json:"VIN,omitempty"`
 }
 
 // VehiclePosition defines model for VehiclePosition.
 type VehiclePosition struct {
-	CreatedDateTime  time.Time     `json:"CreatedDateTime"`
+	CreatedDateTime  time.Time     `json:"CreatedDateTime,omitzero"`
 	GNSSPosition     *GNSSPosition `json:"GNSSPosition,omitempty"`
-	ReceivedDateTime time.Time     `json:"ReceivedDateTime"`
+	ReceivedDateTime time.Time     `json:"ReceivedDateTime,omitzero"`
 	TachographSpeed  *float64      `json:"TachographSpeed,omitempty"`
-	Trigger          Trigger       `json:"Trigger"`
-	VIN              string        `json:"VIN"`
+	Trigger          *Trigger      `json:"Trigger,omitempty"`
+	VIN              string        `json:"VIN,omitempty"`
 	WheelBasedSpeed  *float64      `json:"WheelBasedSpeed,omitempty"`
 }
 
 // VehiclePositionsResponse defines model for VehiclePositionsResponse.
 type VehiclePositionsResponse struct {
-	MoreDataAvailable     *bool             `json:"MoreDataAvailable,omitempty"`
-	RequestServerDateTime time.Time         `json:"RequestServerDateTime"`
+	MoreDataAvailable     bool              `json:"MoreDataAvailable,omitempty"`
+	RequestServerDateTime time.Time         `json:"RequestServerDateTime,omitzero"`
 	VehiclePosition       []VehiclePosition `json:"VehiclePosition,omitempty"`
 }
 
 // VehicleStatus defines model for VehicleStatus.
 type VehicleStatus struct {
 	AccumulatedData               *AccumulatedData `json:"AccumulatedData,omitempty"`
-	CreatedDateTime               time.Time        `json:"CreatedDateTime"`
+	CreatedDateTime               time.Time        `json:"CreatedDateTime,omitzero"`
 	DoorStatus                    []DoorStatus     `json:"DoorStatus,omitempty"`
 	Driver1ID                     *DriverID        `json:"Driver1Id,omitempty"`
 	EngineTotalFuelUsed           *int64           `json:"EngineTotalFuelUsed,omitempty"`
 	GrossCombinationVehicleWeight *int32           `json:"GrossCombinationVehicleWeight,omitempty"`
 	HRTotalVehicleDistance        *int64           `json:"HRTotalVehicleDistance,omitempty"`
-	ReceivedDateTime              time.Time        `json:"ReceivedDateTime"`
+	ReceivedDateTime              time.Time        `json:"ReceivedDateTime,omitzero"`
 	SnapshotData                  *SnapshotData    `json:"SnapshotData,omitempty"`
-	Status2OfDoors                *Status2OfDoors  `json:"Status2OfDoors,omitempty"`
+	Status2OfDoors                Status2OfDoors   `json:"Status2OfDoors,omitempty"`
 	TotalEngineHours              *float64         `json:"TotalEngineHours,omitempty"`
-	Trigger                       Trigger          `json:"Trigger"`
+	Trigger                       *Trigger         `json:"Trigger,omitempty"`
 	UptimeData                    *UptimeData      `json:"UptimeData,omitempty"`
-	VIN                           string           `json:"Vin"`
+	VIN                           string           `json:"Vin,omitempty"`
 }
 
 // VehicleStatusesResponse defines model for VehicleStatusesResponse.
 type VehicleStatusesResponse struct {
-	MoreDataAvailable     *bool           `json:"MoreDataAvailable,omitempty"`
-	RequestServerDateTime time.Time       `json:"RequestServerDateTime"`
+	MoreDataAvailable     bool            `json:"MoreDataAvailable,omitempty"`
+	RequestServerDateTime time.Time       `json:"RequestServerDateTime,omitzero"`
 	VehicleStatus         []VehicleStatus `json:"VehicleStatus,omitempty"`
 }
 
 // VehiclesResponse defines model for VehiclesResponse.
 type VehiclesResponse struct {
-	MoreDataAvailable *bool     `json:"MoreDataAvailable,omitempty"`
+	MoreDataAvailable bool      `json:"MoreDataAvailable,omitempty"`
 	Vehicle           []Vehicle `json:"Vehicle,omitempty"`
 }

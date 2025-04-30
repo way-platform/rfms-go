@@ -41,14 +41,14 @@ func newHTTPError(resp *http.Response) *Error {
 	if data, err := io.ReadAll(resp.Body); err == nil {
 		var body rfmsv4.Error
 		if err := json.Unmarshal(data, &body); err == nil {
-			if body.Error != nil {
-				result.Identifier = *body.Error
+			if body.Error != "" {
+				result.Identifier = body.Error
 			}
-			if body.ErrorDescription != nil {
-				result.Description = *body.ErrorDescription
+			if body.ErrorDescription != "" {
+				result.Description = body.ErrorDescription
 			}
-			if body.ErrorURI != nil {
-				result.ErrorURI = *body.ErrorURI
+			if body.ErrorURI != "" {
+				result.ErrorURI = body.ErrorURI
 			}
 		}
 	}

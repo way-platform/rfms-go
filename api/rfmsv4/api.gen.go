@@ -357,8 +357,8 @@ type AccumulatedData struct {
 
 // AlternatorInfo The alternator status of the up to 4 alternators. Used mainly for buses.
 type AlternatorInfo struct {
-	AlternatorNumber *int64            `json:"alternatorNumber,omitempty"`
-	AlternatorStatus *AlternatorStatus `json:"alternatorStatus,omitempty"`
+	AlternatorNumber *int64           `json:"alternatorNumber,omitempty"`
+	AlternatorStatus AlternatorStatus `json:"alternatorStatus,omitempty"`
 }
 
 // AlternatorStatus defines model for AlternatorStatus.
@@ -399,10 +399,10 @@ type ChargingConnectionStatusInfo struct {
 	//  DISCONNECTING - Vehicle is being disconnected from the charger
 	//  DISCONNECTED - Vehicle is not connected to a charger
 	//  ERROR - An error occurred
-	Event *ChargingConnectionStatusEvent `json:"event,omitempty"`
+	Event ChargingConnectionStatusEvent `json:"event,omitempty"`
 
 	// EventDetail Details regarding the event. Content is OEM specific
-	EventDetail *string `json:"eventDetail,omitempty"`
+	EventDetail string `json:"eventDetail,omitempty"`
 }
 
 // ChargingStatusEvent CHARGING_STARTED - Charging has started
@@ -424,10 +424,10 @@ type ChargingStatusInfo struct {
 	//  ESTIMATED_COMPLETION_TIME_CHANGED - The estimated time for completed charging has changed. (Threshold is outside scope of rFMS)
 	//  TIMER - A predefined time has passed since last charge status update. (Frequency is outside the scope of rFMS)
 	//  CHARGING_LEVEL - The charging level has reached a predefined level. (Charging levels are outside the scope of rFMS)
-	Event *ChargingStatusEvent `json:"event,omitempty"`
+	Event ChargingStatusEvent `json:"event,omitempty"`
 
 	// EventDetail Details regarding the event. Content is OEM specific
-	EventDetail *string `json:"eventDetail,omitempty"`
+	EventDetail string `json:"eventDetail,omitempty"`
 }
 
 // Date Indicates when the vehicle was produced.
@@ -451,10 +451,10 @@ type DoorOpenStatus string
 
 // DoorStatus defines model for DoorStatus.
 type DoorStatus struct {
-	DoorEnabledStatus *DoorEnabledStatus `json:"DoorEnabledStatus,omitempty"`
-	DoorLockStatus    *DoorLockStatus    `json:"DoorLockStatus,omitempty"`
-	DoorNumber        *int               `json:"DoorNumber,omitempty"`
-	DoorOpenStatus    *DoorOpenStatus    `json:"DoorOpenStatus,omitempty"`
+	DoorEnabledStatus DoorEnabledStatus `json:"DoorEnabledStatus,omitempty"`
+	DoorLockStatus    DoorLockStatus    `json:"DoorLockStatus,omitempty"`
+	DoorNumber        *int32            `json:"DoorNumber,omitempty"`
+	DoorOpenStatus    DoorOpenStatus    `json:"DoorOpenStatus,omitempty"`
 }
 
 // DriverAuthenticationType Code to distinguish different types of equipment for the tachograph application. See description of the field 'DriverAuthenticationEquipment' in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
@@ -475,13 +475,13 @@ type DriverWorkingStateProperty = DriverWorkingState
 // Error Optional responses for error codes, detailing the error if needed
 type Error struct {
 	// Error An identifier for this error
-	Error *string `json:"error,omitempty"`
+	Error string `json:"error,omitempty"`
 
 	// ErrorDescription A description of the error
-	ErrorDescription *string `json:"error_description,omitempty"`
+	ErrorDescription string `json:"error_description,omitempty"`
 
 	// ErrorURI A URI providing more information
-	ErrorURI *string `json:"error_uri,omitempty"`
+	ErrorURI string `json:"error_uri,omitempty"`
 }
 
 // EstimatedDistanceToEmpty Estimated distance to empty (tanks and/or battery packs) in meters
@@ -538,13 +538,13 @@ type GNSSPosition struct {
 	Heading *Int `json:"heading,omitempty"`
 
 	// Latitude Latitude (WGS84 based)
-	Latitude float64 `json:"latitude"`
+	Latitude *float64 `json:"latitude,omitempty"`
 
 	// Longitude Longitude (WGS84 based)
-	Longitude float64 `json:"longitude"`
+	Longitude *float64 `json:"longitude,omitempty"`
 
 	// PositionDateTime The time of the position data in iso8601 format.
-	PositionDateTime Time `json:"positionDateTime"`
+	PositionDateTime Time `json:"positionDateTime,omitzero"`
 
 	// Speed The GNSS(e.g. GPS)-speed in km/h
 	Speed *float64 `json:"speed,omitempty"`
@@ -555,21 +555,21 @@ type IgnitionState string
 
 // Label defines model for Label.
 type Label struct {
-	Kilograms   *int64  `json:"kilograms,omitempty"`
-	Label       *string `json:"label,omitempty"`
-	Meters      *int64  `json:"meters,omitempty"`
-	MilliLitres *int64  `json:"milliLitres,omitempty"`
-	Seconds     *int64  `json:"seconds,omitempty"`
-	Watthours   *int64  `json:"watthours,omitempty"`
+	Kilograms   *int64 `json:"kilograms,omitempty"`
+	Label       string `json:"label,omitempty"`
+	Meters      *int64 `json:"meters,omitempty"`
+	MilliLitres *int64 `json:"milliLitres,omitempty"`
+	Seconds     *int64 `json:"seconds,omitempty"`
+	Watthours   *int64 `json:"watthours,omitempty"`
 }
 
 // OEMDriverIdentification defines model for OemDriverIdentification.
 type OEMDriverIdentification struct {
 	// IDType Contains an optional id type (e.g. pin, USB, encrypted EU id...)
-	IDType *string `json:"idType,omitempty"`
+	IDType string `json:"idType,omitempty"`
 
 	// OEMDriverIdentification An OEM specific driver id.
-	OEMDriverIdentification *string `json:"oemDriverIdentification,omitempty"`
+	OEMDriverIdentification string `json:"oemDriverIdentification,omitempty"`
 }
 
 // SnapshotData defines model for SnapshotData.
@@ -584,7 +584,7 @@ type SnapshotData struct {
 	//  Disconnected - No charger is connected
 	//  Error - An error occurred when connecting or disconnecting
 	//  Not available - Charging connection status is not available
-	BatteryPackChargingConnectionStatus *BatteryPackChargingConnectionStatus `json:"batteryPackChargingConnectionStatus,omitempty"`
+	BatteryPackChargingConnectionStatus BatteryPackChargingConnectionStatus `json:"batteryPackChargingConnectionStatus,omitempty"`
 
 	// BatteryPackChargingDevice Device used to charge the battery pack. Standard rFMS values taken from ISO 15118 (OEM can have additional values):
 	//  ACD - Automatic Connection Device
@@ -592,7 +592,7 @@ type SnapshotData struct {
 	//  VEHICLE_COUPLER - manual connection of a flexible cable to an EV
 	//  NONE - No device connected
 	//  NOT_AVAILABLE - Unknown
-	BatteryPackChargingDevice *string `json:"batteryPackChargingDevice,omitempty"`
+	BatteryPackChargingDevice string `json:"batteryPackChargingDevice,omitempty"`
 
 	// BatteryPackChargingPower Charging power in watts.
 	BatteryPackChargingPower *float64 `json:"batteryPackChargingPower,omitempty"`
@@ -604,17 +604,17 @@ type SnapshotData struct {
 	//  Charging DC - DC charging ongoing
 	//  Error - An error occurred when charging
 	//  Not available - Charging status is not available
-	BatteryPackChargingStatus *BatteryPackChargingStatus `json:"batteryPackChargingStatus,omitempty"`
+	BatteryPackChargingStatus BatteryPackChargingStatus `json:"batteryPackChargingStatus,omitempty"`
 
 	// CatalystFuelLevel The adblue level percentage
 	CatalystFuelLevel *float64 `json:"catalystFuelLevel,omitempty"`
 
 	// Driver1WorkingState Tachograph Working state of the driver
-	Driver1WorkingState *DriverWorkingStateProperty `json:"driver1WorkingState,omitempty"`
-	Driver2ID           *DriverID                   `json:"driver2Id,omitempty"`
+	Driver1WorkingState DriverWorkingStateProperty `json:"driver1WorkingState,omitempty"`
+	Driver2ID           *DriverID                  `json:"driver2Id,omitempty"`
 
 	// Driver2WorkingState Tachograph Working state of the driver
-	Driver2WorkingState *DriverWorkingStateProperty `json:"driver2WorkingState,omitempty"`
+	Driver2WorkingState DriverWorkingStateProperty `json:"driver2WorkingState,omitempty"`
 
 	// ElectricMotorSpeed The electric motor speed in rev/min
 	ElectricMotorSpeed *float64 `json:"electricMotorSpeed,omitempty"`
@@ -626,7 +626,7 @@ type SnapshotData struct {
 	EstimatedDistanceToEmpty *EstimatedDistanceToEmpty `json:"estimatedDistanceToEmpty,omitempty"`
 
 	// EstimatedTimeBatteryPackChargingCompleted Estimated time when charging has reached the target level.
-	EstimatedTimeBatteryPackChargingCompleted *Time `json:"estimatedTimeBatteryPackChargingCompleted,omitempty"`
+	EstimatedTimeBatteryPackChargingCompleted Time `json:"estimatedTimeBatteryPackChargingCompleted,omitzero"`
 
 	// FuelLevel1 The fuel level percentage
 	FuelLevel1 *float64 `json:"fuelLevel1,omitempty"`
@@ -635,7 +635,7 @@ type SnapshotData struct {
 	FuelLevel2 *float64 `json:"fuelLevel2,omitempty"`
 
 	// FuelType Type of fuel currently being utilized by the vehicle acc. SPN 5837
-	FuelType     *string       `json:"fuelType,omitempty"`
+	FuelType     string        `json:"fuelType,omitempty"`
 	GNSSPosition *GNSSPosition `json:"gnssPosition,omitempty"`
 
 	// HybridBatteryPackRemainingCharge Indicates the hybrid battery pack remaining charge.
@@ -645,7 +645,7 @@ type SnapshotData struct {
 	HybridBatteryPackRemainingCharge *float64 `json:"hybridBatteryPackRemainingCharge,omitempty"`
 
 	// Ignition The ignition state of the vehicle. This is a Scania-specific field.
-	Ignition *IgnitionState `json:"ignition,omitempty"`
+	Ignition IgnitionState `json:"ignition,omitempty"`
 
 	// ParkingBrakeSwitch Switch signal which indicates when the parking brake is set. In general the switch actuated by the operator's park brake control, whether a pedal, lever or other control mechanism
 	//  true - parking brake set
@@ -671,29 +671,29 @@ type Status2OfDoors string
 // TachoDriverIdentification defines model for TachoDriverIdentification.
 type TachoDriverIdentification struct {
 	// CardIssuingMemberState The country alpha code of the Member State having issued the card. This fields is formatted according the definition for NationAlpha in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
-	CardIssuingMemberState string `json:"cardIssuingMemberState"`
+	CardIssuingMemberState string `json:"cardIssuingMemberState,omitempty"`
 
 	// CardRenewalIndex A card renewal index. This fields is formatted according the definition for CardRenewalIndex (chap 2.25) in: COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
-	CardRenewalIndex *string `json:"cardRenewalIndex,omitempty"`
+	CardRenewalIndex string `json:"cardRenewalIndex,omitempty"`
 
 	// CardReplacementIndex A card replacement index. This fields is formatted according the definition for CardReplacementIndex (chap 2.26) in: COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
-	CardReplacementIndex *string `json:"cardReplacementIndex,omitempty"`
+	CardReplacementIndex string `json:"cardReplacementIndex,omitempty"`
 
 	// DriverAuthenticationEquipment Code to distinguish different types of equipment for the tachograph application. See description of the field 'DriverAuthenticationEquipment' in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
-	DriverAuthenticationEquipment *DriverAuthenticationType `json:"driverAuthenticationEquipment,omitempty"`
+	DriverAuthenticationEquipment DriverAuthenticationType `json:"driverAuthenticationEquipment,omitempty"`
 
 	// DriverIdentification The unique identification of a driver in a Member State. This fields is formatted according the definition for driverIdentification in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
-	DriverIdentification string `json:"driverIdentification"`
+	DriverIdentification string `json:"driverIdentification,omitempty"`
 }
 
 // TellTaleInfo defines model for TellTaleInfo.
 type TellTaleInfo struct {
 	// OEMTellTale The OemTellTale is only set when the TellTale == OEM_SPECIFIC_TELL_TALE. This is an OEM specific string defining a tell tale in the OEM context.
-	OEMTellTale *string `json:"oemTellTale,omitempty"`
+	OEMTellTale string `json:"oemTellTale,omitempty"`
 
 	// State The current state of the tell tale.
-	State    TellTaleState `json:"state"`
-	TellTale TellTaleType  `json:"tellTale"`
+	State    TellTaleState `json:"state,omitempty"`
+	TellTale TellTaleType  `json:"tellTale,omitempty"`
 }
 
 // TellTaleState The current state of the tell tale.
@@ -705,25 +705,25 @@ type TellTaleType string
 // Trailer defines model for Trailer.
 type Trailer struct {
 	// CustomerTrailerName The customer's name for the trailer
-	CustomerTrailerName *string `json:"customerTrailerName,omitempty"`
+	CustomerTrailerName string `json:"customerTrailerName,omitempty"`
 
 	// TrailerAxleLoadSum The sum of the static vertical loads of the trailer axles in kilograms. The load is sent in the EBS22 message of ISO 11992-2.
-	TrailerAxleLoadSum *int `json:"trailerAxleLoadSum,omitempty"`
+	TrailerAxleLoadSum *int32 `json:"trailerAxleLoadSum,omitempty"`
 
 	// TrailerAxles A list of trailer axles
-	TrailerAxles *[]TrailerAxle `json:"trailerAxles,omitempty"`
+	TrailerAxles []TrailerAxle `json:"trailerAxles,omitempty"`
 
 	// TrailerIdentificationData The identification data sent by the trailer to the truck in the RGE23 message of ISO 11992-2. An alternative source is the DID (Data identifier definition) record VIN, as specified in ISO 11992-4. Even though both ISO 11992-2 and ISO 11992-4 specifies this as a VIN, the actual data sent from a trailer is not always the true VIN of the trailer.
-	TrailerIdentificationData *string `json:"trailerIdentificationData,omitempty"`
+	TrailerIdentificationData string `json:"trailerIdentificationData,omitempty"`
 
 	// TrailerNo Trailer number from 1 to 5, 1 being closest to the truck, according to ISO 11992-2.
-	TrailerNo *int `json:"trailerNo,omitempty"`
+	TrailerNo *int32 `json:"trailerNo,omitempty"`
 
 	// TrailerType Indicates the type of the trailer. The type is sent in the EBS24 message of ISO 11992-2.
-	TrailerType *TrailerType `json:"trailerType,omitempty"`
+	TrailerType TrailerType `json:"trailerType,omitempty"`
 
 	// TrailerVIN The vehicle identification number of the trailer. See ISO 3779 (17 characters) If the trailerIdentificationData is reporting a true VIN, trailerVin will have the same value. If it is possible to map the trailerIdentificationData to a true VIN using other sources, the value can be provided here.
-	TrailerVIN *string `json:"trailerVin,omitempty"`
+	TrailerVIN string `json:"trailerVin,omitempty"`
 }
 
 // TrailerAxle defines model for TrailerAxle.
@@ -732,7 +732,7 @@ type TrailerAxle struct {
 	TrailerAxleLoad *float32 `json:"trailerAxleLoad,omitempty"`
 
 	// TrailerAxlePosition Axle position from 1 to 15, 1 being in the front closest to the truck, according to ISO 11992-2.
-	TrailerAxlePosition *int `json:"trailerAxlePosition,omitempty"`
+	TrailerAxlePosition *int32 `json:"trailerAxlePosition,omitempty"`
 }
 
 // TrailerType Indicates the type of the trailer. The type is sent in the EBS24 message of ISO 11992-2.
@@ -758,11 +758,11 @@ type Trigger struct {
 	ChargingStatusInfo *ChargingStatusInfo `json:"chargingStatusInfo,omitempty"`
 
 	// Context The context defines if this is part of the standard or OEM specific. rFMS standard values VOLVO TRUCKS, SCANIA, DAIMLER, IVECO, DAF, MAN, RENAULT TRUCKS, VDL, VOLVO BUSES, IVECO BUS, IRISBUS If the Trigger is defined in the rFMS standard, the Context = RFMS
-	Context  string    `json:"context"`
+	Context  string    `json:"context,omitempty"`
 	DriverID *DriverID `json:"driverId,omitempty"`
 
 	// PtoID The id of a PTO. This is only set if the TriggerType = PTO_ENABLED or PTO_DISABLED
-	PtoID        *string       `json:"ptoId,omitempty"`
+	PtoID        string        `json:"ptoId,omitempty"`
 	TellTaleInfo *TellTaleInfo `json:"tellTaleInfo,omitempty"`
 
 	// TriggerInfo Additional TriggerInfo content for OEM specific triggers E.g. TRAILER_ATTACHED_TRIGGER [id of trailer]
@@ -788,7 +788,7 @@ type Trigger struct {
 	//  BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE - Data was sent due to a change in the battery pack charging connection status.
 	//  TRAILER_CONNECTED - One or several trailers were connected
 	//  TRAILER_DISCONNECTED - One or several trailers were disconnected
-	TriggerType TriggerType `json:"triggerType"`
+	TriggerType TriggerType `json:"triggerType,omitempty"`
 }
 
 // TriggerType Trigger types for Context=RFMS:
@@ -853,7 +853,7 @@ type UptimeData struct {
 	ServiceDistance *int64 `json:"serviceDistance,omitempty"`
 
 	// TellTaleInfo List of tell tales with the actual status for each tell tale.
-	TellTaleInfo []TellTaleInfo `json:"tellTaleInfo"`
+	TellTaleInfo []TellTaleInfo `json:"tellTaleInfo,omitempty"`
 }
 
 // Vehicle defines model for Vehicle.
@@ -862,16 +862,16 @@ type Vehicle struct {
 	AuthorizedPaths []string `json:"authorizedPaths,omitempty"`
 
 	// BodyType The type of body on the chassis. rFMS standard values CITY_BUS, INTERCITY_BUS, COACH. This is used mainly for buses.
-	BodyType *string `json:"bodyType,omitempty"`
+	BodyType string `json:"bodyType,omitempty"`
 
 	// Brand The vehicle brand. rFMS standard values VOLVO TRUCKS, SCANIA, DAIMLER, IVECO, DAF, MAN, RENAULT TRUCKS, VDL, VOLVO BUSES, IVECO BUS, IRISBUS
-	Brand *string `json:"brand,omitempty"`
+	Brand string `json:"brand,omitempty"`
 
 	// ChassisType The chassis type of the vehicle. OEM specific value. This is used mainly for buses
-	ChassisType *string `json:"chassisType,omitempty"`
+	ChassisType string `json:"chassisType,omitempty"`
 
 	// CustomerVehicleName The customer's name for the vehicle.
-	CustomerVehicleName *string `json:"customerVehicleName,omitempty"`
+	CustomerVehicleName string `json:"customerVehicleName,omitempty"`
 
 	// DoorConfiguration The door configuration. The door order definition is OEM specific. E.g. [1, 2, 2] means the bus has 3 doors: 1 front door, double doors for door 2 and 3. This is used mainly for buses.
 	DoorConfiguration []int32 `json:"doorConfiguration,omitempty"`
@@ -889,16 +889,16 @@ type Vehicle struct {
 	//  PROCONVE_P5, PROCONVE_P6, PROCONVE_P7
 	//  Brazil, Nonroad Engines:
 	//  PROCONVE_MARI
-	EmissionLevel *string `json:"emissionLevel,omitempty"`
+	EmissionLevel string `json:"emissionLevel,omitempty"`
 
 	// GearboxType The type of gearbox the vehicle is equipped with. rFMS standard values MANUAL, AUTOMATIC, SEMI_AUTOMATIC, NO_GEAR (e.g electrical)
-	GearboxType *string `json:"gearboxType,omitempty"`
+	GearboxType string `json:"gearboxType,omitempty"`
 
 	// HasRampOrLift If the vehicle is equipped with a ramp or not. This is used mainly for buses.
 	HasRampOrLift *bool `json:"hasRampOrLift,omitempty"`
 
 	// Model Indicates the model of the vehicle. OEM specific value.
-	Model *string `json:"model,omitempty"`
+	Model string `json:"model,omitempty"`
 
 	// NoOfAxles Number of axles on the vehicle. This is used mainly for buses
 	NoOfAxles *int32 `json:"noOfAxles,omitempty"`
@@ -910,7 +910,7 @@ type Vehicle struct {
 	ProductionDate *Date `json:"productionDate,omitempty"`
 
 	// RegistrationNumber The registration number (license plate) of the vehicle. This is a Scania-specific field.
-	RegistrationNumber *string `json:"registrationNumber,omitempty"`
+	RegistrationNumber string `json:"registrationNumber,omitempty"`
 
 	// TachographType The type of tachograph in the vehicle. rFMS standard values MTCO, DTCO, TSU, DTCO_G1, DTCO_G2, NONE
 	//  DTCO - Digital tachograph, unknown generation
@@ -919,10 +919,10 @@ type Vehicle struct {
 	//  NONE - No tachograph in the vehicle
 	//  MTCO - Modular tachograph
 	//  TSU - Tachograph simulator
-	TachographType *string `json:"tachographType,omitempty"`
+	TachographType string `json:"tachographType,omitempty"`
 
 	// TellTaleCode This parameter indicates how the tell tales shall be interpreted, the code is unique for each OEM. One OEM can have different interpretations  depending on vehicle type.
-	TellTaleCode *string `json:"tellTaleCode,omitempty"`
+	TellTaleCode string `json:"tellTaleCode,omitempty"`
 
 	// TotalBatteryPackCapacity Total battery pack capacity in watt hours.
 	TotalBatteryPackCapacity *int32 `json:"totalBatteryPackCapacity,omitempty"`
@@ -934,10 +934,10 @@ type Vehicle struct {
 	TotalFuelTankVolume *int32 `json:"totalFuelTankVolume,omitempty"`
 
 	// Type Indicates the type of vehicle. rFMS standard values TRUCK, BUS, VAN
-	Type *string `json:"type,omitempty"`
+	Type string `json:"type,omitempty"`
 
 	// VIN vehicle identification number. See ISO 3779 (17 characters)
-	VIN string `json:"vin"`
+	VIN string `json:"vin,omitempty"`
 }
 
 // VehicleAxle defines model for VehicleAxle.
@@ -946,17 +946,17 @@ type VehicleAxle struct {
 	VehicleAxleLoad *float32 `json:"vehicleAxleLoad,omitempty"`
 
 	// VehicleAxlePosition Axle position from 1 to 15, 1 being in the front of the truck
-	VehicleAxlePosition *int `json:"vehicleAxlePosition,omitempty"`
+	VehicleAxlePosition *int32 `json:"vehicleAxlePosition,omitempty"`
 }
 
 // VehiclePosition defines model for VehiclePosition.
 type VehiclePosition struct {
 	// CreatedDateTime When the data was retrieved in the vehicle in iso8601 format.
-	CreatedDateTime Time          `json:"createdDateTime"`
+	CreatedDateTime Time          `json:"createdDateTime,omitzero"`
 	GNSSPosition    *GNSSPosition `json:"gnssPosition,omitempty"`
 
 	// ReceivedDateTime Reception at Server. To be used for handling of "more data available" in iso8601 format.
-	ReceivedDateTime Time `json:"receivedDateTime"`
+	ReceivedDateTime Time `json:"receivedDateTime,omitzero"`
 
 	// TachographSpeed Tachograph vehicle speed in km/h (Speed of the vehicle registered by the tachograph)
 	TachographSpeed *float64 `json:"tachographSpeed,omitempty"`
@@ -972,10 +972,10 @@ type VehiclePosition struct {
 	//  Property __tellTaleInfo__:
 	//  The tell tale(s) that triggered this message.
 	//  This is only set if the TriggerType = TELL_TALE
-	TriggerType Trigger `json:"triggerType"`
+	TriggerType *Trigger `json:"triggerType,omitempty"`
 
 	// VIN vehicle identification number. See ISO 3779 (17 characters)
-	VIN string `json:"vin"`
+	VIN string `json:"vin,omitempty"`
 
 	// WheelBasedSpeed Wheel-Based Vehicle Speed in km/h (Speed of the vehicle as calculated from wheel or tailshaft speed)
 	WheelBasedSpeed *float64 `json:"wheelBasedSpeed,omitempty"`
@@ -984,16 +984,16 @@ type VehiclePosition struct {
 // VehiclePositionsResponse defines model for VehiclePositionsResponse.
 type VehiclePositionsResponse struct {
 	// MoreDataAvailable This will be set to true if the result set was too large to be sent back in one reply. A new request must be sent to get the rest of the vehicle positions, where the starttime parameter must be supplied. The starttime should be set to the latest ReceivedDateTime + 1 second of the last vehicle in the result set of this message.
-	MoreDataAvailable bool `json:"moreDataAvailable"`
+	MoreDataAvailable bool `json:"moreDataAvailable,omitempty"`
 
 	// MoreDataAvailableLink Populated with the link to the next part of the result when moreDataAvailable is true. The link is relative, i.e. starts with /rfms/vehiclepositions, and preserves any query parameters from the original request.
-	MoreDataAvailableLink *string `json:"moreDataAvailableLink,omitempty"`
+	MoreDataAvailableLink string `json:"moreDataAvailableLink,omitempty"`
 
 	// RequestServerDateTime Time to be used to ask for historical data at customers (for starttime), to solve the problem of having different times at server and clients. This is the time at the server when this request was received. To avoid losing any messages or get duplicates, this is the time that should be supplied in the startTime parameter in the next request in iso8601 format.
-	RequestServerDateTime   Time `json:"requestServerDateTime"`
+	RequestServerDateTime   Time `json:"requestServerDateTime,omitzero"`
 	VehiclePositionResponse struct {
 		VehiclePositions []VehiclePosition `json:"vehiclePositions,omitempty"`
-	} `json:"vehiclePositionResponse"`
+	} `json:"vehiclePositionResponse,omitempty"`
 }
 
 // VehicleStatus defines model for VehicleStatus.
@@ -1001,7 +1001,7 @@ type VehicleStatus struct {
 	AccumulatedData *AccumulatedData `json:"accumulatedData,omitempty"`
 
 	// CreatedDateTime When the data was retrieved in the vehicle in iso8601 format.
-	CreatedDateTime Time `json:"createdDateTime"`
+	CreatedDateTime Time `json:"createdDateTime,omitzero"`
 
 	// DoorStatus Individual status for each door. Bus specific parameter
 	DoorStatus []DoorStatus `json:"doorStatus,omitempty"`
@@ -1017,11 +1017,11 @@ type VehicleStatus struct {
 	HrTotalVehicleDistance *int64 `json:"hrTotalVehicleDistance,omitempty"`
 
 	// ReceivedDateTime Reception at Server. To be used for handling of "more data available" in iso8601 format.
-	ReceivedDateTime Time          `json:"receivedDateTime"`
+	ReceivedDateTime Time          `json:"receivedDateTime,omitzero"`
 	SnapshotData     *SnapshotData `json:"snapshotData,omitempty"`
 
 	// Status2OfDoors Composite indication of all bus door statuses. Bus specific parameter
-	Status2OfDoors *Status2OfDoors `json:"status2OfDoors,omitempty"`
+	Status2OfDoors Status2OfDoors `json:"status2OfDoors,omitempty"`
 
 	// TotalElectricEnergyUsed Total electric energy consumed by the vehicle, excluding when plugged in (vehicle coupler) for charging, (incl. motor, PTO, cooling, etc.) in watt hours. Recuperation is subtracted from the value.  At least one of engineTotalFuelUsed, totalFuelUsedGaseous or totalElectricEnergyUsed is mandatory.
 	TotalElectricEnergyUsed *int64 `json:"totalElectricEnergyUsed,omitempty"`
@@ -1046,36 +1046,36 @@ type VehicleStatus struct {
 	//  Property __tellTaleInfo__:
 	//  The tell tale(s) that triggered this message.
 	//  This is only set if the TriggerType = TELL_TALE
-	TriggerType Trigger     `json:"triggerType"`
+	TriggerType *Trigger    `json:"triggerType,omitempty"`
 	UptimeData  *UptimeData `json:"uptimeData,omitempty"`
 
 	// VIN vehicle identification number. See ISO 3779 (17 characters)
-	VIN string `json:"vin"`
+	VIN string `json:"vin,omitempty"`
 }
 
 // VehicleStatusesResponse defines model for VehicleStatusesResponse.
 type VehicleStatusesResponse struct {
 	// MoreDataAvailable This will be set to true if the result set was too large to be sent back in one reply. A new request must be done to get the rest of the vehicle statuses, where the starttime parameter must be supplied. The starttime should be set to the ReceivedDateTime + 1 second of the last vehicle in the result set of this message.
-	MoreDataAvailable bool `json:"moreDataAvailable"`
+	MoreDataAvailable bool `json:"moreDataAvailable,omitempty"`
 
 	// MoreDataAvailableLink Populated with the link to the next part of the result when moreDataAvailable is true. The link is relative, i.e. starts with /rfms/vehiclestatuses, and preserves any query parameters from the original request.
-	MoreDataAvailableLink *string `json:"moreDataAvailableLink,omitempty"`
+	MoreDataAvailableLink string `json:"moreDataAvailableLink,omitempty"`
 
 	// RequestServerDateTime Time in UTC to be used to ask for historical data (for starttime), to solve the problem of having different times at server and clients. This is the time at the server when this request was received. To avoid losing any messages or get duplicates, this is the time that should be supplied in the startTime parameter in the next request in iso8601 format.
-	RequestServerDateTime Time `json:"requestServerDateTime"`
+	RequestServerDateTime Time `json:"requestServerDateTime,omitzero"`
 	VehicleStatusResponse struct {
 		VehicleStatuses []VehicleStatus `json:"vehicleStatuses,omitempty"`
-	} `json:"vehicleStatusResponse"`
+	} `json:"vehicleStatusResponse,omitempty"`
 }
 
 // VehiclesResponse defines model for VehiclesResponse.
 type VehiclesResponse struct {
 	// MoreDataAvailable This will be set to true if the result set was too large to be sent back in one reply. A new request must be sent to get the rest of the vehicles, where the lastVin parameter must be supplied. The lastVin should be set to the VIN of the last vehicle in the result set of this message.
-	MoreDataAvailable bool `json:"moreDataAvailable"`
+	MoreDataAvailable bool `json:"moreDataAvailable,omitempty"`
 
 	// MoreDataAvailableLink Populated with the link to the next part of the result when moreDataAvailable is true. The link is relative, i.e. starts with /rfms/vehicles, and preserves any query parameters from the original request.
-	MoreDataAvailableLink *string `json:"moreDataAvailableLink,omitempty"`
+	MoreDataAvailableLink string `json:"moreDataAvailableLink,omitempty"`
 	VehicleResponse       struct {
 		Vehicles []Vehicle `json:"vehicles,omitempty"`
-	} `json:"vehicleResponse"`
+	} `json:"vehicleResponse,omitempty"`
 }

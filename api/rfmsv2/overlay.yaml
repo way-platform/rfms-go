@@ -14,16 +14,6 @@ actions:
   description: "Skip code generation for security schemes"
   remove: true
 
-- target: $..[?(@.type=="array")]
-  description: "Skip pointer to Go slices"
-  update:
-    x-go-type-skip-optional-pointer: true
-
-- target: $..[?(@.type=="integer" && !@.format)]
-  description: "Default integers to int32 if no format is provided"
-  update:
-    format: int32
-
 - target: $.components.schemas
   update:
     DoorOpenStatus:
@@ -260,3 +250,39 @@ actions:
   update:
     Trigger:
       $ref: '#/components/schemas/TriggerType'
+
+- target: $..[?(@.type=="array")]
+  description: "Skip pointer to Go slices"
+  update:
+    x-go-type-skip-optional-pointer: true
+
+- target: $..[?(@.required)]
+  description: "Remove required from all fields"
+  update:
+    required: null
+
+- target: $..[?(@.type=="integer" && !@.format)]
+  description: "Default integers to int32 if no format is provided"
+  update:
+    format: int32
+
+- target: $..[?(@.type=="string")]
+  description: "Skip optional pointer for strings"
+  update:
+    x-go-type-skip-optional-pointer: true
+
+- target: $.components.schemas
+  description: "Skip optional pointer on request fields"
+  update:
+    VehiclesResponse:
+      properties:
+        MoreDataAvailable:
+          x-go-type-skip-optional-pointer: true
+    VehicleStatusesResponse:
+      properties:
+        MoreDataAvailable:
+          x-go-type-skip-optional-pointer: true
+    VehiclePositionsResponse:
+      properties:
+        MoreDataAvailable:
+          x-go-type-skip-optional-pointer: true

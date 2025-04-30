@@ -17,3 +17,8 @@ func (t *Time) UnmarshalJSON(data []byte) error {
 	*t = Time(parsed)
 	return nil
 }
+
+// String returns the time in RFC3339 format, without the "Z" suffix.
+func (t Time) String() string {
+	return strings.TrimSuffix(time.Time(t).UTC().Format(time.RFC3339), "Z")
+}

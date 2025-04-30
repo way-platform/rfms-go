@@ -54,8 +54,8 @@ func newVehiclesCommand() *cobra.Command {
 			}
 			for _, vehicle := range response.Vehicles {
 				cmd.Println(vehicle.VIN)
-				if vehicle.EmissionLevel != nil {
-					cmd.Println(*vehicle.EmissionLevel)
+				if vehicle.EmissionLevel != "" {
+					cmd.Println(vehicle.EmissionLevel)
 				}
 				// printRawJSON(cmd, vehicle.Raw)
 			}
