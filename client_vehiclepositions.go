@@ -45,7 +45,7 @@ func (c *Client) VehiclePositions(
 ) (_ *VehiclePositionsResponse, err error) {
 	defer func() {
 		if err != nil {
-			err = fmt.Errorf("vehicle positions: %w", err)
+			err = fmt.Errorf("rFMS vehicle positions: %w", err)
 		}
 	}()
 	httpRequest, err := c.newRequest(ctx, http.MethodGet, "/vehiclepositions", nil)
@@ -69,10 +69,10 @@ func (c *Client) VehiclePositions(
 			q.Set("datetype", request.DateType)
 		}
 		if !request.StartTime.IsZero() {
-			q.Set("starttime", request.StartTime.UTC().Format(time.RFC3339))
+			q.Set("starttime", rfmsv4.Time(request.StartTime).String())
 		}
 		if !request.StopTime.IsZero() {
-			q.Set("stoptime", request.StopTime.UTC().Format(time.RFC3339))
+			q.Set("stoptime", rfmsv4.Time(request.StopTime).String())
 		}
 		if request.VIN != "" {
 			q.Set("vin", request.VIN)
@@ -109,6 +109,8 @@ func (c *Client) VehiclePositions(
 			return nil, fmt.Errorf("unmarshal v2 response body: %w", err)
 		}
 		v4Response = *rfmsv2tov4.ConvertVehiclePositionsResponse(&v2Response)
+	default:
+		return nil, fmt.Errorf("unsupported API version: %s", c.config.apiVersion)
 	}
 	return &VehiclePositionsResponse{
 		VehiclePositions:      v4Response.VehiclePositionResponse.VehiclePositions,

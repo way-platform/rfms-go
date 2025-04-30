@@ -30,7 +30,7 @@ type VehiclesResponse struct {
 func (c *Client) Vehicles(ctx context.Context, request *VehiclesRequest) (_ *VehiclesResponse, err error) {
 	defer func() {
 		if err != nil {
-			err = fmt.Errorf("vehicles: %w", err)
+			err = fmt.Errorf("rFMS vehicles: %w", err)
 		}
 	}()
 	httpRequest, err := c.newRequest(ctx, http.MethodGet, "/vehicles", nil)
@@ -74,6 +74,8 @@ func (c *Client) Vehicles(ctx context.Context, request *VehiclesRequest) (_ *Veh
 			return nil, fmt.Errorf("unmarshal v2 response body: %w", err)
 		}
 		v4Response = *rfmsv2tov4.ConvertVehiclesResponse(&v2Response)
+	default:
+		return nil, fmt.Errorf("unsupported API version: %s", c.config.apiVersion)
 	}
 	return &VehiclesResponse{
 		Vehicles:          v4Response.VehicleResponse.Vehicles,
