@@ -5,6 +5,6 @@ type Version string
 
 // Currently supported versions of the rFMS API.
 const (
-	Version4  Version = "v4"
-	Version21 Version = "v2.1"
+	V4   Version = "v4"
+	V2_1 Version = "v2.1"
 )

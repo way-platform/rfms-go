@@ -29,12 +29,10 @@ type VehiclePositionsRequest struct {
 }
 
 type VehiclePositionsResponse struct {
-	// Raw response body.
-	Raw json.RawMessage `json:"-"`
 	// VehiclePositions in the response.
-	VehiclePositions []rfmsv4.VehiclePosition `json:"vehiclePositions,omitempty"`
+	VehiclePositions []rfmsv4.VehiclePosition `json:"vehiclePositions"`
 	// MoreDataAvailable indicates if there is more data available.
-	MoreDataAvailable bool `json:"moreDataAvailable,omitempty"`
+	MoreDataAvailable bool `json:"moreDataAvailable"`
 	// MoreDataAvailableLink is the link to the next page of data.
 	MoreDataAvailableLink string `json:"moreDataAvailableLink,omitempty"`
 	// RequestServerDateTime is the server time when the request was received.
@@ -55,9 +53,9 @@ func (c *Client) VehiclePositions(
 		return nil, fmt.Errorf("create request: %w", err)
 	}
 	switch c.config.apiVersion {
-	case Version4:
+	case V4:
 		req.Header.Set("Accept", "application/json; rfms=vehiclepositions.v4.0")
-	case Version21:
+	case V2_1:
 		req.Header.Set("Accept", "application/vnd.fmsstandard.com.vehiclepositions.v2.1+json; UTF-8")
 	default:
 		return nil, fmt.Errorf("unsupported API version: %s", c.config.apiVersion)

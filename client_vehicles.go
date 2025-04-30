@@ -5,9 +5,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 
+	"github.com/way-platform/rfms-go/v4/api/compat/rfmsv2tov4"
+	"github.com/way-platform/rfms-go/v4/api/rfmsv2"
 	"github.com/way-platform/rfms-go/v4/api/rfmsv4"
 )
 
@@ -19,12 +20,10 @@ type VehiclesRequest struct {
 
 // VehiclesResponse is the response for the [Client.Vehicles] method.
 type VehiclesResponse struct {
-	// Raw response body.
-	Raw json.RawMessage `json:"-"`
 	// Vehicles in the response.
-	Vehicles []rfmsv4.Vehicle `json:"vehicles,omitzero"`
+	Vehicles []rfmsv4.Vehicle `json:"vehicles"`
 	// MoreDataAvailable indicates if there is more data available.
-	MoreDataAvailable bool `json:"moreDataAvailable,omitempty"`
+	MoreDataAvailable bool `json:"moreDataAvailable"`
 }
 
 // Vehicles implements the rFMS API method "GET /vehicles".
@@ -34,54 +33,50 @@ func (c *Client) Vehicles(ctx context.Context, request *VehiclesRequest) (_ *Veh
 			err = fmt.Errorf("vehicles: %w", err)
 		}
 	}()
-	req, err := c.newRequest(ctx, http.MethodGet, "/vehicles", nil)
+	httpRequest, err := c.newRequest(ctx, http.MethodGet, "/vehicles", nil)
 	if err != nil {
 		return nil, fmt.Errorf("create request: %w", err)
 	}
 	switch c.config.apiVersion {
-	case Version4:
-		req.Header.Set("Accept", "application/json; rfms=vehicles.v4.0")
-	case Version21:
-		req.Header.Set("Accept", "application/vnd.fmsstandard.com.Vehicles.v2.1+json; UTF-8")
+	case V4:
+		httpRequest.Header.Set("Accept", "application/json; rfms=vehicles.v4.0")
+	case V2_1:
+		httpRequest.Header.Set("Accept", "application/vnd.fmsstandard.com.Vehicles.v2.1+json; UTF-8")
 	default:
 		return nil, fmt.Errorf("unsupported API version: %s", c.config.apiVersion)
 	}
-	q := req.URL.Query()
+	q := httpRequest.URL.Query()
 	if request != nil && request.LastVIN != "" {
 		q.Set("lastVin", request.LastVIN)
 	}
-	req.URL.RawQuery = q.Encode()
-	resp, err := c.httpClient.Do(req)
+	httpRequest.URL.RawQuery = q.Encode()
+	httpResponse, err := c.httpClient.Do(httpRequest)
 	if err != nil {
 		return nil, fmt.Errorf("send request: %w", err)
 	}
-	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK {
-		return nil, newHTTPError(resp)
+	defer httpResponse.Body.Close()
+	if httpResponse.StatusCode != http.StatusOK {
+		return nil, newHTTPError(httpResponse)
 	}
-	data, err := io.ReadAll(resp.Body)
+	data, err := io.ReadAll(httpResponse.Body)
 	if err != nil {
 		return nil, fmt.Errorf("read response body: %w", err)
 	}
-	var responseBody rfmsv4.VehiclesResponse
-	log.Println(string(data))
-	if err := json.Unmarshal(data, &responseBody); err != nil {
-		return nil, fmt.Errorf("unmarshal response body: %w", err)
+	var v4Response rfmsv4.VehiclesResponse
+	switch c.config.apiVersion {
+	case V4:
+		if err := json.Unmarshal(data, &v4Response); err != nil {
+			return nil, fmt.Errorf("unmarshal v4 response body: %w", err)
+		}
+	case V2_1:
+		var v2Response rfmsv2.VehiclesResponse
+		if err := json.Unmarshal(data, &v2Response); err != nil {
+			return nil, fmt.Errorf("unmarshal v2 response body: %w", err)
+		}
+		v4Response = *rfmsv2tov4.ConvertVehiclesResponse(&v2Response)
 	}
-	// var rawVehicles struct {
-	// 	VehicleResponse struct {
-	// 		Vehicles []json.RawMessage `json:"vehicles"`
-	// 	} `json:"vehicleResponse"`
-	// }
-	// if err := json.Unmarshal(data, &rawVehicles); err != nil {
-	// 	return nil, fmt.Errorf("unmarshal response body: %w", err)
-	// }
-	// responseBody.VehicleResponse.Raw = data
-	// for i, rawVehicle := range rawVehicles.VehicleResponse.Vehicles {
-	// 	responseBody.VehicleResponse.Vehicles[i].Raw = rawVehicle
-	// }
 	return &VehiclesResponse{
-		Vehicles:          responseBody.VehicleResponse.Vehicles,
-		MoreDataAvailable: responseBody.MoreDataAvailable,
+		Vehicles:          v4Response.VehicleResponse.Vehicles,
+		MoreDataAvailable: v4Response.MoreDataAvailable,
 	}, nil
 }

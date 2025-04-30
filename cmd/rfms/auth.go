@@ -160,13 +160,13 @@ func newClient() (*rfms.Client, error) {
 		}
 		return rfms.NewClient(
 			rfms.WithBaseURL(rfms.ScaniaBaseURL),
-			rfms.WithVersion(rfms.Version4),
+			rfms.WithVersion(rfms.V4),
 			rfms.WithReuseTokenAuth(*auth.TokenCredentials),
 		), nil
 	case rfms.VolvoTrucks:
 		return rfms.NewClient(
 			rfms.WithBaseURL(rfms.VolvoTrucksBaseURL),
-			rfms.WithVersion(rfms.Version21),
+			rfms.WithVersion(rfms.V2_1),
 			rfms.WithBasicAuth(auth.Username, auth.Password),
 		), nil
 	default:

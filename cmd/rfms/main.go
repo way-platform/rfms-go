@@ -53,11 +53,7 @@ func newVehiclesCommand() *cobra.Command {
 				return err
 			}
 			for _, vehicle := range response.Vehicles {
-				cmd.Println(vehicle.VIN)
-				if vehicle.EmissionLevel != "" {
-					cmd.Println(vehicle.EmissionLevel)
-				}
-				// printRawJSON(cmd, vehicle.Raw)
+				printJSON(cmd, vehicle)
 			}
 			moreDataAvailable = response.MoreDataAvailable
 			lastVIN = response.Vehicles[len(response.Vehicles)-1].VIN
@@ -138,5 +134,14 @@ func printRawJSON(cmd *cobra.Command, raw json.RawMessage) error {
 	var buf bytes.Buffer
 	json.Indent(&buf, raw, "", "  ")
 	cmd.Println(buf.String())
+	return nil
+}
+
+func printJSON(cmd *cobra.Command, msg any) error {
+	data, err := json.MarshalIndent(msg, "", "  ")
+	if err != nil {
+		return err
+	}
+	cmd.Println(string(data))
 	return nil
 }

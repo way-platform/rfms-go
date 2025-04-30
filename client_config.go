@@ -13,7 +13,7 @@ type ClientConfig struct {
 func newClientConfig() ClientConfig {
 	return ClientConfig{
 		baseURL:    ScaniaBaseURL,
-		apiVersion: Version4,
+		apiVersion: V4,
 		transport:  http.DefaultTransport,
 	}
 }
@@ -82,7 +82,7 @@ func WithScania(clientID string, clientSecret string) ClientOption {
 	return func(cc *ClientConfig) {
 		WithBaseURL(ScaniaBaseURL)(cc)
 		WithScaniaAuth(clientID, clientSecret)(cc)
-		WithVersion(Version4)(cc)
+		WithVersion(V4)(cc)
 	}
 }
 
@@ -91,6 +91,6 @@ func WithVolvoTrucks(username string, password string) ClientOption {
 	return func(cc *ClientConfig) {
 		WithBaseURL(VolvoTrucksBaseURL)(cc)
 		WithBasicAuth(username, password)(cc)
-		WithVersion(Version21)(cc)
+		WithVersion(V2_1)(cc)
 	}
 }

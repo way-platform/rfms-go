@@ -5,6 +5,17 @@ import (
 	"github.com/way-platform/rfms-go/v4/api/rfmsv4"
 )
 
+// ConvertVehiclesResponse converts an [rfmsv2.VehiclesResponse] to an [rfmsv4.VehiclesResponse].
+func ConvertVehiclesResponse(v2 *rfmsv2.VehiclesResponse) *rfmsv4.VehiclesResponse {
+	var v4 rfmsv4.VehiclesResponse
+	v4.MoreDataAvailable = v2.MoreDataAvailable
+	v4.VehicleResponse.Vehicles = make([]rfmsv4.Vehicle, 0, len(v2.Vehicle))
+	for _, v2Vehicle := range v2.Vehicle {
+		v4.VehicleResponse.Vehicles = append(v4.VehicleResponse.Vehicles, *ConvertVehicle(&v2Vehicle))
+	}
+	return &v4
+}
+
 // ConvertVehicle converts an [rfmsv2.Vehicle] to an [rfmsv4.Vehicle].
 func ConvertVehicle(v2 *rfmsv2.Vehicle) *rfmsv4.Vehicle {
 	var v4 rfmsv4.Vehicle
