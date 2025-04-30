@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -83,13 +82,7 @@ func newVehiclePositionsCommand() *cobra.Command {
 				return err
 			}
 			for _, vehiclePosition := range response.VehiclePositions {
-				cmd.Println(vehiclePosition.VIN)
-				cmd.Println(vehiclePosition.GNSSPosition.Latitude)
-				cmd.Println(vehiclePosition.GNSSPosition.Longitude)
-				if vehiclePosition.GNSSPosition.Heading != nil {
-					cmd.Println(*vehiclePosition.GNSSPosition.Heading)
-				}
-				// printRawJSON(cmd, vehiclePosition.Raw)
+				printJSON(cmd, vehiclePosition)
 			}
 			moreDataAvailable = response.MoreDataAvailable
 			lastVIN = response.VehiclePositions[len(response.VehiclePositions)-1].VIN
@@ -119,8 +112,7 @@ func newVehicleStatusesCommand() *cobra.Command {
 				return err
 			}
 			for _, vehicleStatus := range response.VehicleStatuses {
-				cmd.Println(vehicleStatus.VIN)
-				// printRawJSON(cmd, vehicleStatus.Raw)
+				printJSON(cmd, vehicleStatus)
 			}
 			moreDataAvailable = response.MoreDataAvailable
 			lastVIN = response.VehicleStatuses[len(response.VehicleStatuses)-1].VIN
@@ -128,13 +120,6 @@ func newVehicleStatusesCommand() *cobra.Command {
 		return nil
 	}
 	return cmd
-}
-
-func printRawJSON(cmd *cobra.Command, raw json.RawMessage) error {
-	var buf bytes.Buffer
-	json.Indent(&buf, raw, "", "  ")
-	cmd.Println(buf.String())
-	return nil
 }
 
 func printJSON(cmd *cobra.Command, msg any) error {

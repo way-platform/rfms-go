@@ -18,6 +18,11 @@ func (t *Time) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+// MarshalJSON implements the [json.Marshaler] interface.
+func (t Time) MarshalJSON() ([]byte, error) {
+	return []byte(`"` + t.String() + `"`), nil
+}
+
 // String returns the time in RFC3339 format, without the "Z" suffix.
 func (t Time) String() string {
 	return strings.TrimSuffix(time.Time(t).UTC().Format(time.RFC3339), "Z")

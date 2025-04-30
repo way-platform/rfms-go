@@ -42,6 +42,9 @@ func ConvertVehicleStatusesResponse(v2 *rfmsv2.VehicleStatusesResponse) *rfmsv4.
 
 // ConvertVehicle converts an [rfmsv2.Vehicle] to an [rfmsv4.Vehicle].
 func ConvertVehicle(v2 *rfmsv2.Vehicle) *rfmsv4.Vehicle {
+	if v2 == nil {
+		return nil
+	}
 	var v4 rfmsv4.Vehicle
 	v4.BodyType = v2.BodyType
 	v4.Brand = v2.Brand
@@ -65,6 +68,9 @@ func ConvertVehicle(v2 *rfmsv2.Vehicle) *rfmsv4.Vehicle {
 
 // ConvertVehiclePosition converts an [rfmsv2.VehiclePosition] to an [rfmsv4.VehiclePosition].
 func ConvertVehiclePosition(v2 *rfmsv2.VehiclePosition) *rfmsv4.VehiclePosition {
+	if v2 == nil {
+		return nil
+	}
 	var v4 rfmsv4.VehiclePosition
 	v4.CreatedDateTime = rfmsv4.Time(v2.CreatedDateTime)
 	v4.GNSSPosition = convertGNSSPosition(v2.GNSSPosition)
@@ -78,6 +84,9 @@ func ConvertVehiclePosition(v2 *rfmsv2.VehiclePosition) *rfmsv4.VehiclePosition 
 
 // ConvertVehicleStatus converts an [rfmsv2.VehicleStatus] to an [rfmsv4.VehicleStatus].
 func ConvertVehicleStatus(v2 *rfmsv2.VehicleStatus) *rfmsv4.VehicleStatus {
+	if v2 == nil {
+		return nil
+	}
 	var v4 rfmsv4.VehicleStatus
 	v4.AccumulatedData = convertAccumulatedData(v2.AccumulatedData)
 	v4.CreatedDateTime = rfmsv4.Time(v2.CreatedDateTime)
@@ -100,6 +109,9 @@ func ConvertVehicleStatus(v2 *rfmsv2.VehicleStatus) *rfmsv4.VehicleStatus {
 }
 
 func convertUptimeData(v2 *rfmsv2.UptimeData) *rfmsv4.UptimeData {
+	if v2 == nil {
+		return nil
+	}
 	var v4 rfmsv4.UptimeData
 	v4.AlternatorInfo = make([]rfmsv4.AlternatorInfo, 0, len(v2.AlternatorInfo))
 	for _, v2AlternatorInfo := range v2.AlternatorInfo {
@@ -310,6 +322,9 @@ func convertLabelClass(v2 *rfmsv2.LabelClass) *rfmsv4.Label {
 }
 
 func convertDate(date *rfmsv2.Date) *rfmsv4.Date {
+	if date == nil {
+		return nil
+	}
 	var result rfmsv4.Date
 	result.Day = date.Day
 	result.Month = date.Month
@@ -318,6 +333,9 @@ func convertDate(date *rfmsv2.Date) *rfmsv4.Date {
 }
 
 func convertGNSSPosition(v2 *rfmsv2.GNSSPosition) *rfmsv4.GNSSPosition {
+	if v2 == nil {
+		return nil
+	}
 	var v4 rfmsv4.GNSSPosition
 	v4.Altitude = v2.Altitude
 	if v2.Heading != nil {
@@ -332,6 +350,9 @@ func convertGNSSPosition(v2 *rfmsv2.GNSSPosition) *rfmsv4.GNSSPosition {
 }
 
 func convertTrigger(v2 *rfmsv2.Trigger) *rfmsv4.Trigger {
+	if v2 == nil {
+		return nil
+	}
 	var v4 rfmsv4.Trigger
 	v4.Context = v2.Context
 	v4.DriverID = convertDriverID(v2.DriverID)
