@@ -817,7 +817,7 @@ type TriggerType string
 // UptimeData defines model for UptimeData.
 type UptimeData struct {
 	// AlternatorInfo The alternator status of the up to 4 alternators. Used mainly for buses.
-	AlternatorInfo *AlternatorInfo `json:"alternatorInfo,omitempty"`
+	AlternatorInfo []AlternatorInfo `json:"alternatorInfo,omitempty"`
 
 	// BellowPressureFrontAxleLeft The bellow pressure in the front axle left side in Pascal. Used mainly for buses.
 	BellowPressureFrontAxleLeft *int64 `json:"bellowPressureFrontAxleLeft,omitempty"`

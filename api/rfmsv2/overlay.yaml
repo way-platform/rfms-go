@@ -29,6 +29,16 @@ actions:
   update:
     format: int32
 
+- target: $.components.schemas.DoorStatus.properties.DoorNumber
+  description: "Harmonize doorNumber with v4"
+  update:
+    format: int32
+
+- target: $.components.schemas.GNSSPosition.properties.Altitude
+  description: "Harmonize altitude with v4"
+  update:
+    format: int32
+
 - target: $.components.schemas.DoorStatus.properties
   update:
     DoorOpenStatus:

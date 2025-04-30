@@ -240,7 +240,9 @@ actions:
 - target: $.components.schemas.UptimeData.properties
   update:
     alternatorInfo:
-      $ref: '#/components/schemas/AlternatorInfo'
+      type: array
+      items:
+        $ref: '#/components/schemas/AlternatorInfo'
 
 # ChargingStatusInfo component
 - target: $.components.schemas

@@ -221,7 +221,7 @@ type DoorOpenStatus string
 type DoorStatus struct {
 	DoorEnabledStatus DoorEnabledStatus `json:"DoorEnabledStatus,omitempty"`
 	DoorLockStatus    DoorLockStatus    `json:"DoorLockStatus,omitempty"`
-	DoorNumber        *int64            `json:"DoorNumber,omitempty"`
+	DoorNumber        *int32            `json:"DoorNumber,omitempty"`
 	DoorOpenStatus    DoorOpenStatus    `json:"DoorOpenStatus,omitempty"`
 }
 
@@ -253,7 +253,7 @@ type FromToClasses struct {
 
 // GNSSPosition defines model for GNSSPosition.
 type GNSSPosition struct {
-	Altitude         *int64    `json:"Altitude,omitempty"`
+	Altitude         *int32    `json:"Altitude,omitempty"`
 	Heading          *int32    `json:"Heading,omitempty"`
 	Latitude         *float64  `json:"Latitude,omitempty"`
 	Longitude        *float64  `json:"Longitude,omitempty"`
