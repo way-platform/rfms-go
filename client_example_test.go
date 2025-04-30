@@ -8,7 +8,7 @@ import (
 	"github.com/way-platform/rfms-go/v4"
 )
 
-func ExampleClient_Scania() {
+func ExampleClient_scania() {
 	client := rfms.NewClient(
 		rfms.WithScania(os.Getenv("SCANIA_CLIENT_ID"), os.Getenv("SCANIA_CLIENT_SECRET")),
 	)
@@ -29,7 +29,7 @@ func ExampleClient_Scania() {
 	}
 }
 
-func ExampleClient_VolvoTrucks() {
+func ExampleClient_volvoTrucks() {
 	client := rfms.NewClient(
 		rfms.WithVolvoTrucks(os.Getenv("VOLVO_TRUCKS_USERNAME"), os.Getenv("VOLVO_TRUCKS_PASSWORD")),
 	)

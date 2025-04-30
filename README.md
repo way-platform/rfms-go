@@ -43,6 +43,20 @@ for moreDataAvailable {
 }
 ```
 
+### Developing
+
+#### (re-)Generate OpenAPI models
+
+```bash
+$ go generate ./...
+```
+
+#### Run tests
+
+```bash
+$ go test ./...
+```
+
 ## CLI tool
 
 ### Installing
