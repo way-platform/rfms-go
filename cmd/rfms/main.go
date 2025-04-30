@@ -30,6 +30,7 @@ func newRootCommand() *cobra.Command {
 	cmd.AddCommand(newAuthCommand())
 	cmd.AddCommand(newVehiclesCommand())
 	cmd.AddCommand(newVehiclePositionsCommand())
+	cmd.AddCommand(newVehicleStatusesCommand())
 	return cmd
 }
 
