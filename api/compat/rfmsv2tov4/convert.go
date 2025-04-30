@@ -16,6 +16,30 @@ func ConvertVehiclesResponse(v2 *rfmsv2.VehiclesResponse) *rfmsv4.VehiclesRespon
 	return &v4
 }
 
+// ConvertVehiclePositionsResponse converts an [rfmsv2.VehiclePositionsResponse] to an [rfmsv4.VehiclePositionsResponse].
+func ConvertVehiclePositionsResponse(v2 *rfmsv2.VehiclePositionsResponse) *rfmsv4.VehiclePositionsResponse {
+	var v4 rfmsv4.VehiclePositionsResponse
+	v4.MoreDataAvailable = v2.MoreDataAvailable
+	v4.RequestServerDateTime = rfmsv4.Time(v2.RequestServerDateTime)
+	v4.VehiclePositionResponse.VehiclePositions = make([]rfmsv4.VehiclePosition, 0, len(v2.VehiclePosition))
+	for _, v2VehiclePosition := range v2.VehiclePosition {
+		v4.VehiclePositionResponse.VehiclePositions = append(v4.VehiclePositionResponse.VehiclePositions, *ConvertVehiclePosition(&v2VehiclePosition))
+	}
+	return &v4
+}
+
+// ConvertVehicleStatusesResponse converts an [rfmsv2.VehicleStatusesResponse] to an [rfmsv4.VehicleStatusesResponse].
+func ConvertVehicleStatusesResponse(v2 *rfmsv2.VehicleStatusesResponse) *rfmsv4.VehicleStatusesResponse {
+	var v4 rfmsv4.VehicleStatusesResponse
+	v4.MoreDataAvailable = v2.MoreDataAvailable
+	v4.RequestServerDateTime = rfmsv4.Time(v2.RequestServerDateTime)
+	v4.VehicleStatusResponse.VehicleStatuses = make([]rfmsv4.VehicleStatus, 0, len(v2.VehicleStatus))
+	for _, v2VehicleStatus := range v2.VehicleStatus {
+		v4.VehicleStatusResponse.VehicleStatuses = append(v4.VehicleStatusResponse.VehicleStatuses, *ConvertVehicleStatus(&v2VehicleStatus))
+	}
+	return &v4
+}
+
 // ConvertVehicle converts an [rfmsv2.Vehicle] to an [rfmsv4.Vehicle].
 func ConvertVehicle(v2 *rfmsv2.Vehicle) *rfmsv4.Vehicle {
 	var v4 rfmsv4.Vehicle

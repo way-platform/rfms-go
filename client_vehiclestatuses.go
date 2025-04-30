@@ -9,6 +9,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/way-platform/rfms-go/v4/api/compat/rfmsv2tov4"
+	"github.com/way-platform/rfms-go/v4/api/rfmsv2"
 	"github.com/way-platform/rfms-go/v4/api/rfmsv4"
 )
 
@@ -36,8 +38,6 @@ type VehicleStatusesResponse struct {
 	VehicleStatuses []rfmsv4.VehicleStatus `json:"vehicleStatuses"`
 	// MoreDataAvailable indicates if there is more data available.
 	MoreDataAvailable bool `json:"moreDataAvailable"`
-	// MoreDataAvailableLink is the link to the next page of data.
-	MoreDataAvailableLink string `json:"moreDataAvailableLink,omitempty"`
 	// RequestServerDateTime is the server time when the request was received.
 	RequestServerDateTime time.Time `json:"requestServerDateTime,omitzero"`
 }
@@ -51,19 +51,19 @@ func (c *Client) VehicleStatuses(
 			err = fmt.Errorf("vehicle statuses: %w", err)
 		}
 	}()
-	req, err := c.newRequest(ctx, http.MethodGet, "/vehiclestatuses", nil)
+	httpRequest, err := c.newRequest(ctx, http.MethodGet, "/vehiclestatuses", nil)
 	if err != nil {
 		return nil, fmt.Errorf("create request: %w", err)
 	}
 	switch c.config.apiVersion {
 	case V4:
-		req.Header.Set("Accept", "application/json; rfms=vehiclestatuses.v4.0")
+		httpRequest.Header.Set("Accept", "application/json; rfms=vehiclestatuses.v4.0")
 	case V2_1:
-		req.Header.Set("Accept", "application/vnd.fmsstandard.com.VehicleStatuses.v2.1+json; UTF-8")
+		httpRequest.Header.Set("Accept", "application/vnd.fmsstandard.com.VehicleStatuses.v2.1+json; UTF-8")
 	default:
 		return nil, fmt.Errorf("unsupported API version: %s", c.config.apiVersion)
 	}
-	q := req.URL.Query()
+	q := httpRequest.URL.Query()
 	if request != nil {
 		if request.LastVIN != "" {
 			q.Set("lastVin", request.LastVIN)
@@ -90,40 +90,38 @@ func (c *Client) VehicleStatuses(
 			q.Set("latestOnly", "true")
 		}
 	}
-	req.URL.RawQuery = q.Encode()
-
-	resp, err := c.httpClient.Do(req)
+	httpRequest.URL.RawQuery = q.Encode()
+	httpResponse, err := c.httpClient.Do(httpRequest)
 	if err != nil {
 		return nil, fmt.Errorf("send request: %w", err)
 	}
-	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK {
-		return nil, newHTTPError(resp)
+	defer httpResponse.Body.Close()
+	if httpResponse.StatusCode != http.StatusOK {
+		return nil, newHTTPError(httpResponse)
 	}
-	data, err := io.ReadAll(resp.Body)
+	data, err := io.ReadAll(httpResponse.Body)
 	if err != nil {
 		return nil, fmt.Errorf("read response body: %w", err)
 	}
-	var responseBody rfmsv4.VehicleStatusesResponse
-	if err := json.Unmarshal(data, &responseBody); err != nil {
-		return nil, fmt.Errorf("unmarshal response body: %w", err)
+	var v4Response rfmsv4.VehicleStatusesResponse
+	if err := json.Unmarshal(data, &v4Response); err != nil {
+		return nil, fmt.Errorf("unmarshal v4 response body: %w", err)
 	}
-	// var rawStatuses struct {
-	// 	VehicleStatusResponse struct {
-	// 		VehicleStatuses []json.RawMessage `json:"vehicleStatuses"`
-	// 	} `json:"vehicleStatusResponse"`
-	// }
-	// if err := json.Unmarshal(data, &rawStatuses); err != nil {
-	// 	return nil, fmt.Errorf("unmarshal raw vehicle statuses: %w", err)
-	// }
-	// for i, rawStatus := range rawStatuses.VehicleStatusResponse.VehicleStatuses {
-	// 	responseBody.VehicleStatusResponse.VehicleStatuses[i].Raw = rawStatus
-	// }
-	// responseBody.VehicleStatusResponse.Raw = data
-	// responseBody.VehicleStatusResponse.MoreDataAvailable = responseBody.MoreDataAvailable
-	// responseBody.VehicleStatusResponse.MoreDataAvailableLink = responseBody.MoreDataAvailableLink
-	// responseBody.VehicleStatusResponse.RequestServerDateTime = responseBody.RequestServerDateTime
+	switch c.config.apiVersion {
+	case V4:
+		if err := json.Unmarshal(data, &v4Response); err != nil {
+			return nil, fmt.Errorf("unmarshal vresponse body: %w", err)
+		}
+	case V2_1:
+		var v2Response rfmsv2.VehicleStatusesResponse
+		if err := json.Unmarshal(data, &v2Response); err != nil {
+			return nil, fmt.Errorf("unmarshal v2 response body: %w", err)
+		}
+		v4Response = *rfmsv2tov4.ConvertVehicleStatusesResponse(&v2Response)
+	}
 	return &VehicleStatusesResponse{
-		VehicleStatuses: responseBody.VehicleStatusResponse.VehicleStatuses,
+		VehicleStatuses:       v4Response.VehicleStatusResponse.VehicleStatuses,
+		MoreDataAvailable:     v4Response.MoreDataAvailable,
+		RequestServerDateTime: time.Time(v4Response.RequestServerDateTime),
 	}, nil
 }

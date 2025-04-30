@@ -8,6 +8,8 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/way-platform/rfms-go/v4/api/compat/rfmsv2tov4"
+	"github.com/way-platform/rfms-go/v4/api/rfmsv2"
 	"github.com/way-platform/rfms-go/v4/api/rfmsv4"
 )
 
@@ -33,8 +35,6 @@ type VehiclePositionsResponse struct {
 	VehiclePositions []rfmsv4.VehiclePosition `json:"vehiclePositions"`
 	// MoreDataAvailable indicates if there is more data available.
 	MoreDataAvailable bool `json:"moreDataAvailable"`
-	// MoreDataAvailableLink is the link to the next page of data.
-	MoreDataAvailableLink string `json:"moreDataAvailableLink,omitempty"`
 	// RequestServerDateTime is the server time when the request was received.
 	RequestServerDateTime time.Time `json:"requestServerDateTime,omitzero"`
 }
@@ -48,19 +48,19 @@ func (c *Client) VehiclePositions(
 			err = fmt.Errorf("vehicle positions: %w", err)
 		}
 	}()
-	req, err := c.newRequest(ctx, http.MethodGet, "/vehiclepositions", nil)
+	httpRequest, err := c.newRequest(ctx, http.MethodGet, "/vehiclepositions", nil)
 	if err != nil {
 		return nil, fmt.Errorf("create request: %w", err)
 	}
 	switch c.config.apiVersion {
 	case V4:
-		req.Header.Set("Accept", "application/json; rfms=vehiclepositions.v4.0")
+		httpRequest.Header.Set("Accept", "application/json; rfms=vehiclepositions.v4.0")
 	case V2_1:
-		req.Header.Set("Accept", "application/vnd.fmsstandard.com.vehiclepositions.v2.1+json; UTF-8")
+		httpRequest.Header.Set("Accept", "application/vnd.fmsstandard.com.vehiclepositions.v2.1+json; UTF-8")
 	default:
 		return nil, fmt.Errorf("unsupported API version: %s", c.config.apiVersion)
 	}
-	q := req.URL.Query()
+	q := httpRequest.URL.Query()
 	if request != nil {
 		if request.LastVIN != "" {
 			q.Set("lastVin", request.LastVIN)
@@ -84,43 +84,35 @@ func (c *Client) VehiclePositions(
 			q.Set("triggerFilter", request.TriggerFilter)
 		}
 	}
-	req.URL.RawQuery = q.Encode()
-	resp, err := c.httpClient.Do(req)
+	httpRequest.URL.RawQuery = q.Encode()
+	httpResponse, err := c.httpClient.Do(httpRequest)
 	if err != nil {
 		return nil, fmt.Errorf("send request: %w", err)
 	}
-	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK {
-		return nil, newHTTPError(resp)
+	defer httpResponse.Body.Close()
+	if httpResponse.StatusCode != http.StatusOK {
+		return nil, newHTTPError(httpResponse)
 	}
-	data, err := io.ReadAll(resp.Body)
+	data, err := io.ReadAll(httpResponse.Body)
 	if err != nil {
 		return nil, fmt.Errorf("read response body: %w", err)
 	}
-	var responseBody rfmsv4.VehiclePositionsResponse
-	if err := json.Unmarshal(data, &responseBody); err != nil {
-		return nil, fmt.Errorf("unmarshal response body: %w", err)
+	var v4Response rfmsv4.VehiclePositionsResponse
+	switch c.config.apiVersion {
+	case V4:
+		if err := json.Unmarshal(data, &v4Response); err != nil {
+			return nil, fmt.Errorf("unmarshal vresponse body: %w", err)
+		}
+	case V2_1:
+		var v2Response rfmsv2.VehiclePositionsResponse
+		if err := json.Unmarshal(data, &v2Response); err != nil {
+			return nil, fmt.Errorf("unmarshal v2 response body: %w", err)
+		}
+		v4Response = *rfmsv2tov4.ConvertVehiclePositionsResponse(&v2Response)
 	}
-	// var rawPositions struct {
-	// 	VehiclePositionResponse struct {
-	// 		VehiclePositions []json.RawMessage `json:"vehiclePositions"`
-	// 	} `json:"vehiclePositionResponse"`
-	// }
-	// if err := json.Unmarshal(data, &rawPositions); err != nil {
-	// 	return nil, fmt.Errorf("unmarshal raw vehicle positions: %w", err)
-	// }
-	// Set raw data and propagate MoreDataAvailable/Link and RequestServerDateTime
-	// responseBody.VehiclePositionResponse.Raw = data
-	// responseBody.VehiclePositionResponse.MoreDataAvailable = responseBody.MoreDataAvailable
-	// responseBody.VehiclePositionResponse.MoreDataAvailableLink = responseBody.MoreDataAvailableLink
-	// responseBody.VehiclePositionResponse.RequestServerDateTime = responseBody.RequestServerDateTime
-	// Set raw data for individual vehicle positions
-	// for i, rawPosition := range rawPositions.VehiclePositionResponse.VehiclePositions {
-	// 	if i < len(responseBody.VehiclePositionResponse.VehiclePositions) {
-	// 		responseBody.VehiclePositionResponse.VehiclePositions[i].Raw = rawPosition
-	// 	}
-	// }
 	return &VehiclePositionsResponse{
-		VehiclePositions: responseBody.VehiclePositionResponse.VehiclePositions,
+		VehiclePositions:      v4Response.VehiclePositionResponse.VehiclePositions,
+		MoreDataAvailable:     v4Response.MoreDataAvailable,
+		RequestServerDateTime: time.Time(v4Response.RequestServerDateTime),
 	}, nil
 }
