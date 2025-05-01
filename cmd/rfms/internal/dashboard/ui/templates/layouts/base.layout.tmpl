@@ -1,0 +1,30 @@
+{{- define "base" -}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{template "title" .}} - rFMS Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.2.0/dist/css/tabler.min.css" />
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    {{template "head" .}}
+</head>
+<body>
+    {{template "header" .}}
+    <main class="page-wrapper">
+            <div class="container-xl">
+                {{template "content" .}}
+            </div>
+    </main>
+    {{template "footer" .}}
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.2.0/dist/js/tabler.min.js"></script>
+    {{template "scripts" .}}
+</body>
+</html>
+{{- end -}}
+
+{{define "title"}}{{end}}
+{{define "head"}}{{end}}
+{{define "content"}}{{end}}
+{{define "footer"}}{{end}}
+{{define "scripts"}}{{end}}

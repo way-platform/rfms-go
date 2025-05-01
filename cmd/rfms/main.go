@@ -6,6 +6,8 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/way-platform/rfms-go/cmd/rfms/v4/internal/auth"
+	"github.com/way-platform/rfms-go/cmd/rfms/v4/internal/dashboard"
 	"github.com/way-platform/rfms-go/v4"
 )
 
@@ -16,18 +18,13 @@ func main() {
 	}
 }
 
-func newCommand() *cobra.Command {
-	cmd := &cobra.Command{}
-	cmd.SetOut(os.Stdout)
-	cmd.SetErr(os.Stderr)
-	return cmd
-}
-
 func newRootCommand() *cobra.Command {
-	cmd := newCommand()
-	cmd.Use = "rfms"
-	cmd.Short = "rFMS CLI"
-	cmd.AddCommand(newAuthCommand())
+	cmd := &cobra.Command{
+		Use:   "rfms",
+		Short: "rFMS CLI",
+	}
+	cmd.AddCommand(auth.NewCommand())
+	cmd.AddCommand(dashboard.NewCommand())
 	cmd.AddCommand(newVehiclesCommand())
 	cmd.AddCommand(newVehiclePositionsCommand())
 	cmd.AddCommand(newVehicleStatusesCommand())
@@ -35,17 +32,18 @@ func newRootCommand() *cobra.Command {
 }
 
 func newVehiclesCommand() *cobra.Command {
-	cmd := newCommand()
-	cmd.Use = "vehicles"
-	cmd.Short = " vehicles"
+	cmd := &cobra.Command{
+		Use:   "vehicles",
+		Short: "List vehicles",
+	}
+	limit := cmd.Flags().Int("limit", 100, "max vehicles queried")
 	cmd.RunE = func(cmd *cobra.Command, args []string) error {
-		client, err := newClient()
+		client, err := auth.NewClient()
 		if err != nil {
 			return err
 		}
-		moreDataAvailable := true
-		lastVIN := ""
-		for moreDataAvailable {
+		moreDataAvailable, lastVIN, count := true, "", 0
+		for moreDataAvailable && count < *limit {
 			response, err := client.Vehicles(cmd.Context(), &rfms.VehiclesRequest{
 				LastVIN: lastVIN,
 			})
@@ -55,6 +53,7 @@ func newVehiclesCommand() *cobra.Command {
 			for _, vehicle := range response.Vehicles {
 				printJSON(cmd, vehicle)
 			}
+			count += len(response.Vehicles)
 			moreDataAvailable = response.MoreDataAvailable
 			lastVIN = response.Vehicles[len(response.Vehicles)-1].VIN
 		}
@@ -64,17 +63,18 @@ func newVehiclesCommand() *cobra.Command {
 }
 
 func newVehiclePositionsCommand() *cobra.Command {
-	cmd := newCommand()
-	cmd.Use = "vehicle-positions"
-	cmd.Short = " vehicle positions"
+	cmd := &cobra.Command{
+		Use:   "vehicle-positions",
+		Short: "List vehicle positions",
+	}
+	limit := cmd.Flags().Int("limit", 100, "max vehicle positions queried")
 	cmd.RunE = func(cmd *cobra.Command, args []string) error {
-		client, err := newClient()
+		client, err := auth.NewClient()
 		if err != nil {
 			return err
 		}
-		moreDataAvailable := true
-		lastVIN := ""
-		for moreDataAvailable {
+		moreDataAvailable, lastVIN, count := true, "", 0
+		for moreDataAvailable && count < *limit {
 			response, err := client.VehiclePositions(cmd.Context(), &rfms.VehiclePositionsRequest{
 				LastVIN:    lastVIN,
 				LatestOnly: true,
@@ -85,6 +85,7 @@ func newVehiclePositionsCommand() *cobra.Command {
 			for _, vehiclePosition := range response.VehiclePositions {
 				printJSON(cmd, vehiclePosition)
 			}
+			count += len(response.VehiclePositions)
 			moreDataAvailable = response.MoreDataAvailable
 			lastVIN = response.VehiclePositions[len(response.VehiclePositions)-1].VIN
 		}
@@ -94,17 +95,18 @@ func newVehiclePositionsCommand() *cobra.Command {
 }
 
 func newVehicleStatusesCommand() *cobra.Command {
-	cmd := newCommand()
-	cmd.Use = "vehicle-statuses"
-	cmd.Short = " vehicle statuses"
+	cmd := &cobra.Command{
+		Use:   "vehicle-statuses",
+		Short: "List vehicle statuses",
+	}
+	limit := cmd.Flags().Int("limit", 100, "max vehicle statuses queried")
 	cmd.RunE = func(cmd *cobra.Command, args []string) error {
-		client, err := newClient()
+		client, err := auth.NewClient()
 		if err != nil {
 			return err
 		}
-		moreDataAvailable := true
-		lastVIN := ""
-		for moreDataAvailable {
+		moreDataAvailable, lastVIN, count := true, "", 0
+		for moreDataAvailable && count < *limit {
 			response, err := client.VehicleStatuses(cmd.Context(), &rfms.VehicleStatusesRequest{
 				LastVIN:    lastVIN,
 				LatestOnly: true,
@@ -115,6 +117,7 @@ func newVehicleStatusesCommand() *cobra.Command {
 			for _, vehicleStatus := range response.VehicleStatuses {
 				printJSON(cmd, vehicleStatus)
 			}
+			count += len(response.VehicleStatuses)
 			moreDataAvailable = response.MoreDataAvailable
 			lastVIN = response.VehicleStatuses[len(response.VehicleStatuses)-1].VIN
 		}
