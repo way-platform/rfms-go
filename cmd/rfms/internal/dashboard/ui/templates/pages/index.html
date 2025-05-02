@@ -1,0 +1,22 @@
+{{template "base" .}}
+
+{{define "title"}}{{.Title}}{{end}}
+
+{{define "content"}}
+<div class="page-header">
+  <div class="row align-items-center">
+    <div class="col">
+      <div class="page-pretitle">Overview</div>
+      <h2 class="page-title">Fleet Dashboard</h2>
+    </div>
+  </div>
+</div>
+
+<div class="row row-deck row-cards mt-2">
+  {{template "vehicle-count-card" .VehicleCountCard}}
+</div>
+
+<div class="row row-deck row-cards mt-2">
+  {{template "world-map-card" .WorldMapCard}}
+</div>
+{{end}}

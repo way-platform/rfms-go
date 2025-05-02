@@ -1,0 +1,30 @@
+{{- define "base" -}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{template "title" .}} - rFMS Dashboard</title>
+    <link rel="stylesheet" href="/static/css/tabler.min.css" />
+    <link rel="stylesheet" href="/static/css/jsvectormap.css" />
+</head>
+
+<body>
+    {{template "header" .}}
+    <main class="page-wrapper">
+        <div class="container-xl">
+            {{template "content" .}}
+        </div>
+    </main>
+    <script src="/static/js/tabler.min.js"></script>
+    <script src="/static/js/jsvectormap.min.js"></script>
+    <script src="/static/js/jsvectormap-world.min.js"></script>
+    <script src="/static/js/jsvectormap-world-merc.min.js"></script>
+</body>
+
+</html>
+{{- end -}}
+
+{{define "title"}}{{end}}
+{{define "content"}}{{end}}

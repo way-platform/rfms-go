@@ -2,7 +2,9 @@ package server
 
 import (
 	"html/template"
+	"io/fs"
 	"log/slog"
+	"mime"
 	"net/http"
 
 	"github.com/way-platform/rfms-go/cmd/rfms/v4/internal/dashboard/ui"
@@ -10,19 +12,28 @@ import (
 
 // Server is an rFMS dashboard server.
 type Server struct {
-	templates *template.Template
-	mux       *http.ServeMux
+	templates     *template.Template
+	staticHandler http.Handler
+	mux           *http.ServeMux
 }
 
 // NewServer creates a new rFMS dashboard server.
 func NewServer() (*Server, error) {
-	templates, err := template.ParseFS(ui.TemplateFS, "templates/**/*.tmpl")
+	if err := mime.AddExtensionType(".js", "text/javascript"); err != nil {
+		return nil, err
+	}
+	templates, err := template.ParseFS(ui.TemplateFS, "templates/*/*.html")
+	if err != nil {
+		return nil, err
+	}
+	rootedStaticFS, err := fs.Sub(ui.StaticFS, "static")
 	if err != nil {
 		return nil, err
 	}
 	server := &Server{
-		templates: templates,
-		mux:       http.NewServeMux(),
+		templates:     templates,
+		staticHandler: http.StripPrefix("/static/", http.FileServer(http.FS(rootedStaticFS))),
+		mux:           http.NewServeMux(),
 	}
 	server.registerRoutes(server.mux)
 	return server, nil

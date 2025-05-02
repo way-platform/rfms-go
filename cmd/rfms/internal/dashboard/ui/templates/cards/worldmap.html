@@ -1,0 +1,52 @@
+{{define "world-map-card"}}
+<div class="col-lg-8">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Global Fleet Distribution</h3>
+        </div>
+        <div class="card-body">
+            <div id="world-map-card" style="height: 25rem;"></div>
+        </div>
+    </div>
+</div>
+<script>
+window.addEventListener('load', function() {
+    const map = new jsVectorMap({
+      selector: '#world-map-card',
+      map: 'world',
+      backgroundColor: 'transparent',
+      regionStyle: {
+        initial: {
+          fill: '#e9ecef',
+          stroke: 'rgba(0,0,0,0.1)',
+          strokeWidth: 1,
+        }
+      },
+      zoomOnScroll: false,
+      markers: [
+      {{range .VehiclePositions}}
+        {
+            name: '{{.VIN}}',
+            coords: [{{.GNSSPosition.Latitude}}, {{.GNSSPosition.Longitude}}],
+        },
+      {{end}}
+      ],
+      markerStyle: {
+        initial: {
+          r: 6,
+          fill: '#206bc4',
+          stroke: '#fff',
+          strokeWidth: 2,
+          stokeOpacity: 0.5,
+          fillOpacity: 0.8,
+        },
+        hover: {
+          stroke: '#fff',
+          fillOpacity: 1,
+          strokeWidth: 3,
+        }
+      },
+    });
+});
+</script>
+{{end}}
