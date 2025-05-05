@@ -30,15 +30,5 @@ jobs:
         uses: go-semantic-release/action@v1
         with:
           allow-initial-development-versions: true
+          hooks: [goreleaser]
           github-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Fetch latest git tags
-        run: git fetch --force --tags
-
-      - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v6
-        with:
-          distribution: goreleaser
-          args: release --clean
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
