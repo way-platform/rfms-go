@@ -30,5 +30,5 @@ jobs:
         uses: go-semantic-release/action@v1
         with:
           allow-initial-development-versions: true
-          hooks: [goreleaser]
+          hooks: goreleaser
           github-token: ${{ secrets.GITHUB_TOKEN }}
