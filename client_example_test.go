@@ -23,9 +23,10 @@ func ExampleClient_scania() {
 		for _, vehicle := range response.Vehicles {
 			fmt.Println(vehicle.VIN)
 		}
-		if response.MoreDataAvailable {
-			lastVIN = response.Vehicles[len(response.Vehicles)-1].VIN
-		}
+    moreDataAvailable = response.MoreDataAvailable
+    if moreDataAvailable {
+        lastVIN = response.Vehicles[len(response.Vehicles)-1].VIN
+    }
 	}
 }
 
@@ -44,8 +45,9 @@ func ExampleClient_volvoTrucks() {
 		for _, vehicle := range response.Vehicles {
 			fmt.Println(vehicle.VIN)
 		}
-		if response.MoreDataAvailable {
-			lastVIN = response.Vehicles[len(response.Vehicles)-1].VIN
-		}
+    moreDataAvailable = response.MoreDataAvailable
+    if moreDataAvailable {
+        lastVIN = response.Vehicles[len(response.Vehicles)-1].VIN
+    }
 	}
 }

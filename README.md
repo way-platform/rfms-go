@@ -38,7 +38,8 @@ for moreDataAvailable {
     for _, vehicle := range response.Vehicles {
         fmt.Println(vehicle.VIN)
     }
-    if response.MoreDataAvailable {
+    moreDataAvailable = response.MoreDataAvailable
+    if moreDataAvailable {
         lastVIN = response.Vehicles[len(response.Vehicles)-1].VIN
     }
 }
