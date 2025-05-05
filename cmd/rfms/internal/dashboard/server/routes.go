@@ -19,6 +19,21 @@ func (s *Server) staticRoute() (string, http.Handler) {
 
 func (s *Server) indexRoute() (string, http.Handler) {
 	return "/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		vehiclesResponse, err := s.client.Vehicles(r.Context(), &rfmsv4.VehiclesRequest{})
+		if err != nil {
+			s.handleError(w, r, "failed to get vehicles", err)
+			return
+		}
+		vehiclePositionsResponse, err := s.client.VehiclePositions(r.Context(), vehiclesResponse.Vehicles)
+		if err != nil {
+			s.handleError(w, r, "failed to get vehicle positions", err)
+			return
+		}
+		vehicleStatusesResponse, err := s.client.GetVehicleStatuses(r.Context(), vehiclesResponse.Vehicles)
+		if err != nil {
+			s.handleError(w, r, "failed to get vehicle statuses", err)
+			return
+		}
 		s.renderTemplate(w, r, "index.html", pages.Index{
 			Title: "Fleet Dashboard",
 			VehicleCountCard: cards.VehicleCount{
