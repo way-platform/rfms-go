@@ -1,4 +1,4 @@
-module github.com/way-platform/rfms-go/v4
+module github.com/way-platform/rfms-go
 
 go 1.24.1
 

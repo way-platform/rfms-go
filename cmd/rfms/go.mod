@@ -5,7 +5,7 @@ go 1.24.1
 require (
 	github.com/adrg/xdg v0.5.3
 	github.com/spf13/cobra v1.9.1
-	github.com/way-platform/rfms-go/v4 v4.0.0-00010101000000-000000000000
+	github.com/way-platform/rfms-go v0.0.0-00010101000000-000000000000
 )
 
 require (
@@ -14,4 +14,4 @@ require (
 	golang.org/x/sys v0.26.0 // indirect
 )
 
-replace github.com/way-platform/rfms-go/v4 => ../../
+replace github.com/way-platform/rfms-go => ../../
