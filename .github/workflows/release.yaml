@@ -36,7 +36,6 @@ jobs:
         uses: goreleaser/goreleaser-action@v6
         with:
           distribution: goreleaser
-          args: release --clean
-          allow-initial-development-versions: true
+          args: release --clean --allow-initial-development-versions
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
