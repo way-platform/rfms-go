@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"github.com/way-platform/rfms-go/v4"
+	"github.com/way-platform/rfms-go"
 )
 
 func main() {

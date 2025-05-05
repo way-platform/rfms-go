@@ -9,9 +9,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/way-platform/rfms-go/v4/api/compat/rfmsv2tov4"
-	"github.com/way-platform/rfms-go/v4/api/rfmsv2"
-	"github.com/way-platform/rfms-go/v4/api/rfmsv4"
+	"github.com/way-platform/rfms-go/api/compat/rfmsv2tov4"
+	"github.com/way-platform/rfms-go/api/rfmsv2"
+	"github.com/way-platform/rfms-go/api/rfmsv4"
 )
 
 type VehicleStatusesRequest struct {

@@ -8,7 +8,7 @@ import (
 
 	"github.com/adrg/xdg"
 	"github.com/spf13/cobra"
-	"github.com/way-platform/rfms-go/v4"
+	"github.com/way-platform/rfms-go"
 )
 
 type authFile struct {

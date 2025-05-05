@@ -1,8 +1,8 @@
 package rfmsv2tov4
 
 import (
-	"github.com/way-platform/rfms-go/v4/api/rfmsv2"
-	"github.com/way-platform/rfms-go/v4/api/rfmsv4"
+	"github.com/way-platform/rfms-go/api/rfmsv2"
+	"github.com/way-platform/rfms-go/api/rfmsv4"
 )
 
 // ConvertVehiclesResponse converts an [rfmsv2.VehiclesResponse] to an [rfmsv4.VehiclesResponse].

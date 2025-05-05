@@ -18,7 +18,7 @@ A Go SDK and CLI tool for [rFMS](https://www.fms-standard.com/) APIs.
 ### Installing
 
 ```bash
-$ go get github.com/way-platform/rfms-go/v4@latest
+$ go get github.com/way-platform/rfms-go@latest
 ```
 
 ### Using

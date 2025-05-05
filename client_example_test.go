@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/way-platform/rfms-go/v4"
+	"github.com/way-platform/rfms-go"
 )
 
 func ExampleClient_scania() {
