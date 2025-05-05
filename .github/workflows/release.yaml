@@ -34,7 +34,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Fetch latest git tags
-        run: git fetch --tags
+        run: git fetch --force --tags
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
