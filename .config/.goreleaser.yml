@@ -1,0 +1,18 @@
+before:
+  hooks:
+    - go mod download
+
+builds:
+  - binary: rfms
+    dir: ./cmd/rfms
+    main: main.go
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+      - linux
+      - windows
+
+release:
+  github:
+  prerelease: auto
