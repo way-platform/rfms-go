@@ -1,5 +1,9 @@
 # rFMS Go
 
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/way-platform/rfms-go)](https://pkg.go.dev/github.com/way-platform/rfms-go)
+[![GoReportCard](https://goreportcard.com/badge/github.com/way-platform/rfms-go)](https://goreportcard.com/report/github.com/way-platform/rfms-go)
+[![CI](https://github.com/way-platform/rfms-go/actions/workflows/ci.yaml/badge.svg)](https://github.com/way-platform/rfms-go/actions/workflows/ci.yaml)
+
 A Go SDK and CLI tool for [rFMS](https://www.fms-standard.com/) APIs.
 
 ## SDK
