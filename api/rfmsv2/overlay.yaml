@@ -258,7 +258,7 @@ actions:
 
 - target: $.components.schemas.Trigger.properties
   update:
-    Trigger:
+    TriggerType:
       $ref: '#/components/schemas/TriggerType'
 
 - target: $..[?(@.type=="array")]

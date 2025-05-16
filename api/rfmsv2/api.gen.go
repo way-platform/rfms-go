@@ -324,8 +324,8 @@ type Trigger struct {
 	DriverID     *DriverID      `json:"DriverId,omitempty"`
 	PtoID        string         `json:"PtoId,omitempty"`
 	TellTaleInfo []TellTaleInfo `json:"TellTaleInfo,omitempty"`
-	Trigger      TriggerType    `json:"Trigger,omitempty"`
 	TriggerInfo  []string       `json:"TriggerInfo,omitempty"`
+	TriggerType  TriggerType    `json:"TriggerType,omitempty"`
 }
 
 // TriggerType defines model for TriggerType.
@@ -373,7 +373,7 @@ type VehiclePosition struct {
 	GNSSPosition     *GNSSPosition `json:"GNSSPosition,omitempty"`
 	ReceivedDateTime time.Time     `json:"ReceivedDateTime,omitzero"`
 	TachographSpeed  *float64      `json:"TachographSpeed,omitempty"`
-	Trigger          *Trigger      `json:"Trigger,omitempty"`
+	TriggerType      *Trigger      `json:"TriggerType,omitempty"`
 	VIN              string        `json:"VIN,omitempty"`
 	WheelBasedSpeed  *float64      `json:"WheelBasedSpeed,omitempty"`
 }
@@ -398,7 +398,7 @@ type VehicleStatus struct {
 	SnapshotData                  *SnapshotData    `json:"SnapshotData,omitempty"`
 	Status2OfDoors                Status2OfDoors   `json:"Status2OfDoors,omitempty"`
 	TotalEngineHours              *float64         `json:"TotalEngineHours,omitempty"`
-	Trigger                       *Trigger         `json:"Trigger,omitempty"`
+	TriggerType                   *Trigger         `json:"TriggerType,omitempty"`
 	UptimeData                    *UptimeData      `json:"UptimeData,omitempty"`
 	VIN                           string           `json:"Vin,omitempty"`
 }

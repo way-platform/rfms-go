@@ -798,7 +798,7 @@ components:
       type: object
       required:
         - Context
-        - Trigger
+        - TriggerType
       properties:
         Context:
           type: string
@@ -821,7 +821,7 @@ components:
           items:
             type: string
             example: InfoString
-        Trigger:
+        TriggerType:
           type: string
           description: ""
           example: TIMER
@@ -888,7 +888,7 @@ components:
       required:
         - CreatedDateTime
         - ReceivedDateTime
-        - Trigger
+        - TriggerType
         - VIN
       properties:
         CreatedDateTime:
@@ -908,7 +908,7 @@ components:
           format: double
           description: ""
           example: 52.4
-        Trigger:
+        TriggerType:
           $ref: "#/components/schemas/Trigger"
         VIN:
           type: string
@@ -943,7 +943,7 @@ components:
       required:
         - CreatedDateTime
         - ReceivedDateTime
-        - Trigger
+        - TriggerType
         - Vin
       properties:
         AccumulatedData:
@@ -995,7 +995,7 @@ components:
           format: double
           description: ""
           example: 681.2
-        Trigger:
+        TriggerType:
           $ref: "#/components/schemas/Trigger"
         UptimeData:
           $ref: "#/components/schemas/UptimeData"
