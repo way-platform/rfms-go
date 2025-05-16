@@ -1,0 +1,727 @@
+syntax = "proto3";
+
+package wayplatform.sdk.rfms.v4;
+
+message AccumulatedData {
+
+  // The time the vehicle speed has been over zero.
+  int64 duration_wheelbased_speed_over_zero = 11281986 [json_name="durationWheelbasedSpeedOverZero"];
+
+  // The distance the vehicle has been driven with cruise control active
+  int64 distance_cruise_control_active = 343769099 [json_name="distanceCruiseControlActive"];
+
+  // The time the vehicle has been driven with cruise control active
+  int64 duration_cruise_control_active = 208121960 [json_name="durationCruiseControlActive"];
+
+  // The fuel the vehicle has consumed while driven with cruise control active, in millilitres
+  int64 fuel_consumption_during_cruise_active = 228091972 [json_name="fuelConsumptionDuringCruiseActive"];
+
+  // The gas the vehicle has consumed while driven with cruise control active, in kilograms.
+  int64 fuel_consumption_during_cruise_active_gaseous = 114613601 [json_name="fuelConsumptionDuringCruiseActiveGaseous"];
+
+  // The electric energy the vehicle has consumed while driven with cruise control active, in watt-hours.
+  int64 electric_energy_consumption_during_cruise_active = 422289399 [json_name="electricEnergyConsumptionDuringCruiseActive"];
+
+  // The time the vehicle speed has been equal to zero, in seconds. Engine on (RPM>0 or electic motor in crank mode) and no PTO active
+  int64 duration_wheelbased_speed_zero = 104209566 [json_name="durationWheelbasedSpeedZero"];
+
+  // The fuel the vehicle has consumed while the vehicle speed has been equal to zero. Engine on (RPM>0) and no PTO active. Unit in millilitres.
+  int64 fuel_wheelbased_speed_zero = 127841475 [json_name="fuelWheelbasedSpeedZero"];
+
+  // The gas the vehicle has consumed while the vehicle speed has been equal to zero. Engine on (RPM>0) and no PTO active. Unit in kilograms.
+  int64 fuel_wheelbased_speed_zero_gaseous = 498394914 [json_name="fuelWheelbasedSpeedZeroGaseous"];
+
+  // The electric energy the vehicle has consumed while the vehicle speed has been equal to zero. Electric motor is in crank mode and no PTO active. Unit in watt-hours.
+  int64 electric_energy_wheelbased_speed_zero = 492914065 [json_name="electricEnergyWheelbasedSpeedZero"];
+
+  // The fuel the vehicle has consumed while the vehicle speed has been over zero. Engine on (RPM>0). Unit in millilitres.
+  int64 fuel_wheelbased_speed_over_zero = 479821734 [json_name="fuelWheelbasedSpeedOverZero"];
+
+  // The gas the vehicle has consumed while the vehicle speed has been over zero. Engine on (RPM>0). Unit in kilograms.
+  int64 fuel_wheelbased_speed_over_zero_gaseous = 318672193 [json_name="fuelWheelbasedSpeedOverZeroGaseous"];
+
+  // The electric energy the vehicle has consumed (including recuperation) while the vehicle speed has been over zero. Electric motor is in crank mode. Unit in watt-hours.
+  int64 electric_energy_wheelbased_speed_over_zero = 435319212 [json_name="electricEnergyWheelbasedSpeedOverZero"];
+
+  // The electric energy the auxiliary systems have consumed, in watt hours. Auxiliary systems are all consumers except electric motor(s) and PTO(s).
+  int64 electric_energy_aux = 234384146 [json_name="electricEnergyAux"];
+
+  // Label WHEELBASED_SPEED_ZERO  At least one PTO active during wheelbased speed=0  Counters for time (seconds) and consumption (millilitres, kilograms, watt-hours)  Label WHEELBASED_SPEED_OVER_ZERO  At least one PTO active during wheelbased speed>0  Counters for time (seconds), distance (meter) and consumption (millilitres, kilograms, watt-hours)
+  repeated Label pto_active_class = 25344981 [json_name="ptoActiveClass"];
+
+  // The total number of times the brake pedal has been used while the vehicle was driving.
+  int64 brake_pedal_counter_speed_over_zero = 373626082 [json_name="brakePedalCounterSpeedOverZero"];
+
+  // The total distance the vehicle has driven where the brake pedal has been used. Unit Meters.
+  int64 distance_brake_pedal_active_speed_over_zero = 414022533 [json_name="distanceBrakePedalActiveSpeedOverZero"];
+
+  // In percent. Minimum 5 classes [0, 20[ [20, 40[ [40, 60[ [60, 80[ [80, 100]
+  repeated FromToClass acceleration_pedal_position_class = 215928488 [json_name="accelerationPedalPositionClass"];
+
+  // In percent. Minimum 5 classes [0, 20[ [20, 40[ [40, 60[ [60, 80[ [80, 100]
+  repeated FromToClass brake_pedal_position_class = 117489446 [json_name="brakePedalPositionClass"];
+
+  // In m/s2 Minimum 13 classes. ], -1.1] ]-1.1, -0.9] ]-0.9, -0.7] ]-0.7, -0.5] ]-0.5, -0.3] ]-0.3, -0.1] ]-0.1, 0.1[ [0.1, 0.3[ [0.3, 0.5[ [0.5, 0.7[ [0.7, 0.9[ [0.9, 1.1[ [1.1, [
+  repeated FromToClass acceleration_class = 442367754 [json_name="accelerationClass"];
+
+  // In m/s2 Minimum 11 classes ], -3.0] ]-3.0, -2.5] ]-2.5, -2.0] ]-2.0, -1.5] ]-1.5, -1.1] ]-1.1, 1.1[ [1.1, 1.5[ [1.5, 2.0[ [2.0, 2.5[ [2.5, 3.0[ [3.0, [
+  repeated FromToClass high_acceleration_class = 338031288 [json_name="highAccelerationClass"];
+
+  // In percent (how the retarder is used as a positive value). Minimum 5 classes ]0, 20[ [20, 40[ [40, 60[ [60, 80[ [80, 100]
+  repeated FromToClass retarder_torque_class = 434617088 [json_name="retarderTorqueClass"];
+
+  // Driving without torque, with gear (clutch is engaged) Labels DRIVING_WITHOUT_TORQUE
+  repeated Label driving_without_torque_class = 312295059 [json_name="drivingWithoutTorqueClass"];
+
+  // In percent based on EEC1 value (Actual Engine-Percent Torque). Minimum 10 classes [0, 10[ [10, 20[ [20, 30[ [30, 40[ [40, 50[ [50, 60[ [60, 70[ [70, 80[ [80, 90[ [90, 100]
+  repeated FromToClassCombustion engine_torque_class = 378431968 [json_name="engineTorqueClass"];
+
+  // In percent (Actual Engine-Percent Torque). Minimum 10 classes [0, 10[ [10, 20[ [20, 30[ [30, 40[ [40, 50[ [50, 60[ [60, 70[ [70, 80[ [80, 90[ [90, 100]
+  repeated FromToClassElectrical electric_motor_torque_class = 312684306 [json_name="electricMotorTorqueClass"];
+
+  // In percent based on EEC2 value (Engine Percent Load At Current Speed). Minimum 10 classes [0, 10[ [10, 20[ [20, 30[ [30, 40[ [40, 50[ [50, 60[ [60, 70[ [70, 80[ [80, 90[ [90, 100]
+  repeated FromToClassCombustion engine_torque_at_current_speed_class = 525023165 [json_name="engineTorqueAtCurrentSpeedClass"];
+
+  // In percent (Engine Percent Load At Current Speed). Minimum 10 classes [0, 10[ [10, 20[ [20, 30[ [30, 40[ [40, 50[ [50, 60[ [60, 70[ [70, 80[ [80, 90[ [90, 100]
+  repeated FromToClassElectrical electric_motor_torque_at_current_speed_class = 164789995 [json_name="electricMotorTorqueAtCurrentSpeedClass"];
+
+  // In km/h Minimum 40 classes. [0, 4[ [4, 8[ [8, 12[ [12, 16[ [16, 20[ [20, 24[ ... [156, [ Engine on (RPM>0 or electric motor in crank mode)
+  repeated FromToClass vehicle_speed_class = 291243758 [json_name="vehicleSpeedClass"];
+
+  // Classes refer to the RPM of the combustion engine. Only mandatory if the vehicle has a combustion engine for propulsion. Minimum 10 classes [0, 400[ [400, 800[ [800, 1200[ [1200, 1600[ [1600, 2000[ [2000, 2400[ [2400, 2800[ [2800, 3200[ [3200, 3600[ [3600, [ Note: Engine on (RPM>0 or electric motor in crank mode)
+  repeated FromToClass engine_speed_class = 76185862 [json_name="engineSpeedClass"];
+
+  // In m/s2 Minimum 13 classes. ], -1.1] ]-1.1, -0.9] ]-0.9, -0.7] ]-0.7, -0.5] ]-0.5, -0.3] ]-0.3, -0.1] ]-0.1, 0.1[ [0.1, 0.3[ [0.3, 0.5[ [0.5, 0.7[ [0.7, 0.9[ [0.9, 1.1[ [1.1, [
+  repeated FromToClass acceleration_during_brake_class = 87193735 [json_name="accelerationDuringBrakeClass"];
+
+  // The currently selected gear One class per gear. Neutral is also a gear. Park is also a gear. This is formatted according to SPN 524, supplied as a decimal value. Example 0 = Neutral, 1 = 1:st gear... This is mainly used for Buses.
+  repeated Label selected_gear_class = 423427349 [json_name="selectedGearClass"];
+
+  // The currently used gear One class per gear. Neutral is also a gear. Park is also a gear. This is formatted according to SPN 523, supplied as a decimal value. Example 0 = Neutral, 1 = 1:st gear... This is mainly used for Buses.
+  repeated Label current_gear_class = 168321358 [json_name="currentGearClass"];
+
+  // The total number of times the chairlift has been outside the bus. This is mainly used for Buses
+  int64 chairlift_counter = 370296847 [json_name="chairliftCounter"];
+
+  // The total number of stop requests made. This is mainly used for Buses
+  int64 stop_request_counter = 172422642 [json_name="stopRequestCounter"];
+
+  // The total number of times the bus has knelt.
+  int64 kneeling_counter = 269559947 [json_name="kneelingCounter"];
+
+  // The total number of pram requests made. This is mainly used for Buses
+  int64 pram_request_counter = 242824262 [json_name="pramRequestCounter"];
+
+  // Classes refer to the recuperated electric power in kilowatt Minimum 11 classes [0, 100[ [100, 200[ [200, 300[ ... [900, 1000[ [1000, [
+  repeated FromToClassElectrical electric_power_recuperation_class = 127417873 [json_name="electricPowerRecuperationClass"];
+
+}
+
+message CreatedDateTimeProperty {
+
+}
+
+message DriverId {
+
+  DriverIdTachoDriverIdentification tacho_driver_identification = 22699971 [json_name="tachoDriverIdentification"];
+
+  DriverIdOemDriverIdentification oem_driver_identification = 14547331 [json_name="oemDriverIdentification"];
+
+}
+
+message DriverIdOemDriverIdentification {
+
+  // Contains an optional id type (e.g. pin, USB, encrypted EU id...)
+  string id_type = 42218465 [json_name="idType"];
+
+  // An OEM specific driver id.
+  string oem_driver_identification = 14547331 [json_name="oemDriverIdentification"];
+
+}
+
+message DriverIdTachoDriverIdentification {
+
+  // The unique identification of a driver in a Member State. This fields is formatted according the definition for driverIdentification in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
+  string driver_identification = 19610781 [json_name="driverIdentification"];
+
+  // The country alpha code of the Member State having issued the card. This fields is formatted according the definition for NationAlpha in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
+  string card_issuing_member_state = 272493884 [json_name="cardIssuingMemberState"];
+
+  // Code to distinguish different types of equipment for the tachograph application. See description of the field 'DriverAuthenticationEquipment' in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
+  string driver_authentication_equipment = 185465666 [json_name="driverAuthenticationEquipment"];
+
+  // A card replacement index. This fields is formatted according the definition for CardReplacementIndex (chap 2.26) in: COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
+  string card_replacement_index = 80526093 [json_name="cardReplacementIndex"];
+
+  // A card renewal index. This fields is formatted according the definition for CardRenewalIndex (chap 2.25) in: COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
+  string card_renewal_index = 288920997 [json_name="cardRenewalIndex"];
+
+}
+
+message DriverWorkingStateProperty {
+
+}
+
+message Error {
+
+  // An identifier for this error
+  string error = 96784904;
+
+  // A description of the error
+  string error_description = 481040315;
+
+  // A URI providing more information
+  string error_uri = 329876149;
+
+}
+
+message FromToClass {
+
+  double from = 3151786;
+
+  double to = 3707;
+
+  int64 seconds = 359484034;
+
+  int64 meters = 3815928;
+
+  int64 milli_litres = 278911141 [json_name="milliLitres"];
+
+  int64 kilograms = 396264903;
+
+  int64 watthours = 206856837;
+
+}
+
+message FromToClassCombustion {
+
+  double from = 3151786;
+
+  double to = 3707;
+
+  int64 seconds = 359484034;
+
+  int64 meters = 3815928;
+
+  int64 milli_litres = 278911141 [json_name="milliLitres"];
+
+  int64 kilograms = 396264903;
+
+}
+
+message FromToClassElectrical {
+
+  double from = 3151786;
+
+  double to = 3707;
+
+  int64 seconds = 359484034;
+
+  int64 meters = 3815928;
+
+  int64 watthours = 206856837;
+
+}
+
+message GNSSPosition {
+
+  // Latitude (WGS84 based)
+  double latitude = 366236566;
+
+  // Longitude (WGS84 based)
+  double longitude = 137365935;
+
+  // The direction of the vehicle (0-359)
+  int32 heading = 258440707;
+
+  // The altitude of the vehicle. Where 0 is sea level, negative values below sealevel and positive above sealevel. Unit in meters.
+  int32 altitude = 425937573;
+
+  // The GNSS(e.g. GPS)-speed in km/h
+  double speed = 109641799;
+
+  // The time of the position data in iso8601 format.
+  string position_date_time = 502508841 [json_name="positionDateTime"];
+
+}
+
+message Label {
+
+  string label = 102727412;
+
+  int64 seconds = 359484034;
+
+  int64 meters = 3815928;
+
+  int64 milli_litres = 278911141 [json_name="milliLitres"];
+
+  int64 kilograms = 396264903;
+
+  int64 watthours = 206856837;
+
+}
+
+message ReceivedDateTimeProperty {
+
+}
+
+message SnapshotData {
+
+  GNSSPosition gnss_position = 381588705 [json_name="gnssPosition"];
+
+  // The vehicle wheelbased speed
+  double wheel_based_speed = 452571691 [json_name="wheelBasedSpeed"];
+
+  // The Tacho speed
+  double tachograph_speed = 228167387 [json_name="tachographSpeed"];
+
+  // The engine (Diesel/gaseous) speed in rev/min
+  double engine_speed = 120923148 [json_name="engineSpeed"];
+
+  // The electric motor speed in rev/min
+  double electric_motor_speed = 44040232 [json_name="electricMotorSpeed"];
+
+  // Type of fuel currently being utilized by the vehicle acc. SPN 5837
+  string fuel_type = 163563556 [json_name="fuelType"];
+
+  // The fuel level percentage
+  double fuel_level1 = 365922348 [json_name="fuelLevel1"];
+
+  // Ratio of volume of fuel to the total volume of fuel storage container, in percent. When Fuel Level 2 is not used, Fuel Level 1 represents the total fuel in all fuel storage containers.  When Fuel Level 2 is used, Fuel Level 1 represents the fuel level in the primary or left-side fuel storage container.
+  double fuel_level2 = 365922347 [json_name="fuelLevel2"];
+
+  // The adblue level percentage
+  double catalyst_fuel_level = 473565889 [json_name="catalystFuelLevel"];
+
+  // Tachograph Working state of the driver
+  string driver1_working_state = 332178767 [json_name="driver1WorkingState"];
+
+  DriverId driver2_id = 56389745 [json_name="driver2Id"];
+
+  // Tachograph Working state of the driver
+  string driver2_working_state = 307753076 [json_name="driver2WorkingState"];
+
+  // The Ambient air temperature in Celsius
+  double ambient_air_temperature = 382134696 [json_name="ambientAirTemperature"];
+
+  // Switch signal which indicates when the parking brake is set. In general the switch actuated by the operator's park brake control, whether a pedal, lever or other control mechanism  true - parking brake set  false - parking brake not set
+  bool parking_brake_switch = 416551920 [json_name="parkingBrakeSwitch"];
+
+  // Indicates the hybrid battery pack remaining charge.  0% means no charge remaining,  100% means full charge remaining.  Is used as well for full electrical vehicles
+  double hybrid_battery_pack_remaining_charge = 138407632 [json_name="hybridBatteryPackRemainingCharge"];
+
+  // Indicates the charging status of the battery pack. Recuperation is excluded.  Not charging - No charging  Charging - Charging ongoing (AC or DC is unknown)  Charging AC - AC charging ongoing  Charging DC - DC charging ongoing  Error - An error occurred when charging  Not available - Charging status is not available
+  string battery_pack_charging_status = 130287183 [json_name="batteryPackChargingStatus"];
+
+  // Indicates the charging connection status of the battery pack.  Connecting - A charger is being connected  Connected - A charger is connected  Disconnecting - A charger is being disconnected  Disconnected - No charger is connected  Error - An error occurred when connecting or disconnecting  Not available - Charging connection status is not available
+  string battery_pack_charging_connection_status = 101407273 [json_name="batteryPackChargingConnectionStatus"];
+
+  // Device used to charge the battery pack. Standard rFMS values taken from ISO 15118 (OEM can have additional values):  ACD - Automatic Connection Device  WPT - Wireless Power Transfer  VEHICLE_COUPLER - manual connection of a flexible cable to an EV  NONE - No device connected  NOT_AVAILABLE - Unknown
+  string battery_pack_charging_device = 224482482 [json_name="batteryPackChargingDevice"];
+
+  // Charging power in watts.
+  double battery_pack_charging_power = 486219628 [json_name="batteryPackChargingPower"];
+
+  // Estimated time when charging has reached the target level.
+  string estimated_time_battery_pack_charging_completed = 286731874 [json_name="estimatedTimeBatteryPackChargingCompleted"];
+
+  SnapshotDataEstimatedDistanceToEmpty estimated_distance_to_empty = 192247218 [json_name="estimatedDistanceToEmpty"];
+
+  // A list of vehicle axles
+  repeated SnapshotDataVehicleAxlesInner vehicle_axles = 410646450 [json_name="vehicleAxles"];
+
+  // List of trailers connected to the truck.
+  repeated SnapshotDataTrailersInner trailers = 202314146;
+
+}
+
+message SnapshotDataEstimatedDistanceToEmpty {
+
+  // Estimated distance to empty, summarizing fuel, gas and battery in meters
+  int64 total = 110549828;
+
+  // Estimated distance to empty, fuel tank, in meters
+  int64 fuel = 3154358;
+
+  // Estimated distance to empty, gas tank, in meters
+  int64 gas = 102105;
+
+  // Estimated distance to empty, battery pack, in meters
+  int64 battery_pack = 80139000 [json_name="batteryPack"];
+
+}
+
+message SnapshotDataTrailersInner {
+
+  // Trailer number from 1 to 5, 1 being closest to the truck, according to ISO 11992-2.
+  int32 trailer_no = 460264374 [json_name="trailerNo"];
+
+  // The identification data sent by the trailer to the truck in the RGE23 message of ISO 11992-2. An alternative source is the DID (Data identifier definition) record VIN, as specified in ISO 11992-4. Even though both ISO 11992-2 and ISO 11992-4 specifies this as a VIN, the actual data sent from a trailer is not always the true VIN of the trailer.
+  string trailer_identification_data = 501827024 [json_name="trailerIdentificationData"];
+
+  // The vehicle identification number of the trailer. See ISO 3779 (17 characters) If the trailerIdentificationData is reporting a true VIN, trailerVin will have the same value. If it is possible to map the trailerIdentificationData to a true VIN using other sources, the value can be provided here.
+  string trailer_vin = 227326735 [json_name="trailerVin"];
+
+  // The customer's name for the trailer
+  string customer_trailer_name = 92276955 [json_name="customerTrailerName"];
+
+  // Indicates the type of the trailer. The type is sent in the EBS24 message of  ISO 11992-2.
+  string trailer_type = 469108028 [json_name="trailerType"];
+
+  // The sum of the static vertical loads of the trailer axles in kilograms. The load is sent in the EBS22 message of ISO 11992-2.
+  int32 trailer_axle_load_sum = 473245483 [json_name="trailerAxleLoadSum"];
+
+  // A list of trailer axles
+  repeated SnapshotDataTrailersInnerTrailerAxlesInner trailer_axles = 64414602 [json_name="trailerAxles"];
+
+}
+
+message SnapshotDataTrailersInnerTrailerAxlesInner {
+
+  // Axle position from 1 to 15, 1 being in the front closest to the truck, according to ISO 11992-2.
+  int32 trailer_axle_position = 497638774 [json_name="trailerAxlePosition"];
+
+  // The static vertical load of a trailer axle in kilograms. The load is sent in the RGE22 message of ISO11992-2.
+  float trailer_axle_load = 266401738 [json_name="trailerAxleLoad"];
+
+}
+
+message SnapshotDataVehicleAxlesInner {
+
+  // Axle position from 1 to 15, 1 being in the front of the truck
+  int32 vehicle_axle_position = 483996871 [json_name="vehicleAxlePosition"];
+
+  // The static vertical load of a vehicle axle in kilograms.
+  float vehicle_axle_load = 359632514 [json_name="vehicleAxleLoad"];
+
+}
+
+message TellTaleInfo {
+
+  string tell_tale = 431378549 [json_name="tellTale"];
+
+  // The OemTellTale is only set when the TellTale == OEM_SPECIFIC_TELL_TALE. This is an OEM specific string defining a tell tale in the OEM context.
+  string oem_tell_tale = 96634998 [json_name="oemTellTale"];
+
+  // The current state of the tell tale.
+  string state = 109757585;
+
+}
+
+message Trigger {
+
+  // Trigger types for Context=RFMS:  TIMER - Data was sent due to a timer trigger. (Timer value set outside rFMS scope)  IGNITION_ON - Data was sent due to an ignition on  IGNITION_OFF - Data was sent due to an ignition off  PTO_ENABLED - Data was sent due to that a PTO was enabled, will be sent for each PTO that gets enabled  PTO_DISABLED - Data was sent due to that a PTO was disabled, will be sent for each PTO that gets disabled.  DRIVER_LOGIN - Data was sent due to a successful driver login.  DRIVER_LOGOUT - Data was sent due to a driver logout  TELL_TALE - Data was sent due to that at least one tell tale changed state  ENGINE_ON - Data was sent due to an engine on. For electric motor crank is on  ENGINE_OFF - Data was sent due to an engine off. For electric motor crank is off  DRIVER_1_WORKING_STATE_CHANGED - Data was sent due to that driver 1 changed working state  DRIVER_2_WORKING_STATE_CHANGED - Data was sent due to that driver 2 changed working state  DISTANCE_TRAVELLED - Data was sent due to that a set distance was travelled. (Distance set outside rFMS scope)  FUEL_TYPE_CHANGE - Data was sent due to that the type of fuel currently being utilized by the vehicle changed  PARKING_BRAKE_SWITCH_CHANGE - Data was sent due to that the parking brake state has changed  BATTERY_PACK_CHARGING_STATUS_CHANGE - Data was sent due to a change in the battery pack charging status.  BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE - Data was sent due to a change in the battery pack charging connection status.  TRAILER_CONNECTED - One or several trailers were connected  TRAILER_DISCONNECTED - One or several trailers were disconnected
+  string trigger_type = 375833953 [json_name="triggerType"];
+
+  // The context defines if this is part of the standard or OEM specific. rFMS standard values VOLVO TRUCKS, SCANIA, DAIMLER, IVECO, DAF, MAN, RENAULT TRUCKS, VDL, VOLVO BUSES, IVECO BUS, IRISBUS If the Trigger is defined in the rFMS standard, the Context = RFMS
+  string context = 414660016;
+
+  // Additional TriggerInfo content for OEM specific triggers E.g. TRAILER_ATTACHED_TRIGGER [id of trailer]
+  repeated string trigger_info = 375495381 [json_name="triggerInfo"];
+
+  DriverId driver_id = 292550512 [json_name="driverId"];
+
+  // The id of a PTO. This is only set if the TriggerType = PTO_ENABLED or PTO_DISABLED
+  string pto_id = 441101586 [json_name="ptoId"];
+
+  TellTaleInfo tell_tale_info = 149293673 [json_name="tellTaleInfo"];
+
+  TriggerChargingStatusInfo charging_status_info = 298511348 [json_name="chargingStatusInfo"];
+
+  TriggerChargingConnectionStatusInfo charging_connection_status_info = 275792520 [json_name="chargingConnectionStatusInfo"];
+
+}
+
+message TriggerChargingConnectionStatusInfo {
+
+  // CONNECTING - Vehicle is being connected to a charger  CONNECTED - Vehicle is connected to a charger  DISCONNECTING - Vehicle is being disconnected from the charger  DISCONNECTED - Vehicle is not connected to a charger  ERROR - An error occurred
+  string event = 96891546;
+
+  // Details regarding the event. Content is OEM specific
+  string event_detail = 79978903 [json_name="eventDetail"];
+
+}
+
+message TriggerChargingStatusInfo {
+
+  // CHARGING_STARTED - Charging has started  CHARGING_COMPLETED - Charging is completed  CHARGING_INTERRUPTED - Charging has been interrupted (no error)  ERROR - An error occurred when charging  ESTIMATED_COMPLETION_TIME_CHANGED - The estimated time for completed charging has changed. (Threshold is outside scope of rFMS)  TIMER - A predefined time has passed since last charge status update. (Frequency is outside the scope of rFMS)  CHARGING_LEVEL - The charging level has reached a predefined level. (Charging levels are outside the scope of rFMS)
+  string event = 96891546;
+
+  // Details regarding the event. Content is OEM specific
+  string event_detail = 79978903 [json_name="eventDetail"];
+
+}
+
+message UptimeData {
+
+  // List of tell tales with the actual status for each tell tale.
+  repeated TellTaleInfo tell_tale_info = 149293673 [json_name="tellTaleInfo"];
+
+  // The distance in meter to the next service
+  int64 service_distance = 518081988 [json_name="serviceDistance"];
+
+  // The temperature of the coolant liquid in Celsius
+  double engine_coolant_temperature = 395477814 [json_name="engineCoolantTemperature"];
+
+  // The temperature of the battery pack coolant in Celsius HVESS - High Voltage Energy Storage System
+  double hvess_outlet_coolant_temperature = 248323833 [json_name="hvessOutletCoolantTemperature"];
+
+  // The temperature of the battery pack in Celsius HVESS - High Voltage Energy Storage System
+  double hvess_temperature = 77200662 [json_name="hvessTemperature"];
+
+  // The air pressure in circuit 1 in Pascal.
+  int64 service_brake_air_pressure_circuit1 = 62204465 [json_name="serviceBrakeAirPressureCircuit1"];
+
+  // The air pressure in circuit 2 in Pascal.
+  int64 service_brake_air_pressure_circuit2 = 62204464 [json_name="serviceBrakeAirPressureCircuit2"];
+
+  // The total time at least one door has been opened in the bus. (seconds) Used mainly for buses.
+  int64 duration_at_least_one_door_open = 157514572 [json_name="durationAtLeastOneDoorOpen"];
+
+  UptimeDataAlternatorInfo alternator_info = 280075811 [json_name="alternatorInfo"];
+
+  // The bellow pressure in the front axle left side in Pascal. Used mainly for buses.
+  int64 bellow_pressure_front_axle_left = 264142332 [json_name="bellowPressureFrontAxleLeft"];
+
+  // The bellow pressure in the front axle right side in Pascal. Used mainly for buses.
+  int64 bellow_pressure_front_axle_right = 395861369 [json_name="bellowPressureFrontAxleRight"];
+
+  // The bellow pressure in the rear axle left side in Pascal. Used mainly for buses.
+  int64 bellow_pressure_rear_axle_left = 161793348 [json_name="bellowPressureRearAxleLeft"];
+
+  // The bellow pressure in the rear axle right side in Pascal. Used mainly for buses.
+  int64 bellow_pressure_rear_axle_right = 347454431 [json_name="bellowPressureRearAxleRight"];
+
+}
+
+message UptimeDataAlternatorInfo {
+
+  string alternator_status = 111166692 [json_name="alternatorStatus"];
+
+  int64 alternator_number = 506155066 [json_name="alternatorNumber"];
+
+}
+
+message Vehicle {
+
+  // vehicle identification number. See ISO 3779 (17 characters)
+  string vin = 116763;
+
+  // The customer's name for the vehicle.
+  string customer_vehicle_name = 142238337 [json_name="customerVehicleName"];
+
+  // The vehicle brand. rFMS standard values VOLVO TRUCKS, SCANIA, DAIMLER, IVECO, DAF, MAN, RENAULT TRUCKS, VDL, VOLVO BUSES, IVECO BUS, IRISBUS
+  string brand = 93997959;
+
+  VehicleProductionDate production_date = 288572278 [json_name="productionDate"];
+
+  // Indicates the type of vehicle. rFMS standard values TRUCK, BUS, VAN
+  string type = 3575610;
+
+  // Indicates the model of the vehicle. OEM specific value.
+  string model = 104069929;
+
+  // The possible fuel types supported by this vehicle, formatted as the HEX id number according to SPN 5837. This does NOT indicate which fuel type that is presently being used.
+  repeated string possible_fuel_type = 199152344 [json_name="possibleFuelType"];
+
+  // The emission level this vehicle supports. Possible values:  European Union, Heavy-Duty Truck and Bus Engines:  EURO_III, EURO_III_EEV, EURO_IV, EURO_V, EURO_VI  European Union, Nonroad Engines:  EURO_STAGE_III, EURO_STAGE_IV, EURO_STAGE_V  United_States, Heavy-Duty Truck and Bus Engines:  EPA_2004, EPA_2007, EPA_2010, EPA_2015_NOX10, EPA_2015_NOX05, EPA_2015_NOX02  United_States, Nonroad Engines:  EPA_TIER_2, EPA_TIER_3, EPA_TIER_4_2008, EPA_TIER_4_2013  Brazil, Heavy-Duty Truck and Bus Engines:  PROCONVE_P5, PROCONVE_P6, PROCONVE_P7  Brazil, Nonroad Engines:  PROCONVE_MARI
+  string emission_level = 272583990 [json_name="emissionLevel"];
+
+  // This parameter indicates how the tell tales shall be interpreted, the code is unique for each OEM. One OEM can have different interpretations  depending on vehicle type.
+  string tell_tale_code = 149471530 [json_name="tellTaleCode"];
+
+  // The chassis type of the vehicle. OEM specific value. This is used mainly for buses
+  string chassis_type = 412001870 [json_name="chassisType"];
+
+  // Number of axles on the vehicle. This is used mainly for buses
+  int32 no_of_axles = 242510121 [json_name="noOfAxles"];
+
+  // Total fuel tank volume for all tanks in milliltres.
+  int32 total_fuel_tank_volume = 194169507 [json_name="totalFuelTankVolume"];
+
+  // Total gas tank capacity for all tanks in kilograms.
+  int32 total_fuel_tank_capacity_gaseous = 14146404 [json_name="totalFuelTankCapacityGaseous"];
+
+  // Total battery pack capacity in watt hours.
+  int32 total_battery_pack_capacity = 11983183 [json_name="totalBatteryPackCapacity"];
+
+  // The type of tachograph in the vehicle. rFMS standard values MTCO, DTCO, TSU, DTCO_G1, DTCO_G2, NONE  DTCO - Digital tachograph, unknown generation  DTCO_G1 - Digital tachograph generation 1  DTCO_G2 - Digital tachograph generation 2  NONE - No tachograph in the vehicle  MTCO - Modular tachograph  TSU - Tachograph simulator
+  string tachograph_type = 529471897 [json_name="tachographType"];
+
+  // The type of gearbox the vehicle is equipped with. rFMS standard values MANUAL, AUTOMATIC, SEMI_AUTOMATIC, NO_GEAR (e.g electrical)
+  string gearbox_type = 213972035 [json_name="gearboxType"];
+
+  // The type of body on the chassis. rFMS standard values CITY_BUS, INTERCITY_BUS, COACH. This is used mainly for buses.
+  string body_type = 179291065 [json_name="bodyType"];
+
+  // The door configuration. The door order definition is OEM specific. E.g. [1, 2, 2] means the bus has 3 doors: 1 front door, double doors for door 2 and 3. This is used mainly for buses.
+  repeated int32 door_configuration = 115776988 [json_name="doorConfiguration"];
+
+  // If the vehicle is equipped with a ramp or not. This is used mainly for buses.
+  bool has_ramp_or_lift = 436686275 [json_name="hasRampOrLift"];
+
+  // Paths that the client is authorized to call
+  repeated string authorized_paths = 199517881 [json_name="authorizedPaths"];
+
+}
+
+message VehiclePosition {
+
+  // vehicle identification number. See ISO 3779 (17 characters)
+  string vin = 116763;
+
+  Trigger trigger_type = 375833953 [json_name="triggerType"];
+
+  // When the data was retrieved in the vehicle in iso8601 format.
+  string created_date_time = 344543196 [json_name="createdDateTime"];
+
+  // Reception at Server. To be used for handling of \"more data available\" in iso8601 format.
+  string received_date_time = 170489827 [json_name="receivedDateTime"];
+
+  GNSSPosition gnss_position = 381588705 [json_name="gnssPosition"];
+
+  // Wheel-Based Vehicle Speed in km/h (Speed of the vehicle as calculated from wheel or tailshaft speed)
+  double wheel_based_speed = 452571691 [json_name="wheelBasedSpeed"];
+
+  // Tachograph vehicle speed in km/h (Speed of the vehicle registered by the tachograph)
+  double tachograph_speed = 228167387 [json_name="tachographSpeed"];
+
+}
+
+message VehiclePositionsResponse {
+
+  VehiclePositionsResponseVehiclePositionResponse vehicle_position_response = 114454597 [json_name="vehiclePositionResponse"];
+
+  // This will be set to true if the result set was too large to be sent back in one reply. A new request must be sent to get the rest of the vehicle positions, where the starttime parameter must be supplied. The starttime should be set to the latest ReceivedDateTime + 1 second of the last vehicle in the result set of this message.
+  bool more_data_available = 207349406 [json_name="moreDataAvailable"];
+
+  // Populated with the link to the next part of the result when moreDataAvailable is true. The link is relative, i.e. starts with /rfms/vehiclepositions, and preserves any query parameters from the original request.
+  string more_data_available_link = 36631803 [json_name="moreDataAvailableLink"];
+
+  // Time to be used to ask for historical data at customers (for starttime), to solve the problem of having different times at server and clients. This is the time at the server when this request was received. To avoid losing any messages or get duplicates, this is the time that should be supplied in the startTime parameter in the next request in iso8601 format.
+  string request_server_date_time = 447485328 [json_name="requestServerDateTime"];
+
+}
+
+message VehiclePositionsResponseVehiclePositionResponse {
+
+  repeated VehiclePosition vehicle_positions = 120778988 [json_name="vehiclePositions"];
+
+}
+
+message VehicleProductionDate {
+
+  // Day of the month where first day of the month is 1
+  int32 day = 99228;
+
+  // Month of the year, where January is value 1
+  int32 month = 104080000;
+
+  int32 year = 3704893;
+
+}
+
+message VehicleStatus {
+
+  // vehicle identification number. See ISO 3779 (17 characters)
+  string vin = 116763;
+
+  Trigger trigger_type = 375833953 [json_name="triggerType"];
+
+  // When the data was retrieved in the vehicle in iso8601 format.
+  string created_date_time = 344543196 [json_name="createdDateTime"];
+
+  // Reception at Server. To be used for handling of \"more data available\" in iso8601 format.
+  string received_date_time = 170489827 [json_name="receivedDateTime"];
+
+  // Accumulated distance travelled by the vehicle during its operation in meter
+  int64 hr_total_vehicle_distance = 478134760 [json_name="hrTotalVehicleDistance"];
+
+  // The total hours of operation for the vehicle combustion engine. At least one of totalEngineHours or totalElectricMotorHours is Mandatory
+  double total_engine_hours = 13101040 [json_name="totalEngineHours"];
+
+  // The total hours the electric motor is ready for propulsion (i.e. crank mode). At least one of totalEngineHours or totalElectricMotorHours is mandatory
+  double total_electric_motor_hours = 517830849 [json_name="totalElectricMotorHours"];
+
+  DriverId driver1_id = 56359954 [json_name="driver1Id"];
+
+  // The full vehicle weight in kg
+  int32 gross_combination_vehicle_weight = 157702457 [json_name="grossCombinationVehicleWeight"];
+
+  // The total fuel the vehicle has used during its lifetime in MilliLitres. At least one of engineTotalFuelUsed, totalFuelUsedGaseous or totalElectricEnergyUsed is mandatory.
+  int64 engine_total_fuel_used = 236077424 [json_name="engineTotalFuelUsed"];
+
+  // Total fuel consumed in kg (trip drive fuel + trip PTO governor moving fuel + trip PTO governor non-moving fuel + trip idle fuel) over the life of the engine. At least one of engineTotalFuelUsed, totalFuelUsedGaseous or totalElectricEnergyUsed is mandatory.
+  int64 total_fuel_used_gaseous = 250424244 [json_name="totalFuelUsedGaseous"];
+
+  // Total electric energy consumed by the vehicle, excluding when plugged in (vehicle coupler) for charging, (incl. motor, PTO, cooling, etc.) in watt hours. Recuperation is subtracted from the value.  At least one of engineTotalFuelUsed, totalFuelUsedGaseous or totalElectricEnergyUsed is mandatory.
+  int64 total_electric_energy_used = 286050575 [json_name="totalElectricEnergyUsed"];
+
+  // Composite indication of all bus door statuses. Bus specific parameter
+  string status2_of_doors = 46851847 [json_name="status2OfDoors"];
+
+  // Individual status for each door. Bus specific parameter
+  repeated VehicleStatusDoorStatusInner door_status = 224250275 [json_name="doorStatus"];
+
+  AccumulatedData accumulated_data = 473630074 [json_name="accumulatedData"];
+
+  SnapshotData snapshot_data = 123850055 [json_name="snapshotData"];
+
+  UptimeData uptime_data = 288408159 [json_name="uptimeData"];
+
+}
+
+message VehicleStatusDoorStatusInner {
+
+  string door_enabled_status = 128974692 [json_name="DoorEnabledStatus"];
+
+  string door_open_status = 282545270 [json_name="DoorOpenStatus"];
+
+  string door_lock_status = 38576523 [json_name="DoorLockStatus"];
+
+  int32 door_number = 82367738 [json_name="DoorNumber"];
+
+}
+
+message VehicleStatusesResponse {
+
+  VehicleStatusesResponseVehicleStatusResponse vehicle_status_response = 259173671 [json_name="vehicleStatusResponse"];
+
+  // This will be set to true if the result set was too large to be sent back in one reply. A new request must be done to get the rest of the vehicle statuses, where the starttime parameter must be supplied. The starttime should be set to the ReceivedDateTime + 1 second of the last vehicle in the result set of this message.
+  bool more_data_available = 207349406 [json_name="moreDataAvailable"];
+
+  // Populated with the link to the next part of the result when moreDataAvailable is true. The link is relative, i.e. starts with /rfms/vehiclestatuses, and preserves any query parameters from the original request.
+  string more_data_available_link = 36631803 [json_name="moreDataAvailableLink"];
+
+  // Time in UTC to be used to ask for historical data (for starttime), to solve the problem of having different times at server and clients. This is the time at the server when this request was received. To avoid losing any messages or get duplicates, this is the time that should be supplied in the startTime parameter in the next request in iso8601 format.
+  string request_server_date_time = 447485328 [json_name="requestServerDateTime"];
+
+}
+
+message VehicleStatusesResponseVehicleStatusResponse {
+
+  repeated VehicleStatus vehicle_statuses = 506750000 [json_name="vehicleStatuses"];
+
+}
+
+message VehiclesResponse {
+
+  VehiclesResponseVehicleResponse vehicle_response = 518588404 [json_name="vehicleResponse"];
+
+  // This will be set to true if the result set was too large to be sent back in one reply. A new request must be sent to get the rest of the vehicles, where the lastVin parameter must be supplied. The lastVin should be set to the VIN of the last vehicle in the result set of this message.
+  bool more_data_available = 207349406 [json_name="moreDataAvailable"];
+
+  // Populated with the link to the next part of the result when moreDataAvailable is true. The link is relative, i.e. starts with /rfms/vehicles, and preserves any query parameters from the original request.
+  string more_data_available_link = 36631803 [json_name="moreDataAvailableLink"];
+
+}
+
+message VehiclesResponseVehicleResponse {
+
+  repeated Vehicle vehicles = 403592906;
+
+}
+
+message VinProperty {
+
+}

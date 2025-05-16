@@ -4,6 +4,8 @@ go 1.24.1
 
 tool github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen
 
+require google.golang.org/protobuf v1.26.0
+
 require (
 	github.com/dprotaso/go-yit v0.0.0-20220510233725-9ba8df137936 // indirect
 	github.com/getkin/kin-openapi v0.128.0 // indirect
