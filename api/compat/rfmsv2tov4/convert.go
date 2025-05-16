@@ -221,64 +221,96 @@ func convertAccumulatedData(v2 *rfmsv2.AccumulatedData) *rfmsv4.AccumulatedData 
 		return nil
 	}
 	var v4 rfmsv4.AccumulatedData
-	v4.AccelerationClass = make([]rfmsv4.FromToClass, 0, len(v2.AccelerationClass.Value))
-	for _, v2FromToClass := range v2.AccelerationClass.Value {
-		v4.AccelerationClass = append(v4.AccelerationClass, *convertFromToClass(&v2FromToClass))
+	if v2.AccelerationClass != nil {
+		v4.AccelerationClass = make([]rfmsv4.FromToClass, 0, len(v2.AccelerationClass.Value))
+		for _, v2FromToClass := range v2.AccelerationClass.Value {
+			v4.AccelerationClass = append(v4.AccelerationClass, *convertFromToClass(&v2FromToClass))
+		}
 	}
-	v4.AccelerationDuringBrakeClass = make([]rfmsv4.FromToClass, 0, len(v2.AccelerationDuringBrakeClass.Value))
-	for _, v2FromToClass := range v2.AccelerationDuringBrakeClass.Value {
-		v4.AccelerationDuringBrakeClass = append(v4.AccelerationDuringBrakeClass, *convertFromToClass(&v2FromToClass))
+	if v2.AccelerationDuringBrakeClass != nil {
+		v4.AccelerationDuringBrakeClass = make([]rfmsv4.FromToClass, 0, len(v2.AccelerationDuringBrakeClass.Value))
+		for _, v2FromToClass := range v2.AccelerationDuringBrakeClass.Value {
+			v4.AccelerationDuringBrakeClass = append(v4.AccelerationDuringBrakeClass, *convertFromToClass(&v2FromToClass))
+		}
 	}
-	v4.AccelerationPedalPositionClass = make([]rfmsv4.FromToClass, 0, len(v2.AccelerationPedalPositionClass.Value))
-	for _, v2FromToClass := range v2.AccelerationPedalPositionClass.Value {
-		v4.AccelerationPedalPositionClass = append(v4.AccelerationPedalPositionClass, *convertFromToClass(&v2FromToClass))
+	if v2.AccelerationPedalPositionClass != nil {
+		v4.AccelerationPedalPositionClass = make([]rfmsv4.FromToClass, 0, len(v2.AccelerationPedalPositionClass.Value))
+		for _, v2FromToClass := range v2.AccelerationPedalPositionClass.Value {
+			v4.AccelerationPedalPositionClass = append(v4.AccelerationPedalPositionClass, *convertFromToClass(&v2FromToClass))
+		}
 	}
 	v4.BrakePedalCounterSpeedOverZero = v2.BrakePedalCounterSpeedOverZero
 	v4.ChairliftCounter = v2.ChairliftCounter
-	v4.CurrentGearClass = make([]rfmsv4.Label, 0, len(v2.CurrentGearClass.Value))
-	for _, v2LabelClass := range v2.CurrentGearClass.Value {
-		v4.CurrentGearClass = append(v4.CurrentGearClass, *convertLabelClass(&v2LabelClass))
+	if v2.CurrentGearClass != nil {
+		v4.CurrentGearClass = make([]rfmsv4.Label, 0, len(v2.CurrentGearClass.Value))
+		for _, v2LabelClass := range v2.CurrentGearClass.Value {
+			v4.CurrentGearClass = append(v4.CurrentGearClass, *convertLabelClass(&v2LabelClass))
+		}
 	}
 	v4.DistanceBrakePedalActiveSpeedOverZero = v2.DistanceBrakePedalActiveSpeedOverZero
 	v4.DistanceCruiseControlActive = v2.DistanceCruiseControlActive
-	v4.DrivingWithoutTorqueClass = make([]rfmsv4.Label, 0, len(v2.DrivingWithoutTorqueClass.Value))
+	if v2.DrivingWithoutTorqueClass != nil {
+		v4.DrivingWithoutTorqueClass = make([]rfmsv4.Label, 0, len(v2.DrivingWithoutTorqueClass.Value))
+		for _, v2LabelClass := range v2.DrivingWithoutTorqueClass.Value {
+			v4.DrivingWithoutTorqueClass = append(v4.DrivingWithoutTorqueClass, *convertLabelClass(&v2LabelClass))
+		}
+	}
 	v4.DurationCruiseControlActive = v2.DurationCruiseControlActive
 	v4.DurationWheelbasedSpeedOverZero = v2.DurationWheelbaseSpeedOverZero
 	v4.DurationWheelbasedSpeedZero = v2.DurationWheelbaseSpeedZero
-	v4.EngineSpeedClass = make([]rfmsv4.FromToClass, 0, len(v2.EngineSpeedClass.Value))
-	for _, v2FromToClass := range v2.EngineSpeedClass.Value {
-		v4.EngineSpeedClass = append(v4.EngineSpeedClass, *convertFromToClass(&v2FromToClass))
+	if v2.EngineSpeedClass != nil {
+		v4.EngineSpeedClass = make([]rfmsv4.FromToClass, 0, len(v2.EngineSpeedClass.Value))
+		for _, v2FromToClass := range v2.EngineSpeedClass.Value {
+			v4.EngineSpeedClass = append(v4.EngineSpeedClass, *convertFromToClass(&v2FromToClass))
+		}
 	}
-	v4.EngineTorqueAtCurrentSpeedClass = make([]rfmsv4.FromToClassCombustion, 0, len(v2.EngineTorqueAtCurrentSpeedClass.Value))
-	for _, v2FromToClass := range v2.EngineTorqueAtCurrentSpeedClass.Value {
-		v4.EngineTorqueAtCurrentSpeedClass = append(v4.EngineTorqueAtCurrentSpeedClass, *convertFromToClassCombustion(&v2FromToClass))
+	if v2.EngineTorqueAtCurrentSpeedClass != nil {
+		v4.EngineTorqueAtCurrentSpeedClass = make([]rfmsv4.FromToClassCombustion, 0, len(v2.EngineTorqueAtCurrentSpeedClass.Value))
+		for _, v2FromToClass := range v2.EngineTorqueAtCurrentSpeedClass.Value {
+			v4.EngineTorqueAtCurrentSpeedClass = append(v4.EngineTorqueAtCurrentSpeedClass, *convertFromToClassCombustion(&v2FromToClass))
+		}
 	}
-	v4.EngineTorqueClass = make([]rfmsv4.FromToClassCombustion, 0, len(v2.EngineTorqueClass.Value))
-	for _, v2FromToClass := range v2.EngineTorqueClass.Value {
-		v4.EngineTorqueClass = append(v4.EngineTorqueClass, *convertFromToClassCombustion(&v2FromToClass))
+	if v2.EngineTorqueClass != nil {
+		v4.EngineTorqueClass = make([]rfmsv4.FromToClassCombustion, 0, len(v2.EngineTorqueClass.Value))
+		for _, v2FromToClass := range v2.EngineTorqueClass.Value {
+			v4.EngineTorqueClass = append(v4.EngineTorqueClass, *convertFromToClassCombustion(&v2FromToClass))
+		}
 	}
 	v4.FuelConsumptionDuringCruiseActive = v2.FuelConsumptionCruiseControlActive
 	v4.FuelWheelbasedSpeedOverZero = v2.FuelWheelbaseSpeedOverZero
 	v4.FuelWheelbasedSpeedZero = v2.FuelWheelbaseSpeedZero
-	v4.HighAccelerationClass = make([]rfmsv4.FromToClass, 0, len(v2.HighAccelerationClass.Value))
+	if v2.HighAccelerationClass != nil {
+		v4.HighAccelerationClass = make([]rfmsv4.FromToClass, 0, len(v2.HighAccelerationClass.Value))
+		for _, v2FromToClass := range v2.HighAccelerationClass.Value {
+			v4.HighAccelerationClass = append(v4.HighAccelerationClass, *convertFromToClass(&v2FromToClass))
+		}
+	}
 	v4.KneelingCounter = v2.KneelingCounter
 	v4.PramRequestCounter = v2.PramRequestCounter
-	v4.PtoActiveClass = make([]rfmsv4.Label, 0, len(v2.PtoActiveClass.Value))
-	for _, v2LabelClass := range v2.PtoActiveClass.Value {
-		v4.PtoActiveClass = append(v4.PtoActiveClass, *convertLabelClass(&v2LabelClass))
+	if v2.PtoActiveClass != nil {
+		v4.PtoActiveClass = make([]rfmsv4.Label, 0, len(v2.PtoActiveClass.Value))
+		for _, v2LabelClass := range v2.PtoActiveClass.Value {
+			v4.PtoActiveClass = append(v4.PtoActiveClass, *convertLabelClass(&v2LabelClass))
+		}
 	}
-	v4.RetarderTorqueClass = make([]rfmsv4.FromToClass, 0, len(v2.RetarderTorqueClass.Value))
-	for _, v2FromToClass := range v2.RetarderTorqueClass.Value {
-		v4.RetarderTorqueClass = append(v4.RetarderTorqueClass, *convertFromToClass(&v2FromToClass))
+	if v2.RetarderTorqueClass != nil {
+		v4.RetarderTorqueClass = make([]rfmsv4.FromToClass, 0, len(v2.RetarderTorqueClass.Value))
+		for _, v2FromToClass := range v2.RetarderTorqueClass.Value {
+			v4.RetarderTorqueClass = append(v4.RetarderTorqueClass, *convertFromToClass(&v2FromToClass))
+		}
 	}
-	v4.SelectedGearClass = make([]rfmsv4.Label, 0, len(v2.SelectedGearClass.Value))
-	for _, v2LabelClass := range v2.SelectedGearClass.Value {
-		v4.SelectedGearClass = append(v4.SelectedGearClass, *convertLabelClass(&v2LabelClass))
+	if v2.SelectedGearClass != nil {
+		v4.SelectedGearClass = make([]rfmsv4.Label, 0, len(v2.SelectedGearClass.Value))
+		for _, v2LabelClass := range v2.SelectedGearClass.Value {
+			v4.SelectedGearClass = append(v4.SelectedGearClass, *convertLabelClass(&v2LabelClass))
+		}
 	}
 	v4.StopRequestCounter = v2.StopRequestCounter
-	v4.VehicleSpeedClass = make([]rfmsv4.FromToClass, 0, len(v2.VehicleSpeedClass.Value))
-	for _, v2FromToClass := range v2.VehicleSpeedClass.Value {
-		v4.VehicleSpeedClass = append(v4.VehicleSpeedClass, *convertFromToClass(&v2FromToClass))
+	if v2.VehicleSpeedClass != nil {
+		v4.VehicleSpeedClass = make([]rfmsv4.FromToClass, 0, len(v2.VehicleSpeedClass.Value))
+		for _, v2FromToClass := range v2.VehicleSpeedClass.Value {
+			v4.VehicleSpeedClass = append(v4.VehicleSpeedClass, *convertFromToClass(&v2FromToClass))
+		}
 	}
 	return &v4
 }
