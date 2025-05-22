@@ -58,6 +58,7 @@ func WithScaniaAuth(clientID string, clientSecret string) ClientOption {
 	return func(cc *ClientConfig) {
 		cc.transport = &tokenAuthenticatorTransport{
 			tokenAuthenticator: &scaniaTokenAuthenticator{
+				baseURL:      ScaniaAuthBaseURL,
 				clientID:     clientID,
 				clientSecret: clientSecret,
 				httpClient:   http.DefaultClient,
