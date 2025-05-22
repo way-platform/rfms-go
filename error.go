@@ -50,6 +50,8 @@ func newHTTPError(resp *http.Response) *Error {
 			if body.ErrorURI != "" {
 				result.ErrorURI = body.ErrorURI
 			}
+		} else {
+			result.Description = string(data)
 		}
 	}
 	if retryAfterHeader := resp.Header.Get("Retry-After"); retryAfterHeader != "" {
