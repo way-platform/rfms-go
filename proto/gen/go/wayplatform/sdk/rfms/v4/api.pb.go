@@ -9,6 +9,7 @@ package rfmsv4
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -977,7 +978,7 @@ type GNSSPosition struct {
 	// The GNSS(e.g. GPS)-speed in km/h
 	Speed float64 `protobuf:"fixed64,109641799,opt,name=speed,proto3" json:"speed,omitempty"`
 	// The time of the position data in iso8601 format.
-	PositionDateTime string `protobuf:"bytes,502508841,opt,name=position_date_time,json=positionDateTime,proto3" json:"position_date_time,omitempty"`
+	PositionDateTime *timestamppb.Timestamp `protobuf:"bytes,502508841,opt,name=position_date_time,json=positionDateTime,proto3" json:"position_date_time,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -1047,11 +1048,11 @@ func (x *GNSSPosition) GetSpeed() float64 {
 	return 0
 }
 
-func (x *GNSSPosition) GetPositionDateTime() string {
+func (x *GNSSPosition) GetPositionDateTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.PositionDateTime
 	}
-	return ""
+	return nil
 }
 
 type Label struct {
@@ -1984,8 +1985,8 @@ type UptimeData struct {
 	// The air pressure in circuit 2 in Pascal.
 	ServiceBrakeAirPressureCircuit2 int64 `protobuf:"varint,62204464,opt,name=service_brake_air_pressure_circuit2,json=serviceBrakeAirPressureCircuit2,proto3" json:"service_brake_air_pressure_circuit2,omitempty"`
 	// The total time at least one door has been opened in the bus. (seconds) Used mainly for buses.
-	DurationAtLeastOneDoorOpen int64                     `protobuf:"varint,157514572,opt,name=duration_at_least_one_door_open,json=durationAtLeastOneDoorOpen,proto3" json:"duration_at_least_one_door_open,omitempty"`
-	AlternatorInfo             *UptimeDataAlternatorInfo `protobuf:"bytes,280075811,opt,name=alternator_info,json=alternatorInfo,proto3" json:"alternator_info,omitempty"`
+	DurationAtLeastOneDoorOpen int64                       `protobuf:"varint,157514572,opt,name=duration_at_least_one_door_open,json=durationAtLeastOneDoorOpen,proto3" json:"duration_at_least_one_door_open,omitempty"`
+	AlternatorInfo             []*UptimeDataAlternatorInfo `protobuf:"bytes,280075811,rep,name=alternator_info,json=alternatorInfo,proto3" json:"alternator_info,omitempty"`
 	// The bellow pressure in the front axle left side in Pascal. Used mainly for buses.
 	BellowPressureFrontAxleLeft int64 `protobuf:"varint,264142332,opt,name=bellow_pressure_front_axle_left,json=bellowPressureFrontAxleLeft,proto3" json:"bellow_pressure_front_axle_left,omitempty"`
 	// The bellow pressure in the front axle right side in Pascal. Used mainly for buses.
@@ -2084,7 +2085,7 @@ func (x *UptimeData) GetDurationAtLeastOneDoorOpen() int64 {
 	return 0
 }
 
-func (x *UptimeData) GetAlternatorInfo() *UptimeDataAlternatorInfo {
+func (x *UptimeData) GetAlternatorInfo() []*UptimeDataAlternatorInfo {
 	if x != nil {
 		return x.AlternatorInfo
 	}
@@ -2392,10 +2393,10 @@ type VehiclePosition struct {
 	Vin         string   `protobuf:"bytes,116763,opt,name=vin,proto3" json:"vin,omitempty"`
 	TriggerType *Trigger `protobuf:"bytes,375833953,opt,name=trigger_type,json=triggerType,proto3" json:"trigger_type,omitempty"`
 	// When the data was retrieved in the vehicle in iso8601 format.
-	CreatedDateTime string `protobuf:"bytes,344543196,opt,name=created_date_time,json=createdDateTime,proto3" json:"created_date_time,omitempty"`
+	CreatedDateTime *timestamppb.Timestamp `protobuf:"bytes,344543196,opt,name=created_date_time,json=createdDateTime,proto3" json:"created_date_time,omitempty"`
 	// Reception at Server. To be used for handling of \"more data available\" in iso8601 format.
-	ReceivedDateTime string        `protobuf:"bytes,170489827,opt,name=received_date_time,json=receivedDateTime,proto3" json:"received_date_time,omitempty"`
-	GnssPosition     *GNSSPosition `protobuf:"bytes,381588705,opt,name=gnss_position,json=gnssPosition,proto3" json:"gnss_position,omitempty"`
+	ReceivedDateTime *timestamppb.Timestamp `protobuf:"bytes,170489827,opt,name=received_date_time,json=receivedDateTime,proto3" json:"received_date_time,omitempty"`
+	GnssPosition     *GNSSPosition          `protobuf:"bytes,381588705,opt,name=gnss_position,json=gnssPosition,proto3" json:"gnss_position,omitempty"`
 	// Wheel-Based Vehicle Speed in km/h (Speed of the vehicle as calculated from wheel or tailshaft speed)
 	WheelBasedSpeed float64 `protobuf:"fixed64,452571691,opt,name=wheel_based_speed,json=wheelBasedSpeed,proto3" json:"wheel_based_speed,omitempty"`
 	// Tachograph vehicle speed in km/h (Speed of the vehicle registered by the tachograph)
@@ -2448,18 +2449,18 @@ func (x *VehiclePosition) GetTriggerType() *Trigger {
 	return nil
 }
 
-func (x *VehiclePosition) GetCreatedDateTime() string {
+func (x *VehiclePosition) GetCreatedDateTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedDateTime
 	}
-	return ""
+	return nil
 }
 
-func (x *VehiclePosition) GetReceivedDateTime() string {
+func (x *VehiclePosition) GetReceivedDateTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.ReceivedDateTime
 	}
-	return ""
+	return nil
 }
 
 func (x *VehiclePosition) GetGnssPosition() *GNSSPosition {
@@ -2491,7 +2492,7 @@ type VehiclePositionsResponse struct {
 	// Populated with the link to the next part of the result when moreDataAvailable is true. The link is relative, i.e. starts with /rfms/vehiclepositions, and preserves any query parameters from the original request.
 	MoreDataAvailableLink string `protobuf:"bytes,36631803,opt,name=more_data_available_link,json=moreDataAvailableLink,proto3" json:"more_data_available_link,omitempty"`
 	// Time to be used to ask for historical data at customers (for starttime), to solve the problem of having different times at server and clients. This is the time at the server when this request was received. To avoid losing any messages or get duplicates, this is the time that should be supplied in the startTime parameter in the next request in iso8601 format.
-	RequestServerDateTime string `protobuf:"bytes,447485328,opt,name=request_server_date_time,json=requestServerDateTime,proto3" json:"request_server_date_time,omitempty"`
+	RequestServerDateTime *timestamppb.Timestamp `protobuf:"bytes,447485328,opt,name=request_server_date_time,json=requestServerDateTime,proto3" json:"request_server_date_time,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -2547,11 +2548,11 @@ func (x *VehiclePositionsResponse) GetMoreDataAvailableLink() string {
 	return ""
 }
 
-func (x *VehiclePositionsResponse) GetRequestServerDateTime() string {
+func (x *VehiclePositionsResponse) GetRequestServerDateTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.RequestServerDateTime
 	}
-	return ""
+	return nil
 }
 
 type VehiclePositionsResponseVehiclePositionResponse struct {
@@ -2666,9 +2667,9 @@ type VehicleStatus struct {
 	Vin         string   `protobuf:"bytes,116763,opt,name=vin,proto3" json:"vin,omitempty"`
 	TriggerType *Trigger `protobuf:"bytes,375833953,opt,name=trigger_type,json=triggerType,proto3" json:"trigger_type,omitempty"`
 	// When the data was retrieved in the vehicle in iso8601 format.
-	CreatedDateTime string `protobuf:"bytes,344543196,opt,name=created_date_time,json=createdDateTime,proto3" json:"created_date_time,omitempty"`
+	CreatedDateTime *timestamppb.Timestamp `protobuf:"bytes,344543196,opt,name=created_date_time,json=createdDateTime,proto3" json:"created_date_time,omitempty"`
 	// Reception at Server. To be used for handling of \"more data available\" in iso8601 format.
-	ReceivedDateTime string `protobuf:"bytes,170489827,opt,name=received_date_time,json=receivedDateTime,proto3" json:"received_date_time,omitempty"`
+	ReceivedDateTime *timestamppb.Timestamp `protobuf:"bytes,170489827,opt,name=received_date_time,json=receivedDateTime,proto3" json:"received_date_time,omitempty"`
 	// Accumulated distance travelled by the vehicle during its operation in meter
 	HrTotalVehicleDistance int64 `protobuf:"varint,478134760,opt,name=hr_total_vehicle_distance,json=hrTotalVehicleDistance,proto3" json:"hr_total_vehicle_distance,omitempty"`
 	// The total hours of operation for the vehicle combustion engine. At least one of totalEngineHours or totalElectricMotorHours is Mandatory
@@ -2739,18 +2740,18 @@ func (x *VehicleStatus) GetTriggerType() *Trigger {
 	return nil
 }
 
-func (x *VehicleStatus) GetCreatedDateTime() string {
+func (x *VehicleStatus) GetCreatedDateTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedDateTime
 	}
-	return ""
+	return nil
 }
 
-func (x *VehicleStatus) GetReceivedDateTime() string {
+func (x *VehicleStatus) GetReceivedDateTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.ReceivedDateTime
 	}
-	return ""
+	return nil
 }
 
 func (x *VehicleStatus) GetHrTotalVehicleDistance() int64 {
@@ -2920,7 +2921,7 @@ type VehicleStatusesResponse struct {
 	// Populated with the link to the next part of the result when moreDataAvailable is true. The link is relative, i.e. starts with /rfms/vehiclestatuses, and preserves any query parameters from the original request.
 	MoreDataAvailableLink string `protobuf:"bytes,36631803,opt,name=more_data_available_link,json=moreDataAvailableLink,proto3" json:"more_data_available_link,omitempty"`
 	// Time in UTC to be used to ask for historical data (for starttime), to solve the problem of having different times at server and clients. This is the time at the server when this request was received. To avoid losing any messages or get duplicates, this is the time that should be supplied in the startTime parameter in the next request in iso8601 format.
-	RequestServerDateTime string `protobuf:"bytes,447485328,opt,name=request_server_date_time,json=requestServerDateTime,proto3" json:"request_server_date_time,omitempty"`
+	RequestServerDateTime *timestamppb.Timestamp `protobuf:"bytes,447485328,opt,name=request_server_date_time,json=requestServerDateTime,proto3" json:"request_server_date_time,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -2976,11 +2977,11 @@ func (x *VehicleStatusesResponse) GetMoreDataAvailableLink() string {
 	return ""
 }
 
-func (x *VehicleStatusesResponse) GetRequestServerDateTime() string {
+func (x *VehicleStatusesResponse) GetRequestServerDateTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.RequestServerDateTime
 	}
-	return ""
+	return nil
 }
 
 type VehicleStatusesResponseVehicleStatusResponse struct {
@@ -3173,7 +3174,7 @@ var File_wayplatform_sdk_rfms_v4_api_proto protoreflect.FileDescriptor
 
 const file_wayplatform_sdk_rfms_v4_api_proto_rawDesc = "" +
 	"\n" +
-	"!wayplatform/sdk/rfms/v4/api.proto\x12\x17wayplatform.sdk.rfms.v4\"\xcb\x19\n" +
+	"!wayplatform/sdk/rfms/v4/api.proto\x12\x17wayplatform.sdk.rfms.v4\x1a\x0ebq_table.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xcb\x19\n" +
 	"\x0fAccumulatedData\x12O\n" +
 	"#duration_wheelbased_speed_over_zero\x18\xc2̰\x05 \x01(\x03R\x1fdurationWheelbasedSpeedOverZero\x12G\n" +
 	"\x1edistance_cruise_control_active\x18\x8b\x80\xf6\xa3\x01 \x01(\x03R\x1bdistanceCruiseControlActive\x12F\n" +
@@ -3251,14 +3252,14 @@ const file_wayplatform_sdk_rfms_v4_api_proto_rawDesc = "" +
 	"\x02to\x18\xfb\x1c \x01(\x01R\x02to\x12\x1c\n" +
 	"\aseconds\x18\x82\x95\xb5\xab\x01 \x01(\x03R\aseconds\x12\x19\n" +
 	"\x06meters\x18\xf8\xf3\xe8\x01 \x01(\x03R\x06meters\x12\x1f\n" +
-	"\twatthours\x18\x85\xc5\xd1b \x01(\x03R\twatthours\"\xd7\x01\n" +
+	"\twatthours\x18\x85\xc5\xd1b \x01(\x03R\twatthours\"\xf3\x01\n" +
 	"\fGNSSPosition\x12\x1e\n" +
 	"\blatitude\x18\x96\xa7Ѯ\x01 \x01(\x01R\blatitude\x12\x1f\n" +
 	"\tlongitude\x18\xaf\x93\xc0A \x01(\x01R\tlongitude\x12\x1b\n" +
 	"\aheading\x18\x83\xfc\x9d{ \x01(\x05R\aheading\x12\x1e\n" +
 	"\baltitude\x18\xa5\x95\x8d\xcb\x01 \x01(\x05R\baltitude\x12\x17\n" +
-	"\x05speed\x18ǀ\xa44 \x01(\x01R\x05speed\x120\n" +
-	"\x12position_date_time\x18\xa9\xda\xce\xef\x01 \x01(\tR\x10positionDateTime\"\xc3\x01\n" +
+	"\x05speed\x18ǀ\xa44 \x01(\x01R\x05speed\x12L\n" +
+	"\x12position_date_time\x18\xa9\xda\xce\xef\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x10positionDateTime\"\xc3\x01\n" +
 	"\x05Label\x12\x17\n" +
 	"\x05label\x18\xf4\xfd\xfd0 \x01(\tR\x05label\x12\x1c\n" +
 	"\aseconds\x18\x82\x95\xb5\xab\x01 \x01(\x03R\aseconds\x12\x19\n" +
@@ -3344,14 +3345,14 @@ const file_wayplatform_sdk_rfms_v4_api_proto_rawDesc = "" +
 	"#service_brake_air_pressure_circuit1\x18\xb1\xd4\xd4\x1d \x01(\x03R\x1fserviceBrakeAirPressureCircuit1\x12O\n" +
 	"#service_brake_air_pressure_circuit2\x18\xb0\xd4\xd4\x1d \x01(\x03R\x1fserviceBrakeAirPressureCircuit2\x12F\n" +
 	"\x1fduration_at_least_one_door_open\x18\xcc\xf6\x8dK \x01(\x03R\x1adurationAtLeastOneDoorOpen\x12^\n" +
-	"\x0falternator_info\x18\xa3\xbcƅ\x01 \x01(\v21.wayplatform.sdk.rfms.v4.UptimeDataAlternatorInfoR\x0ealternatorInfo\x12G\n" +
+	"\x0falternator_info\x18\xa3\xbcƅ\x01 \x03(\v21.wayplatform.sdk.rfms.v4.UptimeDataAlternatorInfoR\x0ealternatorInfo\x12G\n" +
 	"\x1fbellow_pressure_front_axle_left\x18\xfc\xfb\xf9} \x01(\x03R\x1bbellowPressureFrontAxleLeft\x12J\n" +
 	" bellow_pressure_front_axle_right\x18\xf9\xba\xe1\xbc\x01 \x01(\x03R\x1cbellowPressureFrontAxleRight\x12E\n" +
 	"\x1ebellow_pressure_rear_axle_left\x18Ċ\x93M \x01(\x03R\x1abellowPressureRearAxleLeft\x12H\n" +
 	"\x1fbellow_pressure_rear_axle_right\x18\xdf\xf7֥\x01 \x01(\x03R\x1bbellowPressureRearAxleRight\"{\n" +
 	"\x18UptimeDataAlternatorInfo\x12.\n" +
 	"\x11alternator_status\x18䉁5 \x01(\tR\x10alternatorStatus\x12/\n" +
-	"\x11alternator_number\x18\xba\xa0\xad\xf1\x01 \x01(\x03R\x10alternatorNumber\"\x8e\a\n" +
+	"\x11alternator_number\x18\xba\xa0\xad\xf1\x01 \x01(\x03R\x10alternatorNumber\"\x9d\a\n" +
 	"\aVehicle\x12\x12\n" +
 	"\x03vin\x18\x9b\x90\a \x01(\tR\x03vin\x125\n" +
 	"\x15customer_vehicle_name\x18\x81\xc5\xe9C \x01(\tR\x13customerVehicleName\x12\x17\n" +
@@ -3372,31 +3373,34 @@ const file_wayplatform_sdk_rfms_v4_api_proto_rawDesc = "" +
 	"\tbody_type\x18\xb9\x87\xbfU \x01(\tR\bbodyType\x120\n" +
 	"\x12door_configuration\x18ܻ\x9a7 \x03(\x05R\x11doorConfiguration\x12+\n" +
 	"\x10has_ramp_or_lift\x18Û\x9d\xd0\x01 \x01(\bR\rhasRampOrLift\x12,\n" +
-	"\x10authorized_paths\x18\xb9͑_ \x03(\tR\x0fauthorizedPaths\"\xfd\x02\n" +
+	"\x10authorized_paths\x18\xb9͑_ \x03(\tR\x0fauthorizedPaths:\r\xea?\n" +
+	"\n" +
+	"\bvehicles\"\xcd\x03\n" +
 	"\x0fVehiclePosition\x12\x12\n" +
 	"\x03vin\x18\x9b\x90\a \x01(\tR\x03vin\x12G\n" +
-	"\ftrigger_type\x18ኛ\xb3\x01 \x01(\v2 .wayplatform.sdk.rfms.v4.TriggerR\vtriggerType\x12.\n" +
-	"\x11created_date_time\x18ܟ\xa5\xa4\x01 \x01(\tR\x0fcreatedDateTime\x12/\n" +
-	"\x12received_date_time\x18\xe3\xef\xa5Q \x01(\tR\x10receivedDateTime\x12N\n" +
+	"\ftrigger_type\x18ኛ\xb3\x01 \x01(\v2 .wayplatform.sdk.rfms.v4.TriggerR\vtriggerType\x12J\n" +
+	"\x11created_date_time\x18ܟ\xa5\xa4\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0fcreatedDateTime\x12K\n" +
+	"\x12received_date_time\x18\xe3\xef\xa5Q \x01(\v2\x1a.google.protobuf.TimestampR\x10receivedDateTime\x12N\n" +
 	"\rgnss_position\x18\xe1\xa9\xfa\xb5\x01 \x01(\v2%.wayplatform.sdk.rfms.v4.GNSSPositionR\fgnssPosition\x12.\n" +
 	"\x11wheel_based_speed\x18\xab\xe4\xe6\xd7\x01 \x01(\x01R\x0fwheelBasedSpeed\x12,\n" +
-	"\x10tachograph_speed\x18\u06dd\xe6l \x01(\x01R\x0ftachographSpeed\"\xd0\x02\n" +
+	"\x10tachograph_speed\x18\u06dd\xe6l \x01(\x01R\x0ftachographSpeed:\x16\xea?\x13\n" +
+	"\x11vehicle_positions\"\xec\x02\n" +
 	"\x18VehiclePositionsResponse\x12\x87\x01\n" +
 	"\x19vehicle_position_response\x18\xc5\xe0\xc96 \x01(\v2H.wayplatform.sdk.rfms.v4.VehiclePositionsResponseVehiclePositionResponseR\x17vehiclePositionResponse\x121\n" +
 	"\x13more_data_available\x18\x9e\xcd\xefb \x01(\bR\x11moreDataAvailable\x12:\n" +
-	"\x18more_data_available_link\x18\xfb\xe9\xbb\x11 \x01(\tR\x15moreDataAvailableLink\x12;\n" +
-	"\x18request_server_date_time\x18\x90\xab\xb0\xd5\x01 \x01(\tR\x15requestServerDateTime\"\x8b\x01\n" +
+	"\x18more_data_available_link\x18\xfb\xe9\xbb\x11 \x01(\tR\x15moreDataAvailableLink\x12W\n" +
+	"\x18request_server_date_time\x18\x90\xab\xb0\xd5\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x15requestServerDateTime\"\x8b\x01\n" +
 	"/VehiclePositionsResponseVehiclePositionResponse\x12X\n" +
 	"\x11vehicle_positions\x18\xec\xe1\xcb9 \x03(\v2(.wayplatform.sdk.rfms.v4.VehiclePositionR\x10vehiclePositions\"[\n" +
 	"\x15VehicleProductionDate\x12\x12\n" +
 	"\x03day\x18\x9c\x87\x06 \x01(\x05R\x03day\x12\x17\n" +
 	"\x05month\x18\x80\xc5\xd01 \x01(\x05R\x05month\x12\x15\n" +
-	"\x04year\x18\xbd\x90\xe2\x01 \x01(\x05R\x04year\"\xbc\b\n" +
+	"\x04year\x18\xbd\x90\xe2\x01 \x01(\x05R\x04year\"\x8b\t\n" +
 	"\rVehicleStatus\x12\x12\n" +
 	"\x03vin\x18\x9b\x90\a \x01(\tR\x03vin\x12G\n" +
-	"\ftrigger_type\x18ኛ\xb3\x01 \x01(\v2 .wayplatform.sdk.rfms.v4.TriggerR\vtriggerType\x12.\n" +
-	"\x11created_date_time\x18ܟ\xa5\xa4\x01 \x01(\tR\x0fcreatedDateTime\x12/\n" +
-	"\x12received_date_time\x18\xe3\xef\xa5Q \x01(\tR\x10receivedDateTime\x12=\n" +
+	"\ftrigger_type\x18ኛ\xb3\x01 \x01(\v2 .wayplatform.sdk.rfms.v4.TriggerR\vtriggerType\x12J\n" +
+	"\x11created_date_time\x18ܟ\xa5\xa4\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0fcreatedDateTime\x12K\n" +
+	"\x12received_date_time\x18\xe3\xef\xa5Q \x01(\v2\x1a.google.protobuf.TimestampR\x10receivedDateTime\x12=\n" +
 	"\x19hr_total_vehicle_distance\x18\xe8\x83\xff\xe3\x01 \x01(\x03R\x16hrTotalVehicleDistance\x12/\n" +
 	"\x12total_engine_hours\x18\xf0ϟ\x06 \x01(\x01R\x10totalEngineHours\x12?\n" +
 	"\x1atotal_electric_motor_hours\x18\xc1\xf1\xf5\xf6\x01 \x01(\x01R\x17totalElectricMotorHours\x12C\n" +
@@ -3412,18 +3416,19 @@ const file_wayplatform_sdk_rfms_v4_api_proto_rawDesc = "" +
 	"\x10accumulated_data\x18\xfa\x8a\xec\xe1\x01 \x01(\v2(.wayplatform.sdk.rfms.v4.AccumulatedDataR\x0faccumulatedData\x12M\n" +
 	"\rsnapshot_data\x18ǚ\x87; \x01(\v2%.wayplatform.sdk.rfms.v4.SnapshotDataR\fsnapshotData\x12H\n" +
 	"\vuptime_data\x18߄É\x01 \x01(\v2#.wayplatform.sdk.rfms.v4.UptimeDataR\n" +
-	"uptimeData\"\xd0\x01\n" +
+	"uptimeData:\x15\xea?\x12\n" +
+	"\x10vehicle_statuses\"\xd0\x01\n" +
 	"\x1cVehicleStatusDoorStatusInner\x121\n" +
 	"\x13door_enabled_status\x18\xe4\xfe\xbf= \x01(\tR\x11DoorEnabledStatus\x12,\n" +
 	"\x10door_open_status\x18\xf6\x98݆\x01 \x01(\tR\x0eDoorOpenStatus\x12+\n" +
 	"\x10door_lock_status\x18\x8bò\x12 \x01(\tR\x0eDoorLockStatus\x12\"\n" +
 	"\vdoor_number\x18\xfa\xa9\xa3' \x01(\x05R\n" +
-	"DoorNumber\"\xc8\x02\n" +
+	"DoorNumber\"\xe4\x02\n" +
 	"\x17VehicleStatusesResponse\x12\x80\x01\n" +
 	"\x17vehicle_status_response\x18\xa7\xda\xca{ \x01(\v2E.wayplatform.sdk.rfms.v4.VehicleStatusesResponseVehicleStatusResponseR\x15vehicleStatusResponse\x121\n" +
 	"\x13more_data_available\x18\x9e\xcd\xefb \x01(\bR\x11moreDataAvailable\x12:\n" +
-	"\x18more_data_available_link\x18\xfb\xe9\xbb\x11 \x01(\tR\x15moreDataAvailableLink\x12;\n" +
-	"\x18request_server_date_time\x18\x90\xab\xb0\xd5\x01 \x01(\tR\x15requestServerDateTime\"\x85\x01\n" +
+	"\x18more_data_available_link\x18\xfb\xe9\xbb\x11 \x01(\tR\x15moreDataAvailableLink\x12W\n" +
+	"\x18request_server_date_time\x18\x90\xab\xb0\xd5\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x15requestServerDateTime\"\x85\x01\n" +
 	",VehicleStatusesResponseVehicleStatusResponse\x12U\n" +
 	"\x10vehicle_statuses\x18\xb0\xc8\xd1\xf1\x01 \x03(\v2&.wayplatform.sdk.rfms.v4.VehicleStatusR\x0fvehicleStatuses\"\xea\x01\n" +
 	"\x10VehiclesResponse\x12g\n" +
@@ -3432,8 +3437,8 @@ const file_wayplatform_sdk_rfms_v4_api_proto_rawDesc = "" +
 	"\x18more_data_available_link\x18\xfb\xe9\xbb\x11 \x01(\tR\x15moreDataAvailableLink\"c\n" +
 	"\x1fVehiclesResponseVehicleResponse\x12@\n" +
 	"\bvehicles\x18ʭ\xb9\xc0\x01 \x03(\v2 .wayplatform.sdk.rfms.v4.VehicleR\bvehicles\"\r\n" +
-	"\vVinPropertyB\xeb\x01\n" +
-	"\x1bcom.wayplatform.sdk.rfms.v4B\bApiProtoP\x01ZCgithub.com/way-platform/proto/gen/go/wayplatform/sdk/rfms/v4;rfmsv4\xa2\x02\x03WSR\xaa\x02\x17Wayplatform.Sdk.Rfms.V4\xca\x02\x17Wayplatform\\Sdk\\Rfms\\V4\xe2\x02#Wayplatform\\Sdk\\Rfms\\V4\\GPBMetadata\xea\x02\x1aWayplatform::Sdk::Rfms::V4b\x06proto3"
+	"\vVinPropertyB\xf3\x01\n" +
+	"\x1bcom.wayplatform.sdk.rfms.v4B\bApiProtoP\x01ZKgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/sdk/rfms/v4;rfmsv4\xa2\x02\x03WSR\xaa\x02\x17Wayplatform.Sdk.Rfms.V4\xca\x02\x17Wayplatform\\Sdk\\Rfms\\V4\xe2\x02#Wayplatform\\Sdk\\Rfms\\V4\\GPBMetadata\xea\x02\x1aWayplatform::Sdk::Rfms::V4b\x06proto3"
 
 var (
 	file_wayplatform_sdk_rfms_v4_api_proto_rawDescOnce sync.Once
@@ -3485,6 +3490,7 @@ var file_wayplatform_sdk_rfms_v4_api_proto_goTypes = []any{
 	(*VehiclesResponse)(nil),                                // 33: wayplatform.sdk.rfms.v4.VehiclesResponse
 	(*VehiclesResponseVehicleResponse)(nil),                 // 34: wayplatform.sdk.rfms.v4.VehiclesResponseVehicleResponse
 	(*VinProperty)(nil),                                     // 35: wayplatform.sdk.rfms.v4.VinProperty
+	(*timestamppb.Timestamp)(nil),                           // 36: google.protobuf.Timestamp
 }
 var file_wayplatform_sdk_rfms_v4_api_proto_depIdxs = []int32{
 	11, // 0: wayplatform.sdk.rfms.v4.AccumulatedData.pto_active_class:type_name -> wayplatform.sdk.rfms.v4.Label
@@ -3506,38 +3512,45 @@ var file_wayplatform_sdk_rfms_v4_api_proto_depIdxs = []int32{
 	9,  // 16: wayplatform.sdk.rfms.v4.AccumulatedData.electric_power_recuperation_class:type_name -> wayplatform.sdk.rfms.v4.FromToClassElectrical
 	4,  // 17: wayplatform.sdk.rfms.v4.DriverId.tacho_driver_identification:type_name -> wayplatform.sdk.rfms.v4.DriverIdTachoDriverIdentification
 	3,  // 18: wayplatform.sdk.rfms.v4.DriverId.oem_driver_identification:type_name -> wayplatform.sdk.rfms.v4.DriverIdOemDriverIdentification
-	10, // 19: wayplatform.sdk.rfms.v4.SnapshotData.gnss_position:type_name -> wayplatform.sdk.rfms.v4.GNSSPosition
-	2,  // 20: wayplatform.sdk.rfms.v4.SnapshotData.driver2_id:type_name -> wayplatform.sdk.rfms.v4.DriverId
-	14, // 21: wayplatform.sdk.rfms.v4.SnapshotData.estimated_distance_to_empty:type_name -> wayplatform.sdk.rfms.v4.SnapshotDataEstimatedDistanceToEmpty
-	17, // 22: wayplatform.sdk.rfms.v4.SnapshotData.vehicle_axles:type_name -> wayplatform.sdk.rfms.v4.SnapshotDataVehicleAxlesInner
-	15, // 23: wayplatform.sdk.rfms.v4.SnapshotData.trailers:type_name -> wayplatform.sdk.rfms.v4.SnapshotDataTrailersInner
-	16, // 24: wayplatform.sdk.rfms.v4.SnapshotDataTrailersInner.trailer_axles:type_name -> wayplatform.sdk.rfms.v4.SnapshotDataTrailersInnerTrailerAxlesInner
-	2,  // 25: wayplatform.sdk.rfms.v4.Trigger.driver_id:type_name -> wayplatform.sdk.rfms.v4.DriverId
-	18, // 26: wayplatform.sdk.rfms.v4.Trigger.tell_tale_info:type_name -> wayplatform.sdk.rfms.v4.TellTaleInfo
-	21, // 27: wayplatform.sdk.rfms.v4.Trigger.charging_status_info:type_name -> wayplatform.sdk.rfms.v4.TriggerChargingStatusInfo
-	20, // 28: wayplatform.sdk.rfms.v4.Trigger.charging_connection_status_info:type_name -> wayplatform.sdk.rfms.v4.TriggerChargingConnectionStatusInfo
-	18, // 29: wayplatform.sdk.rfms.v4.UptimeData.tell_tale_info:type_name -> wayplatform.sdk.rfms.v4.TellTaleInfo
-	23, // 30: wayplatform.sdk.rfms.v4.UptimeData.alternator_info:type_name -> wayplatform.sdk.rfms.v4.UptimeDataAlternatorInfo
-	28, // 31: wayplatform.sdk.rfms.v4.Vehicle.production_date:type_name -> wayplatform.sdk.rfms.v4.VehicleProductionDate
-	19, // 32: wayplatform.sdk.rfms.v4.VehiclePosition.trigger_type:type_name -> wayplatform.sdk.rfms.v4.Trigger
-	10, // 33: wayplatform.sdk.rfms.v4.VehiclePosition.gnss_position:type_name -> wayplatform.sdk.rfms.v4.GNSSPosition
-	27, // 34: wayplatform.sdk.rfms.v4.VehiclePositionsResponse.vehicle_position_response:type_name -> wayplatform.sdk.rfms.v4.VehiclePositionsResponseVehiclePositionResponse
-	25, // 35: wayplatform.sdk.rfms.v4.VehiclePositionsResponseVehiclePositionResponse.vehicle_positions:type_name -> wayplatform.sdk.rfms.v4.VehiclePosition
-	19, // 36: wayplatform.sdk.rfms.v4.VehicleStatus.trigger_type:type_name -> wayplatform.sdk.rfms.v4.Trigger
-	2,  // 37: wayplatform.sdk.rfms.v4.VehicleStatus.driver1_id:type_name -> wayplatform.sdk.rfms.v4.DriverId
-	30, // 38: wayplatform.sdk.rfms.v4.VehicleStatus.door_status:type_name -> wayplatform.sdk.rfms.v4.VehicleStatusDoorStatusInner
-	0,  // 39: wayplatform.sdk.rfms.v4.VehicleStatus.accumulated_data:type_name -> wayplatform.sdk.rfms.v4.AccumulatedData
-	13, // 40: wayplatform.sdk.rfms.v4.VehicleStatus.snapshot_data:type_name -> wayplatform.sdk.rfms.v4.SnapshotData
-	22, // 41: wayplatform.sdk.rfms.v4.VehicleStatus.uptime_data:type_name -> wayplatform.sdk.rfms.v4.UptimeData
-	32, // 42: wayplatform.sdk.rfms.v4.VehicleStatusesResponse.vehicle_status_response:type_name -> wayplatform.sdk.rfms.v4.VehicleStatusesResponseVehicleStatusResponse
-	29, // 43: wayplatform.sdk.rfms.v4.VehicleStatusesResponseVehicleStatusResponse.vehicle_statuses:type_name -> wayplatform.sdk.rfms.v4.VehicleStatus
-	34, // 44: wayplatform.sdk.rfms.v4.VehiclesResponse.vehicle_response:type_name -> wayplatform.sdk.rfms.v4.VehiclesResponseVehicleResponse
-	24, // 45: wayplatform.sdk.rfms.v4.VehiclesResponseVehicleResponse.vehicles:type_name -> wayplatform.sdk.rfms.v4.Vehicle
-	46, // [46:46] is the sub-list for method output_type
-	46, // [46:46] is the sub-list for method input_type
-	46, // [46:46] is the sub-list for extension type_name
-	46, // [46:46] is the sub-list for extension extendee
-	0,  // [0:46] is the sub-list for field type_name
+	36, // 19: wayplatform.sdk.rfms.v4.GNSSPosition.position_date_time:type_name -> google.protobuf.Timestamp
+	10, // 20: wayplatform.sdk.rfms.v4.SnapshotData.gnss_position:type_name -> wayplatform.sdk.rfms.v4.GNSSPosition
+	2,  // 21: wayplatform.sdk.rfms.v4.SnapshotData.driver2_id:type_name -> wayplatform.sdk.rfms.v4.DriverId
+	14, // 22: wayplatform.sdk.rfms.v4.SnapshotData.estimated_distance_to_empty:type_name -> wayplatform.sdk.rfms.v4.SnapshotDataEstimatedDistanceToEmpty
+	17, // 23: wayplatform.sdk.rfms.v4.SnapshotData.vehicle_axles:type_name -> wayplatform.sdk.rfms.v4.SnapshotDataVehicleAxlesInner
+	15, // 24: wayplatform.sdk.rfms.v4.SnapshotData.trailers:type_name -> wayplatform.sdk.rfms.v4.SnapshotDataTrailersInner
+	16, // 25: wayplatform.sdk.rfms.v4.SnapshotDataTrailersInner.trailer_axles:type_name -> wayplatform.sdk.rfms.v4.SnapshotDataTrailersInnerTrailerAxlesInner
+	2,  // 26: wayplatform.sdk.rfms.v4.Trigger.driver_id:type_name -> wayplatform.sdk.rfms.v4.DriverId
+	18, // 27: wayplatform.sdk.rfms.v4.Trigger.tell_tale_info:type_name -> wayplatform.sdk.rfms.v4.TellTaleInfo
+	21, // 28: wayplatform.sdk.rfms.v4.Trigger.charging_status_info:type_name -> wayplatform.sdk.rfms.v4.TriggerChargingStatusInfo
+	20, // 29: wayplatform.sdk.rfms.v4.Trigger.charging_connection_status_info:type_name -> wayplatform.sdk.rfms.v4.TriggerChargingConnectionStatusInfo
+	18, // 30: wayplatform.sdk.rfms.v4.UptimeData.tell_tale_info:type_name -> wayplatform.sdk.rfms.v4.TellTaleInfo
+	23, // 31: wayplatform.sdk.rfms.v4.UptimeData.alternator_info:type_name -> wayplatform.sdk.rfms.v4.UptimeDataAlternatorInfo
+	28, // 32: wayplatform.sdk.rfms.v4.Vehicle.production_date:type_name -> wayplatform.sdk.rfms.v4.VehicleProductionDate
+	19, // 33: wayplatform.sdk.rfms.v4.VehiclePosition.trigger_type:type_name -> wayplatform.sdk.rfms.v4.Trigger
+	36, // 34: wayplatform.sdk.rfms.v4.VehiclePosition.created_date_time:type_name -> google.protobuf.Timestamp
+	36, // 35: wayplatform.sdk.rfms.v4.VehiclePosition.received_date_time:type_name -> google.protobuf.Timestamp
+	10, // 36: wayplatform.sdk.rfms.v4.VehiclePosition.gnss_position:type_name -> wayplatform.sdk.rfms.v4.GNSSPosition
+	27, // 37: wayplatform.sdk.rfms.v4.VehiclePositionsResponse.vehicle_position_response:type_name -> wayplatform.sdk.rfms.v4.VehiclePositionsResponseVehiclePositionResponse
+	36, // 38: wayplatform.sdk.rfms.v4.VehiclePositionsResponse.request_server_date_time:type_name -> google.protobuf.Timestamp
+	25, // 39: wayplatform.sdk.rfms.v4.VehiclePositionsResponseVehiclePositionResponse.vehicle_positions:type_name -> wayplatform.sdk.rfms.v4.VehiclePosition
+	19, // 40: wayplatform.sdk.rfms.v4.VehicleStatus.trigger_type:type_name -> wayplatform.sdk.rfms.v4.Trigger
+	36, // 41: wayplatform.sdk.rfms.v4.VehicleStatus.created_date_time:type_name -> google.protobuf.Timestamp
+	36, // 42: wayplatform.sdk.rfms.v4.VehicleStatus.received_date_time:type_name -> google.protobuf.Timestamp
+	2,  // 43: wayplatform.sdk.rfms.v4.VehicleStatus.driver1_id:type_name -> wayplatform.sdk.rfms.v4.DriverId
+	30, // 44: wayplatform.sdk.rfms.v4.VehicleStatus.door_status:type_name -> wayplatform.sdk.rfms.v4.VehicleStatusDoorStatusInner
+	0,  // 45: wayplatform.sdk.rfms.v4.VehicleStatus.accumulated_data:type_name -> wayplatform.sdk.rfms.v4.AccumulatedData
+	13, // 46: wayplatform.sdk.rfms.v4.VehicleStatus.snapshot_data:type_name -> wayplatform.sdk.rfms.v4.SnapshotData
+	22, // 47: wayplatform.sdk.rfms.v4.VehicleStatus.uptime_data:type_name -> wayplatform.sdk.rfms.v4.UptimeData
+	32, // 48: wayplatform.sdk.rfms.v4.VehicleStatusesResponse.vehicle_status_response:type_name -> wayplatform.sdk.rfms.v4.VehicleStatusesResponseVehicleStatusResponse
+	36, // 49: wayplatform.sdk.rfms.v4.VehicleStatusesResponse.request_server_date_time:type_name -> google.protobuf.Timestamp
+	29, // 50: wayplatform.sdk.rfms.v4.VehicleStatusesResponseVehicleStatusResponse.vehicle_statuses:type_name -> wayplatform.sdk.rfms.v4.VehicleStatus
+	34, // 51: wayplatform.sdk.rfms.v4.VehiclesResponse.vehicle_response:type_name -> wayplatform.sdk.rfms.v4.VehiclesResponseVehicleResponse
+	24, // 52: wayplatform.sdk.rfms.v4.VehiclesResponseVehicleResponse.vehicles:type_name -> wayplatform.sdk.rfms.v4.Vehicle
+	53, // [53:53] is the sub-list for method output_type
+	53, // [53:53] is the sub-list for method input_type
+	53, // [53:53] is the sub-list for extension type_name
+	53, // [53:53] is the sub-list for extension extendee
+	0,  // [0:53] is the sub-list for field type_name
 }
 
 func init() { file_wayplatform_sdk_rfms_v4_api_proto_init() }

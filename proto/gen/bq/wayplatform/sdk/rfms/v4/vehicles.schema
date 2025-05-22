@@ -1,0 +1,140 @@
+[
+ {
+  "name": "vin",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "vehicle identification number. See ISO 3779 (17 characters)"
+ },
+ {
+  "name": "customer_vehicle_name",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The customer's name for the vehicle."
+ },
+ {
+  "name": "brand",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The vehicle brand. rFMS standard values VOLVO TRUCKS, SCANIA, DAIMLER, IVECO, DAF, MAN, RENAULT TRUCKS, VDL, VOLVO BUSES, IVECO BUS, IRISBUS"
+ },
+ {
+  "name": "production_date",
+  "type": "RECORD",
+  "mode": "NULLABLE",
+  "fields": [
+   {
+    "name": "day",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "Day of the month where first day of the month is 1"
+   },
+   {
+    "name": "month",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "Month of the year, where January is value 1"
+   },
+   {
+    "name": "year",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   }
+  ]
+ },
+ {
+  "name": "type",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "Indicates the type of vehicle. rFMS standard values TRUCK, BUS, VAN"
+ },
+ {
+  "name": "model",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "Indicates the model of the vehicle. OEM specific value."
+ },
+ {
+  "name": "possible_fuel_type",
+  "type": "STRING",
+  "mode": "REPEATED",
+  "description": "The possible fuel types supported by this vehicle, formatted as the HEX id number according to SPN 5837. This does NOT indicate which fuel type that is presently being used."
+ },
+ {
+  "name": "emission_level",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The emission level this vehicle supports. Possible values:  European Union, Heavy-Duty Truck and Bus Engines:  EURO_III, EURO_III_EEV, EURO_IV, EURO_V, EURO_VI  European Union, Nonroad Engines:  EURO_STAGE_III, EURO_STAGE_IV, EURO_STAGE_V  United_States, Heavy-Duty Truck and Bus Engines:  EPA_2004, EPA_2007, EPA_2010, EPA_2015_NOX10, EPA_2015_NOX05, EPA_2015_NOX02  United_States, Nonroad Engines:  EPA_TIER_2, EPA_TIER_3, EPA_TIER_4_2008, EPA_TIER_4_2013  Brazil, Heavy-Duty Truck and Bus Engines:  PROCONVE_P5, PROCONVE_P6, PROCONVE_P7  Brazil, Nonroad Engines:  PROCONVE_MARI"
+ },
+ {
+  "name": "tell_tale_code",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "This parameter indicates how the tell tales shall be interpreted, the code is unique for each OEM. One OEM can have different interpretations  depending on vehicle type."
+ },
+ {
+  "name": "chassis_type",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The chassis type of the vehicle. OEM specific value. This is used mainly for buses"
+ },
+ {
+  "name": "no_of_axles",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "Number of axles on the vehicle. This is used mainly for buses"
+ },
+ {
+  "name": "total_fuel_tank_volume",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "Total fuel tank volume for all tanks in milliltres."
+ },
+ {
+  "name": "total_fuel_tank_capacity_gaseous",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "Total gas tank capacity for all tanks in kilograms."
+ },
+ {
+  "name": "total_battery_pack_capacity",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "Total battery pack capacity in watt hours."
+ },
+ {
+  "name": "tachograph_type",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The type of tachograph in the vehicle. rFMS standard values MTCO, DTCO, TSU, DTCO_G1, DTCO_G2, NONE  DTCO - Digital tachograph, unknown generation  DTCO_G1 - Digital tachograph generation 1  DTCO_G2 - Digital tachograph generation 2  NONE - No tachograph in the vehicle  MTCO - Modular tachograph  TSU - Tachograph simulator"
+ },
+ {
+  "name": "gearbox_type",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The type of gearbox the vehicle is equipped with. rFMS standard values MANUAL, AUTOMATIC, SEMI_AUTOMATIC, NO_GEAR (e.g electrical)"
+ },
+ {
+  "name": "body_type",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The type of body on the chassis. rFMS standard values CITY_BUS, INTERCITY_BUS, COACH. This is used mainly for buses."
+ },
+ {
+  "name": "door_configuration",
+  "type": "INTEGER",
+  "mode": "REPEATED",
+  "description": "The door configuration. The door order definition is OEM specific. E.g. [1, 2, 2] means the bus has 3 doors: 1 front door, double doors for door 2 and 3. This is used mainly for buses."
+ },
+ {
+  "name": "has_ramp_or_lift",
+  "type": "BOOLEAN",
+  "mode": "NULLABLE",
+  "description": "If the vehicle is equipped with a ramp or not. This is used mainly for buses."
+ },
+ {
+  "name": "authorized_paths",
+  "type": "STRING",
+  "mode": "REPEATED",
+  "description": "Paths that the client is authorized to call"
+ }
+]

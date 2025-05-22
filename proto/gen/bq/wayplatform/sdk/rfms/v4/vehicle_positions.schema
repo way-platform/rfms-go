@@ -1,0 +1,231 @@
+[
+ {
+  "name": "vin",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "vehicle identification number. See ISO 3779 (17 characters)"
+ },
+ {
+  "name": "trigger_type",
+  "type": "RECORD",
+  "mode": "NULLABLE",
+  "fields": [
+   {
+    "name": "trigger_type",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Trigger types for Context=RFMS:  TIMER - Data was sent due to a timer trigger. (Timer value set outside rFMS scope)  IGNITION_ON - Data was sent due to an ignition on  IGNITION_OFF - Data was sent due to an ignition off  PTO_ENABLED - Data was sent due to that a PTO was enabled, will be sent for each PTO that gets enabled  PTO_DISABLED - Data was sent due to that a PTO was disabled, will be sent for each PTO that gets disabled.  DRIVER_LOGIN - Data was sent due to a successful driver login.  DRIVER_LOGOUT - Data was sent due to a driver logout  TELL_TALE - Data was sent due to that at least one tell tale changed state  ENGINE_ON - Data was sent due to an engine on. For electric motor crank is on  ENGINE_OFF - Data was sent due to an engine off. For electric motor crank is off  DRIVER_1_WORKING_STATE_CHANGED - Data was sent due to that driver 1 changed working state  DRIVER_2_WORKING_STATE_CHANGED - Data was sent due to that driver 2 changed working state  DISTANCE_TRAVELLED - Data was sent due to that a se..."
+   },
+   {
+    "name": "context",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "The context defines if this is part of the standard or OEM specific. rFMS standard values VOLVO TRUCKS, SCANIA, DAIMLER, IVECO, DAF, MAN, RENAULT TRUCKS, VDL, VOLVO BUSES, IVECO BUS, IRISBUS If the Trigger is defined in the rFMS standard, the Context = RFMS"
+   },
+   {
+    "name": "trigger_info",
+    "type": "STRING",
+    "mode": "REPEATED",
+    "description": "Additional TriggerInfo content for OEM specific triggers E.g. TRAILER_ATTACHED_TRIGGER [id of trailer]"
+   },
+   {
+    "name": "driver_id",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+     {
+      "name": "tacho_driver_identification",
+      "type": "RECORD",
+      "mode": "NULLABLE",
+      "fields": [
+       {
+        "name": "driver_identification",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "The unique identification of a driver in a Member State. This fields is formatted according the definition for driverIdentification in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b"
+       },
+       {
+        "name": "card_issuing_member_state",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "The country alpha code of the Member State having issued the card. This fields is formatted according the definition for NationAlpha in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b"
+       },
+       {
+        "name": "driver_authentication_equipment",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "Code to distinguish different types of equipment for the tachograph application. See description of the field 'DriverAuthenticationEquipment' in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b"
+       },
+       {
+        "name": "card_replacement_index",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "A card replacement index. This fields is formatted according the definition for CardReplacementIndex (chap 2.26) in: COMMISSION REGULATION (EC) No 1360/2002 Annex 1b"
+       },
+       {
+        "name": "card_renewal_index",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "A card renewal index. This fields is formatted according the definition for CardRenewalIndex (chap 2.25) in: COMMISSION REGULATION (EC) No 1360/2002 Annex 1b"
+       }
+      ]
+     },
+     {
+      "name": "oem_driver_identification",
+      "type": "RECORD",
+      "mode": "NULLABLE",
+      "fields": [
+       {
+        "name": "id_type",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "Contains an optional id type (e.g. pin, USB, encrypted EU id...)"
+       },
+       {
+        "name": "oem_driver_identification",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "An OEM specific driver id."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "pto_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "The id of a PTO. This is only set if the TriggerType = PTO_ENABLED or PTO_DISABLED"
+   },
+   {
+    "name": "tell_tale_info",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+     {
+      "name": "tell_tale",
+      "type": "STRING",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "oem_tell_tale",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "The OemTellTale is only set when the TellTale == OEM_SPECIFIC_TELL_TALE. This is an OEM specific string defining a tell tale in the OEM context."
+     },
+     {
+      "name": "state",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "The current state of the tell tale."
+     }
+    ]
+   },
+   {
+    "name": "charging_status_info",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+     {
+      "name": "event",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "CHARGING_STARTED - Charging has started  CHARGING_COMPLETED - Charging is completed  CHARGING_INTERRUPTED - Charging has been interrupted (no error)  ERROR - An error occurred when charging  ESTIMATED_COMPLETION_TIME_CHANGED - The estimated time for completed charging has changed. (Threshold is outside scope of rFMS)  TIMER - A predefined time has passed since last charge status update. (Frequency is outside the scope of rFMS)  CHARGING_LEVEL - The charging level has reached a predefined level. (Charging levels are outside the scope of rFMS)"
+     },
+     {
+      "name": "event_detail",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "Details regarding the event. Content is OEM specific"
+     }
+    ]
+   },
+   {
+    "name": "charging_connection_status_info",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+     {
+      "name": "event",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "CONNECTING - Vehicle is being connected to a charger  CONNECTED - Vehicle is connected to a charger  DISCONNECTING - Vehicle is being disconnected from the charger  DISCONNECTED - Vehicle is not connected to a charger  ERROR - An error occurred"
+     },
+     {
+      "name": "event_detail",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "Details regarding the event. Content is OEM specific"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "name": "created_date_time",
+  "type": "TIMESTAMP",
+  "mode": "NULLABLE",
+  "description": "When the data was retrieved in the vehicle in iso8601 format."
+ },
+ {
+  "name": "received_date_time",
+  "type": "TIMESTAMP",
+  "mode": "NULLABLE",
+  "description": "Reception at Server. To be used for handling of \\\"more data available\\\" in iso8601 format."
+ },
+ {
+  "name": "gnss_position",
+  "type": "RECORD",
+  "mode": "NULLABLE",
+  "fields": [
+   {
+    "name": "latitude",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "Latitude (WGS84 based)"
+   },
+   {
+    "name": "longitude",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "Longitude (WGS84 based)"
+   },
+   {
+    "name": "heading",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The direction of the vehicle (0-359)"
+   },
+   {
+    "name": "altitude",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The altitude of the vehicle. Where 0 is sea level, negative values below sealevel and positive above sealevel. Unit in meters."
+   },
+   {
+    "name": "speed",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The GNSS(e.g. GPS)-speed in km/h"
+   },
+   {
+    "name": "position_date_time",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "The time of the position data in iso8601 format."
+   }
+  ]
+ },
+ {
+  "name": "wheel_based_speed",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "Wheel-Based Vehicle Speed in km/h (Speed of the vehicle as calculated from wheel or tailshaft speed)"
+ },
+ {
+  "name": "tachograph_speed",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "Tachograph vehicle speed in km/h (Speed of the vehicle registered by the tachograph)"
+ }
+]

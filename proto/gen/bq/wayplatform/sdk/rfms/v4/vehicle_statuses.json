@@ -1,0 +1,1564 @@
+[
+ {
+  "name": "vin",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "vehicle identification number. See ISO 3779 (17 characters)"
+ },
+ {
+  "name": "trigger_type",
+  "type": "RECORD",
+  "mode": "NULLABLE",
+  "fields": [
+   {
+    "name": "trigger_type",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Trigger types for Context=RFMS:  TIMER - Data was sent due to a timer trigger. (Timer value set outside rFMS scope)  IGNITION_ON - Data was sent due to an ignition on  IGNITION_OFF - Data was sent due to an ignition off  PTO_ENABLED - Data was sent due to that a PTO was enabled, will be sent for each PTO that gets enabled  PTO_DISABLED - Data was sent due to that a PTO was disabled, will be sent for each PTO that gets disabled.  DRIVER_LOGIN - Data was sent due to a successful driver login.  DRIVER_LOGOUT - Data was sent due to a driver logout  TELL_TALE - Data was sent due to that at least one tell tale changed state  ENGINE_ON - Data was sent due to an engine on. For electric motor crank is on  ENGINE_OFF - Data was sent due to an engine off. For electric motor crank is off  DRIVER_1_WORKING_STATE_CHANGED - Data was sent due to that driver 1 changed working state  DRIVER_2_WORKING_STATE_CHANGED - Data was sent due to that driver 2 changed working state  DISTANCE_TRAVELLED - Data was sent due to that a se..."
+   },
+   {
+    "name": "context",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "The context defines if this is part of the standard or OEM specific. rFMS standard values VOLVO TRUCKS, SCANIA, DAIMLER, IVECO, DAF, MAN, RENAULT TRUCKS, VDL, VOLVO BUSES, IVECO BUS, IRISBUS If the Trigger is defined in the rFMS standard, the Context = RFMS"
+   },
+   {
+    "name": "trigger_info",
+    "type": "STRING",
+    "mode": "REPEATED",
+    "description": "Additional TriggerInfo content for OEM specific triggers E.g. TRAILER_ATTACHED_TRIGGER [id of trailer]"
+   },
+   {
+    "name": "driver_id",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+     {
+      "name": "tacho_driver_identification",
+      "type": "RECORD",
+      "mode": "NULLABLE",
+      "fields": [
+       {
+        "name": "driver_identification",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "The unique identification of a driver in a Member State. This fields is formatted according the definition for driverIdentification in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b"
+       },
+       {
+        "name": "card_issuing_member_state",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "The country alpha code of the Member State having issued the card. This fields is formatted according the definition for NationAlpha in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b"
+       },
+       {
+        "name": "driver_authentication_equipment",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "Code to distinguish different types of equipment for the tachograph application. See description of the field 'DriverAuthenticationEquipment' in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b"
+       },
+       {
+        "name": "card_replacement_index",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "A card replacement index. This fields is formatted according the definition for CardReplacementIndex (chap 2.26) in: COMMISSION REGULATION (EC) No 1360/2002 Annex 1b"
+       },
+       {
+        "name": "card_renewal_index",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "A card renewal index. This fields is formatted according the definition for CardRenewalIndex (chap 2.25) in: COMMISSION REGULATION (EC) No 1360/2002 Annex 1b"
+       }
+      ]
+     },
+     {
+      "name": "oem_driver_identification",
+      "type": "RECORD",
+      "mode": "NULLABLE",
+      "fields": [
+       {
+        "name": "id_type",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "Contains an optional id type (e.g. pin, USB, encrypted EU id...)"
+       },
+       {
+        "name": "oem_driver_identification",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "An OEM specific driver id."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "pto_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "The id of a PTO. This is only set if the TriggerType = PTO_ENABLED or PTO_DISABLED"
+   },
+   {
+    "name": "tell_tale_info",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+     {
+      "name": "tell_tale",
+      "type": "STRING",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "oem_tell_tale",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "The OemTellTale is only set when the TellTale == OEM_SPECIFIC_TELL_TALE. This is an OEM specific string defining a tell tale in the OEM context."
+     },
+     {
+      "name": "state",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "The current state of the tell tale."
+     }
+    ]
+   },
+   {
+    "name": "charging_status_info",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+     {
+      "name": "event",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "CHARGING_STARTED - Charging has started  CHARGING_COMPLETED - Charging is completed  CHARGING_INTERRUPTED - Charging has been interrupted (no error)  ERROR - An error occurred when charging  ESTIMATED_COMPLETION_TIME_CHANGED - The estimated time for completed charging has changed. (Threshold is outside scope of rFMS)  TIMER - A predefined time has passed since last charge status update. (Frequency is outside the scope of rFMS)  CHARGING_LEVEL - The charging level has reached a predefined level. (Charging levels are outside the scope of rFMS)"
+     },
+     {
+      "name": "event_detail",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "Details regarding the event. Content is OEM specific"
+     }
+    ]
+   },
+   {
+    "name": "charging_connection_status_info",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+     {
+      "name": "event",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "CONNECTING - Vehicle is being connected to a charger  CONNECTED - Vehicle is connected to a charger  DISCONNECTING - Vehicle is being disconnected from the charger  DISCONNECTED - Vehicle is not connected to a charger  ERROR - An error occurred"
+     },
+     {
+      "name": "event_detail",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "Details regarding the event. Content is OEM specific"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "name": "created_date_time",
+  "type": "TIMESTAMP",
+  "mode": "NULLABLE",
+  "description": "When the data was retrieved in the vehicle in iso8601 format."
+ },
+ {
+  "name": "received_date_time",
+  "type": "TIMESTAMP",
+  "mode": "NULLABLE",
+  "description": "Reception at Server. To be used for handling of \\\"more data available\\\" in iso8601 format."
+ },
+ {
+  "name": "hr_total_vehicle_distance",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "Accumulated distance travelled by the vehicle during its operation in meter"
+ },
+ {
+  "name": "total_engine_hours",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The total hours of operation for the vehicle combustion engine. At least one of totalEngineHours or totalElectricMotorHours is Mandatory"
+ },
+ {
+  "name": "total_electric_motor_hours",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The total hours the electric motor is ready for propulsion (i.e. crank mode). At least one of totalEngineHours or totalElectricMotorHours is mandatory"
+ },
+ {
+  "name": "driver1_id",
+  "type": "RECORD",
+  "mode": "NULLABLE",
+  "fields": [
+   {
+    "name": "tacho_driver_identification",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+     {
+      "name": "driver_identification",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "The unique identification of a driver in a Member State. This fields is formatted according the definition for driverIdentification in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b"
+     },
+     {
+      "name": "card_issuing_member_state",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "The country alpha code of the Member State having issued the card. This fields is formatted according the definition for NationAlpha in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b"
+     },
+     {
+      "name": "driver_authentication_equipment",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "Code to distinguish different types of equipment for the tachograph application. See description of the field 'DriverAuthenticationEquipment' in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b"
+     },
+     {
+      "name": "card_replacement_index",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "A card replacement index. This fields is formatted according the definition for CardReplacementIndex (chap 2.26) in: COMMISSION REGULATION (EC) No 1360/2002 Annex 1b"
+     },
+     {
+      "name": "card_renewal_index",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "A card renewal index. This fields is formatted according the definition for CardRenewalIndex (chap 2.25) in: COMMISSION REGULATION (EC) No 1360/2002 Annex 1b"
+     }
+    ]
+   },
+   {
+    "name": "oem_driver_identification",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+     {
+      "name": "id_type",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "Contains an optional id type (e.g. pin, USB, encrypted EU id...)"
+     },
+     {
+      "name": "oem_driver_identification",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "An OEM specific driver id."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "name": "gross_combination_vehicle_weight",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "The full vehicle weight in kg"
+ },
+ {
+  "name": "engine_total_fuel_used",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "The total fuel the vehicle has used during its lifetime in MilliLitres. At least one of engineTotalFuelUsed, totalFuelUsedGaseous or totalElectricEnergyUsed is mandatory."
+ },
+ {
+  "name": "total_fuel_used_gaseous",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "Total fuel consumed in kg (trip drive fuel + trip PTO governor moving fuel + trip PTO governor non-moving fuel + trip idle fuel) over the life of the engine. At least one of engineTotalFuelUsed, totalFuelUsedGaseous or totalElectricEnergyUsed is mandatory."
+ },
+ {
+  "name": "total_electric_energy_used",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "Total electric energy consumed by the vehicle, excluding when plugged in (vehicle coupler) for charging, (incl. motor, PTO, cooling, etc.) in watt hours. Recuperation is subtracted from the value.  At least one of engineTotalFuelUsed, totalFuelUsedGaseous or totalElectricEnergyUsed is mandatory."
+ },
+ {
+  "name": "status2_of_doors",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "Composite indication of all bus door statuses. Bus specific parameter"
+ },
+ {
+  "name": "door_status",
+  "type": "RECORD",
+  "mode": "REPEATED",
+  "description": "Individual status for each door. Bus specific parameter",
+  "fields": [
+   {
+    "name": "door_enabled_status",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "door_open_status",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "door_lock_status",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "door_number",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+   }
+  ]
+ },
+ {
+  "name": "accumulated_data",
+  "type": "RECORD",
+  "mode": "NULLABLE",
+  "fields": [
+   {
+    "name": "duration_wheelbased_speed_over_zero",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The time the vehicle speed has been over zero."
+   },
+   {
+    "name": "distance_cruise_control_active",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The distance the vehicle has been driven with cruise control active"
+   },
+   {
+    "name": "duration_cruise_control_active",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The time the vehicle has been driven with cruise control active"
+   },
+   {
+    "name": "fuel_consumption_during_cruise_active",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The fuel the vehicle has consumed while driven with cruise control active, in millilitres"
+   },
+   {
+    "name": "fuel_consumption_during_cruise_active_gaseous",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The gas the vehicle has consumed while driven with cruise control active, in kilograms."
+   },
+   {
+    "name": "electric_energy_consumption_during_cruise_active",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The electric energy the vehicle has consumed while driven with cruise control active, in watt-hours."
+   },
+   {
+    "name": "duration_wheelbased_speed_zero",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The time the vehicle speed has been equal to zero, in seconds. Engine on (RPM\u003e0 or electic motor in crank mode) and no PTO active"
+   },
+   {
+    "name": "fuel_wheelbased_speed_zero",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The fuel the vehicle has consumed while the vehicle speed has been equal to zero. Engine on (RPM\u003e0) and no PTO active. Unit in millilitres."
+   },
+   {
+    "name": "fuel_wheelbased_speed_zero_gaseous",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The gas the vehicle has consumed while the vehicle speed has been equal to zero. Engine on (RPM\u003e0) and no PTO active. Unit in kilograms."
+   },
+   {
+    "name": "electric_energy_wheelbased_speed_zero",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The electric energy the vehicle has consumed while the vehicle speed has been equal to zero. Electric motor is in crank mode and no PTO active. Unit in watt-hours."
+   },
+   {
+    "name": "fuel_wheelbased_speed_over_zero",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The fuel the vehicle has consumed while the vehicle speed has been over zero. Engine on (RPM\u003e0). Unit in millilitres."
+   },
+   {
+    "name": "fuel_wheelbased_speed_over_zero_gaseous",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The gas the vehicle has consumed while the vehicle speed has been over zero. Engine on (RPM\u003e0). Unit in kilograms."
+   },
+   {
+    "name": "electric_energy_wheelbased_speed_over_zero",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The electric energy the vehicle has consumed (including recuperation) while the vehicle speed has been over zero. Electric motor is in crank mode. Unit in watt-hours."
+   },
+   {
+    "name": "electric_energy_aux",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The electric energy the auxiliary systems have consumed, in watt hours. Auxiliary systems are all consumers except electric motor(s) and PTO(s)."
+   },
+   {
+    "name": "pto_active_class",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "Label WHEELBASED_SPEED_ZERO  At least one PTO active during wheelbased speed=0  Counters for time (seconds) and consumption (millilitres, kilograms, watt-hours)  Label WHEELBASED_SPEED_OVER_ZERO  At least one PTO active during wheelbased speed\u003e0  Counters for time (seconds), distance (meter) and consumption (millilitres, kilograms, watt-hours)",
+    "fields": [
+     {
+      "name": "label",
+      "type": "STRING",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "seconds",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "meters",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "milli_litres",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "kilograms",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "watthours",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     }
+    ]
+   },
+   {
+    "name": "brake_pedal_counter_speed_over_zero",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The total number of times the brake pedal has been used while the vehicle was driving."
+   },
+   {
+    "name": "distance_brake_pedal_active_speed_over_zero",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The total distance the vehicle has driven where the brake pedal has been used. Unit Meters."
+   },
+   {
+    "name": "acceleration_pedal_position_class",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "In percent. Minimum 5 classes [0, 20[ [20, 40[ [40, 60[ [60, 80[ [80, 100]",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "seconds",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "meters",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "milli_litres",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "kilograms",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "watthours",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     }
+    ]
+   },
+   {
+    "name": "brake_pedal_position_class",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "In percent. Minimum 5 classes [0, 20[ [20, 40[ [40, 60[ [60, 80[ [80, 100]",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "seconds",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "meters",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "milli_litres",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "kilograms",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "watthours",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     }
+    ]
+   },
+   {
+    "name": "acceleration_class",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "In m/s2 Minimum 13 classes. ], -1.1] ]-1.1, -0.9] ]-0.9, -0.7] ]-0.7, -0.5] ]-0.5, -0.3] ]-0.3, -0.1] ]-0.1, 0.1[ [0.1, 0.3[ [0.3, 0.5[ [0.5, 0.7[ [0.7, 0.9[ [0.9, 1.1[ [1.1, [",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "seconds",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "meters",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "milli_litres",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "kilograms",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "watthours",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     }
+    ]
+   },
+   {
+    "name": "high_acceleration_class",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "In m/s2 Minimum 11 classes ], -3.0] ]-3.0, -2.5] ]-2.5, -2.0] ]-2.0, -1.5] ]-1.5, -1.1] ]-1.1, 1.1[ [1.1, 1.5[ [1.5, 2.0[ [2.0, 2.5[ [2.5, 3.0[ [3.0, [",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "seconds",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "meters",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "milli_litres",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "kilograms",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "watthours",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     }
+    ]
+   },
+   {
+    "name": "retarder_torque_class",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "In percent (how the retarder is used as a positive value). Minimum 5 classes ]0, 20[ [20, 40[ [40, 60[ [60, 80[ [80, 100]",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "seconds",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "meters",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "milli_litres",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "kilograms",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "watthours",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     }
+    ]
+   },
+   {
+    "name": "driving_without_torque_class",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "Driving without torque, with gear (clutch is engaged) Labels DRIVING_WITHOUT_TORQUE",
+    "fields": [
+     {
+      "name": "label",
+      "type": "STRING",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "seconds",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "meters",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "milli_litres",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "kilograms",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "watthours",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     }
+    ]
+   },
+   {
+    "name": "engine_torque_class",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "In percent based on EEC1 value (Actual Engine-Percent Torque). Minimum 10 classes [0, 10[ [10, 20[ [20, 30[ [30, 40[ [40, 50[ [50, 60[ [60, 70[ [70, 80[ [80, 90[ [90, 100]",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "seconds",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "meters",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "milli_litres",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "kilograms",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     }
+    ]
+   },
+   {
+    "name": "electric_motor_torque_class",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "In percent (Actual Engine-Percent Torque). Minimum 10 classes [0, 10[ [10, 20[ [20, 30[ [30, 40[ [40, 50[ [50, 60[ [60, 70[ [70, 80[ [80, 90[ [90, 100]",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "seconds",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "meters",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "watthours",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     }
+    ]
+   },
+   {
+    "name": "engine_torque_at_current_speed_class",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "In percent based on EEC2 value (Engine Percent Load At Current Speed). Minimum 10 classes [0, 10[ [10, 20[ [20, 30[ [30, 40[ [40, 50[ [50, 60[ [60, 70[ [70, 80[ [80, 90[ [90, 100]",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "seconds",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "meters",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "milli_litres",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "kilograms",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     }
+    ]
+   },
+   {
+    "name": "electric_motor_torque_at_current_speed_class",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "In percent (Engine Percent Load At Current Speed). Minimum 10 classes [0, 10[ [10, 20[ [20, 30[ [30, 40[ [40, 50[ [50, 60[ [60, 70[ [70, 80[ [80, 90[ [90, 100]",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "seconds",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "meters",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "watthours",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     }
+    ]
+   },
+   {
+    "name": "vehicle_speed_class",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "In km/h Minimum 40 classes. [0, 4[ [4, 8[ [8, 12[ [12, 16[ [16, 20[ [20, 24[ ... [156, [ Engine on (RPM\u003e0 or electric motor in crank mode)",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "seconds",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "meters",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "milli_litres",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "kilograms",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "watthours",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     }
+    ]
+   },
+   {
+    "name": "engine_speed_class",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "Classes refer to the RPM of the combustion engine. Only mandatory if the vehicle has a combustion engine for propulsion. Minimum 10 classes [0, 400[ [400, 800[ [800, 1200[ [1200, 1600[ [1600, 2000[ [2000, 2400[ [2400, 2800[ [2800, 3200[ [3200, 3600[ [3600, [ Note: Engine on (RPM\u003e0 or electric motor in crank mode)",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "seconds",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "meters",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "milli_litres",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "kilograms",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "watthours",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     }
+    ]
+   },
+   {
+    "name": "acceleration_during_brake_class",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "In m/s2 Minimum 13 classes. ], -1.1] ]-1.1, -0.9] ]-0.9, -0.7] ]-0.7, -0.5] ]-0.5, -0.3] ]-0.3, -0.1] ]-0.1, 0.1[ [0.1, 0.3[ [0.3, 0.5[ [0.5, 0.7[ [0.7, 0.9[ [0.9, 1.1[ [1.1, [",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "seconds",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "meters",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "milli_litres",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "kilograms",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "watthours",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     }
+    ]
+   },
+   {
+    "name": "selected_gear_class",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "The currently selected gear One class per gear. Neutral is also a gear. Park is also a gear. This is formatted according to SPN 524, supplied as a decimal value. Example 0 = Neutral, 1 = 1:st gear... This is mainly used for Buses.",
+    "fields": [
+     {
+      "name": "label",
+      "type": "STRING",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "seconds",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "meters",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "milli_litres",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "kilograms",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "watthours",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     }
+    ]
+   },
+   {
+    "name": "current_gear_class",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "The currently used gear One class per gear. Neutral is also a gear. Park is also a gear. This is formatted according to SPN 523, supplied as a decimal value. Example 0 = Neutral, 1 = 1:st gear... This is mainly used for Buses.",
+    "fields": [
+     {
+      "name": "label",
+      "type": "STRING",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "seconds",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "meters",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "milli_litres",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "kilograms",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "watthours",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     }
+    ]
+   },
+   {
+    "name": "chairlift_counter",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The total number of times the chairlift has been outside the bus. This is mainly used for Buses"
+   },
+   {
+    "name": "stop_request_counter",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The total number of stop requests made. This is mainly used for Buses"
+   },
+   {
+    "name": "kneeling_counter",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The total number of times the bus has knelt."
+   },
+   {
+    "name": "pram_request_counter",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The total number of pram requests made. This is mainly used for Buses"
+   },
+   {
+    "name": "electric_power_recuperation_class",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "Classes refer to the recuperated electric power in kilowatt Minimum 11 classes [0, 100[ [100, 200[ [200, 300[ ... [900, 1000[ [1000, [",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "seconds",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "meters",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "watthours",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "name": "snapshot_data",
+  "type": "RECORD",
+  "mode": "NULLABLE",
+  "fields": [
+   {
+    "name": "gnss_position",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+     {
+      "name": "latitude",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "Latitude (WGS84 based)"
+     },
+     {
+      "name": "longitude",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "Longitude (WGS84 based)"
+     },
+     {
+      "name": "heading",
+      "type": "INTEGER",
+      "mode": "NULLABLE",
+      "description": "The direction of the vehicle (0-359)"
+     },
+     {
+      "name": "altitude",
+      "type": "INTEGER",
+      "mode": "NULLABLE",
+      "description": "The altitude of the vehicle. Where 0 is sea level, negative values below sealevel and positive above sealevel. Unit in meters."
+     },
+     {
+      "name": "speed",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The GNSS(e.g. GPS)-speed in km/h"
+     },
+     {
+      "name": "position_date_time",
+      "type": "TIMESTAMP",
+      "mode": "NULLABLE",
+      "description": "The time of the position data in iso8601 format."
+     }
+    ]
+   },
+   {
+    "name": "wheel_based_speed",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The vehicle wheelbased speed"
+   },
+   {
+    "name": "tachograph_speed",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The Tacho speed"
+   },
+   {
+    "name": "engine_speed",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The engine (Diesel/gaseous) speed in rev/min"
+   },
+   {
+    "name": "electric_motor_speed",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The electric motor speed in rev/min"
+   },
+   {
+    "name": "fuel_type",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Type of fuel currently being utilized by the vehicle acc. SPN 5837"
+   },
+   {
+    "name": "fuel_level1",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The fuel level percentage"
+   },
+   {
+    "name": "fuel_level2",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "Ratio of volume of fuel to the total volume of fuel storage container, in percent. When Fuel Level 2 is not used, Fuel Level 1 represents the total fuel in all fuel storage containers.  When Fuel Level 2 is used, Fuel Level 1 represents the fuel level in the primary or left-side fuel storage container."
+   },
+   {
+    "name": "catalyst_fuel_level",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The adblue level percentage"
+   },
+   {
+    "name": "driver1_working_state",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Tachograph Working state of the driver"
+   },
+   {
+    "name": "driver2_id",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+     {
+      "name": "tacho_driver_identification",
+      "type": "RECORD",
+      "mode": "NULLABLE",
+      "fields": [
+       {
+        "name": "driver_identification",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "The unique identification of a driver in a Member State. This fields is formatted according the definition for driverIdentification in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b"
+       },
+       {
+        "name": "card_issuing_member_state",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "The country alpha code of the Member State having issued the card. This fields is formatted according the definition for NationAlpha in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b"
+       },
+       {
+        "name": "driver_authentication_equipment",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "Code to distinguish different types of equipment for the tachograph application. See description of the field 'DriverAuthenticationEquipment' in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b"
+       },
+       {
+        "name": "card_replacement_index",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "A card replacement index. This fields is formatted according the definition for CardReplacementIndex (chap 2.26) in: COMMISSION REGULATION (EC) No 1360/2002 Annex 1b"
+       },
+       {
+        "name": "card_renewal_index",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "A card renewal index. This fields is formatted according the definition for CardRenewalIndex (chap 2.25) in: COMMISSION REGULATION (EC) No 1360/2002 Annex 1b"
+       }
+      ]
+     },
+     {
+      "name": "oem_driver_identification",
+      "type": "RECORD",
+      "mode": "NULLABLE",
+      "fields": [
+       {
+        "name": "id_type",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "Contains an optional id type (e.g. pin, USB, encrypted EU id...)"
+       },
+       {
+        "name": "oem_driver_identification",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "An OEM specific driver id."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "driver2_working_state",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Tachograph Working state of the driver"
+   },
+   {
+    "name": "ambient_air_temperature",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The Ambient air temperature in Celsius"
+   },
+   {
+    "name": "parking_brake_switch",
+    "type": "BOOLEAN",
+    "mode": "NULLABLE",
+    "description": "Switch signal which indicates when the parking brake is set. In general the switch actuated by the operator's park brake control, whether a pedal, lever or other control mechanism  true - parking brake set  false - parking brake not set"
+   },
+   {
+    "name": "hybrid_battery_pack_remaining_charge",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "Indicates the hybrid battery pack remaining charge.  0% means no charge remaining,  100% means full charge remaining.  Is used as well for full electrical vehicles"
+   },
+   {
+    "name": "battery_pack_charging_status",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Indicates the charging status of the battery pack. Recuperation is excluded.  Not charging - No charging  Charging - Charging ongoing (AC or DC is unknown)  Charging AC - AC charging ongoing  Charging DC - DC charging ongoing  Error - An error occurred when charging  Not available - Charging status is not available"
+   },
+   {
+    "name": "battery_pack_charging_connection_status",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Indicates the charging connection status of the battery pack.  Connecting - A charger is being connected  Connected - A charger is connected  Disconnecting - A charger is being disconnected  Disconnected - No charger is connected  Error - An error occurred when connecting or disconnecting  Not available - Charging connection status is not available"
+   },
+   {
+    "name": "battery_pack_charging_device",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Device used to charge the battery pack. Standard rFMS values taken from ISO 15118 (OEM can have additional values):  ACD - Automatic Connection Device  WPT - Wireless Power Transfer  VEHICLE_COUPLER - manual connection of a flexible cable to an EV  NONE - No device connected  NOT_AVAILABLE - Unknown"
+   },
+   {
+    "name": "battery_pack_charging_power",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "Charging power in watts."
+   },
+   {
+    "name": "estimated_time_battery_pack_charging_completed",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Estimated time when charging has reached the target level."
+   },
+   {
+    "name": "estimated_distance_to_empty",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+     {
+      "name": "total",
+      "type": "INTEGER",
+      "mode": "NULLABLE",
+      "description": "Estimated distance to empty, summarizing fuel, gas and battery in meters"
+     },
+     {
+      "name": "fuel",
+      "type": "INTEGER",
+      "mode": "NULLABLE",
+      "description": "Estimated distance to empty, fuel tank, in meters"
+     },
+     {
+      "name": "gas",
+      "type": "INTEGER",
+      "mode": "NULLABLE",
+      "description": "Estimated distance to empty, gas tank, in meters"
+     },
+     {
+      "name": "battery_pack",
+      "type": "INTEGER",
+      "mode": "NULLABLE",
+      "description": "Estimated distance to empty, battery pack, in meters"
+     }
+    ]
+   },
+   {
+    "name": "vehicle_axles",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "A list of vehicle axles",
+    "fields": [
+     {
+      "name": "vehicle_axle_position",
+      "type": "INTEGER",
+      "mode": "NULLABLE",
+      "description": "Axle position from 1 to 15, 1 being in the front of the truck"
+     },
+     {
+      "name": "vehicle_axle_load",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The static vertical load of a vehicle axle in kilograms."
+     }
+    ]
+   },
+   {
+    "name": "trailers",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "List of trailers connected to the truck.",
+    "fields": [
+     {
+      "name": "trailer_no",
+      "type": "INTEGER",
+      "mode": "NULLABLE",
+      "description": "Trailer number from 1 to 5, 1 being closest to the truck, according to ISO 11992-2."
+     },
+     {
+      "name": "trailer_identification_data",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "The identification data sent by the trailer to the truck in the RGE23 message of ISO 11992-2. An alternative source is the DID (Data identifier definition) record VIN, as specified in ISO 11992-4. Even though both ISO 11992-2 and ISO 11992-4 specifies this as a VIN, the actual data sent from a trailer is not always the true VIN of the trailer."
+     },
+     {
+      "name": "trailer_vin",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "The vehicle identification number of the trailer. See ISO 3779 (17 characters) If the trailerIdentificationData is reporting a true VIN, trailerVin will have the same value. If it is possible to map the trailerIdentificationData to a true VIN using other sources, the value can be provided here."
+     },
+     {
+      "name": "customer_trailer_name",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "The customer's name for the trailer"
+     },
+     {
+      "name": "trailer_type",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "Indicates the type of the trailer. The type is sent in the EBS24 message of  ISO 11992-2."
+     },
+     {
+      "name": "trailer_axle_load_sum",
+      "type": "INTEGER",
+      "mode": "NULLABLE",
+      "description": "The sum of the static vertical loads of the trailer axles in kilograms. The load is sent in the EBS22 message of ISO 11992-2."
+     },
+     {
+      "name": "trailer_axles",
+      "type": "RECORD",
+      "mode": "REPEATED",
+      "description": "A list of trailer axles",
+      "fields": [
+       {
+        "name": "trailer_axle_position",
+        "type": "INTEGER",
+        "mode": "NULLABLE",
+        "description": "Axle position from 1 to 15, 1 being in the front closest to the truck, according to ISO 11992-2."
+       },
+       {
+        "name": "trailer_axle_load",
+        "type": "FLOAT",
+        "mode": "NULLABLE",
+        "description": "The static vertical load of a trailer axle in kilograms. The load is sent in the RGE22 message of ISO11992-2."
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "name": "uptime_data",
+  "type": "RECORD",
+  "mode": "NULLABLE",
+  "fields": [
+   {
+    "name": "tell_tale_info",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "List of tell tales with the actual status for each tell tale.",
+    "fields": [
+     {
+      "name": "tell_tale",
+      "type": "STRING",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "oem_tell_tale",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "The OemTellTale is only set when the TellTale == OEM_SPECIFIC_TELL_TALE. This is an OEM specific string defining a tell tale in the OEM context."
+     },
+     {
+      "name": "state",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "The current state of the tell tale."
+     }
+    ]
+   },
+   {
+    "name": "service_distance",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The distance in meter to the next service"
+   },
+   {
+    "name": "engine_coolant_temperature",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The temperature of the coolant liquid in Celsius"
+   },
+   {
+    "name": "hvess_outlet_coolant_temperature",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The temperature of the battery pack coolant in Celsius HVESS - High Voltage Energy Storage System"
+   },
+   {
+    "name": "hvess_temperature",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The temperature of the battery pack in Celsius HVESS - High Voltage Energy Storage System"
+   },
+   {
+    "name": "service_brake_air_pressure_circuit1",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The air pressure in circuit 1 in Pascal."
+   },
+   {
+    "name": "service_brake_air_pressure_circuit2",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The air pressure in circuit 2 in Pascal."
+   },
+   {
+    "name": "duration_at_least_one_door_open",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The total time at least one door has been opened in the bus. (seconds) Used mainly for buses."
+   },
+   {
+    "name": "alternator_info",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "fields": [
+     {
+      "name": "alternator_status",
+      "type": "STRING",
+      "mode": "NULLABLE"
+     },
+     {
+      "name": "alternator_number",
+      "type": "INTEGER",
+      "mode": "NULLABLE"
+     }
+    ]
+   },
+   {
+    "name": "bellow_pressure_front_axle_left",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The bellow pressure in the front axle left side in Pascal. Used mainly for buses."
+   },
+   {
+    "name": "bellow_pressure_front_axle_right",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The bellow pressure in the front axle right side in Pascal. Used mainly for buses."
+   },
+   {
+    "name": "bellow_pressure_rear_axle_left",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The bellow pressure in the rear axle left side in Pascal. Used mainly for buses."
+   },
+   {
+    "name": "bellow_pressure_rear_axle_right",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The bellow pressure in the rear axle right side in Pascal. Used mainly for buses."
+   }
+  ]
+ }
+]
