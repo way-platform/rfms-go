@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        (unknown)
-// source: wayplatform/sdk/rfms/v4/api.proto
+// source: wayplatform/rfms/v4/api.proto
 
 package rfmsv4
 
@@ -103,7 +103,7 @@ type AccumulatedData struct {
 
 func (x *AccumulatedData) Reset() {
 	*x = AccumulatedData{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[0]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -115,7 +115,7 @@ func (x *AccumulatedData) String() string {
 func (*AccumulatedData) ProtoMessage() {}
 
 func (x *AccumulatedData) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[0]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -128,7 +128,7 @@ func (x *AccumulatedData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccumulatedData.ProtoReflect.Descriptor instead.
 func (*AccumulatedData) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{0}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *AccumulatedData) GetDurationWheelbasedSpeedOverZero() int64 {
@@ -398,7 +398,7 @@ type CreatedDateTimeProperty struct {
 
 func (x *CreatedDateTimeProperty) Reset() {
 	*x = CreatedDateTimeProperty{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[1]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -410,7 +410,7 @@ func (x *CreatedDateTimeProperty) String() string {
 func (*CreatedDateTimeProperty) ProtoMessage() {}
 
 func (x *CreatedDateTimeProperty) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[1]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -423,7 +423,7 @@ func (x *CreatedDateTimeProperty) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatedDateTimeProperty.ProtoReflect.Descriptor instead.
 func (*CreatedDateTimeProperty) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{1}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{1}
 }
 
 type DriverId struct {
@@ -436,7 +436,7 @@ type DriverId struct {
 
 func (x *DriverId) Reset() {
 	*x = DriverId{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[2]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -448,7 +448,7 @@ func (x *DriverId) String() string {
 func (*DriverId) ProtoMessage() {}
 
 func (x *DriverId) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[2]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -461,7 +461,7 @@ func (x *DriverId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DriverId.ProtoReflect.Descriptor instead.
 func (*DriverId) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{2}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *DriverId) GetTachoDriverIdentification() *DriverIdTachoDriverIdentification {
@@ -490,7 +490,7 @@ type DriverIdOemDriverIdentification struct {
 
 func (x *DriverIdOemDriverIdentification) Reset() {
 	*x = DriverIdOemDriverIdentification{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[3]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -502,7 +502,7 @@ func (x *DriverIdOemDriverIdentification) String() string {
 func (*DriverIdOemDriverIdentification) ProtoMessage() {}
 
 func (x *DriverIdOemDriverIdentification) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[3]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -515,7 +515,7 @@ func (x *DriverIdOemDriverIdentification) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DriverIdOemDriverIdentification.ProtoReflect.Descriptor instead.
 func (*DriverIdOemDriverIdentification) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{3}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *DriverIdOemDriverIdentification) GetIdType() string {
@@ -550,7 +550,7 @@ type DriverIdTachoDriverIdentification struct {
 
 func (x *DriverIdTachoDriverIdentification) Reset() {
 	*x = DriverIdTachoDriverIdentification{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[4]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -562,7 +562,7 @@ func (x *DriverIdTachoDriverIdentification) String() string {
 func (*DriverIdTachoDriverIdentification) ProtoMessage() {}
 
 func (x *DriverIdTachoDriverIdentification) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[4]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -575,7 +575,7 @@ func (x *DriverIdTachoDriverIdentification) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use DriverIdTachoDriverIdentification.ProtoReflect.Descriptor instead.
 func (*DriverIdTachoDriverIdentification) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{4}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *DriverIdTachoDriverIdentification) GetDriverIdentification() string {
@@ -621,7 +621,7 @@ type DriverWorkingStateProperty struct {
 
 func (x *DriverWorkingStateProperty) Reset() {
 	*x = DriverWorkingStateProperty{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[5]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -633,7 +633,7 @@ func (x *DriverWorkingStateProperty) String() string {
 func (*DriverWorkingStateProperty) ProtoMessage() {}
 
 func (x *DriverWorkingStateProperty) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[5]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -646,7 +646,7 @@ func (x *DriverWorkingStateProperty) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DriverWorkingStateProperty.ProtoReflect.Descriptor instead.
 func (*DriverWorkingStateProperty) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{5}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{5}
 }
 
 type Error struct {
@@ -663,7 +663,7 @@ type Error struct {
 
 func (x *Error) Reset() {
 	*x = Error{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[6]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -675,7 +675,7 @@ func (x *Error) String() string {
 func (*Error) ProtoMessage() {}
 
 func (x *Error) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[6]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -688,7 +688,7 @@ func (x *Error) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Error.ProtoReflect.Descriptor instead.
 func (*Error) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{6}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *Error) GetError() string {
@@ -727,7 +727,7 @@ type FromToClass struct {
 
 func (x *FromToClass) Reset() {
 	*x = FromToClass{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[7]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -739,7 +739,7 @@ func (x *FromToClass) String() string {
 func (*FromToClass) ProtoMessage() {}
 
 func (x *FromToClass) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[7]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -752,7 +752,7 @@ func (x *FromToClass) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FromToClass.ProtoReflect.Descriptor instead.
 func (*FromToClass) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{7}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *FromToClass) GetFrom() float64 {
@@ -818,7 +818,7 @@ type FromToClassCombustion struct {
 
 func (x *FromToClassCombustion) Reset() {
 	*x = FromToClassCombustion{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[8]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -830,7 +830,7 @@ func (x *FromToClassCombustion) String() string {
 func (*FromToClassCombustion) ProtoMessage() {}
 
 func (x *FromToClassCombustion) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[8]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -843,7 +843,7 @@ func (x *FromToClassCombustion) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FromToClassCombustion.ProtoReflect.Descriptor instead.
 func (*FromToClassCombustion) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{8}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *FromToClassCombustion) GetFrom() float64 {
@@ -901,7 +901,7 @@ type FromToClassElectrical struct {
 
 func (x *FromToClassElectrical) Reset() {
 	*x = FromToClassElectrical{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[9]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -913,7 +913,7 @@ func (x *FromToClassElectrical) String() string {
 func (*FromToClassElectrical) ProtoMessage() {}
 
 func (x *FromToClassElectrical) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[9]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -926,7 +926,7 @@ func (x *FromToClassElectrical) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FromToClassElectrical.ProtoReflect.Descriptor instead.
 func (*FromToClassElectrical) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{9}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *FromToClassElectrical) GetFrom() float64 {
@@ -984,7 +984,7 @@ type GNSSPosition struct {
 
 func (x *GNSSPosition) Reset() {
 	*x = GNSSPosition{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[10]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -996,7 +996,7 @@ func (x *GNSSPosition) String() string {
 func (*GNSSPosition) ProtoMessage() {}
 
 func (x *GNSSPosition) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[10]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1009,7 +1009,7 @@ func (x *GNSSPosition) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GNSSPosition.ProtoReflect.Descriptor instead.
 func (*GNSSPosition) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{10}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GNSSPosition) GetLatitude() float64 {
@@ -1068,7 +1068,7 @@ type Label struct {
 
 func (x *Label) Reset() {
 	*x = Label{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[11]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1080,7 +1080,7 @@ func (x *Label) String() string {
 func (*Label) ProtoMessage() {}
 
 func (x *Label) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[11]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1093,7 +1093,7 @@ func (x *Label) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Label.ProtoReflect.Descriptor instead.
 func (*Label) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{11}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *Label) GetLabel() string {
@@ -1146,7 +1146,7 @@ type ReceivedDateTimeProperty struct {
 
 func (x *ReceivedDateTimeProperty) Reset() {
 	*x = ReceivedDateTimeProperty{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[12]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1158,7 +1158,7 @@ func (x *ReceivedDateTimeProperty) String() string {
 func (*ReceivedDateTimeProperty) ProtoMessage() {}
 
 func (x *ReceivedDateTimeProperty) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[12]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1171,7 +1171,7 @@ func (x *ReceivedDateTimeProperty) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReceivedDateTimeProperty.ProtoReflect.Descriptor instead.
 func (*ReceivedDateTimeProperty) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{12}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{12}
 }
 
 type SnapshotData struct {
@@ -1225,7 +1225,7 @@ type SnapshotData struct {
 
 func (x *SnapshotData) Reset() {
 	*x = SnapshotData{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[13]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1237,7 +1237,7 @@ func (x *SnapshotData) String() string {
 func (*SnapshotData) ProtoMessage() {}
 
 func (x *SnapshotData) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[13]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1250,7 +1250,7 @@ func (x *SnapshotData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SnapshotData.ProtoReflect.Descriptor instead.
 func (*SnapshotData) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{13}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *SnapshotData) GetGnssPosition() *GNSSPosition {
@@ -1430,7 +1430,7 @@ type SnapshotDataEstimatedDistanceToEmpty struct {
 
 func (x *SnapshotDataEstimatedDistanceToEmpty) Reset() {
 	*x = SnapshotDataEstimatedDistanceToEmpty{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[14]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1442,7 +1442,7 @@ func (x *SnapshotDataEstimatedDistanceToEmpty) String() string {
 func (*SnapshotDataEstimatedDistanceToEmpty) ProtoMessage() {}
 
 func (x *SnapshotDataEstimatedDistanceToEmpty) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[14]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1455,7 +1455,7 @@ func (x *SnapshotDataEstimatedDistanceToEmpty) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use SnapshotDataEstimatedDistanceToEmpty.ProtoReflect.Descriptor instead.
 func (*SnapshotDataEstimatedDistanceToEmpty) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{14}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *SnapshotDataEstimatedDistanceToEmpty) GetTotal() int64 {
@@ -1508,7 +1508,7 @@ type SnapshotDataTrailersInner struct {
 
 func (x *SnapshotDataTrailersInner) Reset() {
 	*x = SnapshotDataTrailersInner{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[15]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1520,7 +1520,7 @@ func (x *SnapshotDataTrailersInner) String() string {
 func (*SnapshotDataTrailersInner) ProtoMessage() {}
 
 func (x *SnapshotDataTrailersInner) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[15]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1533,7 +1533,7 @@ func (x *SnapshotDataTrailersInner) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SnapshotDataTrailersInner.ProtoReflect.Descriptor instead.
 func (*SnapshotDataTrailersInner) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{15}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *SnapshotDataTrailersInner) GetTrailerNo() int32 {
@@ -1597,7 +1597,7 @@ type SnapshotDataTrailersInnerTrailerAxlesInner struct {
 
 func (x *SnapshotDataTrailersInnerTrailerAxlesInner) Reset() {
 	*x = SnapshotDataTrailersInnerTrailerAxlesInner{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[16]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1609,7 +1609,7 @@ func (x *SnapshotDataTrailersInnerTrailerAxlesInner) String() string {
 func (*SnapshotDataTrailersInnerTrailerAxlesInner) ProtoMessage() {}
 
 func (x *SnapshotDataTrailersInnerTrailerAxlesInner) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[16]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1622,7 +1622,7 @@ func (x *SnapshotDataTrailersInnerTrailerAxlesInner) ProtoReflect() protoreflect
 
 // Deprecated: Use SnapshotDataTrailersInnerTrailerAxlesInner.ProtoReflect.Descriptor instead.
 func (*SnapshotDataTrailersInnerTrailerAxlesInner) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{16}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *SnapshotDataTrailersInnerTrailerAxlesInner) GetTrailerAxlePosition() int32 {
@@ -1651,7 +1651,7 @@ type SnapshotDataVehicleAxlesInner struct {
 
 func (x *SnapshotDataVehicleAxlesInner) Reset() {
 	*x = SnapshotDataVehicleAxlesInner{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[17]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1663,7 +1663,7 @@ func (x *SnapshotDataVehicleAxlesInner) String() string {
 func (*SnapshotDataVehicleAxlesInner) ProtoMessage() {}
 
 func (x *SnapshotDataVehicleAxlesInner) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[17]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1676,7 +1676,7 @@ func (x *SnapshotDataVehicleAxlesInner) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SnapshotDataVehicleAxlesInner.ProtoReflect.Descriptor instead.
 func (*SnapshotDataVehicleAxlesInner) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{17}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *SnapshotDataVehicleAxlesInner) GetVehicleAxlePosition() int32 {
@@ -1706,7 +1706,7 @@ type TellTaleInfo struct {
 
 func (x *TellTaleInfo) Reset() {
 	*x = TellTaleInfo{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[18]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1718,7 +1718,7 @@ func (x *TellTaleInfo) String() string {
 func (*TellTaleInfo) ProtoMessage() {}
 
 func (x *TellTaleInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[18]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1731,7 +1731,7 @@ func (x *TellTaleInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TellTaleInfo.ProtoReflect.Descriptor instead.
 func (*TellTaleInfo) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{18}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *TellTaleInfo) GetTellTale() string {
@@ -1775,7 +1775,7 @@ type Trigger struct {
 
 func (x *Trigger) Reset() {
 	*x = Trigger{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[19]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1787,7 +1787,7 @@ func (x *Trigger) String() string {
 func (*Trigger) ProtoMessage() {}
 
 func (x *Trigger) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[19]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1800,7 +1800,7 @@ func (x *Trigger) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Trigger.ProtoReflect.Descriptor instead.
 func (*Trigger) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{19}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *Trigger) GetTriggerType() string {
@@ -1871,7 +1871,7 @@ type TriggerChargingConnectionStatusInfo struct {
 
 func (x *TriggerChargingConnectionStatusInfo) Reset() {
 	*x = TriggerChargingConnectionStatusInfo{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[20]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1883,7 +1883,7 @@ func (x *TriggerChargingConnectionStatusInfo) String() string {
 func (*TriggerChargingConnectionStatusInfo) ProtoMessage() {}
 
 func (x *TriggerChargingConnectionStatusInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[20]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1896,7 +1896,7 @@ func (x *TriggerChargingConnectionStatusInfo) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use TriggerChargingConnectionStatusInfo.ProtoReflect.Descriptor instead.
 func (*TriggerChargingConnectionStatusInfo) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{20}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *TriggerChargingConnectionStatusInfo) GetEvent() string {
@@ -1925,7 +1925,7 @@ type TriggerChargingStatusInfo struct {
 
 func (x *TriggerChargingStatusInfo) Reset() {
 	*x = TriggerChargingStatusInfo{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[21]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1937,7 +1937,7 @@ func (x *TriggerChargingStatusInfo) String() string {
 func (*TriggerChargingStatusInfo) ProtoMessage() {}
 
 func (x *TriggerChargingStatusInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[21]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1950,7 +1950,7 @@ func (x *TriggerChargingStatusInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TriggerChargingStatusInfo.ProtoReflect.Descriptor instead.
 func (*TriggerChargingStatusInfo) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{21}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *TriggerChargingStatusInfo) GetEvent() string {
@@ -2000,7 +2000,7 @@ type UptimeData struct {
 
 func (x *UptimeData) Reset() {
 	*x = UptimeData{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[22]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2012,7 +2012,7 @@ func (x *UptimeData) String() string {
 func (*UptimeData) ProtoMessage() {}
 
 func (x *UptimeData) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[22]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2025,7 +2025,7 @@ func (x *UptimeData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UptimeData.ProtoReflect.Descriptor instead.
 func (*UptimeData) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{22}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *UptimeData) GetTellTaleInfo() []*TellTaleInfo {
@@ -2129,7 +2129,7 @@ type UptimeDataAlternatorInfo struct {
 
 func (x *UptimeDataAlternatorInfo) Reset() {
 	*x = UptimeDataAlternatorInfo{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[23]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2141,7 +2141,7 @@ func (x *UptimeDataAlternatorInfo) String() string {
 func (*UptimeDataAlternatorInfo) ProtoMessage() {}
 
 func (x *UptimeDataAlternatorInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[23]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2154,7 +2154,7 @@ func (x *UptimeDataAlternatorInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UptimeDataAlternatorInfo.ProtoReflect.Descriptor instead.
 func (*UptimeDataAlternatorInfo) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{23}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *UptimeDataAlternatorInfo) GetAlternatorStatus() string {
@@ -2218,7 +2218,7 @@ type Vehicle struct {
 
 func (x *Vehicle) Reset() {
 	*x = Vehicle{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[24]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2230,7 +2230,7 @@ func (x *Vehicle) String() string {
 func (*Vehicle) ProtoMessage() {}
 
 func (x *Vehicle) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[24]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2243,7 +2243,7 @@ func (x *Vehicle) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Vehicle.ProtoReflect.Descriptor instead.
 func (*Vehicle) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{24}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *Vehicle) GetVin() string {
@@ -2406,7 +2406,7 @@ type VehiclePosition struct {
 
 func (x *VehiclePosition) Reset() {
 	*x = VehiclePosition{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[25]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2418,7 +2418,7 @@ func (x *VehiclePosition) String() string {
 func (*VehiclePosition) ProtoMessage() {}
 
 func (x *VehiclePosition) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[25]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2431,7 +2431,7 @@ func (x *VehiclePosition) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VehiclePosition.ProtoReflect.Descriptor instead.
 func (*VehiclePosition) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{25}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *VehiclePosition) GetVin() string {
@@ -2498,7 +2498,7 @@ type VehiclePositionsResponse struct {
 
 func (x *VehiclePositionsResponse) Reset() {
 	*x = VehiclePositionsResponse{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[26]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2510,7 +2510,7 @@ func (x *VehiclePositionsResponse) String() string {
 func (*VehiclePositionsResponse) ProtoMessage() {}
 
 func (x *VehiclePositionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[26]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2523,7 +2523,7 @@ func (x *VehiclePositionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VehiclePositionsResponse.ProtoReflect.Descriptor instead.
 func (*VehiclePositionsResponse) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{26}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *VehiclePositionsResponse) GetVehiclePositionResponse() *VehiclePositionsResponseVehiclePositionResponse {
@@ -2563,7 +2563,7 @@ type VehiclePositionsResponseVehiclePositionResponse struct {
 
 func (x *VehiclePositionsResponseVehiclePositionResponse) Reset() {
 	*x = VehiclePositionsResponseVehiclePositionResponse{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[27]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2575,7 +2575,7 @@ func (x *VehiclePositionsResponseVehiclePositionResponse) String() string {
 func (*VehiclePositionsResponseVehiclePositionResponse) ProtoMessage() {}
 
 func (x *VehiclePositionsResponseVehiclePositionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[27]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2588,7 +2588,7 @@ func (x *VehiclePositionsResponseVehiclePositionResponse) ProtoReflect() protore
 
 // Deprecated: Use VehiclePositionsResponseVehiclePositionResponse.ProtoReflect.Descriptor instead.
 func (*VehiclePositionsResponseVehiclePositionResponse) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{27}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *VehiclePositionsResponseVehiclePositionResponse) GetVehiclePositions() []*VehiclePosition {
@@ -2611,7 +2611,7 @@ type VehicleProductionDate struct {
 
 func (x *VehicleProductionDate) Reset() {
 	*x = VehicleProductionDate{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[28]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2623,7 +2623,7 @@ func (x *VehicleProductionDate) String() string {
 func (*VehicleProductionDate) ProtoMessage() {}
 
 func (x *VehicleProductionDate) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[28]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2636,7 +2636,7 @@ func (x *VehicleProductionDate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VehicleProductionDate.ProtoReflect.Descriptor instead.
 func (*VehicleProductionDate) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{28}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *VehicleProductionDate) GetDay() int32 {
@@ -2697,7 +2697,7 @@ type VehicleStatus struct {
 
 func (x *VehicleStatus) Reset() {
 	*x = VehicleStatus{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[29]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2709,7 +2709,7 @@ func (x *VehicleStatus) String() string {
 func (*VehicleStatus) ProtoMessage() {}
 
 func (x *VehicleStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[29]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2722,7 +2722,7 @@ func (x *VehicleStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VehicleStatus.ProtoReflect.Descriptor instead.
 func (*VehicleStatus) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{29}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *VehicleStatus) GetVin() string {
@@ -2856,7 +2856,7 @@ type VehicleStatusDoorStatusInner struct {
 
 func (x *VehicleStatusDoorStatusInner) Reset() {
 	*x = VehicleStatusDoorStatusInner{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[30]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2868,7 +2868,7 @@ func (x *VehicleStatusDoorStatusInner) String() string {
 func (*VehicleStatusDoorStatusInner) ProtoMessage() {}
 
 func (x *VehicleStatusDoorStatusInner) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[30]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2881,7 +2881,7 @@ func (x *VehicleStatusDoorStatusInner) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VehicleStatusDoorStatusInner.ProtoReflect.Descriptor instead.
 func (*VehicleStatusDoorStatusInner) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{30}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *VehicleStatusDoorStatusInner) GetDoorEnabledStatus() string {
@@ -2927,7 +2927,7 @@ type VehicleStatusesResponse struct {
 
 func (x *VehicleStatusesResponse) Reset() {
 	*x = VehicleStatusesResponse{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[31]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2939,7 +2939,7 @@ func (x *VehicleStatusesResponse) String() string {
 func (*VehicleStatusesResponse) ProtoMessage() {}
 
 func (x *VehicleStatusesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[31]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2952,7 +2952,7 @@ func (x *VehicleStatusesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VehicleStatusesResponse.ProtoReflect.Descriptor instead.
 func (*VehicleStatusesResponse) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{31}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *VehicleStatusesResponse) GetVehicleStatusResponse() *VehicleStatusesResponseVehicleStatusResponse {
@@ -2992,7 +2992,7 @@ type VehicleStatusesResponseVehicleStatusResponse struct {
 
 func (x *VehicleStatusesResponseVehicleStatusResponse) Reset() {
 	*x = VehicleStatusesResponseVehicleStatusResponse{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[32]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3004,7 +3004,7 @@ func (x *VehicleStatusesResponseVehicleStatusResponse) String() string {
 func (*VehicleStatusesResponseVehicleStatusResponse) ProtoMessage() {}
 
 func (x *VehicleStatusesResponseVehicleStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[32]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3017,7 +3017,7 @@ func (x *VehicleStatusesResponseVehicleStatusResponse) ProtoReflect() protorefle
 
 // Deprecated: Use VehicleStatusesResponseVehicleStatusResponse.ProtoReflect.Descriptor instead.
 func (*VehicleStatusesResponseVehicleStatusResponse) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{32}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *VehicleStatusesResponseVehicleStatusResponse) GetVehicleStatuses() []*VehicleStatus {
@@ -3040,7 +3040,7 @@ type VehiclesResponse struct {
 
 func (x *VehiclesResponse) Reset() {
 	*x = VehiclesResponse{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[33]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3052,7 +3052,7 @@ func (x *VehiclesResponse) String() string {
 func (*VehiclesResponse) ProtoMessage() {}
 
 func (x *VehiclesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[33]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3065,7 +3065,7 @@ func (x *VehiclesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VehiclesResponse.ProtoReflect.Descriptor instead.
 func (*VehiclesResponse) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{33}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *VehiclesResponse) GetVehicleResponse() *VehiclesResponseVehicleResponse {
@@ -3098,7 +3098,7 @@ type VehiclesResponseVehicleResponse struct {
 
 func (x *VehiclesResponseVehicleResponse) Reset() {
 	*x = VehiclesResponseVehicleResponse{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[34]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3110,7 +3110,7 @@ func (x *VehiclesResponseVehicleResponse) String() string {
 func (*VehiclesResponseVehicleResponse) ProtoMessage() {}
 
 func (x *VehiclesResponseVehicleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[34]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3123,7 +3123,7 @@ func (x *VehiclesResponseVehicleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VehiclesResponseVehicleResponse.ProtoReflect.Descriptor instead.
 func (*VehiclesResponseVehicleResponse) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{34}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *VehiclesResponseVehicleResponse) GetVehicles() []*Vehicle {
@@ -3141,7 +3141,7 @@ type VinProperty struct {
 
 func (x *VinProperty) Reset() {
 	*x = VinProperty{}
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[35]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3153,7 +3153,7 @@ func (x *VinProperty) String() string {
 func (*VinProperty) ProtoMessage() {}
 
 func (x *VinProperty) ProtoReflect() protoreflect.Message {
-	mi := &file_wayplatform_sdk_rfms_v4_api_proto_msgTypes[35]
+	mi := &file_wayplatform_rfms_v4_api_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3166,14 +3166,14 @@ func (x *VinProperty) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VinProperty.ProtoReflect.Descriptor instead.
 func (*VinProperty) Descriptor() ([]byte, []int) {
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP(), []int{35}
+	return file_wayplatform_rfms_v4_api_proto_rawDescGZIP(), []int{35}
 }
 
-var File_wayplatform_sdk_rfms_v4_api_proto protoreflect.FileDescriptor
+var File_wayplatform_rfms_v4_api_proto protoreflect.FileDescriptor
 
-const file_wayplatform_sdk_rfms_v4_api_proto_rawDesc = "" +
+const file_wayplatform_rfms_v4_api_proto_rawDesc = "" +
 	"\n" +
-	"!wayplatform/sdk/rfms/v4/api.proto\x12\x17wayplatform.sdk.rfms.v4\"\xcb\x19\n" +
+	"\x1dwayplatform/rfms/v4/api.proto\x12\x17wayplatform.sdk.rfms.v4\"\xcb\x19\n" +
 	"\x0fAccumulatedData\x12O\n" +
 	"#duration_wheelbased_speed_over_zero\x18\xc2̰\x05 \x01(\x03R\x1fdurationWheelbasedSpeedOverZero\x12G\n" +
 	"\x1edistance_cruise_control_active\x18\x8b\x80\xf6\xa3\x01 \x01(\x03R\x1bdistanceCruiseControlActive\x12F\n" +
@@ -3432,23 +3432,23 @@ const file_wayplatform_sdk_rfms_v4_api_proto_rawDesc = "" +
 	"\x18more_data_available_link\x18\xfb\xe9\xbb\x11 \x01(\tR\x15moreDataAvailableLink\"c\n" +
 	"\x1fVehiclesResponseVehicleResponse\x12@\n" +
 	"\bvehicles\x18ʭ\xb9\xc0\x01 \x03(\v2 .wayplatform.sdk.rfms.v4.VehicleR\bvehicles\"\r\n" +
-	"\vVinPropertyB\xeb\x01\n" +
-	"\x1bcom.wayplatform.sdk.rfms.v4B\bApiProtoP\x01ZCgithub.com/way-platform/proto/gen/go/wayplatform/sdk/rfms/v4;rfmsv4\xa2\x02\x03WSR\xaa\x02\x17Wayplatform.Sdk.Rfms.V4\xca\x02\x17Wayplatform\\Sdk\\Rfms\\V4\xe2\x02#Wayplatform\\Sdk\\Rfms\\V4\\GPBMetadata\xea\x02\x1aWayplatform::Sdk::Rfms::V4b\x06proto3"
+	"\vVinPropertyB\xe7\x01\n" +
+	"\x1bcom.wayplatform.sdk.rfms.v4B\bApiProtoP\x01Z?github.com/way-platform/proto/gen/go/wayplatform/rfms/v4;rfmsv4\xa2\x02\x03WSR\xaa\x02\x17Wayplatform.Sdk.Rfms.V4\xca\x02\x17Wayplatform\\Sdk\\Rfms\\V4\xe2\x02#Wayplatform\\Sdk\\Rfms\\V4\\GPBMetadata\xea\x02\x1aWayplatform::Sdk::Rfms::V4b\x06proto3"
 
 var (
-	file_wayplatform_sdk_rfms_v4_api_proto_rawDescOnce sync.Once
-	file_wayplatform_sdk_rfms_v4_api_proto_rawDescData []byte
+	file_wayplatform_rfms_v4_api_proto_rawDescOnce sync.Once
+	file_wayplatform_rfms_v4_api_proto_rawDescData []byte
 )
 
-func file_wayplatform_sdk_rfms_v4_api_proto_rawDescGZIP() []byte {
-	file_wayplatform_sdk_rfms_v4_api_proto_rawDescOnce.Do(func() {
-		file_wayplatform_sdk_rfms_v4_api_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_wayplatform_sdk_rfms_v4_api_proto_rawDesc), len(file_wayplatform_sdk_rfms_v4_api_proto_rawDesc)))
+func file_wayplatform_rfms_v4_api_proto_rawDescGZIP() []byte {
+	file_wayplatform_rfms_v4_api_proto_rawDescOnce.Do(func() {
+		file_wayplatform_rfms_v4_api_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_wayplatform_rfms_v4_api_proto_rawDesc), len(file_wayplatform_rfms_v4_api_proto_rawDesc)))
 	})
-	return file_wayplatform_sdk_rfms_v4_api_proto_rawDescData
+	return file_wayplatform_rfms_v4_api_proto_rawDescData
 }
 
-var file_wayplatform_sdk_rfms_v4_api_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
-var file_wayplatform_sdk_rfms_v4_api_proto_goTypes = []any{
+var file_wayplatform_rfms_v4_api_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
+var file_wayplatform_rfms_v4_api_proto_goTypes = []any{
 	(*AccumulatedData)(nil),                                 // 0: wayplatform.sdk.rfms.v4.AccumulatedData
 	(*CreatedDateTimeProperty)(nil),                         // 1: wayplatform.sdk.rfms.v4.CreatedDateTimeProperty
 	(*DriverId)(nil),                                        // 2: wayplatform.sdk.rfms.v4.DriverId
@@ -3486,7 +3486,7 @@ var file_wayplatform_sdk_rfms_v4_api_proto_goTypes = []any{
 	(*VehiclesResponseVehicleResponse)(nil),                 // 34: wayplatform.sdk.rfms.v4.VehiclesResponseVehicleResponse
 	(*VinProperty)(nil),                                     // 35: wayplatform.sdk.rfms.v4.VinProperty
 }
-var file_wayplatform_sdk_rfms_v4_api_proto_depIdxs = []int32{
+var file_wayplatform_rfms_v4_api_proto_depIdxs = []int32{
 	11, // 0: wayplatform.sdk.rfms.v4.AccumulatedData.pto_active_class:type_name -> wayplatform.sdk.rfms.v4.Label
 	7,  // 1: wayplatform.sdk.rfms.v4.AccumulatedData.acceleration_pedal_position_class:type_name -> wayplatform.sdk.rfms.v4.FromToClass
 	7,  // 2: wayplatform.sdk.rfms.v4.AccumulatedData.brake_pedal_position_class:type_name -> wayplatform.sdk.rfms.v4.FromToClass
@@ -3540,26 +3540,26 @@ var file_wayplatform_sdk_rfms_v4_api_proto_depIdxs = []int32{
 	0,  // [0:46] is the sub-list for field type_name
 }
 
-func init() { file_wayplatform_sdk_rfms_v4_api_proto_init() }
-func file_wayplatform_sdk_rfms_v4_api_proto_init() {
-	if File_wayplatform_sdk_rfms_v4_api_proto != nil {
+func init() { file_wayplatform_rfms_v4_api_proto_init() }
+func file_wayplatform_rfms_v4_api_proto_init() {
+	if File_wayplatform_rfms_v4_api_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_wayplatform_sdk_rfms_v4_api_proto_rawDesc), len(file_wayplatform_sdk_rfms_v4_api_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_wayplatform_rfms_v4_api_proto_rawDesc), len(file_wayplatform_rfms_v4_api_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   36,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_wayplatform_sdk_rfms_v4_api_proto_goTypes,
-		DependencyIndexes: file_wayplatform_sdk_rfms_v4_api_proto_depIdxs,
-		MessageInfos:      file_wayplatform_sdk_rfms_v4_api_proto_msgTypes,
+		GoTypes:           file_wayplatform_rfms_v4_api_proto_goTypes,
+		DependencyIndexes: file_wayplatform_rfms_v4_api_proto_depIdxs,
+		MessageInfos:      file_wayplatform_rfms_v4_api_proto_msgTypes,
 	}.Build()
-	File_wayplatform_sdk_rfms_v4_api_proto = out.File
-	file_wayplatform_sdk_rfms_v4_api_proto_goTypes = nil
-	file_wayplatform_sdk_rfms_v4_api_proto_depIdxs = nil
+	File_wayplatform_rfms_v4_api_proto = out.File
+	file_wayplatform_rfms_v4_api_proto_goTypes = nil
+	file_wayplatform_rfms_v4_api_proto_depIdxs = nil
 }

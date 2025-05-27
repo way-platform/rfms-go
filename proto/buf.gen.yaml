@@ -1,4 +1,5 @@
 version: v2
+
 clean: true
 
 managed:
@@ -15,3 +16,5 @@ inputs:
 plugins:
   - local: ["go", "tool", "protoc-gen-go"]
     out: gen/go
+    opt:
+      - module=github.com/way-platform/proto/gen/go
