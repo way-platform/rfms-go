@@ -66,12 +66,6 @@ For all available build tasks, see:
 $ go tool mage
 ```
 
-#### (re-)Generate OpenAPI models
-
-```bash
-$ go generate ./...
-```
-
 ## CLI tool
 
 ### Installing
