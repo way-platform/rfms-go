@@ -26,6 +26,9 @@ jobs:
         with:
           go-version: ${{ env.GO_VERSION }}
 
+      - name: Run CI pipeline
+        run: go tool mage ci
+
       - name: Run Go Semantic Release
         uses: go-semantic-release/action@v1
         with:
