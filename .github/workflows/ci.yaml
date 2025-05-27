@@ -27,11 +27,5 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Install Go dependencies
-        run: go mod tidy
-
-      - name: Generate Go code
-        run: go generate -v ./...
-
-      - name: Run tests
-        run: go test -v ./...
+      - name: Run CI pipeline
+        run: go tool mage ci
