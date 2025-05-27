@@ -9,14 +9,19 @@ import (
 	"github.com/magefile/mage/sh"
 )
 
-// CI runs the full CI pipeline.
-func CI() {
-	mg.Deps(Generate, Test)
+// Build runs a full CI build.
+func Build() {
+	mg.Deps(Generate, Lint, Test)
 }
 
 // Clean removes all build artifacts.
 func Clean() error {
 	return sh.Run("rm", "-rf", "build")
+}
+
+// Lint runs the Go linter.
+func Lint() error {
+	return sh.RunV("go", "tool", "golangci-lint", "run")
 }
 
 // Test runs the Go tests.

@@ -27,5 +27,5 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Run CI pipeline
-        run: go tool mage ci
+      - name: Build
+        run: go tool mage build

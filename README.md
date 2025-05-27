@@ -51,16 +51,25 @@ for moreDataAvailable {
 
 ### Developing
 
+#### Build project
+
+The project is built using [Mage](https://magefile.org), see
+[magefile.go](./magefile.go).
+
+```bash
+$ go tool mage build
+```
+
+For all available build tasks, see:
+
+```bash
+$ go tool mage
+```
+
 #### (re-)Generate OpenAPI models
 
 ```bash
 $ go generate ./...
-```
-
-#### Run tests
-
-```bash
-$ go test ./...
 ```
 
 ## CLI tool
