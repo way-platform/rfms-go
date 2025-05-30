@@ -7,6 +7,8 @@ type ClientConfig struct {
 	baseURL    string
 	apiVersion Version
 	transport  http.RoundTripper
+	retryCount int
+	logger     Logger
 }
 
 // newClientConfig creates a new default [ClientConfig].
@@ -93,5 +95,27 @@ func WithVolvoTrucks(username string, password string) ClientOption {
 		WithBaseURL(VolvoTrucksBaseURL)(cc)
 		WithBasicAuth(username, password)(cc)
 		WithVersion(V2_1)(cc)
+	}
+}
+
+// WithRetryCount sets the maximum number of times to retry a request.
+func WithRetryCount(retryCount int) ClientOption {
+	return func(cc *ClientConfig) {
+		cc.retryCount = retryCount
+	}
+}
+
+// Logger is a leveled logger interface.
+type Logger interface {
+	Debug(msg string, keysAndValues ...any)
+	Info(msg string, keysAndValues ...any)
+	Warn(msg string, keysAndValues ...any)
+	Error(msg string, keysAndValues ...any)
+}
+
+// WithLogger sets the [Logger] for the [Client].
+func WithLogger(logger Logger) ClientOption {
+	return func(cc *ClientConfig) {
+		cc.logger = logger
 	}
 }
