@@ -4,14 +4,15 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"net/http"
 	"runtime/debug"
+
+	"github.com/hashicorp/go-retryablehttp"
 )
 
 // Client is an rFMS API client.
 type Client struct {
 	config     ClientConfig
-	httpClient *http.Client
+	httpClient *retryablehttp.Client
 }
 
 // NewClient creates a new [Client] with the given base URL and options.
@@ -20,19 +21,27 @@ func NewClient(opts ...ClientOption) *Client {
 	for _, opt := range opts {
 		opt(&config)
 	}
+	httpClient := retryablehttp.NewClient()
+	if config.transport != nil {
+		httpClient.HTTPClient.Transport = config.transport
+	}
+	httpClient.RetryMax = config.retryCount
+	if config.logger != nil {
+		httpClient.Logger = config.logger
+	}
 	return &Client{
 		config:     config,
-		httpClient: &http.Client{Transport: config.transport},
+		httpClient: httpClient,
 	}
 }
 
-func (c *Client) newRequest(ctx context.Context, method, path string, body io.Reader) (_ *http.Request, err error) {
+func (c *Client) newRequest(ctx context.Context, method, path string, body io.Reader) (_ *retryablehttp.Request, err error) {
 	defer func() {
 		if err != nil {
 			err = fmt.Errorf("new request: %w", err)
 		}
 	}()
-	request, err := http.NewRequestWithContext(ctx, method, c.config.baseURL+path, body)
+	request, err := retryablehttp.NewRequestWithContext(ctx, method, c.config.baseURL+path, body)
 	if err != nil {
 		return nil, err
 	}
