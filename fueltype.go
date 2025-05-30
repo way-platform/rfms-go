@@ -27,5 +27,5 @@ const (
 	// 0x1F Kerosene.
 	FuelTypeKerosene = "1F"
 	// 0x20 Heavy Fuel Oil.
-	FuelTypeKerosene = "20"
+	FuelTypeHeavyFuelOil = "20"
 )
