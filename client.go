@@ -26,6 +26,7 @@ func NewClient(opts ...ClientOption) *Client {
 		httpClient.HTTPClient.Transport = config.transport
 	}
 	httpClient.RetryMax = config.retryCount
+	// TODO: Add custom retry logic for non-standard rFMS retry headers.
 	if config.logger != nil {
 		httpClient.Logger = config.logger
 	}
