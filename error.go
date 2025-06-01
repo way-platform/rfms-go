@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/way-platform/rfms-go/api/rfmsv4"
+	"github.com/way-platform/rfms-go/openapi/rfmsv4"
 )
 
 // Error is an error returned by the rFMS API.
