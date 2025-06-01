@@ -7,9 +7,9 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/way-platform/rfms-go/api/compat/rfmsv2tov4"
-	"github.com/way-platform/rfms-go/api/rfmsv2"
-	"github.com/way-platform/rfms-go/api/rfmsv4"
+	"github.com/way-platform/rfms-go/openapi/compat/rfmsv2tov4"
+	"github.com/way-platform/rfms-go/openapi/rfmsv2"
+	"github.com/way-platform/rfms-go/openapi/rfmsv4"
 )
 
 // VehiclesRequest is the request for the [Client.Vehicles] method.
