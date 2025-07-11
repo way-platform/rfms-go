@@ -50,7 +50,7 @@ func NewClient() (*rfms.Client, error) {
 		return nil, err
 	}
 	switch auth.Provider {
-	case rfms.Scania:
+	case rfms.BrandScania:
 		if auth.TokenCredentials.TokenExpireTime.Before(time.Now()) {
 			if auth.TokenCredentials.RefreshTokenExpireTime.Before(time.Now()) {
 				// TODO: Refresh token credentials if they are expired.
@@ -63,7 +63,7 @@ func NewClient() (*rfms.Client, error) {
 			rfms.WithVersion(rfms.V4),
 			rfms.WithReuseTokenAuth(*auth.TokenCredentials),
 		), nil
-	case rfms.VolvoTrucks:
+	case rfms.BrandVolvoTrucks:
 		return rfms.NewClient(
 			rfms.WithVolvoTrucks(auth.Username, auth.Password),
 		), nil
@@ -115,7 +115,7 @@ func newLoginCommand() *cobra.Command {
 }
 
 func newLoginScaniaCommand() *cobra.Command {
-	const provider = rfms.Scania
+	const provider = rfms.BrandScania
 	cmd := &cobra.Command{
 		Use:   "scania",
 		Short: "Login to the Scania rFMS API",
@@ -144,7 +144,7 @@ func newLoginScaniaCommand() *cobra.Command {
 }
 
 func newLoginVolvoTrucksCommand() *cobra.Command {
-	const provider = rfms.VolvoTrucks
+	const provider = rfms.BrandVolvoTrucks
 	cmd := &cobra.Command{
 		Use:   "volvo-trucks",
 		Short: "Login to the Volvo Trucks rFMS API",

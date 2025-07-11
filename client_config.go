@@ -1,6 +1,10 @@
 package rfms
 
-import "net/http"
+import (
+	"net/http"
+
+	"github.com/hashicorp/go-retryablehttp"
+)
 
 // ClientConfig is the configuration for a [Client].
 type ClientConfig struct {
@@ -63,7 +67,7 @@ func WithScaniaAuth(clientID string, clientSecret string) ClientOption {
 				baseURL:      ScaniaAuthBaseURL,
 				clientID:     clientID,
 				clientSecret: clientSecret,
-				httpClient:   http.DefaultClient,
+				httpClient:   retryablehttp.NewClient(),
 			},
 			transport: cc.transport,
 		}
