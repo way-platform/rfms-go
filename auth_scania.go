@@ -12,6 +12,8 @@ import (
 	"net/http"
 	"net/url"
 	"time"
+
+	"github.com/hashicorp/go-retryablehttp"
 )
 
 // scaniaTokenAuthenticator is an [TokenAuthenticator] for Scania's rFMS API.
@@ -19,7 +21,7 @@ type scaniaTokenAuthenticator struct {
 	baseURL      string
 	clientID     string
 	clientSecret string
-	httpClient   *http.Client
+	httpClient   *retryablehttp.Client
 }
 
 // NewScaniaTokenAuthenticator creates a new [TokenAuthenticator] for Scania's rFMS API.
@@ -28,7 +30,7 @@ func NewScaniaTokenAuthenticator(clientID string, clientSecret string) TokenAuth
 		baseURL:      ScaniaAuthBaseURL,
 		clientID:     clientID,
 		clientSecret: clientSecret,
-		httpClient:   http.DefaultClient,
+		httpClient:   retryablehttp.NewClient(),
 	}
 }
 
@@ -179,13 +181,13 @@ func (a *scaniaTokenAuthenticator) newRequest(
 	method string,
 	path string,
 	body io.Reader,
-) (_ *http.Request, err error) {
+) (_ *retryablehttp.Request, err error) {
 	defer func() {
 		if err != nil {
 			err = fmt.Errorf("new request: %w", err)
 		}
 	}()
-	request, err := http.NewRequestWithContext(ctx, method, a.baseURL+path, body)
+	request, err := retryablehttp.NewRequestWithContext(ctx, method, a.baseURL+path, body)
 	if err != nil {
 		return nil, err
 	}
