@@ -266,10 +266,9 @@ actions:
   update:
     x-go-type-skip-optional-pointer: true
 
-- target: $..[?(@.required)]
+- target: $..[?(@.required)].required
   description: "Remove required from all fields"
-  update:
-    required: null
+  remove: true
 
 - target: $..[?(@.type=="integer" && !@.format)]
   description: "Default integers to int32 if no format is provided"
