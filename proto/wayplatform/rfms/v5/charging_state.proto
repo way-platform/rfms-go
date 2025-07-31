@@ -1,0 +1,30 @@
+edition = "2023";
+
+package wayplatform.rfms.v5;
+
+// Charging state.
+enum ChargingState {
+  // Default value. This value is not used.
+  CHARGING_STATE_UNSPECIFIED = 0;
+
+  // The charging state is unknown.
+  CHARGING_STATE_UNKNOWN = 1;
+
+  // The charging state is not available.
+  CHARGING_STATE_NOT_AVAILABLE = 2;
+
+  // An error occurred when charging.
+  CHARGING_STATE_ERROR = 3;
+
+  // The charging state is not charging.
+  NOT_CHARGING = 4;
+
+  // The charging state is charging. AC or DC is unknown.
+  CHARGING = 5;
+
+  // Charging is ongoing using AC.
+  CHARGING_AC = 6;
+
+  // Charging is ongoing using DC.
+  CHARGING_DC = 7;
+}

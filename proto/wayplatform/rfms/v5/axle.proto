@@ -1,0 +1,26 @@
+edition = "2023";
+
+package wayplatform.rfms.v5;
+
+// A vehicle axle.
+message Axle {
+  // The position of the axle.
+  int32 position = 1;
+
+  // The static vertical load of the axle. (kg)
+  double load_kg = 2;
+
+  // The tires on the axle.
+  repeated Tire tires = 3;
+
+  // A tire on an axle.
+  message Tire {
+    // Tire position (on the specified axle) from 1 to 15,
+    // counting left to right when facing in the direction of
+    // normal vehicle travel (forward).
+    int32 position = 1;
+
+    // Tire pressure. (kPa)
+    double pressure_kpa = 2;
+  }
+}

@@ -14,19 +14,19 @@ func ExampleClient_scania() {
 	)
 	lastVIN, moreDataAvailable := "", true
 	for moreDataAvailable {
-		response, err := client.Vehicles(context.Background(), &rfms.VehiclesRequest{
+		response, err := client.Vehicles(context.Background(), rfms.VehiclesRequest{
 			LastVIN: lastVIN,
 		})
 		if err != nil {
 			panic(err)
 		}
 		for _, vehicle := range response.Vehicles {
-			fmt.Println(vehicle.VIN)
+			fmt.Println(vehicle.GetVin())
 		}
-    moreDataAvailable = response.MoreDataAvailable
-    if moreDataAvailable {
-        lastVIN = response.Vehicles[len(response.Vehicles)-1].VIN
-    }
+		moreDataAvailable = response.MoreDataAvailable
+		if moreDataAvailable {
+			lastVIN = response.Vehicles[len(response.Vehicles)-1].GetVin()
+		}
 	}
 }
 
@@ -36,18 +36,18 @@ func ExampleClient_volvoTrucks() {
 	)
 	lastVIN, moreDataAvailable := "", true
 	for moreDataAvailable {
-		response, err := client.Vehicles(context.Background(), &rfms.VehiclesRequest{
+		response, err := client.Vehicles(context.Background(), rfms.VehiclesRequest{
 			LastVIN: lastVIN,
 		})
 		if err != nil {
 			panic(err)
 		}
 		for _, vehicle := range response.Vehicles {
-			fmt.Println(vehicle.VIN)
+			fmt.Println(vehicle.GetVin())
 		}
-    moreDataAvailable = response.MoreDataAvailable
-    if moreDataAvailable {
-        lastVIN = response.Vehicles[len(response.Vehicles)-1].VIN
-    }
+		moreDataAvailable = response.MoreDataAvailable
+		if moreDataAvailable {
+			lastVIN = response.Vehicles[len(response.Vehicles)-1].GetVin()
+		}
 	}
 }

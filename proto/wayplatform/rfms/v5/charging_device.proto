@@ -1,0 +1,27 @@
+edition = "2023";
+
+package wayplatform.rfms.v5;
+
+// Charging device.
+enum ChargingDevice {
+  // Default value. This value is not used.
+  CHARGING_DEVICE_UNSPECIFIED = 0;
+
+  // The charging device is unknown.
+  CHARGING_DEVICE_UNKNOWN = 1;
+
+  // The charging device is not available.
+  CHARGING_DEVICE_NOT_AVAILABLE = 2;
+
+  // No device connected.
+  CHARGING_DEVICE_NONE = 3;
+
+  // Automatic Connection Device. (ACD)
+  AUTOMATIC_CONNECTION_DEVICE = 4;
+
+  // Wireless Power Transfer. (WPT)
+  WIRELESS_POWER_TRANSFER = 5;
+
+  // Vehicle Coupler.
+  VEHICLE_COUPLER = 6;
+}

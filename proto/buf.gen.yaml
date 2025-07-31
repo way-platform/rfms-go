@@ -18,3 +18,4 @@ plugins:
     out: gen/go
     opt:
       - module=github.com/way-platform/proto/gen/go
+      - default_api_level=API_OPAQUE

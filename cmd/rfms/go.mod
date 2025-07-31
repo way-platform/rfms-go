@@ -9,6 +9,7 @@ require (
 	github.com/spf13/cobra v1.9.1
 	github.com/way-platform/rfms-go v0.0.0-00010101000000-000000000000
 	golang.org/x/term v0.32.0
+	google.golang.org/protobuf v1.36.6
 )
 
 require (

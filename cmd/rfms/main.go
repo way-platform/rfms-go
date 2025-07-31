@@ -2,8 +2,9 @@ package main
 
 import (
 	"context"
-	"encoding/json"
+	"fmt"
 	"image/color"
+	"log/slog"
 	"os"
 
 	"github.com/charmbracelet/fang"
@@ -11,6 +12,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/way-platform/rfms-go"
 	"github.com/way-platform/rfms-go/cmd/rfms/internal/auth"
+	"google.golang.org/protobuf/encoding/protojson"
 )
 
 func main() {
@@ -64,6 +66,17 @@ func newRootCommand() *cobra.Command {
 	})
 	cmd.SetHelpCommandGroupID("utils")
 	cmd.SetCompletionCommandGroupID("utils")
+	cmd.PersistentFlags().BoolP("debug", "d", false, "enable debug logging")
+	cmd.PersistentPreRunE = func(cmd *cobra.Command, args []string) error {
+		level := slog.LevelInfo
+		if cmd.Flags().Changed("debug") {
+			level = slog.LevelDebug
+		}
+		slog.SetDefault(slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
+			Level: level,
+		})))
+		return nil
+	}
 	return cmd
 }
 
@@ -81,18 +94,18 @@ func newVehiclesCommand() *cobra.Command {
 		}
 		moreDataAvailable, lastVIN, count := true, "", 0
 		for moreDataAvailable && count < *limit {
-			response, err := client.Vehicles(cmd.Context(), &rfms.VehiclesRequest{
+			response, err := client.Vehicles(cmd.Context(), rfms.VehiclesRequest{
 				LastVIN: lastVIN,
 			})
 			if err != nil {
 				return err
 			}
 			for _, vehicle := range response.Vehicles {
-				printJSON(cmd, vehicle)
+				fmt.Println(protojson.Format(vehicle))
 			}
 			count += len(response.Vehicles)
 			moreDataAvailable = response.MoreDataAvailable
-			lastVIN = response.Vehicles[len(response.Vehicles)-1].VIN
+			lastVIN = response.Vehicles[len(response.Vehicles)-1].GetVin()
 		}
 		return nil
 	}
@@ -113,7 +126,7 @@ func newVehiclePositionsCommand() *cobra.Command {
 		}
 		moreDataAvailable, lastVIN, count := true, "", 0
 		for moreDataAvailable && count < *limit {
-			response, err := client.VehiclePositions(cmd.Context(), &rfms.VehiclePositionsRequest{
+			response, err := client.VehiclePositions(cmd.Context(), rfms.VehiclePositionsRequest{
 				LastVIN:    lastVIN,
 				LatestOnly: true,
 			})
@@ -121,11 +134,11 @@ func newVehiclePositionsCommand() *cobra.Command {
 				return err
 			}
 			for _, vehiclePosition := range response.VehiclePositions {
-				printJSON(cmd, vehiclePosition)
+				fmt.Println(protojson.Format(vehiclePosition))
 			}
 			count += len(response.VehiclePositions)
 			moreDataAvailable = response.MoreDataAvailable
-			lastVIN = response.VehiclePositions[len(response.VehiclePositions)-1].VIN
+			lastVIN = response.VehiclePositions[len(response.VehiclePositions)-1].GetVin()
 		}
 		return nil
 	}
@@ -146,7 +159,7 @@ func newVehicleStatusesCommand() *cobra.Command {
 		}
 		moreDataAvailable, lastVIN, count := true, "", 0
 		for moreDataAvailable && count < *limit {
-			response, err := client.VehicleStatuses(cmd.Context(), &rfms.VehicleStatusesRequest{
+			response, err := client.VehicleStatuses(cmd.Context(), rfms.VehicleStatusesRequest{
 				LastVIN:    lastVIN,
 				LatestOnly: true,
 			})
@@ -154,21 +167,13 @@ func newVehicleStatusesCommand() *cobra.Command {
 				return err
 			}
 			for _, vehicleStatus := range response.VehicleStatuses {
-				printJSON(cmd, vehicleStatus)
+				fmt.Println(protojson.Format(vehicleStatus))
 			}
 			count += len(response.VehicleStatuses)
 			moreDataAvailable = response.MoreDataAvailable
-			lastVIN = response.VehicleStatuses[len(response.VehicleStatuses)-1].VIN
+			lastVIN = response.VehicleStatuses[len(response.VehicleStatuses)-1].GetVin()
 		}
 		return nil
 	}
 	return cmd
-}
-
-func printJSON(cmd *cobra.Command, msg any) {
-	data, err := json.MarshalIndent(msg, "", "  ")
-	if err != nil {
-		panic(err)
-	}
-	cmd.Println(string(data))
 }

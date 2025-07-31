@@ -1,0 +1,3158 @@
+openapi: 3.0.3
+info:
+  title: rFMS vehicle data
+  description: "The rFMS API is used to remotely access vehicle FMS data in a
+    standardized way without installing any additional hardware to the vehicle by
+    using the existing OEM hardware. The API specifies how to retreive the data by
+    calling https endpoints as well as subscribing to the data and getting it
+    through callbacks.\n\n"
+  version: 5.0.0_prel9
+servers:
+  - url: /rfms
+security:
+  - oauth2AuthCode: []
+  - oauth2ClientCredential: []
+
+paths:
+  /vehicles:
+    get:
+      tags:
+        - Vehicle Data
+      summary: List of vehicles
+      description: >-
+        The vehicle resource is used to get a list of all the vehicles
+        the client credentials  has access to. The vehicle list is always returned
+        in the same order. The max number of items returned in one call is OEM specific.
+      parameters:
+        - $ref: "#/components/parameters/xCorrelationId"
+        - $ref: "#/components/parameters/lastVin"
+      responses:
+        200:
+          description: OK
+          content:
+            "application/json; rfms=vehicles.v5.0":
+              schema:
+                $ref: "#/components/schemas/VehicleResponseObject"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        403:
+          $ref: "#/components/responses/Forbidden"
+        404:
+          $ref: "#/components/responses/NotFound"
+        406:
+          $ref: "#/components/responses/NotAcceptable"
+        429:
+          $ref: "#/components/responses/TooManyRequests"
+  /vehiclepositions:
+    get:
+      tags:
+        - Vehicle Data
+      summary: Positions for one or more vehicles
+      description:
+        "The vehicle position resource is used to get the positions for one or
+        several vehicles.\n\n
+
+        The starttime, stoptime & latestOnly parameters can be used to get all historical
+        positions between a start and stop time or the latest known position only.\n\n
+
+        The vin parameter can be used to get positions for one or more individual vehicles.
+        If the vin parameter isn't set the response will contain all vehicles the client has
+        access to.\n\n
+
+        The failedOnly parameter can be used to get positions that was not possible to push.
+        This regardless if the subscription is still active, paused or deleted. The failedOnly
+        parameter can be used together with **starttime and/or stoptime and/or ** X-CorrelationId
+        (all optional). Providing any other parameter will result in an HTTP 400 error.\n\n
+
+        If a request is made for data in a period where no data has been received, an empty
+        list will be returned. The max number of items returned in one call is OEM specific.\n\n
+
+        It is mandatory to either supply the starttime (for historical requests), latestOnly
+        (for getting the latest data) or failedOnly (for failed pushes). If none of these
+        parameters are set, an HTTP 400 error will be returned indicating that the parameters
+        supplied are invalid.\n\n
+
+        If latestOnly and starttime and/or stoptime are set, an HTTP 400 error will be returned
+        indicating that the parameters supplied are invalid. If latestOnly and failedOnly are
+        set, an HTTP 400 error will be returned indicating that the parameters supplied are
+        invalid.\n\n
+
+        If the moreDataAvailable is set to true in the response and the latestOnly was set to
+        true in the request then the next request shall state the last received VIN to get the
+        full set. The vehicles are always returned in the same order, when using latestOnly.
+        The ordering is OEM specific.\n\n
+
+        If the moreDataAvailable is set to true in the response and the failedOnly was set
+        in the request, then the request shall be repeated to get the full set.\n\n
+        For the next starttime/stoptime request, set the start time to the last
+        ReceivedDateTime + 1 second of the last vehicle from the latest response.\n\n"
+      parameters:
+        - $ref: "#/components/parameters/xCorrelationId"
+        - $ref: "#/components/parameters/datetype"
+        - $ref: "#/components/parameters/starttime"
+        - $ref: "#/components/parameters/stoptime"
+        - $ref: "#/components/parameters/vin"
+        - name: latestOnly
+          in: query
+          description: >-
+            If this value is set to true only the last latest position, matching
+            the trigger filter (if used), is returned for each vehicle in the response.
+            If this value is set to false (or not present) all positions matching the
+            starttime/stoptime criteria is returned for each vehicle in the response.
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: triggerFilter
+          in: query
+          description: >-
+            Will only return data reports that was triggered by the trigger
+            defined by the filter. Detailed information for this parameter can be found
+            in the Trigger filter chapter in the API documentation.
+          required: false
+          schema:
+            type: string
+            enum:
+              - TIMER
+              - TELL_TALE
+              - DRIVER_LOGIN
+              - DRIVER_LOGOUT
+              - IGNITION_ON
+              - IGNITION_OFF
+              - ENGINE_ON
+              - ENGINE_OFF
+              - PTO_ENABLED
+              - PTO_DISABLED
+              - DISTANCE_TRAVELLED
+              - DRIVER_1_WORKING_STATE_CHANGED
+              - DRIVER_2_WORKING_STATE_CHANGED
+              - FUEL_TYPE_CHANGE
+              - PARKING_BRAKE_SWITCH_CHANGE
+              - BATTERY_PACK_CHARGING_STATUS_CHANGE
+              - BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE
+              - TRAILER_CONNECTED
+              - TRAILER_DISCONNECTED
+              - ALARM
+        - $ref: "#/components/parameters/lastVin"
+        - name: failedOnly
+          in: query
+          description: >-
+            If this value is set, it returns failed messages for the supplied subscription id.
+          required: false
+          schema:
+            type: string
+            example: SUBID12345
+      responses:
+        200:
+          description: OK
+          content:
+            "application/json; rfms=vehiclepositions.v5.0":
+              schema:
+                $ref: "#/components/schemas/VehiclePositionResponseObject"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        403:
+          $ref: "#/components/responses/Forbidden"
+        404:
+          $ref: "#/components/responses/NotFound"
+        406:
+          $ref: "#/components/responses/NotAcceptable"
+        429:
+          $ref: "#/components/responses/TooManyRequests"
+  /vehiclestatuses:
+    get:
+      tags:
+        - Vehicle Data
+      summary: Status for one or more vehicles
+      description:
+        "The vehicle status resource is used to get the status reports for one or
+        several vehicles.\n\n
+
+        The starttime, stoptime & latestOnly parameters can be used to get all historical
+        status reports between a start and stop time or the latest known status only.\n\n
+
+        The vin parameter can be used to get vehicle reports for one or more individual
+        vehicles.\n\n
+        If the vin parameter isn't set the response will contain all vehicles the client has
+        access to.\n\n
+
+        The failedOnly parameter can be used to get statuses that was not possible to push.
+        This regardless if the subscription is still active, paused or deleted. The failedOnly
+        parameter can only be used together with **starttime and/or stoptime and/or **
+        X-CorrelationId (all optional). Providing any other parameter will result
+        in an HTTP 400 error.\n\n
+
+        If a request is made for data in a period where no data has been received, an empty
+        list will be returned. The max number of items returned in one call is OEM specific.\n\n
+
+        It is mandatory to either supply the starttime (for historical requests), latestOnly
+        (for getting the latest data) or failedOnly (for failed pushes). If none of these
+        parameters are set, an HTTP 400 error will be returned indicating that the parameters
+        supplied are invalid.\n\n
+
+        If latestOnly and starttime and/or stoptime are set, an HTTP 400 error will be returned
+        indicating that the parameters supplied are invalid. If latestOnly and failedOnly are
+        set, an HTTP 400 error will be returned indicating that the parameters supplied are
+        invalid.\n\n
+
+        If the moreDataAvailable is set to true in the response and the latestOnly was set to true
+        in the request then the next request shall state the last received VIN to get the full set.
+        The vehicles are always returned in the same order, when using latestOnly. The ordering is
+        OEM specific.\n\n
+        If the moreDataAvailable is set to true in the response and the failedOnly was set
+        in the request, then the request shall be repeated to get the full set.\n\n
+        For the next starttime/stoptime request, set the start time to the last
+        ReceivedDateTime + 1 second of the last vehicle from the latest response.\n\n"
+      parameters:
+        - $ref: "#/components/parameters/xCorrelationId"
+        - $ref: "#/components/parameters/datetype"
+        - $ref: "#/components/parameters/starttime"
+        - $ref: "#/components/parameters/stoptime"
+        - $ref: "#/components/parameters/vin"
+        - name: contentFilter
+          in: query
+          description: >-
+            Will only return data reports that contain information in the
+            area defined by the filters. Detailed information for this parameter can
+            be found in the Content chapter. If this filter parameter isn't supplied
+            the returned reports contain all available blocks. If the content filter
+            is set and the latestOnly is set to true then the response will be the last
+            received data containing the data set in the content filter
+          required: false
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - ACCUMULATED
+                - SNAPSHOT
+                - UPTIME
+        - name: triggerFilter
+          in: query
+          description: >-
+            Will only return data reports that were triggered by the triggers
+            defined by the filter. Detailed information for this parameter can be found
+            in the Trigger filter chapter in the API documentation. If this filter parameter
+            isn't supplied the returned data reports contain data reports triggered
+            by any trigger.
+          required: false
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - TIMER
+                - TELL_TALE
+                - DRIVER_LOGIN
+                - DRIVER_LOGOUT
+                - IGNITION_ON
+                - IGNITION_OFF
+                - ENGINE_ON
+                - ENGINE_OFF
+                - PTO_ENABLED
+                - PTO_DISABLED
+                - DISTANCE_TRAVELLED
+                - DRIVER_1_WORKING_STATE_CHANGED
+                - DRIVER_2_WORKING_STATE_CHANGED
+                - FUEL_TYPE_CHANGE
+                - PARKING_BRAKE_SWITCH_CHANGE
+                - BATTERY_PACK_CHARGING_STATUS_CHANGE
+                - BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE
+                - TRAILER_CONNECTED
+                - TRAILER_DISCONNECTED
+                - ALARM
+        - name: latestOnly
+          in: query
+          description: >-
+            If this value is set to true only the last latest vehicle status
+            event, matching the trigger filter (if used), is returned for each vehicle
+            in the response. If this value is set to false (or not present) all vehicle
+            status events matching the starttime/stoptime criteria is returned for each
+            vehicle in the response.
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - $ref: "#/components/parameters/lastVin"
+        - name: failedOnly
+          in: query
+          description: >-
+            If this value is set, it returns failed messages for the supplied subscription id.
+          required: false
+          schema:
+            type: string
+            example: SUBID12345
+      responses:
+        200:
+          description: successful operation
+          content:
+            "application/json; rfms=vehiclestatuses.v5.0":
+              schema:
+                $ref: "#/components/schemas/VehicleStatusResponseObject"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        403:
+          $ref: "#/components/responses/Forbidden"
+        404:
+          $ref: "#/components/responses/NotFound"
+        406:
+          $ref: "#/components/responses/NotAcceptable"
+        429:
+          $ref: "#/components/responses/TooManyRequests"
+  /vehiclepositionsubscriptions:
+    get:
+      tags:
+        - Vehicle Data Subscription
+      summary: List of vehicle position subscriptions
+      description:
+        "The vehicle position subscription resource is used to get a list of all
+        vehicle position subscriptions."
+      parameters:
+        - $ref: "#/components/parameters/xCorrelationId"
+        - name: includeDeleted
+          in: query
+          description: >-
+            If this value is set to true also deleted subscriptions will be returned
+            TO DISCUSS: Move to PDF?
+            Deleted subscriptions will be retained for at least 3 months. An OEM can
+            decide to prolong this time.
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        200:
+          description: OK
+          content:
+            "application/json; rfms=vehiclepositionsubscriptions.v5.0":
+              schema:
+                $ref: "#/components/schemas/VehiclePositionSubscriptionListResponseObject"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        403:
+          $ref: "#/components/responses/Forbidden"
+        404:
+          $ref: "#/components/responses/NotFound"
+        406:
+          $ref: "#/components/responses/NotAcceptable"
+        429:
+          $ref: "#/components/responses/TooManyRequests"
+    post:
+      tags:
+        - Vehicle Data Subscription
+      summary: Create a subscription for vehicle positions
+      description:
+        "The vehicle position subscription is used to get the positions for
+        one or several vehicles pushed using callbacks to the client. The client can
+        choose to receive all data in the callback or just a notification that data is
+        available.\n\n
+
+        The vin parameter can be used to subscribe to positions for one or several
+        specific vehicles. If access to one of these vehicles are removed when the subscription is
+        active, it will be removed from the subscription\n\n
+
+        If the vin parameter isn't set the subscription will contain all vehicles the client has
+        access to. If the client gets access to more or less vehicles when the subscription
+        is active, the subscription is updated accordingly\n\n
+
+        The max number of items sent in one callback is OEM specific.\n\n
+
+        Before the subscription is created, a callback will be made with an empty list.
+        If the callback is successful the subscription will be created."
+      parameters:
+        - $ref: "#/components/parameters/xCorrelationId"
+        - $ref: "#/components/parameters/vin"
+        - name: triggerFilter
+          in: query
+          description: >-
+            Will only return data reports that was triggered by the triggers
+            defined by the filter. Detailed information for this parameter can be found
+            in the Trigger filter chapter in the API documentation.
+            If this filter parameter isn't supplied, data reports for all triggers will be returned.
+          required: false
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - TIMER
+                - TELL_TALE
+                - DRIVER_LOGIN
+                - DRIVER_LOGOUT
+                - IGNITION_ON
+                - IGNITION_OFF
+                - ENGINE_ON
+                - ENGINE_OFF
+                - PTO_ENABLED
+                - PTO_DISABLED
+                - DISTANCE_TRAVELLED
+                - DRIVER_1_WORKING_STATE_CHANGED
+                - DRIVER_2_WORKING_STATE_CHANGED
+                - FUEL_TYPE_CHANGE
+                - PARKING_BRAKE_SWITCH_CHANGE
+                - BATTERY_PACK_CHARGING_STATUS_CHANGE
+                - BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE
+                - TRAILER_CONNECTED
+                - TRAILER_DISCONNECTED
+                - ALARM
+        - name: notificationOnly
+          in: query
+          description: >-
+            If this value is set to true only a notification of new data is pushed.
+            If this value is set to false (or not present) the callback will contain all
+            new positions
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: test
+          in: query
+          description:
+            "Used to test a subscription. The subscription status will after
+            the test automatically be set to DELETED_BY_SERVER. No data from real
+            vehicles will be returned.\n\n
+            Possible values:\n\n
+            **ONE_CALLBACK** - One notification or one payload (dependent on
+            notificationOnly) is sent to the callbackUrl.\n\n"
+          required: false
+          schema:
+            type: string
+          example: ONE_CALLBACK
+      requestBody:
+        required: true
+        content:
+          "application/json; rfms=vehiclepositionsubscriptions.v5.0":
+            schema:
+              $ref: "#/components/schemas/SubscriptionCreateObject"
+      responses:
+        201:
+          description: Created
+          headers:
+            Location:
+              schema:
+                type: string
+                format: uri
+              description: URL to the created subscription including the unique subscription id
+              example: /rfms/vehiclepositionsubscriptions/SUBID12345
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        403:
+          $ref: "#/components/responses/Forbidden"
+        404:
+          $ref: "#/components/responses/NotFound"
+        406:
+          $ref: "#/components/responses/NotAcceptable"
+        429:
+          $ref: "#/components/responses/TooManyRequests"
+      callbacks:
+        vehiclePositionIncludingData:
+          "{$request.body#/callbackUrl}":
+            post:
+              description: |
+                When there is new data available matching the subscription and the
+                *notificationOnly* flag is set to false, this callback method is used
+                to deliver the data. The server can send one or many vehicle positions
+                in one callback dependent on how frequent the vehicles are reporting
+                positions.
+                **Note:** The client is only required to implement the callback method
+                of choice.
+              parameters:
+                - $ref: "#/components/parameters/callbackHeaderExample"
+              requestBody:
+                required: true
+                content:
+                  "application/json; rfms=vehiclepositions.v5.0":
+                    schema:
+                      $ref: "#/components/schemas/VehiclePositionCallbackObject"
+              responses:
+                204:
+                  description: Your server returns this code if it accepts the callback
+                400:
+                  $ref: "#/components/responses/BadRequest"
+                401:
+                  $ref: "#/components/responses/Unauthorized"
+                403:
+                  $ref: "#/components/responses/Forbidden"
+                404:
+                  $ref: "#/components/responses/NotFound"
+                406:
+                  $ref: "#/components/responses/NotAcceptable"
+                429:
+                  $ref: "#/components/responses/TooManyRequests"
+        vehiclePositionNotification:
+          "{$request.body#/callbackUrl}":
+            post:
+              description: |
+                When there is new data available matching the subscription and the
+                *notificationOnly* flag is set to true, this callback method is used to
+                deliver a notification that new data is available.
+                The server can send one or many notifications in one callback dependent
+                on how frequent the vehicles are reporting positions.
+                **Note:** The client is only required to implement the callback method
+                of choice.
+              parameters:
+                - $ref: "#/components/parameters/callbackHeaderExample"
+              requestBody:
+                required: true
+                content:
+                  "application/json; rfms=vehiclepositions.v5.0":
+                    schema:
+                      required:
+                        - vehiclePositionCallback
+                      type: object
+                      properties:
+                        vehiclePositionCallback:
+                          type: object
+                          properties:
+                            vehiclePositions:
+                              type: array
+                              items:
+                                required:
+                                  - receivedDateTime
+                                  - vin
+                                type: object
+                                properties:
+                                  vin:
+                                    $ref: "#/components/schemas/VinProperty"
+                                  receivedDateTime:
+                                    $ref: "#/components/schemas/ReceivedDateTimeProperty"
+                        serverDateTime:
+                          $ref: "#/components/schemas/ServerDateTimeProperty"
+              responses:
+                204:
+                  description: Your server returns this code if it accepts the callback
+                400:
+                  $ref: "#/components/responses/BadRequest"
+                401:
+                  $ref: "#/components/responses/Unauthorized"
+                403:
+                  $ref: "#/components/responses/Forbidden"
+                404:
+                  $ref: "#/components/responses/NotFound"
+                406:
+                  $ref: "#/components/responses/NotAcceptable"
+                429:
+                  $ref: "#/components/responses/TooManyRequests"
+  /vehiclepositionsubscriptions/{subscriptionId}:
+    patch:
+      summary: Pause or activate a subscription for vehicle positions
+      description:
+        "Pause or activate a subscription using the subscription id. The
+        subscription id is returned when the subscription is created and can also be
+        retrieved by listing the subscriptions.\n\n
+        It is only possible to pause active (ACTIVE->PAUSED) subscriptions and to
+        activate paused (PAUSED->ACTIVE) subscriptions. No other status transitions are
+        allowed and will return an HTTP 400\n\n"
+      tags:
+        - Vehicle Data Subscription
+      parameters:
+        - $ref: "#/components/parameters/xCorrelationId"
+        - name: subscriptionId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          "application/json; rfms=vehiclepositionsubscriptions.v5.0":
+            schema:
+              type: object
+              required:
+                - status
+              properties:
+                status:
+                  $ref: "#/components/schemas/SubscriptionStatusProperty"
+      responses:
+        204:
+          description: OK
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        403:
+          $ref: "#/components/responses/Forbidden"
+        404:
+          $ref: "#/components/responses/NotFound"
+        406:
+          $ref: "#/components/responses/NotAcceptable"
+        429:
+          $ref: "#/components/responses/TooManyRequests"
+    delete:
+      summary: Delete a subscription for vehicle positions
+      description:
+        "Delete a subscription using the subscription id. The subscription
+        id is returned when the subscription is created and can also be retrieved by
+        listing the subscriptions.\n\n
+        A deleted subscription will get the status DELETED_BY_CLIENT and cannot be
+        activated again.\n\n
+        Failed messages will be kept for later retreival."
+      tags:
+        - Vehicle Data Subscription
+      parameters:
+        - $ref: "#/components/parameters/xCorrelationId"
+        - name: subscriptionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: Deleted
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        403:
+          $ref: "#/components/responses/Forbidden"
+        404:
+          $ref: "#/components/responses/NotFound"
+        406:
+          $ref: "#/components/responses/NotAcceptable"
+        429:
+          $ref: "#/components/responses/TooManyRequests"
+
+  /vehiclestatussubscriptions:
+    get:
+      tags:
+        - Vehicle Data Subscription
+      summary: List of vehicle status subscriptions
+      description:
+        "The vehicle status subscription resource is used to get a list of all
+        vehicle status subscriptions."
+      parameters:
+        - $ref: "#/components/parameters/xCorrelationId"
+        - name: includeDeleted
+          in: query
+          description: >-
+            If this value is set to true also deleted subscriptions will be returned
+            TO DISCUSS: Move to PDF?
+            Deleted subscriptions will be retained for at least 3 months. An OEM can
+            decide to prolong this time.
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        200:
+          description: OK
+          content:
+            "application/json; rfms=vehiclestatussubscriptions.v5.0":
+              schema:
+                $ref: "#/components/schemas/VehicleStatusSubscriptionListResponseObject"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        403:
+          $ref: "#/components/responses/Forbidden"
+        404:
+          $ref: "#/components/responses/NotFound"
+        406:
+          $ref: "#/components/responses/NotAcceptable"
+        429:
+          $ref: "#/components/responses/TooManyRequests"
+    post:
+      tags:
+        - Vehicle Data Subscription
+      summary: Create a subscription for vehicle statuses
+      description:
+        "The vehicle status subscription is used to get the vehicle status for
+        one or several vehicles pushed using callbacks to the client. The client can
+        choose to receive all data in the callback or just a notification that data is
+        available.\n\n
+
+        The vin parameter can be used to subscribe to vehicle statuses for one or several
+        specific vehicles. If access to one of these vehicles are removed when the subscription is
+        active, it will be removed from the subscription\n\n
+
+        If the vin parameter isn't set the subscription will contain all vehicles the client has
+        access to. If the client gets access to more or less vehicles when the subscription
+        is active, the subscription is updated accordingly\n\n
+
+        The max number of items sent in one callback is OEM specific.\n\n
+
+        Before the subscription is created, a callback will be made with an empty list.
+        If the callback is successful the subscription will be created."
+      parameters:
+        - $ref: "#/components/parameters/xCorrelationId"
+        - $ref: "#/components/parameters/vin"
+        - name: contentFilter
+          in: query
+          description: >-
+            Will only return data reports that contain information in the
+            area defined by the filters. Detailed information for this parameter can
+            be found in the Content chapter.If this filter parameter isn't supplied
+            the returned reports contain all available blocks.
+          required: false
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - ACCUMULATED
+                - SNAPSHOT
+                - UPTIME
+        - name: triggerFilter
+          in: query
+          description: >-
+            Will only return data reports that were triggered by the triggers
+            defined by the filter. Detailed information for this parameter can be found
+            in the Trigger filter chapter in the API documentation. If this filter parameter isn't supplied,
+            data reports for all triggers will be returned.
+          required: false
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - TIMER
+                - TELL_TALE
+                - DRIVER_LOGIN
+                - DRIVER_LOGOUT
+                - IGNITION_ON
+                - IGNITION_OFF
+                - ENGINE_ON
+                - ENGINE_OFF
+                - PTO_ENABLED
+                - PTO_DISABLED
+                - DISTANCE_TRAVELLED
+                - DRIVER_1_WORKING_STATE_CHANGED
+                - DRIVER_2_WORKING_STATE_CHANGED
+                - FUEL_TYPE_CHANGE
+                - PARKING_BRAKE_SWITCH_CHANGE
+                - BATTERY_PACK_CHARGING_STATUS_CHANGE
+                - BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE
+                - TRAILER_CONNECTED
+                - TRAILER_DISCONNECTED
+                - ALARM
+        - name: notificationOnly
+          in: query
+          description: >-
+            If this value is set to true only a notification of new data is pushed.
+            If this value is set to false (or not present) the callback will contain all
+            new vehicle status.
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: test
+          in: query
+          description:
+            "Used to test a subscription. The subscription status will after
+            the test automatically be set to DELETED_BY_SERVER. No data from real
+            vehicles will be returned.\n\n
+            Possible values:\n\n
+            **ONE_CALLBACK** - One notification or one payload (dependent on
+            notificationOnly) is sent to the callbackUrl using the callbackAccessToken.\n\n"
+          required: false
+          schema:
+            type: string
+          example: ONE_CALLBACK
+      requestBody:
+        required: true
+        content:
+          "application/json; rfms=vehiclestatussubscriptions.v5.0":
+            schema:
+              $ref: "#/components/schemas/SubscriptionCreateObject"
+      responses:
+        201:
+          description: Created
+          headers:
+            Location:
+              schema:
+                type: string
+                format: uri
+              description: URL to the created subscription including the unique subscription id
+              example: /rfms/vehiclestatussubscriptions/SUBID12345
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        403:
+          $ref: "#/components/responses/Forbidden"
+        404:
+          $ref: "#/components/responses/NotFound"
+        406:
+          $ref: "#/components/responses/NotAcceptable"
+        429:
+          $ref: "#/components/responses/TooManyRequests"
+      callbacks:
+        vehicleStatusIncludingData:
+          "{$request.body#/callbackUrl}":
+            post:
+              description: |
+                When there is new data available matching the subscription and the
+                *notificationOnly* flag is set to false, this callback method is used
+                to deliver the data. The server can send one or many vehicle statuses
+                in one callback dependent on how frequent the vehicles are reporting vehicle statuses.
+                **Note:** The client is only required to implement the callback method
+                of choice.
+              parameters:
+                - $ref: "#/components/parameters/callbackHeaderExample"
+              requestBody:
+                required: true
+                content:
+                  "application/json; rfms=vehiclestatuses.v5.0":
+                    schema:
+                      $ref: "#/components/schemas/VehicleStatusCallbackObject"
+              responses:
+                204:
+                  description: Your server returns this code if it accepts the callback
+                400:
+                  $ref: "#/components/responses/BadRequest"
+                401:
+                  $ref: "#/components/responses/Unauthorized"
+                403:
+                  $ref: "#/components/responses/Forbidden"
+                404:
+                  $ref: "#/components/responses/NotFound"
+                406:
+                  $ref: "#/components/responses/NotAcceptable"
+                429:
+                  $ref: "#/components/responses/TooManyRequests"
+        vehicleStatusNotification:
+          "{$request.body#/callbackUrl}":
+            post:
+              description: |
+                When there is new data available matching the subscription and the
+                *notificationOnly* flag is set to true, this callback method is used to
+                deliver a notification that new data is available.
+                The server can send one or many notifications in one callback dependent
+                on how frequent the vehicles are reporting vehicle statuses.
+                **Note:** The client is only required to implement the callback method
+                of choice.
+              parameters:
+                - $ref: "#/components/parameters/callbackHeaderExample"
+              requestBody:
+                required: true
+                content:
+                  "application/json; rfms=vehiclestatuses.v5.0":
+                    schema:
+                      required:
+                        - vehicleStatusCallback
+                      type: object
+                      properties:
+                        vehicleStatusCallback:
+                          type: object
+                          properties:
+                            vehicleStatuses:
+                              type: array
+                              items:
+                                required:
+                                  - receivedDateTime
+                                  - vin
+                                type: object
+                                properties:
+                                  vin:
+                                    $ref: "#/components/schemas/VinProperty"
+                                  receivedDateTime:
+                                    $ref: "#/components/schemas/ReceivedDateTimeProperty"
+                        serverDateTime:
+                          $ref: "#/components/schemas/ServerDateTimeProperty"
+              responses:
+                204:
+                  description: Your server returns this code if it accepts the callback
+                400:
+                  $ref: "#/components/responses/BadRequest"
+                401:
+                  $ref: "#/components/responses/Unauthorized"
+                403:
+                  $ref: "#/components/responses/Forbidden"
+                404:
+                  $ref: "#/components/responses/NotFound"
+                406:
+                  $ref: "#/components/responses/NotAcceptable"
+                429:
+                  $ref: "#/components/responses/TooManyRequests"
+
+  /vehiclestatussubscriptions/{subscriptionId}:
+    patch:
+      summary: Pause or activate a subscription for vehicle statuses
+      description:
+        "Pause or activate a subscription using the subscription id. The
+        subscription id is returned when the subscription is created and can also be
+        retrieved by listing the subscriptions.\n\n
+        It is only possible to pause active (ACTIVE->PAUSED) subscriptions and to
+        activate paused (PAUSED->ACTIVE) subscriptions. No other status transitions are
+        allowed and will return an HTTP 400\n\n"
+      tags:
+        - Vehicle Data Subscription
+      parameters:
+        - $ref: "#/components/parameters/xCorrelationId"
+        - name: subscriptionId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          "application/json; rfms=vehiclestatussubscriptions.v5.0":
+            schema:
+              type: object
+              required:
+                - status
+              properties:
+                status:
+                  $ref: "#/components/schemas/SubscriptionStatusProperty"
+      responses:
+        204:
+          description: OK
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        403:
+          $ref: "#/components/responses/Forbidden"
+        404:
+          $ref: "#/components/responses/NotFound"
+        406:
+          $ref: "#/components/responses/NotAcceptable"
+        429:
+          $ref: "#/components/responses/TooManyRequests"
+    delete:
+      summary: Delete a subscription for vehicle statuses
+      description:
+        "Delete a subscription using the subscription id. The subscription
+        id is returned when the subscription is created and can also be retrieved by
+        listing the subscriptions.\n\n
+        A deleted subscription will get the status DELETED_BY_CLIENT and cannot be
+        activated again.\n\n
+        Failed messages will be kept for later retreival."
+      tags:
+        - Vehicle Data Subscription
+      parameters:
+        - $ref: "#/components/parameters/xCorrelationId"
+        - name: subscriptionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: Deleted
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        403:
+          $ref: "#/components/responses/Forbidden"
+        404:
+          $ref: "#/components/responses/NotFound"
+        406:
+          $ref: "#/components/responses/NotAcceptable"
+        429:
+          $ref: "#/components/responses/TooManyRequests"
+
+components:
+  schemas:
+    ErrorObject:
+      type: object
+      properties:
+        error:
+          type: string
+          description: An identifier for this error
+          example: UnsupportedAcceptParameter
+        error_description:
+          type: string
+          description: A description of the error
+          example: The provided accept parameter is not supported
+        error_uri:
+          type: string
+          description: A URI providing more information
+          example: https://oem.com/rfms/UnsupportedAcceptParameter.html
+      description: Optional responses for error codes, detailing the error if needed
+    VehicleResponseObject:
+      required:
+        - moreDataAvailable
+        - vehicleResponse
+      type: object
+      properties:
+        vehicleResponse:
+          type: object
+          properties:
+            vehicles:
+              type: array
+              items:
+                $ref: "#/components/schemas/VehicleObject"
+        moreDataAvailable:
+          type: boolean
+          description:
+            This will be set to true if the result set was too large to
+            be sent back in one reply. A new request must be sent to get the rest
+            of the vehicles, where the lastVin parameter must be supplied. The lastVin
+            should be set to the VIN of the last vehicle in the result set of this
+            message.
+        moreDataAvailableLink:
+          type: string
+          description:
+            Populated with the link to the next part of the result when
+            moreDataAvailable is true. The link is relative, i.e. starts with /rfms/vehicles,
+            and preserves any query parameters from the original request.
+          example: /rfms/vehicles?lastVin=ABC12345678901234
+    VehicleObject:
+      required:
+        - vin
+      type: object
+      properties:
+        vin:
+          $ref: "#/components/schemas/VinProperty"
+        customerVehicleName:
+          type: string
+          description: The customer's name for the vehicle.
+          example: Mike's truck
+        registrationNumber:
+          type: string
+          description: The registration number (license plate) of the vehicle
+          example: ABC 123
+        brand:
+          type: string
+          description:
+            The vehicle brand. rFMS standard values are VOLVO TRUCKS, SCANIA,
+            DAIMLER, IVECO, DAF, MAN, RENAULT TRUCKS, VDL, VOLVO BUSES, IVECO BUS,
+            HEULIEZ, VWTB, KENWORTH, PETERBILT, MACK TRUCKS, INTERNATIONAL, IC BUS
+            Other brand names are allowed
+          example: VOLVO TRUCKS
+        productionDate:
+          type: object
+          properties:
+            day:
+              type: integer
+              description: Day of the month where first day of the month is 1
+              example: 1
+            month:
+              type: integer
+              description: Month of the year, where January is value 1
+              example: 4
+            year:
+              type: integer
+              example: 2018
+          description: Indicates when the vehicle was produced.
+        type:
+          type: string
+          description: Indicates the type of vehicle. rFMS standard values are
+            TRUCK, BUS, VAN
+            Other types are allowed
+          example: TRUCK
+        model:
+          type: string
+          description: Indicates the model of the vehicle. OEM specific value.
+          example: FH
+        possibleFuelType:
+          type: array
+          description:
+            The possible fuel types supported by this vehicle, formatted
+            as the HEX id number according to SPN 5837 (J1939DA FEB24). This does NOT indicate which
+            fuel type that is presently being used.
+          items:
+            type: string
+            example: 1A
+        emissionLevel:
+          type: string
+          description: "The emission level this vehicle supports.
+            Possible values:\n
+            European Union, Heavy-Duty Truck and Bus Engines:\n
+            EURO_III, EURO_III_EEV, EURO_IV, EURO_V, EURO_VI, EURO_VII\n
+            European Union, Nonroad Engines:\n
+            EURO_STAGE_III, EURO_STAGE_IV, EURO_STAGE_V\n
+            United_States, Heavy-Duty Truck and Bus Engines:\n
+            EPA_2004, EPA_2007, EPA_2010, EPA_2015_NOX10, EPA_2015_NOX05, EPA_2015_NOX02\n
+            United_States, Nonroad Engines:\n
+            EPA_TIER_2, EPA_TIER_3, EPA_TIER_4_2008, EPA_TIER_4_2013\n
+            Brazil, Heavy-Duty Truck and Bus Engines:\n
+            PROCONVE_P5, PROCONVE_P6, PROCONVE_P7\n
+            Brazil, Nonroad Engines:\n
+            PROCONVE_MARI\n
+            Other emission level values are allowed"
+          example: EURO_VI
+        tellTaleCode:
+          type: string
+          description:
+            This parameter indicates how the tell tales shall be interpreted,
+            the code is unique for each OEM. One OEM can have different interpretations  depending
+            on vehicle type.
+        chassisType:
+          type: string
+          description: The chassis type of the vehicle. OEM specific value.
+            This is used mainly for buses
+        noOfAxles:
+          type: integer
+          description: Number of axles on the vehicle. This is used mainly for buses
+          example: 2
+        totalFuelTankVolume:
+          type: integer
+          description: Total fuel tank volume for all tanks in millilitres.
+          example: 500
+        totalFuelTankCapacityGaseous:
+          type: number
+          format: double
+          description: Total gas tank capacity for all tanks in kilograms.
+          example: 400.5
+        totalBatteryPackCapacity:
+          type: integer
+          description:
+            Total battery pack capacity in watt hours from the Vehicle
+            specification. The value is static, i.e. does not take aging into
+            consideration.
+          example: 200000
+        tachographType:
+          type: string
+          description: "The type of tachograph in the vehicle.
+            rFMS standard values MTCO, DTCO, TSU, DTCO_G1, DTCO_G2, NONE\n
+            DTCO - Digital tachograph, unknown generation\n
+            DTCO_G1 - Digital tachograph generation 1\n
+            DTCO_G2 - Digital tachograph generation 2\n
+            NONE - No tachograph in the vehicle\n
+            MTCO - Modular tachograph\n
+            TSU - Tachograph simulator\n
+            Other tachograph types are allowed"
+          example: MTCO
+        gearboxType:
+          type: string
+          description:
+            The type of gearbox the vehicle is equipped with. rFMS standard
+            values MANUAL, AUTOMATIC, SEMI_AUTOMATIC, NO_GEAR (e.g electrical)
+          example: AUTOMATIC
+        bodyType:
+          type: string
+          description:
+            The type of body on the chassis. rFMS standard values CITY_BUS,
+            INTERCITY_BUS, COACH. This is used mainly for buses.
+          example: CITY_BUS
+        doorConfiguration:
+          type: array
+          description:
+            "The door configuration. The door order definition is OEM specific.
+            E.g. [1, 2, 2] means the bus has 3 doors: 1 front door, double doors for
+            door 2 and 3. This is used mainly for buses."
+          example:
+            - 1
+            - 2
+            - 2
+          items:
+            type: integer
+        hasRampOrLift:
+          type: boolean
+          description: If the vehicle is equipped with a ramp or not. This is used mainly for buses.
+        authorizedPaths:
+          type: array
+          description: Paths that the client is authorized to call
+          example:
+            - /vehiclestatuses
+            - /vehiclepositions
+          items:
+            type: string
+    VehiclePositionResponseObject:
+      required:
+        - moreDataAvailable
+        - requestServerDateTime
+        - vehiclePositionResponse
+      type: object
+      properties:
+        vehiclePositionResponse:
+          type: object
+          properties:
+            vehiclePositions:
+              type: array
+              items:
+                $ref: "#/components/schemas/VehiclePositionObject"
+        moreDataAvailable:
+          type: boolean
+          description:
+            This will be set to true if the result set was too large to
+            be sent back in one reply. A new request must be sent to get the rest
+            of the vehicle positions, where the starttime parameter must be supplied.
+            The starttime should be set to the latest ReceivedDateTime + 1 second
+            of the last vehicle in the result set of this message.
+        moreDataAvailableLink:
+          type: string
+          description:
+            Populated with the link to the next part of the result when
+            moreDataAvailable is true. The link is relative, i.e. starts with /rfms/vehiclepositions,
+            and preserves any query parameters from the original request.
+          example: /rfms/vehiclepositions?starttime=2019-04-04T16:42:49Z&triggerFilter=TIMER
+        requestServerDateTime:
+          type: string
+          description:
+            Time to be used to ask for historical data at customers (for
+            starttime), to solve the problem of having different times at server and
+            clients. This is the time at the server when this request was received.
+            To avoid losing any messages or get duplicates, this is the time that
+            should be supplied in the startTime parameter in the next request in iso8601
+            format.
+          format: date-time
+    VehiclePositionCallbackObject:
+      required:
+        - serverDateTime
+        - vehiclePositionCallback
+      type: object
+      properties:
+        vehiclePositionCallback:
+          type: object
+          properties:
+            vehiclePositions:
+              type: array
+              items:
+                $ref: "#/components/schemas/VehiclePositionObject"
+        serverDateTime:
+          $ref: "#/components/schemas/ServerDateTimeProperty"
+    VehicleStatusCallbackObject:
+      required:
+        - serverDateTime
+        - vehicleStatusCallback
+      type: object
+      properties:
+        vehicleStatusCallback:
+          type: object
+          properties:
+            vehicleStatuses:
+              type: array
+              items:
+                $ref: "#/components/schemas/VehicleStatusObject"
+        serverDateTime:
+          $ref: "#/components/schemas/ServerDateTimeProperty"
+    VehiclePositionObject:
+      required:
+        - createdDateTime
+        - receivedDateTime
+        - triggerType
+        - vin
+      type: object
+      properties:
+        vin:
+          $ref: "#/components/schemas/VinProperty"
+        triggerType:
+          $ref: "#/components/schemas/TriggerObject"
+        createdDateTime:
+          $ref: "#/components/schemas/CreatedDateTimeProperty"
+        receivedDateTime:
+          $ref: "#/components/schemas/ReceivedDateTimeProperty"
+        gnssPosition:
+          $ref: "#/components/schemas/GNSSPositionObject"
+        wheelBasedSpeed:
+          type: number
+          description:
+            Wheel-Based Vehicle Speed in km/h (Speed of the vehicle as
+            calculated from wheel or tailshaft speed)
+          format: double
+          example: 54.3
+        tachographSpeed:
+          type: number
+          description:
+            Tachograph vehicle speed in km/h (Speed of the vehicle registered
+            by the tachograph)
+          format: double
+          example: 54.1
+    VehicleStatusResponseObject:
+      required:
+        - moreDataAvailable
+        - requestServerDateTime
+        - vehicleStatusResponse
+      type: object
+      properties:
+        vehicleStatusResponse:
+          type: object
+          properties:
+            vehicleStatuses:
+              type: array
+              items:
+                $ref: "#/components/schemas/VehicleStatusObject"
+        moreDataAvailable:
+          type: boolean
+          description:
+            This will be set to true if the result set was too large to
+            be sent back in one reply. A new request must be done to get the rest
+            of the vehicle statuses, where the starttime parameter must be supplied.
+            The starttime should be set to the ReceivedDateTime + 1 second of the
+            last vehicle in the result set of this message.
+        moreDataAvailableLink:
+          type: string
+          description:
+            Populated with the link to the next part of the result when
+            moreDataAvailable is true. The link is relative, i.e. starts with /rfms/vehiclestatuses,
+            and preserves any query parameters from the original request.
+          example: /rfms/vehiclestatuses?starttime=2019-04-04T16:42:49Z&triggerFilter=TIMER
+        requestServerDateTime:
+          type: string
+          description:
+            Time in UTC to be used to ask for historical data (for starttime),
+            to solve the problem of having different times at server and clients.
+            This is the time at the server when this request was received. To avoid
+            losing any messages or get duplicates, this is the time that should be
+            supplied in the startTime parameter in the next request in iso8601 format.
+          format: date-time
+    VehicleStatusObject:
+      required:
+        - createdDateTime
+        - receivedDateTime
+        - triggerType
+        - vin
+      type: object
+      properties:
+        vin:
+          $ref: "#/components/schemas/VinProperty"
+        triggerType:
+          $ref: "#/components/schemas/TriggerObject"
+        createdDateTime:
+          $ref: "#/components/schemas/CreatedDateTimeProperty"
+        receivedDateTime:
+          $ref: "#/components/schemas/ReceivedDateTimeProperty"
+        hrTotalVehicleDistance:
+          type: integer
+          description: Accumulated distance travelled by the vehicle during its
+            operation in meters. Should not be reset during lifetime of the vehicle.
+          format: int64
+          example: 34567891
+        totalEngineHours:
+          type: number
+          description:
+            The total hours of operation for the vehicle combustion engine
+            during its lifetime. At least one of totalEngineHours or
+            totalElectricMotorHours is mandatory. Should not be reset during lifetime
+            of the engine.
+          format: double
+          example: 1234.3
+        totalElectricMotorHours:
+          type: number
+          description:
+            The total hours the electric motor is ready for propulsion
+            (i.e. crank mode) during its lifetime. At least one of totalEngineHours
+            or totalElectricMotorHours is mandatory. Should not be reset during lifetime
+            of the motor.
+          format: double
+          example: 987.6
+        driver1Id:
+          $ref: "#/components/schemas/DriverIdObject"
+        grossCombinationVehicleWeight:
+          type: integer
+          description: The full vehicle weight in kg
+          example: 23456
+        engineTotalFuelUsed:
+          type: integer
+          description:
+            The total fuel the vehicle has used during its lifetime in
+            MilliLitres. At least one of engineTotalFuelUsed, totalFuelUsedGaseous
+            or totalElectricEnergyUsed is mandatory. Should not be reset during
+            lifetime of the vehicle.
+          format: int64
+          example: 7890123
+        totalFuelUsedGaseous:
+          type: number
+          format: double
+          description:
+            Total fuel consumed in kg (trip drive fuel + trip PTO governor
+            moving fuel + trip PTO governor non-moving fuel + trip idle fuel) over
+            the life of the engine. At least one of engineTotalFuelUsed,
+            totalFuelUsedGaseous or totalElectricEnergyUsed is mandatory.
+            Should not be reset during lifetime of the vehicle.
+          example: 7890123.5
+        totalElectricEnergyUsed:
+          type: integer
+          description:
+            Total electric energy consumed by the vehicle, excluding when
+            plugged in (vehicle coupler) for charging, (incl. motor, PTO, cooling,
+            etc.) during its lifetime, in watt hours. Recuperation is subtracted from the value.
+            At least one of engineTotalFuelUsed, totalFuelUsedGaseous or
+            totalElectricEnergyUsed is mandatory. Should not be reset during
+            lifetime of the vehicle.
+          format: int64
+          example: 123456789
+        totalElectricEnergyRecuperated:
+          type: integer
+          description: Total electric energy recuperated by the vehicle during
+            its lifetime, in watt hours. Should not be reset during lifetime
+            of the vehicle.
+          format: int64
+          example: 1234
+        status2OfDoors:
+          type: string
+          description: Composite indication of all bus door statuses. Bus specific parameter
+          example: ALL_DOORS_DISABLED
+          enum:
+            - ALL_DOORS_DISABLED
+            - AT_LEAST_ONE_DOOR_ENABLED
+            - ERROR
+            - NOT_AVAILABLE
+        doorStatus:
+          type: array
+          description: Individual status for each door. Bus specific parameter
+          items:
+            type: object
+            properties:
+              DoorEnabledStatus:
+                type: string
+                example: ENABLED
+                enum:
+                  - ENABLED
+                  - DISABLED
+                  - ERROR
+                  - NOT_AVAILABLE
+              DoorOpenStatus:
+                type: string
+                example: CLOSED
+                enum:
+                  - CLOSED
+                  - OPEN
+                  - ERROR
+                  - NOT_AVAILABLE
+              DoorLockStatus:
+                type: string
+                example: UNLOCKED
+                enum:
+                  - UNLOCKED
+                  - LOCKED
+                  - ERROR
+                  - NOT_AVAILABLE
+              DoorNumber:
+                type: integer
+                example: 1
+        accumulatedData:
+          $ref: "#/components/schemas/AccumulatedDataObject"
+        snapshotData:
+          $ref: "#/components/schemas/SnapshotDataObject"
+        uptimeData:
+          $ref: "#/components/schemas/UptimeDataObject"
+    AccumulatedDataObject:
+      type: object
+      description: The data items in the accumulated data section contains
+        values that start from zero.The OEM specifies if the values are reset
+        only when the vehicle is produced, or also at owner change and/or service activation.
+      properties:
+        durationWheelbasedSpeedOverZero:
+          type: integer
+          description: The time the vehicle speed has been over zero.
+          format: int64
+          example: 123456
+        distanceCruiseControlActive:
+          type: integer
+          description:
+            The distance the vehicle has been driven with cruise control
+            active
+          format: int64
+          example: 23456
+        durationCruiseControlActive:
+          type: integer
+          description: The time the vehicle has been driven with cruise control active
+          format: int64
+          example: 45678
+        fuelConsumptionDuringCruiseActive:
+          type: integer
+          description: The fuel the vehicle has consumed while driven with
+            cruise control active, in millilitres. At least one of
+            fuelConsumptionDuringCruiseActive, fuelConsumptionDuringCruiseActiveGaseous or
+            electricEnergyConsumptionDuringCruiseActive is mandatory.
+          format: int64
+          example: 987654
+        fuelConsumptionDuringCruiseActiveGaseous:
+          type: number
+          format: double
+          description: The gas the vehicle has consumed while driven with
+            cruise control active, in kilograms. At least one of
+            fuelConsumptionDuringCruiseActive, fuelConsumptionDuringCruiseActiveGaseous or
+            electricEnergyConsumptionDuringCruiseActive is mandatory.
+          example: 87654.5
+        electricEnergyConsumptionDuringCruiseActive:
+          type: integer
+          description:
+            The electric energy the vehicle has consumed while driven with
+            cruise control active, in watt-hours. At least one of
+            fuelConsumptionDuringCruiseActive, fuelConsumptionDuringCruiseActiveGaseous or
+            electricEnergyConsumptionDuringCruiseActive is mandatory.
+          format: int64
+          example: 459775
+        durationWheelbasedSpeedZero:
+          type: integer
+          description:
+            The time the vehicle speed has been equal to zero, in seconds.
+            Engine on (RPM>0 or electic motor in crank mode) and no PTO active
+          format: int64
+          example: 12345
+        fuelWheelbasedSpeedZero:
+          type: integer
+          description:
+            The fuel the vehicle has consumed while the vehicle speed has
+            been equal to zero. Engine on (RPM>0) and no PTO active. Unit in millilitres.
+            At least one of fuelWheelbasedSpeedZero, fuelWheelbasedSpeedZeroGaseous or
+            electricEnergyWheelbasedSpeedZero is mandatory.
+          format: int64
+          example: 87654
+        fuelWheelbasedSpeedZeroGaseous:
+          type: number
+          format: double
+          description:
+            The gas the vehicle has consumed while the vehicle speed has
+            been equal to zero. Engine on (RPM>0) and no PTO active. Unit in kilograms.
+            At least one of fuelWheelbasedSpeedZero, fuelWheelbasedSpeedZeroGaseous or
+            electricEnergyWheelbasedSpeedZero is mandatory.
+          example: 56745.5
+        electricEnergyWheelbasedSpeedZero:
+          type: integer
+          description:
+            The electric energy the vehicle has consumed while the vehicle
+            speed has been equal to zero. Electric motor is in crank mode and no PTO
+            active. Unit in watt-hours.
+            At least one of fuelWheelbasedSpeedZero, fuelWheelbasedSpeedZeroGaseous or
+            electricEnergyWheelbasedSpeedZero is mandatory.
+          format: int64
+          example: 8547594
+        fuelWheelbasedSpeedOverZero:
+          type: integer
+          description:
+            The fuel the vehicle has consumed while the vehicle speed has
+            been over zero. Engine on (RPM>0). Unit in millilitres.
+            At least one of fuelWheelbasedSpeedOverZero, fuelWheelbasedSpeedOverZeroGaseous or
+            electricEnergyWheelbasedSpeedOverZero is mandatory.
+          format: int64
+          example: 764847
+        fuelWheelbasedSpeedOverZeroGaseous:
+          type: number
+          format: double
+          description:
+            The gas the vehicle has consumed while the vehicle speed has
+            been over zero. Engine on (RPM>0). Unit in kilograms.
+            At least one of fuelWheelbasedSpeedOverZero, fuelWheelbasedSpeedOverZeroGaseous or
+            electricEnergyWheelbasedSpeedOverZero is mandatory.
+          example: 873733.5
+        electricEnergyWheelbasedSpeedOverZero:
+          type: integer
+          description:
+            The electric energy the vehicle has consumed (including recuperation)
+            while the vehicle speed has been over zero. Electric motor is in crank
+            mode. Unit in watt-hours.
+            At least one of fuelWheelbasedSpeedOverZero, fuelWheelbasedSpeedOverZeroGaseous or
+            electricEnergyWheelbasedSpeedOverZero is mandatory.
+          format: int64
+          example: 28746443
+        electricEnergyAux:
+          type: integer
+          description:
+            "The electric energy the auxiliary systems have consumed, in
+            watt hours. Auxiliary systems are all consumers except electric motor(s)
+            and PTO(s). "
+          format: int64
+          example: 14279
+        ptoActiveClass:
+          type: array
+          description: "Label WHEELBASED_SPEED_ZERO\n
+            At least one PTO active during wheelbased speed=0\n
+            Counters for time (seconds) and consumption (millilitres, kilograms, watt-hours)\n
+            Label WHEELBASED_SPEED_OVER_ZERO\n
+            At least one PTO active during wheelbased speed>0\n
+            Counters for time (seconds), distance (meter) and consumption (millilitres, kilograms, watt-hours)"
+          example:
+            - label: WHEELBASED_SPEED_OVER_ZERO
+              seconds: 12345
+              meters: 2345
+              milliLitres: 3456
+              kilograms: 2345
+              watthours: 287588
+          items:
+            $ref: "#/components/schemas/LabelObject"
+        brakePedalCounterSpeedOverZero:
+          type: integer
+          description:
+            The total number of times the brake pedal has been used while
+            the vehicle was driving.
+          format: int64
+          example: 12765
+        distanceBrakePedalActiveSpeedOverZero:
+          type: integer
+          description:
+            The total distance the vehicle has driven where the brake pedal
+            has been used. Unit Meters.
+          format: int64
+          example: 1456
+        accelerationPedalPositionClass:
+          type: array
+          description:
+            In percent. Minimum 5 classes [0, 20[ [20, 40[ [40, 60[ [60,
+            80[ [80, 100]
+          example:
+            - from: 0
+              to: 20
+              seconds: 23456
+              meters: 345678
+              milliLitres: 678345
+              kilograms: 564743
+              watthours: 9897354
+          items:
+            $ref: "#/components/schemas/FromToClassObject"
+        brakePedalPositionClass:
+          type: array
+          description:
+            In percent. Minimum 5 classes [0, 20[ [20, 40[ [40, 60[ [60,
+            80[ [80, 100]
+          example:
+            - from: 0
+              to: 20
+              seconds: 2456
+              meters: 34578
+              milliLitres: 67345
+              kilograms: 564743
+              watthours: 9897354
+          items:
+            $ref: "#/components/schemas/FromToClassObject"
+        accelerationClass:
+          type: array
+          description: "In m/s2. Minimum 13 classes.\n\n
+            ], -1.1] ]-1.1, -0.9] ]-0.9, -0.7] ]-0.7, -0.5] ]-0.5, -0.3] ]-0.3, -0.1] ]-0.1,
+            0.1[ [0.1, 0.3[ [0.3, 0.5[ [0.5, 0.7[ [0.7, 0.9[ [0.9, 1.1[ [1.1, ["
+          example:
+            - from: -1.1
+              to: -0.9
+              seconds: 23456
+              meters: 345678
+              milliLitres: 678345
+              kilograms: 564743
+              watthours: 9897354
+          items:
+            $ref: "#/components/schemas/FromToClassObject"
+        highAccelerationClass:
+          type: array
+          description:
+            "In m/s2 Minimum 11 classes ], -3.0] ]-3.0, -2.5] ]-2.5, -2.0]
+            ]-2.0, -1.5] ]-1.5, -1.1] ]-1.1, 1.1[ [1.1, 1.5[ [1.5, 2.0[ [2.0, 2.5[
+            [2.5, 3.0[ [3.0, ["
+          example:
+            - from: -3.0
+              to: -2.5
+              seconds: 23456
+              meters: 345678
+              milliLitres: 678345
+              kilograms: 564743
+              watthours: 9897354
+          items:
+            $ref: "#/components/schemas/FromToClassObject"
+        retarderTorqueClass:
+          type: array
+          description:
+            In percent (how the retarder is used as a positive value).
+            Minimum 5 classes ]0, 20[ [20, 40[ [40, 60[ [60, 80[ [80, 100]
+          example:
+            - from: 0
+              to: 20
+              seconds: 23456
+              meters: 345678
+              milliLitres: 678345
+              kilograms: 564743
+              watthours: 9897354
+          items:
+            $ref: "#/components/schemas/FromToClassObject"
+        drivingWithoutTorqueClass:
+          type: array
+          description:
+            Driving without torque, with gear (clutch is engaged) Labels
+            DRIVING_WITHOUT_TORQUE
+          example:
+            - label: DRIVING_WITHOUT_TORQUE
+              seconds: 12345
+              meters: 2345
+              milliLitres: 3456
+              kilograms: 2345
+              watthours: 287588
+          items:
+            $ref: "#/components/schemas/LabelObject"
+        engineTorqueClass:
+          type: array
+          description:
+            "In percent based on EEC1 value (Actual Engine-Percent Torque).
+            Minimum 10 classes [0, 10[ [10, 20[ [20, 30[ [30, 40[ [40, 50[ [50, 60[
+            [60, 70[ [70, 80[ [80, 90[ [90, 100]"
+          example:
+            - from: 0
+              to: 10
+              seconds: 23456
+              meters: 345678
+              milliLitres: 678345
+              kilograms: 2345
+          items:
+            $ref: "#/components/schemas/FromToClassObjectCombustion"
+        electricMotorTorqueClass:
+          type: array
+          description:
+            "In percent (Actual Engine-Percent Torque). Minimum 10 classes
+            [0, 10[ [10, 20[ [20, 30[ [30, 40[ [40, 50[ [50, 60[ [60, 70[ [70, 80[
+            [80, 90[ [90, 100]"
+          example:
+            - from: 0
+              to: 10
+              seconds: 23456
+              meters: 345678
+              watthours: 6778345
+          items:
+            $ref: "#/components/schemas/FromToClassObjectElectrical"
+        engineTorqueAtCurrentSpeedClass:
+          type: array
+          description:
+            "In percent based on EEC2 value (Engine Percent Load At Current
+            Speed). Minimum 10 classes [0, 10[ [10, 20[ [20, 30[ [30, 40[ [40, 50[
+            [50, 60[ [60, 70[ [70, 80[ [80, 90[ [90, 100]"
+          example:
+            - from: 0
+              to: 10
+              seconds: 23456
+              meters: 345678
+              milliLitres: 678345
+              kilograms: 234545
+          items:
+            $ref: "#/components/schemas/FromToClassObjectCombustion"
+        electricMotorTorqueAtCurrentSpeedClass:
+          type: array
+          description:
+            "In percent (Engine Percent Load At Current Speed). Minimum
+            10 classes [0, 10[ [10, 20[ [20, 30[ [30, 40[ [40, 50[ [50, 60[ [60, 70[
+            [70, 80[ [80, 90[ [90, 100]"
+          example:
+            - from: 0
+              to: 10
+              seconds: 23456
+              meters: 345678
+              watthours: 6784345
+          items:
+            $ref: "#/components/schemas/FromToClassObjectElectrical"
+        vehicleSpeedClass:
+          type: array
+          description:
+            "In km/h Minimum 40 classes. [0, 4[ [4, 8[ [8, 12[ [12, 16[
+            [16, 20[ [20, 24[ ... [156, [ Engine on (RPM>0 or electric motor in crank
+            mode)"
+          example:
+            - from: 0
+              to: 4
+              seconds: 23456
+              meters: 345678
+              milliLitres: 678345
+              kilograms: 564743
+              watthours: 9897354
+          items:
+            $ref: "#/components/schemas/FromToClassObject"
+        engineSpeedClass:
+          type: array
+          description:
+            "Classes refer to the RPM of the combustion engine. Only mandatory
+            if the vehicle has a combustion engine for propulsion. Minimum 10 classes
+            [0, 400[ [400, 800[ [800, 1200[ [1200, 1600[ [1600, 2000[ [2000, 2400[
+            [2400, 2800[ [2800, 3200[ [3200, 3600[ [3600, [
+            Note: Engine on (RPM>0 or electric motor in crank mode)"
+          example:
+            - from: 0
+              to: 400
+              seconds: 23456
+              meters: 345678
+              milliLitres: 678345
+              kilograms: 564743
+              watthours: 9897354
+          items:
+            $ref: "#/components/schemas/FromToClassObject"
+        accelerationDuringBrakeClass:
+          type: array
+          description:
+            "In m/s2 Minimum 13 classes. ], -1.1] ]-1.1, -0.9] ]-0.9, -0.7]
+            ]-0.7, -0.5] ]-0.5, -0.3] ]-0.3, -0.1] ]-0.1, 0.1[ [0.1, 0.3[ [0.3, 0.5[
+            [0.5, 0.7[ [0.7, 0.9[ [0.9, 1.1[ [1.1, ["
+          example:
+            - from: -1.1
+              to: -0.9
+              seconds: 23456
+              meters: 345678
+              milliLitres: 678345
+              kilograms: 564743
+              watthours: 9897354
+          items:
+            $ref: "#/components/schemas/FromToClassObject"
+        selectedGearClass:
+          type: array
+          description:
+            The currently selected gear One class per gear. Neutral is
+            also a gear. Park is also a gear. This is formatted according to SPN 524,
+            supplied as a decimal value. Example 0 = Neutral, 1 = 1:st gear... This
+            is mainly used for Buses.
+          example:
+            - label: "0"
+              seconds: 12345
+              meters: 2345
+              milliLitres: 3456
+              kilograms: 5647
+              watthours: 98973
+          items:
+            $ref: "#/components/schemas/LabelObject"
+        currentGearClass:
+          type: array
+          description:
+            The currently used gear One class per gear. Neutral is also
+            a gear. Park is also a gear. This is formatted according to SPN 523, supplied
+            as a decimal value. Example 0 = Neutral, 1 = 1:st gear... This is mainly
+            used for Buses.
+          example:
+            - label: "0"
+              seconds: 12345
+              meters: 2345
+              milliLitres: 3456
+              kilograms: 5647
+              watthours: 98973
+          items:
+            $ref: "#/components/schemas/LabelObject"
+        chairliftCounter:
+          type: integer
+          description:
+            The total number of times the chairlift has been outside the
+            bus. This is mainly used for Buses
+          format: int64
+          example: 568
+        stopRequestCounter:
+          type: integer
+          description:
+            The total number of stop requests made. This is mainly used
+            for Buses
+          format: int64
+          example: 4567
+        kneelingCounter:
+          type: integer
+          description: The total number of times the bus has knelt.
+          format: int64
+          example: 976
+        pramRequestCounter:
+          type: integer
+          description:
+            The total number of pram requests made. This is mainly used
+            for Buses
+          format: int64
+          example: 123
+        electricPowerRecuperationClass:
+          type: array
+          deprecated: true
+          description:
+            "Classes refer to the recuperated electric power in kilowatt
+            Minimum 11 classes [0, 100[ [100, 200[ [200, 300[ ... [900, 1000[ [1000,
+            ["
+          example:
+            - from: 0
+              to: 100
+              seconds: 23456
+              meters: 345678
+              watthours: 4353945
+          items:
+            $ref: "#/components/schemas/FromToClassObjectElectrical"
+        electricPowerRecuperationClassV2:
+          type: array
+          description:
+            "Classes refer to the recuperated electric power in kilowatt
+            Minimum 21 classes [0, 50[ [50, 100[ [100, 150[ ... [950, 1000[ [1000,
+            [\n\n
+            This parameter replaces electricPowerRecuperationClass with a higher resolution"
+          example:
+            - from: 0
+              to: 50
+              seconds: 23456
+              meters: 345678
+              watthours: 4353945
+          items:
+            $ref: "#/components/schemas/FromToClassObjectElectrical"
+    SnapshotDataObject:
+      type: object
+      properties:
+        gnssPosition:
+          $ref: "#/components/schemas/GNSSPositionObject"
+        wheelBasedSpeed:
+          type: number
+          description: The vehicle wheelbased speed
+          format: double
+          example: 54.3
+        tachographSpeed:
+          type: number
+          description: The Tacho speed
+          format: double
+          example: 54.4
+        engineSpeed:
+          type: number
+          description: The engine (Diesel/gaseous) speed in rev/min
+          format: double
+          example: 1234.0
+        electricMotorSpeed:
+          type: number
+          description: The electric motor speed in rev/min
+          format: double
+          example: 346.0
+        ignition:
+          type: string
+          description: Indicates if the ignition is on or off
+          enum:
+            - ON
+            - OFF
+          example: ON
+        fuelType:
+          type: string
+          description:
+            Type of fuel currently being utilized by the vehicle acc. SPN
+            5837 (J1939DA FEB24)
+          example: 1A
+        fuelLevel1:
+          type: number
+          description: The fuel level percentage
+          format: double
+          example: 86.0
+        fuelLevel2:
+          type: number
+          description: >-
+            Ratio of volume of fuel to the total volume of fuel storage
+            container, in percent. When Fuel Level 2 is not used, Fuel Level 1 represents
+            the total fuel in all fuel storage containers.  When Fuel Level 2 is used,
+            Fuel Level 1 represents the fuel level in the primary or left-side fuel
+            storage container.
+          format: double
+          example: 45.0
+        catalystFuelLevel:
+          type: number
+          description: The adblue level percentage
+          format: double
+          example: 43.0
+        driver1WorkingState:
+          $ref: "#/components/schemas/DriverWorkingStateProperty"
+        driver2Id:
+          $ref: "#/components/schemas/DriverIdObject"
+        driver2WorkingState:
+          $ref: "#/components/schemas/DriverWorkingStateProperty"
+        ambientAirTemperature:
+          type: number
+          description: The Ambient air temperature in Celsius
+          format: double
+          example: 23.7
+        parkingBrakeSwitch:
+          type: boolean
+          description:
+            "Switch signal which indicates when the parking brake is set.
+            In general the switch actuated by the operator's park brake control, whether
+            a pedal, lever or other control mechanism\n
+            true - parking brake set\n
+            false - parking brake not set"
+          example: false
+        hybridBatteryPackRemainingCharge:
+          type: number
+          description: "Indicates the hybrid battery pack remaining charge.\n
+            0% means no charge remaining,\n
+            100% means full charge remaining.\n
+            Is used as well for full electrical vehicles"
+          format: double
+          example: 76.0
+        batteryPackChargingStatus:
+          type: string
+          description:
+            "Indicates the charging status of the battery pack. Recuperation
+            is excluded.\n
+            Not charging - No charging\n
+            Charging - Charging ongoing (AC or DC is unknown)\n
+            Charging AC - Charging ongoing using AC\n
+            Charging DC - Charging ongoing using DC\n
+            Error - An error occurred when charging\n
+            Not available - Charging status is not available"
+          example: CHARGING
+          enum:
+            - NOT_CHARGING
+            - CHARGING
+            - CHARGING_AC
+            - CHARGING_DC
+            - ERROR
+            - NOT_AVAILABLE
+        batteryPackChargingConnectionStatus:
+          type: string
+          description:
+            "Indicates the charging connection status of the battery pack.\n
+            Connecting - A charger is being connected\n
+            Connected - A charger is connected\n
+            Disconnecting - A charger is being disconnected\n
+            Disconnected - No charger is connected\n
+            Error - An error occurred when connecting or disconnecting\n
+            Not available - Charging connection status is not available"
+          example: ERROR
+          enum:
+            - CONNECTING
+            - CONNECTED
+            - DISCONNECTING
+            - DISCONNECTED
+            - ERROR
+            - NOT_AVAILABLE
+        batteryPackChargingDevice:
+          type: string
+          description:
+            "Device used to charge the battery pack. Standard rFMS values
+            taken from ISO 15118 (OEM can have additional values):\n
+            ACD - Automatic Connection Device\n
+            WPT - Wireless Power Transfer\n
+            VEHICLE_COUPLER - manual connection of a flexible cable to an EV\n
+            NONE - No device connected\n
+            NOT_AVAILABLE - Unknown"
+          example: VEHICLE_COUPLER
+        batteryPackChargingPower:
+          type: number
+          description: Charging power in watts.
+          format: double
+          example: 3500.0
+        estimatedTimeBatteryPackChargingCompleted:
+          type: string
+          description: Estimated time when charging has reached the target level.
+          format: date-time
+        estimatedDistanceToEmpty:
+          type: object
+          description: Estimated distance to empty (tanks and/or battery packs) in meters
+          properties:
+            total:
+              type: integer
+              description: Estimated distance to empty, summarizing fuel, gas and battery in meters
+              format: int64
+              example: 503700
+            fuel:
+              type: integer
+              description: Estimated distance to empty, fuel tank, in meters
+              format: int64
+              example: 457600
+            gas:
+              type: integer
+              description: Estimated distance to empty, gas tank, in meters
+              format: int64
+              example: 299200
+            batteryPack:
+              type: integer
+              description: Estimated distance to empty, battery pack, in meters
+              format: int64
+              example: 150900
+        vehicleAxles:
+          type: array
+          description: A list of vehicle axles
+          items:
+            type: object
+            properties:
+              vehicleAxlePosition:
+                type: integer
+                description:
+                  Axle position from 1 to 15, 1 being in the front of the
+                  truck
+                example: 1
+              vehicleAxleLoad:
+                type: number
+                description: The static vertical load of a vehicle axle in kilograms.
+                example: 4556.5
+              vehicleTires:
+                type: array
+                description: A list of vehicle tires
+                items:
+                  type: object
+                  properties:
+                    vehicleTirePosition:
+                      type: integer
+                      description:
+                        Tire position (on the specified axle) from 1 to 15,
+                        counting left to right when facing in the direction of
+                        normal vehicle travel (forward).
+                      example: 1
+                    vehicleTirePressure:
+                      type: integer
+                      description: Tire pressure in kPa.
+                      example: 900
+        trailers:
+          type: array
+          description: List of trailers connected to the truck.
+          items:
+            type: object
+            properties:
+              trailerNo:
+                type: integer
+                description:
+                  Trailer number from 1 to 5, 1 being closest to the truck,
+                  according to ISO 11992-2.
+                example: 1.0
+              trailerIdentificationData:
+                type: string
+                description:
+                  The identification data sent by the trailer to the truck
+                  in the RGE23 message of ISO 11992-2. An alternative source is the
+                  DID (Data identifier definition) record VIN, as specified in ISO
+                  11992-4. Even though both ISO 11992-2 and ISO 11992-4 specifies
+                  this as a VIN, the actual data sent from a trailer is not always
+                  the true VIN of the trailer.
+                example: ABC12345678901234
+              trailerVin:
+                type: string
+                description:
+                  The vehicle identification number of the trailer. See
+                  ISO 3779 (17 characters) If the trailerIdentificationData is reporting
+                  a true VIN, trailerVin will have the same value. If it is possible
+                  to map the trailerIdentificationData to a true VIN using other sources,
+                  the value can be provided here.
+                example: ABC12345678901234
+              customerTrailerName:
+                type: string
+                description: The customer's name for the trailer
+                example: Fridge trailer 5
+              trailerType:
+                type: string
+                description:
+                  Indicates the type of the trailer. The type is sent in
+                  the EBS24 message of  ISO 11992-2.
+                example: SEMI_TRAILER
+                enum:
+                  - SEMI_TRAILER
+                  - CENTRE_AXLE_TRAILER
+                  - FULL_TRAILER
+                  - CONVERTER_DOLLY
+                  - LINK_TRAILER
+                  - TOWING_SEMI_TRAILER
+                  - TOWING_CENTRE_AXLE_TRAILER
+                  - TOWING_FULL_TRAILER
+                  - UNKNOWN
+              trailerAxleLoadSum:
+                type: integer
+                description:
+                  The sum of the static vertical loads of the trailer axles
+                  in kilograms. The load is sent in the EBS22 message of ISO 11992-2.
+                example: 16200
+              trailerAxles:
+                type: array
+                description: A list of trailer axles
+                items:
+                  type: object
+                  properties:
+                    trailerAxlePosition:
+                      type: integer
+                      description:
+                        Axle position from 1 to 15, 1 being in the front
+                        closest to the truck, according to ISO 11992-2.
+                      example: 1
+                    trailerAxleLoad:
+                      type: number
+                      description:
+                        The static vertical load of a trailer axle in kilograms.
+                        The load is sent in the RGE22 message of ISO11992-2.
+                      example: 456.5
+    UptimeDataObject:
+      required:
+        - tellTaleInfo
+      type: object
+      properties:
+        tellTaleInfo:
+          type: array
+          description: List of tell tales with the actual status for each tell tale.
+          items:
+            $ref: "#/components/schemas/TellTaleObject"
+        serviceDistance:
+          type: integer
+          description: The distance in meter to the next service
+          format: int64
+          example: 100000
+        engineCoolantTemperature:
+          type: number
+          description: The temperature of the coolant liquid in Celsius
+          format: double
+          example: 90.0
+        hvessOutletCoolantTemperature:
+          type: number
+          description:
+            The temperature of the battery pack coolant in Celsius HVESS
+            - High Voltage Energy Storage System
+          format: double
+          example: 70.0
+        hvessTemperature:
+          type: number
+          description:
+            The temperature of the battery pack in Celsius HVESS - High
+            Voltage Energy Storage System
+          format: double
+          example: 35.0
+        serviceBrakeAirPressureCircuit1:
+          type: integer
+          description: The air pressure in circuit 1 in Pascal.
+          format: int64
+          example: 512000
+        serviceBrakeAirPressureCircuit2:
+          type: integer
+          description: The air pressure in circuit 2 in Pascal.
+          format: int64
+          example: 534000
+        durationAtLeastOneDoorOpen:
+          type: integer
+          description:
+            The total time at least one door has been opened in the bus.
+            (seconds) Used mainly for buses.
+          format: int64
+        alternatorInfo:
+          type: object
+          properties:
+            alternatorStatus:
+              type: string
+              example: CHARGING
+              enum:
+                - NOT_CHARGING
+                - CHARGING
+                - ERROR
+                - NOT_AVAILABLE
+            alternatorNumber:
+              type: integer
+              format: int64
+              example: 1
+          description:
+            The alternator status of the up to 4 alternators. Used mainly
+            for buses.
+        bellowPressureFrontAxleLeft:
+          type: integer
+          description:
+            The bellow pressure in the front axle left side in Pascal.
+            Used mainly for buses.
+          format: int64
+          example: 234000
+        bellowPressureFrontAxleRight:
+          type: integer
+          description:
+            The bellow pressure in the front axle right side in Pascal.
+            Used mainly for buses.
+          format: int64
+          example: 234000
+        bellowPressureRearAxleLeft:
+          type: integer
+          description:
+            The bellow pressure in the rear axle left side in Pascal. Used
+            mainly for buses.
+          format: int64
+          example: 234000
+        bellowPressureRearAxleRight:
+          type: integer
+          description:
+            The bellow pressure in the rear axle right side in Pascal.
+            Used mainly for buses.
+          format: int64
+          example: 234000
+
+    SubscriptionCreateObject:
+      required:
+        - callbackUrl
+      type: object
+      properties:
+        callbackAccessToken:
+          $ref: "#/components/schemas/CallbackAccessTokenProperty"
+        callbackAccessTokenExpiresIn:
+          $ref: "#/components/schemas/CallbackAccessTokenExpiresInProperty"
+        callbackHeaders:
+          $ref: "#/components/schemas/CallbackHeaderArray"
+        callbackUrl:
+          $ref: "#/components/schemas/CallbackUrlProperty"
+        callbackTokenScope:
+          $ref: "#/components/schemas/CallbackTokenScopeProperty"
+        callbackClientId:
+          $ref: "#/components/schemas/callbackClientIdProperty"
+    VehiclePositionSubscriptionListResponseObject:
+      required:
+        - vehiclePositionSubscriptionResponse
+      type: object
+      properties:
+        vehiclePositionSubscriptionResponse:
+          type: object
+          properties:
+            vehiclePositionSubscriptions:
+              type: array
+              items:
+                $ref: "#/components/schemas/SubscriptionListObject"
+    SubscriptionListObject:
+      required:
+        - subscriptionId
+        - status
+        - url
+        - callbackUrl
+        - createdDateTime
+        - totalFailedCount
+        - hasFailedDataStored
+        - test
+      type: object
+      properties:
+        callbackClientId:
+          $ref: "#/components/schemas/callbackClientIdProperty"
+        subscriptionId:
+          type: string
+          description: A unique identifier for the subscription
+          example: SUBID12345
+        status:
+          $ref: "#/components/schemas/SubscriptionStatusProperty"
+        statusReason:
+          $ref: "#/components/schemas/StatusReasonProperty"
+        statusReasonDetailed:
+          type: string
+          description: Additional OEM specific information regarding the reason for the status
+          example: Access token expired 2023-08-08T15:57:23Z
+        pausedDateTime:
+          type: string
+          format: date-time
+          description:
+            Date and time when the subscription was paused. (Only populated if the
+            subscription status is PAUSED)
+          example: "2023-08-08T16:11:34Z"
+        deletedDateTime:
+          type: string
+          format: date-time
+          description:
+            Date and time when the subscription was deleted. (Only populated if the
+            subscription status is DELETED_BY_CLIENT or DELETED_BY_SERVER)
+          example: "2023-08-08T16:11:34Z"
+        url:
+          type: string
+          format: uri
+          description: The url used to create the subscription
+          example: https://oem.example.com/rfms/vehiclepositionsubscriptions?vin=ABC12345678901234
+        callbackUrl:
+          $ref: "#/components/schemas/CallbackUrlProperty"
+        createdDateTime:
+          type: string
+          format: datetime
+          description: Date and time when the subscription was created.
+          example: "2023-08-08T16:11:34Z"
+        latestSuccessfulCallback:
+          type: string
+          format: datetime
+          description: Date and time of the last successful callback.
+          example: "2023-08-08T16:11:34Z"
+        latestFailedCallback:
+          type: string
+          format: datetime
+          description: Date and time of the last failed callback.
+          example: "2023-08-08T16:11:34Z"
+        latestFailedCallbackHttpCode:
+          type: integer
+          description: HTTP code of the last failed callback
+          example: 404
+        totalFailedCount:
+          type: integer
+          description: Total number of times the callbacks have failed for this subscription
+          example: 34
+        hasFailedDataStored:
+          type: boolean
+          description: Indicates if there are failed callback data to be fetched
+          example: false
+        retentionTimeFailedDeliveries:
+          type: integer
+          description: Specifies for how long failed callback data will be retained in days
+          example: 14
+        test:
+          type: boolean
+          description: Indicates if this subscription is a test subscription or not
+          example: false
+
+    VehicleStatusSubscriptionListResponseObject:
+      required:
+        - vehicleStatusSubscriptionResponse
+      type: object
+      properties:
+        vehicleStatusSubscriptionResponse:
+          type: object
+          properties:
+            vehicleStatusSubscriptions:
+              type: array
+              items:
+                $ref: "#/components/schemas/SubscriptionListObject"
+
+    TriggerObject:
+      required:
+        - context
+        - triggerType
+      type: object
+      description:
+        "This description is placed here due to limitations of describing references in OpenAPI\n
+        Property __driverId__:\n
+        The driver id of driver. (independant whether it is driver or Co-driver)\n
+        This is only set if the TriggerType = DRIVER_LOGIN, DRIVER_LOGOUT,
+        DRIVER_1_WORKING_STATE_CHANGED or DRIVER_2_WORKING_STATE_CHANGED\n
+        For DRIVER_LOGIN it is the id of the driver that logged in\n
+        For DRIVER_LOGOUT it is the id of the driver that logged out\n
+        For DRIVER_1_WORKING_STATE_CHANGED it is the id of driver 1\n
+        For DRIVER_2_WORKING_STATE_CHANGED it is the id of driver 2\n
+        Property __tellTaleInfo__:\n
+        The tell tale(s) that triggered this message.\n
+        This is only set if the TriggerType = TELL_TALE"
+      properties:
+        triggerType:
+          type: string
+          description: "Trigger types for Context=RFMS:\n\n
+            TIMER - Data was sent due to a timer trigger. (Timer value set outside rFMS scope)\n\n
+            IGNITION_ON - Data was sent due to an ignition on\n\n
+            IGNITION_OFF - Data was sent due to an ignition off\n\n
+            PTO_ENABLED - Data was sent due to that a PTO was enabled, will be sent for each PTO that gets enabled\n\n
+            PTO_DISABLED - Data was sent due to that a PTO was disabled, will be sent for each PTO that gets disabled.\n\n
+            DRIVER_LOGIN - Data was sent due to a successful driver login.\n\n
+            DRIVER_LOGOUT - Data was sent due to a driver logout\n\n
+            TELL_TALE - Data was sent due to that at least one tell tale changed state\n\n
+            ENGINE_ON - Data was sent due to an engine on. For electric motor crank is on\n\n
+            ENGINE_OFF - Data was sent due to an engine off. For electric motor crank is off\n\n
+            DRIVER_1_WORKING_STATE_CHANGED - Data was sent due to that driver 1 changed working state\n\n
+            DRIVER_2_WORKING_STATE_CHANGED - Data was sent due to that driver 2 changed working state\n\n
+            DISTANCE_TRAVELLED - Data was sent due to that a set distance was travelled. (Distance set outside rFMS scope)\n\n
+            FUEL_TYPE_CHANGE - Data was sent due to that the type of fuel currently being utilized by the vehicle changed\n\n
+            PARKING_BRAKE_SWITCH_CHANGE - Data was sent due to that the parking brake state has changed\n\n
+            BATTERY_PACK_CHARGING_STATUS_CHANGE - Data was sent due to a change in the battery pack charging status.\n\n
+            BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE - Data was sent due to a change in the battery pack charging connection status.\n\n
+            TRAILER_CONNECTED - One or several trailers were connected\n\n
+            TRAILER_DISCONNECTED - One or several trailers were disconnected\n\n
+            ALARM - An alarm was armed, disarmed or triggered"
+          example: IGNITION_ON
+        context:
+          type: string
+          description:
+            The context defines if this is part of the standard or OEM
+            specific. rFMS standard values VOLVO TRUCKS, SCANIA, DAIMLER, IVECO, DAF,
+            MAN, RENAULT TRUCKS, VDL, VOLVO BUSES, IVECO BUS, IRISBUS If the Trigger
+            is defined in the rFMS standard, the Context = RFMS
+          example: RFMS
+        triggerInfo:
+          type: array
+          description:
+            Additional OEM specific TriggerInfo content. Can be used for both
+            OEM specific and rFMS defined triggers E.g.
+            TRAILER_ATTACHED_TRIGGER [id of trailer]
+          example:
+            - VIN12345678901234
+          items:
+            type: string
+        driverId:
+          $ref: "#/components/schemas/DriverIdObject"
+        ptoId:
+          type: string
+          description:
+            The id of a PTO. This is only set if the TriggerType = PTO_ENABLED
+            or PTO_DISABLED
+        tellTaleInfo:
+          $ref: "#/components/schemas/TellTaleObject"
+        chargingStatusInfo:
+          type: object
+          properties:
+            event:
+              type: string
+              description: "CHARGING_STARTED - Charging has started\n
+                CHARGING_COMPLETED - Charging is completed\n
+                CHARGING_INTERRUPTED - Charging has been interrupted (no error)\n
+                ERROR - An error occurred when charging\n
+                ESTIMATED_COMPLETION_TIME_CHANGED - The estimated time for completed charging has changed. (Threshold is outside scope of rFMS)\n
+                TIMER - A predefined time has passed since last charge status update. (Frequency is outside the scope of rFMS)\n
+                CHARGING_LEVEL - The charging level has reached a predefined level. (Charging levels are outside the scope of rFMS)"
+              example: ERROR
+              enum:
+                - CHARGING_STARTED
+                - CHARGING_COMPLETED
+                - CHARGING_INTERRUPTED
+                - ERROR
+                - ESTIMATED_COMPLETION_TIME_CHANGED
+                - TIMER
+                - CHARGING_LEVEL
+            eventDetail:
+              type: string
+              description: Details regarding the event. Content is OEM specific
+              example: NOT_ALLOWED_TO_CHARGE
+          description:
+            Additional information can be provided if the trigger type
+            is BATTERY_PACK_CHARGING_STATUS_CHANGE.
+        chargingConnectionStatusInfo:
+          type: object
+          properties:
+            event:
+              type: string
+              description: >-
+                CONNECTING - Vehicle is being connected to a charger\n
+                CONNECTED - Vehicle is connected to a charger\n
+                DISCONNECTING - Vehicle is being disconnected from the charger\n
+                DISCONNECTED - Vehicle is not connected to a charger\n
+                ERROR - An error occurred
+              example: ERROR
+              enum:
+                - CONNECTING
+                - CONNECTED
+                - DISCONNECTING
+                - DISCONNECTED
+                - ERROR
+            eventDetail:
+              type: string
+              description: Details regarding the event. Content is OEM specific
+              example: VEHICLE_NOT_IN_POSITION
+          description:
+            Additional information can be provided if the trigger type
+            is BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE.
+        alarmInfo:
+          type: object
+          properties:
+            alarmType:
+              type: string
+              description: >-
+                THEFT - Theft alarm
+                FUEL_THEFT - Fuel theft alarm
+                FIRE - Fire alarm
+                PANIC - Panic alarm
+                CARGO_TEMPERATURE - Cargo temperature alarm
+                OEM specific types can be added
+              example: THEFT
+            alarmStatus:
+              type: string
+              description: >-
+                ARMED - The alarm is armed
+                ARMED_WITH_ERROR - The alarm has been armed with errors
+                DISARMED - The alarm is disarmed
+                TRIGGERED - The alarm has been fired/triggered
+                UNTRIGGERED - The alarm has been untriggered in an authorized way
+                ERROR - An error has occured in the alarm system
+                OEM specific statuses can be added
+              example: ARMED
+            alarmDetails:
+              type: array
+              items:
+                type: string
+                description: OEM specific details.
+                example:
+                  - DRIVER_DOOR_OPENED
+                  - CARGO_DOOR_OPENED
+
+    DriverIdObject:
+      type: object
+      properties:
+        tachoDriverIdentification:
+          required:
+            - cardIssuingMemberState
+            - driverIdentification
+          type: object
+          properties:
+            driverIdentification:
+              type: string
+              description:
+                The unique identification of a driver in a Member State.
+                This fields is formatted according the definition for driverIdentification
+                in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
+              example: "12345678901234"
+            cardIssuingMemberState:
+              type: string
+              description:
+                The country alpha code of the Member State having issued
+                the card. This fields is formatted according the definition for NationAlpha
+                in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
+              example: S
+            driverAuthenticationEquipment:
+              type: string
+              description:
+                Code to distinguish different types of equipment for the
+                tachograph application. See description of the field 'DriverAuthenticationEquipment'
+                in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
+              example: DRIVER_CARD
+              enum:
+                - RESERVED
+                - DRIVER_CARD
+                - CONTROL_CARD
+                - COMPANY_CARD
+                - MANUFACTURING_CARD
+                - VEHICLE_UNIT
+                - MOTION_SENSOR
+            cardReplacementIndex:
+              type: string
+              description:
+                "A card replacement index. This fields is formatted according
+                the definition for CardReplacementIndex (chap 2.26) in: COMMISSION
+                REGULATION (EC) No 1360/2002 Annex 1b"
+              example: "0"
+            cardRenewalIndex:
+              type: string
+              description:
+                "A card renewal index. This fields is formatted according
+                the definition for CardRenewalIndex (chap 2.25) in: COMMISSION REGULATION
+                (EC) No 1360/2002 Annex 1b"
+              example: "0"
+        oemDriverIdentification:
+          type: object
+          properties:
+            idType:
+              type: string
+              description:
+                Contains an optional id type (e.g. pin, USB, encrypted
+                EU id...)
+              example: USB
+            oemDriverIdentification:
+              type: string
+              description: An OEM specific driver id.
+              example: ABC-123-DEF
+    TellTaleObject:
+      required:
+        - state
+        - tellTale
+      type: object
+      properties:
+        tellTale:
+          type: string
+          example: FUEL_LEVEL
+          enum:
+            - COOLING_AIR_CONDITIONING
+            - HIGH_BEAM_MAIN_BEAM
+            - LOW_BEAM_DIPPED_BEAM
+            - TURN_SIGNALS
+            - HAZARD_WARNING
+            - PROVISIONING_HANDICAPPED_PERSON
+            - PARKING_BRAKE
+            - BRAKE_MALFUNCTION
+            - HATCH_OPEN
+            - FUEL_LEVEL
+            - ENGINE_COOLANT_TEMPERATURE
+            - BATTERY_CHARGING_CONDITION
+            - ENGINE_OIL
+            - POSITION_LIGHTS
+            - FRONT_FOG_LIGHT
+            - REAR_FOG_LIGHT
+            - PARKING_HEATER
+            - ENGINE_MIL_INDICATOR
+            - SERVICE_CALL_FOR_MAINTENANCE
+            - TRANSMISSION_FLUID_TEMPERATURE
+            - TRANSMISSION_MALFUNCTION
+            - ANTI_LOCK_BRAKE_FAILURE
+            - WORN_BRAKE_LININGS
+            - WINDSCREEN_WASHER_FLUID
+            - TIRE_MALFUNCTION
+            - GENERAL_FAILURE
+            - ENGINE_OIL_TEMPERATURE
+            - ENGINE_OIL_LEVEL
+            - ENGINE_COOLANT_LEVEL
+            - STEERING_FLUID_LEVEL
+            - STEERING_FAILURE
+            - HEIGHT_CONTROL
+            - RETARDER
+            - ENGINE_EMISSION_FAILURE
+            - ESC_INDICATOR
+            - BRAKE_LIGHTS
+            - ARTICULATION
+            - STOP_REQUEST
+            - PRAM_REQUEST
+            - BUS_STOP_BRAKE
+            - ADBLUE_LEVEL
+            - RAISING
+            - LOWERING
+            - KNEELING
+            - ENGINE_COMPARTMENT_TEMPERATURE
+            - AUXILLARY_AIR_PRESSURE
+            - AIR_FILTER_CLOGGED
+            - FUEL_FILTER_DIFF_PRESSURE
+            - SEAT_BELT
+            - EBS
+            - LANE_DEPARTURE_INDICATOR
+            - ADVANCED_EMERGENCY_BRAKING
+            - ACC
+            - TRAILER_CONNECTED
+            - ABS_TRAILER
+            - AIRBAG
+            - EBS_TRAILER_1_2
+            - TACHOGRAPH_INDICATOR
+            - ESC_SWITCHED_OFF
+            - LANE_DEPARTURE_WARNING_SWITCHED_OFF
+            - ENGINE_EMISSION_FILTER_SOOT_FILTER
+            - ELECTRIC_MOTOR_FAILURES
+            - ADBLUE_TAMPERING
+            - MULTIPLEX_SYSTEM
+            - BATTERY_PACK
+            - HIGH_VOLTAGE_SYSTEM_CAUTION
+            - BATTERY_PACK_TEMPERATURE
+            - LIMITED_PERFORMANCE_ELECTRIC_MOTOR
+            - BATTERY_PACK_COOLING
+            - WATER_IN_FUEL_INDICATOR
+            - OEM_SPECIFIC_TELL_TALE
+        oemTellTale:
+          type: string
+          description:
+            The OemTellTale is only set when the TellTale == OEM_SPECIFIC_TELL_TALE.
+            This is an OEM specific string defining a tell tale in the OEM context.
+          example: NO_GPS_SIGNAL
+        state:
+          type: string
+          description: The current state of the tell tale.
+          example: YELLOW
+          enum:
+            - RED
+            - YELLOW
+            - INFO
+            - OFF
+            - RESERVED_4
+            - RESERVED_5
+            - RESERVED_6
+            - NOT_AVAILABLE
+    GNSSPositionObject:
+      required:
+        - latitude
+        - longitude
+        - positionDateTime
+      type: object
+      properties:
+        latitude:
+          type: number
+          description: Latitude (WGS84 based)
+          format: double
+          example: 57.71727
+        longitude:
+          type: number
+          description: Longitude (WGS84 based)
+          format: double
+          example: 11.921161
+        heading:
+          type: integer
+          description: The direction of the vehicle (0-359)
+          example: 30
+        altitude:
+          type: integer
+          description:
+            The altitude of the vehicle. Where 0 is sea level, negative
+            values below sealevel and positive above sealevel. Unit in meters.
+          example: 32
+        speed:
+          type: number
+          description: The GNSS(e.g. GPS)-speed in km/h
+          format: double
+          example: 54.5
+        positionDateTime:
+          type: string
+          description: The time of the position data in iso8601 format.
+          format: date-time
+    LabelObject:
+      type: object
+      properties:
+        label:
+          type: string
+        seconds:
+          type: integer
+          format: int64
+        meters:
+          type: integer
+          format: int64
+        milliLitres:
+          type: integer
+          format: int64
+        kilograms:
+          type: number
+          format: double
+        watthours:
+          type: integer
+          format: int64
+    FromToClassObject:
+      type: object
+      properties:
+        from:
+          type: number
+          format: double
+        to:
+          type: number
+          format: double
+        seconds:
+          type: integer
+          format: int64
+        meters:
+          type: integer
+          format: int64
+        milliLitres:
+          type: integer
+          format: int64
+        kilograms:
+          type: number
+          format: double
+        watthours:
+          type: integer
+          format: int64
+    FromToClassObjectCombustion:
+      type: object
+      properties:
+        from:
+          type: number
+          format: double
+        to:
+          type: number
+          format: double
+        seconds:
+          type: integer
+          format: int64
+        meters:
+          type: integer
+          format: int64
+        milliLitres:
+          type: integer
+          format: int64
+        kilograms:
+          type: number
+          format: double
+    FromToClassObjectElectrical:
+      type: object
+      properties:
+        from:
+          type: number
+          format: double
+        to:
+          type: number
+          format: double
+        seconds:
+          type: integer
+          format: int64
+        meters:
+          type: integer
+          format: int64
+        watthours:
+          type: integer
+          format: int64
+    VinProperty:
+      type: string
+      description: vehicle identification number. See ISO 3779 (17 characters)
+      example: ABC12345678901234
+    CreatedDateTimeProperty:
+      type: string
+      description: When the data was retrieved in the vehicle in iso8601 format.
+      format: date-time
+    ReceivedDateTimeProperty:
+      type: string
+      description:
+        Reception at Server. To be used for handling of "more data available"
+        in iso8601 format.
+      format: date-time
+    DriverWorkingStateProperty:
+      type: string
+      description: Tachograph Working state of the driver
+      example: DRIVE
+      enum:
+        - REST
+        - DRIVER_AVAILABLE
+        - WORK
+        - DRIVE
+        - ERROR
+        - NOT_AVAILABLE
+    CallbackAccessTokenProperty:
+      type: string
+      description:
+        Access token to provide as bearer token in the callback. The access
+        token shall be according to RFC 6749. Both opaque tokens and JWTs are allowed.
+        Either callback access token or callback client id needs to be provided.
+      example: 03a3a360-780b-4a0f-93bf-10d515cb68a1
+    CallbackHeaderArray:
+      description: Array of HTTP headers to be sent by the rFMS resource server
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: http header field name
+            example: Api-subscription-key
+          value:
+            type: string
+            description: http header field value
+            example: ASK12345
+    CallbackAccessTokenExpiresInProperty:
+      type: integer
+      description:
+        "The lifetime in seconds of the access token. For example, the
+        value 3600 denotes that the access token will expire in one hour from the
+        time the access token was provided"
+      example: 3600
+    CallbackTokenScopeProperty:
+      type: string
+      description: Access token scope according to RFC 6749 chapter 3.3
+      example: CTS12345
+    CallbackUrlProperty:
+      type: string
+      format: uri
+      description: The callback url to be used when pushing the data
+      example: https://client.example.com/rfms/callback/vehicledata
+    ServerDateTimeProperty:
+      type: string
+      description: This is the time at the server when this message was created.
+      format: date-time
+    SubscriptionStatusProperty:
+      type: string
+      description: "Status of the subscription\n\n
+        **PENDING** - Subscription is created, but the test call is not confirmed yet\n\n
+        **ACTIVE** - Subscription is active\n\n
+        **PAUSED** - Subscription is paused - data from vehicles will not be pushed\n\n
+        **DELETED_BY_CLIENT** - Subscription is deleted by the client\n\n
+        **DELETED_BY_SERVER** - Subscription is deleted by the OEM. Information can be
+        found in statusReason"
+      enum:
+        - PENDING
+        - ACTIVE
+        - PAUSED
+        - DELETED_BY_CLIENT
+        - DELETED_BY_SERVER
+      example: ACTIVE
+    callbackClientIdProperty:
+      type: string
+      description:
+        Client ID to be used when retrieving the callback access token.
+        Either callback access token or callback client id needs to be provided.
+      example: CCID12345
+
+    StatusReasonProperty:
+      type: string
+      description: "Additional information regarding the subscription status\n\n
+        **rFMS standard reasons**:\n\n
+        **CALLBACK_ENDPOINT_CERTIFICATE_NOT_VALID** - The certificate is not valid at the
+        callback URL, e.g. not a trusted CA\n\n
+        **CALLBACK_ENDPOINT_CERTIFICATE_EXPIRED** - The certificate has expired at the
+        callback URL\n\n
+        **ACCESS_TOKEN_NOT_VALID** - The callback access token is not valid, i.e. 401 was returned\n\n
+        **ACCESS_TOKEN_EXPIRED** - The callback access token has expired\n\n
+        **CANNOT_RETREIVE_ACCESS_TOKEN** - The callback access token couldn't be retreived\n\n
+        **TOO_MANY_REQUESTS** - The limit for Too many requests (429) returned from the
+        callback URL has been exceeded\n\n
+        **TOO_MANY_ERRORS** - The limit for Not found (404) or server errors (5xx)
+        returned from the callback URL has been exceeded\n\n
+        **UNRECOVERABLE_ERROR** - Bad request (400), Forbidden (403) or Not Acceptable
+        (406) was returned from the callback URL\n\n
+        **CALLBACK_URL_NOT_REACHABLE** - The callback URL cannot be reached, e.g. DNS
+        failure, timeout\n\n
+        OEM specific reasons can be added"
+      example: ACCESS_TOKEN_EXPIRED
+
+  responses:
+    BadRequest:
+      description:
+        "The server cannot or will not process the request due to an apparent client error
+        (e.g., malformed request syntax, invalid request message framing, or deceptive request routing)\n
+        Possible reason: Mandatory field missing, e.g. Authentication Header empty or missing\n
+        The comments for the 4xx codes are from the Wikipedia article
+        [List of HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors),
+        which is released under the
+        [Creative Commons Attribution-Share-Alike License 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+        View authors on this [page](https://en.wikipedia.org/w/index.php?title=List_of_HTTP_status_codes&action=history)."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/ErrorObject"
+          examples:
+            badRequest:
+              $ref: "#/components/examples/BadRequest"
+
+    Forbidden:
+      description:
+        "The request was a valid request, but the server is refusing to respond to it. Unlike
+        a 401 Unauthorized response, authenticating will make no difference. On servers where
+        authentication is required, this commonly means that the provided credentials were successfully
+        authenticated but that the credentials still do not grant the client permission to access the
+        resource (e.g. a recognized user attempting to access restricted content)\n
+        Possible reason: Insufficient rights for the service, no rights on any service of this vehicle
+        and/or Response is too large\n
+        The comments for the 4xx codes are from the Wikipedia article
+        [List of HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors),
+        which is released under the
+        [Creative Commons Attribution-Share-Alike License 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+        View authors on this [page](https://en.wikipedia.org/w/index.php?title=List_of_HTTP_status_codes&action=history)."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/ErrorObject"
+          examples:
+            badRequest:
+              $ref: "#/components/examples/Forbidden"
+
+    NotAcceptable:
+      description: "Possible reason: unsupported Accept parameter sent"
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/ErrorObject"
+          examples:
+            badRequest:
+              $ref: "#/components/examples/NotAcceptable"
+
+    NotFound:
+      description:
+        "The requested resource could not be found but may be available again in the future.
+        Subsequent requests by the client are permissible\n
+        Possible reason: vehicle unknown and/or rFMS-Version not supported\n
+        The comments for the 4xx codes are from the Wikipedia article
+        [List of HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors),
+        which is released under the
+        [Creative Commons Attribution-Share-Alike License 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+        View authors on this [page](https://en.wikipedia.org/w/index.php?title=List_of_HTTP_status_codes&action=history)."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/ErrorObject"
+          examples:
+            badRequest:
+              $ref: "#/components/examples/NotFound"
+
+    TooManyRequests:
+      description: >-
+        The user has sent too many requests in a given amount of time. Intended for use with rate limiting schemes
+        Possible reason Request sent too often and/or Max concurrent calls
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/ErrorObject"
+          examples:
+            badRequest:
+              $ref: "#/components/examples/TooManyRequests"
+
+    Unauthorized:
+      description:
+        "Similar to 403 Forbidden, but specifically for use when authentication is required
+        and has failed or has not yet been provided. The response must include a WWW-Authenticate header
+        field containing a challenge applicable to the requested resource. See Basic access authentication
+        and Digest access authentication.\n
+        Possible reasons: Wrong credentials, Login credentials expired and/or Access token not valid or
+        expired\n
+        The comments for the 4xx codes are from the Wikipedia article
+        [List of HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors),
+        which is released under the
+        [Creative Commons Attribution-Share-Alike License 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+        View authors on this [page](https://en.wikipedia.org/w/index.php?title=List_of_HTTP_status_codes&action=history)."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/ErrorObject"
+          examples:
+            badRequest:
+              $ref: "#/components/examples/Unathorized"
+
+  examples:
+    BadRequest:
+      summary: Bad request example
+      value:
+        error: NoBearerToken
+        error_description: "No bearer token provided in the request"
+        error_uri: "https://oem.com/rfms/NoBearerToken.html"
+    Forbidden:
+      summary: Forbidden example
+      value:
+        error: NoAccess
+        error_description: "No access to the requested resources"
+        error_uri: "https://oem.com/rfms/NoAccess.html"
+    NotAcceptable:
+      summary: Not acceptable example
+      value:
+        error: UnsupportedAcceptParameter
+        error_description: "The provided accept parameter is not supported"
+        error_uri: "https://oem.com/rfms/UnsupportedAcceptParameter.html"
+    NotFound:
+      summary: Not found example
+      value:
+        error: UnknownVin
+        error_description: "The provided VIN cannot be found"
+        error_uri: "https://oem.com/rfms/UnknownVin.html"
+    TooManyRequests:
+      summary: Too many request example
+      value:
+        error: RateExceeded
+        error_description: "Too many requests per minute"
+        error_uri: "https://oem.com/rfms/RateExceeded.html"
+    Unathorized:
+      summary: Unauthorized example
+      value:
+        error: InvalidAccessToken
+        error_description: "The provided access token is not valid"
+        error_uri: "https://oem.com/rfms/InvalidAccessToken.html"
+
+  parameters:
+    callbackHeaderExample:
+      name: Api-Subscription-key
+      in: header
+      description: Example of callback header. Specified by client when creating subscription
+      required: false
+      schema:
+        type: string
+      example: ASK12345
+    xCorrelationId:
+      name: X-Correlation-Id
+      in: header
+      description: >-
+        A client unique request id used for fault tracing at the API supplier.
+        This shall be unique for each request if used. Max 40 characters.
+      required: false
+      schema:
+        type: string
+      example: caac4197-5ffa-46e8-95db-42cb97d817aa
+    lastVin:
+      name: lastVin
+      in: query
+      description: >-
+        The response will return the next block of vehicles not including
+        the one with the given VIN. When the last call to the vehicle list function
+        had MoreDataAvailable-parameter set to true you must supply the VIN of the
+        last item in the list as lastVin parameter in the next call.
+      required: false
+      schema:
+        type: string
+      example: ABC12345678901234
+    datetype:
+      name: datetype
+      in: query
+      description: >-
+        The start/stop times are compared to the created or received time
+        of the position reports. If this isn't supplied all times are received times.
+      required: false
+      schema:
+        type: string
+        default: received
+        enum:
+          - created
+          - received
+    starttime:
+      name: starttime
+      in: query
+      description: >-
+        Only the data created/received at or after this time should be
+        returned. (i.e. >= starttime)
+      required: false
+      schema:
+        type: string
+        format: date-time
+    stoptime:
+      name: stoptime
+      in: query
+      description: >-
+        Only the data created/received before this time should be returned.
+        (i.e. < stoptime)
+      required: false
+      schema:
+        type: string
+        format: date-time
+    vin:
+      name: vin
+      in: query
+      description: >-
+        Only the data created by the vehicles with these VINs should be returned
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: array
+        items:
+          type: string
+
+  securitySchemes:
+    oauth2AuthCode:
+      type: oauth2
+      description: >-
+        This authorization use the OAuth2 authorization code flow as specified in the rFMS
+        authorization specification
+      flows:
+        authorizationCode:
+          authorizationUrl: https://oem.com/authorize
+          tokenUrl: https://oem.com/token
+          scopes:
+            rfms: Initial scope, see rFMS authorization specification for details
+    oauth2ClientCredential:
+      type: oauth2
+      description: >-
+        This authorization use the OAuth2 client credentials flow as specified in the rFMS
+        authorization specification
+      flows:
+        clientCredentials:
+          tokenUrl: https://oem.com/token
+          scopes:
+            rfms: Initial scope, see rFMS authorization specification for details

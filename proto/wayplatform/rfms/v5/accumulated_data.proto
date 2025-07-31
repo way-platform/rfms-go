@@ -1,0 +1,144 @@
+edition = "2023";
+
+package wayplatform.rfms.v5;
+
+// Accumulated data for a vehicle.
+//
+// The data items in the accumulated data section contains
+// values that start from zero.The OEM specifies if the values are reset
+// only when the vehicle is produced, or also at owner change and/or service activation.
+message AccumulatedData {
+  // The duration the vehicle speed has been over zero. (s)
+  double wheel_based_speed_over_zero_duration_s = 1;
+
+  // The fuel the vehicle has consumed while driven with speed over zero. (ml)
+  // Engine on (RPM>0) and no PTO active.
+  double wheel_based_speed_over_zero_fuel_ml = 2;
+
+  // The fuel the vehicle has consumed while driven with speed over zero. (kg)
+  // Engine on (RPM>0) and no PTO active.
+  double wheel_based_speed_over_zero_fuel_gaseous_kg = 3;
+
+  // The electric energy the vehicle has consumed while driven with speed over zero. (Wh)
+  double wheel_based_speed_over_zero_electric_energy_consumption_wh = 4;
+
+  // The duration the vehicle speed has been zero. (s)
+  // Engine on (RPM>0 or electic motor in crank mode) and no PTO active
+  double wheel_based_speed_zero_duration_s = 5;
+
+  // The distance the vehicle has been driven with speed zero. (m)
+  double wheel_based_speed_zero_distance_m = 6;
+
+  // The fuel the vehicle has consumed while driven with speed zero. (ml)
+  // Engine on (RPM>0) and no PTO active.
+  double wheel_based_speed_zero_fuel_ml = 7;
+
+  // The fuel the vehicle has consumed while driven with speed zero. (ml)
+  // Engine on (RPM>0) and no PTO active.
+  double wheel_based_speed_zero_fuel_gaseous_kg = 8;
+
+  // The electric energy the vehicle has consumed while driven with speed zero. (Wh)
+  double wheel_based_speed_zero_electric_energy_consumption_wh = 9;
+
+  // The distance the vehicle has been driven with cruise control active. (m)
+  double cruise_control_active_distance_m = 10;
+
+  // The duration the vehicle has been driven with cruise control active. (s)
+  double cruise_control_active_duration_s = 11;
+
+  // The fuel the vehicle has consumed while driven with cruise control active. (ml)
+  double cruise_control_active_fuel_consumption_ml = 12;
+
+  // The fuel the vehicle has consumed while driven with cruise control active. (kg)
+  double cruise_control_active_fuel_consumption_gaseous_kg = 13;
+
+  // The electric energy the vehicle has consumed while driven with cruise control active. (Wh)
+  double cruise_control_active_electric_energy_consumption_wh = 14;
+
+  // The electric energy the auxiliary systems have consumed. (Wh)
+  double aux_electric_energy_consumption_wh = 15;
+
+  repeated LabelClass pto_active_class = 16;
+
+  // The total number of times the brake pedal has been used while
+  int32 brake_pedal_speed_over_zero_count = 17;
+
+  // The total distance the vehicle has driven where the brake pedal has been used. (m)
+  double brake_pedal_speed_over_zero_distance_m = 18;
+
+  repeated FromToClass acceleration_pedal_position_class = 19;
+
+  repeated FromToClass brake_pedal_position_class = 20;
+
+  repeated FromToClass acceleration_class = 21;
+
+  repeated FromToClass high_acceleration_class = 22;
+
+  repeated FromToClass retarder_torque_class = 23;
+
+  repeated LabelClass driving_without_torque_class = 24;
+
+  repeated FromToClassCombustion engine_torque_class = 25;
+
+  repeated FromToClassElectrical electric_motor_torque_class = 26;
+
+  repeated FromToClassCombustion engine_torque_at_current_speed_class = 27;
+
+  repeated FromToClassElectrical electric_motor_torque_at_current_speed_class = 28;
+
+  repeated FromToClass vehicle_speed_class = 29;
+
+  repeated FromToClass engine_speed_class = 30;
+
+  repeated FromToClass acceleration_during_brake_class = 31;
+
+  repeated LabelClass selected_gear_class = 32;
+
+  repeated LabelClass current_gear_class = 33;
+
+  int32 chairlift_count = 34;
+
+  int32 stop_request_count = 35;
+
+  int32 kneeling_count = 36;
+
+  int32 pram_request_count = 37;
+
+  repeated FromToClassElectrical electric_power_recuperation_class = 38;
+
+  message LabelClass {
+    string label = 1;
+    double duration_s = 2;
+    double distance_m = 3;
+    double fuel_consumption_ml = 4;
+    double fuel_consumption_gaseous_kg = 5;
+    double electric_energy_consumption_wh = 6;
+  }
+
+  message FromToClass {
+    double from = 1;
+    double to = 2;
+    double duration_s = 3;
+    double distance_m = 4;
+    double fuel_consumption_ml = 5;
+    double fuel_consumption_gaseous_kg = 6;
+    double electric_energy_consumption_wh = 7;
+  }
+
+  message FromToClassCombustion {
+    double from = 1;
+    double to = 2;
+    double duration_s = 3;
+    double distance_m = 4;
+    double fuel_consumption_ml = 5;
+    double fuel_consumption_gaseous_kg = 6;
+  }
+
+  message FromToClassElectrical {
+    double from = 1;
+    double to = 2;
+    double duration_s = 3;
+    double distance_m = 4;
+    double electric_energy_consumption_wh = 5;
+  }
+}

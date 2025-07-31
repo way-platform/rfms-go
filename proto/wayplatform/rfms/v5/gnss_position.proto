@@ -1,0 +1,20 @@
+edition = "2023";
+
+package wayplatform.rfms.v5;
+
+// A GNSS position.
+message GnssPosition {
+  // The date and time the GNSS position was recorded. (Unix microseconds)
+  int64 time = 1;
+  // The latitude of the vehicle. (WGS84 based)
+  double latitude = 2;
+  // The longitude of the vehicle. (WGS84 based)
+  double longitude = 3;
+  // The heading of the vehicle. (degrees) (0-359)
+  double heading_deg = 4;
+  // The altitude of the vehicle. (meters)
+  // 0 is sea level, negative values below sea level, and positive above sea level.
+  double altitude_m = 5;
+  // The speed of the vehicle. (km/h)
+  double speed_kmh = 6;
+}

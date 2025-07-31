@@ -1,0 +1,77 @@
+edition = "2023";
+
+package wayplatform.rfms.v5;
+
+// A trailer.
+message Trailer {
+  // The trailer number from 1 to 5, 1 being closest to the truck, according to ISO 11992-2.
+  int32 number = 1;
+
+  // The trailer identification data sent by the trailer to the truck in the RGE23 message of ISO 11992-2.
+  // An alternative source is the DID (Data identifier definition) record VIN, as specified in ISO 11992-4.
+  // Even though both ISO 11992-2 and ISO 11992-4 specifies this as a VIN, the actual data sent from a trailer is not always
+  // the true VIN of the trailer.
+  string identification_data = 2;
+
+  // The vehicle identification number of the trailer. See ISO 3779 (17 characters)
+  // If the trailerIdentificationData is reporting a true VIN, trailerVin will have the same value.
+  // If it is possible to map the trailerIdentificationData to a true VIN using other sources, the value can be provided here.
+  string vin = 3;
+
+  // The customer's name for the trailer
+  string customer_name = 4;
+
+  // The trailer type.
+  Type type = 5;
+
+  // The sum of the static vertical loads of the trailer axles. (kg)
+  // The load is sent in the EBS22 message of ISO 11992-2.
+  double axle_load_sum_kg = 6;
+
+  // The type of a trailer.
+  enum Type {
+    // Default value. This value is not used.
+    TYPE_UNSPECIFIED = 0;
+
+    // The trailer type is unknown.
+    TYPE_UNKNOWN = 1;
+
+    // The trailer type is not available.
+    TYPE_NOT_AVAILABLE = 2;
+
+    // A semi-trailer.
+    SEMI_TRAILER = 3;
+
+    // A centre axle trailer.
+    CENTRE_AXLE_TRAILER = 4;
+
+    // A full trailer.
+    FULL_TRAILER = 5;
+
+    // A converter dolly.
+    CONVERTER_DOLLY = 6;
+
+    // A link trailer.
+    LINK_TRAILER = 7;
+
+    // A towing semi-trailer.
+    TOWING_SEMI_TRAILER = 8;
+
+    // A towing centre axle trailer.
+    TOWING_CENTRE_AXLE_TRAILER = 9;
+
+    // A towing full trailer.
+    TOWING_FULL_TRAILER = 10;
+  }
+
+  // A trailer axle.
+  message Axle {
+    // The position of the axle from 1 to 15, 1 being in the front
+    // closest to the truck, according to ISO 11992-2.
+    int32 position = 1;
+
+    // The static vertical load of the axle in kilograms.
+    // The load is sent in the EBS22 message of ISO 11992-2.
+    double load_kg = 2;
+  }
+}
