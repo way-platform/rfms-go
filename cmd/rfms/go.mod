@@ -8,6 +8,7 @@ require (
 	github.com/charmbracelet/lipgloss/v2 v2.0.0-beta1
 	github.com/spf13/cobra v1.9.1
 	github.com/way-platform/rfms-go v0.0.0-00010101000000-000000000000
+	golang.org/x/term v0.32.0
 )
 
 require (
@@ -20,7 +21,6 @@ require (
 	github.com/hashicorp/go-retryablehttp v0.7.7 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
-	github.com/magefile/mage v1.15.0 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/muesli/cancelreader v0.2.2 // indirect
 	github.com/muesli/mango v0.1.0 // indirect

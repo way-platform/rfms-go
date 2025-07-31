@@ -9,6 +9,7 @@ import (
 	"github.com/adrg/xdg"
 	"github.com/spf13/cobra"
 	"github.com/way-platform/rfms-go"
+	"golang.org/x/term"
 )
 
 // Credentials for the rFMS CLI.
@@ -121,11 +122,25 @@ func newLoginScaniaCommand() *cobra.Command {
 		Use:   "scania",
 		Short: "Login to the Scania rFMS API",
 	}
-	clientID := cmd.Flags().String("client-id", "", "client ID to use for authentication")
-	cmd.MarkFlagRequired("client-id")
-	clientSecret := cmd.Flags().String("client-secret", "", "client secret to use for authentication")
-	cmd.MarkFlagRequired("client-secret")
+	clientID := cmd.Flags().String("client-id", "-", "client ID to use for authentication")
+	clientSecret := cmd.Flags().String("client-secret", "-", "client secret to use for authentication")
 	cmd.RunE = func(cmd *cobra.Command, _ []string) error {
+		if *clientID == "-" {
+			cmd.Println("\nEnter OAuth2 client ID:")
+			input, err := term.ReadPassword(int(os.Stdin.Fd()))
+			if err != nil {
+				return err
+			}
+			*clientID = string(input)
+		}
+		if *clientSecret == "-" {
+			cmd.Println("\nEnter OAuth2 client secret:")
+			input, err := term.ReadPassword(int(os.Stdin.Fd()))
+			if err != nil {
+				return err
+			}
+			*clientSecret = string(input)
+		}
 		authenticator := rfms.NewScaniaTokenAuthenticator(*clientID, *clientSecret)
 		credentials, err := authenticator.Authenticate(cmd.Context())
 		if err != nil {
@@ -150,11 +165,25 @@ func newLoginVolvoTrucksCommand() *cobra.Command {
 		Use:   "volvo-trucks",
 		Short: "Login to the Volvo Trucks rFMS API",
 	}
-	username := cmd.Flags().String("username", "", "username to use for authentication")
-	cmd.MarkFlagRequired("username")
-	password := cmd.Flags().String("password", "", "password to use for authentication")
-	cmd.MarkFlagRequired("password")
+	username := cmd.Flags().String("username", "-", "username to use for authentication")
+	password := cmd.Flags().String("password", "-", "password to use for authentication")
 	cmd.RunE = func(cmd *cobra.Command, _ []string) error {
+		if *username == "-" {
+			cmd.Println("\nEnter username:")
+			input, err := term.ReadPassword(int(os.Stdin.Fd()))
+			if err != nil {
+				return err
+			}
+			*username = string(input)
+		}
+		if *password == "-" {
+			cmd.Println("\nEnter password:")
+			input, err := term.ReadPassword(int(os.Stdin.Fd()))
+			if err != nil {
+				return err
+			}
+			*password = string(input)
+		}
 		auth := &Credentials{
 			Provider: provider,
 			Username: *username,
