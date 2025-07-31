@@ -165,11 +165,10 @@ func newVehicleStatusesCommand() *cobra.Command {
 	return cmd
 }
 
-func printJSON(cmd *cobra.Command, msg any) error {
+func printJSON(cmd *cobra.Command, msg any) {
 	data, err := json.MarshalIndent(msg, "", "  ")
 	if err != nil {
-		return err
+		panic(err)
 	}
 	cmd.Println(string(data))
-	return nil
 }

@@ -10,14 +10,14 @@ A Go SDK and CLI tool for [rFMS](https://www.fms-standard.com/) APIs.
 
 ### Features
 
-* Full support for the [rFMS 4.0.0 standard](https://www.fms-standard.com/Truck/down_load/Technical_Specification_rFMS_vehicle_data_V4.0.0_17.09.2021.pdf)
-* Backwards-compatibility with the [rFMS 2.1.1 standard](https://www.fms-standard.com/Truck/down_load/Technical_Specification_rFMS_V2.1.0_13.10.2017.pdf) (JSON)
-* Support for vendor-specific fields from Scania
+- Full support for the [rFMS 4.0.0 standard](https://www.fms-standard.com/Truck/down_load/Technical_Specification_rFMS_vehicle_data_V4.0.0_17.09.2021.pdf)
+- Backwards-compatibility with the [rFMS 2.1.1 standard](https://www.fms-standard.com/Truck/down_load/Technical_Specification_rFMS_V2.1.0_13.10.2017.pdf) (JSON)
+- Support for vendor-specific fields from Scania
 
 ### Supported OEMs
 
-* [Scania](https://developer.scania.com)
-* [Volvo Trucks](https://developer.volvotrucks.com)
+- [Scania](https://developer.scania.com)
+- [Volvo Trucks](https://developer.volvotrucks.com)
 
 ### Installing
 
@@ -57,13 +57,13 @@ The project is built using [Mage](https://magefile.org), see
 [magefile.go](./magefile.go).
 
 ```bash
-$ go tool mage build
+$ ./tools/mage build
 ```
 
 For all available build tasks, see:
 
 ```bash
-$ go tool mage
+$ ./tools/mage -l
 ```
 
 ## CLI tool
