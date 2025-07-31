@@ -1,0 +1,250 @@
+edition = "2023";
+
+package wayplatform.rfms.v5;
+
+import "wayplatform/rfms/v5/date.proto";
+import "wayplatform/rfms/v5/fuel_type.proto";
+
+// A vehicle.
+message Vehicle {
+  // The vehicle identification number (VIN) of the vehicle.
+  string vin = 1;
+
+  // The customer's name for the vehicle.
+  string customer_vehicle_name = 2;
+
+  // The registration number (license plate) of the vehicle.
+  string registration_number = 3;
+
+  // The brand of the vehicle.
+  Brand brand = 4;
+
+  // The unknown brand of the vehicle.
+  // This is used when the type is BRAND_UNKNOWN.
+  string unknown_brand = 5;
+
+  // The production date of the vehicle.
+  Date production_date = 6;
+
+  // The type of vehicle.
+  Type type = 7;
+
+  // The unknown type of the vehicle.
+  // This is used when type is TYPE_UNKNOWN.
+  string unknown_type = 8;
+
+  // The model of the vehicle.
+  string model = 9;
+
+  // The possible fuel types supported by this vehicle.
+  // This does NOT indicate which fuel type that is presently being used.
+  repeated FuelType possible_fuel_types = 10;
+
+  // The unknown possible fuel types of the vehicle.
+  // This is used when possible_fuel_types contains unknown fuel types.
+  repeated FuelType unknown_possible_fuel_types = 11;
+
+  // The emission level of the vehicle.
+  EmissionLevel emission_level = 12;
+
+  // The unknown emission level of the vehicle.
+  // This is used when emission_level is EMISSION_LEVEL_UNKNOWN.
+  string unknown_emission_level = 13;
+
+  // The telltale code indicates how the tell tales shall be interpreted.
+  // The code is unique for each OEM. One OEM can have different interpretations
+  // depending on vehicle type.
+  string tell_tale_code = 14;
+
+  // The chassis type of the vehicle.
+  string chassis_type = 15;
+
+  // The number of axles on the vehicle.
+  int32 axle_count = 16;
+
+  // The total fuel tank volume of the vehicle.
+  double total_fuel_tank_volume_ml = 17;
+
+  // The total fuel tank capacity of the vehicle.
+  double total_fuel_tank_capacity_gaseous_kg = 18;
+
+  // The total battery pack capacity of the vehicle.
+  double total_battery_pack_capacity_wh = 19;
+
+  // The type of tachograph in the vehicle.
+  TachographType tachograph_type = 20;
+
+  // The unknown tachograph type of the vehicle.
+  // This is used when tachograph_type is TACH_TYPE_UNKNOWN.
+  string unknown_tachograph_type = 21;
+
+  // The type of gearbox in the vehicle.
+  GearboxType gearbox_type = 22;
+
+  // The unknown gearbox type of the vehicle.
+  // This is used when gearbox_type is GEARBOX_TYPE_UNKNOWN.
+  string unknown_gearbox_type = 23;
+
+  // The type of body on the chassis.
+  BodyType body_type = 24;
+
+  // The unknown body type of the vehicle.
+  // This is used when body_type is BODY_TYPE_UNKNOWN.
+  string unknown_body_type = 25;
+
+  // The door configuration of the vehicle. The door order definition is OEM
+  // specific. E.g. [1, 2, 2] means the bus has 3 doors: 1 front door, double
+  // doors for door 2 and 3. This is used mainly for buses.
+  repeated int32 door_configuration = 26;
+
+  // If the vehicle is equipped with a ramp or not. This is used mainly for buses.
+  bool has_ramp_or_lift = 27;
+
+  // The brand of a vehicle.
+  enum Brand {
+    // Default value. This value is not used.
+    BRAND_UNSPECIFIED = 0;
+    // Unknown brand.
+    BRAND_UNKNOWN = 1;
+    // VOLVO TRUCKS.
+    VOLVO_TRUCKS = 2;
+    // SCANIA.
+    SCANIA = 3;
+    // DAIMLER.
+    DAIMLER = 4;
+    // IVECO.
+    IVECO = 5;
+    // DAF.
+    DAF = 6;
+    // MAN.
+    MAN = 7;
+    // RENAULT TRUCKS.
+    RENAULT_TRUCKS = 8;
+    // VDL.
+    VDL = 9;
+    // VOLVO BUSES.
+    VOLVO_BUSES = 10;
+    // IVECO BUS.
+    IVECO_BUS = 11;
+    // HEULIEZ.
+    HEULIEZ = 12;
+    // VWTB.
+    VWTB = 13;
+    // KENWORTH.
+    KENWORTH = 14;
+    // PETERBILT.
+    PETERBILT = 15;
+    // MACK TRUCKS.
+    MACK_TRUCKS = 16;
+    // INTERNATIONAL.
+    INTERNATIONAL = 17;
+    // IC BUS.
+    IC_BUS = 18;
+  }
+
+  // The type of a vehicle.
+  enum Type {
+    TYPE_UNSPECIFIED = 0;
+    // Unknown vehicle type.
+    TYPE_UNKNOWN = 1;
+    // A truck.
+    TRUCK = 2;
+    // A bus.
+    BUS = 3;
+    // A van.
+    VAN = 4;
+  }
+
+  // The emission level of a vehicle.
+  enum EmissionLevel {
+    // Default value. This value is not used.
+    EMISSION_LEVEL_UNSPECIFIED = 0;
+    // Unknown emission level.
+    EMISSION_LEVEL_UNKNOWN = 1;
+    // European Union, Heavy-Duty Truck and Bus Engines.
+    EURO_III = 2;
+    EURO_III_EEV = 3;
+    EURO_IV = 4;
+    EURO_V = 5;
+    EURO_VI = 6;
+    EURO_VII = 7;
+    // European Union, Nonroad Engines.
+    EURO_STAGE_III = 8;
+    EURO_STAGE_IV = 9;
+    EURO_STAGE_V = 10;
+    // United_States, Heavy-Duty Truck and Bus Engines.
+    EPA_2004 = 11;
+    EPA_2007 = 12;
+    EPA_2010 = 13;
+    EPA_2015_NOX10 = 14;
+    EPA_2015_NOX05 = 15;
+    EPA_2015_NOX02 = 16;
+    // United_States, Nonroad Engines.
+    EPA_TIER_2 = 17;
+    EPA_TIER_3 = 18;
+    EPA_TIER_4_2008 = 19;
+    EPA_TIER_4_2013 = 20;
+    // Brazil, Heavy-Duty Truck and Bus Engines.
+    PROCONVE_P5 = 21;
+    PROCONVE_P6 = 22;
+    PROCONVE_P7 = 23;
+    // Brazil, Nonroad Engines.
+    PROCONVE_MARI = 24;
+  }
+
+  // The type of tachograph.
+  enum TachographType {
+    // Default value. This value is not used.
+    TACHOGRAPH_TYPE_UNSPECIFIED = 0;
+    // Unknown tachograph type.
+    TACHOGRAPH_TYPE_UNKNOWN = 1;
+    // Modular tachograph.
+    MTCO = 2;
+    // Digital tachograph, unknown generation.
+    DTCO = 3;
+    // Digital tachograph generation 1.
+    DTCO_G1 = 4;
+    // Digital tachograph generation 2.
+    DTCO_G2 = 5;
+    // Tachograph simulator.
+    TSU = 6;
+    // No tachograph in the vehicle.
+    NONE = 7;
+    // Stoneridge Smart. (Scania)
+    STONERIDGE_SMART = 8;
+    // Stoneridge Smart 2. (Scania)
+    STONERIDGE_SMART2 = 9;
+  }
+
+  // The type of gearbox.
+  enum GearboxType {
+    // Default value. This value is not used.
+    GEARBOX_TYPE_UNSPECIFIED = 0;
+    // Unknown gearbox type.
+    GEARBOX_TYPE_UNKNOWN = 1;
+    // Manual.
+    MANUAL = 2;
+    // Automatic.
+    AUTOMATIC = 3;
+    // Semi-automatic.
+    SEMI_AUTOMATIC = 4;
+    // E.g. electrical.
+    NO_GEAR = 5;
+    // Automated manual transmission. (Scania)
+    AMT = 6;
+  }
+
+  // The type of body on the chassis.
+  enum BodyType {
+    // Default value. This value is not used.
+    BODY_TYPE_UNSPECIFIED = 0;
+    // Unknown body type.
+    BODY_TYPE_UNKNOWN = 1;
+    // City bus.
+    CITY_BUS = 2;
+    // Intercity bus.
+    INTERCITY_BUS = 3;
+    // Coach.
+    COACH = 4;
+  }
+}

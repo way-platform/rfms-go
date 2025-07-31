@@ -1,0 +1,13 @@
+edition = "2023";
+
+package wayplatform.rfms.v5;
+
+// A date.
+message Date {
+  // The day of the month.
+  int32 day = 1;
+  // The month of the year.
+  int32 month = 2;
+  // The year.
+  int32 year = 3;
+}

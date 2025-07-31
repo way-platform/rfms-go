@@ -1,0 +1,32 @@
+overlay: 1.0.0
+
+info:
+  title: Overlay for the Volvo Trucks rFMS v2.1 API
+  version: 1.0.0
+
+actions:
+  - target: $.paths
+    description: "Skip code generation for requests"
+    remove: true
+
+  - target: $.components.securitySchemes
+    description: "Skip code generation for security schemes"
+    remove: true
+
+  - target: $.components.parameters
+    description: "Skip code generation for request parameters"
+    remove: true
+
+  - target: $..[?(@.type=="array")]
+    description: "Skip pointer to Go slices"
+    update:
+      x-go-type-skip-optional-pointer: true
+
+  - target: $..[?(@.required)].required
+    description: "Remove required from all fields"
+    remove: true
+
+  - target: $..[?(@.type=="integer" && !@.format)]
+    description: "Default integers to int32 if no format is provided"
+    update:
+      format: int32

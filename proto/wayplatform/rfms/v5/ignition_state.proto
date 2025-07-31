@@ -1,0 +1,21 @@
+edition = "2023";
+
+package wayplatform.rfms.v5;
+
+// Ignition state.
+enum IgnitionState {
+  // Default value. This value is not used.
+  IGNITION_STATE_UNSPECIFIED = 0;
+
+  // The ignition state is unknown.
+  IGNITION_STATE_UNKNOWN = 1;
+
+  // The ignition state is not available.
+  IGNITION_STATE_NOT_AVAILABLE = 2;
+
+  // The ignition state is off.
+  OFF = 3;
+
+  // The ignition state is on.
+  ON = 4;
+}

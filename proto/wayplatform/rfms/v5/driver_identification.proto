@@ -1,0 +1,72 @@
+edition = "2023";
+
+package wayplatform.rfms.v5;
+
+// The identification of a driver.
+message DriverIdentification {
+  // The identification of a driver using the Tacho card.
+  Tacho tacho = 1;
+
+  // The identification of a driver using an OEM specific method.
+  Oem oem = 2;
+
+  // Identification of a driver using the Tacho card.
+  message Tacho {
+    // The unique identification of a driver in a Member State.
+    // This fields is formatted according the definition for driverIdentification
+    // in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
+    string driver_id = 1;
+
+    // The country alpha code of the Member State having issued the card.
+    // This fields is formatted according the definition for NationAlpha
+    // in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
+    string card_issuing_member_state = 2;
+
+    // Code to distinguish different types of equipment for the
+    // tachograph application. See description of the field 'DriverAuthenticationEquipment'
+    // in COMMISSION REGULATION (EC) No 1360/2002 Annex 1b
+    AuthenticationEquipment authentication_equipment = 3;
+
+    // The unknown authentication equipment of the driver.
+    // This is used when authentication_equipment is AUTHENTICATION_EQUIPMENT_UNKNOWN.
+    string unknown_authentication_equipment = 4;
+
+    // A card replacement index. This fields is formatted according
+    // the definition for CardReplacementIndex (chap 2.26) in: COMMISSION
+    // REGULATION (EC) No 1360/2002 Annex 1b
+    string card_replacement_index = 5;
+
+    // A card renewal index. This fields is formatted according
+    // the definition for CardRenewalIndex (chap 2.25) in: COMMISSION
+    // REGULATION (EC) No 1360/2002 Annex 1b
+    string card_renewal_index = 6;
+
+    // Driver authentication equipment.
+    enum AuthenticationEquipment {
+      // Default value. This value is not used.
+      AUTHENTICATION_EQUIPMENT_UNSPECIFIED = 0;
+      // Unknown authentication equipment.
+      AUTHENTICATION_EQUIPMENT_UNKNOWN = 1;
+      // Driver card.
+      DRIVER_CARD = 2;
+      // Control card.
+      CONTROL_CARD = 3;
+      // Company card.
+      COMPANY_CARD = 4;
+      // Manufacturing card.
+      MANUFACTURING_CARD = 5;
+      // Vehicle unit.
+      VEHICLE_UNIT = 6;
+      // Motion sensor.
+      MOTION_SENSOR = 7;
+    }
+  }
+
+  // Identification of a driver using an OEM specific method.
+  message Oem {
+    // An optional id type (e.g. pin, USB, encrypted EU id...).
+    string id_type = 1; // TODO: Should this be enum?
+    // An OEM specific driver id.
+    string driver_id = 2;
+  }
+}

@@ -1,0 +1,30 @@
+edition = "2023";
+
+package wayplatform.rfms.v5;
+
+// Driver working state.
+enum DriverWorkingState {
+  // Default value. This value is not used.
+  DRIVER_WORKING_STATE_UNSPECIFIED = 0;
+
+  // The driver working state is unknown.
+  DRIVER_WORKING_STATE_UNKNOWN = 1;
+
+  // The driver working state is not available.
+  DRIVER_WORKING_STATE_NOT_AVAILABLE = 2;
+
+  // An error occurred when getting the driver working state.
+  DRIVER_WORKING_STATE_ERROR = 3;
+
+  // The driver is resting.
+  REST = 4;
+
+  // The driver is available.
+  AVAILABLE = 5;
+
+  // The driver is working.
+  WORK = 6;
+
+  // The driver is driving.
+  DRIVE = 7;
+}

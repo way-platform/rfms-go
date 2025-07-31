@@ -1,0 +1,119 @@
+edition = "2023";
+
+package wayplatform.rfms.v5;
+
+// Information about a tell tale.
+message TellTale {
+  // The type of tell tale.
+  Type type = 1;
+
+  // The unknown tell tale type. Used when the type is TYPE_UNKNOWN.
+  string unknown_type = 2;
+
+  // The OEM specific type. Used when the type is TYPE_OEM_SPECIFIC.
+  string oem_specific_type = 3;
+
+  // The state of the tell tale.
+  State state = 4;
+
+  // The unknown state. Used when the state is STATE_UNKNOWN.
+  string unknown_state = 5;
+
+  // The type of a tell tale.
+  enum Type {
+    // Default value. This value is unused.
+    TYPE_UNSPECIFIED = 0;
+    // The tell tale type is unknown.
+    TYPE_UNKNOWN = 1;
+    // The tell tale type is OEM specific.
+    OEM_SPECIFIC = 2;
+    COOLING_AIR_CONDITIONING = 3;
+    HIGH_BEAM_MAIN_BEAM = 4;
+    LOW_BEAM_DIPPED_BEAM = 5;
+    TURN_SIGNALS = 6;
+    HAZARD_WARNING = 7;
+    PROVISIONING_HANDICAPPED_PERSON = 8;
+    PARKING_BRAKE = 9;
+    BRAKE_MALFUNCTION = 10;
+    HATCH_OPEN = 11;
+    FUEL_LEVEL = 12;
+    ENGINE_COOLANT_TEMPERATURE = 13;
+    BATTERY_CHARGING_CONDITION = 14;
+    ENGINE_OIL = 15;
+    POSITION_LIGHTS = 16;
+    FRONT_FOG_LIGHT = 17;
+    REAR_FOG_LIGHT = 18;
+    PARKING_HEATER = 19;
+    ENGINE_MIL_INDICATOR = 20;
+    SERVICE_CALL_FOR_MAINTENANCE = 21;
+    TRANSMISSION_FLUID_TEMPERATURE = 22;
+    TRANSMISSION_MALFUNCTION = 23;
+    ANTI_LOCK_BRAKE_FAILURE = 24;
+    WORN_BRAKE_LININGS = 25;
+    WINDSCREEN_WASHER_FLUID = 26;
+    TIRE_MALFUNCTION = 27;
+    GENERAL_FAILURE = 28;
+    ENGINE_OIL_TEMPERATURE = 29;
+    ENGINE_OIL_LEVEL = 30;
+    ENGINE_COOLANT_LEVEL = 31;
+    STEERING_FLUID_LEVEL = 32;
+    STEERING_FAILURE = 33;
+    HEIGHT_CONTROL = 34;
+    RETARDER = 35;
+    ENGINE_EMISSION_FAILURE = 36;
+    ESC_INDICATOR = 37;
+    BRAKE_LIGHTS = 38;
+    ARTICULATION = 39;
+    STOP_REQUEST = 40;
+    PRAM_REQUEST = 41;
+    BUS_STOP_BRAKE = 42;
+    ADBLUE_LEVEL = 43;
+    RAISING = 44;
+    LOWERING = 45;
+    KNEELING = 46;
+    ENGINE_COMPARTMENT_TEMPERATURE = 47;
+    AUXILLARY_AIR_PRESSURE = 48;
+    AIR_FILTER_CLOGGED = 49;
+    FUEL_FILTER_DIFF_PRESSURE = 50;
+    SEAT_BELT = 51;
+    EBS = 52;
+    LANE_DEPARTURE_INDICATOR = 53;
+    ADVANCED_EMERGENCY_BRAKING = 54;
+    ACC = 55;
+    TRAILER_CONNECTED = 56;
+    ABS_TRAILER = 57;
+    AIRBAG = 58;
+    EBS_TRAILER_1_2 = 59;
+    TACHOGRAPH_INDICATOR = 60;
+    ESC_SWITCHED_OFF = 61;
+    LANE_DEPARTURE_WARNING_SWITCHED_OFF = 62;
+    ENGINE_EMISSION_FILTER_SOOT_FILTER = 63;
+    ELECTRIC_MOTOR_FAILURES = 64;
+    ADBLUE_TAMPERING = 65;
+    MULTIPLEX_SYSTEM = 66;
+    BATTERY_PACK = 67;
+    HIGH_VOLTAGE_SYSTEM_CAUTION = 68;
+    BATTERY_PACK_TEMPERATURE = 69;
+    LIMITED_PERFORMANCE_ELECTRIC_MOTOR = 70;
+    BATTERY_PACK_COOLING = 71;
+    WATER_IN_FUEL_INDICATOR = 72;
+  }
+
+  // The state of a tell tale.
+  enum State {
+    // Default value. This value is unused.
+    STATE_UNSPECIFIED = 0;
+    // The state is unknown.
+    STATE_UNKNOWN = 1;
+    // The state is not available.
+    STATE_NOT_AVAILABLE = 2;
+    // The state is red.
+    RED = 3;
+    // The state is yellow.
+    YELLOW = 4;
+    // The state is info.
+    INFO = 5;
+    // The state is off.
+    OFF = 6;
+  }
+}

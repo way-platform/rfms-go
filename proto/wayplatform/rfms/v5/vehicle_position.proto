@@ -1,0 +1,24 @@
+edition = "2023";
+
+package wayplatform.rfms.v5;
+
+import "wayplatform/rfms/v5/gnss_position.proto";
+import "wayplatform/rfms/v5/trigger.proto";
+
+// A vehicle position.
+message VehiclePosition {
+  // The vehicle identification number (VIN) of the vehicle.
+  string vin = 1;
+  // The type of trigger that caused the vehicle position to be sent.
+  Trigger trigger = 2;
+  // The date and time the vehicle position was created. (Unix microseconds)
+  int64 create_time = 3;
+  // The date and time the vehicle position was received. (Unix microseconds)
+  int64 receive_time = 4;
+  // The GNSS position of the vehicle.
+  GnssPosition gnss_position = 5;
+  // Speed of the vehicle as calculated from wheel or tailshaft speed. (km/h)
+  double wheel_based_speed_kmh = 6;
+  // Speed of the vehicle registered by the tachograph. (km/h)
+  double tachograph_speed_kmh = 7;
+}

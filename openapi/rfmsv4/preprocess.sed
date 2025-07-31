@@ -1,5 +1,0 @@
-s/VehicleResponseObject/VehiclesResponse/g
-s/VehiclePositionResponseObject/VehiclePositionsResponse/g
-s/VehicleStatusResponseObject/VehicleStatusesResponse/g
-s/TellTaleObject/TellTaleInfo/g
-s/Object//g

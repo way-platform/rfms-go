@@ -1,0 +1,86 @@
+overlay: 1.0.0
+
+info:
+  title: Overlay for the rFMS v4.0 API
+  version: 1.0.0
+
+actions:
+  - target: $.paths
+    description: "Skip code generation for requests"
+    remove: true
+
+  - target: $.components.securitySchemes
+    description: "Skip code generation for security schemes"
+    remove: true
+
+  - target: $.components.parameters
+    description: "Skip code generation for request parameters"
+    remove: true
+
+  - target: $.components.schemas
+    description: "Add Scania-specific fields"
+    update:
+      VehicleObject:
+        properties:
+          registrationNumber:
+            type: string
+            description: "The registration number (license plate) of the vehicle. This is a Scania-specific field."
+            example: "ABC123"
+      SnapshotDataObject:
+        properties:
+          ignition:
+            type: string
+            description: "The ignition state of the vehicle. This is a Scania-specific field."
+            enum:
+              - ON
+              - OFF
+              - ERROR
+              - NOT_AVAILABLE
+
+  - target: $.components.schemas.GNSSPositionObject.properties.heading
+    description: "Fix heading data type"
+    update:
+      x-go-type: Int
+
+  - target: $.components.schemas.UptimeDataObject.properties.alternatorInfo
+    description: "Fix alternatorInfo data type"
+    update:
+      type: array
+      items:
+        type: object
+        properties:
+          alternatorStatus:
+            type: string
+            example: CHARGING
+            enum:
+              - NOT_CHARGING
+              - CHARGING
+              - ERROR
+              - NOT_AVAILABLE
+          alternatorNumber:
+            type: integer
+            format: int64
+            example: 1
+
+  - target: $.components.schemas.UptimeDataObject.properties.alternatorInfo.properties
+    description: "Fix alternatorInfo data type"
+    remove: true
+
+  - target: $..[?(@.type=="array")]
+    description: "Skip pointer to Go slices"
+    update:
+      x-go-type-skip-optional-pointer: true
+
+  - target: $..[?(@.required)].required
+    description: "Remove required from all fields"
+    remove: true
+
+  - target: $..[?(@.type=="integer" && !@.format)]
+    description: "Default integers to int32 if no format is provided"
+    update:
+      format: int32
+
+  - target: $..[?(@.type=="string" && @.format=="date-time")]
+    description: "Use custom type to handle non-conformance with RFC3339"
+    update:
+      x-go-type: Time

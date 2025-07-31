@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/way-platform/rfms-go/openapi/rfmsv4"
+	"github.com/way-platform/rfms-go/internal/openapi/rfmsv4oapi"
 )
 
 // Error is an error returned by the rFMS API.
@@ -39,16 +39,16 @@ func newHTTPError(resp *http.Response) *Error {
 		StatusCode: resp.StatusCode,
 	}
 	if data, err := io.ReadAll(resp.Body); err == nil {
-		var body rfmsv4.Error
+		var body rfmsv4oapi.ErrorObject
 		if err := json.Unmarshal(data, &body); err == nil {
-			if body.Error != "" {
-				result.Identifier = body.Error
+			if body.Error != nil {
+				result.Identifier = *body.Error
 			}
-			if body.ErrorDescription != "" {
-				result.Description = body.ErrorDescription
+			if body.ErrorDescription != nil {
+				result.Description = *body.ErrorDescription
 			}
-			if body.ErrorURI != "" {
-				result.ErrorURI = body.ErrorURI
+			if body.ErrorURI != nil {
+				result.ErrorURI = *body.ErrorURI
 			}
 		} else {
 			result.Description = string(data)

@@ -1,0 +1,35 @@
+edition = "2023";
+
+package wayplatform.rfms.v5;
+
+// FuelType is a type of fuel usable by a vehicle.
+enum FuelType {
+  // Default value. This value is not used.
+  FUEL_TYPE_UNSPECIFIED = 0;
+  // Unknown fuel type.
+  FUEL_TYPE_UNKNOWN = 1;
+  // Gasoline. 0x01 (GAS)
+  GASOLINE = 2;
+  // Methanol. 0x02 (METH)
+  METHANOL = 3;
+  // Ethanol. 0x03 (ETH)
+  ETHANOL = 4;
+  // Diesel. 0x04 (DSL)
+  DIESEL = 5;
+  // Liquefied petroleum gas. 0x05 (LPG)
+  LIQUEFIED_PETROLEUM_GAS = 6;
+  // Compressed natural gas. 0x06 (CNG)
+  COMPRESSED_NATURAL_GAS = 7;
+  // Propane. 0x07 (PROP)
+  PROPANE = 8;
+  // Battery electric. 0x08 (ELEC)
+  BATTERY_ELECTRIC = 9;
+  // Hydrogen fuel cell. 0x1D (H2FC)
+  HYDROGEN_FUEL_CELL = 10;
+  // Hydrogen internal combustion engine. 0x1E (H2ICE)
+  HYDROGEN_INTERNAL_COMBUSTION_ENGINE = 11;
+  // Kerosene. 0x1F (KER)
+  KEROSENE = 12;
+  // Heavy fuel oil. 0x20 (HFO)
+  HEAVY_FUEL_OIL = 13;
+}

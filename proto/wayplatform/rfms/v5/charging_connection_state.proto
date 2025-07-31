@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package wayplatform.rfms.v5;
+
+// Charging connection state.
+enum ChargingConnectionState {
+  // Default value. This value is not used.
+  CHARGING_CONNECTION_STATE_UNSPECIFIED = 0;
+
+  // The charging connection state is unknown.
+  CHARGING_CONNECTION_STATE_UNKNOWN = 1;
+
+  // The charging connection state is not available.
+  CHARGING_CONNECTION_STATE_NOT_AVAILABLE = 2;
+
+  // An error occurred when connecting or disconnecting.
+  CHARGING_CONNECTION_STATE_ERROR = 3;
+
+  // A charger is being connected.
+  CONNECTING = 4;
+
+  // A charger is connected.
+  CONNECTED = 5;
+
+  // A charger is being disconnected.
+  DISCONNECTING = 6;
+
+  // A charger is disconnected.
+  DISCONNECTED = 7;
+}
