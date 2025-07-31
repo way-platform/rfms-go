@@ -95,8 +95,9 @@ func removeCredentials() error {
 // NewCommand returns a new [cobra.Command] for rFMS CLI authentication.
 func NewCommand() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "auth",
-		Short: "Authenticate with an rFMS API",
+		Use:     "auth",
+		Short:   "Authenticate with an rFMS API",
+		GroupID: "auth",
 	}
 	cmd.AddCommand(newLoginCommand())
 	cmd.AddCommand(newLogoutCommand())

@@ -1,18 +1,42 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
+	"image/color"
 	"os"
 
+	"github.com/charmbracelet/fang"
+	"github.com/charmbracelet/lipgloss/v2"
 	"github.com/spf13/cobra"
 	"github.com/way-platform/rfms-go"
 	"github.com/way-platform/rfms-go/cmd/rfms/internal/auth"
 )
 
 func main() {
-	if err := newRootCommand().Execute(); err != nil {
-		_, _ = fmt.Fprintln(os.Stderr, err)
+	if err := fang.Execute(
+		context.Background(),
+		newRootCommand(),
+		fang.WithColorSchemeFunc(func(c lipgloss.LightDarkFunc) fang.ColorScheme {
+			base := c(lipgloss.Black, lipgloss.White)
+			baseInverted := c(lipgloss.White, lipgloss.Black)
+			return fang.ColorScheme{
+				Base:         base,
+				Title:        base,
+				Description:  base,
+				Comment:      base,
+				Flag:         base,
+				FlagDefault:  base,
+				Command:      base,
+				QuotedString: base,
+				Argument:     base,
+				Help:         base,
+				Dash:         base,
+				ErrorHeader:  [2]color.Color{baseInverted, base},
+				ErrorDetails: base,
+			}
+		}),
+	); err != nil {
 		os.Exit(1)
 	}
 }
@@ -22,17 +46,32 @@ func newRootCommand() *cobra.Command {
 		Use:   "rfms",
 		Short: "rFMS CLI",
 	}
+	cmd.AddGroup(&cobra.Group{
+		ID:    "auth",
+		Title: "Authentication",
+	})
 	cmd.AddCommand(auth.NewCommand())
+	cmd.AddGroup(&cobra.Group{
+		ID:    "rfms",
+		Title: "rFMS Commands",
+	})
 	cmd.AddCommand(newVehiclesCommand())
 	cmd.AddCommand(newVehiclePositionsCommand())
 	cmd.AddCommand(newVehicleStatusesCommand())
+	cmd.AddGroup(&cobra.Group{
+		ID:    "utils",
+		Title: "Utils",
+	})
+	cmd.SetHelpCommandGroupID("utils")
+	cmd.SetCompletionCommandGroupID("utils")
 	return cmd
 }
 
 func newVehiclesCommand() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "vehicles",
-		Short: "List vehicles",
+		Use:     "vehicles",
+		Short:   "List vehicles",
+		GroupID: "rfms",
 	}
 	limit := cmd.Flags().Int("limit", 100, "max vehicles queried")
 	cmd.RunE = func(cmd *cobra.Command, args []string) error {
@@ -62,8 +101,9 @@ func newVehiclesCommand() *cobra.Command {
 
 func newVehiclePositionsCommand() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "vehicle-positions",
-		Short: "List vehicle positions",
+		Use:     "vehicle-positions",
+		Short:   "List vehicle positions",
+		GroupID: "rfms",
 	}
 	limit := cmd.Flags().Int("limit", 100, "max vehicle positions queried")
 	cmd.RunE = func(cmd *cobra.Command, args []string) error {
@@ -94,8 +134,9 @@ func newVehiclePositionsCommand() *cobra.Command {
 
 func newVehicleStatusesCommand() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "vehicle-statuses",
-		Short: "List vehicle statuses",
+		Use:     "vehicle-statuses",
+		Short:   "List vehicle statuses",
+		GroupID: "rfms",
 	}
 	limit := cmd.Flags().Int("limit", 100, "max vehicle statuses queried")
 	cmd.RunE = func(cmd *cobra.Command, args []string) error {
