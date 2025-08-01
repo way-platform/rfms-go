@@ -1,0 +1,223 @@
+syntax = "proto2";
+message VehiclePosition {
+  optional string vin = 1;
+  optional Inline_wayplatform_rfms_v5_Trigger trigger = 2;
+  optional int64 create_time = 3;
+  optional int64 receive_time = 4;
+  optional Inline_wayplatform_rfms_v5_GnssPosition gnss_position = 5;
+  optional double wheel_based_speed_kmh = 6;
+  optional double tachograph_speed_kmh = 7;
+  message Inline_wayplatform_rfms_v5_DriverIdentification {
+    optional Tacho tacho = 1;
+    optional Oem oem = 2;
+    message Tacho {
+      optional string driver_id = 1;
+      optional string card_issuing_member_state = 2;
+      optional int32 authentication_equipment = 3;
+      optional string unknown_authentication_equipment = 4;
+      optional string card_replacement_index = 5;
+      optional string card_renewal_index = 6;
+      enum AuthenticationEquipment {
+        AUTHENTICATION_EQUIPMENT_UNSPECIFIED = 0;
+        AUTHENTICATION_EQUIPMENT_UNKNOWN = 1;
+        DRIVER_CARD = 2;
+        CONTROL_CARD = 3;
+        COMPANY_CARD = 4;
+        MANUFACTURING_CARD = 5;
+        VEHICLE_UNIT = 6;
+        MOTION_SENSOR = 7;
+      }
+    }
+    message Oem {
+      optional string id_type = 1;
+      optional string driver_id = 2;
+    }
+  }
+  message Inline_wayplatform_rfms_v5_TellTale {
+    optional int32 type = 1;
+    optional string unknown_type = 2;
+    optional string oem_specific_type = 3;
+    optional int32 state = 4;
+    optional string unknown_state = 5;
+    enum Type {
+      TYPE_UNSPECIFIED = 0;
+      TYPE_UNKNOWN = 1;
+      OEM_SPECIFIC = 2;
+      COOLING_AIR_CONDITIONING = 3;
+      HIGH_BEAM_MAIN_BEAM = 4;
+      LOW_BEAM_DIPPED_BEAM = 5;
+      TURN_SIGNALS = 6;
+      HAZARD_WARNING = 7;
+      PROVISIONING_HANDICAPPED_PERSON = 8;
+      PARKING_BRAKE = 9;
+      BRAKE_MALFUNCTION = 10;
+      HATCH_OPEN = 11;
+      FUEL_LEVEL = 12;
+      ENGINE_COOLANT_TEMPERATURE = 13;
+      BATTERY_CHARGING_CONDITION = 14;
+      ENGINE_OIL = 15;
+      POSITION_LIGHTS = 16;
+      FRONT_FOG_LIGHT = 17;
+      REAR_FOG_LIGHT = 18;
+      PARKING_HEATER = 19;
+      ENGINE_MIL_INDICATOR = 20;
+      SERVICE_CALL_FOR_MAINTENANCE = 21;
+      TRANSMISSION_FLUID_TEMPERATURE = 22;
+      TRANSMISSION_MALFUNCTION = 23;
+      ANTI_LOCK_BRAKE_FAILURE = 24;
+      WORN_BRAKE_LININGS = 25;
+      WINDSCREEN_WASHER_FLUID = 26;
+      TIRE_MALFUNCTION = 27;
+      GENERAL_FAILURE = 28;
+      ENGINE_OIL_TEMPERATURE = 29;
+      ENGINE_OIL_LEVEL = 30;
+      ENGINE_COOLANT_LEVEL = 31;
+      STEERING_FLUID_LEVEL = 32;
+      STEERING_FAILURE = 33;
+      HEIGHT_CONTROL = 34;
+      RETARDER = 35;
+      ENGINE_EMISSION_FAILURE = 36;
+      ESC_INDICATOR = 37;
+      BRAKE_LIGHTS = 38;
+      ARTICULATION = 39;
+      STOP_REQUEST = 40;
+      PRAM_REQUEST = 41;
+      BUS_STOP_BRAKE = 42;
+      ADBLUE_LEVEL = 43;
+      RAISING = 44;
+      LOWERING = 45;
+      KNEELING = 46;
+      ENGINE_COMPARTMENT_TEMPERATURE = 47;
+      AUXILLARY_AIR_PRESSURE = 48;
+      AIR_FILTER_CLOGGED = 49;
+      FUEL_FILTER_DIFF_PRESSURE = 50;
+      SEAT_BELT = 51;
+      EBS = 52;
+      LANE_DEPARTURE_INDICATOR = 53;
+      ADVANCED_EMERGENCY_BRAKING = 54;
+      ACC = 55;
+      TRAILER_CONNECTED = 56;
+      ABS_TRAILER = 57;
+      AIRBAG = 58;
+      EBS_TRAILER_1_2 = 59;
+      TACHOGRAPH_INDICATOR = 60;
+      ESC_SWITCHED_OFF = 61;
+      LANE_DEPARTURE_WARNING_SWITCHED_OFF = 62;
+      ENGINE_EMISSION_FILTER_SOOT_FILTER = 63;
+      ELECTRIC_MOTOR_FAILURES = 64;
+      ADBLUE_TAMPERING = 65;
+      MULTIPLEX_SYSTEM = 66;
+      BATTERY_PACK = 67;
+      HIGH_VOLTAGE_SYSTEM_CAUTION = 68;
+      BATTERY_PACK_TEMPERATURE = 69;
+      LIMITED_PERFORMANCE_ELECTRIC_MOTOR = 70;
+      BATTERY_PACK_COOLING = 71;
+      WATER_IN_FUEL_INDICATOR = 72;
+    }
+    enum State {
+      STATE_UNSPECIFIED = 0;
+      STATE_UNKNOWN = 1;
+      STATE_NOT_AVAILABLE = 2;
+      RED = 3;
+      YELLOW = 4;
+      INFO = 5;
+      OFF = 6;
+    }
+  }
+  message Inline_wayplatform_rfms_v5_Trigger {
+    optional int32 type = 1;
+    optional string unknown_type = 2;
+    optional int32 context = 3;
+    optional string unknown_context = 4;
+    repeated string additional_info = 5;
+    optional Inline_wayplatform_rfms_v5_DriverIdentification driver_info = 6;
+    optional string pto_id = 7;
+    optional Inline_wayplatform_rfms_v5_TellTale tell_tale_info = 8;
+    optional ChargingStatusInfo charging_status_info = 9;
+    optional ChargingConnectionStatusInfo charging_connection_status_info = 10;
+    optional AlarmInfo alarm_info = 11;
+    message ChargingStatusInfo {
+      optional int32 event = 1;
+      optional string unknown_event = 2;
+      optional string detail = 3;
+      enum Event {
+        EVENT_UNSPECIFIED = 0;
+        EVENT_UNKNOWN = 1;
+        EVENT_ERROR = 2;
+        CHARGING_STARTED = 3;
+        CHARGING_COMPLETED = 4;
+        CHARGING_INTERRUPTED = 5;
+        ESTIMATED_COMPLETION_TIME_CHANGED = 6;
+        TIMER = 7;
+        CHARGING_LEVEL = 8;
+      }
+    }
+    message ChargingConnectionStatusInfo {
+      optional int32 state = 1;
+      optional string unknown_state = 2;
+    }
+    message AlarmInfo {
+      optional int32 type = 1;
+      optional string unknown_type = 2;
+      optional int32 state = 3;
+      optional string unknown_state = 4;
+      repeated string details = 5;
+      enum Type {
+        TYPE_UNSPECIFIED = 0;
+        TYPE_UNKNOWN = 1;
+        THEFT = 2;
+        FUEL_THEFT = 3;
+        FIRE = 4;
+        PANIC = 5;
+        CARGO_TEMPERATURE = 6;
+      }
+      enum State {
+        STATE_UNSPECIFIED = 0;
+        STATE_UNKNOWN = 1;
+        STATE_ERROR = 2;
+        ARMED = 3;
+        ARMED_WITH_ERROR = 4;
+        DISARMED = 5;
+        TRIGGERED = 6;
+        UNTRIGGERED = 7;
+      }
+    }
+    enum Type {
+      TYPE_UNSPECIFIED = 0;
+      TYPE_UNKNOWN = 1;
+      TIMER = 2;
+      IGNITION_ON = 3;
+      IGNITION_OFF = 4;
+      PTO_ENABLED = 5;
+      PTO_DISABLED = 6;
+      DRIVER_LOGIN = 7;
+      DRIVER_LOGOUT = 8;
+      TELL_TALE = 9;
+      ENGINE_ON = 10;
+      ENGINE_OFF = 11;
+      DRIVER_1_WORKING_STATE_CHANGED = 12;
+      DRIVER_2_WORKING_STATE_CHANGED = 13;
+      DISTANCE_TRAVELLED = 14;
+      FUEL_TYPE_CHANGE = 15;
+      PARKING_BRAKE_SWITCH_CHANGE = 16;
+      BATTERY_PACK_CHARGING_STATUS_CHANGE = 17;
+      BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE = 18;
+      TRAILER_CONNECTED = 19;
+      TRAILER_DISCONNECTED = 20;
+      ALARM = 21;
+    }
+    enum Context {
+      CONTEXT_UNSPECIFIED = 0;
+      CONTEXT_UNKNOWN = 1;
+      RFMS = 2;
+    }
+  }
+  message Inline_wayplatform_rfms_v5_GnssPosition {
+    optional int64 time = 1;
+    optional double latitude = 2;
+    optional double longitude = 3;
+    optional double heading_deg = 4;
+    optional double altitude_m = 5;
+    optional double speed_kmh = 6;
+  }
+}

@@ -1978,8 +1978,8 @@ const file_wayplatform_rfms_v5_accumulated_data_proto_rawDesc = "" +
 	"duration_s\x18\x03 \x01(\x01R\tdurationS\x12\x1d\n" +
 	"\n" +
 	"distance_m\x18\x04 \x01(\x01R\tdistanceM\x12C\n" +
-	"\x1eelectric_energy_consumption_wh\x18\x05 \x01(\x01R\x1belectricEnergyConsumptionWhB\xde\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x14AccumulatedDataProtoP\x01Z?github.com/way-platform/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\x1eelectric_energy_consumption_wh\x18\x05 \x01(\x01R\x1belectricEnergyConsumptionWhB\xe6\x01\n" +
+	"\x17com.wayplatform.rfms.v5B\x14AccumulatedDataProtoP\x01ZGgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_rfms_v5_accumulated_data_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_wayplatform_rfms_v5_accumulated_data_proto_goTypes = []any{

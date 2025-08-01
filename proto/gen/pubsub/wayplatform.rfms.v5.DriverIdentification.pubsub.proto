@@ -1,0 +1,27 @@
+syntax = "proto2";
+message DriverIdentification {
+  optional Tacho tacho = 1;
+  optional Oem oem = 2;
+  message Tacho {
+    optional string driver_id = 1;
+    optional string card_issuing_member_state = 2;
+    optional int32 authentication_equipment = 3;
+    optional string unknown_authentication_equipment = 4;
+    optional string card_replacement_index = 5;
+    optional string card_renewal_index = 6;
+    enum AuthenticationEquipment {
+      AUTHENTICATION_EQUIPMENT_UNSPECIFIED = 0;
+      AUTHENTICATION_EQUIPMENT_UNKNOWN = 1;
+      DRIVER_CARD = 2;
+      CONTROL_CARD = 3;
+      COMPANY_CARD = 4;
+      MANUFACTURING_CARD = 5;
+      VEHICLE_UNIT = 6;
+      MOTION_SENSOR = 7;
+    }
+  }
+  message Oem {
+    optional string id_type = 1;
+    optional string driver_id = 2;
+  }
+}

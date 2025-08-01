@@ -1,0 +1,32 @@
+[
+ {
+  "name": "type",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "The type of tell tale."
+ },
+ {
+  "name": "unknown_type",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The unknown tell tale type. Used when the type is TYPE_UNKNOWN."
+ },
+ {
+  "name": "oem_specific_type",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The OEM specific type. Used when the type is TYPE_OEM_SPECIFIC."
+ },
+ {
+  "name": "state",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "The state of the tell tale."
+ },
+ {
+  "name": "unknown_state",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The unknown state. Used when the state is STATE_UNKNOWN."
+ }
+]

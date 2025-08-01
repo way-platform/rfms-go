@@ -1,0 +1,34 @@
+[
+ {
+  "name": "position",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "The position of the axle."
+ },
+ {
+  "name": "load_kg",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The static vertical load of the axle. (kg)"
+ },
+ {
+  "name": "tires",
+  "type": "RECORD",
+  "mode": "REPEATED",
+  "description": "The tires on the axle.",
+  "fields": [
+   {
+    "name": "position",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "Tire position (on the specified axle) from 1 to 15,\n counting left to right when facing in the direction of\n normal vehicle travel (forward)."
+   },
+   {
+    "name": "pressure_kpa",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "Tire pressure. (kPa)"
+   }
+  ]
+ }
+]

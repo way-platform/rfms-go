@@ -289,8 +289,8 @@ const file_wayplatform_rfms_v5_vehicle_position_proto_rawDesc = "" +
 	"\freceive_time\x18\x04 \x01(\x03R\vreceiveTime\x12F\n" +
 	"\rgnss_position\x18\x05 \x01(\v2!.wayplatform.rfms.v5.GnssPositionR\fgnssPosition\x121\n" +
 	"\x15wheel_based_speed_kmh\x18\x06 \x01(\x01R\x12wheelBasedSpeedKmh\x120\n" +
-	"\x14tachograph_speed_kmh\x18\a \x01(\x01R\x12tachographSpeedKmhB\xde\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x14VehiclePositionProtoP\x01Z?github.com/way-platform/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\x14tachograph_speed_kmh\x18\a \x01(\x01R\x12tachographSpeedKmhB\xe6\x01\n" +
+	"\x17com.wayplatform.rfms.v5B\x14VehiclePositionProtoP\x01ZGgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_rfms_v5_vehicle_position_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_wayplatform_rfms_v5_vehicle_position_proto_goTypes = []any{

@@ -1,0 +1,778 @@
+[
+ {
+  "name": "wheel_based_speed_over_zero_duration_s",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The duration the vehicle speed has been over zero. (s)"
+ },
+ {
+  "name": "wheel_based_speed_over_zero_fuel_ml",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The fuel the vehicle has consumed while driven with speed over zero. (ml)\n Engine on (RPM\u003e0) and no PTO active."
+ },
+ {
+  "name": "wheel_based_speed_over_zero_fuel_gaseous_kg",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The fuel the vehicle has consumed while driven with speed over zero. (kg)\n Engine on (RPM\u003e0) and no PTO active."
+ },
+ {
+  "name": "wheel_based_speed_over_zero_electric_energy_consumption_wh",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The electric energy the vehicle has consumed while driven with speed over zero. (Wh)"
+ },
+ {
+  "name": "wheel_based_speed_zero_duration_s",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The duration the vehicle speed has been zero. (s)\n Engine on (RPM\u003e0 or electic motor in crank mode) and no PTO active"
+ },
+ {
+  "name": "wheel_based_speed_zero_distance_m",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The distance the vehicle has been driven with speed zero. (m)"
+ },
+ {
+  "name": "wheel_based_speed_zero_fuel_ml",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The fuel the vehicle has consumed while driven with speed zero. (ml)\n Engine on (RPM\u003e0) and no PTO active."
+ },
+ {
+  "name": "wheel_based_speed_zero_fuel_gaseous_kg",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The fuel the vehicle has consumed while driven with speed zero. (ml)\n Engine on (RPM\u003e0) and no PTO active."
+ },
+ {
+  "name": "wheel_based_speed_zero_electric_energy_consumption_wh",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The electric energy the vehicle has consumed while driven with speed zero. (Wh)"
+ },
+ {
+  "name": "cruise_control_active_distance_m",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The distance the vehicle has been driven with cruise control active. (m)"
+ },
+ {
+  "name": "cruise_control_active_duration_s",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The duration the vehicle has been driven with cruise control active. (s)"
+ },
+ {
+  "name": "cruise_control_active_fuel_consumption_ml",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The fuel the vehicle has consumed while driven with cruise control active. (ml)"
+ },
+ {
+  "name": "cruise_control_active_fuel_consumption_gaseous_kg",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The fuel the vehicle has consumed while driven with cruise control active. (kg)"
+ },
+ {
+  "name": "cruise_control_active_electric_energy_consumption_wh",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The electric energy the vehicle has consumed while driven with cruise control active. (Wh)"
+ },
+ {
+  "name": "aux_electric_energy_consumption_wh",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The electric energy the auxiliary systems have consumed. (Wh)"
+ },
+ {
+  "name": "pto_active_class",
+  "type": "RECORD",
+  "mode": "REPEATED",
+  "fields": [
+   {
+    "name": "label",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "duration_s",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "distance_m",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_ml",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_gaseous_kg",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "electric_energy_consumption_wh",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   }
+  ]
+ },
+ {
+  "name": "brake_pedal_speed_over_zero_count",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "The total number of times the brake pedal has been used while"
+ },
+ {
+  "name": "brake_pedal_speed_over_zero_distance_m",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The total distance the vehicle has driven where the brake pedal has been used. (m)"
+ },
+ {
+  "name": "acceleration_pedal_position_class",
+  "type": "RECORD",
+  "mode": "REPEATED",
+  "fields": [
+   {
+    "name": "from",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "to",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "duration_s",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "distance_m",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_ml",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_gaseous_kg",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "electric_energy_consumption_wh",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   }
+  ]
+ },
+ {
+  "name": "brake_pedal_position_class",
+  "type": "RECORD",
+  "mode": "REPEATED",
+  "fields": [
+   {
+    "name": "from",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "to",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "duration_s",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "distance_m",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_ml",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_gaseous_kg",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "electric_energy_consumption_wh",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   }
+  ]
+ },
+ {
+  "name": "acceleration_class",
+  "type": "RECORD",
+  "mode": "REPEATED",
+  "fields": [
+   {
+    "name": "from",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "to",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "duration_s",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "distance_m",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_ml",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_gaseous_kg",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "electric_energy_consumption_wh",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   }
+  ]
+ },
+ {
+  "name": "high_acceleration_class",
+  "type": "RECORD",
+  "mode": "REPEATED",
+  "fields": [
+   {
+    "name": "from",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "to",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "duration_s",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "distance_m",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_ml",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_gaseous_kg",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "electric_energy_consumption_wh",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   }
+  ]
+ },
+ {
+  "name": "retarder_torque_class",
+  "type": "RECORD",
+  "mode": "REPEATED",
+  "fields": [
+   {
+    "name": "from",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "to",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "duration_s",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "distance_m",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_ml",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_gaseous_kg",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "electric_energy_consumption_wh",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   }
+  ]
+ },
+ {
+  "name": "driving_without_torque_class",
+  "type": "RECORD",
+  "mode": "REPEATED",
+  "fields": [
+   {
+    "name": "label",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "duration_s",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "distance_m",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_ml",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_gaseous_kg",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "electric_energy_consumption_wh",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   }
+  ]
+ },
+ {
+  "name": "engine_torque_class",
+  "type": "RECORD",
+  "mode": "REPEATED",
+  "fields": [
+   {
+    "name": "from",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "to",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "duration_s",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "distance_m",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_ml",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_gaseous_kg",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   }
+  ]
+ },
+ {
+  "name": "electric_motor_torque_class",
+  "type": "RECORD",
+  "mode": "REPEATED",
+  "fields": [
+   {
+    "name": "from",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "to",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "duration_s",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "distance_m",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "electric_energy_consumption_wh",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   }
+  ]
+ },
+ {
+  "name": "engine_torque_at_current_speed_class",
+  "type": "RECORD",
+  "mode": "REPEATED",
+  "fields": [
+   {
+    "name": "from",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "to",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "duration_s",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "distance_m",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_ml",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_gaseous_kg",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   }
+  ]
+ },
+ {
+  "name": "electric_motor_torque_at_current_speed_class",
+  "type": "RECORD",
+  "mode": "REPEATED",
+  "fields": [
+   {
+    "name": "from",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "to",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "duration_s",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "distance_m",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "electric_energy_consumption_wh",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   }
+  ]
+ },
+ {
+  "name": "vehicle_speed_class",
+  "type": "RECORD",
+  "mode": "REPEATED",
+  "fields": [
+   {
+    "name": "from",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "to",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "duration_s",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "distance_m",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_ml",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_gaseous_kg",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "electric_energy_consumption_wh",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   }
+  ]
+ },
+ {
+  "name": "engine_speed_class",
+  "type": "RECORD",
+  "mode": "REPEATED",
+  "fields": [
+   {
+    "name": "from",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "to",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "duration_s",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "distance_m",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_ml",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_gaseous_kg",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "electric_energy_consumption_wh",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   }
+  ]
+ },
+ {
+  "name": "acceleration_during_brake_class",
+  "type": "RECORD",
+  "mode": "REPEATED",
+  "fields": [
+   {
+    "name": "from",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "to",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "duration_s",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "distance_m",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_ml",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_gaseous_kg",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "electric_energy_consumption_wh",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   }
+  ]
+ },
+ {
+  "name": "selected_gear_class",
+  "type": "RECORD",
+  "mode": "REPEATED",
+  "fields": [
+   {
+    "name": "label",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "duration_s",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "distance_m",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_ml",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_gaseous_kg",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "electric_energy_consumption_wh",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   }
+  ]
+ },
+ {
+  "name": "current_gear_class",
+  "type": "RECORD",
+  "mode": "REPEATED",
+  "fields": [
+   {
+    "name": "label",
+    "type": "STRING",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "duration_s",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "distance_m",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_ml",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "fuel_consumption_gaseous_kg",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "electric_energy_consumption_wh",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   }
+  ]
+ },
+ {
+  "name": "chairlift_count",
+  "type": "INTEGER",
+  "mode": "NULLABLE"
+ },
+ {
+  "name": "stop_request_count",
+  "type": "INTEGER",
+  "mode": "NULLABLE"
+ },
+ {
+  "name": "kneeling_count",
+  "type": "INTEGER",
+  "mode": "NULLABLE"
+ },
+ {
+  "name": "pram_request_count",
+  "type": "INTEGER",
+  "mode": "NULLABLE"
+ },
+ {
+  "name": "electric_power_recuperation_class",
+  "type": "RECORD",
+  "mode": "REPEATED",
+  "fields": [
+   {
+    "name": "from",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "to",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "duration_s",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "distance_m",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   },
+   {
+    "name": "electric_energy_consumption_wh",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+   }
+  ]
+ }
+]

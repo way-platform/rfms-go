@@ -1511,8 +1511,8 @@ const file_wayplatform_rfms_v5_vehicle_proto_rawDesc = "" +
 	"\x11BODY_TYPE_UNKNOWN\x10\x01\x12\f\n" +
 	"\bCITY_BUS\x10\x02\x12\x11\n" +
 	"\rINTERCITY_BUS\x10\x03\x12\t\n" +
-	"\x05COACH\x10\x04B\xd6\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\fVehicleProtoP\x01Z?github.com/way-platform/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\x05COACH\x10\x04B\xde\x01\n" +
+	"\x17com.wayplatform.rfms.v5B\fVehicleProtoP\x01ZGgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_rfms_v5_vehicle_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
 var file_wayplatform_rfms_v5_vehicle_proto_msgTypes = make([]protoimpl.MessageInfo, 1)

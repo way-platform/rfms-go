@@ -96,8 +96,8 @@ const file_wayplatform_rfms_v5_charging_device_proto_rawDesc = "" +
 	"\x14CHARGING_DEVICE_NONE\x10\x03\x12\x1f\n" +
 	"\x1bAUTOMATIC_CONNECTION_DEVICE\x10\x04\x12\x1b\n" +
 	"\x17WIRELESS_POWER_TRANSFER\x10\x05\x12\x13\n" +
-	"\x0fVEHICLE_COUPLER\x10\x06B\xdd\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x13ChargingDeviceProtoP\x01Z?github.com/way-platform/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\x0fVEHICLE_COUPLER\x10\x06B\xe5\x01\n" +
+	"\x17com.wayplatform.rfms.v5B\x13ChargingDeviceProtoP\x01ZGgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_rfms_v5_charging_device_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_wayplatform_rfms_v5_charging_device_proto_goTypes = []any{

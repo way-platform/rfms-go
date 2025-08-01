@@ -102,8 +102,8 @@ const file_wayplatform_rfms_v5_charging_connection_state_proto_rawDesc = "" +
 	"CONNECTING\x10\x04\x12\r\n" +
 	"\tCONNECTED\x10\x05\x12\x11\n" +
 	"\rDISCONNECTING\x10\x06\x12\x10\n" +
-	"\fDISCONNECTED\x10\aB\xe6\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x1cChargingConnectionStateProtoP\x01Z?github.com/way-platform/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\x06proto3"
+	"\fDISCONNECTED\x10\aB\xee\x01\n" +
+	"\x17com.wayplatform.rfms.v5B\x1cChargingConnectionStateProtoP\x01ZGgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\x06proto3"
 
 var file_wayplatform_rfms_v5_charging_connection_state_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_wayplatform_rfms_v5_charging_connection_state_proto_goTypes = []any{

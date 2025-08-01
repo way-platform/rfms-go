@@ -101,8 +101,8 @@ const file_wayplatform_rfms_v5_charging_state_proto_rawDesc = "" +
 	"\fNOT_CHARGING\x10\x04\x12\f\n" +
 	"\bCHARGING\x10\x05\x12\x0f\n" +
 	"\vCHARGING_AC\x10\x06\x12\x0f\n" +
-	"\vCHARGING_DC\x10\aB\xdc\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x12ChargingStateProtoP\x01Z?github.com/way-platform/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\vCHARGING_DC\x10\aB\xe4\x01\n" +
+	"\x17com.wayplatform.rfms.v5B\x12ChargingStateProtoP\x01ZGgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_rfms_v5_charging_state_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_wayplatform_rfms_v5_charging_state_proto_goTypes = []any{

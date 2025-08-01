@@ -133,8 +133,8 @@ const file_wayplatform_rfms_v5_fuel_type_proto_rawDesc = "" +
 	"\x12'\n" +
 	"#HYDROGEN_INTERNAL_COMBUSTION_ENGINE\x10\v\x12\f\n" +
 	"\bKEROSENE\x10\f\x12\x12\n" +
-	"\x0eHEAVY_FUEL_OIL\x10\rB\xd7\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\rFuelTypeProtoP\x01Z?github.com/way-platform/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\x0eHEAVY_FUEL_OIL\x10\rB\xdf\x01\n" +
+	"\x17com.wayplatform.rfms.v5B\rFuelTypeProtoP\x01ZGgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_rfms_v5_fuel_type_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_wayplatform_rfms_v5_fuel_type_proto_goTypes = []any{

@@ -1107,8 +1107,8 @@ const file_wayplatform_rfms_v5_snapshot_data_proto_rawDesc = "" +
 	"\atotal_m\x18\x01 \x01(\x01R\x06totalM\x12\x15\n" +
 	"\x06fuel_m\x18\x02 \x01(\x01R\x05fuelM\x12\x13\n" +
 	"\x05gas_m\x18\x03 \x01(\x01R\x04gasM\x12$\n" +
-	"\x0ebattery_pack_m\x18\x04 \x01(\x01R\fbatteryPackMB\xdb\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x11SnapshotDataProtoP\x01Z?github.com/way-platform/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\x0ebattery_pack_m\x18\x04 \x01(\x01R\fbatteryPackMB\xe3\x01\n" +
+	"\x17com.wayplatform.rfms.v5B\x11SnapshotDataProtoP\x01ZGgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_rfms_v5_snapshot_data_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_wayplatform_rfms_v5_snapshot_data_proto_goTypes = []any{

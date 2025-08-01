@@ -266,8 +266,8 @@ const file_wayplatform_rfms_v5_gnss_position_proto_rawDesc = "" +
 	"headingDeg\x12\x1d\n" +
 	"\n" +
 	"altitude_m\x18\x05 \x01(\x01R\taltitudeM\x12\x1b\n" +
-	"\tspeed_kmh\x18\x06 \x01(\x01R\bspeedKmhB\xdb\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x11GnssPositionProtoP\x01Z?github.com/way-platform/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\tspeed_kmh\x18\x06 \x01(\x01R\bspeedKmhB\xe3\x01\n" +
+	"\x17com.wayplatform.rfms.v5B\x11GnssPositionProtoP\x01ZGgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_rfms_v5_gnss_position_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_wayplatform_rfms_v5_gnss_position_proto_goTypes = []any{

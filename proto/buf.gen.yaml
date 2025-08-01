@@ -8,7 +8,7 @@ managed:
     - module: buf.build/googlecloudplatform/bq-schema-api
   override:
     - file_option: go_package_prefix
-      value: github.com/way-platform/proto/gen/go
+      value: github.com/way-platform/rfms-go/proto/gen/go
 
 inputs:
   - directory: "."
@@ -17,5 +17,14 @@ plugins:
   - local: ["go", "tool", "-modfile", "../tools/go.mod", "protoc-gen-go"]
     out: gen/go
     opt:
-      - module=github.com/way-platform/proto/gen/go
+      - module=github.com/way-platform/rfms-go/proto/gen/go
       - default_api_level=API_OPAQUE
+
+  - remote: buf.build/googlecloudplatform/bq-schema:v3.1.0
+    out: gen/bq
+    opt:
+      - module=github.com/way-platform/rfms-go/proto/gen/bq
+      - single-message
+
+  - remote: buf.build/bufbuild/protoschema-pubsub:v0.5.1
+    out: gen/pubsub

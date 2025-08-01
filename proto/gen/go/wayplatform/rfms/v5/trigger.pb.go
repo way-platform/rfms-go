@@ -1311,8 +1311,8 @@ const file_wayplatform_rfms_v5_trigger_proto_rawDesc = "" +
 	"\aContext\x12\x17\n" +
 	"\x13CONTEXT_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fCONTEXT_UNKNOWN\x10\x01\x12\b\n" +
-	"\x04RFMS\x10\x02B\xd6\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\fTriggerProtoP\x01Z?github.com/way-platform/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\x04RFMS\x10\x02B\xde\x01\n" +
+	"\x17com.wayplatform.rfms.v5B\fTriggerProtoP\x01ZGgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_rfms_v5_trigger_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
 var file_wayplatform_rfms_v5_trigger_proto_msgTypes = make([]protoimpl.MessageInfo, 4)

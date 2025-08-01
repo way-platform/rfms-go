@@ -584,8 +584,8 @@ const file_wayplatform_rfms_v5_driver_identification_proto_rawDesc = "" +
 	"\rMOTION_SENSOR\x10\a\x1a;\n" +
 	"\x03Oem\x12\x17\n" +
 	"\aid_type\x18\x01 \x01(\tR\x06idType\x12\x1b\n" +
-	"\tdriver_id\x18\x02 \x01(\tR\bdriverIdB\xe3\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x19DriverIdentificationProtoP\x01Z?github.com/way-platform/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\tdriver_id\x18\x02 \x01(\tR\bdriverIdB\xeb\x01\n" +
+	"\x17com.wayplatform.rfms.v5B\x19DriverIdentificationProtoP\x01ZGgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_rfms_v5_driver_identification_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_wayplatform_rfms_v5_driver_identification_proto_msgTypes = make([]protoimpl.MessageInfo, 3)

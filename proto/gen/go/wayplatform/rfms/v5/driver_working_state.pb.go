@@ -101,8 +101,8 @@ const file_wayplatform_rfms_v5_driver_working_state_proto_rawDesc = "" +
 	"\x04REST\x10\x04\x12\r\n" +
 	"\tAVAILABLE\x10\x05\x12\b\n" +
 	"\x04WORK\x10\x06\x12\t\n" +
-	"\x05DRIVE\x10\aB\xe1\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x17DriverWorkingStateProtoP\x01Z?github.com/way-platform/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\x05DRIVE\x10\aB\xe9\x01\n" +
+	"\x17com.wayplatform.rfms.v5B\x17DriverWorkingStateProtoP\x01ZGgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_rfms_v5_driver_working_state_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_wayplatform_rfms_v5_driver_working_state_proto_goTypes = []any{

@@ -1198,8 +1198,8 @@ const file_wayplatform_rfms_v5_vehicle_status_proto_rawDesc = "" +
 	"\x14STATE_OF_DOORS_ERROR\x10\x02\x12 \n" +
 	"\x1cSTATE_OF_DOORS_NOT_AVAILABLE\x10\x03\x12\x16\n" +
 	"\x12ALL_DOORS_DISABLED\x10\x04\x12\x1d\n" +
-	"\x19AT_LEAST_ONE_DOOR_ENABLED\x10\x05B\xdc\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x12VehicleStatusProtoP\x01Z?github.com/way-platform/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\x19AT_LEAST_ONE_DOOR_ENABLED\x10\x05B\xe4\x01\n" +
+	"\x17com.wayplatform.rfms.v5B\x12VehicleStatusProtoP\x01ZGgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_rfms_v5_vehicle_status_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
 var file_wayplatform_rfms_v5_vehicle_status_proto_msgTypes = make([]protoimpl.MessageInfo, 2)

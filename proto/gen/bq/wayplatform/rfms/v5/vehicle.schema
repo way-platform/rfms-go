@@ -1,0 +1,184 @@
+[
+ {
+  "name": "vin",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The vehicle identification number (VIN) of the vehicle."
+ },
+ {
+  "name": "customer_vehicle_name",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The customer's name for the vehicle."
+ },
+ {
+  "name": "registration_number",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The registration number (license plate) of the vehicle."
+ },
+ {
+  "name": "brand",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "The brand of the vehicle."
+ },
+ {
+  "name": "unknown_brand",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The unknown brand of the vehicle.\n This is used when the type is BRAND_UNKNOWN."
+ },
+ {
+  "name": "production_date",
+  "type": "RECORD",
+  "mode": "NULLABLE",
+  "description": "The production date of the vehicle.",
+  "fields": [
+   {
+    "name": "day",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The day of the month."
+   },
+   {
+    "name": "month",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The month of the year."
+   },
+   {
+    "name": "year",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The year."
+   }
+  ]
+ },
+ {
+  "name": "type",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "The type of vehicle."
+ },
+ {
+  "name": "unknown_type",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The unknown type of the vehicle.\n This is used when type is TYPE_UNKNOWN."
+ },
+ {
+  "name": "model",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The model of the vehicle."
+ },
+ {
+  "name": "possible_fuel_types",
+  "type": "INTEGER",
+  "mode": "REPEATED",
+  "description": "The possible fuel types supported by this vehicle.\n This does NOT indicate which fuel type that is presently being used."
+ },
+ {
+  "name": "unknown_possible_fuel_types",
+  "type": "INTEGER",
+  "mode": "REPEATED",
+  "description": "The unknown possible fuel types of the vehicle.\n This is used when possible_fuel_types contains unknown fuel types."
+ },
+ {
+  "name": "emission_level",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "The emission level of the vehicle."
+ },
+ {
+  "name": "unknown_emission_level",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The unknown emission level of the vehicle.\n This is used when emission_level is EMISSION_LEVEL_UNKNOWN."
+ },
+ {
+  "name": "tell_tale_code",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The telltale code indicates how the tell tales shall be interpreted.\n The code is unique for each OEM. One OEM can have different interpretations\n depending on vehicle type."
+ },
+ {
+  "name": "chassis_type",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The chassis type of the vehicle."
+ },
+ {
+  "name": "axle_count",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "The number of axles on the vehicle."
+ },
+ {
+  "name": "total_fuel_tank_volume_ml",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The total fuel tank volume of the vehicle."
+ },
+ {
+  "name": "total_fuel_tank_capacity_gaseous_kg",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The total fuel tank capacity of the vehicle."
+ },
+ {
+  "name": "total_battery_pack_capacity_wh",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The total battery pack capacity of the vehicle."
+ },
+ {
+  "name": "tachograph_type",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "The type of tachograph in the vehicle."
+ },
+ {
+  "name": "unknown_tachograph_type",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The unknown tachograph type of the vehicle.\n This is used when tachograph_type is TACH_TYPE_UNKNOWN."
+ },
+ {
+  "name": "gearbox_type",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "The type of gearbox in the vehicle."
+ },
+ {
+  "name": "unknown_gearbox_type",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The unknown gearbox type of the vehicle.\n This is used when gearbox_type is GEARBOX_TYPE_UNKNOWN."
+ },
+ {
+  "name": "body_type",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "The type of body on the chassis."
+ },
+ {
+  "name": "unknown_body_type",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The unknown body type of the vehicle.\n This is used when body_type is BODY_TYPE_UNKNOWN."
+ },
+ {
+  "name": "door_configuration",
+  "type": "INTEGER",
+  "mode": "REPEATED",
+  "description": "The door configuration of the vehicle. The door order definition is OEM\n specific. E.g. [1, 2, 2] means the bus has 3 doors: 1 front door, double\n doors for door 2 and 3. This is used mainly for buses."
+ },
+ {
+  "name": "has_ramp_or_lift",
+  "type": "BOOLEAN",
+  "mode": "NULLABLE",
+  "description": "If the vehicle is equipped with a ramp or not. This is used mainly for buses."
+ }
+]

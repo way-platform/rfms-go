@@ -1,0 +1,10 @@
+syntax = "proto2";
+message Axle {
+  optional int32 position = 1;
+  optional double load_kg = 2;
+  repeated Tire tires = 3;
+  message Tire {
+    optional int32 position = 1;
+    optional double pressure_kpa = 2;
+  }
+}

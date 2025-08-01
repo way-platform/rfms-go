@@ -654,8 +654,8 @@ const file_wayplatform_rfms_v5_tell_tale_proto_rawDesc = "" +
 	"\n" +
 	"\x06YELLOW\x10\x04\x12\b\n" +
 	"\x04INFO\x10\x05\x12\a\n" +
-	"\x03OFF\x10\x06B\xd7\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\rTellTaleProtoP\x01Z?github.com/way-platform/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\x03OFF\x10\x06B\xdf\x01\n" +
+	"\x17com.wayplatform.rfms.v5B\rTellTaleProtoP\x01ZGgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_rfms_v5_tell_tale_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_wayplatform_rfms_v5_tell_tale_proto_msgTypes = make([]protoimpl.MessageInfo, 1)

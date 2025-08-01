@@ -1,0 +1,38 @@
+[
+ {
+  "name": "time",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "The date and time the GNSS position was recorded. (Unix microseconds)"
+ },
+ {
+  "name": "latitude",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The latitude of the vehicle. (WGS84 based)"
+ },
+ {
+  "name": "longitude",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The longitude of the vehicle. (WGS84 based)"
+ },
+ {
+  "name": "heading_deg",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The heading of the vehicle. (degrees) (0-359)"
+ },
+ {
+  "name": "altitude_m",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The altitude of the vehicle. (meters)\n 0 is sea level, negative values below sea level, and positive above sea level."
+ },
+ {
+  "name": "speed_kmh",
+  "type": "FLOAT",
+  "mode": "NULLABLE",
+  "description": "The speed of the vehicle. (km/h)"
+ }
+]

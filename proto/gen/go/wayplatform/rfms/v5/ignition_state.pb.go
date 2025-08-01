@@ -86,8 +86,8 @@ const file_wayplatform_rfms_v5_ignition_state_proto_rawDesc = "" +
 	"\x16IGNITION_STATE_UNKNOWN\x10\x01\x12 \n" +
 	"\x1cIGNITION_STATE_NOT_AVAILABLE\x10\x02\x12\a\n" +
 	"\x03OFF\x10\x03\x12\x06\n" +
-	"\x02ON\x10\x04B\xdc\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x12IgnitionStateProtoP\x01Z?github.com/way-platform/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\x02ON\x10\x04B\xe4\x01\n" +
+	"\x17com.wayplatform.rfms.v5B\x12IgnitionStateProtoP\x01ZGgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_rfms_v5_ignition_state_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_wayplatform_rfms_v5_ignition_state_proto_goTypes = []any{

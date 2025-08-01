@@ -1,0 +1,6 @@
+syntax = "proto2";
+message Date {
+  optional int32 day = 1;
+  optional int32 month = 2;
+  optional int32 year = 3;
+}

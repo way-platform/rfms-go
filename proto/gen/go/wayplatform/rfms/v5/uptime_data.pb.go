@@ -681,8 +681,8 @@ const file_wayplatform_rfms_v5_uptime_data_proto_rawDesc = "" +
 	"\vSTATE_ERROR\x10\x02\x12\x17\n" +
 	"\x13STATE_NOT_AVAILABLE\x10\x03\x12\x10\n" +
 	"\fNOT_CHARGING\x10\x04\x12\f\n" +
-	"\bCHARGING\x10\x05B\xd9\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x0fUptimeDataProtoP\x01Z?github.com/way-platform/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\bCHARGING\x10\x05B\xe1\x01\n" +
+	"\x17com.wayplatform.rfms.v5B\x0fUptimeDataProtoP\x01ZGgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_rfms_v5_uptime_data_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_wayplatform_rfms_v5_uptime_data_proto_msgTypes = make([]protoimpl.MessageInfo, 2)

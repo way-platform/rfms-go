@@ -266,8 +266,8 @@ const file_wayplatform_rfms_v5_axle_proto_rawDesc = "" +
 	"\x05tires\x18\x03 \x03(\v2\x1e.wayplatform.rfms.v5.Axle.TireR\x05tires\x1aE\n" +
 	"\x04Tire\x12\x1a\n" +
 	"\bposition\x18\x01 \x01(\x05R\bposition\x12!\n" +
-	"\fpressure_kpa\x18\x02 \x01(\x01R\vpressureKpaB\xd3\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\tAxleProtoP\x01Z?github.com/way-platform/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\fpressure_kpa\x18\x02 \x01(\x01R\vpressureKpaB\xdb\x01\n" +
+	"\x17com.wayplatform.rfms.v5B\tAxleProtoP\x01ZGgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_rfms_v5_axle_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_wayplatform_rfms_v5_axle_proto_goTypes = []any{
