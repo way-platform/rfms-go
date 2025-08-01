@@ -68,6 +68,10 @@ $ ./tools/mage -l
 
 ## CLI tool
 
+The `rfms` CLI tool enables interaction with rFMS APIs from the command line.
+
+<img src="docs/cli.gif" />
+
 ### Installing
 
 ```bash
@@ -105,3 +109,15 @@ $ rfms vehicles
   "vin": "YS2R4X2000TT00396"
 }
 ```
+
+## License
+
+This SDK is published under the [MIT License](./LICENSE).
+
+## Security
+
+Security researchers, see the [Security Policy](https://github.com/way-platform/mbz-go?tab=security-ov-file#readme).
+
+## Code of Conduct
+
+Be nice. For more info, see the [Code of Conduct](https://github.com/way-platform/mbz-go?tab=coc-ov-file#readme).
