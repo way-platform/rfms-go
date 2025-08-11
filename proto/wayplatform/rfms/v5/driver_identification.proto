@@ -2,7 +2,7 @@ edition = "2023";
 
 package wayplatform.rfms.v5;
 
-// The identification of a driver.
+// The identification of a driver or co-driver.
 message DriverIdentification {
   // The identification of a driver using the Tacho card.
   Tacho tacho = 1;

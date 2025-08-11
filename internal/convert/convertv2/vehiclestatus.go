@@ -1,6 +1,8 @@
 package convertv2
 
 import (
+	"time"
+
 	"github.com/way-platform/rfms-go/internal/convert"
 	"github.com/way-platform/rfms-go/internal/openapi/rfmsv2oapi"
 	rfmsv5 "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5"
@@ -16,19 +18,19 @@ func VehicleStatus(input *rfmsv2oapi.VehicleStatusType) *rfmsv5.VehicleStatus {
 		output.SetTrigger(trigger(input.TriggerType))
 	}
 	if input.CreatedDateTime != nil {
-		output.SetCreateTime(input.CreatedDateTime.UnixMicro())
+		output.SetCreateTime(time.Time(*input.CreatedDateTime).UTC().Format(time.RFC3339Nano))
 	}
 	if input.ReceivedDateTime != nil {
-		output.SetReceiveTime(input.ReceivedDateTime.UnixMicro())
+		output.SetReceiveTime(time.Time(*input.ReceivedDateTime).UTC().Format(time.RFC3339Nano))
 	}
 	if input.HRTotalVehicleDistance != nil {
-		output.SetTotalVehicleDistanceM(*input.HRTotalVehicleDistance)
+		output.SetHrTotalVehicleDistanceM(float64(*input.HRTotalVehicleDistance))
 	}
 	if input.TotalEngineHours != nil {
 		output.SetTotalEngineHours(*input.TotalEngineHours)
 	}
 	if input.Driver1ID != nil {
-		output.SetDriver1(driverIdentification(input.Driver1ID))
+		output.SetDriver1Id(driverIdentification(input.Driver1ID))
 	}
 	if input.GrossCombinationVehicleWeight != nil {
 		output.SetGrossCombinationVehicleWeightKg(float64(*input.GrossCombinationVehicleWeight))

@@ -5,7 +5,7 @@ message SnapshotData {
   optional double tachograph_speed_kmh = 3;
   optional double engine_speed_rpm = 4;
   optional double electric_motor_speed_rpm = 5;
-  optional int32 ignition_state = 6;
+  optional int32 ignition = 6;
   optional int32 fuel_type = 7;
   optional string unknown_fuel_type = 8;
   optional double fuel_level1_percent = 9;
@@ -13,7 +13,7 @@ message SnapshotData {
   optional double catalyst_fuel_level_percent = 11;
   optional int32 driver1_working_state = 12;
   optional string unknown_driver1_working_state = 13;
-  optional Inline_wayplatform_rfms_v5_DriverIdentification driver2 = 14;
+  optional Inline_wayplatform_rfms_v5_DriverIdentification driver2_id = 14;
   optional int32 driver2_working_state = 15;
   optional string unknown_driver2_working_state = 16;
   optional double ambient_air_temperature_c = 17;
@@ -23,9 +23,9 @@ message SnapshotData {
   optional int32 battery_pack_charging_connection_state = 21;
   optional int32 battery_pack_charging_device = 22;
   optional double battery_pack_charging_power_w = 23;
-  optional int64 battery_pack_estimated_charging_completed_time = 24;
+  optional string battery_pack_estimated_charging_completed_time = 24;
   optional EstimatedDistanceToEmpty estimated_distance_to_empty = 25;
-  repeated Inline_wayplatform_rfms_v5_Axle axles = 26;
+  repeated Inline_wayplatform_rfms_v5_VehicleAxle vehicle_axles = 26;
   repeated Inline_wayplatform_rfms_v5_Trailer trailers = 27;
   message EstimatedDistanceToEmpty {
     optional double total_m = 1;
@@ -34,7 +34,7 @@ message SnapshotData {
     optional double battery_pack_m = 4;
   }
   message Inline_wayplatform_rfms_v5_GnssPosition {
-    optional int64 time = 1;
+    optional string time = 1;
     optional double latitude = 2;
     optional double longitude = 3;
     optional double heading_deg = 4;
@@ -67,7 +67,7 @@ message SnapshotData {
       optional string driver_id = 2;
     }
   }
-  message Inline_wayplatform_rfms_v5_Axle {
+  message Inline_wayplatform_rfms_v5_VehicleAxle {
     optional int32 position = 1;
     optional double load_kg = 2;
     repeated Tire tires = 3;
@@ -83,6 +83,7 @@ message SnapshotData {
     optional string customer_name = 4;
     optional int32 type = 5;
     optional double axle_load_sum_kg = 6;
+    repeated Axle axles = 7;
     message Axle {
       optional int32 position = 1;
       optional double load_kg = 2;

@@ -74,61 +74,61 @@ func (x VehicleStatus_StateOfDoors) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Lock state of a door.
-type VehicleStatus_Door_LockState int32
+// Enabled state of a bus door.
+type VehicleStatus_Door_EnabledState int32
 
 const (
-	VehicleStatus_Door_LOCK_STATE_UNSPECIFIED   VehicleStatus_Door_LockState = 0
-	VehicleStatus_Door_LOCK_STATE_UNKNOWN       VehicleStatus_Door_LockState = 1
-	VehicleStatus_Door_LOCK_STATE_ERROR         VehicleStatus_Door_LockState = 2
-	VehicleStatus_Door_LOCK_STATE_NOT_AVAILABLE VehicleStatus_Door_LockState = 3
-	VehicleStatus_Door_UNLOCKED                 VehicleStatus_Door_LockState = 4
-	VehicleStatus_Door_LOCKED                   VehicleStatus_Door_LockState = 5
+	VehicleStatus_Door_ENABLED_STATE_UNSPECIFIED   VehicleStatus_Door_EnabledState = 0
+	VehicleStatus_Door_ENABLED_STATE_UNKNOWN       VehicleStatus_Door_EnabledState = 1
+	VehicleStatus_Door_ENABLED_STATE_ERROR         VehicleStatus_Door_EnabledState = 2
+	VehicleStatus_Door_ENABLED_STATE_NOT_AVAILABLE VehicleStatus_Door_EnabledState = 3
+	VehicleStatus_Door_ENABLED                     VehicleStatus_Door_EnabledState = 4
+	VehicleStatus_Door_DISABLED                    VehicleStatus_Door_EnabledState = 5
 )
 
-// Enum value maps for VehicleStatus_Door_LockState.
+// Enum value maps for VehicleStatus_Door_EnabledState.
 var (
-	VehicleStatus_Door_LockState_name = map[int32]string{
-		0: "LOCK_STATE_UNSPECIFIED",
-		1: "LOCK_STATE_UNKNOWN",
-		2: "LOCK_STATE_ERROR",
-		3: "LOCK_STATE_NOT_AVAILABLE",
-		4: "UNLOCKED",
-		5: "LOCKED",
+	VehicleStatus_Door_EnabledState_name = map[int32]string{
+		0: "ENABLED_STATE_UNSPECIFIED",
+		1: "ENABLED_STATE_UNKNOWN",
+		2: "ENABLED_STATE_ERROR",
+		3: "ENABLED_STATE_NOT_AVAILABLE",
+		4: "ENABLED",
+		5: "DISABLED",
 	}
-	VehicleStatus_Door_LockState_value = map[string]int32{
-		"LOCK_STATE_UNSPECIFIED":   0,
-		"LOCK_STATE_UNKNOWN":       1,
-		"LOCK_STATE_ERROR":         2,
-		"LOCK_STATE_NOT_AVAILABLE": 3,
-		"UNLOCKED":                 4,
-		"LOCKED":                   5,
+	VehicleStatus_Door_EnabledState_value = map[string]int32{
+		"ENABLED_STATE_UNSPECIFIED":   0,
+		"ENABLED_STATE_UNKNOWN":       1,
+		"ENABLED_STATE_ERROR":         2,
+		"ENABLED_STATE_NOT_AVAILABLE": 3,
+		"ENABLED":                     4,
+		"DISABLED":                    5,
 	}
 )
 
-func (x VehicleStatus_Door_LockState) Enum() *VehicleStatus_Door_LockState {
-	p := new(VehicleStatus_Door_LockState)
+func (x VehicleStatus_Door_EnabledState) Enum() *VehicleStatus_Door_EnabledState {
+	p := new(VehicleStatus_Door_EnabledState)
 	*p = x
 	return p
 }
 
-func (x VehicleStatus_Door_LockState) String() string {
+func (x VehicleStatus_Door_EnabledState) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (VehicleStatus_Door_LockState) Descriptor() protoreflect.EnumDescriptor {
+func (VehicleStatus_Door_EnabledState) Descriptor() protoreflect.EnumDescriptor {
 	return file_wayplatform_rfms_v5_vehicle_status_proto_enumTypes[1].Descriptor()
 }
 
-func (VehicleStatus_Door_LockState) Type() protoreflect.EnumType {
+func (VehicleStatus_Door_EnabledState) Type() protoreflect.EnumType {
 	return &file_wayplatform_rfms_v5_vehicle_status_proto_enumTypes[1]
 }
 
-func (x VehicleStatus_Door_LockState) Number() protoreflect.EnumNumber {
+func (x VehicleStatus_Door_EnabledState) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Open state of a door.
+// Open state of a bus door.
 type VehicleStatus_Door_OpenState int32
 
 const (
@@ -182,57 +182,57 @@ func (x VehicleStatus_Door_OpenState) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Enabled state of a door.
-type VehicleStatus_Door_EnabledState int32
+// Lock state of a bus door.
+type VehicleStatus_Door_LockState int32
 
 const (
-	VehicleStatus_Door_ENABLED_STATE_UNSPECIFIED   VehicleStatus_Door_EnabledState = 0
-	VehicleStatus_Door_ENABLED_STATE_UNKNOWN       VehicleStatus_Door_EnabledState = 1
-	VehicleStatus_Door_ENABLED_STATE_ERROR         VehicleStatus_Door_EnabledState = 2
-	VehicleStatus_Door_ENABLED_STATE_NOT_AVAILABLE VehicleStatus_Door_EnabledState = 3
-	VehicleStatus_Door_ENABLED                     VehicleStatus_Door_EnabledState = 4
-	VehicleStatus_Door_DISABLED                    VehicleStatus_Door_EnabledState = 5
+	VehicleStatus_Door_LOCK_STATE_UNSPECIFIED   VehicleStatus_Door_LockState = 0
+	VehicleStatus_Door_LOCK_STATE_UNKNOWN       VehicleStatus_Door_LockState = 1
+	VehicleStatus_Door_LOCK_STATE_ERROR         VehicleStatus_Door_LockState = 2
+	VehicleStatus_Door_LOCK_STATE_NOT_AVAILABLE VehicleStatus_Door_LockState = 3
+	VehicleStatus_Door_UNLOCKED                 VehicleStatus_Door_LockState = 4
+	VehicleStatus_Door_LOCKED                   VehicleStatus_Door_LockState = 5
 )
 
-// Enum value maps for VehicleStatus_Door_EnabledState.
+// Enum value maps for VehicleStatus_Door_LockState.
 var (
-	VehicleStatus_Door_EnabledState_name = map[int32]string{
-		0: "ENABLED_STATE_UNSPECIFIED",
-		1: "ENABLED_STATE_UNKNOWN",
-		2: "ENABLED_STATE_ERROR",
-		3: "ENABLED_STATE_NOT_AVAILABLE",
-		4: "ENABLED",
-		5: "DISABLED",
+	VehicleStatus_Door_LockState_name = map[int32]string{
+		0: "LOCK_STATE_UNSPECIFIED",
+		1: "LOCK_STATE_UNKNOWN",
+		2: "LOCK_STATE_ERROR",
+		3: "LOCK_STATE_NOT_AVAILABLE",
+		4: "UNLOCKED",
+		5: "LOCKED",
 	}
-	VehicleStatus_Door_EnabledState_value = map[string]int32{
-		"ENABLED_STATE_UNSPECIFIED":   0,
-		"ENABLED_STATE_UNKNOWN":       1,
-		"ENABLED_STATE_ERROR":         2,
-		"ENABLED_STATE_NOT_AVAILABLE": 3,
-		"ENABLED":                     4,
-		"DISABLED":                    5,
+	VehicleStatus_Door_LockState_value = map[string]int32{
+		"LOCK_STATE_UNSPECIFIED":   0,
+		"LOCK_STATE_UNKNOWN":       1,
+		"LOCK_STATE_ERROR":         2,
+		"LOCK_STATE_NOT_AVAILABLE": 3,
+		"UNLOCKED":                 4,
+		"LOCKED":                   5,
 	}
 )
 
-func (x VehicleStatus_Door_EnabledState) Enum() *VehicleStatus_Door_EnabledState {
-	p := new(VehicleStatus_Door_EnabledState)
+func (x VehicleStatus_Door_LockState) Enum() *VehicleStatus_Door_LockState {
+	p := new(VehicleStatus_Door_LockState)
 	*p = x
 	return p
 }
 
-func (x VehicleStatus_Door_EnabledState) String() string {
+func (x VehicleStatus_Door_LockState) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (VehicleStatus_Door_EnabledState) Descriptor() protoreflect.EnumDescriptor {
+func (VehicleStatus_Door_LockState) Descriptor() protoreflect.EnumDescriptor {
 	return file_wayplatform_rfms_v5_vehicle_status_proto_enumTypes[3].Descriptor()
 }
 
-func (VehicleStatus_Door_EnabledState) Type() protoreflect.EnumType {
+func (VehicleStatus_Door_LockState) Type() protoreflect.EnumType {
 	return &file_wayplatform_rfms_v5_vehicle_status_proto_enumTypes[3]
 }
 
-func (x VehicleStatus_Door_EnabledState) Number() protoreflect.EnumNumber {
+func (x VehicleStatus_Door_LockState) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
@@ -241,12 +241,12 @@ type VehicleStatus struct {
 	state                                       protoimpl.MessageState     `protogen:"opaque.v1"`
 	xxx_hidden_Vin                              *string                    `protobuf:"bytes,1,opt,name=vin"`
 	xxx_hidden_Trigger                          *Trigger                   `protobuf:"bytes,2,opt,name=trigger"`
-	xxx_hidden_CreateTime                       int64                      `protobuf:"varint,3,opt,name=create_time,json=createTime"`
-	xxx_hidden_ReceiveTime                      int64                      `protobuf:"varint,4,opt,name=receive_time,json=receiveTime"`
-	xxx_hidden_TotalVehicleDistanceM            int64                      `protobuf:"varint,5,opt,name=total_vehicle_distance_m,json=totalVehicleDistanceM"`
+	xxx_hidden_CreateTime                       *string                    `protobuf:"bytes,3,opt,name=create_time,json=createTime"`
+	xxx_hidden_ReceiveTime                      *string                    `protobuf:"bytes,4,opt,name=receive_time,json=receiveTime"`
+	xxx_hidden_HrTotalVehicleDistanceM          float64                    `protobuf:"fixed64,5,opt,name=hr_total_vehicle_distance_m,json=hrTotalVehicleDistanceM"`
 	xxx_hidden_TotalEngineHours                 float64                    `protobuf:"fixed64,6,opt,name=total_engine_hours,json=totalEngineHours"`
 	xxx_hidden_TotalElectricMotorHours          float64                    `protobuf:"fixed64,7,opt,name=total_electric_motor_hours,json=totalElectricMotorHours"`
-	xxx_hidden_Driver1                          *DriverIdentification      `protobuf:"bytes,8,opt,name=driver1"`
+	xxx_hidden_Driver1Id                        *DriverIdentification      `protobuf:"bytes,8,opt,name=driver1_id,json=driver1Id"`
 	xxx_hidden_GrossCombinationVehicleWeightKg  float64                    `protobuf:"fixed64,9,opt,name=gross_combination_vehicle_weight_kg,json=grossCombinationVehicleWeightKg"`
 	xxx_hidden_EngineTotalFuelUsedMl            float64                    `protobuf:"fixed64,10,opt,name=engine_total_fuel_used_ml,json=engineTotalFuelUsedMl"`
 	xxx_hidden_TotalFuelUsedGaseousKg           float64                    `protobuf:"fixed64,11,opt,name=total_fuel_used_gaseous_kg,json=totalFuelUsedGaseousKg"`
@@ -255,9 +255,9 @@ type VehicleStatus struct {
 	xxx_hidden_StateOfDoors                     VehicleStatus_StateOfDoors `protobuf:"varint,14,opt,name=state_of_doors,json=stateOfDoors,enum=wayplatform.rfms.v5.VehicleStatus_StateOfDoors"`
 	xxx_hidden_UnknownStateOfDoors              *string                    `protobuf:"bytes,15,opt,name=unknown_state_of_doors,json=unknownStateOfDoors"`
 	xxx_hidden_Doors                            *[]*VehicleStatus_Door     `protobuf:"bytes,16,rep,name=doors"`
-	xxx_hidden_AccumulatedData                  *AccumulatedData           `protobuf:"bytes,17,opt,name=accumulated_data,json=accumulatedData"`
 	xxx_hidden_SnapshotData                     *SnapshotData              `protobuf:"bytes,18,opt,name=snapshot_data,json=snapshotData"`
 	xxx_hidden_UptimeData                       *UptimeData                `protobuf:"bytes,19,opt,name=uptime_data,json=uptimeData"`
+	xxx_hidden_AccumulatedData                  *AccumulatedData           `protobuf:"bytes,17,opt,name=accumulated_data,json=accumulatedData"`
 	XXX_raceDetectHookData                      protoimpl.RaceDetectHookData
 	XXX_presence                                [1]uint32
 	unknownFields                               protoimpl.UnknownFields
@@ -306,23 +306,29 @@ func (x *VehicleStatus) GetTrigger() *Trigger {
 	return nil
 }
 
-func (x *VehicleStatus) GetCreateTime() int64 {
+func (x *VehicleStatus) GetCreateTime() string {
 	if x != nil {
-		return x.xxx_hidden_CreateTime
+		if x.xxx_hidden_CreateTime != nil {
+			return *x.xxx_hidden_CreateTime
+		}
+		return ""
 	}
-	return 0
+	return ""
 }
 
-func (x *VehicleStatus) GetReceiveTime() int64 {
+func (x *VehicleStatus) GetReceiveTime() string {
 	if x != nil {
-		return x.xxx_hidden_ReceiveTime
+		if x.xxx_hidden_ReceiveTime != nil {
+			return *x.xxx_hidden_ReceiveTime
+		}
+		return ""
 	}
-	return 0
+	return ""
 }
 
-func (x *VehicleStatus) GetTotalVehicleDistanceM() int64 {
+func (x *VehicleStatus) GetHrTotalVehicleDistanceM() float64 {
 	if x != nil {
-		return x.xxx_hidden_TotalVehicleDistanceM
+		return x.xxx_hidden_HrTotalVehicleDistanceM
 	}
 	return 0
 }
@@ -341,9 +347,9 @@ func (x *VehicleStatus) GetTotalElectricMotorHours() float64 {
 	return 0
 }
 
-func (x *VehicleStatus) GetDriver1() *DriverIdentification {
+func (x *VehicleStatus) GetDriver1Id() *DriverIdentification {
 	if x != nil {
-		return x.xxx_hidden_Driver1
+		return x.xxx_hidden_Driver1Id
 	}
 	return nil
 }
@@ -411,13 +417,6 @@ func (x *VehicleStatus) GetDoors() []*VehicleStatus_Door {
 	return nil
 }
 
-func (x *VehicleStatus) GetAccumulatedData() *AccumulatedData {
-	if x != nil {
-		return x.xxx_hidden_AccumulatedData
-	}
-	return nil
-}
-
 func (x *VehicleStatus) GetSnapshotData() *SnapshotData {
 	if x != nil {
 		return x.xxx_hidden_SnapshotData
@@ -432,6 +431,13 @@ func (x *VehicleStatus) GetUptimeData() *UptimeData {
 	return nil
 }
 
+func (x *VehicleStatus) GetAccumulatedData() *AccumulatedData {
+	if x != nil {
+		return x.xxx_hidden_AccumulatedData
+	}
+	return nil
+}
+
 func (x *VehicleStatus) SetVin(v string) {
 	x.xxx_hidden_Vin = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 19)
@@ -441,18 +447,18 @@ func (x *VehicleStatus) SetTrigger(v *Trigger) {
 	x.xxx_hidden_Trigger = v
 }
 
-func (x *VehicleStatus) SetCreateTime(v int64) {
-	x.xxx_hidden_CreateTime = v
+func (x *VehicleStatus) SetCreateTime(v string) {
+	x.xxx_hidden_CreateTime = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 19)
 }
 
-func (x *VehicleStatus) SetReceiveTime(v int64) {
-	x.xxx_hidden_ReceiveTime = v
+func (x *VehicleStatus) SetReceiveTime(v string) {
+	x.xxx_hidden_ReceiveTime = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 19)
 }
 
-func (x *VehicleStatus) SetTotalVehicleDistanceM(v int64) {
-	x.xxx_hidden_TotalVehicleDistanceM = v
+func (x *VehicleStatus) SetHrTotalVehicleDistanceM(v float64) {
+	x.xxx_hidden_HrTotalVehicleDistanceM = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 19)
 }
 
@@ -466,8 +472,8 @@ func (x *VehicleStatus) SetTotalElectricMotorHours(v float64) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 19)
 }
 
-func (x *VehicleStatus) SetDriver1(v *DriverIdentification) {
-	x.xxx_hidden_Driver1 = v
+func (x *VehicleStatus) SetDriver1Id(v *DriverIdentification) {
+	x.xxx_hidden_Driver1Id = v
 }
 
 func (x *VehicleStatus) SetGrossCombinationVehicleWeightKg(v float64) {
@@ -509,16 +515,16 @@ func (x *VehicleStatus) SetDoors(v []*VehicleStatus_Door) {
 	x.xxx_hidden_Doors = &v
 }
 
-func (x *VehicleStatus) SetAccumulatedData(v *AccumulatedData) {
-	x.xxx_hidden_AccumulatedData = v
-}
-
 func (x *VehicleStatus) SetSnapshotData(v *SnapshotData) {
 	x.xxx_hidden_SnapshotData = v
 }
 
 func (x *VehicleStatus) SetUptimeData(v *UptimeData) {
 	x.xxx_hidden_UptimeData = v
+}
+
+func (x *VehicleStatus) SetAccumulatedData(v *AccumulatedData) {
+	x.xxx_hidden_AccumulatedData = v
 }
 
 func (x *VehicleStatus) HasVin() bool {
@@ -549,7 +555,7 @@ func (x *VehicleStatus) HasReceiveTime() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
-func (x *VehicleStatus) HasTotalVehicleDistanceM() bool {
+func (x *VehicleStatus) HasHrTotalVehicleDistanceM() bool {
 	if x == nil {
 		return false
 	}
@@ -570,11 +576,11 @@ func (x *VehicleStatus) HasTotalElectricMotorHours() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 6)
 }
 
-func (x *VehicleStatus) HasDriver1() bool {
+func (x *VehicleStatus) HasDriver1Id() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_Driver1 != nil
+	return x.xxx_hidden_Driver1Id != nil
 }
 
 func (x *VehicleStatus) HasGrossCombinationVehicleWeightKg() bool {
@@ -626,13 +632,6 @@ func (x *VehicleStatus) HasUnknownStateOfDoors() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 14)
 }
 
-func (x *VehicleStatus) HasAccumulatedData() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_AccumulatedData != nil
-}
-
 func (x *VehicleStatus) HasSnapshotData() bool {
 	if x == nil {
 		return false
@@ -647,6 +646,13 @@ func (x *VehicleStatus) HasUptimeData() bool {
 	return x.xxx_hidden_UptimeData != nil
 }
 
+func (x *VehicleStatus) HasAccumulatedData() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_AccumulatedData != nil
+}
+
 func (x *VehicleStatus) ClearVin() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Vin = nil
@@ -658,17 +664,17 @@ func (x *VehicleStatus) ClearTrigger() {
 
 func (x *VehicleStatus) ClearCreateTime() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
-	x.xxx_hidden_CreateTime = 0
+	x.xxx_hidden_CreateTime = nil
 }
 
 func (x *VehicleStatus) ClearReceiveTime() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
-	x.xxx_hidden_ReceiveTime = 0
+	x.xxx_hidden_ReceiveTime = nil
 }
 
-func (x *VehicleStatus) ClearTotalVehicleDistanceM() {
+func (x *VehicleStatus) ClearHrTotalVehicleDistanceM() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
-	x.xxx_hidden_TotalVehicleDistanceM = 0
+	x.xxx_hidden_HrTotalVehicleDistanceM = 0
 }
 
 func (x *VehicleStatus) ClearTotalEngineHours() {
@@ -681,8 +687,8 @@ func (x *VehicleStatus) ClearTotalElectricMotorHours() {
 	x.xxx_hidden_TotalElectricMotorHours = 0
 }
 
-func (x *VehicleStatus) ClearDriver1() {
-	x.xxx_hidden_Driver1 = nil
+func (x *VehicleStatus) ClearDriver1Id() {
+	x.xxx_hidden_Driver1Id = nil
 }
 
 func (x *VehicleStatus) ClearGrossCombinationVehicleWeightKg() {
@@ -720,16 +726,16 @@ func (x *VehicleStatus) ClearUnknownStateOfDoors() {
 	x.xxx_hidden_UnknownStateOfDoors = nil
 }
 
-func (x *VehicleStatus) ClearAccumulatedData() {
-	x.xxx_hidden_AccumulatedData = nil
-}
-
 func (x *VehicleStatus) ClearSnapshotData() {
 	x.xxx_hidden_SnapshotData = nil
 }
 
 func (x *VehicleStatus) ClearUptimeData() {
 	x.xxx_hidden_UptimeData = nil
+}
+
+func (x *VehicleStatus) ClearAccumulatedData() {
+	x.xxx_hidden_AccumulatedData = nil
 }
 
 type VehicleStatus_builder struct {
@@ -739,37 +745,59 @@ type VehicleStatus_builder struct {
 	Vin *string
 	// The type of trigger that caused the vehicle status to be sent.
 	Trigger *Trigger
-	// The date and time the vehicle status was created. (Unix microseconds)
-	CreateTime *int64
-	// The date and time the vehicle status was received. (Unix microseconds)
-	ReceiveTime *int64
+	// The date and time the vehicle status was created. (RFC 3339)
+	CreateTime *string
+	// The date and time the vehicle status was received. (RFC 3339)
+	ReceiveTime *string
 	// The total distance travelled by the vehicle during its operation in meters.
 	// Should not be reset during lifetime of the vehicle.
-	TotalVehicleDistanceM *int64
+	HrTotalVehicleDistanceM *float64
 	// The total hours of operation for the vehicle combustion engine during its lifetime.
 	// Should not be reset during lifetime of the engine.
 	TotalEngineHours *float64
-	// The total hours of operation for the vehicle electric motor during its lifetime.
-	// Should not be reset during lifetime of the electric motor.
+	// The total hours the electric motor is ready for propulsion
+	// (i.e. crank mode) during its lifetime.
+	//
+	// At least one of total_engine_hours or total_electric_motor_hours is mandatory.
+	//
+	// Should not be reset during lifetime of the motor.
 	TotalElectricMotorHours *float64
 	// The driver identification of driver 1.
-	Driver1 *DriverIdentification
+	Driver1Id *DriverIdentification
 	// The gross combination vehicle weight in kg.
 	GrossCombinationVehicleWeightKg *float64
-	// The total fuel the vehicle has used during its lifetime in liters.
+	// The total fuel the vehicle has used during its lifetime in ml.
+	//
+	// At least one of engine_total_fuel_used_ml, total_fuel_used_gaseous_kg
+	// or total_electric_energy_used_wh is mandatory.
+	//
 	// Should not be reset during lifetime of the vehicle.
 	EngineTotalFuelUsedMl *float64
-	// The total fuel the vehicle has used during its lifetime in liters.
+	// Total fuel consumed in kg.
+	//
+	// (trip drive fuel + trip PTO governor moving fuel + trip PTO governor non-moving fuel
+	//   - trip idle fuel) over the life of the engine.
+	//
+	// At least one of engine_total_fuel_used_ml, total_fuel_used_gaseous_kg
+	// or total_electric_energy_used_wh is mandatory.
+	//
 	// Should not be reset during lifetime of the vehicle.
 	TotalFuelUsedGaseousKg *float64
-	// The total electric energy the vehicle has used during its lifetime in Wh.
+	// Total electric energy consumed by the vehicle, excluding when plugged in (vehicle coupler)
+	// for charging, (incl. motor, PTO, cooling, etc.) during its lifetime, in Wh.
+	//
+	// Recuperation is subtracted from the value.
+	//
+	// At least one of engine_total_fuel_used_ml, total_fuel_used_gaseous_kg
+	// or total_electric_energy_used_wh is mandatory.
+	//
 	// Should not be reset during lifetime of the vehicle.
 	TotalElectricEnergyUsedWh *float64
-	// The total electric energy recuperated by the vehicle during its lifetime in Wh.
+	// Total electric energy recuperated by the vehicle during its lifetime, in watt hours.
 	// Should not be reset during lifetime of the vehicle.
 	TotalElectricEnergyRecuperatedWh *float64
 	// The status of the doors of the vehicle.
-	// Should not be reset during lifetime of the vehicle.
+	// Bus specific parameter.
 	StateOfDoors *VehicleStatus_StateOfDoors
 	// The unknown state of the doors of the vehicle.
 	// Provided when the state of the doors is STATE_OF_DOORS_UNKNOWN.
@@ -777,12 +805,12 @@ type VehicleStatus_builder struct {
 	// Individual status for each door.
 	// Bus specific parameter.
 	Doors []*VehicleStatus_Door
-	// Accumulated data for the vehicle.
-	AccumulatedData *AccumulatedData
 	// Snapshot data for the vehicle.
 	SnapshotData *SnapshotData
 	// Uptime data for the vehicle.
 	UptimeData *UptimeData
+	// Accumulated data for the vehicle.
+	AccumulatedData *AccumulatedData
 }
 
 func (b0 VehicleStatus_builder) Build() *VehicleStatus {
@@ -796,15 +824,15 @@ func (b0 VehicleStatus_builder) Build() *VehicleStatus {
 	x.xxx_hidden_Trigger = b.Trigger
 	if b.CreateTime != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 19)
-		x.xxx_hidden_CreateTime = *b.CreateTime
+		x.xxx_hidden_CreateTime = b.CreateTime
 	}
 	if b.ReceiveTime != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 19)
-		x.xxx_hidden_ReceiveTime = *b.ReceiveTime
+		x.xxx_hidden_ReceiveTime = b.ReceiveTime
 	}
-	if b.TotalVehicleDistanceM != nil {
+	if b.HrTotalVehicleDistanceM != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 19)
-		x.xxx_hidden_TotalVehicleDistanceM = *b.TotalVehicleDistanceM
+		x.xxx_hidden_HrTotalVehicleDistanceM = *b.HrTotalVehicleDistanceM
 	}
 	if b.TotalEngineHours != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 19)
@@ -814,7 +842,7 @@ func (b0 VehicleStatus_builder) Build() *VehicleStatus {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 19)
 		x.xxx_hidden_TotalElectricMotorHours = *b.TotalElectricMotorHours
 	}
-	x.xxx_hidden_Driver1 = b.Driver1
+	x.xxx_hidden_Driver1Id = b.Driver1Id
 	if b.GrossCombinationVehicleWeightKg != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 8, 19)
 		x.xxx_hidden_GrossCombinationVehicleWeightKg = *b.GrossCombinationVehicleWeightKg
@@ -844,13 +872,13 @@ func (b0 VehicleStatus_builder) Build() *VehicleStatus {
 		x.xxx_hidden_UnknownStateOfDoors = b.UnknownStateOfDoors
 	}
 	x.xxx_hidden_Doors = &b.Doors
-	x.xxx_hidden_AccumulatedData = b.AccumulatedData
 	x.xxx_hidden_SnapshotData = b.SnapshotData
 	x.xxx_hidden_UptimeData = b.UptimeData
+	x.xxx_hidden_AccumulatedData = b.AccumulatedData
 	return m0
 }
 
-// Information about a door on a bus.
+// Information about a door.
 type VehicleStatus_Door struct {
 	state                          protoimpl.MessageState          `protogen:"opaque.v1"`
 	xxx_hidden_Number              int32                           `protobuf:"varint,1,opt,name=number"`
@@ -1077,21 +1105,21 @@ func (x *VehicleStatus_Door) ClearUnknownLockState() {
 type VehicleStatus_Door_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// The number of the door.
+	// The number of the bus door.
 	Number *int32
-	// The enabled state of the door.
+	// The enabled state of the bus door.
 	EnabledState *VehicleStatus_Door_EnabledState
-	// The unknown enabled state of the door.
+	// The unknown enabled state of the bus door.
 	// Provided when the enabled state is ENABLED_STATE_UNKNOWN.
 	UnknownEnabledState *string
-	// The open state of the door.
+	// The open state of the bus door.
 	OpenState *VehicleStatus_Door_OpenState
-	// The unknown open state of the door.
+	// The unknown open state of the bus door.
 	// Provided when the open state is OPEN_STATE_UNKNOWN.
 	UnknownOpenState *string
-	// The lock state of the door.
+	// The lock state of the bus door.
 	LockState *VehicleStatus_Door_LockState
-	// The unknown lock state of the door.
+	// The unknown lock state of the bus door.
 	// Provided when the lock state is LOCK_STATE_UNKNOWN.
 	UnknownLockState *string
 }
@@ -1135,17 +1163,18 @@ var File_wayplatform_rfms_v5_vehicle_status_proto protoreflect.FileDescriptor
 
 const file_wayplatform_rfms_v5_vehicle_status_proto_rawDesc = "" +
 	"\n" +
-	"(wayplatform/rfms/v5/vehicle_status.proto\x12\x13wayplatform.rfms.v5\x1a*wayplatform/rfms/v5/accumulated_data.proto\x1a/wayplatform/rfms/v5/driver_identification.proto\x1a'wayplatform/rfms/v5/snapshot_data.proto\x1a!wayplatform/rfms/v5/trigger.proto\x1a%wayplatform/rfms/v5/uptime_data.proto\"\xae\x11\n" +
+	"(wayplatform/rfms/v5/vehicle_status.proto\x12\x13wayplatform.rfms.v5\x1a*wayplatform/rfms/v5/accumulated_data.proto\x1a/wayplatform/rfms/v5/driver_identification.proto\x1a'wayplatform/rfms/v5/snapshot_data.proto\x1a!wayplatform/rfms/v5/trigger.proto\x1a%wayplatform/rfms/v5/uptime_data.proto\"\xb8\x11\n" +
 	"\rVehicleStatus\x12\x10\n" +
 	"\x03vin\x18\x01 \x01(\tR\x03vin\x126\n" +
 	"\atrigger\x18\x02 \x01(\v2\x1c.wayplatform.rfms.v5.TriggerR\atrigger\x12\x1f\n" +
-	"\vcreate_time\x18\x03 \x01(\x03R\n" +
+	"\vcreate_time\x18\x03 \x01(\tR\n" +
 	"createTime\x12!\n" +
-	"\freceive_time\x18\x04 \x01(\x03R\vreceiveTime\x127\n" +
-	"\x18total_vehicle_distance_m\x18\x05 \x01(\x03R\x15totalVehicleDistanceM\x12,\n" +
+	"\freceive_time\x18\x04 \x01(\tR\vreceiveTime\x12<\n" +
+	"\x1bhr_total_vehicle_distance_m\x18\x05 \x01(\x01R\x17hrTotalVehicleDistanceM\x12,\n" +
 	"\x12total_engine_hours\x18\x06 \x01(\x01R\x10totalEngineHours\x12;\n" +
-	"\x1atotal_electric_motor_hours\x18\a \x01(\x01R\x17totalElectricMotorHours\x12C\n" +
-	"\adriver1\x18\b \x01(\v2).wayplatform.rfms.v5.DriverIdentificationR\adriver1\x12L\n" +
+	"\x1atotal_electric_motor_hours\x18\a \x01(\x01R\x17totalElectricMotorHours\x12H\n" +
+	"\n" +
+	"driver1_id\x18\b \x01(\v2).wayplatform.rfms.v5.DriverIdentificationR\tdriver1Id\x12L\n" +
 	"#gross_combination_vehicle_weight_kg\x18\t \x01(\x01R\x1fgrossCombinationVehicleWeightKg\x128\n" +
 	"\x19engine_total_fuel_used_ml\x18\n" +
 	" \x01(\x01R\x15engineTotalFuelUsedMl\x12:\n" +
@@ -1154,11 +1183,11 @@ const file_wayplatform_rfms_v5_vehicle_status_proto_rawDesc = "" +
 	"$total_electric_energy_recuperated_wh\x18\r \x01(\x01R totalElectricEnergyRecuperatedWh\x12U\n" +
 	"\x0estate_of_doors\x18\x0e \x01(\x0e2/.wayplatform.rfms.v5.VehicleStatus.StateOfDoorsR\fstateOfDoors\x123\n" +
 	"\x16unknown_state_of_doors\x18\x0f \x01(\tR\x13unknownStateOfDoors\x12=\n" +
-	"\x05doors\x18\x10 \x03(\v2'.wayplatform.rfms.v5.VehicleStatus.DoorR\x05doors\x12O\n" +
-	"\x10accumulated_data\x18\x11 \x01(\v2$.wayplatform.rfms.v5.AccumulatedDataR\x0faccumulatedData\x12F\n" +
+	"\x05doors\x18\x10 \x03(\v2'.wayplatform.rfms.v5.VehicleStatus.DoorR\x05doors\x12F\n" +
 	"\rsnapshot_data\x18\x12 \x01(\v2!.wayplatform.rfms.v5.SnapshotDataR\fsnapshotData\x12@\n" +
 	"\vuptime_data\x18\x13 \x01(\v2\x1f.wayplatform.rfms.v5.UptimeDataR\n" +
-	"uptimeData\x1a\xe9\x06\n" +
+	"uptimeData\x12O\n" +
+	"\x10accumulated_data\x18\x11 \x01(\v2$.wayplatform.rfms.v5.AccumulatedDataR\x0faccumulatedData\x1a\xe9\x06\n" +
 	"\x04Door\x12\x16\n" +
 	"\x06number\x18\x01 \x01(\x05R\x06number\x12Y\n" +
 	"\renabled_state\x18\x02 \x01(\x0e24.wayplatform.rfms.v5.VehicleStatus.Door.EnabledStateR\fenabledState\x122\n" +
@@ -1168,15 +1197,14 @@ const file_wayplatform_rfms_v5_vehicle_status_proto_rawDesc = "" +
 	"\x12unknown_open_state\x18\x05 \x01(\tR\x10unknownOpenState\x12P\n" +
 	"\n" +
 	"lock_state\x18\x06 \x01(\x0e21.wayplatform.rfms.v5.VehicleStatus.Door.LockStateR\tlockState\x12,\n" +
-	"\x12unknown_lock_state\x18\a \x01(\tR\x10unknownLockState\"\x8d\x01\n" +
-	"\tLockState\x12\x1a\n" +
-	"\x16LOCK_STATE_UNSPECIFIED\x10\x00\x12\x16\n" +
-	"\x12LOCK_STATE_UNKNOWN\x10\x01\x12\x14\n" +
-	"\x10LOCK_STATE_ERROR\x10\x02\x12\x1c\n" +
-	"\x18LOCK_STATE_NOT_AVAILABLE\x10\x03\x12\f\n" +
-	"\bUNLOCKED\x10\x04\x12\n" +
-	"\n" +
-	"\x06LOCKED\x10\x05\"\x89\x01\n" +
+	"\x12unknown_lock_state\x18\a \x01(\tR\x10unknownLockState\"\x9d\x01\n" +
+	"\fEnabledState\x12\x1d\n" +
+	"\x19ENABLED_STATE_UNSPECIFIED\x10\x00\x12\x19\n" +
+	"\x15ENABLED_STATE_UNKNOWN\x10\x01\x12\x17\n" +
+	"\x13ENABLED_STATE_ERROR\x10\x02\x12\x1f\n" +
+	"\x1bENABLED_STATE_NOT_AVAILABLE\x10\x03\x12\v\n" +
+	"\aENABLED\x10\x04\x12\f\n" +
+	"\bDISABLED\x10\x05\"\x89\x01\n" +
 	"\tOpenState\x12\x1a\n" +
 	"\x16OPEN_STATE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12OPEN_STATE_UNKNOWN\x10\x01\x12\x14\n" +
@@ -1184,14 +1212,15 @@ const file_wayplatform_rfms_v5_vehicle_status_proto_rawDesc = "" +
 	"\x18OPEN_STATE_NOT_AVAILABLE\x10\x03\x12\n" +
 	"\n" +
 	"\x06CLOSED\x10\x04\x12\b\n" +
-	"\x04OPEN\x10\x05\"\x9d\x01\n" +
-	"\fEnabledState\x12\x1d\n" +
-	"\x19ENABLED_STATE_UNSPECIFIED\x10\x00\x12\x19\n" +
-	"\x15ENABLED_STATE_UNKNOWN\x10\x01\x12\x17\n" +
-	"\x13ENABLED_STATE_ERROR\x10\x02\x12\x1f\n" +
-	"\x1bENABLED_STATE_NOT_AVAILABLE\x10\x03\x12\v\n" +
-	"\aENABLED\x10\x04\x12\f\n" +
-	"\bDISABLED\x10\x05\"\xbd\x01\n" +
+	"\x04OPEN\x10\x05\"\x8d\x01\n" +
+	"\tLockState\x12\x1a\n" +
+	"\x16LOCK_STATE_UNSPECIFIED\x10\x00\x12\x16\n" +
+	"\x12LOCK_STATE_UNKNOWN\x10\x01\x12\x14\n" +
+	"\x10LOCK_STATE_ERROR\x10\x02\x12\x1c\n" +
+	"\x18LOCK_STATE_NOT_AVAILABLE\x10\x03\x12\f\n" +
+	"\bUNLOCKED\x10\x04\x12\n" +
+	"\n" +
+	"\x06LOCKED\x10\x05\"\xbd\x01\n" +
 	"\fStateOfDoors\x12\x1e\n" +
 	"\x1aSTATE_OF_DOORS_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16STATE_OF_DOORS_UNKNOWN\x10\x01\x12\x18\n" +
@@ -1205,28 +1234,28 @@ var file_wayplatform_rfms_v5_vehicle_status_proto_enumTypes = make([]protoimpl.E
 var file_wayplatform_rfms_v5_vehicle_status_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_wayplatform_rfms_v5_vehicle_status_proto_goTypes = []any{
 	(VehicleStatus_StateOfDoors)(0),      // 0: wayplatform.rfms.v5.VehicleStatus.StateOfDoors
-	(VehicleStatus_Door_LockState)(0),    // 1: wayplatform.rfms.v5.VehicleStatus.Door.LockState
+	(VehicleStatus_Door_EnabledState)(0), // 1: wayplatform.rfms.v5.VehicleStatus.Door.EnabledState
 	(VehicleStatus_Door_OpenState)(0),    // 2: wayplatform.rfms.v5.VehicleStatus.Door.OpenState
-	(VehicleStatus_Door_EnabledState)(0), // 3: wayplatform.rfms.v5.VehicleStatus.Door.EnabledState
+	(VehicleStatus_Door_LockState)(0),    // 3: wayplatform.rfms.v5.VehicleStatus.Door.LockState
 	(*VehicleStatus)(nil),                // 4: wayplatform.rfms.v5.VehicleStatus
 	(*VehicleStatus_Door)(nil),           // 5: wayplatform.rfms.v5.VehicleStatus.Door
 	(*Trigger)(nil),                      // 6: wayplatform.rfms.v5.Trigger
 	(*DriverIdentification)(nil),         // 7: wayplatform.rfms.v5.DriverIdentification
-	(*AccumulatedData)(nil),              // 8: wayplatform.rfms.v5.AccumulatedData
-	(*SnapshotData)(nil),                 // 9: wayplatform.rfms.v5.SnapshotData
-	(*UptimeData)(nil),                   // 10: wayplatform.rfms.v5.UptimeData
+	(*SnapshotData)(nil),                 // 8: wayplatform.rfms.v5.SnapshotData
+	(*UptimeData)(nil),                   // 9: wayplatform.rfms.v5.UptimeData
+	(*AccumulatedData)(nil),              // 10: wayplatform.rfms.v5.AccumulatedData
 }
 var file_wayplatform_rfms_v5_vehicle_status_proto_depIdxs = []int32{
 	6,  // 0: wayplatform.rfms.v5.VehicleStatus.trigger:type_name -> wayplatform.rfms.v5.Trigger
-	7,  // 1: wayplatform.rfms.v5.VehicleStatus.driver1:type_name -> wayplatform.rfms.v5.DriverIdentification
+	7,  // 1: wayplatform.rfms.v5.VehicleStatus.driver1_id:type_name -> wayplatform.rfms.v5.DriverIdentification
 	0,  // 2: wayplatform.rfms.v5.VehicleStatus.state_of_doors:type_name -> wayplatform.rfms.v5.VehicleStatus.StateOfDoors
 	5,  // 3: wayplatform.rfms.v5.VehicleStatus.doors:type_name -> wayplatform.rfms.v5.VehicleStatus.Door
-	8,  // 4: wayplatform.rfms.v5.VehicleStatus.accumulated_data:type_name -> wayplatform.rfms.v5.AccumulatedData
-	9,  // 5: wayplatform.rfms.v5.VehicleStatus.snapshot_data:type_name -> wayplatform.rfms.v5.SnapshotData
-	10, // 6: wayplatform.rfms.v5.VehicleStatus.uptime_data:type_name -> wayplatform.rfms.v5.UptimeData
-	3,  // 7: wayplatform.rfms.v5.VehicleStatus.Door.enabled_state:type_name -> wayplatform.rfms.v5.VehicleStatus.Door.EnabledState
+	8,  // 4: wayplatform.rfms.v5.VehicleStatus.snapshot_data:type_name -> wayplatform.rfms.v5.SnapshotData
+	9,  // 5: wayplatform.rfms.v5.VehicleStatus.uptime_data:type_name -> wayplatform.rfms.v5.UptimeData
+	10, // 6: wayplatform.rfms.v5.VehicleStatus.accumulated_data:type_name -> wayplatform.rfms.v5.AccumulatedData
+	1,  // 7: wayplatform.rfms.v5.VehicleStatus.Door.enabled_state:type_name -> wayplatform.rfms.v5.VehicleStatus.Door.EnabledState
 	2,  // 8: wayplatform.rfms.v5.VehicleStatus.Door.open_state:type_name -> wayplatform.rfms.v5.VehicleStatus.Door.OpenState
-	1,  // 9: wayplatform.rfms.v5.VehicleStatus.Door.lock_state:type_name -> wayplatform.rfms.v5.VehicleStatus.Door.LockState
+	3,  // 9: wayplatform.rfms.v5.VehicleStatus.Door.lock_state:type_name -> wayplatform.rfms.v5.VehicleStatus.Door.LockState
 	10, // [10:10] is the sub-list for method output_type
 	10, // [10:10] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name

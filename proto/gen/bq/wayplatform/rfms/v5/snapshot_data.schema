@@ -7,9 +7,9 @@
   "fields": [
    {
     "name": "time",
-    "type": "INTEGER",
+    "type": "STRING",
     "mode": "NULLABLE",
-    "description": "The date and time the GNSS position was recorded. (Unix microseconds)"
+    "description": "The time of the GNSS position data. (RFC 3339)"
    },
    {
     "name": "latitude",
@@ -68,7 +68,7 @@
   "description": "The electric motor speed of the vehicle. (rev/min)"
  },
  {
-  "name": "ignition_state",
+  "name": "ignition",
   "type": "INTEGER",
   "mode": "NULLABLE",
   "description": "The ignition state of the vehicle."
@@ -116,7 +116,7 @@
   "description": "The unknown driver working state of the vehicle.\n Provided when the driver working state is DRIVER_WORKING_STATE_UNKNOWN."
  },
  {
-  "name": "driver2",
+  "name": "driver2_id",
   "type": "RECORD",
   "mode": "NULLABLE",
   "description": "The driver identification of driver 2.",
@@ -243,9 +243,9 @@
  },
  {
   "name": "battery_pack_estimated_charging_completed_time",
-  "type": "INTEGER",
+  "type": "STRING",
   "mode": "NULLABLE",
-  "description": "The estimated time when charging has reached the target level. (Unix micros)"
+  "description": "The estimated time when charging has reached the target level. (RFC 3339)"
  },
  {
   "name": "estimated_distance_to_empty",
@@ -280,7 +280,7 @@
   ]
  },
  {
-  "name": "axles",
+  "name": "vehicle_axles",
   "type": "RECORD",
   "mode": "REPEATED",
   "description": "The axles of the vehicle.",
@@ -360,6 +360,26 @@
     "type": "FLOAT",
     "mode": "NULLABLE",
     "description": "The sum of the static vertical loads of the trailer axles. (kg)\n The load is sent in the EBS22 message of ISO 11992-2."
+   },
+   {
+    "name": "axles",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "The trailer axles.",
+    "fields": [
+     {
+      "name": "position",
+      "type": "INTEGER",
+      "mode": "NULLABLE",
+      "description": "The position of the axle from 1 to 15, 1 being in the front\n closest to the truck, according to ISO 11992-2."
+     },
+     {
+      "name": "load_kg",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The static vertical load of the axle in kilograms.\n The load is sent in the EBS22 message of ISO 11992-2."
+     }
+    ]
    }
   ]
  }

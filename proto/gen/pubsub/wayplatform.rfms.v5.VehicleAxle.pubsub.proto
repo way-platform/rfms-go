@@ -1,5 +1,5 @@
 syntax = "proto2";
-message Axle {
+message VehicleAxle {
   optional int32 position = 1;
   optional double load_kg = 2;
   repeated Tire tires = 3;

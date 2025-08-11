@@ -2,12 +2,12 @@ syntax = "proto2";
 message VehicleStatus {
   optional string vin = 1;
   optional Inline_wayplatform_rfms_v5_Trigger trigger = 2;
-  optional int64 create_time = 3;
-  optional int64 receive_time = 4;
-  optional int64 total_vehicle_distance_m = 5;
+  optional string create_time = 3;
+  optional string receive_time = 4;
+  optional double hr_total_vehicle_distance_m = 5;
   optional double total_engine_hours = 6;
   optional double total_electric_motor_hours = 7;
-  optional Inline_wayplatform_rfms_v5_DriverIdentification driver1 = 8;
+  optional Inline_wayplatform_rfms_v5_DriverIdentification driver1_id = 8;
   optional double gross_combination_vehicle_weight_kg = 9;
   optional double engine_total_fuel_used_ml = 10;
   optional double total_fuel_used_gaseous_kg = 11;
@@ -16,9 +16,9 @@ message VehicleStatus {
   optional int32 state_of_doors = 14;
   optional string unknown_state_of_doors = 15;
   repeated Door doors = 16;
-  optional Inline_wayplatform_rfms_v5_AccumulatedData accumulated_data = 17;
   optional Inline_wayplatform_rfms_v5_SnapshotData snapshot_data = 18;
   optional Inline_wayplatform_rfms_v5_UptimeData uptime_data = 19;
+  optional Inline_wayplatform_rfms_v5_AccumulatedData accumulated_data = 17;
   message Door {
     optional int32 number = 1;
     optional int32 enabled_state = 2;
@@ -27,13 +27,13 @@ message VehicleStatus {
     optional string unknown_open_state = 5;
     optional int32 lock_state = 6;
     optional string unknown_lock_state = 7;
-    enum LockState {
-      LOCK_STATE_UNSPECIFIED = 0;
-      LOCK_STATE_UNKNOWN = 1;
-      LOCK_STATE_ERROR = 2;
-      LOCK_STATE_NOT_AVAILABLE = 3;
-      UNLOCKED = 4;
-      LOCKED = 5;
+    enum EnabledState {
+      ENABLED_STATE_UNSPECIFIED = 0;
+      ENABLED_STATE_UNKNOWN = 1;
+      ENABLED_STATE_ERROR = 2;
+      ENABLED_STATE_NOT_AVAILABLE = 3;
+      ENABLED = 4;
+      DISABLED = 5;
     }
     enum OpenState {
       OPEN_STATE_UNSPECIFIED = 0;
@@ -43,13 +43,13 @@ message VehicleStatus {
       CLOSED = 4;
       OPEN = 5;
     }
-    enum EnabledState {
-      ENABLED_STATE_UNSPECIFIED = 0;
-      ENABLED_STATE_UNKNOWN = 1;
-      ENABLED_STATE_ERROR = 2;
-      ENABLED_STATE_NOT_AVAILABLE = 3;
-      ENABLED = 4;
-      DISABLED = 5;
+    enum LockState {
+      LOCK_STATE_UNSPECIFIED = 0;
+      LOCK_STATE_UNKNOWN = 1;
+      LOCK_STATE_ERROR = 2;
+      LOCK_STATE_NOT_AVAILABLE = 3;
+      UNLOCKED = 4;
+      LOCKED = 5;
     }
   }
   message Inline_wayplatform_rfms_v5_DriverIdentification {
@@ -174,8 +174,8 @@ message VehicleStatus {
     optional string unknown_type = 2;
     optional int32 context = 3;
     optional string unknown_context = 4;
-    repeated string additional_info = 5;
-    optional Inline_wayplatform_rfms_v5_DriverIdentification driver_info = 6;
+    repeated string trigger_info = 5;
+    optional Inline_wayplatform_rfms_v5_DriverIdentification driver_id = 6;
     optional string pto_id = 7;
     optional Inline_wayplatform_rfms_v5_TellTale tell_tale_info = 8;
     optional ChargingStatusInfo charging_status_info = 9;
@@ -255,89 +255,28 @@ message VehicleStatus {
       CONTEXT_UNSPECIFIED = 0;
       CONTEXT_UNKNOWN = 1;
       RFMS = 2;
-    }
-  }
-  message Inline_wayplatform_rfms_v5_AccumulatedData {
-    optional double wheel_based_speed_over_zero_duration_s = 1;
-    optional double wheel_based_speed_over_zero_fuel_ml = 2;
-    optional double wheel_based_speed_over_zero_fuel_gaseous_kg = 3;
-    optional double wheel_based_speed_over_zero_electric_energy_consumption_wh = 4;
-    optional double wheel_based_speed_zero_duration_s = 5;
-    optional double wheel_based_speed_zero_distance_m = 6;
-    optional double wheel_based_speed_zero_fuel_ml = 7;
-    optional double wheel_based_speed_zero_fuel_gaseous_kg = 8;
-    optional double wheel_based_speed_zero_electric_energy_consumption_wh = 9;
-    optional double cruise_control_active_distance_m = 10;
-    optional double cruise_control_active_duration_s = 11;
-    optional double cruise_control_active_fuel_consumption_ml = 12;
-    optional double cruise_control_active_fuel_consumption_gaseous_kg = 13;
-    optional double cruise_control_active_electric_energy_consumption_wh = 14;
-    optional double aux_electric_energy_consumption_wh = 15;
-    repeated LabelClass pto_active_class = 16;
-    optional int32 brake_pedal_speed_over_zero_count = 17;
-    optional double brake_pedal_speed_over_zero_distance_m = 18;
-    repeated FromToClass acceleration_pedal_position_class = 19;
-    repeated FromToClass brake_pedal_position_class = 20;
-    repeated FromToClass acceleration_class = 21;
-    repeated FromToClass high_acceleration_class = 22;
-    repeated FromToClass retarder_torque_class = 23;
-    repeated LabelClass driving_without_torque_class = 24;
-    repeated FromToClassCombustion engine_torque_class = 25;
-    repeated FromToClassElectrical electric_motor_torque_class = 26;
-    repeated FromToClassCombustion engine_torque_at_current_speed_class = 27;
-    repeated FromToClassElectrical electric_motor_torque_at_current_speed_class = 28;
-    repeated FromToClass vehicle_speed_class = 29;
-    repeated FromToClass engine_speed_class = 30;
-    repeated FromToClass acceleration_during_brake_class = 31;
-    repeated LabelClass selected_gear_class = 32;
-    repeated LabelClass current_gear_class = 33;
-    optional int32 chairlift_count = 34;
-    optional int32 stop_request_count = 35;
-    optional int32 kneeling_count = 36;
-    optional int32 pram_request_count = 37;
-    repeated FromToClassElectrical electric_power_recuperation_class = 38;
-    message LabelClass {
-      optional string label = 1;
-      optional double duration_s = 2;
-      optional double distance_m = 3;
-      optional double fuel_consumption_ml = 4;
-      optional double fuel_consumption_gaseous_kg = 5;
-      optional double electric_energy_consumption_wh = 6;
-    }
-    message FromToClass {
-      optional double from = 1;
-      optional double to = 2;
-      optional double duration_s = 3;
-      optional double distance_m = 4;
-      optional double fuel_consumption_ml = 5;
-      optional double fuel_consumption_gaseous_kg = 6;
-      optional double electric_energy_consumption_wh = 7;
-    }
-    message FromToClassCombustion {
-      optional double from = 1;
-      optional double to = 2;
-      optional double duration_s = 3;
-      optional double distance_m = 4;
-      optional double fuel_consumption_ml = 5;
-      optional double fuel_consumption_gaseous_kg = 6;
-    }
-    message FromToClassElectrical {
-      optional double from = 1;
-      optional double to = 2;
-      optional double duration_s = 3;
-      optional double distance_m = 4;
-      optional double electric_energy_consumption_wh = 5;
+      VOLVO_TRUCKS = 3;
+      SCANIA = 4;
+      DAIMLER = 5;
+      IVECO = 6;
+      DAF = 7;
+      MAN = 8;
+      RENAULT_TRUCKS = 9;
+      VDL = 10;
+      VOLVO_BUSES = 11;
+      IVECO_BUS = 12;
+      IRISBUS = 13;
     }
   }
   message Inline_wayplatform_rfms_v5_GnssPosition {
-    optional int64 time = 1;
+    optional string time = 1;
     optional double latitude = 2;
     optional double longitude = 3;
     optional double heading_deg = 4;
     optional double altitude_m = 5;
     optional double speed_kmh = 6;
   }
-  message Inline_wayplatform_rfms_v5_Axle {
+  message Inline_wayplatform_rfms_v5_VehicleAxle {
     optional int32 position = 1;
     optional double load_kg = 2;
     repeated Tire tires = 3;
@@ -353,6 +292,7 @@ message VehicleStatus {
     optional string customer_name = 4;
     optional int32 type = 5;
     optional double axle_load_sum_kg = 6;
+    repeated Axle axles = 7;
     message Axle {
       optional int32 position = 1;
       optional double load_kg = 2;
@@ -377,7 +317,7 @@ message VehicleStatus {
     optional double tachograph_speed_kmh = 3;
     optional double engine_speed_rpm = 4;
     optional double electric_motor_speed_rpm = 5;
-    optional int32 ignition_state = 6;
+    optional int32 ignition = 6;
     optional int32 fuel_type = 7;
     optional string unknown_fuel_type = 8;
     optional double fuel_level1_percent = 9;
@@ -385,7 +325,7 @@ message VehicleStatus {
     optional double catalyst_fuel_level_percent = 11;
     optional int32 driver1_working_state = 12;
     optional string unknown_driver1_working_state = 13;
-    optional Inline_wayplatform_rfms_v5_DriverIdentification driver2 = 14;
+    optional Inline_wayplatform_rfms_v5_DriverIdentification driver2_id = 14;
     optional int32 driver2_working_state = 15;
     optional string unknown_driver2_working_state = 16;
     optional double ambient_air_temperature_c = 17;
@@ -395,9 +335,9 @@ message VehicleStatus {
     optional int32 battery_pack_charging_connection_state = 21;
     optional int32 battery_pack_charging_device = 22;
     optional double battery_pack_charging_power_w = 23;
-    optional int64 battery_pack_estimated_charging_completed_time = 24;
+    optional string battery_pack_estimated_charging_completed_time = 24;
     optional EstimatedDistanceToEmpty estimated_distance_to_empty = 25;
-    repeated Inline_wayplatform_rfms_v5_Axle axles = 26;
+    repeated Inline_wayplatform_rfms_v5_VehicleAxle vehicle_axles = 26;
     repeated Inline_wayplatform_rfms_v5_Trailer trailers = 27;
     message EstimatedDistanceToEmpty {
       optional double total_m = 1;
@@ -432,6 +372,78 @@ message VehicleStatus {
         NOT_CHARGING = 4;
         CHARGING = 5;
       }
+    }
+  }
+  message Inline_wayplatform_rfms_v5_AccumulatedData {
+    optional double wheel_based_speed_over_zero_duration_s = 1;
+    optional double wheel_based_speed_over_zero_fuel_ml = 2;
+    optional double wheel_based_speed_over_zero_fuel_gaseous_kg = 3;
+    optional double wheel_based_speed_over_zero_electric_energy_consumption_wh = 4;
+    optional double wheel_based_speed_zero_duration_s = 5;
+    optional double wheel_based_speed_zero_distance_m = 6;
+    optional double wheel_based_speed_zero_fuel_ml = 7;
+    optional double wheel_based_speed_zero_fuel_gaseous_kg = 8;
+    optional double wheel_based_speed_zero_electric_energy_consumption_wh = 9;
+    optional double cruise_control_active_distance_m = 10;
+    optional double cruise_control_active_duration_s = 11;
+    optional double cruise_control_active_fuel_consumption_ml = 12;
+    optional double cruise_control_active_fuel_consumption_gaseous_kg = 13;
+    optional double cruise_control_active_electric_energy_consumption_wh = 14;
+    optional double aux_electric_energy_consumption_wh = 15;
+    repeated LabelClass pto_active_class = 16;
+    optional int32 brake_pedal_speed_over_zero_count = 17;
+    optional double brake_pedal_speed_over_zero_distance_m = 18;
+    repeated FromToClass acceleration_pedal_position_class_percent = 19;
+    repeated FromToClass brake_pedal_position_class_percent = 20;
+    repeated FromToClass acceleration_class_mps2 = 21;
+    repeated FromToClass high_acceleration_class_mps2 = 22;
+    repeated FromToClass retarder_torque_class_percent = 23;
+    repeated LabelClass driving_without_torque_class = 24;
+    repeated FromToClassCombustion engine_torque_class_percent = 25;
+    repeated FromToClassElectrical electric_motor_torque_class_percent = 26;
+    repeated FromToClassCombustion engine_torque_at_current_speed_class_percent = 27;
+    repeated FromToClassElectrical electric_motor_torque_at_current_speed_class_percent = 28;
+    repeated FromToClass vehicle_speed_class_kmh = 29;
+    repeated FromToClass engine_speed_class_rpm = 30;
+    repeated FromToClass acceleration_during_brake_class_mps2 = 31;
+    repeated LabelClass selected_gear_class = 32;
+    repeated LabelClass current_gear_class = 33;
+    optional int32 chairlift_count = 34;
+    optional int32 stop_request_count = 35;
+    optional int32 kneeling_count = 36;
+    optional int32 pram_request_count = 37;
+    repeated FromToClassElectrical electric_power_recuperation_class_kw = 38;
+    message LabelClass {
+      optional string label = 1;
+      optional double duration_s = 2;
+      optional double distance_m = 3;
+      optional double fuel_consumption_ml = 4;
+      optional double fuel_consumption_gaseous_kg = 5;
+      optional double electric_energy_consumption_wh = 6;
+    }
+    message FromToClass {
+      optional double from = 1;
+      optional double to = 2;
+      optional double duration_s = 3;
+      optional double distance_m = 4;
+      optional double fuel_consumption_ml = 5;
+      optional double fuel_consumption_gaseous_kg = 6;
+      optional double electric_energy_consumption_wh = 7;
+    }
+    message FromToClassCombustion {
+      optional double from = 1;
+      optional double to = 2;
+      optional double duration_s = 3;
+      optional double distance_m = 4;
+      optional double fuel_consumption_ml = 5;
+      optional double fuel_consumption_gaseous_kg = 6;
+    }
+    message FromToClassElectrical {
+      optional double from = 1;
+      optional double to = 2;
+      optional double duration_s = 3;
+      optional double distance_m = 4;
+      optional double electric_energy_consumption_wh = 5;
     }
   }
   enum StateOfDoors {

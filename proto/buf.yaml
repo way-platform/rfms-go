@@ -3,3 +3,9 @@ version: v2
 modules:
   - path: .
     name: buf.build/way-platform/rfms
+
+lint:
+  use:
+    - STANDARD
+  except:
+    - ENUM_VALUE_PREFIX

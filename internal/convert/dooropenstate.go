@@ -4,7 +4,7 @@ import (
 	rfmsv5 "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5"
 )
 
-// DoorOpenState converts an rFMS door open state to proto.
+// DoorOpenState converts an rFMS bus door open state to proto.
 func DoorOpenState(input string) rfmsv5.VehicleStatus_Door_OpenState {
 	switch input {
 	case "OPEN":

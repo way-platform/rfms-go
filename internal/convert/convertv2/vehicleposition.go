@@ -1,6 +1,8 @@
 package convertv2
 
 import (
+	"time"
+
 	"github.com/way-platform/rfms-go/internal/openapi/rfmsv2oapi"
 	rfmsv5 "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5"
 )
@@ -15,10 +17,10 @@ func VehiclePosition(input *rfmsv2oapi.VehiclePositionType) *rfmsv5.VehiclePosit
 		output.SetTrigger(trigger(input.TriggerType))
 	}
 	if input.CreatedDateTime != nil {
-		output.SetCreateTime(input.CreatedDateTime.UnixMicro())
+		output.SetCreateTime(time.Time(*input.CreatedDateTime).UTC().Format(time.RFC3339Nano))
 	}
 	if input.ReceivedDateTime != nil {
-		output.SetReceiveTime(input.ReceivedDateTime.UnixMicro())
+		output.SetReceiveTime(time.Time(*input.ReceivedDateTime).UTC().Format(time.RFC3339Nano))
 	}
 	if input.GNSSPosition != nil {
 		output.SetGnssPosition(gnssPosition(input.GNSSPosition))

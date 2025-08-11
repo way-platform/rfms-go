@@ -88,7 +88,7 @@ func (x DriverIdentification_Tacho_AuthenticationEquipment) Number() protoreflec
 	return protoreflect.EnumNumber(x)
 }
 
-// The identification of a driver.
+// The identification of a driver or co-driver.
 type DriverIdentification struct {
 	state            protoimpl.MessageState      `protogen:"opaque.v1"`
 	xxx_hidden_Tacho *DriverIdentification_Tacho `protobuf:"bytes,1,opt,name=tacho"`

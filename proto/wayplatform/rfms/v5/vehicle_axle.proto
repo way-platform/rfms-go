@@ -3,7 +3,7 @@ edition = "2023";
 package wayplatform.rfms.v5;
 
 // A vehicle axle.
-message Axle {
+message VehicleAxle {
   // The position of the axle.
   int32 position = 1;
 

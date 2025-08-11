@@ -4,7 +4,7 @@ import (
 	rfmsv5 "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5"
 )
 
-// StateOfDoors converts an rFMS v2 door state to proto.
+// StateOfDoors converts a rFMS state of doors to proto.
 func StateOfDoors(input string) rfmsv5.VehicleStatus_StateOfDoors {
 	switch input {
 	case "ALL_DOORS_DISABLED":

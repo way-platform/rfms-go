@@ -10,7 +10,7 @@ type Time time.Time
 
 // UnmarshalJSON implements the [json.Unmarshaler] interface.
 func (t *Time) UnmarshalJSON(data []byte) error {
-	parsed, err := time.Parse(time.RFC3339, string(strings.Trim(string(data), `Z"`)+"Z"))
+	parsed, err := time.Parse(time.RFC3339Nano, string(strings.Trim(string(data), `Z"`)+"Z"))
 	if err != nil {
 		return err
 	}
@@ -23,7 +23,7 @@ func (t Time) MarshalJSON() ([]byte, error) {
 	return []byte(`"` + t.String() + `"`), nil
 }
 
-// String returns the time in RFC3339 format.
+// String returns the time in RFC3339Nano format.
 func (t Time) String() string {
-	return time.Time(t).UTC().Format(time.RFC3339)
+	return time.Time(t).UTC().Format(time.RFC3339Nano)
 }

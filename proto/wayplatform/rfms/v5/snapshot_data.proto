@@ -2,7 +2,6 @@ edition = "2023";
 
 package wayplatform.rfms.v5;
 
-import "wayplatform/rfms/v5/axle.proto";
 import "wayplatform/rfms/v5/charging_connection_state.proto";
 import "wayplatform/rfms/v5/charging_device.proto";
 import "wayplatform/rfms/v5/charging_state.proto";
@@ -12,6 +11,7 @@ import "wayplatform/rfms/v5/fuel_type.proto";
 import "wayplatform/rfms/v5/gnss_position.proto";
 import "wayplatform/rfms/v5/ignition_state.proto";
 import "wayplatform/rfms/v5/trailer.proto";
+import "wayplatform/rfms/v5/vehicle_axle.proto";
 
 // Snapshot data for a vehicle.
 message SnapshotData {
@@ -31,7 +31,7 @@ message SnapshotData {
   double electric_motor_speed_rpm = 5;
 
   // The ignition state of the vehicle.
-  IgnitionState ignition_state = 6;
+  IgnitionState ignition = 6;
 
   // The fuel type currently being utilized by the vehicle.
   FuelType fuel_type = 7;
@@ -63,7 +63,7 @@ message SnapshotData {
   string unknown_driver1_working_state = 13;
 
   // The driver identification of driver 2.
-  DriverIdentification driver2 = 14;
+  DriverIdentification driver2_id = 14;
 
   // The driver working state of the vehicle.
   DriverWorkingState driver2_working_state = 15;
@@ -100,17 +100,11 @@ message SnapshotData {
   // The battery pack charging power of the vehicle. (W)
   double battery_pack_charging_power_w = 23;
 
-  // The estimated time when charging has reached the target level. (Unix micros)
-  int64 battery_pack_estimated_charging_completed_time = 24;
+  // The estimated time when charging has reached the target level. (RFC 3339)
+  string battery_pack_estimated_charging_completed_time = 24;
 
   // The estimated distance to empty of the vehicle.
   EstimatedDistanceToEmpty estimated_distance_to_empty = 25;
-
-  // The axles of the vehicle.
-  repeated Axle axles = 26;
-
-  // The trailers connected to the vehicle.
-  repeated Trailer trailers = 27;
 
   // The estimated distance to empty of the vehicle.
   message EstimatedDistanceToEmpty {
@@ -126,4 +120,10 @@ message SnapshotData {
     // The estimated distance to empty of the vehicle. (m)
     double battery_pack_m = 4;
   }
+
+  // The axles of the vehicle.
+  repeated VehicleAxle vehicle_axles = 26;
+
+  // The trailers connected to the vehicle.
+  repeated Trailer trailers = 27;
 }

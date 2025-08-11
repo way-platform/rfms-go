@@ -4,8 +4,8 @@ package wayplatform.rfms.v5;
 
 // A GNSS position.
 message GnssPosition {
-  // The date and time the GNSS position was recorded. (Unix microseconds)
-  int64 time = 1;
+  // The time of the GNSS position data. (RFC 3339)
+  string time = 1;
   // The latitude of the vehicle. (WGS84 based)
   double latitude = 2;
   // The longitude of the vehicle. (WGS84 based)

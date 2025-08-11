@@ -28,7 +28,7 @@ type SnapshotData struct {
 	xxx_hidden_TachographSpeedKmh                        float64                                `protobuf:"fixed64,3,opt,name=tachograph_speed_kmh,json=tachographSpeedKmh"`
 	xxx_hidden_EngineSpeedRpm                            float64                                `protobuf:"fixed64,4,opt,name=engine_speed_rpm,json=engineSpeedRpm"`
 	xxx_hidden_ElectricMotorSpeedRpm                     float64                                `protobuf:"fixed64,5,opt,name=electric_motor_speed_rpm,json=electricMotorSpeedRpm"`
-	xxx_hidden_IgnitionState                             IgnitionState                          `protobuf:"varint,6,opt,name=ignition_state,json=ignitionState,enum=wayplatform.rfms.v5.IgnitionState"`
+	xxx_hidden_Ignition                                  IgnitionState                          `protobuf:"varint,6,opt,name=ignition,enum=wayplatform.rfms.v5.IgnitionState"`
 	xxx_hidden_FuelType                                  FuelType                               `protobuf:"varint,7,opt,name=fuel_type,json=fuelType,enum=wayplatform.rfms.v5.FuelType"`
 	xxx_hidden_UnknownFuelType                           *string                                `protobuf:"bytes,8,opt,name=unknown_fuel_type,json=unknownFuelType"`
 	xxx_hidden_FuelLevel1Percent                         float64                                `protobuf:"fixed64,9,opt,name=fuel_level1_percent,json=fuelLevel1Percent"`
@@ -36,7 +36,7 @@ type SnapshotData struct {
 	xxx_hidden_CatalystFuelLevelPercent                  float64                                `protobuf:"fixed64,11,opt,name=catalyst_fuel_level_percent,json=catalystFuelLevelPercent"`
 	xxx_hidden_Driver1WorkingState                       DriverWorkingState                     `protobuf:"varint,12,opt,name=driver1_working_state,json=driver1WorkingState,enum=wayplatform.rfms.v5.DriverWorkingState"`
 	xxx_hidden_UnknownDriver1WorkingState                *string                                `protobuf:"bytes,13,opt,name=unknown_driver1_working_state,json=unknownDriver1WorkingState"`
-	xxx_hidden_Driver2                                   *DriverIdentification                  `protobuf:"bytes,14,opt,name=driver2"`
+	xxx_hidden_Driver2Id                                 *DriverIdentification                  `protobuf:"bytes,14,opt,name=driver2_id,json=driver2Id"`
 	xxx_hidden_Driver2WorkingState                       DriverWorkingState                     `protobuf:"varint,15,opt,name=driver2_working_state,json=driver2WorkingState,enum=wayplatform.rfms.v5.DriverWorkingState"`
 	xxx_hidden_UnknownDriver2WorkingState                *string                                `protobuf:"bytes,16,opt,name=unknown_driver2_working_state,json=unknownDriver2WorkingState"`
 	xxx_hidden_AmbientAirTemperatureC                    float64                                `protobuf:"fixed64,17,opt,name=ambient_air_temperature_c,json=ambientAirTemperatureC"`
@@ -46,9 +46,9 @@ type SnapshotData struct {
 	xxx_hidden_BatteryPackChargingConnectionState        ChargingConnectionState                `protobuf:"varint,21,opt,name=battery_pack_charging_connection_state,json=batteryPackChargingConnectionState,enum=wayplatform.rfms.v5.ChargingConnectionState"`
 	xxx_hidden_BatteryPackChargingDevice                 ChargingDevice                         `protobuf:"varint,22,opt,name=battery_pack_charging_device,json=batteryPackChargingDevice,enum=wayplatform.rfms.v5.ChargingDevice"`
 	xxx_hidden_BatteryPackChargingPowerW                 float64                                `protobuf:"fixed64,23,opt,name=battery_pack_charging_power_w,json=batteryPackChargingPowerW"`
-	xxx_hidden_BatteryPackEstimatedChargingCompletedTime int64                                  `protobuf:"varint,24,opt,name=battery_pack_estimated_charging_completed_time,json=batteryPackEstimatedChargingCompletedTime"`
+	xxx_hidden_BatteryPackEstimatedChargingCompletedTime *string                                `protobuf:"bytes,24,opt,name=battery_pack_estimated_charging_completed_time,json=batteryPackEstimatedChargingCompletedTime"`
 	xxx_hidden_EstimatedDistanceToEmpty                  *SnapshotData_EstimatedDistanceToEmpty `protobuf:"bytes,25,opt,name=estimated_distance_to_empty,json=estimatedDistanceToEmpty"`
-	xxx_hidden_Axles                                     *[]*Axle                               `protobuf:"bytes,26,rep,name=axles"`
+	xxx_hidden_VehicleAxles                              *[]*VehicleAxle                        `protobuf:"bytes,26,rep,name=vehicle_axles,json=vehicleAxles"`
 	xxx_hidden_Trailers                                  *[]*Trailer                            `protobuf:"bytes,27,rep,name=trailers"`
 	XXX_raceDetectHookData                               protoimpl.RaceDetectHookData
 	XXX_presence                                         [1]uint32
@@ -116,10 +116,10 @@ func (x *SnapshotData) GetElectricMotorSpeedRpm() float64 {
 	return 0
 }
 
-func (x *SnapshotData) GetIgnitionState() IgnitionState {
+func (x *SnapshotData) GetIgnition() IgnitionState {
 	if x != nil {
 		if protoimpl.X.Present(&(x.XXX_presence[0]), 5) {
-			return x.xxx_hidden_IgnitionState
+			return x.xxx_hidden_Ignition
 		}
 	}
 	return IgnitionState_IGNITION_STATE_UNSPECIFIED
@@ -184,9 +184,9 @@ func (x *SnapshotData) GetUnknownDriver1WorkingState() string {
 	return ""
 }
 
-func (x *SnapshotData) GetDriver2() *DriverIdentification {
+func (x *SnapshotData) GetDriver2Id() *DriverIdentification {
 	if x != nil {
-		return x.xxx_hidden_Driver2
+		return x.xxx_hidden_Driver2Id
 	}
 	return nil
 }
@@ -265,11 +265,14 @@ func (x *SnapshotData) GetBatteryPackChargingPowerW() float64 {
 	return 0
 }
 
-func (x *SnapshotData) GetBatteryPackEstimatedChargingCompletedTime() int64 {
+func (x *SnapshotData) GetBatteryPackEstimatedChargingCompletedTime() string {
 	if x != nil {
-		return x.xxx_hidden_BatteryPackEstimatedChargingCompletedTime
+		if x.xxx_hidden_BatteryPackEstimatedChargingCompletedTime != nil {
+			return *x.xxx_hidden_BatteryPackEstimatedChargingCompletedTime
+		}
+		return ""
 	}
-	return 0
+	return ""
 }
 
 func (x *SnapshotData) GetEstimatedDistanceToEmpty() *SnapshotData_EstimatedDistanceToEmpty {
@@ -279,10 +282,10 @@ func (x *SnapshotData) GetEstimatedDistanceToEmpty() *SnapshotData_EstimatedDist
 	return nil
 }
 
-func (x *SnapshotData) GetAxles() []*Axle {
+func (x *SnapshotData) GetVehicleAxles() []*VehicleAxle {
 	if x != nil {
-		if x.xxx_hidden_Axles != nil {
-			return *x.xxx_hidden_Axles
+		if x.xxx_hidden_VehicleAxles != nil {
+			return *x.xxx_hidden_VehicleAxles
 		}
 	}
 	return nil
@@ -321,8 +324,8 @@ func (x *SnapshotData) SetElectricMotorSpeedRpm(v float64) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 27)
 }
 
-func (x *SnapshotData) SetIgnitionState(v IgnitionState) {
-	x.xxx_hidden_IgnitionState = v
+func (x *SnapshotData) SetIgnition(v IgnitionState) {
+	x.xxx_hidden_Ignition = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 27)
 }
 
@@ -361,8 +364,8 @@ func (x *SnapshotData) SetUnknownDriver1WorkingState(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 12, 27)
 }
 
-func (x *SnapshotData) SetDriver2(v *DriverIdentification) {
-	x.xxx_hidden_Driver2 = v
+func (x *SnapshotData) SetDriver2Id(v *DriverIdentification) {
+	x.xxx_hidden_Driver2Id = v
 }
 
 func (x *SnapshotData) SetDriver2WorkingState(v DriverWorkingState) {
@@ -410,8 +413,8 @@ func (x *SnapshotData) SetBatteryPackChargingPowerW(v float64) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 22, 27)
 }
 
-func (x *SnapshotData) SetBatteryPackEstimatedChargingCompletedTime(v int64) {
-	x.xxx_hidden_BatteryPackEstimatedChargingCompletedTime = v
+func (x *SnapshotData) SetBatteryPackEstimatedChargingCompletedTime(v string) {
+	x.xxx_hidden_BatteryPackEstimatedChargingCompletedTime = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 23, 27)
 }
 
@@ -419,8 +422,8 @@ func (x *SnapshotData) SetEstimatedDistanceToEmpty(v *SnapshotData_EstimatedDist
 	x.xxx_hidden_EstimatedDistanceToEmpty = v
 }
 
-func (x *SnapshotData) SetAxles(v []*Axle) {
-	x.xxx_hidden_Axles = &v
+func (x *SnapshotData) SetVehicleAxles(v []*VehicleAxle) {
+	x.xxx_hidden_VehicleAxles = &v
 }
 
 func (x *SnapshotData) SetTrailers(v []*Trailer) {
@@ -462,7 +465,7 @@ func (x *SnapshotData) HasElectricMotorSpeedRpm() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
 }
 
-func (x *SnapshotData) HasIgnitionState() bool {
+func (x *SnapshotData) HasIgnition() bool {
 	if x == nil {
 		return false
 	}
@@ -518,11 +521,11 @@ func (x *SnapshotData) HasUnknownDriver1WorkingState() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 12)
 }
 
-func (x *SnapshotData) HasDriver2() bool {
+func (x *SnapshotData) HasDriver2Id() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_Driver2 != nil
+	return x.xxx_hidden_Driver2Id != nil
 }
 
 func (x *SnapshotData) HasDriver2WorkingState() bool {
@@ -626,9 +629,9 @@ func (x *SnapshotData) ClearElectricMotorSpeedRpm() {
 	x.xxx_hidden_ElectricMotorSpeedRpm = 0
 }
 
-func (x *SnapshotData) ClearIgnitionState() {
+func (x *SnapshotData) ClearIgnition() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
-	x.xxx_hidden_IgnitionState = IgnitionState_IGNITION_STATE_UNSPECIFIED
+	x.xxx_hidden_Ignition = IgnitionState_IGNITION_STATE_UNSPECIFIED
 }
 
 func (x *SnapshotData) ClearFuelType() {
@@ -666,8 +669,8 @@ func (x *SnapshotData) ClearUnknownDriver1WorkingState() {
 	x.xxx_hidden_UnknownDriver1WorkingState = nil
 }
 
-func (x *SnapshotData) ClearDriver2() {
-	x.xxx_hidden_Driver2 = nil
+func (x *SnapshotData) ClearDriver2Id() {
+	x.xxx_hidden_Driver2Id = nil
 }
 
 func (x *SnapshotData) ClearDriver2WorkingState() {
@@ -717,7 +720,7 @@ func (x *SnapshotData) ClearBatteryPackChargingPowerW() {
 
 func (x *SnapshotData) ClearBatteryPackEstimatedChargingCompletedTime() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 23)
-	x.xxx_hidden_BatteryPackEstimatedChargingCompletedTime = 0
+	x.xxx_hidden_BatteryPackEstimatedChargingCompletedTime = nil
 }
 
 func (x *SnapshotData) ClearEstimatedDistanceToEmpty() {
@@ -738,7 +741,7 @@ type SnapshotData_builder struct {
 	// The electric motor speed of the vehicle. (rev/min)
 	ElectricMotorSpeedRpm *float64
 	// The ignition state of the vehicle.
-	IgnitionState *IgnitionState
+	Ignition *IgnitionState
 	// The fuel type currently being utilized by the vehicle.
 	FuelType *FuelType
 	// The unknown fuel type of the vehicle.
@@ -762,7 +765,7 @@ type SnapshotData_builder struct {
 	// Provided when the driver working state is DRIVER_WORKING_STATE_UNKNOWN.
 	UnknownDriver1WorkingState *string
 	// The driver identification of driver 2.
-	Driver2 *DriverIdentification
+	Driver2Id *DriverIdentification
 	// The driver working state of the vehicle.
 	Driver2WorkingState *DriverWorkingState
 	// The unknown driver working state of the vehicle.
@@ -789,12 +792,12 @@ type SnapshotData_builder struct {
 	BatteryPackChargingDevice *ChargingDevice
 	// The battery pack charging power of the vehicle. (W)
 	BatteryPackChargingPowerW *float64
-	// The estimated time when charging has reached the target level. (Unix micros)
-	BatteryPackEstimatedChargingCompletedTime *int64
+	// The estimated time when charging has reached the target level. (RFC 3339)
+	BatteryPackEstimatedChargingCompletedTime *string
 	// The estimated distance to empty of the vehicle.
 	EstimatedDistanceToEmpty *SnapshotData_EstimatedDistanceToEmpty
 	// The axles of the vehicle.
-	Axles []*Axle
+	VehicleAxles []*VehicleAxle
 	// The trailers connected to the vehicle.
 	Trailers []*Trailer
 }
@@ -820,9 +823,9 @@ func (b0 SnapshotData_builder) Build() *SnapshotData {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 27)
 		x.xxx_hidden_ElectricMotorSpeedRpm = *b.ElectricMotorSpeedRpm
 	}
-	if b.IgnitionState != nil {
+	if b.Ignition != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 27)
-		x.xxx_hidden_IgnitionState = *b.IgnitionState
+		x.xxx_hidden_Ignition = *b.Ignition
 	}
 	if b.FuelType != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 27)
@@ -852,7 +855,7 @@ func (b0 SnapshotData_builder) Build() *SnapshotData {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 12, 27)
 		x.xxx_hidden_UnknownDriver1WorkingState = b.UnknownDriver1WorkingState
 	}
-	x.xxx_hidden_Driver2 = b.Driver2
+	x.xxx_hidden_Driver2Id = b.Driver2Id
 	if b.Driver2WorkingState != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 14, 27)
 		x.xxx_hidden_Driver2WorkingState = *b.Driver2WorkingState
@@ -891,10 +894,10 @@ func (b0 SnapshotData_builder) Build() *SnapshotData {
 	}
 	if b.BatteryPackEstimatedChargingCompletedTime != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 23, 27)
-		x.xxx_hidden_BatteryPackEstimatedChargingCompletedTime = *b.BatteryPackEstimatedChargingCompletedTime
+		x.xxx_hidden_BatteryPackEstimatedChargingCompletedTime = b.BatteryPackEstimatedChargingCompletedTime
 	}
 	x.xxx_hidden_EstimatedDistanceToEmpty = b.EstimatedDistanceToEmpty
-	x.xxx_hidden_Axles = &b.Axles
+	x.xxx_hidden_VehicleAxles = &b.VehicleAxles
 	x.xxx_hidden_Trailers = &b.Trailers
 	return m0
 }
@@ -1073,14 +1076,14 @@ var File_wayplatform_rfms_v5_snapshot_data_proto protoreflect.FileDescriptor
 
 const file_wayplatform_rfms_v5_snapshot_data_proto_rawDesc = "" +
 	"\n" +
-	"'wayplatform/rfms/v5/snapshot_data.proto\x12\x13wayplatform.rfms.v5\x1a\x1ewayplatform/rfms/v5/axle.proto\x1a3wayplatform/rfms/v5/charging_connection_state.proto\x1a)wayplatform/rfms/v5/charging_device.proto\x1a(wayplatform/rfms/v5/charging_state.proto\x1a/wayplatform/rfms/v5/driver_identification.proto\x1a.wayplatform/rfms/v5/driver_working_state.proto\x1a#wayplatform/rfms/v5/fuel_type.proto\x1a'wayplatform/rfms/v5/gnss_position.proto\x1a(wayplatform/rfms/v5/ignition_state.proto\x1a!wayplatform/rfms/v5/trailer.proto\"\x93\x10\n" +
+	"'wayplatform/rfms/v5/snapshot_data.proto\x12\x13wayplatform.rfms.v5\x1a3wayplatform/rfms/v5/charging_connection_state.proto\x1a)wayplatform/rfms/v5/charging_device.proto\x1a(wayplatform/rfms/v5/charging_state.proto\x1a/wayplatform/rfms/v5/driver_identification.proto\x1a.wayplatform/rfms/v5/driver_working_state.proto\x1a#wayplatform/rfms/v5/fuel_type.proto\x1a'wayplatform/rfms/v5/gnss_position.proto\x1a(wayplatform/rfms/v5/ignition_state.proto\x1a!wayplatform/rfms/v5/trailer.proto\x1a&wayplatform/rfms/v5/vehicle_axle.proto\"\xa3\x10\n" +
 	"\fSnapshotData\x12F\n" +
 	"\rgnss_position\x18\x01 \x01(\v2!.wayplatform.rfms.v5.GnssPositionR\fgnssPosition\x121\n" +
 	"\x15wheel_based_speed_kmh\x18\x02 \x01(\x01R\x12wheelBasedSpeedKmh\x120\n" +
 	"\x14tachograph_speed_kmh\x18\x03 \x01(\x01R\x12tachographSpeedKmh\x12(\n" +
 	"\x10engine_speed_rpm\x18\x04 \x01(\x01R\x0eengineSpeedRpm\x127\n" +
-	"\x18electric_motor_speed_rpm\x18\x05 \x01(\x01R\x15electricMotorSpeedRpm\x12I\n" +
-	"\x0eignition_state\x18\x06 \x01(\x0e2\".wayplatform.rfms.v5.IgnitionStateR\rignitionState\x12:\n" +
+	"\x18electric_motor_speed_rpm\x18\x05 \x01(\x01R\x15electricMotorSpeedRpm\x12>\n" +
+	"\bignition\x18\x06 \x01(\x0e2\".wayplatform.rfms.v5.IgnitionStateR\bignition\x12:\n" +
 	"\tfuel_type\x18\a \x01(\x0e2\x1d.wayplatform.rfms.v5.FuelTypeR\bfuelType\x12*\n" +
 	"\x11unknown_fuel_type\x18\b \x01(\tR\x0funknownFuelType\x12.\n" +
 	"\x13fuel_level1_percent\x18\t \x01(\x01R\x11fuelLevel1Percent\x12.\n" +
@@ -1088,8 +1091,9 @@ const file_wayplatform_rfms_v5_snapshot_data_proto_rawDesc = "" +
 	" \x01(\x01R\x11fuelLevel2Percent\x12=\n" +
 	"\x1bcatalyst_fuel_level_percent\x18\v \x01(\x01R\x18catalystFuelLevelPercent\x12[\n" +
 	"\x15driver1_working_state\x18\f \x01(\x0e2'.wayplatform.rfms.v5.DriverWorkingStateR\x13driver1WorkingState\x12A\n" +
-	"\x1dunknown_driver1_working_state\x18\r \x01(\tR\x1aunknownDriver1WorkingState\x12C\n" +
-	"\adriver2\x18\x0e \x01(\v2).wayplatform.rfms.v5.DriverIdentificationR\adriver2\x12[\n" +
+	"\x1dunknown_driver1_working_state\x18\r \x01(\tR\x1aunknownDriver1WorkingState\x12H\n" +
+	"\n" +
+	"driver2_id\x18\x0e \x01(\v2).wayplatform.rfms.v5.DriverIdentificationR\tdriver2Id\x12[\n" +
 	"\x15driver2_working_state\x18\x0f \x01(\x0e2'.wayplatform.rfms.v5.DriverWorkingStateR\x13driver2WorkingState\x12A\n" +
 	"\x1dunknown_driver2_working_state\x18\x10 \x01(\tR\x1aunknownDriver2WorkingState\x129\n" +
 	"\x19ambient_air_temperature_c\x18\x11 \x01(\x01R\x16ambientAirTemperatureC\x120\n" +
@@ -1099,9 +1103,9 @@ const file_wayplatform_rfms_v5_snapshot_data_proto_rawDesc = "" +
 	"&battery_pack_charging_connection_state\x18\x15 \x01(\x0e2,.wayplatform.rfms.v5.ChargingConnectionStateR\"batteryPackChargingConnectionState\x12d\n" +
 	"\x1cbattery_pack_charging_device\x18\x16 \x01(\x0e2#.wayplatform.rfms.v5.ChargingDeviceR\x19batteryPackChargingDevice\x12@\n" +
 	"\x1dbattery_pack_charging_power_w\x18\x17 \x01(\x01R\x19batteryPackChargingPowerW\x12a\n" +
-	".battery_pack_estimated_charging_completed_time\x18\x18 \x01(\x03R)batteryPackEstimatedChargingCompletedTime\x12y\n" +
-	"\x1bestimated_distance_to_empty\x18\x19 \x01(\v2:.wayplatform.rfms.v5.SnapshotData.EstimatedDistanceToEmptyR\x18estimatedDistanceToEmpty\x12/\n" +
-	"\x05axles\x18\x1a \x03(\v2\x19.wayplatform.rfms.v5.AxleR\x05axles\x128\n" +
+	".battery_pack_estimated_charging_completed_time\x18\x18 \x01(\tR)batteryPackEstimatedChargingCompletedTime\x12y\n" +
+	"\x1bestimated_distance_to_empty\x18\x19 \x01(\v2:.wayplatform.rfms.v5.SnapshotData.EstimatedDistanceToEmptyR\x18estimatedDistanceToEmpty\x12E\n" +
+	"\rvehicle_axles\x18\x1a \x03(\v2 .wayplatform.rfms.v5.VehicleAxleR\fvehicleAxles\x128\n" +
 	"\btrailers\x18\x1b \x03(\v2\x1c.wayplatform.rfms.v5.TrailerR\btrailers\x1a\x85\x01\n" +
 	"\x18EstimatedDistanceToEmpty\x12\x17\n" +
 	"\atotal_m\x18\x01 \x01(\x01R\x06totalM\x12\x15\n" +
@@ -1122,21 +1126,21 @@ var file_wayplatform_rfms_v5_snapshot_data_proto_goTypes = []any{
 	(ChargingState)(0),                            // 7: wayplatform.rfms.v5.ChargingState
 	(ChargingConnectionState)(0),                  // 8: wayplatform.rfms.v5.ChargingConnectionState
 	(ChargingDevice)(0),                           // 9: wayplatform.rfms.v5.ChargingDevice
-	(*Axle)(nil),                                  // 10: wayplatform.rfms.v5.Axle
+	(*VehicleAxle)(nil),                           // 10: wayplatform.rfms.v5.VehicleAxle
 	(*Trailer)(nil),                               // 11: wayplatform.rfms.v5.Trailer
 }
 var file_wayplatform_rfms_v5_snapshot_data_proto_depIdxs = []int32{
 	2,  // 0: wayplatform.rfms.v5.SnapshotData.gnss_position:type_name -> wayplatform.rfms.v5.GnssPosition
-	3,  // 1: wayplatform.rfms.v5.SnapshotData.ignition_state:type_name -> wayplatform.rfms.v5.IgnitionState
+	3,  // 1: wayplatform.rfms.v5.SnapshotData.ignition:type_name -> wayplatform.rfms.v5.IgnitionState
 	4,  // 2: wayplatform.rfms.v5.SnapshotData.fuel_type:type_name -> wayplatform.rfms.v5.FuelType
 	5,  // 3: wayplatform.rfms.v5.SnapshotData.driver1_working_state:type_name -> wayplatform.rfms.v5.DriverWorkingState
-	6,  // 4: wayplatform.rfms.v5.SnapshotData.driver2:type_name -> wayplatform.rfms.v5.DriverIdentification
+	6,  // 4: wayplatform.rfms.v5.SnapshotData.driver2_id:type_name -> wayplatform.rfms.v5.DriverIdentification
 	5,  // 5: wayplatform.rfms.v5.SnapshotData.driver2_working_state:type_name -> wayplatform.rfms.v5.DriverWorkingState
 	7,  // 6: wayplatform.rfms.v5.SnapshotData.battery_pack_charging_state:type_name -> wayplatform.rfms.v5.ChargingState
 	8,  // 7: wayplatform.rfms.v5.SnapshotData.battery_pack_charging_connection_state:type_name -> wayplatform.rfms.v5.ChargingConnectionState
 	9,  // 8: wayplatform.rfms.v5.SnapshotData.battery_pack_charging_device:type_name -> wayplatform.rfms.v5.ChargingDevice
 	1,  // 9: wayplatform.rfms.v5.SnapshotData.estimated_distance_to_empty:type_name -> wayplatform.rfms.v5.SnapshotData.EstimatedDistanceToEmpty
-	10, // 10: wayplatform.rfms.v5.SnapshotData.axles:type_name -> wayplatform.rfms.v5.Axle
+	10, // 10: wayplatform.rfms.v5.SnapshotData.vehicle_axles:type_name -> wayplatform.rfms.v5.VehicleAxle
 	11, // 11: wayplatform.rfms.v5.SnapshotData.trailers:type_name -> wayplatform.rfms.v5.Trailer
 	12, // [12:12] is the sub-list for method output_type
 	12, // [12:12] is the sub-list for method input_type
@@ -1150,7 +1154,6 @@ func file_wayplatform_rfms_v5_snapshot_data_proto_init() {
 	if File_wayplatform_rfms_v5_snapshot_data_proto != nil {
 		return
 	}
-	file_wayplatform_rfms_v5_axle_proto_init()
 	file_wayplatform_rfms_v5_charging_connection_state_proto_init()
 	file_wayplatform_rfms_v5_charging_device_proto_init()
 	file_wayplatform_rfms_v5_charging_state_proto_init()
@@ -1160,6 +1163,7 @@ func file_wayplatform_rfms_v5_snapshot_data_proto_init() {
 	file_wayplatform_rfms_v5_gnss_position_proto_init()
 	file_wayplatform_rfms_v5_ignition_state_proto_init()
 	file_wayplatform_rfms_v5_trailer_proto_init()
+	file_wayplatform_rfms_v5_vehicle_axle_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

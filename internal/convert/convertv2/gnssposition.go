@@ -1,6 +1,8 @@
 package convertv2
 
 import (
+	"time"
+
 	"github.com/way-platform/rfms-go/internal/openapi/rfmsv2oapi"
 	rfmsv5 "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5"
 )
@@ -23,7 +25,7 @@ func gnssPosition(input *rfmsv2oapi.GNSSPositionType) *rfmsv5.GnssPosition {
 		output.SetSpeedKmh(*input.Speed)
 	}
 	if input.PositionDateTime != nil {
-		output.SetTime(input.PositionDateTime.UnixMicro())
+		output.SetTime(time.Time(*input.PositionDateTime).UTC().Format(time.RFC3339Nano))
 	}
 	return &output
 }

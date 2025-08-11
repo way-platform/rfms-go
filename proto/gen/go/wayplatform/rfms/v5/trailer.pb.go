@@ -109,6 +109,7 @@ type Trailer struct {
 	xxx_hidden_CustomerName       *string                `protobuf:"bytes,4,opt,name=customer_name,json=customerName"`
 	xxx_hidden_Type               Trailer_Type           `protobuf:"varint,5,opt,name=type,enum=wayplatform.rfms.v5.Trailer_Type"`
 	xxx_hidden_AxleLoadSumKg      float64                `protobuf:"fixed64,6,opt,name=axle_load_sum_kg,json=axleLoadSumKg"`
+	xxx_hidden_Axles              *[]*Trailer_Axle       `protobuf:"bytes,7,rep,name=axles"`
 	XXX_raceDetectHookData        protoimpl.RaceDetectHookData
 	XXX_presence                  [1]uint32
 	unknownFields                 protoimpl.UnknownFields
@@ -193,34 +194,47 @@ func (x *Trailer) GetAxleLoadSumKg() float64 {
 	return 0
 }
 
+func (x *Trailer) GetAxles() []*Trailer_Axle {
+	if x != nil {
+		if x.xxx_hidden_Axles != nil {
+			return *x.xxx_hidden_Axles
+		}
+	}
+	return nil
+}
+
 func (x *Trailer) SetNumber(v int32) {
 	x.xxx_hidden_Number = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 7)
 }
 
 func (x *Trailer) SetIdentificationData(v string) {
 	x.xxx_hidden_IdentificationData = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 7)
 }
 
 func (x *Trailer) SetVin(v string) {
 	x.xxx_hidden_Vin = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 7)
 }
 
 func (x *Trailer) SetCustomerName(v string) {
 	x.xxx_hidden_CustomerName = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 7)
 }
 
 func (x *Trailer) SetType(v Trailer_Type) {
 	x.xxx_hidden_Type = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 7)
 }
 
 func (x *Trailer) SetAxleLoadSumKg(v float64) {
 	x.xxx_hidden_AxleLoadSumKg = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 7)
+}
+
+func (x *Trailer) SetAxles(v []*Trailer_Axle) {
+	x.xxx_hidden_Axles = &v
 }
 
 func (x *Trailer) HasNumber() bool {
@@ -316,6 +330,8 @@ type Trailer_builder struct {
 	// The sum of the static vertical loads of the trailer axles. (kg)
 	// The load is sent in the EBS22 message of ISO 11992-2.
 	AxleLoadSumKg *float64
+	// The trailer axles.
+	Axles []*Trailer_Axle
 }
 
 func (b0 Trailer_builder) Build() *Trailer {
@@ -323,29 +339,30 @@ func (b0 Trailer_builder) Build() *Trailer {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Number != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 7)
 		x.xxx_hidden_Number = *b.Number
 	}
 	if b.IdentificationData != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 7)
 		x.xxx_hidden_IdentificationData = b.IdentificationData
 	}
 	if b.Vin != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 7)
 		x.xxx_hidden_Vin = b.Vin
 	}
 	if b.CustomerName != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 7)
 		x.xxx_hidden_CustomerName = b.CustomerName
 	}
 	if b.Type != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 7)
 		x.xxx_hidden_Type = *b.Type
 	}
 	if b.AxleLoadSumKg != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 7)
 		x.xxx_hidden_AxleLoadSumKg = *b.AxleLoadSumKg
 	}
+	x.xxx_hidden_Axles = &b.Axles
 	return m0
 }
 
@@ -463,14 +480,15 @@ var File_wayplatform_rfms_v5_trailer_proto protoreflect.FileDescriptor
 
 const file_wayplatform_rfms_v5_trailer_proto_rawDesc = "" +
 	"\n" +
-	"!wayplatform/rfms/v5/trailer.proto\x12\x13wayplatform.rfms.v5\"\xa5\x04\n" +
+	"!wayplatform/rfms/v5/trailer.proto\x12\x13wayplatform.rfms.v5\"\xde\x04\n" +
 	"\aTrailer\x12\x16\n" +
 	"\x06number\x18\x01 \x01(\x05R\x06number\x12/\n" +
 	"\x13identification_data\x18\x02 \x01(\tR\x12identificationData\x12\x10\n" +
 	"\x03vin\x18\x03 \x01(\tR\x03vin\x12#\n" +
 	"\rcustomer_name\x18\x04 \x01(\tR\fcustomerName\x125\n" +
 	"\x04type\x18\x05 \x01(\x0e2!.wayplatform.rfms.v5.Trailer.TypeR\x04type\x12'\n" +
-	"\x10axle_load_sum_kg\x18\x06 \x01(\x01R\raxleLoadSumKg\x1a;\n" +
+	"\x10axle_load_sum_kg\x18\x06 \x01(\x01R\raxleLoadSumKg\x127\n" +
+	"\x05axles\x18\a \x03(\v2!.wayplatform.rfms.v5.Trailer.AxleR\x05axles\x1a;\n" +
 	"\x04Axle\x12\x1a\n" +
 	"\bposition\x18\x01 \x01(\x05R\bposition\x12\x17\n" +
 	"\aload_kg\x18\x02 \x01(\x01R\x06loadKg\"\xfc\x01\n" +
@@ -498,11 +516,12 @@ var file_wayplatform_rfms_v5_trailer_proto_goTypes = []any{
 }
 var file_wayplatform_rfms_v5_trailer_proto_depIdxs = []int32{
 	0, // 0: wayplatform.rfms.v5.Trailer.type:type_name -> wayplatform.rfms.v5.Trailer.Type
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2, // 1: wayplatform.rfms.v5.Trailer.axles:type_name -> wayplatform.rfms.v5.Trailer.Axle
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_wayplatform_rfms_v5_trailer_proto_init() }

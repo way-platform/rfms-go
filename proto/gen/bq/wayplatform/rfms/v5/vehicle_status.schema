@@ -36,13 +36,13 @@
     "description": "The unknown context. Used when the context is CONTEXT_UNKNOWN."
    },
    {
-    "name": "additional_info",
+    "name": "trigger_info",
     "type": "STRING",
     "mode": "REPEATED",
     "description": "Additional OEM specific trigger info content.\n Can be used for both OEM specific and rFMS defined triggers.\n E.g. TRAILER_CONNECTED [id of trailer]."
    },
    {
-    "name": "driver_info",
+    "name": "driver_id",
     "type": "RECORD",
     "mode": "NULLABLE",
     "description": "The driver identification.\n Provided when the trigger type is DRIVER_LOGIN, DRIVER_LOGOUT, DRIVER_1_WORKING_STATE_CHANGED or DRIVER_2_WORKING_STATE_CHANGED.\n For DRIVER_LOGIN it is the id of the driver that logged in.\n For DRIVER_LOGOUT it is the id of the driver that logged out.\n For DRIVER_1_WORKING_STATE_CHANGED it is the id of driver 1.\n For DRIVER_2_WORKING_STATE_CHANGED it is the id of driver 2.",
@@ -245,19 +245,19 @@
  },
  {
   "name": "create_time",
-  "type": "INTEGER",
+  "type": "STRING",
   "mode": "NULLABLE",
-  "description": "The date and time the vehicle status was created. (Unix microseconds)"
+  "description": "The date and time the vehicle status was created. (RFC 3339)"
  },
  {
   "name": "receive_time",
-  "type": "INTEGER",
+  "type": "STRING",
   "mode": "NULLABLE",
-  "description": "The date and time the vehicle status was received. (Unix microseconds)"
+  "description": "The date and time the vehicle status was received. (RFC 3339)"
  },
  {
-  "name": "total_vehicle_distance_m",
-  "type": "INTEGER",
+  "name": "hr_total_vehicle_distance_m",
+  "type": "FLOAT",
   "mode": "NULLABLE",
   "description": "The total distance travelled by the vehicle during its operation in meters.\n Should not be reset during lifetime of the vehicle."
  },
@@ -271,10 +271,10 @@
   "name": "total_electric_motor_hours",
   "type": "FLOAT",
   "mode": "NULLABLE",
-  "description": "The total hours of operation for the vehicle electric motor during its lifetime.\n Should not be reset during lifetime of the electric motor."
+  "description": "The total hours the electric motor is ready for propulsion\n (i.e. crank mode) during its lifetime.\n\n At least one of total_engine_hours or total_electric_motor_hours is mandatory.\n\n Should not be reset during lifetime of the motor."
  },
  {
-  "name": "driver1",
+  "name": "driver1_id",
   "type": "RECORD",
   "mode": "NULLABLE",
   "description": "The driver identification of driver 1.",
@@ -355,31 +355,31 @@
   "name": "engine_total_fuel_used_ml",
   "type": "FLOAT",
   "mode": "NULLABLE",
-  "description": "The total fuel the vehicle has used during its lifetime in liters.\n Should not be reset during lifetime of the vehicle."
+  "description": "The total fuel the vehicle has used during its lifetime in ml.\n\n At least one of engine_total_fuel_used_ml, total_fuel_used_gaseous_kg\n or total_electric_energy_used_wh is mandatory.\n\n Should not be reset during lifetime of the vehicle."
  },
  {
   "name": "total_fuel_used_gaseous_kg",
   "type": "FLOAT",
   "mode": "NULLABLE",
-  "description": "The total fuel the vehicle has used during its lifetime in liters.\n Should not be reset during lifetime of the vehicle."
+  "description": "Total fuel consumed in kg.\n\n (trip drive fuel + trip PTO governor moving fuel + trip PTO governor non-moving fuel\n  + trip idle fuel) over the life of the engine.\n\n At least one of engine_total_fuel_used_ml, total_fuel_used_gaseous_kg\n or total_electric_energy_used_wh is mandatory.\n\n Should not be reset during lifetime of the vehicle."
  },
  {
   "name": "total_electric_energy_used_wh",
   "type": "FLOAT",
   "mode": "NULLABLE",
-  "description": "The total electric energy the vehicle has used during its lifetime in Wh.\n Should not be reset during lifetime of the vehicle."
+  "description": "Total electric energy consumed by the vehicle, excluding when plugged in (vehicle coupler)\n for charging, (incl. motor, PTO, cooling, etc.) during its lifetime, in Wh.\n\n Recuperation is subtracted from the value.\n\n At least one of engine_total_fuel_used_ml, total_fuel_used_gaseous_kg\n or total_electric_energy_used_wh is mandatory.\n\n Should not be reset during lifetime of the vehicle."
  },
  {
   "name": "total_electric_energy_recuperated_wh",
   "type": "FLOAT",
   "mode": "NULLABLE",
-  "description": "The total electric energy recuperated by the vehicle during its lifetime in Wh.\n Should not be reset during lifetime of the vehicle."
+  "description": "Total electric energy recuperated by the vehicle during its lifetime, in watt hours.\n Should not be reset during lifetime of the vehicle."
  },
  {
   "name": "state_of_doors",
   "type": "INTEGER",
   "mode": "NULLABLE",
-  "description": "The status of the doors of the vehicle.\n Should not be reset during lifetime of the vehicle."
+  "description": "The status of the doors of the vehicle.\n Bus specific parameter."
  },
  {
   "name": "unknown_state_of_doors",
@@ -397,827 +397,43 @@
     "name": "number",
     "type": "INTEGER",
     "mode": "NULLABLE",
-    "description": "The number of the door."
+    "description": "The number of the bus door."
    },
    {
     "name": "enabled_state",
     "type": "INTEGER",
     "mode": "NULLABLE",
-    "description": "The enabled state of the door."
+    "description": "The enabled state of the bus door."
    },
    {
     "name": "unknown_enabled_state",
     "type": "STRING",
     "mode": "NULLABLE",
-    "description": "The unknown enabled state of the door.\n Provided when the enabled state is ENABLED_STATE_UNKNOWN."
+    "description": "The unknown enabled state of the bus door.\n Provided when the enabled state is ENABLED_STATE_UNKNOWN."
    },
    {
     "name": "open_state",
     "type": "INTEGER",
     "mode": "NULLABLE",
-    "description": "The open state of the door."
+    "description": "The open state of the bus door."
    },
    {
     "name": "unknown_open_state",
     "type": "STRING",
     "mode": "NULLABLE",
-    "description": "The unknown open state of the door.\n Provided when the open state is OPEN_STATE_UNKNOWN."
+    "description": "The unknown open state of the bus door.\n Provided when the open state is OPEN_STATE_UNKNOWN."
    },
    {
     "name": "lock_state",
     "type": "INTEGER",
     "mode": "NULLABLE",
-    "description": "The lock state of the door."
+    "description": "The lock state of the bus door."
    },
    {
     "name": "unknown_lock_state",
     "type": "STRING",
     "mode": "NULLABLE",
-    "description": "The unknown lock state of the door.\n Provided when the lock state is LOCK_STATE_UNKNOWN."
-   }
-  ]
- },
- {
-  "name": "accumulated_data",
-  "type": "RECORD",
-  "mode": "NULLABLE",
-  "description": "Accumulated data for the vehicle.",
-  "fields": [
-   {
-    "name": "wheel_based_speed_over_zero_duration_s",
-    "type": "FLOAT",
-    "mode": "NULLABLE",
-    "description": "The duration the vehicle speed has been over zero. (s)"
-   },
-   {
-    "name": "wheel_based_speed_over_zero_fuel_ml",
-    "type": "FLOAT",
-    "mode": "NULLABLE",
-    "description": "The fuel the vehicle has consumed while driven with speed over zero. (ml)\n Engine on (RPM\u003e0) and no PTO active."
-   },
-   {
-    "name": "wheel_based_speed_over_zero_fuel_gaseous_kg",
-    "type": "FLOAT",
-    "mode": "NULLABLE",
-    "description": "The fuel the vehicle has consumed while driven with speed over zero. (kg)\n Engine on (RPM\u003e0) and no PTO active."
-   },
-   {
-    "name": "wheel_based_speed_over_zero_electric_energy_consumption_wh",
-    "type": "FLOAT",
-    "mode": "NULLABLE",
-    "description": "The electric energy the vehicle has consumed while driven with speed over zero. (Wh)"
-   },
-   {
-    "name": "wheel_based_speed_zero_duration_s",
-    "type": "FLOAT",
-    "mode": "NULLABLE",
-    "description": "The duration the vehicle speed has been zero. (s)\n Engine on (RPM\u003e0 or electic motor in crank mode) and no PTO active"
-   },
-   {
-    "name": "wheel_based_speed_zero_distance_m",
-    "type": "FLOAT",
-    "mode": "NULLABLE",
-    "description": "The distance the vehicle has been driven with speed zero. (m)"
-   },
-   {
-    "name": "wheel_based_speed_zero_fuel_ml",
-    "type": "FLOAT",
-    "mode": "NULLABLE",
-    "description": "The fuel the vehicle has consumed while driven with speed zero. (ml)\n Engine on (RPM\u003e0) and no PTO active."
-   },
-   {
-    "name": "wheel_based_speed_zero_fuel_gaseous_kg",
-    "type": "FLOAT",
-    "mode": "NULLABLE",
-    "description": "The fuel the vehicle has consumed while driven with speed zero. (ml)\n Engine on (RPM\u003e0) and no PTO active."
-   },
-   {
-    "name": "wheel_based_speed_zero_electric_energy_consumption_wh",
-    "type": "FLOAT",
-    "mode": "NULLABLE",
-    "description": "The electric energy the vehicle has consumed while driven with speed zero. (Wh)"
-   },
-   {
-    "name": "cruise_control_active_distance_m",
-    "type": "FLOAT",
-    "mode": "NULLABLE",
-    "description": "The distance the vehicle has been driven with cruise control active. (m)"
-   },
-   {
-    "name": "cruise_control_active_duration_s",
-    "type": "FLOAT",
-    "mode": "NULLABLE",
-    "description": "The duration the vehicle has been driven with cruise control active. (s)"
-   },
-   {
-    "name": "cruise_control_active_fuel_consumption_ml",
-    "type": "FLOAT",
-    "mode": "NULLABLE",
-    "description": "The fuel the vehicle has consumed while driven with cruise control active. (ml)"
-   },
-   {
-    "name": "cruise_control_active_fuel_consumption_gaseous_kg",
-    "type": "FLOAT",
-    "mode": "NULLABLE",
-    "description": "The fuel the vehicle has consumed while driven with cruise control active. (kg)"
-   },
-   {
-    "name": "cruise_control_active_electric_energy_consumption_wh",
-    "type": "FLOAT",
-    "mode": "NULLABLE",
-    "description": "The electric energy the vehicle has consumed while driven with cruise control active. (Wh)"
-   },
-   {
-    "name": "aux_electric_energy_consumption_wh",
-    "type": "FLOAT",
-    "mode": "NULLABLE",
-    "description": "The electric energy the auxiliary systems have consumed. (Wh)"
-   },
-   {
-    "name": "pto_active_class",
-    "type": "RECORD",
-    "mode": "REPEATED",
-    "fields": [
-     {
-      "name": "label",
-      "type": "STRING",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "duration_s",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "distance_m",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_ml",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_gaseous_kg",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "electric_energy_consumption_wh",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     }
-    ]
-   },
-   {
-    "name": "brake_pedal_speed_over_zero_count",
-    "type": "INTEGER",
-    "mode": "NULLABLE",
-    "description": "The total number of times the brake pedal has been used while"
-   },
-   {
-    "name": "brake_pedal_speed_over_zero_distance_m",
-    "type": "FLOAT",
-    "mode": "NULLABLE",
-    "description": "The total distance the vehicle has driven where the brake pedal has been used. (m)"
-   },
-   {
-    "name": "acceleration_pedal_position_class",
-    "type": "RECORD",
-    "mode": "REPEATED",
-    "fields": [
-     {
-      "name": "from",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "to",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "duration_s",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "distance_m",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_ml",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_gaseous_kg",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "electric_energy_consumption_wh",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     }
-    ]
-   },
-   {
-    "name": "brake_pedal_position_class",
-    "type": "RECORD",
-    "mode": "REPEATED",
-    "fields": [
-     {
-      "name": "from",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "to",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "duration_s",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "distance_m",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_ml",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_gaseous_kg",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "electric_energy_consumption_wh",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     }
-    ]
-   },
-   {
-    "name": "acceleration_class",
-    "type": "RECORD",
-    "mode": "REPEATED",
-    "fields": [
-     {
-      "name": "from",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "to",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "duration_s",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "distance_m",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_ml",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_gaseous_kg",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "electric_energy_consumption_wh",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     }
-    ]
-   },
-   {
-    "name": "high_acceleration_class",
-    "type": "RECORD",
-    "mode": "REPEATED",
-    "fields": [
-     {
-      "name": "from",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "to",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "duration_s",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "distance_m",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_ml",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_gaseous_kg",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "electric_energy_consumption_wh",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     }
-    ]
-   },
-   {
-    "name": "retarder_torque_class",
-    "type": "RECORD",
-    "mode": "REPEATED",
-    "fields": [
-     {
-      "name": "from",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "to",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "duration_s",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "distance_m",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_ml",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_gaseous_kg",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "electric_energy_consumption_wh",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     }
-    ]
-   },
-   {
-    "name": "driving_without_torque_class",
-    "type": "RECORD",
-    "mode": "REPEATED",
-    "fields": [
-     {
-      "name": "label",
-      "type": "STRING",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "duration_s",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "distance_m",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_ml",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_gaseous_kg",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "electric_energy_consumption_wh",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     }
-    ]
-   },
-   {
-    "name": "engine_torque_class",
-    "type": "RECORD",
-    "mode": "REPEATED",
-    "fields": [
-     {
-      "name": "from",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "to",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "duration_s",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "distance_m",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_ml",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_gaseous_kg",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     }
-    ]
-   },
-   {
-    "name": "electric_motor_torque_class",
-    "type": "RECORD",
-    "mode": "REPEATED",
-    "fields": [
-     {
-      "name": "from",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "to",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "duration_s",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "distance_m",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "electric_energy_consumption_wh",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     }
-    ]
-   },
-   {
-    "name": "engine_torque_at_current_speed_class",
-    "type": "RECORD",
-    "mode": "REPEATED",
-    "fields": [
-     {
-      "name": "from",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "to",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "duration_s",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "distance_m",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_ml",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_gaseous_kg",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     }
-    ]
-   },
-   {
-    "name": "electric_motor_torque_at_current_speed_class",
-    "type": "RECORD",
-    "mode": "REPEATED",
-    "fields": [
-     {
-      "name": "from",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "to",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "duration_s",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "distance_m",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "electric_energy_consumption_wh",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     }
-    ]
-   },
-   {
-    "name": "vehicle_speed_class",
-    "type": "RECORD",
-    "mode": "REPEATED",
-    "fields": [
-     {
-      "name": "from",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "to",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "duration_s",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "distance_m",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_ml",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_gaseous_kg",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "electric_energy_consumption_wh",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     }
-    ]
-   },
-   {
-    "name": "engine_speed_class",
-    "type": "RECORD",
-    "mode": "REPEATED",
-    "fields": [
-     {
-      "name": "from",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "to",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "duration_s",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "distance_m",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_ml",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_gaseous_kg",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "electric_energy_consumption_wh",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     }
-    ]
-   },
-   {
-    "name": "acceleration_during_brake_class",
-    "type": "RECORD",
-    "mode": "REPEATED",
-    "fields": [
-     {
-      "name": "from",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "to",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "duration_s",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "distance_m",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_ml",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_gaseous_kg",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "electric_energy_consumption_wh",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     }
-    ]
-   },
-   {
-    "name": "selected_gear_class",
-    "type": "RECORD",
-    "mode": "REPEATED",
-    "fields": [
-     {
-      "name": "label",
-      "type": "STRING",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "duration_s",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "distance_m",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_ml",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_gaseous_kg",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "electric_energy_consumption_wh",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     }
-    ]
-   },
-   {
-    "name": "current_gear_class",
-    "type": "RECORD",
-    "mode": "REPEATED",
-    "fields": [
-     {
-      "name": "label",
-      "type": "STRING",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "duration_s",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "distance_m",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_ml",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "fuel_consumption_gaseous_kg",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "electric_energy_consumption_wh",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     }
-    ]
-   },
-   {
-    "name": "chairlift_count",
-    "type": "INTEGER",
-    "mode": "NULLABLE"
-   },
-   {
-    "name": "stop_request_count",
-    "type": "INTEGER",
-    "mode": "NULLABLE"
-   },
-   {
-    "name": "kneeling_count",
-    "type": "INTEGER",
-    "mode": "NULLABLE"
-   },
-   {
-    "name": "pram_request_count",
-    "type": "INTEGER",
-    "mode": "NULLABLE"
-   },
-   {
-    "name": "electric_power_recuperation_class",
-    "type": "RECORD",
-    "mode": "REPEATED",
-    "fields": [
-     {
-      "name": "from",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "to",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "duration_s",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "distance_m",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     },
-     {
-      "name": "electric_energy_consumption_wh",
-      "type": "FLOAT",
-      "mode": "NULLABLE"
-     }
-    ]
+    "description": "The unknown lock state of the bus door.\n Provided when the lock state is LOCK_STATE_UNKNOWN."
    }
   ]
  },
@@ -1235,9 +451,9 @@
     "fields": [
      {
       "name": "time",
-      "type": "INTEGER",
+      "type": "STRING",
       "mode": "NULLABLE",
-      "description": "The date and time the GNSS position was recorded. (Unix microseconds)"
+      "description": "The time of the GNSS position data. (RFC 3339)"
      },
      {
       "name": "latitude",
@@ -1296,7 +512,7 @@
     "description": "The electric motor speed of the vehicle. (rev/min)"
    },
    {
-    "name": "ignition_state",
+    "name": "ignition",
     "type": "INTEGER",
     "mode": "NULLABLE",
     "description": "The ignition state of the vehicle."
@@ -1344,7 +560,7 @@
     "description": "The unknown driver working state of the vehicle.\n Provided when the driver working state is DRIVER_WORKING_STATE_UNKNOWN."
    },
    {
-    "name": "driver2",
+    "name": "driver2_id",
     "type": "RECORD",
     "mode": "NULLABLE",
     "description": "The driver identification of driver 2.",
@@ -1471,9 +687,9 @@
    },
    {
     "name": "battery_pack_estimated_charging_completed_time",
-    "type": "INTEGER",
+    "type": "STRING",
     "mode": "NULLABLE",
-    "description": "The estimated time when charging has reached the target level. (Unix micros)"
+    "description": "The estimated time when charging has reached the target level. (RFC 3339)"
    },
    {
     "name": "estimated_distance_to_empty",
@@ -1508,7 +724,7 @@
     ]
    },
    {
-    "name": "axles",
+    "name": "vehicle_axles",
     "type": "RECORD",
     "mode": "REPEATED",
     "description": "The axles of the vehicle.",
@@ -1588,6 +804,26 @@
       "type": "FLOAT",
       "mode": "NULLABLE",
       "description": "The sum of the static vertical loads of the trailer axles. (kg)\n The load is sent in the EBS22 message of ISO 11992-2."
+     },
+     {
+      "name": "axles",
+      "type": "RECORD",
+      "mode": "REPEATED",
+      "description": "The trailer axles.",
+      "fields": [
+       {
+        "name": "position",
+        "type": "INTEGER",
+        "mode": "NULLABLE",
+        "description": "The position of the axle from 1 to 15, 1 being in the front\n closest to the truck, according to ISO 11992-2."
+       },
+       {
+        "name": "load_kg",
+        "type": "FLOAT",
+        "mode": "NULLABLE",
+        "description": "The static vertical load of the axle in kilograms.\n The load is sent in the EBS22 message of ISO 11992-2."
+       }
+      ]
      }
     ]
    }
@@ -1728,6 +964,917 @@
     "type": "FLOAT",
     "mode": "NULLABLE",
     "description": "The pressure of the bellow pressure rear axle right. (Pa)\n Used mainly for buses."
+   }
+  ]
+ },
+ {
+  "name": "accumulated_data",
+  "type": "RECORD",
+  "mode": "NULLABLE",
+  "description": "Accumulated data for the vehicle.",
+  "fields": [
+   {
+    "name": "wheel_based_speed_over_zero_duration_s",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The duration the vehicle speed has been over zero. (s)"
+   },
+   {
+    "name": "wheel_based_speed_over_zero_fuel_ml",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The fuel the vehicle has consumed while driven with speed over zero. (ml)\n Engine on (RPM\u003e0) and no PTO active."
+   },
+   {
+    "name": "wheel_based_speed_over_zero_fuel_gaseous_kg",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The fuel the vehicle has consumed while driven with speed over zero. (kg)\n Engine on (RPM\u003e0) and no PTO active."
+   },
+   {
+    "name": "wheel_based_speed_over_zero_electric_energy_consumption_wh",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The electric energy the vehicle has consumed while driven with speed over zero. (Wh)"
+   },
+   {
+    "name": "wheel_based_speed_zero_duration_s",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The duration the vehicle speed has been zero. (s)\n Engine on (RPM\u003e0 or electic motor in crank mode) and no PTO active"
+   },
+   {
+    "name": "wheel_based_speed_zero_distance_m",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The distance the vehicle has been driven with speed zero. (m)"
+   },
+   {
+    "name": "wheel_based_speed_zero_fuel_ml",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The fuel the vehicle has consumed while driven with speed zero. (ml)\n Engine on (RPM\u003e0) and no PTO active."
+   },
+   {
+    "name": "wheel_based_speed_zero_fuel_gaseous_kg",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The fuel the vehicle has consumed while driven with speed zero. (ml)\n Engine on (RPM\u003e0) and no PTO active."
+   },
+   {
+    "name": "wheel_based_speed_zero_electric_energy_consumption_wh",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The electric energy the vehicle has consumed while driven with speed zero. (Wh)"
+   },
+   {
+    "name": "cruise_control_active_distance_m",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The distance the vehicle has been driven with cruise control active. (m)"
+   },
+   {
+    "name": "cruise_control_active_duration_s",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The duration the vehicle has been driven with cruise control active. (s)"
+   },
+   {
+    "name": "cruise_control_active_fuel_consumption_ml",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The fuel the vehicle has consumed while driven with cruise control active. (ml)"
+   },
+   {
+    "name": "cruise_control_active_fuel_consumption_gaseous_kg",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The fuel the vehicle has consumed while driven with cruise control active. (kg)"
+   },
+   {
+    "name": "cruise_control_active_electric_energy_consumption_wh",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The electric energy the vehicle has consumed while driven with cruise control active. (Wh)"
+   },
+   {
+    "name": "aux_electric_energy_consumption_wh",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The electric energy the auxiliary systems have consumed. (Wh)"
+   },
+   {
+    "name": "pto_active_class",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "fields": [
+     {
+      "name": "label",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "The label of the class."
+     },
+     {
+      "name": "duration_s",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The duration of the class. (s)"
+     },
+     {
+      "name": "distance_m",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The distance of the class. (m)"
+     },
+     {
+      "name": "fuel_consumption_ml",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The liquid fuel consumption of the class. (ml)"
+     },
+     {
+      "name": "fuel_consumption_gaseous_kg",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The gaseous fuel consumption of the class. (kg)"
+     },
+     {
+      "name": "electric_energy_consumption_wh",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The electric energy consumption of the class. (wh)"
+     }
+    ]
+   },
+   {
+    "name": "brake_pedal_speed_over_zero_count",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The total number of times the brake pedal has been used while"
+   },
+   {
+    "name": "brake_pedal_speed_over_zero_distance_m",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The total distance the vehicle has driven where the brake pedal has been used. (m)"
+   },
+   {
+    "name": "acceleration_pedal_position_class_percent",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "Histogram of stats for acceleration pedal position intervals. (percent)\n\n Default:\n   Min interval: [0%, 20%)\n   Max interval: [80%, 100%]\n   Bucket count: 5\n   Bucket width: 20%",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The from value of the bucket interval. (inclusive)"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The to value of the bucket interval. (exclusive)"
+     },
+     {
+      "name": "duration_s",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total duration of the bucket. (s)"
+     },
+     {
+      "name": "distance_m",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total distance of the bucket. (m)"
+     },
+     {
+      "name": "fuel_consumption_ml",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total liquid fuel consumption of the bucket. (ml)"
+     },
+     {
+      "name": "fuel_consumption_gaseous_kg",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total gaseous fuel consumption of the bucket. (kg)"
+     },
+     {
+      "name": "electric_energy_consumption_wh",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total electric energy consumption of the bucket. (wh)"
+     }
+    ]
+   },
+   {
+    "name": "brake_pedal_position_class_percent",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "Histogram of stats for brake pedal position intervals. (percent)\n\n Default:\n   Min interval: [0%, 20%)\n   Max interval: [80%, 100%]\n   Bucket count: 5\n   Bucket width: 20%",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The from value of the bucket interval. (inclusive)"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The to value of the bucket interval. (exclusive)"
+     },
+     {
+      "name": "duration_s",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total duration of the bucket. (s)"
+     },
+     {
+      "name": "distance_m",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total distance of the bucket. (m)"
+     },
+     {
+      "name": "fuel_consumption_ml",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total liquid fuel consumption of the bucket. (ml)"
+     },
+     {
+      "name": "fuel_consumption_gaseous_kg",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total gaseous fuel consumption of the bucket. (kg)"
+     },
+     {
+      "name": "electric_energy_consumption_wh",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total electric energy consumption of the bucket. (wh)"
+     }
+    ]
+   },
+   {
+    "name": "acceleration_class_mps2",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "Histogram of stats for acceleration intervals. (m/s2)\n\n Default:\n   Min interval: (...,  -1.1)\n   Mid interval: (-0.1, 0.1)\n   Max interval: [1.1,  ...)\n   Bucket count: 11\n   Bucket width: 0.2",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The from value of the bucket interval. (inclusive)"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The to value of the bucket interval. (exclusive)"
+     },
+     {
+      "name": "duration_s",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total duration of the bucket. (s)"
+     },
+     {
+      "name": "distance_m",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total distance of the bucket. (m)"
+     },
+     {
+      "name": "fuel_consumption_ml",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total liquid fuel consumption of the bucket. (ml)"
+     },
+     {
+      "name": "fuel_consumption_gaseous_kg",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total gaseous fuel consumption of the bucket. (kg)"
+     },
+     {
+      "name": "electric_energy_consumption_wh",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total electric energy consumption of the bucket. (wh)"
+     }
+    ]
+   },
+   {
+    "name": "high_acceleration_class_mps2",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "Histogram of stats for acceleration intervals. (m/s2)\n\n Default:\n   Min interval: (...,  -1.1)\n   Mid interval: (-0.1, 0.1)\n   Max interval: [1.1,  ...)\n   Bucket count: 11\n   Bucket width: 0.2",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The from value of the bucket interval. (inclusive)"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The to value of the bucket interval. (exclusive)"
+     },
+     {
+      "name": "duration_s",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total duration of the bucket. (s)"
+     },
+     {
+      "name": "distance_m",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total distance of the bucket. (m)"
+     },
+     {
+      "name": "fuel_consumption_ml",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total liquid fuel consumption of the bucket. (ml)"
+     },
+     {
+      "name": "fuel_consumption_gaseous_kg",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total gaseous fuel consumption of the bucket. (kg)"
+     },
+     {
+      "name": "electric_energy_consumption_wh",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total electric energy consumption of the bucket. (wh)"
+     }
+    ]
+   },
+   {
+    "name": "retarder_torque_class_percent",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "Histogram of stats by retarder usage. (%)\n\n Default:\n  Min interval: (0%, 20%)\n  Max interval: [80%, 100%]\n  Bucket count: 5\n  Bucket width: 20%",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The from value of the bucket interval. (inclusive)"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The to value of the bucket interval. (exclusive)"
+     },
+     {
+      "name": "duration_s",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total duration of the bucket. (s)"
+     },
+     {
+      "name": "distance_m",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total distance of the bucket. (m)"
+     },
+     {
+      "name": "fuel_consumption_ml",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total liquid fuel consumption of the bucket. (ml)"
+     },
+     {
+      "name": "fuel_consumption_gaseous_kg",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total gaseous fuel consumption of the bucket. (kg)"
+     },
+     {
+      "name": "electric_energy_consumption_wh",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total electric energy consumption of the bucket. (wh)"
+     }
+    ]
+   },
+   {
+    "name": "driving_without_torque_class",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "Histogram of stats when driving without torque, with gear (clutch is engaged).\n\n Labels:\n   DRIVING_WITHOUT_TORQUE",
+    "fields": [
+     {
+      "name": "label",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "The label of the class."
+     },
+     {
+      "name": "duration_s",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The duration of the class. (s)"
+     },
+     {
+      "name": "distance_m",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The distance of the class. (m)"
+     },
+     {
+      "name": "fuel_consumption_ml",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The liquid fuel consumption of the class. (ml)"
+     },
+     {
+      "name": "fuel_consumption_gaseous_kg",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The gaseous fuel consumption of the class. (kg)"
+     },
+     {
+      "name": "electric_energy_consumption_wh",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The electric energy consumption of the class. (wh)"
+     }
+    ]
+   },
+   {
+    "name": "engine_torque_class_percent",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "Histogram of stats by EEC1 value (Actual Engine-Percent Torque). (%)\n\n Default:\n   Min interval: [0%, 10%)\n   Max interval: [90%, 100%]\n   Bucket count: 10\n   Bucket width: 10%",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The from value of the bucket interval. (inclusive)"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The to value of the bucket interval. (exclusive)"
+     },
+     {
+      "name": "duration_s",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total duration of the bucket. (s)"
+     },
+     {
+      "name": "distance_m",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total distance of the bucket. (m)"
+     },
+     {
+      "name": "fuel_consumption_ml",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total liquid fuel consumption of the bucket. (ml)"
+     },
+     {
+      "name": "fuel_consumption_gaseous_kg",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total gaseous fuel consumption of the bucket. (kg)"
+     }
+    ]
+   },
+   {
+    "name": "electric_motor_torque_class_percent",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "Histogram of stats by electric engine torque (Actual Engine-Percent Torque). (%)\n\n Default:\n   Min interval: [0%, 10%)\n   Max interval: [90%, 100%]\n   Bucket count: 10\n   Bucket width: 10%",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The from value of the bucket interval. (inclusive)"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The to value of the bucket interval. (exclusive)"
+     },
+     {
+      "name": "duration_s",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total duration of the bucket. (s)"
+     },
+     {
+      "name": "distance_m",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total distance of the bucket. (m)"
+     },
+     {
+      "name": "electric_energy_consumption_wh",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total electric energy consumption of the bucket. (wh)"
+     }
+    ]
+   },
+   {
+    "name": "engine_torque_at_current_speed_class_percent",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "Histogram of stats based on EEC2 value (Engine Percent Load At Current Speed). (%)\n\n Default:\n   Min interval: [0%, 10%)\n   Max interval: [90%, 100%]\n   Bucket count: 10\n   Bucket width: 10%",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The from value of the bucket interval. (inclusive)"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The to value of the bucket interval. (exclusive)"
+     },
+     {
+      "name": "duration_s",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total duration of the bucket. (s)"
+     },
+     {
+      "name": "distance_m",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total distance of the bucket. (m)"
+     },
+     {
+      "name": "fuel_consumption_ml",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total liquid fuel consumption of the bucket. (ml)"
+     },
+     {
+      "name": "fuel_consumption_gaseous_kg",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total gaseous fuel consumption of the bucket. (kg)"
+     }
+    ]
+   },
+   {
+    "name": "electric_motor_torque_at_current_speed_class_percent",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "Histogram of stats based on electric motor EEC2 value. (Engine Percent Load At Current Speed).\n\n Default:\n   Min interval: [0%, 10%)\n   Max interval: [90%, 100%]\n   Bucket count: 10\n   Bucket width: 10%",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The from value of the bucket interval. (inclusive)"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The to value of the bucket interval. (exclusive)"
+     },
+     {
+      "name": "duration_s",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total duration of the bucket. (s)"
+     },
+     {
+      "name": "distance_m",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total distance of the bucket. (m)"
+     },
+     {
+      "name": "electric_energy_consumption_wh",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total electric energy consumption of the bucket. (wh)"
+     }
+    ]
+   },
+   {
+    "name": "vehicle_speed_class_kmh",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "Histogram of stats based on vehicle speed. (km/h)\n Engine on (RPM\u003e0 or electric motor in crank mode).\n\n Default:\n   Min interval: [0km/h, 4km/h)\n   Max interval: [156km/h, ...)\n   Bucket count: 40\n   Bucket width: 4km/h",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The from value of the bucket interval. (inclusive)"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The to value of the bucket interval. (exclusive)"
+     },
+     {
+      "name": "duration_s",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total duration of the bucket. (s)"
+     },
+     {
+      "name": "distance_m",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total distance of the bucket. (m)"
+     },
+     {
+      "name": "fuel_consumption_ml",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total liquid fuel consumption of the bucket. (ml)"
+     },
+     {
+      "name": "fuel_consumption_gaseous_kg",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total gaseous fuel consumption of the bucket. (kg)"
+     },
+     {
+      "name": "electric_energy_consumption_wh",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total electric energy consumption of the bucket. (wh)"
+     }
+    ]
+   },
+   {
+    "name": "engine_speed_class_rpm",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "Histogram of stats based on the RPM of the combustion engine. (rpm)\n Only mandatory if the vehicle has a combustion engine for propulsion.\n\n Default:\n   Min interval: [0rpm, 400pm)\n   Max interval: [3600rpm, ...)\n   Bucket count: 10\n   Bucket width: 400rpm",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The from value of the bucket interval. (inclusive)"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The to value of the bucket interval. (exclusive)"
+     },
+     {
+      "name": "duration_s",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total duration of the bucket. (s)"
+     },
+     {
+      "name": "distance_m",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total distance of the bucket. (m)"
+     },
+     {
+      "name": "fuel_consumption_ml",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total liquid fuel consumption of the bucket. (ml)"
+     },
+     {
+      "name": "fuel_consumption_gaseous_kg",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total gaseous fuel consumption of the bucket. (kg)"
+     },
+     {
+      "name": "electric_energy_consumption_wh",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total electric energy consumption of the bucket. (wh)"
+     }
+    ]
+   },
+   {
+    "name": "acceleration_during_brake_class_mps2",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "Histogram of stats based on the acceleration during braking. (m/s2)\n\n Default:\n   Min interval: [..., -1.1m/s2)\n   Mid interval: (-0.1m/s2, 0.1m/s2)\n   Max interval: [1.1m/s2, ...)\n   Bucket count: 13\n   Bucket width: 0.2m/s2",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The from value of the bucket interval. (inclusive)"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The to value of the bucket interval. (exclusive)"
+     },
+     {
+      "name": "duration_s",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total duration of the bucket. (s)"
+     },
+     {
+      "name": "distance_m",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total distance of the bucket. (m)"
+     },
+     {
+      "name": "fuel_consumption_ml",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total liquid fuel consumption of the bucket. (ml)"
+     },
+     {
+      "name": "fuel_consumption_gaseous_kg",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total gaseous fuel consumption of the bucket. (kg)"
+     },
+     {
+      "name": "electric_energy_consumption_wh",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total electric energy consumption of the bucket. (wh)"
+     }
+    ]
+   },
+   {
+    "name": "selected_gear_class",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "Histogram of stats based on the currently selected gear.\n On class per gear. Park is also a gear.\n Gear is formatted according to SPN 524 and supplied as a decimal value.\n\n Example:\n   0 = Neutral\n   1 = 1st gear\n   2 = 2nd gear\n\n This is mainly used for buses.",
+    "fields": [
+     {
+      "name": "label",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "The label of the class."
+     },
+     {
+      "name": "duration_s",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The duration of the class. (s)"
+     },
+     {
+      "name": "distance_m",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The distance of the class. (m)"
+     },
+     {
+      "name": "fuel_consumption_ml",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The liquid fuel consumption of the class. (ml)"
+     },
+     {
+      "name": "fuel_consumption_gaseous_kg",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The gaseous fuel consumption of the class. (kg)"
+     },
+     {
+      "name": "electric_energy_consumption_wh",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The electric energy consumption of the class. (wh)"
+     }
+    ]
+   },
+   {
+    "name": "current_gear_class",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "Histogram of stats based on the currently used gear.\n On class per gear. Park is also a gear.\n Gear is formatted according to SPN 524 and supplied as a decimal value.\n\n Example:\n   0 = Neutral\n   1 = 1st gear\n   2 = 2nd gear\n\n This is mainly used for buses.",
+    "fields": [
+     {
+      "name": "label",
+      "type": "STRING",
+      "mode": "NULLABLE",
+      "description": "The label of the class."
+     },
+     {
+      "name": "duration_s",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The duration of the class. (s)"
+     },
+     {
+      "name": "distance_m",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The distance of the class. (m)"
+     },
+     {
+      "name": "fuel_consumption_ml",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The liquid fuel consumption of the class. (ml)"
+     },
+     {
+      "name": "fuel_consumption_gaseous_kg",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The gaseous fuel consumption of the class. (kg)"
+     },
+     {
+      "name": "electric_energy_consumption_wh",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The electric energy consumption of the class. (wh)"
+     }
+    ]
+   },
+   {
+    "name": "chairlift_count",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The total number of times the chairlift has been outside the bus.\n This is mainly used for buses."
+   },
+   {
+    "name": "stop_request_count",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The total number of stop requests made.\n This is mainly used for buses."
+   },
+   {
+    "name": "kneeling_count",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The total number of times the bus has knelt.\n This is mainly used for buses."
+   },
+   {
+    "name": "pram_request_count",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The total number of pram requests made.\n This is mainly used for buses."
+   },
+   {
+    "name": "electric_power_recuperation_class_kw",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "description": "Classes refer to the recuperated electric power. (kw)\n Minimum 11 classes.\n [0, 100) [100, 200) [200, 300) ... [900, 1000), [1000, ...]",
+    "fields": [
+     {
+      "name": "from",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The from value of the bucket interval. (inclusive)"
+     },
+     {
+      "name": "to",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The to value of the bucket interval. (exclusive)"
+     },
+     {
+      "name": "duration_s",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total duration of the bucket. (s)"
+     },
+     {
+      "name": "distance_m",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total distance of the bucket. (m)"
+     },
+     {
+      "name": "electric_energy_consumption_wh",
+      "type": "FLOAT",
+      "mode": "NULLABLE",
+      "description": "The total electric energy consumption of the bucket. (wh)"
+     }
+    ]
    }
   ]
  }

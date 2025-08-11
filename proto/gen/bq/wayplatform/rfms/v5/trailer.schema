@@ -34,5 +34,25 @@
   "type": "FLOAT",
   "mode": "NULLABLE",
   "description": "The sum of the static vertical loads of the trailer axles. (kg)\n The load is sent in the EBS22 message of ISO 11992-2."
+ },
+ {
+  "name": "axles",
+  "type": "RECORD",
+  "mode": "REPEATED",
+  "description": "The trailer axles.",
+  "fields": [
+   {
+    "name": "position",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "The position of the axle from 1 to 15, 1 being in the front\n closest to the truck, according to ISO 11992-2."
+   },
+   {
+    "name": "load_kg",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": "The static vertical load of the axle in kilograms.\n The load is sent in the EBS22 message of ISO 11992-2."
+   }
+  ]
  }
 ]
