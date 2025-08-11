@@ -1,6 +1,6 @@
 [
  {
-  "name": "tell_tales",
+  "name": "tell_tale_info",
   "type": "RECORD",
   "mode": "REPEATED",
   "description": "List of tell tales with the actual state for each tell tale.",
@@ -80,7 +80,7 @@
   "description": "The total time at least one door has been opened in the bus. (s)\n Used mainly for buses."
  },
  {
-  "name": "alternators",
+  "name": "alternator_info",
   "type": "RECORD",
   "mode": "REPEATED",
   "description": "The alternator status of up to 4 alternators.\n Used mainly for buses.",

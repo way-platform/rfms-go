@@ -1,0 +1,60 @@
+edition = "2023";
+
+package wayplatform.rfms.v5;
+
+// Information about a door on a bus.
+message BusDoor {
+  // The number of the bus door.
+  int32 number = 1;
+
+  // The enabled state of the bus door.
+  EnabledState enabled_state = 2;
+
+  // Enabled state of a bus door.
+  enum EnabledState {
+    ENABLED_STATE_UNSPECIFIED = 0;
+    ENABLED_STATE_UNKNOWN = 1;
+    ENABLED_STATE_ERROR = 2;
+    ENABLED_STATE_NOT_AVAILABLE = 3;
+    ENABLED = 4;
+    DISABLED = 5;
+  }
+
+  // The unknown enabled state of the bus door.
+  // Provided when the enabled state is ENABLED_STATE_UNKNOWN.
+  string unknown_enabled_state = 3;
+
+  // The open state of the bus door.
+  OpenState open_state = 4;
+
+  // Open state of a bus door.
+  enum OpenState {
+    OPEN_STATE_UNSPECIFIED = 0;
+    OPEN_STATE_UNKNOWN = 1;
+    OPEN_STATE_ERROR = 2;
+    OPEN_STATE_NOT_AVAILABLE = 3;
+    CLOSED = 4;
+    OPEN = 5;
+  }
+
+  // The unknown open state of the bus door.
+  // Provided when the open state is OPEN_STATE_UNKNOWN.
+  string unknown_open_state = 5;
+
+  // The lock state of the bus door.
+  LockState lock_state = 6;
+
+  // Lock state of a bus door.
+  enum LockState {
+    LOCK_STATE_UNSPECIFIED = 0;
+    LOCK_STATE_UNKNOWN = 1;
+    LOCK_STATE_ERROR = 2;
+    LOCK_STATE_NOT_AVAILABLE = 3;
+    UNLOCKED = 4;
+    LOCKED = 5;
+  }
+
+  // The unknown lock state of the bus door.
+  // Provided when the lock state is LOCK_STATE_UNKNOWN.
+  string unknown_lock_state = 7;
+}

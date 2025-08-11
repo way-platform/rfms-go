@@ -1,0 +1,45 @@
+edition = "2023";
+
+package wayplatform.rfms.v5;
+
+// A vehicle brand.
+enum Brand {
+  // Default value. This value is not used.
+  BRAND_UNSPECIFIED = 0;
+  // Unknown brand.
+  BRAND_UNKNOWN = 1;
+  // VOLVO TRUCKS.
+  VOLVO_TRUCKS = 2;
+  // SCANIA.
+  SCANIA = 3;
+  // DAIMLER.
+  DAIMLER = 4;
+  // IVECO.
+  IVECO = 5;
+  // DAF.
+  DAF = 6;
+  // MAN.
+  MAN = 7;
+  // RENAULT TRUCKS.
+  RENAULT_TRUCKS = 8;
+  // VDL.
+  VDL = 9;
+  // VOLVO BUSES.
+  VOLVO_BUSES = 10;
+  // IVECO BUS.
+  IVECO_BUS = 11;
+  // HEULIEZ.
+  HEULIEZ = 12;
+  // VWTB.
+  VWTB = 13;
+  // KENWORTH.
+  KENWORTH = 14;
+  // PETERBILT.
+  PETERBILT = 15;
+  // MACK TRUCKS.
+  MACK_TRUCKS = 16;
+  // INTERNATIONAL.
+  INTERNATIONAL = 17;
+  // IC BUS.
+  IC_BUS = 18;
+}

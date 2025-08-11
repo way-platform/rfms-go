@@ -10,12 +10,12 @@ message Vehicle {
   optional string unknown_type = 8;
   optional string model = 9;
   repeated int32 possible_fuel_types = 10;
-  repeated int32 unknown_possible_fuel_types = 11;
+  repeated string unknown_possible_fuel_types = 11;
   optional int32 emission_level = 12;
   optional string unknown_emission_level = 13;
   optional string tell_tale_code = 14;
   optional string chassis_type = 15;
-  optional int32 axle_count = 16;
+  optional int32 no_of_axles = 16;
   optional double total_fuel_tank_volume_ml = 17;
   optional double total_fuel_tank_capacity_gaseous_kg = 18;
   optional double total_battery_pack_capacity_wh = 19;
@@ -27,31 +27,11 @@ message Vehicle {
   optional string unknown_body_type = 25;
   repeated int32 door_configuration = 26;
   optional bool has_ramp_or_lift = 27;
+  repeated string authorized_paths = 28;
   message Inline_wayplatform_rfms_v5_Date {
     optional int32 day = 1;
     optional int32 month = 2;
     optional int32 year = 3;
-  }
-  enum Brand {
-    BRAND_UNSPECIFIED = 0;
-    BRAND_UNKNOWN = 1;
-    VOLVO_TRUCKS = 2;
-    SCANIA = 3;
-    DAIMLER = 4;
-    IVECO = 5;
-    DAF = 6;
-    MAN = 7;
-    RENAULT_TRUCKS = 8;
-    VDL = 9;
-    VOLVO_BUSES = 10;
-    IVECO_BUS = 11;
-    HEULIEZ = 12;
-    VWTB = 13;
-    KENWORTH = 14;
-    PETERBILT = 15;
-    MACK_TRUCKS = 16;
-    INTERNATIONAL = 17;
-    IC_BUS = 18;
   }
   enum Type {
     TYPE_UNSPECIFIED = 0;
@@ -59,54 +39,6 @@ message Vehicle {
     TRUCK = 2;
     BUS = 3;
     VAN = 4;
-  }
-  enum EmissionLevel {
-    EMISSION_LEVEL_UNSPECIFIED = 0;
-    EMISSION_LEVEL_UNKNOWN = 1;
-    EURO_III = 2;
-    EURO_III_EEV = 3;
-    EURO_IV = 4;
-    EURO_V = 5;
-    EURO_VI = 6;
-    EURO_VII = 7;
-    EURO_STAGE_III = 8;
-    EURO_STAGE_IV = 9;
-    EURO_STAGE_V = 10;
-    EPA_2004 = 11;
-    EPA_2007 = 12;
-    EPA_2010 = 13;
-    EPA_2015_NOX10 = 14;
-    EPA_2015_NOX05 = 15;
-    EPA_2015_NOX02 = 16;
-    EPA_TIER_2 = 17;
-    EPA_TIER_3 = 18;
-    EPA_TIER_4_2008 = 19;
-    EPA_TIER_4_2013 = 20;
-    PROCONVE_P5 = 21;
-    PROCONVE_P6 = 22;
-    PROCONVE_P7 = 23;
-    PROCONVE_MARI = 24;
-  }
-  enum TachographType {
-    TACHOGRAPH_TYPE_UNSPECIFIED = 0;
-    TACHOGRAPH_TYPE_UNKNOWN = 1;
-    MTCO = 2;
-    DTCO = 3;
-    DTCO_G1 = 4;
-    DTCO_G2 = 5;
-    TSU = 6;
-    NONE = 7;
-    STONERIDGE_SMART = 8;
-    STONERIDGE_SMART2 = 9;
-  }
-  enum GearboxType {
-    GEARBOX_TYPE_UNSPECIFIED = 0;
-    GEARBOX_TYPE_UNKNOWN = 1;
-    MANUAL = 2;
-    AUTOMATIC = 3;
-    SEMI_AUTOMATIC = 4;
-    NO_GEAR = 5;
-    AMT = 6;
   }
   enum BodyType {
     BODY_TYPE_UNSPECIFIED = 0;

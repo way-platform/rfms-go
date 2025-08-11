@@ -45,26 +45,26 @@ type AccumulatedData struct {
 	xxx_hidden_PtoActiveClass                                     *[]*AccumulatedData_LabelClass            `protobuf:"bytes,16,rep,name=pto_active_class,json=ptoActiveClass"`
 	xxx_hidden_BrakePedalSpeedOverZeroCount                       int32                                     `protobuf:"varint,17,opt,name=brake_pedal_speed_over_zero_count,json=brakePedalSpeedOverZeroCount"`
 	xxx_hidden_BrakePedalSpeedOverZeroDistanceM                   float64                                   `protobuf:"fixed64,18,opt,name=brake_pedal_speed_over_zero_distance_m,json=brakePedalSpeedOverZeroDistanceM"`
-	xxx_hidden_AccelerationPedalPositionClass                     *[]*AccumulatedData_FromToClass           `protobuf:"bytes,19,rep,name=acceleration_pedal_position_class,json=accelerationPedalPositionClass"`
-	xxx_hidden_BrakePedalPositionClass                            *[]*AccumulatedData_FromToClass           `protobuf:"bytes,20,rep,name=brake_pedal_position_class,json=brakePedalPositionClass"`
-	xxx_hidden_AccelerationClass                                  *[]*AccumulatedData_FromToClass           `protobuf:"bytes,21,rep,name=acceleration_class,json=accelerationClass"`
-	xxx_hidden_HighAccelerationClass                              *[]*AccumulatedData_FromToClass           `protobuf:"bytes,22,rep,name=high_acceleration_class,json=highAccelerationClass"`
-	xxx_hidden_RetarderTorqueClass                                *[]*AccumulatedData_FromToClass           `protobuf:"bytes,23,rep,name=retarder_torque_class,json=retarderTorqueClass"`
+	xxx_hidden_AccelerationPedalPositionClassPercent              *[]*AccumulatedData_FromToClass           `protobuf:"bytes,19,rep,name=acceleration_pedal_position_class_percent,json=accelerationPedalPositionClassPercent"`
+	xxx_hidden_BrakePedalPositionClassPercent                     *[]*AccumulatedData_FromToClass           `protobuf:"bytes,20,rep,name=brake_pedal_position_class_percent,json=brakePedalPositionClassPercent"`
+	xxx_hidden_AccelerationClassMps2                              *[]*AccumulatedData_FromToClass           `protobuf:"bytes,21,rep,name=acceleration_class_mps2,json=accelerationClassMps2"`
+	xxx_hidden_HighAccelerationClassMps2                          *[]*AccumulatedData_FromToClass           `protobuf:"bytes,22,rep,name=high_acceleration_class_mps2,json=highAccelerationClassMps2"`
+	xxx_hidden_RetarderTorqueClassPercent                         *[]*AccumulatedData_FromToClass           `protobuf:"bytes,23,rep,name=retarder_torque_class_percent,json=retarderTorqueClassPercent"`
 	xxx_hidden_DrivingWithoutTorqueClass                          *[]*AccumulatedData_LabelClass            `protobuf:"bytes,24,rep,name=driving_without_torque_class,json=drivingWithoutTorqueClass"`
-	xxx_hidden_EngineTorqueClass                                  *[]*AccumulatedData_FromToClassCombustion `protobuf:"bytes,25,rep,name=engine_torque_class,json=engineTorqueClass"`
-	xxx_hidden_ElectricMotorTorqueClass                           *[]*AccumulatedData_FromToClassElectrical `protobuf:"bytes,26,rep,name=electric_motor_torque_class,json=electricMotorTorqueClass"`
-	xxx_hidden_EngineTorqueAtCurrentSpeedClass                    *[]*AccumulatedData_FromToClassCombustion `protobuf:"bytes,27,rep,name=engine_torque_at_current_speed_class,json=engineTorqueAtCurrentSpeedClass"`
-	xxx_hidden_ElectricMotorTorqueAtCurrentSpeedClass             *[]*AccumulatedData_FromToClassElectrical `protobuf:"bytes,28,rep,name=electric_motor_torque_at_current_speed_class,json=electricMotorTorqueAtCurrentSpeedClass"`
-	xxx_hidden_VehicleSpeedClass                                  *[]*AccumulatedData_FromToClass           `protobuf:"bytes,29,rep,name=vehicle_speed_class,json=vehicleSpeedClass"`
-	xxx_hidden_EngineSpeedClass                                   *[]*AccumulatedData_FromToClass           `protobuf:"bytes,30,rep,name=engine_speed_class,json=engineSpeedClass"`
-	xxx_hidden_AccelerationDuringBrakeClass                       *[]*AccumulatedData_FromToClass           `protobuf:"bytes,31,rep,name=acceleration_during_brake_class,json=accelerationDuringBrakeClass"`
+	xxx_hidden_EngineTorqueClassPercent                           *[]*AccumulatedData_FromToClassCombustion `protobuf:"bytes,25,rep,name=engine_torque_class_percent,json=engineTorqueClassPercent"`
+	xxx_hidden_ElectricMotorTorqueClassPercent                    *[]*AccumulatedData_FromToClassElectrical `protobuf:"bytes,26,rep,name=electric_motor_torque_class_percent,json=electricMotorTorqueClassPercent"`
+	xxx_hidden_EngineTorqueAtCurrentSpeedClassPercent             *[]*AccumulatedData_FromToClassCombustion `protobuf:"bytes,27,rep,name=engine_torque_at_current_speed_class_percent,json=engineTorqueAtCurrentSpeedClassPercent"`
+	xxx_hidden_ElectricMotorTorqueAtCurrentSpeedClassPercent      *[]*AccumulatedData_FromToClassElectrical `protobuf:"bytes,28,rep,name=electric_motor_torque_at_current_speed_class_percent,json=electricMotorTorqueAtCurrentSpeedClassPercent"`
+	xxx_hidden_VehicleSpeedClassKmh                               *[]*AccumulatedData_FromToClass           `protobuf:"bytes,29,rep,name=vehicle_speed_class_kmh,json=vehicleSpeedClassKmh"`
+	xxx_hidden_EngineSpeedClassRpm                                *[]*AccumulatedData_FromToClass           `protobuf:"bytes,30,rep,name=engine_speed_class_rpm,json=engineSpeedClassRpm"`
+	xxx_hidden_AccelerationDuringBrakeClassMps2                   *[]*AccumulatedData_FromToClass           `protobuf:"bytes,31,rep,name=acceleration_during_brake_class_mps2,json=accelerationDuringBrakeClassMps2"`
 	xxx_hidden_SelectedGearClass                                  *[]*AccumulatedData_LabelClass            `protobuf:"bytes,32,rep,name=selected_gear_class,json=selectedGearClass"`
 	xxx_hidden_CurrentGearClass                                   *[]*AccumulatedData_LabelClass            `protobuf:"bytes,33,rep,name=current_gear_class,json=currentGearClass"`
 	xxx_hidden_ChairliftCount                                     int32                                     `protobuf:"varint,34,opt,name=chairlift_count,json=chairliftCount"`
 	xxx_hidden_StopRequestCount                                   int32                                     `protobuf:"varint,35,opt,name=stop_request_count,json=stopRequestCount"`
 	xxx_hidden_KneelingCount                                      int32                                     `protobuf:"varint,36,opt,name=kneeling_count,json=kneelingCount"`
 	xxx_hidden_PramRequestCount                                   int32                                     `protobuf:"varint,37,opt,name=pram_request_count,json=pramRequestCount"`
-	xxx_hidden_ElectricPowerRecuperationClass                     *[]*AccumulatedData_FromToClassElectrical `protobuf:"bytes,38,rep,name=electric_power_recuperation_class,json=electricPowerRecuperationClass"`
+	xxx_hidden_ElectricPowerRecuperationClassKw                   *[]*AccumulatedData_FromToClassElectrical `protobuf:"bytes,38,rep,name=electric_power_recuperation_class_kw,json=electricPowerRecuperationClassKw"`
 	XXX_raceDetectHookData                                        protoimpl.RaceDetectHookData
 	XXX_presence                                                  [2]uint32
 	unknownFields                                                 protoimpl.UnknownFields
@@ -224,46 +224,46 @@ func (x *AccumulatedData) GetBrakePedalSpeedOverZeroDistanceM() float64 {
 	return 0
 }
 
-func (x *AccumulatedData) GetAccelerationPedalPositionClass() []*AccumulatedData_FromToClass {
+func (x *AccumulatedData) GetAccelerationPedalPositionClassPercent() []*AccumulatedData_FromToClass {
 	if x != nil {
-		if x.xxx_hidden_AccelerationPedalPositionClass != nil {
-			return *x.xxx_hidden_AccelerationPedalPositionClass
+		if x.xxx_hidden_AccelerationPedalPositionClassPercent != nil {
+			return *x.xxx_hidden_AccelerationPedalPositionClassPercent
 		}
 	}
 	return nil
 }
 
-func (x *AccumulatedData) GetBrakePedalPositionClass() []*AccumulatedData_FromToClass {
+func (x *AccumulatedData) GetBrakePedalPositionClassPercent() []*AccumulatedData_FromToClass {
 	if x != nil {
-		if x.xxx_hidden_BrakePedalPositionClass != nil {
-			return *x.xxx_hidden_BrakePedalPositionClass
+		if x.xxx_hidden_BrakePedalPositionClassPercent != nil {
+			return *x.xxx_hidden_BrakePedalPositionClassPercent
 		}
 	}
 	return nil
 }
 
-func (x *AccumulatedData) GetAccelerationClass() []*AccumulatedData_FromToClass {
+func (x *AccumulatedData) GetAccelerationClassMps2() []*AccumulatedData_FromToClass {
 	if x != nil {
-		if x.xxx_hidden_AccelerationClass != nil {
-			return *x.xxx_hidden_AccelerationClass
+		if x.xxx_hidden_AccelerationClassMps2 != nil {
+			return *x.xxx_hidden_AccelerationClassMps2
 		}
 	}
 	return nil
 }
 
-func (x *AccumulatedData) GetHighAccelerationClass() []*AccumulatedData_FromToClass {
+func (x *AccumulatedData) GetHighAccelerationClassMps2() []*AccumulatedData_FromToClass {
 	if x != nil {
-		if x.xxx_hidden_HighAccelerationClass != nil {
-			return *x.xxx_hidden_HighAccelerationClass
+		if x.xxx_hidden_HighAccelerationClassMps2 != nil {
+			return *x.xxx_hidden_HighAccelerationClassMps2
 		}
 	}
 	return nil
 }
 
-func (x *AccumulatedData) GetRetarderTorqueClass() []*AccumulatedData_FromToClass {
+func (x *AccumulatedData) GetRetarderTorqueClassPercent() []*AccumulatedData_FromToClass {
 	if x != nil {
-		if x.xxx_hidden_RetarderTorqueClass != nil {
-			return *x.xxx_hidden_RetarderTorqueClass
+		if x.xxx_hidden_RetarderTorqueClassPercent != nil {
+			return *x.xxx_hidden_RetarderTorqueClassPercent
 		}
 	}
 	return nil
@@ -278,64 +278,64 @@ func (x *AccumulatedData) GetDrivingWithoutTorqueClass() []*AccumulatedData_Labe
 	return nil
 }
 
-func (x *AccumulatedData) GetEngineTorqueClass() []*AccumulatedData_FromToClassCombustion {
+func (x *AccumulatedData) GetEngineTorqueClassPercent() []*AccumulatedData_FromToClassCombustion {
 	if x != nil {
-		if x.xxx_hidden_EngineTorqueClass != nil {
-			return *x.xxx_hidden_EngineTorqueClass
+		if x.xxx_hidden_EngineTorqueClassPercent != nil {
+			return *x.xxx_hidden_EngineTorqueClassPercent
 		}
 	}
 	return nil
 }
 
-func (x *AccumulatedData) GetElectricMotorTorqueClass() []*AccumulatedData_FromToClassElectrical {
+func (x *AccumulatedData) GetElectricMotorTorqueClassPercent() []*AccumulatedData_FromToClassElectrical {
 	if x != nil {
-		if x.xxx_hidden_ElectricMotorTorqueClass != nil {
-			return *x.xxx_hidden_ElectricMotorTorqueClass
+		if x.xxx_hidden_ElectricMotorTorqueClassPercent != nil {
+			return *x.xxx_hidden_ElectricMotorTorqueClassPercent
 		}
 	}
 	return nil
 }
 
-func (x *AccumulatedData) GetEngineTorqueAtCurrentSpeedClass() []*AccumulatedData_FromToClassCombustion {
+func (x *AccumulatedData) GetEngineTorqueAtCurrentSpeedClassPercent() []*AccumulatedData_FromToClassCombustion {
 	if x != nil {
-		if x.xxx_hidden_EngineTorqueAtCurrentSpeedClass != nil {
-			return *x.xxx_hidden_EngineTorqueAtCurrentSpeedClass
+		if x.xxx_hidden_EngineTorqueAtCurrentSpeedClassPercent != nil {
+			return *x.xxx_hidden_EngineTorqueAtCurrentSpeedClassPercent
 		}
 	}
 	return nil
 }
 
-func (x *AccumulatedData) GetElectricMotorTorqueAtCurrentSpeedClass() []*AccumulatedData_FromToClassElectrical {
+func (x *AccumulatedData) GetElectricMotorTorqueAtCurrentSpeedClassPercent() []*AccumulatedData_FromToClassElectrical {
 	if x != nil {
-		if x.xxx_hidden_ElectricMotorTorqueAtCurrentSpeedClass != nil {
-			return *x.xxx_hidden_ElectricMotorTorqueAtCurrentSpeedClass
+		if x.xxx_hidden_ElectricMotorTorqueAtCurrentSpeedClassPercent != nil {
+			return *x.xxx_hidden_ElectricMotorTorqueAtCurrentSpeedClassPercent
 		}
 	}
 	return nil
 }
 
-func (x *AccumulatedData) GetVehicleSpeedClass() []*AccumulatedData_FromToClass {
+func (x *AccumulatedData) GetVehicleSpeedClassKmh() []*AccumulatedData_FromToClass {
 	if x != nil {
-		if x.xxx_hidden_VehicleSpeedClass != nil {
-			return *x.xxx_hidden_VehicleSpeedClass
+		if x.xxx_hidden_VehicleSpeedClassKmh != nil {
+			return *x.xxx_hidden_VehicleSpeedClassKmh
 		}
 	}
 	return nil
 }
 
-func (x *AccumulatedData) GetEngineSpeedClass() []*AccumulatedData_FromToClass {
+func (x *AccumulatedData) GetEngineSpeedClassRpm() []*AccumulatedData_FromToClass {
 	if x != nil {
-		if x.xxx_hidden_EngineSpeedClass != nil {
-			return *x.xxx_hidden_EngineSpeedClass
+		if x.xxx_hidden_EngineSpeedClassRpm != nil {
+			return *x.xxx_hidden_EngineSpeedClassRpm
 		}
 	}
 	return nil
 }
 
-func (x *AccumulatedData) GetAccelerationDuringBrakeClass() []*AccumulatedData_FromToClass {
+func (x *AccumulatedData) GetAccelerationDuringBrakeClassMps2() []*AccumulatedData_FromToClass {
 	if x != nil {
-		if x.xxx_hidden_AccelerationDuringBrakeClass != nil {
-			return *x.xxx_hidden_AccelerationDuringBrakeClass
+		if x.xxx_hidden_AccelerationDuringBrakeClassMps2 != nil {
+			return *x.xxx_hidden_AccelerationDuringBrakeClassMps2
 		}
 	}
 	return nil
@@ -387,10 +387,10 @@ func (x *AccumulatedData) GetPramRequestCount() int32 {
 	return 0
 }
 
-func (x *AccumulatedData) GetElectricPowerRecuperationClass() []*AccumulatedData_FromToClassElectrical {
+func (x *AccumulatedData) GetElectricPowerRecuperationClassKw() []*AccumulatedData_FromToClassElectrical {
 	if x != nil {
-		if x.xxx_hidden_ElectricPowerRecuperationClass != nil {
-			return *x.xxx_hidden_ElectricPowerRecuperationClass
+		if x.xxx_hidden_ElectricPowerRecuperationClassKw != nil {
+			return *x.xxx_hidden_ElectricPowerRecuperationClassKw
 		}
 	}
 	return nil
@@ -485,56 +485,56 @@ func (x *AccumulatedData) SetBrakePedalSpeedOverZeroDistanceM(v float64) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 17, 38)
 }
 
-func (x *AccumulatedData) SetAccelerationPedalPositionClass(v []*AccumulatedData_FromToClass) {
-	x.xxx_hidden_AccelerationPedalPositionClass = &v
+func (x *AccumulatedData) SetAccelerationPedalPositionClassPercent(v []*AccumulatedData_FromToClass) {
+	x.xxx_hidden_AccelerationPedalPositionClassPercent = &v
 }
 
-func (x *AccumulatedData) SetBrakePedalPositionClass(v []*AccumulatedData_FromToClass) {
-	x.xxx_hidden_BrakePedalPositionClass = &v
+func (x *AccumulatedData) SetBrakePedalPositionClassPercent(v []*AccumulatedData_FromToClass) {
+	x.xxx_hidden_BrakePedalPositionClassPercent = &v
 }
 
-func (x *AccumulatedData) SetAccelerationClass(v []*AccumulatedData_FromToClass) {
-	x.xxx_hidden_AccelerationClass = &v
+func (x *AccumulatedData) SetAccelerationClassMps2(v []*AccumulatedData_FromToClass) {
+	x.xxx_hidden_AccelerationClassMps2 = &v
 }
 
-func (x *AccumulatedData) SetHighAccelerationClass(v []*AccumulatedData_FromToClass) {
-	x.xxx_hidden_HighAccelerationClass = &v
+func (x *AccumulatedData) SetHighAccelerationClassMps2(v []*AccumulatedData_FromToClass) {
+	x.xxx_hidden_HighAccelerationClassMps2 = &v
 }
 
-func (x *AccumulatedData) SetRetarderTorqueClass(v []*AccumulatedData_FromToClass) {
-	x.xxx_hidden_RetarderTorqueClass = &v
+func (x *AccumulatedData) SetRetarderTorqueClassPercent(v []*AccumulatedData_FromToClass) {
+	x.xxx_hidden_RetarderTorqueClassPercent = &v
 }
 
 func (x *AccumulatedData) SetDrivingWithoutTorqueClass(v []*AccumulatedData_LabelClass) {
 	x.xxx_hidden_DrivingWithoutTorqueClass = &v
 }
 
-func (x *AccumulatedData) SetEngineTorqueClass(v []*AccumulatedData_FromToClassCombustion) {
-	x.xxx_hidden_EngineTorqueClass = &v
+func (x *AccumulatedData) SetEngineTorqueClassPercent(v []*AccumulatedData_FromToClassCombustion) {
+	x.xxx_hidden_EngineTorqueClassPercent = &v
 }
 
-func (x *AccumulatedData) SetElectricMotorTorqueClass(v []*AccumulatedData_FromToClassElectrical) {
-	x.xxx_hidden_ElectricMotorTorqueClass = &v
+func (x *AccumulatedData) SetElectricMotorTorqueClassPercent(v []*AccumulatedData_FromToClassElectrical) {
+	x.xxx_hidden_ElectricMotorTorqueClassPercent = &v
 }
 
-func (x *AccumulatedData) SetEngineTorqueAtCurrentSpeedClass(v []*AccumulatedData_FromToClassCombustion) {
-	x.xxx_hidden_EngineTorqueAtCurrentSpeedClass = &v
+func (x *AccumulatedData) SetEngineTorqueAtCurrentSpeedClassPercent(v []*AccumulatedData_FromToClassCombustion) {
+	x.xxx_hidden_EngineTorqueAtCurrentSpeedClassPercent = &v
 }
 
-func (x *AccumulatedData) SetElectricMotorTorqueAtCurrentSpeedClass(v []*AccumulatedData_FromToClassElectrical) {
-	x.xxx_hidden_ElectricMotorTorqueAtCurrentSpeedClass = &v
+func (x *AccumulatedData) SetElectricMotorTorqueAtCurrentSpeedClassPercent(v []*AccumulatedData_FromToClassElectrical) {
+	x.xxx_hidden_ElectricMotorTorqueAtCurrentSpeedClassPercent = &v
 }
 
-func (x *AccumulatedData) SetVehicleSpeedClass(v []*AccumulatedData_FromToClass) {
-	x.xxx_hidden_VehicleSpeedClass = &v
+func (x *AccumulatedData) SetVehicleSpeedClassKmh(v []*AccumulatedData_FromToClass) {
+	x.xxx_hidden_VehicleSpeedClassKmh = &v
 }
 
-func (x *AccumulatedData) SetEngineSpeedClass(v []*AccumulatedData_FromToClass) {
-	x.xxx_hidden_EngineSpeedClass = &v
+func (x *AccumulatedData) SetEngineSpeedClassRpm(v []*AccumulatedData_FromToClass) {
+	x.xxx_hidden_EngineSpeedClassRpm = &v
 }
 
-func (x *AccumulatedData) SetAccelerationDuringBrakeClass(v []*AccumulatedData_FromToClass) {
-	x.xxx_hidden_AccelerationDuringBrakeClass = &v
+func (x *AccumulatedData) SetAccelerationDuringBrakeClassMps2(v []*AccumulatedData_FromToClass) {
+	x.xxx_hidden_AccelerationDuringBrakeClassMps2 = &v
 }
 
 func (x *AccumulatedData) SetSelectedGearClass(v []*AccumulatedData_LabelClass) {
@@ -565,8 +565,8 @@ func (x *AccumulatedData) SetPramRequestCount(v int32) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[1]), 36, 38)
 }
 
-func (x *AccumulatedData) SetElectricPowerRecuperationClass(v []*AccumulatedData_FromToClassElectrical) {
-	x.xxx_hidden_ElectricPowerRecuperationClass = &v
+func (x *AccumulatedData) SetElectricPowerRecuperationClassKw(v []*AccumulatedData_FromToClassElectrical) {
+	x.xxx_hidden_ElectricPowerRecuperationClassKw = &v
 }
 
 func (x *AccumulatedData) HasWheelBasedSpeedOverZeroDurationS() bool {
@@ -863,27 +863,166 @@ type AccumulatedData_builder struct {
 	// The total number of times the brake pedal has been used while
 	BrakePedalSpeedOverZeroCount *int32
 	// The total distance the vehicle has driven where the brake pedal has been used. (m)
-	BrakePedalSpeedOverZeroDistanceM       *float64
-	AccelerationPedalPositionClass         []*AccumulatedData_FromToClass
-	BrakePedalPositionClass                []*AccumulatedData_FromToClass
-	AccelerationClass                      []*AccumulatedData_FromToClass
-	HighAccelerationClass                  []*AccumulatedData_FromToClass
-	RetarderTorqueClass                    []*AccumulatedData_FromToClass
-	DrivingWithoutTorqueClass              []*AccumulatedData_LabelClass
-	EngineTorqueClass                      []*AccumulatedData_FromToClassCombustion
-	ElectricMotorTorqueClass               []*AccumulatedData_FromToClassElectrical
-	EngineTorqueAtCurrentSpeedClass        []*AccumulatedData_FromToClassCombustion
-	ElectricMotorTorqueAtCurrentSpeedClass []*AccumulatedData_FromToClassElectrical
-	VehicleSpeedClass                      []*AccumulatedData_FromToClass
-	EngineSpeedClass                       []*AccumulatedData_FromToClass
-	AccelerationDuringBrakeClass           []*AccumulatedData_FromToClass
-	SelectedGearClass                      []*AccumulatedData_LabelClass
-	CurrentGearClass                       []*AccumulatedData_LabelClass
-	ChairliftCount                         *int32
-	StopRequestCount                       *int32
-	KneelingCount                          *int32
-	PramRequestCount                       *int32
-	ElectricPowerRecuperationClass         []*AccumulatedData_FromToClassElectrical
+	BrakePedalSpeedOverZeroDistanceM *float64
+	// Histogram of stats for acceleration pedal position intervals. (percent)
+	//
+	// Default:
+	//
+	//	Min interval: [0%, 20%)
+	//	Max interval: [80%, 100%]
+	//	Bucket count: 5
+	//	Bucket width: 20%
+	AccelerationPedalPositionClassPercent []*AccumulatedData_FromToClass
+	// Histogram of stats for brake pedal position intervals. (percent)
+	//
+	// Default:
+	//
+	//	Min interval: [0%, 20%)
+	//	Max interval: [80%, 100%]
+	//	Bucket count: 5
+	//	Bucket width: 20%
+	BrakePedalPositionClassPercent []*AccumulatedData_FromToClass
+	// Histogram of stats for acceleration intervals. (m/s2)
+	//
+	// Default:
+	//
+	//	Min interval: (...,  -1.1)
+	//	Mid interval: (-0.1, 0.1)
+	//	Max interval: [1.1,  ...)
+	//	Bucket count: 11
+	//	Bucket width: 0.2
+	AccelerationClassMps2 []*AccumulatedData_FromToClass
+	// Histogram of stats for acceleration intervals. (m/s2)
+	//
+	// Default:
+	//
+	//	Min interval: (...,  -1.1)
+	//	Mid interval: (-0.1, 0.1)
+	//	Max interval: [1.1,  ...)
+	//	Bucket count: 11
+	//	Bucket width: 0.2
+	HighAccelerationClassMps2 []*AccumulatedData_FromToClass
+	// Histogram of stats by retarder usage. (%)
+	//
+	// Default:
+	//
+	//	Min interval: (0%, 20%)
+	//	Max interval: [80%, 100%]
+	//	Bucket count: 5
+	//	Bucket width: 20%
+	RetarderTorqueClassPercent []*AccumulatedData_FromToClass
+	// Histogram of stats when driving without torque, with gear (clutch is engaged).
+	//
+	// Labels:
+	//
+	//	DRIVING_WITHOUT_TORQUE
+	DrivingWithoutTorqueClass []*AccumulatedData_LabelClass
+	// Histogram of stats by EEC1 value (Actual Engine-Percent Torque). (%)
+	//
+	// Default:
+	//
+	//	Min interval: [0%, 10%)
+	//	Max interval: [90%, 100%]
+	//	Bucket count: 10
+	//	Bucket width: 10%
+	EngineTorqueClassPercent []*AccumulatedData_FromToClassCombustion
+	// Histogram of stats by electric engine torque (Actual Engine-Percent Torque). (%)
+	//
+	// Default:
+	//
+	//	Min interval: [0%, 10%)
+	//	Max interval: [90%, 100%]
+	//	Bucket count: 10
+	//	Bucket width: 10%
+	ElectricMotorTorqueClassPercent []*AccumulatedData_FromToClassElectrical
+	// Histogram of stats based on EEC2 value (Engine Percent Load At Current Speed). (%)
+	//
+	// Default:
+	//
+	//	Min interval: [0%, 10%)
+	//	Max interval: [90%, 100%]
+	//	Bucket count: 10
+	//	Bucket width: 10%
+	EngineTorqueAtCurrentSpeedClassPercent []*AccumulatedData_FromToClassCombustion
+	// Histogram of stats based on electric motor EEC2 value. (Engine Percent Load At Current Speed).
+	//
+	// Default:
+	//
+	//	Min interval: [0%, 10%)
+	//	Max interval: [90%, 100%]
+	//	Bucket count: 10
+	//	Bucket width: 10%
+	ElectricMotorTorqueAtCurrentSpeedClassPercent []*AccumulatedData_FromToClassElectrical
+	// Histogram of stats based on vehicle speed. (km/h)
+	// Engine on (RPM>0 or electric motor in crank mode).
+	//
+	// Default:
+	//
+	//	Min interval: [0km/h, 4km/h)
+	//	Max interval: [156km/h, ...)
+	//	Bucket count: 40
+	//	Bucket width: 4km/h
+	VehicleSpeedClassKmh []*AccumulatedData_FromToClass
+	// Histogram of stats based on the RPM of the combustion engine. (rpm)
+	// Only mandatory if the vehicle has a combustion engine for propulsion.
+	//
+	// Default:
+	//
+	//	Min interval: [0rpm, 400pm)
+	//	Max interval: [3600rpm, ...)
+	//	Bucket count: 10
+	//	Bucket width: 400rpm
+	EngineSpeedClassRpm []*AccumulatedData_FromToClass
+	// Histogram of stats based on the acceleration during braking. (m/s2)
+	//
+	// Default:
+	//
+	//	Min interval: [..., -1.1m/s2)
+	//	Mid interval: (-0.1m/s2, 0.1m/s2)
+	//	Max interval: [1.1m/s2, ...)
+	//	Bucket count: 13
+	//	Bucket width: 0.2m/s2
+	AccelerationDuringBrakeClassMps2 []*AccumulatedData_FromToClass
+	// Histogram of stats based on the currently selected gear.
+	// On class per gear. Park is also a gear.
+	// Gear is formatted according to SPN 524 and supplied as a decimal value.
+	//
+	// Example:
+	//
+	//	0 = Neutral
+	//	1 = 1st gear
+	//	2 = 2nd gear
+	//
+	// This is mainly used for buses.
+	SelectedGearClass []*AccumulatedData_LabelClass
+	// Histogram of stats based on the currently used gear.
+	// On class per gear. Park is also a gear.
+	// Gear is formatted according to SPN 524 and supplied as a decimal value.
+	//
+	// Example:
+	//
+	//	0 = Neutral
+	//	1 = 1st gear
+	//	2 = 2nd gear
+	//
+	// This is mainly used for buses.
+	CurrentGearClass []*AccumulatedData_LabelClass
+	// The total number of times the chairlift has been outside the bus.
+	// This is mainly used for buses.
+	ChairliftCount *int32
+	// The total number of stop requests made.
+	// This is mainly used for buses.
+	StopRequestCount *int32
+	// The total number of times the bus has knelt.
+	// This is mainly used for buses.
+	KneelingCount *int32
+	// The total number of pram requests made.
+	// This is mainly used for buses.
+	PramRequestCount *int32
+	// Classes refer to the recuperated electric power. (kw)
+	// Minimum 11 classes.
+	// [0, 100) [100, 200) [200, 300) ... [900, 1000), [1000, ...]
+	ElectricPowerRecuperationClassKw []*AccumulatedData_FromToClassElectrical
 }
 
 func (b0 AccumulatedData_builder) Build() *AccumulatedData {
@@ -959,19 +1098,19 @@ func (b0 AccumulatedData_builder) Build() *AccumulatedData {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 17, 38)
 		x.xxx_hidden_BrakePedalSpeedOverZeroDistanceM = *b.BrakePedalSpeedOverZeroDistanceM
 	}
-	x.xxx_hidden_AccelerationPedalPositionClass = &b.AccelerationPedalPositionClass
-	x.xxx_hidden_BrakePedalPositionClass = &b.BrakePedalPositionClass
-	x.xxx_hidden_AccelerationClass = &b.AccelerationClass
-	x.xxx_hidden_HighAccelerationClass = &b.HighAccelerationClass
-	x.xxx_hidden_RetarderTorqueClass = &b.RetarderTorqueClass
+	x.xxx_hidden_AccelerationPedalPositionClassPercent = &b.AccelerationPedalPositionClassPercent
+	x.xxx_hidden_BrakePedalPositionClassPercent = &b.BrakePedalPositionClassPercent
+	x.xxx_hidden_AccelerationClassMps2 = &b.AccelerationClassMps2
+	x.xxx_hidden_HighAccelerationClassMps2 = &b.HighAccelerationClassMps2
+	x.xxx_hidden_RetarderTorqueClassPercent = &b.RetarderTorqueClassPercent
 	x.xxx_hidden_DrivingWithoutTorqueClass = &b.DrivingWithoutTorqueClass
-	x.xxx_hidden_EngineTorqueClass = &b.EngineTorqueClass
-	x.xxx_hidden_ElectricMotorTorqueClass = &b.ElectricMotorTorqueClass
-	x.xxx_hidden_EngineTorqueAtCurrentSpeedClass = &b.EngineTorqueAtCurrentSpeedClass
-	x.xxx_hidden_ElectricMotorTorqueAtCurrentSpeedClass = &b.ElectricMotorTorqueAtCurrentSpeedClass
-	x.xxx_hidden_VehicleSpeedClass = &b.VehicleSpeedClass
-	x.xxx_hidden_EngineSpeedClass = &b.EngineSpeedClass
-	x.xxx_hidden_AccelerationDuringBrakeClass = &b.AccelerationDuringBrakeClass
+	x.xxx_hidden_EngineTorqueClassPercent = &b.EngineTorqueClassPercent
+	x.xxx_hidden_ElectricMotorTorqueClassPercent = &b.ElectricMotorTorqueClassPercent
+	x.xxx_hidden_EngineTorqueAtCurrentSpeedClassPercent = &b.EngineTorqueAtCurrentSpeedClassPercent
+	x.xxx_hidden_ElectricMotorTorqueAtCurrentSpeedClassPercent = &b.ElectricMotorTorqueAtCurrentSpeedClassPercent
+	x.xxx_hidden_VehicleSpeedClassKmh = &b.VehicleSpeedClassKmh
+	x.xxx_hidden_EngineSpeedClassRpm = &b.EngineSpeedClassRpm
+	x.xxx_hidden_AccelerationDuringBrakeClassMps2 = &b.AccelerationDuringBrakeClassMps2
 	x.xxx_hidden_SelectedGearClass = &b.SelectedGearClass
 	x.xxx_hidden_CurrentGearClass = &b.CurrentGearClass
 	if b.ChairliftCount != nil {
@@ -990,10 +1129,11 @@ func (b0 AccumulatedData_builder) Build() *AccumulatedData {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[1]), 36, 38)
 		x.xxx_hidden_PramRequestCount = *b.PramRequestCount
 	}
-	x.xxx_hidden_ElectricPowerRecuperationClass = &b.ElectricPowerRecuperationClass
+	x.xxx_hidden_ElectricPowerRecuperationClassKw = &b.ElectricPowerRecuperationClassKw
 	return m0
 }
 
+// A histogram bucket of operational stats with a label.
 type AccumulatedData_LabelClass struct {
 	state                                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Label                       *string                `protobuf:"bytes,1,opt,name=label"`
@@ -1183,11 +1323,17 @@ func (x *AccumulatedData_LabelClass) ClearElectricEnergyConsumptionWh() {
 type AccumulatedData_LabelClass_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Label                       *string
-	DurationS                   *float64
-	DistanceM                   *float64
-	FuelConsumptionMl           *float64
-	FuelConsumptionGaseousKg    *float64
+	// The label of the class.
+	Label *string
+	// The duration of the class. (s)
+	DurationS *float64
+	// The distance of the class. (m)
+	DistanceM *float64
+	// The liquid fuel consumption of the class. (ml)
+	FuelConsumptionMl *float64
+	// The gaseous fuel consumption of the class. (kg)
+	FuelConsumptionGaseousKg *float64
+	// The electric energy consumption of the class. (wh)
 	ElectricEnergyConsumptionWh *float64
 }
 
@@ -1222,6 +1368,7 @@ func (b0 AccumulatedData_LabelClass_builder) Build() *AccumulatedData_LabelClass
 	return m0
 }
 
+// A histogram bucket of operational stats with an interval [from,to).
 type AccumulatedData_FromToClass struct {
 	state                                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_From                        float64                `protobuf:"fixed64,1,opt,name=from"`
@@ -1433,12 +1580,19 @@ func (x *AccumulatedData_FromToClass) ClearElectricEnergyConsumptionWh() {
 type AccumulatedData_FromToClass_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	From                        *float64
-	To                          *float64
-	DurationS                   *float64
-	DistanceM                   *float64
-	FuelConsumptionMl           *float64
-	FuelConsumptionGaseousKg    *float64
+	// The from value of the bucket interval. (inclusive)
+	From *float64
+	// The to value of the bucket interval. (exclusive)
+	To *float64
+	// The total duration of the bucket. (s)
+	DurationS *float64
+	// The total distance of the bucket. (m)
+	DistanceM *float64
+	// The total liquid fuel consumption of the bucket. (ml)
+	FuelConsumptionMl *float64
+	// The total gaseous fuel consumption of the bucket. (kg)
+	FuelConsumptionGaseousKg *float64
+	// The total electric energy consumption of the bucket. (wh)
 	ElectricEnergyConsumptionWh *float64
 }
 
@@ -1477,6 +1631,7 @@ func (b0 AccumulatedData_FromToClass_builder) Build() *AccumulatedData_FromToCla
 	return m0
 }
 
+// A histogram bucket of combustion engine operational stats with an interval [from,to).
 type AccumulatedData_FromToClassCombustion struct {
 	state                               protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_From                     float64                `protobuf:"fixed64,1,opt,name=from"`
@@ -1663,11 +1818,17 @@ func (x *AccumulatedData_FromToClassCombustion) ClearFuelConsumptionGaseousKg() 
 type AccumulatedData_FromToClassCombustion_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	From                     *float64
-	To                       *float64
-	DurationS                *float64
-	DistanceM                *float64
-	FuelConsumptionMl        *float64
+	// The from value of the bucket interval. (inclusive)
+	From *float64
+	// The to value of the bucket interval. (exclusive)
+	To *float64
+	// The total duration of the bucket. (s)
+	DurationS *float64
+	// The total distance of the bucket. (m)
+	DistanceM *float64
+	// The total liquid fuel consumption of the bucket. (ml)
+	FuelConsumptionMl *float64
+	// The total gaseous fuel consumption of the bucket. (kg)
 	FuelConsumptionGaseousKg *float64
 }
 
@@ -1702,6 +1863,7 @@ func (b0 AccumulatedData_FromToClassCombustion_builder) Build() *AccumulatedData
 	return m0
 }
 
+// A histogram bucket of electrical engine operational stats with an interval [from,to).
 type AccumulatedData_FromToClassElectrical struct {
 	state                                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_From                        float64                `protobuf:"fixed64,1,opt,name=from"`
@@ -1863,10 +2025,15 @@ func (x *AccumulatedData_FromToClassElectrical) ClearElectricEnergyConsumptionWh
 type AccumulatedData_FromToClassElectrical_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	From                        *float64
-	To                          *float64
-	DurationS                   *float64
-	DistanceM                   *float64
+	// The from value of the bucket interval. (inclusive)
+	From *float64
+	// The to value of the bucket interval. (exclusive)
+	To *float64
+	// The total duration of the bucket. (s)
+	DurationS *float64
+	// The total distance of the bucket. (m)
+	DistanceM *float64
+	// The total electric energy consumption of the bucket. (wh)
 	ElectricEnergyConsumptionWh *float64
 }
 
@@ -1901,7 +2068,7 @@ var File_wayplatform_rfms_v5_accumulated_data_proto protoreflect.FileDescriptor
 
 const file_wayplatform_rfms_v5_accumulated_data_proto_rawDesc = "" +
 	"\n" +
-	"*wayplatform/rfms/v5/accumulated_data.proto\x12\x13wayplatform.rfms.v5\"\xce#\n" +
+	"*wayplatform/rfms/v5/accumulated_data.proto\x12\x13wayplatform.rfms.v5\"\xe8$\n" +
 	"\x0fAccumulatedData\x12P\n" +
 	"&wheel_based_speed_over_zero_duration_s\x18\x01 \x01(\x01R wheelBasedSpeedOverZeroDurationS\x12J\n" +
 	"#wheel_based_speed_over_zero_fuel_ml\x18\x02 \x01(\x01R\x1dwheelBasedSpeedOverZeroFuelMl\x12Y\n" +
@@ -1921,27 +2088,27 @@ const file_wayplatform_rfms_v5_accumulated_data_proto_rawDesc = "" +
 	"\"aux_electric_energy_consumption_wh\x18\x0f \x01(\x01R\x1eauxElectricEnergyConsumptionWh\x12Y\n" +
 	"\x10pto_active_class\x18\x10 \x03(\v2/.wayplatform.rfms.v5.AccumulatedData.LabelClassR\x0eptoActiveClass\x12G\n" +
 	"!brake_pedal_speed_over_zero_count\x18\x11 \x01(\x05R\x1cbrakePedalSpeedOverZeroCount\x12P\n" +
-	"&brake_pedal_speed_over_zero_distance_m\x18\x12 \x01(\x01R brakePedalSpeedOverZeroDistanceM\x12{\n" +
-	"!acceleration_pedal_position_class\x18\x13 \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR\x1eaccelerationPedalPositionClass\x12m\n" +
-	"\x1abrake_pedal_position_class\x18\x14 \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR\x17brakePedalPositionClass\x12_\n" +
-	"\x12acceleration_class\x18\x15 \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR\x11accelerationClass\x12h\n" +
-	"\x17high_acceleration_class\x18\x16 \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR\x15highAccelerationClass\x12d\n" +
-	"\x15retarder_torque_class\x18\x17 \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR\x13retarderTorqueClass\x12p\n" +
-	"\x1cdriving_without_torque_class\x18\x18 \x03(\v2/.wayplatform.rfms.v5.AccumulatedData.LabelClassR\x19drivingWithoutTorqueClass\x12j\n" +
-	"\x13engine_torque_class\x18\x19 \x03(\v2:.wayplatform.rfms.v5.AccumulatedData.FromToClassCombustionR\x11engineTorqueClass\x12y\n" +
-	"\x1belectric_motor_torque_class\x18\x1a \x03(\v2:.wayplatform.rfms.v5.AccumulatedData.FromToClassElectricalR\x18electricMotorTorqueClass\x12\x89\x01\n" +
-	"$engine_torque_at_current_speed_class\x18\x1b \x03(\v2:.wayplatform.rfms.v5.AccumulatedData.FromToClassCombustionR\x1fengineTorqueAtCurrentSpeedClass\x12\x98\x01\n" +
-	",electric_motor_torque_at_current_speed_class\x18\x1c \x03(\v2:.wayplatform.rfms.v5.AccumulatedData.FromToClassElectricalR&electricMotorTorqueAtCurrentSpeedClass\x12`\n" +
-	"\x13vehicle_speed_class\x18\x1d \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR\x11vehicleSpeedClass\x12^\n" +
-	"\x12engine_speed_class\x18\x1e \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR\x10engineSpeedClass\x12w\n" +
-	"\x1facceleration_during_brake_class\x18\x1f \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR\x1caccelerationDuringBrakeClass\x12_\n" +
+	"&brake_pedal_speed_over_zero_distance_m\x18\x12 \x01(\x01R brakePedalSpeedOverZeroDistanceM\x12\x8a\x01\n" +
+	")acceleration_pedal_position_class_percent\x18\x13 \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR%accelerationPedalPositionClassPercent\x12|\n" +
+	"\"brake_pedal_position_class_percent\x18\x14 \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR\x1ebrakePedalPositionClassPercent\x12h\n" +
+	"\x17acceleration_class_mps2\x18\x15 \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR\x15accelerationClassMps2\x12q\n" +
+	"\x1chigh_acceleration_class_mps2\x18\x16 \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR\x19highAccelerationClassMps2\x12s\n" +
+	"\x1dretarder_torque_class_percent\x18\x17 \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR\x1aretarderTorqueClassPercent\x12p\n" +
+	"\x1cdriving_without_torque_class\x18\x18 \x03(\v2/.wayplatform.rfms.v5.AccumulatedData.LabelClassR\x19drivingWithoutTorqueClass\x12y\n" +
+	"\x1bengine_torque_class_percent\x18\x19 \x03(\v2:.wayplatform.rfms.v5.AccumulatedData.FromToClassCombustionR\x18engineTorqueClassPercent\x12\x88\x01\n" +
+	"#electric_motor_torque_class_percent\x18\x1a \x03(\v2:.wayplatform.rfms.v5.AccumulatedData.FromToClassElectricalR\x1felectricMotorTorqueClassPercent\x12\x98\x01\n" +
+	",engine_torque_at_current_speed_class_percent\x18\x1b \x03(\v2:.wayplatform.rfms.v5.AccumulatedData.FromToClassCombustionR&engineTorqueAtCurrentSpeedClassPercent\x12\xa7\x01\n" +
+	"4electric_motor_torque_at_current_speed_class_percent\x18\x1c \x03(\v2:.wayplatform.rfms.v5.AccumulatedData.FromToClassElectricalR-electricMotorTorqueAtCurrentSpeedClassPercent\x12g\n" +
+	"\x17vehicle_speed_class_kmh\x18\x1d \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR\x14vehicleSpeedClassKmh\x12e\n" +
+	"\x16engine_speed_class_rpm\x18\x1e \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR\x13engineSpeedClassRpm\x12\x80\x01\n" +
+	"$acceleration_during_brake_class_mps2\x18\x1f \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR accelerationDuringBrakeClassMps2\x12_\n" +
 	"\x13selected_gear_class\x18  \x03(\v2/.wayplatform.rfms.v5.AccumulatedData.LabelClassR\x11selectedGearClass\x12]\n" +
 	"\x12current_gear_class\x18! \x03(\v2/.wayplatform.rfms.v5.AccumulatedData.LabelClassR\x10currentGearClass\x12'\n" +
 	"\x0fchairlift_count\x18\" \x01(\x05R\x0echairliftCount\x12,\n" +
 	"\x12stop_request_count\x18# \x01(\x05R\x10stopRequestCount\x12%\n" +
 	"\x0ekneeling_count\x18$ \x01(\x05R\rkneelingCount\x12,\n" +
-	"\x12pram_request_count\x18% \x01(\x05R\x10pramRequestCount\x12\x85\x01\n" +
-	"!electric_power_recuperation_class\x18& \x03(\v2:.wayplatform.rfms.v5.AccumulatedData.FromToClassElectricalR\x1eelectricPowerRecuperationClass\x1a\x94\x02\n" +
+	"\x12pram_request_count\x18% \x01(\x05R\x10pramRequestCount\x12\x8a\x01\n" +
+	"$electric_power_recuperation_class_kw\x18& \x03(\v2:.wayplatform.rfms.v5.AccumulatedData.FromToClassElectricalR electricPowerRecuperationClassKw\x1a\x94\x02\n" +
 	"\n" +
 	"LabelClass\x12\x14\n" +
 	"\x05label\x18\x01 \x01(\tR\x05label\x12\x1d\n" +
@@ -1991,22 +2158,22 @@ var file_wayplatform_rfms_v5_accumulated_data_proto_goTypes = []any{
 }
 var file_wayplatform_rfms_v5_accumulated_data_proto_depIdxs = []int32{
 	1,  // 0: wayplatform.rfms.v5.AccumulatedData.pto_active_class:type_name -> wayplatform.rfms.v5.AccumulatedData.LabelClass
-	2,  // 1: wayplatform.rfms.v5.AccumulatedData.acceleration_pedal_position_class:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
-	2,  // 2: wayplatform.rfms.v5.AccumulatedData.brake_pedal_position_class:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
-	2,  // 3: wayplatform.rfms.v5.AccumulatedData.acceleration_class:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
-	2,  // 4: wayplatform.rfms.v5.AccumulatedData.high_acceleration_class:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
-	2,  // 5: wayplatform.rfms.v5.AccumulatedData.retarder_torque_class:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
+	2,  // 1: wayplatform.rfms.v5.AccumulatedData.acceleration_pedal_position_class_percent:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
+	2,  // 2: wayplatform.rfms.v5.AccumulatedData.brake_pedal_position_class_percent:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
+	2,  // 3: wayplatform.rfms.v5.AccumulatedData.acceleration_class_mps2:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
+	2,  // 4: wayplatform.rfms.v5.AccumulatedData.high_acceleration_class_mps2:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
+	2,  // 5: wayplatform.rfms.v5.AccumulatedData.retarder_torque_class_percent:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
 	1,  // 6: wayplatform.rfms.v5.AccumulatedData.driving_without_torque_class:type_name -> wayplatform.rfms.v5.AccumulatedData.LabelClass
-	3,  // 7: wayplatform.rfms.v5.AccumulatedData.engine_torque_class:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClassCombustion
-	4,  // 8: wayplatform.rfms.v5.AccumulatedData.electric_motor_torque_class:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClassElectrical
-	3,  // 9: wayplatform.rfms.v5.AccumulatedData.engine_torque_at_current_speed_class:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClassCombustion
-	4,  // 10: wayplatform.rfms.v5.AccumulatedData.electric_motor_torque_at_current_speed_class:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClassElectrical
-	2,  // 11: wayplatform.rfms.v5.AccumulatedData.vehicle_speed_class:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
-	2,  // 12: wayplatform.rfms.v5.AccumulatedData.engine_speed_class:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
-	2,  // 13: wayplatform.rfms.v5.AccumulatedData.acceleration_during_brake_class:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
+	3,  // 7: wayplatform.rfms.v5.AccumulatedData.engine_torque_class_percent:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClassCombustion
+	4,  // 8: wayplatform.rfms.v5.AccumulatedData.electric_motor_torque_class_percent:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClassElectrical
+	3,  // 9: wayplatform.rfms.v5.AccumulatedData.engine_torque_at_current_speed_class_percent:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClassCombustion
+	4,  // 10: wayplatform.rfms.v5.AccumulatedData.electric_motor_torque_at_current_speed_class_percent:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClassElectrical
+	2,  // 11: wayplatform.rfms.v5.AccumulatedData.vehicle_speed_class_kmh:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
+	2,  // 12: wayplatform.rfms.v5.AccumulatedData.engine_speed_class_rpm:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
+	2,  // 13: wayplatform.rfms.v5.AccumulatedData.acceleration_during_brake_class_mps2:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
 	1,  // 14: wayplatform.rfms.v5.AccumulatedData.selected_gear_class:type_name -> wayplatform.rfms.v5.AccumulatedData.LabelClass
 	1,  // 15: wayplatform.rfms.v5.AccumulatedData.current_gear_class:type_name -> wayplatform.rfms.v5.AccumulatedData.LabelClass
-	4,  // 16: wayplatform.rfms.v5.AccumulatedData.electric_power_recuperation_class:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClassElectrical
+	4,  // 16: wayplatform.rfms.v5.AccumulatedData.electric_power_recuperation_class_kw:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClassElectrical
 	17, // [17:17] is the sub-list for method output_type
 	17, // [17:17] is the sub-list for method input_type
 	17, // [17:17] is the sub-list for extension type_name

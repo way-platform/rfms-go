@@ -3,10 +3,10 @@
   "name": "vin",
   "type": "STRING",
   "mode": "NULLABLE",
-  "description": "The vehicle identification number (VIN) of the vehicle."
+  "description": "The vehicle identification number (VIN) of the vehicle.\n See ISO 3779 (17 characters)."
  },
  {
-  "name": "trigger",
+  "name": "trigger_type",
   "type": "RECORD",
   "mode": "NULLABLE",
   "description": "The type of trigger that caused the vehicle position to be sent.",
@@ -36,13 +36,13 @@
     "description": "The unknown context. Used when the context is CONTEXT_UNKNOWN."
    },
    {
-    "name": "additional_info",
+    "name": "trigger_info",
     "type": "STRING",
     "mode": "REPEATED",
     "description": "Additional OEM specific trigger info content.\n Can be used for both OEM specific and rFMS defined triggers.\n E.g. TRAILER_CONNECTED [id of trailer]."
    },
    {
-    "name": "driver_info",
+    "name": "driver_id",
     "type": "RECORD",
     "mode": "NULLABLE",
     "description": "The driver identification.\n Provided when the trigger type is DRIVER_LOGIN, DRIVER_LOGOUT, DRIVER_1_WORKING_STATE_CHANGED or DRIVER_2_WORKING_STATE_CHANGED.\n For DRIVER_LOGIN it is the id of the driver that logged in.\n For DRIVER_LOGOUT it is the id of the driver that logged out.\n For DRIVER_1_WORKING_STATE_CHANGED it is the id of driver 1.\n For DRIVER_2_WORKING_STATE_CHANGED it is the id of driver 2.",
@@ -245,15 +245,15 @@
  },
  {
   "name": "create_time",
-  "type": "INTEGER",
+  "type": "STRING",
   "mode": "NULLABLE",
-  "description": "The date and time the vehicle position was created. (Unix microseconds)"
+  "description": "The date and time the vehicle position was created. (RFC 3339)"
  },
  {
   "name": "receive_time",
-  "type": "INTEGER",
+  "type": "STRING",
   "mode": "NULLABLE",
-  "description": "The date and time the vehicle position was received. (Unix microseconds)"
+  "description": "The date and time the vehicle position was received. (RFC 3339)"
  },
  {
   "name": "gnss_position",
@@ -263,9 +263,9 @@
   "fields": [
    {
     "name": "time",
-    "type": "INTEGER",
+    "type": "STRING",
     "mode": "NULLABLE",
-    "description": "The date and time the GNSS position was recorded. (Unix microseconds)"
+    "description": "The time of the GNSS position data. (RFC 3339)"
    },
    {
     "name": "latitude",

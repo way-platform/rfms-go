@@ -152,21 +152,65 @@ const (
 	Trigger_CONTEXT_UNSPECIFIED Trigger_Context = 0
 	// The context is unknown.
 	Trigger_CONTEXT_UNKNOWN Trigger_Context = 1
-	// The context is RFMS.
+	// RFMS.
 	Trigger_RFMS Trigger_Context = 2
+	// VOLVO TRUCKS.
+	Trigger_VOLVO_TRUCKS Trigger_Context = 3
+	// SCANIA.
+	Trigger_SCANIA Trigger_Context = 4
+	// DAIMLER.
+	Trigger_DAIMLER Trigger_Context = 5
+	// IVECO.
+	Trigger_IVECO Trigger_Context = 6
+	// DAF.
+	Trigger_DAF Trigger_Context = 7
+	// MAN.
+	Trigger_MAN Trigger_Context = 8
+	// RENAULT TRUCKS.
+	Trigger_RENAULT_TRUCKS Trigger_Context = 9
+	// VDL.
+	Trigger_VDL Trigger_Context = 10
+	// VOLVO BUSES.
+	Trigger_VOLVO_BUSES Trigger_Context = 11
+	// IVECO BUS.
+	Trigger_IVECO_BUS Trigger_Context = 12
+	// IRISBUS.
+	Trigger_IRISBUS Trigger_Context = 13
 )
 
 // Enum value maps for Trigger_Context.
 var (
 	Trigger_Context_name = map[int32]string{
-		0: "CONTEXT_UNSPECIFIED",
-		1: "CONTEXT_UNKNOWN",
-		2: "RFMS",
+		0:  "CONTEXT_UNSPECIFIED",
+		1:  "CONTEXT_UNKNOWN",
+		2:  "RFMS",
+		3:  "VOLVO_TRUCKS",
+		4:  "SCANIA",
+		5:  "DAIMLER",
+		6:  "IVECO",
+		7:  "DAF",
+		8:  "MAN",
+		9:  "RENAULT_TRUCKS",
+		10: "VDL",
+		11: "VOLVO_BUSES",
+		12: "IVECO_BUS",
+		13: "IRISBUS",
 	}
 	Trigger_Context_value = map[string]int32{
 		"CONTEXT_UNSPECIFIED": 0,
 		"CONTEXT_UNKNOWN":     1,
 		"RFMS":                2,
+		"VOLVO_TRUCKS":        3,
+		"SCANIA":              4,
+		"DAIMLER":             5,
+		"IVECO":               6,
+		"DAF":                 7,
+		"MAN":                 8,
+		"RENAULT_TRUCKS":      9,
+		"VDL":                 10,
+		"VOLVO_BUSES":         11,
+		"IVECO_BUS":           12,
+		"IRISBUS":             13,
 	}
 )
 
@@ -403,8 +447,8 @@ type Trigger struct {
 	xxx_hidden_UnknownType                  *string                               `protobuf:"bytes,2,opt,name=unknown_type,json=unknownType"`
 	xxx_hidden_Context                      Trigger_Context                       `protobuf:"varint,3,opt,name=context,enum=wayplatform.rfms.v5.Trigger_Context"`
 	xxx_hidden_UnknownContext               *string                               `protobuf:"bytes,4,opt,name=unknown_context,json=unknownContext"`
-	xxx_hidden_AdditionalInfo               []string                              `protobuf:"bytes,5,rep,name=additional_info,json=additionalInfo"`
-	xxx_hidden_DriverInfo                   *DriverIdentification                 `protobuf:"bytes,6,opt,name=driver_info,json=driverInfo"`
+	xxx_hidden_TriggerInfo                  []string                              `protobuf:"bytes,5,rep,name=trigger_info,json=triggerInfo"`
+	xxx_hidden_DriverId                     *DriverIdentification                 `protobuf:"bytes,6,opt,name=driver_id,json=driverId"`
 	xxx_hidden_PtoId                        *string                               `protobuf:"bytes,7,opt,name=pto_id,json=ptoId"`
 	xxx_hidden_TellTaleInfo                 *TellTale                             `protobuf:"bytes,8,opt,name=tell_tale_info,json=tellTaleInfo"`
 	xxx_hidden_ChargingStatusInfo           *Trigger_ChargingStatusInfo           `protobuf:"bytes,9,opt,name=charging_status_info,json=chargingStatusInfo"`
@@ -479,16 +523,16 @@ func (x *Trigger) GetUnknownContext() string {
 	return ""
 }
 
-func (x *Trigger) GetAdditionalInfo() []string {
+func (x *Trigger) GetTriggerInfo() []string {
 	if x != nil {
-		return x.xxx_hidden_AdditionalInfo
+		return x.xxx_hidden_TriggerInfo
 	}
 	return nil
 }
 
-func (x *Trigger) GetDriverInfo() *DriverIdentification {
+func (x *Trigger) GetDriverId() *DriverIdentification {
 	if x != nil {
-		return x.xxx_hidden_DriverInfo
+		return x.xxx_hidden_DriverId
 	}
 	return nil
 }
@@ -551,12 +595,12 @@ func (x *Trigger) SetUnknownContext(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 11)
 }
 
-func (x *Trigger) SetAdditionalInfo(v []string) {
-	x.xxx_hidden_AdditionalInfo = v
+func (x *Trigger) SetTriggerInfo(v []string) {
+	x.xxx_hidden_TriggerInfo = v
 }
 
-func (x *Trigger) SetDriverInfo(v *DriverIdentification) {
-	x.xxx_hidden_DriverInfo = v
+func (x *Trigger) SetDriverId(v *DriverIdentification) {
+	x.xxx_hidden_DriverId = v
 }
 
 func (x *Trigger) SetPtoId(v string) {
@@ -608,11 +652,11 @@ func (x *Trigger) HasUnknownContext() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
-func (x *Trigger) HasDriverInfo() bool {
+func (x *Trigger) HasDriverId() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_DriverInfo != nil
+	return x.xxx_hidden_DriverId != nil
 }
 
 func (x *Trigger) HasPtoId() bool {
@@ -670,8 +714,8 @@ func (x *Trigger) ClearUnknownContext() {
 	x.xxx_hidden_UnknownContext = nil
 }
 
-func (x *Trigger) ClearDriverInfo() {
-	x.xxx_hidden_DriverInfo = nil
+func (x *Trigger) ClearDriverId() {
+	x.xxx_hidden_DriverId = nil
 }
 
 func (x *Trigger) ClearPtoId() {
@@ -709,14 +753,14 @@ type Trigger_builder struct {
 	// Additional OEM specific trigger info content.
 	// Can be used for both OEM specific and rFMS defined triggers.
 	// E.g. TRAILER_CONNECTED [id of trailer].
-	AdditionalInfo []string
+	TriggerInfo []string
 	// The driver identification.
 	// Provided when the trigger type is DRIVER_LOGIN, DRIVER_LOGOUT, DRIVER_1_WORKING_STATE_CHANGED or DRIVER_2_WORKING_STATE_CHANGED.
 	// For DRIVER_LOGIN it is the id of the driver that logged in.
 	// For DRIVER_LOGOUT it is the id of the driver that logged out.
 	// For DRIVER_1_WORKING_STATE_CHANGED it is the id of driver 1.
 	// For DRIVER_2_WORKING_STATE_CHANGED it is the id of driver 2.
-	DriverInfo *DriverIdentification
+	DriverId *DriverIdentification
 	// The id of a power take off.
 	// Provided when the trigger type is PTO_ENABLED or PTO_DISABLED.
 	PtoId *string
@@ -754,8 +798,8 @@ func (b0 Trigger_builder) Build() *Trigger {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 11)
 		x.xxx_hidden_UnknownContext = b.UnknownContext
 	}
-	x.xxx_hidden_AdditionalInfo = b.AdditionalInfo
-	x.xxx_hidden_DriverInfo = b.DriverInfo
+	x.xxx_hidden_TriggerInfo = b.TriggerInfo
+	x.xxx_hidden_DriverId = b.DriverId
 	if b.PtoId != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 11)
 		x.xxx_hidden_PtoId = b.PtoId
@@ -1226,15 +1270,14 @@ var File_wayplatform_rfms_v5_trigger_proto protoreflect.FileDescriptor
 
 const file_wayplatform_rfms_v5_trigger_proto_rawDesc = "" +
 	"\n" +
-	"!wayplatform/rfms/v5/trigger.proto\x12\x13wayplatform.rfms.v5\x1a3wayplatform/rfms/v5/charging_connection_state.proto\x1a/wayplatform/rfms/v5/driver_identification.proto\x1a#wayplatform/rfms/v5/tell_tale.proto\"\x90\x12\n" +
+	"!wayplatform/rfms/v5/trigger.proto\x12\x13wayplatform.rfms.v5\x1a3wayplatform/rfms/v5/charging_connection_state.proto\x1a/wayplatform/rfms/v5/driver_identification.proto\x1a#wayplatform/rfms/v5/tell_tale.proto\"\x99\x13\n" +
 	"\aTrigger\x125\n" +
 	"\x04type\x18\x01 \x01(\x0e2!.wayplatform.rfms.v5.Trigger.TypeR\x04type\x12!\n" +
 	"\funknown_type\x18\x02 \x01(\tR\vunknownType\x12>\n" +
 	"\acontext\x18\x03 \x01(\x0e2$.wayplatform.rfms.v5.Trigger.ContextR\acontext\x12'\n" +
-	"\x0funknown_context\x18\x04 \x01(\tR\x0eunknownContext\x12'\n" +
-	"\x0fadditional_info\x18\x05 \x03(\tR\x0eadditionalInfo\x12J\n" +
-	"\vdriver_info\x18\x06 \x01(\v2).wayplatform.rfms.v5.DriverIdentificationR\n" +
-	"driverInfo\x12\x15\n" +
+	"\x0funknown_context\x18\x04 \x01(\tR\x0eunknownContext\x12!\n" +
+	"\ftrigger_info\x18\x05 \x03(\tR\vtriggerInfo\x12F\n" +
+	"\tdriver_id\x18\x06 \x01(\v2).wayplatform.rfms.v5.DriverIdentificationR\bdriverId\x12\x15\n" +
 	"\x06pto_id\x18\a \x01(\tR\x05ptoId\x12C\n" +
 	"\x0etell_tale_info\x18\b \x01(\v2\x1d.wayplatform.rfms.v5.TellTaleR\ftellTaleInfo\x12a\n" +
 	"\x14charging_status_info\x18\t \x01(\v2/.wayplatform.rfms.v5.Trigger.ChargingStatusInfoR\x12chargingStatusInfo\x12\x80\x01\n" +
@@ -1307,11 +1350,24 @@ const file_wayplatform_rfms_v5_trigger_proto_rawDesc = "" +
 	".BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE\x10\x12\x12\x15\n" +
 	"\x11TRAILER_CONNECTED\x10\x13\x12\x18\n" +
 	"\x14TRAILER_DISCONNECTED\x10\x14\x12\t\n" +
-	"\x05ALARM\x10\x15\"A\n" +
+	"\x05ALARM\x10\x15\"\xd3\x01\n" +
 	"\aContext\x12\x17\n" +
 	"\x13CONTEXT_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fCONTEXT_UNKNOWN\x10\x01\x12\b\n" +
-	"\x04RFMS\x10\x02B\xde\x01\n" +
+	"\x04RFMS\x10\x02\x12\x10\n" +
+	"\fVOLVO_TRUCKS\x10\x03\x12\n" +
+	"\n" +
+	"\x06SCANIA\x10\x04\x12\v\n" +
+	"\aDAIMLER\x10\x05\x12\t\n" +
+	"\x05IVECO\x10\x06\x12\a\n" +
+	"\x03DAF\x10\a\x12\a\n" +
+	"\x03MAN\x10\b\x12\x12\n" +
+	"\x0eRENAULT_TRUCKS\x10\t\x12\a\n" +
+	"\x03VDL\x10\n" +
+	"\x12\x0f\n" +
+	"\vVOLVO_BUSES\x10\v\x12\r\n" +
+	"\tIVECO_BUS\x10\f\x12\v\n" +
+	"\aIRISBUS\x10\rB\xde\x01\n" +
 	"\x17com.wayplatform.rfms.v5B\fTriggerProtoP\x01ZGgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_rfms_v5_trigger_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
@@ -1333,7 +1389,7 @@ var file_wayplatform_rfms_v5_trigger_proto_goTypes = []any{
 var file_wayplatform_rfms_v5_trigger_proto_depIdxs = []int32{
 	0,  // 0: wayplatform.rfms.v5.Trigger.type:type_name -> wayplatform.rfms.v5.Trigger.Type
 	1,  // 1: wayplatform.rfms.v5.Trigger.context:type_name -> wayplatform.rfms.v5.Trigger.Context
-	9,  // 2: wayplatform.rfms.v5.Trigger.driver_info:type_name -> wayplatform.rfms.v5.DriverIdentification
+	9,  // 2: wayplatform.rfms.v5.Trigger.driver_id:type_name -> wayplatform.rfms.v5.DriverIdentification
 	10, // 3: wayplatform.rfms.v5.Trigger.tell_tale_info:type_name -> wayplatform.rfms.v5.TellTale
 	6,  // 4: wayplatform.rfms.v5.Trigger.charging_status_info:type_name -> wayplatform.rfms.v5.Trigger.ChargingStatusInfo
 	7,  // 5: wayplatform.rfms.v5.Trigger.charging_connection_status_info:type_name -> wayplatform.rfms.v5.Trigger.ChargingConnectionStatusInfo

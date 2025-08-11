@@ -3,7 +3,7 @@
   "name": "vin",
   "type": "STRING",
   "mode": "NULLABLE",
-  "description": "The vehicle identification number (VIN) of the vehicle."
+  "description": "The vehicle identification number (VIN) of the vehicle.\n See ISO 3779 (17 characters)"
  },
  {
   "name": "customer_vehicle_name",
@@ -71,7 +71,7 @@
   "name": "model",
   "type": "STRING",
   "mode": "NULLABLE",
-  "description": "The model of the vehicle."
+  "description": "The model of the vehicle.\n OEM-specific value."
  },
  {
   "name": "possible_fuel_types",
@@ -81,7 +81,7 @@
  },
  {
   "name": "unknown_possible_fuel_types",
-  "type": "INTEGER",
+  "type": "STRING",
   "mode": "REPEATED",
   "description": "The unknown possible fuel types of the vehicle.\n This is used when possible_fuel_types contains unknown fuel types."
  },
@@ -107,10 +107,10 @@
   "name": "chassis_type",
   "type": "STRING",
   "mode": "NULLABLE",
-  "description": "The chassis type of the vehicle."
+  "description": "The chassis type of the vehicle.\n This is used mainly for buses."
  },
  {
-  "name": "axle_count",
+  "name": "no_of_axles",
   "type": "INTEGER",
   "mode": "NULLABLE",
   "description": "The number of axles on the vehicle."
@@ -119,19 +119,19 @@
   "name": "total_fuel_tank_volume_ml",
   "type": "FLOAT",
   "mode": "NULLABLE",
-  "description": "The total fuel tank volume of the vehicle."
+  "description": "The total fuel tank volume of the vehicle. (ml)"
  },
  {
   "name": "total_fuel_tank_capacity_gaseous_kg",
   "type": "FLOAT",
   "mode": "NULLABLE",
-  "description": "The total fuel tank capacity of the vehicle."
+  "description": "The total gas tank capacity of the vehicle. (kg)"
  },
  {
   "name": "total_battery_pack_capacity_wh",
   "type": "FLOAT",
   "mode": "NULLABLE",
-  "description": "The total battery pack capacity of the vehicle."
+  "description": "The total battery pack capacity of the vehicle. (Wh)\n The value comes from the vehicle's specification.\n The value is static, i.e. does not take aging into consideration."
  },
  {
   "name": "tachograph_type",
@@ -161,7 +161,7 @@
   "name": "body_type",
   "type": "INTEGER",
   "mode": "NULLABLE",
-  "description": "The type of body on the chassis."
+  "description": "The type of body on the chassis.\n This is used mainly for buses."
  },
  {
   "name": "unknown_body_type",
@@ -180,5 +180,11 @@
   "type": "BOOLEAN",
   "mode": "NULLABLE",
   "description": "If the vehicle is equipped with a ramp or not. This is used mainly for buses."
+ },
+ {
+  "name": "authorized_paths",
+  "type": "STRING",
+  "mode": "REPEATED",
+  "description": "Paths that the client is authorized to call.\n Example: [\"/vehiclestatuses\", \"/vehiclepositions\"]"
  }
 ]

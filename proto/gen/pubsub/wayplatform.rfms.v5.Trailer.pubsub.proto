@@ -6,6 +6,7 @@ message Trailer {
   optional string customer_name = 4;
   optional int32 type = 5;
   optional double axle_load_sum_kg = 6;
+  repeated Axle axles = 7;
   message Axle {
     optional int32 position = 1;
     optional double load_kg = 2;

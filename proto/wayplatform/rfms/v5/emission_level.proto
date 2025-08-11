@@ -1,0 +1,40 @@
+edition = "2023";
+
+package wayplatform.rfms.v5;
+
+// Well-known emission levels.
+enum EmissionLevel {
+  // Default value. This value is not used.
+  EMISSION_LEVEL_UNSPECIFIED = 0;
+  // Unknown emission level.
+  EMISSION_LEVEL_UNKNOWN = 1;
+  // European Union, Heavy-Duty Truck and Bus Engines.
+  EURO_III = 2;
+  EURO_III_EEV = 3;
+  EURO_IV = 4;
+  EURO_V = 5;
+  EURO_VI = 6;
+  EURO_VII = 7;
+  // European Union, Nonroad Engines.
+  EURO_STAGE_III = 8;
+  EURO_STAGE_IV = 9;
+  EURO_STAGE_V = 10;
+  // United_States, Heavy-Duty Truck and Bus Engines.
+  EPA_2004 = 11;
+  EPA_2007 = 12;
+  EPA_2010 = 13;
+  EPA_2015_NOX10 = 14;
+  EPA_2015_NOX05 = 15;
+  EPA_2015_NOX02 = 16;
+  // United_States, Nonroad Engines.
+  EPA_TIER_2 = 17;
+  EPA_TIER_3 = 18;
+  EPA_TIER_4_2008 = 19;
+  EPA_TIER_4_2013 = 20;
+  // Brazil, Heavy-Duty Truck and Bus Engines.
+  PROCONVE_P5 = 21;
+  PROCONVE_P6 = 22;
+  PROCONVE_P7 = 23;
+  // Brazil, Nonroad Engines.
+  PROCONVE_MARI = 24;
+}

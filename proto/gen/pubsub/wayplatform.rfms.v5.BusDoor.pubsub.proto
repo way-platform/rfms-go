@@ -1,0 +1,34 @@
+syntax = "proto2";
+message BusDoor {
+  optional int32 number = 1;
+  optional int32 enabled_state = 2;
+  optional string unknown_enabled_state = 3;
+  optional int32 open_state = 4;
+  optional string unknown_open_state = 5;
+  optional int32 lock_state = 6;
+  optional string unknown_lock_state = 7;
+  enum EnabledState {
+    ENABLED_STATE_UNSPECIFIED = 0;
+    ENABLED_STATE_UNKNOWN = 1;
+    ENABLED_STATE_ERROR = 2;
+    ENABLED_STATE_NOT_AVAILABLE = 3;
+    ENABLED = 4;
+    DISABLED = 5;
+  }
+  enum OpenState {
+    OPEN_STATE_UNSPECIFIED = 0;
+    OPEN_STATE_UNKNOWN = 1;
+    OPEN_STATE_ERROR = 2;
+    OPEN_STATE_NOT_AVAILABLE = 3;
+    CLOSED = 4;
+    OPEN = 5;
+  }
+  enum LockState {
+    LOCK_STATE_UNSPECIFIED = 0;
+    LOCK_STATE_UNKNOWN = 1;
+    LOCK_STATE_ERROR = 2;
+    LOCK_STATE_NOT_AVAILABLE = 3;
+    UNLOCKED = 4;
+    LOCKED = 5;
+  }
+}

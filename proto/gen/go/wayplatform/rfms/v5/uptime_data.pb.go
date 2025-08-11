@@ -21,20 +21,20 @@ const (
 )
 
 // The state of an alternator.
-type UptimeData_Alternator_State int32
+type UptimeData_AlternatorInfo_State int32
 
 const (
-	UptimeData_Alternator_STATE_UNSPECIFIED   UptimeData_Alternator_State = 0
-	UptimeData_Alternator_STATE_UNKNOWN       UptimeData_Alternator_State = 1
-	UptimeData_Alternator_STATE_ERROR         UptimeData_Alternator_State = 2
-	UptimeData_Alternator_STATE_NOT_AVAILABLE UptimeData_Alternator_State = 3
-	UptimeData_Alternator_NOT_CHARGING        UptimeData_Alternator_State = 4
-	UptimeData_Alternator_CHARGING            UptimeData_Alternator_State = 5
+	UptimeData_AlternatorInfo_STATE_UNSPECIFIED   UptimeData_AlternatorInfo_State = 0
+	UptimeData_AlternatorInfo_STATE_UNKNOWN       UptimeData_AlternatorInfo_State = 1
+	UptimeData_AlternatorInfo_STATE_ERROR         UptimeData_AlternatorInfo_State = 2
+	UptimeData_AlternatorInfo_STATE_NOT_AVAILABLE UptimeData_AlternatorInfo_State = 3
+	UptimeData_AlternatorInfo_NOT_CHARGING        UptimeData_AlternatorInfo_State = 4
+	UptimeData_AlternatorInfo_CHARGING            UptimeData_AlternatorInfo_State = 5
 )
 
-// Enum value maps for UptimeData_Alternator_State.
+// Enum value maps for UptimeData_AlternatorInfo_State.
 var (
-	UptimeData_Alternator_State_name = map[int32]string{
+	UptimeData_AlternatorInfo_State_name = map[int32]string{
 		0: "STATE_UNSPECIFIED",
 		1: "STATE_UNKNOWN",
 		2: "STATE_ERROR",
@@ -42,7 +42,7 @@ var (
 		4: "NOT_CHARGING",
 		5: "CHARGING",
 	}
-	UptimeData_Alternator_State_value = map[string]int32{
+	UptimeData_AlternatorInfo_State_value = map[string]int32{
 		"STATE_UNSPECIFIED":   0,
 		"STATE_UNKNOWN":       1,
 		"STATE_ERROR":         2,
@@ -52,44 +52,44 @@ var (
 	}
 )
 
-func (x UptimeData_Alternator_State) Enum() *UptimeData_Alternator_State {
-	p := new(UptimeData_Alternator_State)
+func (x UptimeData_AlternatorInfo_State) Enum() *UptimeData_AlternatorInfo_State {
+	p := new(UptimeData_AlternatorInfo_State)
 	*p = x
 	return p
 }
 
-func (x UptimeData_Alternator_State) String() string {
+func (x UptimeData_AlternatorInfo_State) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (UptimeData_Alternator_State) Descriptor() protoreflect.EnumDescriptor {
+func (UptimeData_AlternatorInfo_State) Descriptor() protoreflect.EnumDescriptor {
 	return file_wayplatform_rfms_v5_uptime_data_proto_enumTypes[0].Descriptor()
 }
 
-func (UptimeData_Alternator_State) Type() protoreflect.EnumType {
+func (UptimeData_AlternatorInfo_State) Type() protoreflect.EnumType {
 	return &file_wayplatform_rfms_v5_uptime_data_proto_enumTypes[0]
 }
 
-func (x UptimeData_Alternator_State) Number() protoreflect.EnumNumber {
+func (x UptimeData_AlternatorInfo_State) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
 // Uptime data for a vehicle.
 type UptimeData struct {
-	state                                        protoimpl.MessageState    `protogen:"opaque.v1"`
-	xxx_hidden_TellTales                         *[]*TellTale              `protobuf:"bytes,1,rep,name=tell_tales,json=tellTales"`
-	xxx_hidden_ServiceDistanceM                  float64                   `protobuf:"fixed64,2,opt,name=service_distance_m,json=serviceDistanceM"`
-	xxx_hidden_EngineCoolantTemperatureC         float64                   `protobuf:"fixed64,3,opt,name=engine_coolant_temperature_c,json=engineCoolantTemperatureC"`
-	xxx_hidden_HvessOutletCoolantTemperatureC    float64                   `protobuf:"fixed64,4,opt,name=hvess_outlet_coolant_temperature_c,json=hvessOutletCoolantTemperatureC"`
-	xxx_hidden_HvessTemperatureC                 float64                   `protobuf:"fixed64,5,opt,name=hvess_temperature_c,json=hvessTemperatureC"`
-	xxx_hidden_ServiceBrakeAirPressureCircuit1Pa float64                   `protobuf:"fixed64,6,opt,name=service_brake_air_pressure_circuit1_pa,json=serviceBrakeAirPressureCircuit1Pa"`
-	xxx_hidden_ServiceBrakeAirPressureCircuit2Pa float64                   `protobuf:"fixed64,7,opt,name=service_brake_air_pressure_circuit2_pa,json=serviceBrakeAirPressureCircuit2Pa"`
-	xxx_hidden_AtLeastOneDoorOpenDurationS       float64                   `protobuf:"fixed64,8,opt,name=at_least_one_door_open_duration_s,json=atLeastOneDoorOpenDurationS"`
-	xxx_hidden_Alternators                       *[]*UptimeData_Alternator `protobuf:"bytes,9,rep,name=alternators"`
-	xxx_hidden_BellowPressureFrontAxleLeftPa     float64                   `protobuf:"fixed64,10,opt,name=bellow_pressure_front_axle_left_pa,json=bellowPressureFrontAxleLeftPa"`
-	xxx_hidden_BellowPressureFrontAxleRightPa    float64                   `protobuf:"fixed64,11,opt,name=bellow_pressure_front_axle_right_pa,json=bellowPressureFrontAxleRightPa"`
-	xxx_hidden_BellowPressureRearAxleLeftPa      float64                   `protobuf:"fixed64,12,opt,name=bellow_pressure_rear_axle_left_pa,json=bellowPressureRearAxleLeftPa"`
-	xxx_hidden_BellowPressureRearAxleRightPa     float64                   `protobuf:"fixed64,13,opt,name=bellow_pressure_rear_axle_right_pa,json=bellowPressureRearAxleRightPa"`
+	state                                        protoimpl.MessageState        `protogen:"opaque.v1"`
+	xxx_hidden_TellTaleInfo                      *[]*TellTale                  `protobuf:"bytes,1,rep,name=tell_tale_info,json=tellTaleInfo"`
+	xxx_hidden_ServiceDistanceM                  float64                       `protobuf:"fixed64,2,opt,name=service_distance_m,json=serviceDistanceM"`
+	xxx_hidden_EngineCoolantTemperatureC         float64                       `protobuf:"fixed64,3,opt,name=engine_coolant_temperature_c,json=engineCoolantTemperatureC"`
+	xxx_hidden_HvessOutletCoolantTemperatureC    float64                       `protobuf:"fixed64,4,opt,name=hvess_outlet_coolant_temperature_c,json=hvessOutletCoolantTemperatureC"`
+	xxx_hidden_HvessTemperatureC                 float64                       `protobuf:"fixed64,5,opt,name=hvess_temperature_c,json=hvessTemperatureC"`
+	xxx_hidden_ServiceBrakeAirPressureCircuit1Pa float64                       `protobuf:"fixed64,6,opt,name=service_brake_air_pressure_circuit1_pa,json=serviceBrakeAirPressureCircuit1Pa"`
+	xxx_hidden_ServiceBrakeAirPressureCircuit2Pa float64                       `protobuf:"fixed64,7,opt,name=service_brake_air_pressure_circuit2_pa,json=serviceBrakeAirPressureCircuit2Pa"`
+	xxx_hidden_AtLeastOneDoorOpenDurationS       float64                       `protobuf:"fixed64,8,opt,name=at_least_one_door_open_duration_s,json=atLeastOneDoorOpenDurationS"`
+	xxx_hidden_AlternatorInfo                    *[]*UptimeData_AlternatorInfo `protobuf:"bytes,9,rep,name=alternator_info,json=alternatorInfo"`
+	xxx_hidden_BellowPressureFrontAxleLeftPa     float64                       `protobuf:"fixed64,10,opt,name=bellow_pressure_front_axle_left_pa,json=bellowPressureFrontAxleLeftPa"`
+	xxx_hidden_BellowPressureFrontAxleRightPa    float64                       `protobuf:"fixed64,11,opt,name=bellow_pressure_front_axle_right_pa,json=bellowPressureFrontAxleRightPa"`
+	xxx_hidden_BellowPressureRearAxleLeftPa      float64                       `protobuf:"fixed64,12,opt,name=bellow_pressure_rear_axle_left_pa,json=bellowPressureRearAxleLeftPa"`
+	xxx_hidden_BellowPressureRearAxleRightPa     float64                       `protobuf:"fixed64,13,opt,name=bellow_pressure_rear_axle_right_pa,json=bellowPressureRearAxleRightPa"`
 	XXX_raceDetectHookData                       protoimpl.RaceDetectHookData
 	XXX_presence                                 [1]uint32
 	unknownFields                                protoimpl.UnknownFields
@@ -121,10 +121,10 @@ func (x *UptimeData) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *UptimeData) GetTellTales() []*TellTale {
+func (x *UptimeData) GetTellTaleInfo() []*TellTale {
 	if x != nil {
-		if x.xxx_hidden_TellTales != nil {
-			return *x.xxx_hidden_TellTales
+		if x.xxx_hidden_TellTaleInfo != nil {
+			return *x.xxx_hidden_TellTaleInfo
 		}
 	}
 	return nil
@@ -179,10 +179,10 @@ func (x *UptimeData) GetAtLeastOneDoorOpenDurationS() float64 {
 	return 0
 }
 
-func (x *UptimeData) GetAlternators() []*UptimeData_Alternator {
+func (x *UptimeData) GetAlternatorInfo() []*UptimeData_AlternatorInfo {
 	if x != nil {
-		if x.xxx_hidden_Alternators != nil {
-			return *x.xxx_hidden_Alternators
+		if x.xxx_hidden_AlternatorInfo != nil {
+			return *x.xxx_hidden_AlternatorInfo
 		}
 	}
 	return nil
@@ -216,8 +216,8 @@ func (x *UptimeData) GetBellowPressureRearAxleRightPa() float64 {
 	return 0
 }
 
-func (x *UptimeData) SetTellTales(v []*TellTale) {
-	x.xxx_hidden_TellTales = &v
+func (x *UptimeData) SetTellTaleInfo(v []*TellTale) {
+	x.xxx_hidden_TellTaleInfo = &v
 }
 
 func (x *UptimeData) SetServiceDistanceM(v float64) {
@@ -255,8 +255,8 @@ func (x *UptimeData) SetAtLeastOneDoorOpenDurationS(v float64) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 13)
 }
 
-func (x *UptimeData) SetAlternators(v []*UptimeData_Alternator) {
-	x.xxx_hidden_Alternators = &v
+func (x *UptimeData) SetAlternatorInfo(v []*UptimeData_AlternatorInfo) {
+	x.xxx_hidden_AlternatorInfo = &v
 }
 
 func (x *UptimeData) SetBellowPressureFrontAxleLeftPa(v float64) {
@@ -415,7 +415,7 @@ type UptimeData_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// List of tell tales with the actual state for each tell tale.
-	TellTales []*TellTale
+	TellTaleInfo []*TellTale
 	// The distance in meter to the next service. (m)
 	ServiceDistanceM *float64
 	// The temperature of the coolant liquid. (°C)
@@ -435,7 +435,7 @@ type UptimeData_builder struct {
 	AtLeastOneDoorOpenDurationS *float64
 	// The alternator status of up to 4 alternators.
 	// Used mainly for buses.
-	Alternators []*UptimeData_Alternator
+	AlternatorInfo []*UptimeData_AlternatorInfo
 	// The pressure of the bellow pressure front axle left. (Pa)
 	// Used mainly for buses.
 	BellowPressureFrontAxleLeftPa *float64
@@ -454,7 +454,7 @@ func (b0 UptimeData_builder) Build() *UptimeData {
 	m0 := &UptimeData{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.xxx_hidden_TellTales = &b.TellTales
+	x.xxx_hidden_TellTaleInfo = &b.TellTaleInfo
 	if b.ServiceDistanceM != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 13)
 		x.xxx_hidden_ServiceDistanceM = *b.ServiceDistanceM
@@ -483,7 +483,7 @@ func (b0 UptimeData_builder) Build() *UptimeData {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 13)
 		x.xxx_hidden_AtLeastOneDoorOpenDurationS = *b.AtLeastOneDoorOpenDurationS
 	}
-	x.xxx_hidden_Alternators = &b.Alternators
+	x.xxx_hidden_AlternatorInfo = &b.AlternatorInfo
 	if b.BellowPressureFrontAxleLeftPa != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 9, 13)
 		x.xxx_hidden_BellowPressureFrontAxleLeftPa = *b.BellowPressureFrontAxleLeftPa
@@ -504,31 +504,31 @@ func (b0 UptimeData_builder) Build() *UptimeData {
 }
 
 // An alternator.
-type UptimeData_Alternator struct {
-	state                   protoimpl.MessageState      `protogen:"opaque.v1"`
-	xxx_hidden_Number       int32                       `protobuf:"varint,1,opt,name=number"`
-	xxx_hidden_State        UptimeData_Alternator_State `protobuf:"varint,2,opt,name=state,enum=wayplatform.rfms.v5.UptimeData_Alternator_State"`
-	xxx_hidden_UnknownState *string                     `protobuf:"bytes,3,opt,name=unknown_state,json=unknownState"`
+type UptimeData_AlternatorInfo struct {
+	state                   protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_Number       int32                           `protobuf:"varint,1,opt,name=number"`
+	xxx_hidden_State        UptimeData_AlternatorInfo_State `protobuf:"varint,2,opt,name=state,enum=wayplatform.rfms.v5.UptimeData_AlternatorInfo_State"`
+	xxx_hidden_UnknownState *string                         `protobuf:"bytes,3,opt,name=unknown_state,json=unknownState"`
 	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
 	XXX_presence            [1]uint32
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
 
-func (x *UptimeData_Alternator) Reset() {
-	*x = UptimeData_Alternator{}
+func (x *UptimeData_AlternatorInfo) Reset() {
+	*x = UptimeData_AlternatorInfo{}
 	mi := &file_wayplatform_rfms_v5_uptime_data_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UptimeData_Alternator) String() string {
+func (x *UptimeData_AlternatorInfo) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UptimeData_Alternator) ProtoMessage() {}
+func (*UptimeData_AlternatorInfo) ProtoMessage() {}
 
-func (x *UptimeData_Alternator) ProtoReflect() protoreflect.Message {
+func (x *UptimeData_AlternatorInfo) ProtoReflect() protoreflect.Message {
 	mi := &file_wayplatform_rfms_v5_uptime_data_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -540,23 +540,23 @@ func (x *UptimeData_Alternator) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *UptimeData_Alternator) GetNumber() int32 {
+func (x *UptimeData_AlternatorInfo) GetNumber() int32 {
 	if x != nil {
 		return x.xxx_hidden_Number
 	}
 	return 0
 }
 
-func (x *UptimeData_Alternator) GetState() UptimeData_Alternator_State {
+func (x *UptimeData_AlternatorInfo) GetState() UptimeData_AlternatorInfo_State {
 	if x != nil {
 		if protoimpl.X.Present(&(x.XXX_presence[0]), 1) {
 			return x.xxx_hidden_State
 		}
 	}
-	return UptimeData_Alternator_STATE_UNSPECIFIED
+	return UptimeData_AlternatorInfo_STATE_UNSPECIFIED
 }
 
-func (x *UptimeData_Alternator) GetUnknownState() string {
+func (x *UptimeData_AlternatorInfo) GetUnknownState() string {
 	if x != nil {
 		if x.xxx_hidden_UnknownState != nil {
 			return *x.xxx_hidden_UnknownState
@@ -566,71 +566,71 @@ func (x *UptimeData_Alternator) GetUnknownState() string {
 	return ""
 }
 
-func (x *UptimeData_Alternator) SetNumber(v int32) {
+func (x *UptimeData_AlternatorInfo) SetNumber(v int32) {
 	x.xxx_hidden_Number = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
-func (x *UptimeData_Alternator) SetState(v UptimeData_Alternator_State) {
+func (x *UptimeData_AlternatorInfo) SetState(v UptimeData_AlternatorInfo_State) {
 	x.xxx_hidden_State = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
-func (x *UptimeData_Alternator) SetUnknownState(v string) {
+func (x *UptimeData_AlternatorInfo) SetUnknownState(v string) {
 	x.xxx_hidden_UnknownState = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
-func (x *UptimeData_Alternator) HasNumber() bool {
+func (x *UptimeData_AlternatorInfo) HasNumber() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *UptimeData_Alternator) HasState() bool {
+func (x *UptimeData_AlternatorInfo) HasState() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *UptimeData_Alternator) HasUnknownState() bool {
+func (x *UptimeData_AlternatorInfo) HasUnknownState() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
-func (x *UptimeData_Alternator) ClearNumber() {
+func (x *UptimeData_AlternatorInfo) ClearNumber() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Number = 0
 }
 
-func (x *UptimeData_Alternator) ClearState() {
+func (x *UptimeData_AlternatorInfo) ClearState() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_State = UptimeData_Alternator_STATE_UNSPECIFIED
+	x.xxx_hidden_State = UptimeData_AlternatorInfo_STATE_UNSPECIFIED
 }
 
-func (x *UptimeData_Alternator) ClearUnknownState() {
+func (x *UptimeData_AlternatorInfo) ClearUnknownState() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_UnknownState = nil
 }
 
-type UptimeData_Alternator_builder struct {
+type UptimeData_AlternatorInfo_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// The number of the alternator.
 	Number *int32
 	// The status of the alternator.
-	State *UptimeData_Alternator_State
+	State *UptimeData_AlternatorInfo_State
 	// The unknown state of the alternator.
 	// Used when the state is STATE_UNKNOWN.
 	UnknownState *string
 }
 
-func (b0 UptimeData_Alternator_builder) Build() *UptimeData_Alternator {
-	m0 := &UptimeData_Alternator{}
+func (b0 UptimeData_AlternatorInfo_builder) Build() *UptimeData_AlternatorInfo {
+	m0 := &UptimeData_AlternatorInfo{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Number != nil {
@@ -652,28 +652,26 @@ var File_wayplatform_rfms_v5_uptime_data_proto protoreflect.FileDescriptor
 
 const file_wayplatform_rfms_v5_uptime_data_proto_rawDesc = "" +
 	"\n" +
-	"%wayplatform/rfms/v5/uptime_data.proto\x12\x13wayplatform.rfms.v5\x1a#wayplatform/rfms/v5/tell_tale.proto\"\xae\t\n" +
+	"%wayplatform/rfms/v5/uptime_data.proto\x12\x13wayplatform.rfms.v5\x1a#wayplatform/rfms/v5/tell_tale.proto\"\xc8\t\n" +
 	"\n" +
-	"UptimeData\x12<\n" +
-	"\n" +
-	"tell_tales\x18\x01 \x03(\v2\x1d.wayplatform.rfms.v5.TellTaleR\ttellTales\x12,\n" +
+	"UptimeData\x12C\n" +
+	"\x0etell_tale_info\x18\x01 \x03(\v2\x1d.wayplatform.rfms.v5.TellTaleR\ftellTaleInfo\x12,\n" +
 	"\x12service_distance_m\x18\x02 \x01(\x01R\x10serviceDistanceM\x12?\n" +
 	"\x1cengine_coolant_temperature_c\x18\x03 \x01(\x01R\x19engineCoolantTemperatureC\x12J\n" +
 	"\"hvess_outlet_coolant_temperature_c\x18\x04 \x01(\x01R\x1ehvessOutletCoolantTemperatureC\x12.\n" +
 	"\x13hvess_temperature_c\x18\x05 \x01(\x01R\x11hvessTemperatureC\x12Q\n" +
 	"&service_brake_air_pressure_circuit1_pa\x18\x06 \x01(\x01R!serviceBrakeAirPressureCircuit1Pa\x12Q\n" +
 	"&service_brake_air_pressure_circuit2_pa\x18\a \x01(\x01R!serviceBrakeAirPressureCircuit2Pa\x12F\n" +
-	"!at_least_one_door_open_duration_s\x18\b \x01(\x01R\x1batLeastOneDoorOpenDurationS\x12L\n" +
-	"\valternators\x18\t \x03(\v2*.wayplatform.rfms.v5.UptimeData.AlternatorR\valternators\x12I\n" +
+	"!at_least_one_door_open_duration_s\x18\b \x01(\x01R\x1batLeastOneDoorOpenDurationS\x12W\n" +
+	"\x0falternator_info\x18\t \x03(\v2..wayplatform.rfms.v5.UptimeData.AlternatorInfoR\x0ealternatorInfo\x12I\n" +
 	"\"bellow_pressure_front_axle_left_pa\x18\n" +
 	" \x01(\x01R\x1dbellowPressureFrontAxleLeftPa\x12K\n" +
 	"#bellow_pressure_front_axle_right_pa\x18\v \x01(\x01R\x1ebellowPressureFrontAxleRightPa\x12G\n" +
 	"!bellow_pressure_rear_axle_left_pa\x18\f \x01(\x01R\x1cbellowPressureRearAxleLeftPa\x12I\n" +
-	"\"bellow_pressure_rear_axle_right_pa\x18\r \x01(\x01R\x1dbellowPressureRearAxleRightPa\x1a\x8e\x02\n" +
-	"\n" +
-	"Alternator\x12\x16\n" +
-	"\x06number\x18\x01 \x01(\x05R\x06number\x12F\n" +
-	"\x05state\x18\x02 \x01(\x0e20.wayplatform.rfms.v5.UptimeData.Alternator.StateR\x05state\x12#\n" +
+	"\"bellow_pressure_rear_axle_right_pa\x18\r \x01(\x01R\x1dbellowPressureRearAxleRightPa\x1a\x96\x02\n" +
+	"\x0eAlternatorInfo\x12\x16\n" +
+	"\x06number\x18\x01 \x01(\x05R\x06number\x12J\n" +
+	"\x05state\x18\x02 \x01(\x0e24.wayplatform.rfms.v5.UptimeData.AlternatorInfo.StateR\x05state\x12#\n" +
 	"\runknown_state\x18\x03 \x01(\tR\funknownState\"{\n" +
 	"\x05State\x12\x15\n" +
 	"\x11STATE_UNSPECIFIED\x10\x00\x12\x11\n" +
@@ -687,15 +685,15 @@ const file_wayplatform_rfms_v5_uptime_data_proto_rawDesc = "" +
 var file_wayplatform_rfms_v5_uptime_data_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_wayplatform_rfms_v5_uptime_data_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_wayplatform_rfms_v5_uptime_data_proto_goTypes = []any{
-	(UptimeData_Alternator_State)(0), // 0: wayplatform.rfms.v5.UptimeData.Alternator.State
-	(*UptimeData)(nil),               // 1: wayplatform.rfms.v5.UptimeData
-	(*UptimeData_Alternator)(nil),    // 2: wayplatform.rfms.v5.UptimeData.Alternator
-	(*TellTale)(nil),                 // 3: wayplatform.rfms.v5.TellTale
+	(UptimeData_AlternatorInfo_State)(0), // 0: wayplatform.rfms.v5.UptimeData.AlternatorInfo.State
+	(*UptimeData)(nil),                   // 1: wayplatform.rfms.v5.UptimeData
+	(*UptimeData_AlternatorInfo)(nil),    // 2: wayplatform.rfms.v5.UptimeData.AlternatorInfo
+	(*TellTale)(nil),                     // 3: wayplatform.rfms.v5.TellTale
 }
 var file_wayplatform_rfms_v5_uptime_data_proto_depIdxs = []int32{
-	3, // 0: wayplatform.rfms.v5.UptimeData.tell_tales:type_name -> wayplatform.rfms.v5.TellTale
-	2, // 1: wayplatform.rfms.v5.UptimeData.alternators:type_name -> wayplatform.rfms.v5.UptimeData.Alternator
-	0, // 2: wayplatform.rfms.v5.UptimeData.Alternator.state:type_name -> wayplatform.rfms.v5.UptimeData.Alternator.State
+	3, // 0: wayplatform.rfms.v5.UptimeData.tell_tale_info:type_name -> wayplatform.rfms.v5.TellTale
+	2, // 1: wayplatform.rfms.v5.UptimeData.alternator_info:type_name -> wayplatform.rfms.v5.UptimeData.AlternatorInfo
+	0, // 2: wayplatform.rfms.v5.UptimeData.AlternatorInfo.state:type_name -> wayplatform.rfms.v5.UptimeData.AlternatorInfo.State
 	3, // [3:3] is the sub-list for method output_type
 	3, // [3:3] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name

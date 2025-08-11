@@ -1,0 +1,30 @@
+edition = "2023";
+
+package wayplatform.rfms.v5;
+
+// Well-known tachograph types.
+//
+// This enum is not exhaustive. It identifies commonly used tachograph types across
+// OEM-specific implementations of rFMS APIs.
+enum TachographType {
+  // Default value. This value is not used.
+  TACHOGRAPH_TYPE_UNSPECIFIED = 0;
+  // Unknown tachograph type.
+  TACHOGRAPH_TYPE_UNKNOWN = 1;
+  // Modular tachograph.
+  MTCO = 2;
+  // Digital tachograph, unknown generation.
+  DTCO = 3;
+  // Digital tachograph generation 1.
+  DTCO_G1 = 4;
+  // Digital tachograph generation 2.
+  DTCO_G2 = 5;
+  // Tachograph simulator.
+  TSU = 6;
+  // No tachograph in the vehicle.
+  NONE = 7;
+  // Stoneridge Smart. (Scania)
+  STONERIDGE_SMART = 8;
+  // Stoneridge Smart 2. (Scania)
+  STONERIDGE_SMART2 = 9;
+}

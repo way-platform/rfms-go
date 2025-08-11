@@ -1,6 +1,6 @@
 syntax = "proto2";
 message UptimeData {
-  repeated Inline_wayplatform_rfms_v5_TellTale tell_tales = 1;
+  repeated Inline_wayplatform_rfms_v5_TellTale tell_tale_info = 1;
   optional double service_distance_m = 2;
   optional double engine_coolant_temperature_c = 3;
   optional double hvess_outlet_coolant_temperature_c = 4;
@@ -8,12 +8,12 @@ message UptimeData {
   optional double service_brake_air_pressure_circuit1_pa = 6;
   optional double service_brake_air_pressure_circuit2_pa = 7;
   optional double at_least_one_door_open_duration_s = 8;
-  repeated Alternator alternators = 9;
+  repeated AlternatorInfo alternator_info = 9;
   optional double bellow_pressure_front_axle_left_pa = 10;
   optional double bellow_pressure_front_axle_right_pa = 11;
   optional double bellow_pressure_rear_axle_left_pa = 12;
   optional double bellow_pressure_rear_axle_right_pa = 13;
-  message Alternator {
+  message AlternatorInfo {
     optional int32 number = 1;
     optional int32 state = 2;
     optional string unknown_state = 3;

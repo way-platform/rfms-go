@@ -66,79 +66,231 @@ message AccumulatedData {
   // The total distance the vehicle has driven where the brake pedal has been used. (m)
   double brake_pedal_speed_over_zero_distance_m = 18;
 
-  repeated FromToClass acceleration_pedal_position_class = 19;
+  // Histogram of stats for acceleration pedal position intervals. (percent)
+  //
+  // Default:
+  //   Min interval: [0%, 20%)
+  //   Max interval: [80%, 100%]
+  //   Bucket count: 5
+  //   Bucket width: 20%
+  repeated FromToClass acceleration_pedal_position_class_percent = 19;
 
-  repeated FromToClass brake_pedal_position_class = 20;
+  // Histogram of stats for brake pedal position intervals. (percent)
+  //
+  // Default:
+  //   Min interval: [0%, 20%)
+  //   Max interval: [80%, 100%]
+  //   Bucket count: 5
+  //   Bucket width: 20%
+  repeated FromToClass brake_pedal_position_class_percent = 20;
 
-  repeated FromToClass acceleration_class = 21;
+  // Histogram of stats for acceleration intervals. (m/s2)
+  //
+  // Default:
+  //   Min interval: (...,  -1.1)
+  //   Mid interval: (-0.1, 0.1)
+  //   Max interval: [1.1,  ...)
+  //   Bucket count: 11
+  //   Bucket width: 0.2
+  repeated FromToClass acceleration_class_mps2 = 21;
 
-  repeated FromToClass high_acceleration_class = 22;
+  // Histogram of stats for acceleration intervals. (m/s2)
+  //
+  // Default:
+  //   Min interval: (...,  -1.1)
+  //   Mid interval: (-0.1, 0.1)
+  //   Max interval: [1.1,  ...)
+  //   Bucket count: 11
+  //   Bucket width: 0.2
+  repeated FromToClass high_acceleration_class_mps2 = 22;
 
-  repeated FromToClass retarder_torque_class = 23;
+  // Histogram of stats by retarder usage. (%)
+  //
+  // Default:
+  //  Min interval: (0%, 20%)
+  //  Max interval: [80%, 100%]
+  //  Bucket count: 5
+  //  Bucket width: 20%
+  repeated FromToClass retarder_torque_class_percent = 23;
 
+  // Histogram of stats when driving without torque, with gear (clutch is engaged).
+  //
+  // Labels:
+  //   DRIVING_WITHOUT_TORQUE
   repeated LabelClass driving_without_torque_class = 24;
 
-  repeated FromToClassCombustion engine_torque_class = 25;
+  // Histogram of stats by EEC1 value (Actual Engine-Percent Torque). (%)
+  //
+  // Default:
+  //   Min interval: [0%, 10%)
+  //   Max interval: [90%, 100%]
+  //   Bucket count: 10
+  //   Bucket width: 10%
+  repeated FromToClassCombustion engine_torque_class_percent = 25;
 
-  repeated FromToClassElectrical electric_motor_torque_class = 26;
+  // Histogram of stats by electric engine torque (Actual Engine-Percent Torque). (%)
+  //
+  // Default:
+  //   Min interval: [0%, 10%)
+  //   Max interval: [90%, 100%]
+  //   Bucket count: 10
+  //   Bucket width: 10%
+  repeated FromToClassElectrical electric_motor_torque_class_percent = 26;
 
-  repeated FromToClassCombustion engine_torque_at_current_speed_class = 27;
+  // Histogram of stats based on EEC2 value (Engine Percent Load At Current Speed). (%)
+  //
+  // Default:
+  //   Min interval: [0%, 10%)
+  //   Max interval: [90%, 100%]
+  //   Bucket count: 10
+  //   Bucket width: 10%
+  repeated FromToClassCombustion engine_torque_at_current_speed_class_percent = 27;
 
-  repeated FromToClassElectrical electric_motor_torque_at_current_speed_class = 28;
+  // Histogram of stats based on electric motor EEC2 value. (Engine Percent Load At Current Speed).
+  //
+  // Default:
+  //   Min interval: [0%, 10%)
+  //   Max interval: [90%, 100%]
+  //   Bucket count: 10
+  //   Bucket width: 10%
+  repeated FromToClassElectrical electric_motor_torque_at_current_speed_class_percent = 28;
 
-  repeated FromToClass vehicle_speed_class = 29;
+  // Histogram of stats based on vehicle speed. (km/h)
+  // Engine on (RPM>0 or electric motor in crank mode).
+  //
+  // Default:
+  //   Min interval: [0km/h, 4km/h)
+  //   Max interval: [156km/h, ...)
+  //   Bucket count: 40
+  //   Bucket width: 4km/h
+  repeated FromToClass vehicle_speed_class_kmh = 29;
 
-  repeated FromToClass engine_speed_class = 30;
+  // Histogram of stats based on the RPM of the combustion engine. (rpm)
+  // Only mandatory if the vehicle has a combustion engine for propulsion.
+  //
+  // Default:
+  //   Min interval: [0rpm, 400pm)
+  //   Max interval: [3600rpm, ...)
+  //   Bucket count: 10
+  //   Bucket width: 400rpm
+  repeated FromToClass engine_speed_class_rpm = 30;
 
-  repeated FromToClass acceleration_during_brake_class = 31;
+  // Histogram of stats based on the acceleration during braking. (m/s2)
+  //
+  // Default:
+  //   Min interval: [..., -1.1m/s2)
+  //   Mid interval: (-0.1m/s2, 0.1m/s2)
+  //   Max interval: [1.1m/s2, ...)
+  //   Bucket count: 13
+  //   Bucket width: 0.2m/s2
+  repeated FromToClass acceleration_during_brake_class_mps2 = 31;
 
+  // Histogram of stats based on the currently selected gear.
+  // On class per gear. Park is also a gear.
+  // Gear is formatted according to SPN 524 and supplied as a decimal value.
+  //
+  // Example:
+  //   0 = Neutral
+  //   1 = 1st gear
+  //   2 = 2nd gear
+  //
+  // This is mainly used for buses.
   repeated LabelClass selected_gear_class = 32;
 
+  // Histogram of stats based on the currently used gear.
+  // On class per gear. Park is also a gear.
+  // Gear is formatted according to SPN 524 and supplied as a decimal value.
+  //
+  // Example:
+  //   0 = Neutral
+  //   1 = 1st gear
+  //   2 = 2nd gear
+  //
+  // This is mainly used for buses.
   repeated LabelClass current_gear_class = 33;
 
+  // The total number of times the chairlift has been outside the bus.
+  // This is mainly used for buses.
   int32 chairlift_count = 34;
 
+  // The total number of stop requests made.
+  // This is mainly used for buses.
   int32 stop_request_count = 35;
 
+  // The total number of times the bus has knelt.
+  // This is mainly used for buses.
   int32 kneeling_count = 36;
 
+  // The total number of pram requests made.
+  // This is mainly used for buses.
   int32 pram_request_count = 37;
 
-  repeated FromToClassElectrical electric_power_recuperation_class = 38;
+  // Classes refer to the recuperated electric power. (kw)
+  // Minimum 11 classes.
+  // [0, 100) [100, 200) [200, 300) ... [900, 1000), [1000, ...]
+  repeated FromToClassElectrical electric_power_recuperation_class_kw = 38;
 
+  // A histogram bucket of operational stats with a label.
   message LabelClass {
+    // The label of the class.
     string label = 1;
+    // The duration of the class. (s)
     double duration_s = 2;
+    // The distance of the class. (m)
     double distance_m = 3;
+    // The liquid fuel consumption of the class. (ml)
     double fuel_consumption_ml = 4;
+    // The gaseous fuel consumption of the class. (kg)
     double fuel_consumption_gaseous_kg = 5;
+    // The electric energy consumption of the class. (wh)
     double electric_energy_consumption_wh = 6;
   }
 
+  // A histogram bucket of operational stats with an interval [from,to).
   message FromToClass {
+    // The from value of the bucket interval. (inclusive)
     double from = 1;
+    // The to value of the bucket interval. (exclusive)
     double to = 2;
+    // The total duration of the bucket. (s)
     double duration_s = 3;
+    // The total distance of the bucket. (m)
     double distance_m = 4;
+    // The total liquid fuel consumption of the bucket. (ml)
     double fuel_consumption_ml = 5;
+    // The total gaseous fuel consumption of the bucket. (kg)
     double fuel_consumption_gaseous_kg = 6;
+    // The total electric energy consumption of the bucket. (wh)
     double electric_energy_consumption_wh = 7;
   }
 
+  // A histogram bucket of combustion engine operational stats with an interval [from,to).
   message FromToClassCombustion {
+    // The from value of the bucket interval. (inclusive)
     double from = 1;
+    // The to value of the bucket interval. (exclusive)
     double to = 2;
+    // The total duration of the bucket. (s)
     double duration_s = 3;
+    // The total distance of the bucket. (m)
     double distance_m = 4;
+    // The total liquid fuel consumption of the bucket. (ml)
     double fuel_consumption_ml = 5;
+    // The total gaseous fuel consumption of the bucket. (kg)
     double fuel_consumption_gaseous_kg = 6;
   }
 
+  // A histogram bucket of electrical engine operational stats with an interval [from,to).
   message FromToClassElectrical {
+    // The from value of the bucket interval. (inclusive)
     double from = 1;
+    // The to value of the bucket interval. (exclusive)
     double to = 2;
+    // The total duration of the bucket. (s)
     double duration_s = 3;
+    // The total distance of the bucket. (m)
     double distance_m = 4;
+    // The total electric energy consumption of the bucket. (wh)
     double electric_energy_consumption_wh = 5;
   }
 }

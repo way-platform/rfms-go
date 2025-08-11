@@ -1,0 +1,44 @@
+[
+ {
+  "name": "number",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "The number of the bus door."
+ },
+ {
+  "name": "enabled_state",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "The enabled state of the bus door."
+ },
+ {
+  "name": "unknown_enabled_state",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The unknown enabled state of the bus door.\n Provided when the enabled state is ENABLED_STATE_UNKNOWN."
+ },
+ {
+  "name": "open_state",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "The open state of the bus door."
+ },
+ {
+  "name": "unknown_open_state",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The unknown open state of the bus door.\n Provided when the open state is OPEN_STATE_UNKNOWN."
+ },
+ {
+  "name": "lock_state",
+  "type": "INTEGER",
+  "mode": "NULLABLE",
+  "description": "The lock state of the bus door."
+ },
+ {
+  "name": "unknown_lock_state",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The unknown lock state of the bus door.\n Provided when the lock state is LOCK_STATE_UNKNOWN."
+ }
+]

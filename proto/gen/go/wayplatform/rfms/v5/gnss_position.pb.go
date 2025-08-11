@@ -23,7 +23,7 @@ const (
 // A GNSS position.
 type GnssPosition struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Time        int64                  `protobuf:"varint,1,opt,name=time"`
+	xxx_hidden_Time        *string                `protobuf:"bytes,1,opt,name=time"`
 	xxx_hidden_Latitude    float64                `protobuf:"fixed64,2,opt,name=latitude"`
 	xxx_hidden_Longitude   float64                `protobuf:"fixed64,3,opt,name=longitude"`
 	xxx_hidden_HeadingDeg  float64                `protobuf:"fixed64,4,opt,name=heading_deg,json=headingDeg"`
@@ -60,11 +60,14 @@ func (x *GnssPosition) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *GnssPosition) GetTime() int64 {
+func (x *GnssPosition) GetTime() string {
 	if x != nil {
-		return x.xxx_hidden_Time
+		if x.xxx_hidden_Time != nil {
+			return *x.xxx_hidden_Time
+		}
+		return ""
 	}
-	return 0
+	return ""
 }
 
 func (x *GnssPosition) GetLatitude() float64 {
@@ -102,8 +105,8 @@ func (x *GnssPosition) GetSpeedKmh() float64 {
 	return 0
 }
 
-func (x *GnssPosition) SetTime(v int64) {
-	x.xxx_hidden_Time = v
+func (x *GnssPosition) SetTime(v string) {
+	x.xxx_hidden_Time = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
 }
 
@@ -176,7 +179,7 @@ func (x *GnssPosition) HasSpeedKmh() bool {
 
 func (x *GnssPosition) ClearTime() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_Time = 0
+	x.xxx_hidden_Time = nil
 }
 
 func (x *GnssPosition) ClearLatitude() {
@@ -207,8 +210,8 @@ func (x *GnssPosition) ClearSpeedKmh() {
 type GnssPosition_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// The date and time the GNSS position was recorded. (Unix microseconds)
-	Time *int64
+	// The time of the GNSS position data. (RFC 3339)
+	Time *string
 	// The latitude of the vehicle. (WGS84 based)
 	Latitude *float64
 	// The longitude of the vehicle. (WGS84 based)
@@ -228,7 +231,7 @@ func (b0 GnssPosition_builder) Build() *GnssPosition {
 	_, _ = b, x
 	if b.Time != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
-		x.xxx_hidden_Time = *b.Time
+		x.xxx_hidden_Time = b.Time
 	}
 	if b.Latitude != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 6)
@@ -259,7 +262,7 @@ const file_wayplatform_rfms_v5_gnss_position_proto_rawDesc = "" +
 	"\n" +
 	"'wayplatform/rfms/v5/gnss_position.proto\x12\x13wayplatform.rfms.v5\"\xb9\x01\n" +
 	"\fGnssPosition\x12\x12\n" +
-	"\x04time\x18\x01 \x01(\x03R\x04time\x12\x1a\n" +
+	"\x04time\x18\x01 \x01(\tR\x04time\x12\x1a\n" +
 	"\blatitude\x18\x02 \x01(\x01R\blatitude\x12\x1c\n" +
 	"\tlongitude\x18\x03 \x01(\x01R\tlongitude\x12\x1f\n" +
 	"\vheading_deg\x18\x04 \x01(\x01R\n" +

@@ -4,8 +4,8 @@ message Trigger {
   optional string unknown_type = 2;
   optional int32 context = 3;
   optional string unknown_context = 4;
-  repeated string additional_info = 5;
-  optional Inline_wayplatform_rfms_v5_DriverIdentification driver_info = 6;
+  repeated string trigger_info = 5;
+  optional Inline_wayplatform_rfms_v5_DriverIdentification driver_id = 6;
   optional string pto_id = 7;
   optional Inline_wayplatform_rfms_v5_TellTale tell_tale_info = 8;
   optional ChargingStatusInfo charging_status_info = 9;
@@ -202,5 +202,16 @@ message Trigger {
     CONTEXT_UNSPECIFIED = 0;
     CONTEXT_UNKNOWN = 1;
     RFMS = 2;
+    VOLVO_TRUCKS = 3;
+    SCANIA = 4;
+    DAIMLER = 5;
+    IVECO = 6;
+    DAF = 7;
+    MAN = 8;
+    RENAULT_TRUCKS = 9;
+    VDL = 10;
+    VOLVO_BUSES = 11;
+    IVECO_BUS = 12;
+    IRISBUS = 13;
   }
 }

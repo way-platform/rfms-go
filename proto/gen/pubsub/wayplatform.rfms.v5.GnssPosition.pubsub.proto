@@ -1,6 +1,6 @@
 syntax = "proto2";
 message GnssPosition {
-  optional int64 time = 1;
+  optional string time = 1;
   optional double latitude = 2;
   optional double longitude = 3;
   optional double heading_deg = 4;

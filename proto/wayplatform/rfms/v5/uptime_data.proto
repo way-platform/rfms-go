@@ -7,7 +7,7 @@ import "wayplatform/rfms/v5/tell_tale.proto";
 // Uptime data for a vehicle.
 message UptimeData {
   // List of tell tales with the actual state for each tell tale.
-  repeated TellTale tell_tales = 1;
+  repeated TellTale tell_tale_info = 1;
 
   // The distance in meter to the next service. (m)
   double service_distance_m = 2;
@@ -35,7 +35,7 @@ message UptimeData {
 
   // The alternator status of up to 4 alternators.
   // Used mainly for buses.
-  repeated Alternator alternators = 9;
+  repeated AlternatorInfo alternator_info = 9;
 
   // The pressure of the bellow pressure front axle left. (Pa)
   // Used mainly for buses.
@@ -54,7 +54,7 @@ message UptimeData {
   double bellow_pressure_rear_axle_right_pa = 13;
 
   // An alternator.
-  message Alternator {
+  message AlternatorInfo {
     // The number of the alternator.
     int32 number = 1;
 
