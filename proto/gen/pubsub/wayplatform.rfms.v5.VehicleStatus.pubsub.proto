@@ -317,7 +317,7 @@ message VehicleStatus {
     optional double tachograph_speed_kmh = 3;
     optional double engine_speed_rpm = 4;
     optional double electric_motor_speed_rpm = 5;
-    optional int32 ignition = 6;
+    optional int32 ignition_state = 6;
     optional int32 fuel_type = 7;
     optional string unknown_fuel_type = 8;
     optional double fuel_level1_percent = 9;
@@ -332,13 +332,16 @@ message VehicleStatus {
     optional bool parking_brake_switch = 18;
     optional double battery_pack_remaining_charge_percent = 19;
     optional int32 battery_pack_charging_state = 20;
-    optional int32 battery_pack_charging_connection_state = 21;
-    optional int32 battery_pack_charging_device = 22;
-    optional double battery_pack_charging_power_w = 23;
-    optional string battery_pack_estimated_charging_completed_time = 24;
-    optional EstimatedDistanceToEmpty estimated_distance_to_empty = 25;
-    repeated Inline_wayplatform_rfms_v5_VehicleAxle vehicle_axles = 26;
-    repeated Inline_wayplatform_rfms_v5_Trailer trailers = 27;
+    optional string unknown_battery_pack_charging_state = 21;
+    optional int32 battery_pack_charging_connection_state = 22;
+    optional string unknown_battery_pack_charging_connection_state = 23;
+    optional int32 battery_pack_charging_device = 24;
+    optional string unknown_battery_pack_charging_device = 25;
+    optional double battery_pack_charging_power_w = 26;
+    optional string battery_pack_estimated_charging_completed_time = 27;
+    optional EstimatedDistanceToEmpty estimated_distance_to_empty = 28;
+    repeated Inline_wayplatform_rfms_v5_VehicleAxle vehicle_axles = 29;
+    repeated Inline_wayplatform_rfms_v5_Trailer trailers = 30;
     message EstimatedDistanceToEmpty {
       optional double total_m = 1;
       optional double fuel_m = 2;

@@ -28,7 +28,7 @@ type SnapshotData struct {
 	xxx_hidden_TachographSpeedKmh                        float64                                `protobuf:"fixed64,3,opt,name=tachograph_speed_kmh,json=tachographSpeedKmh"`
 	xxx_hidden_EngineSpeedRpm                            float64                                `protobuf:"fixed64,4,opt,name=engine_speed_rpm,json=engineSpeedRpm"`
 	xxx_hidden_ElectricMotorSpeedRpm                     float64                                `protobuf:"fixed64,5,opt,name=electric_motor_speed_rpm,json=electricMotorSpeedRpm"`
-	xxx_hidden_Ignition                                  IgnitionState                          `protobuf:"varint,6,opt,name=ignition,enum=wayplatform.rfms.v5.IgnitionState"`
+	xxx_hidden_IgnitionState                             IgnitionState                          `protobuf:"varint,6,opt,name=ignition_state,json=ignitionState,enum=wayplatform.rfms.v5.IgnitionState"`
 	xxx_hidden_FuelType                                  FuelType                               `protobuf:"varint,7,opt,name=fuel_type,json=fuelType,enum=wayplatform.rfms.v5.FuelType"`
 	xxx_hidden_UnknownFuelType                           *string                                `protobuf:"bytes,8,opt,name=unknown_fuel_type,json=unknownFuelType"`
 	xxx_hidden_FuelLevel1Percent                         float64                                `protobuf:"fixed64,9,opt,name=fuel_level1_percent,json=fuelLevel1Percent"`
@@ -43,13 +43,16 @@ type SnapshotData struct {
 	xxx_hidden_ParkingBrakeSwitch                        bool                                   `protobuf:"varint,18,opt,name=parking_brake_switch,json=parkingBrakeSwitch"`
 	xxx_hidden_BatteryPackRemainingChargePercent         float64                                `protobuf:"fixed64,19,opt,name=battery_pack_remaining_charge_percent,json=batteryPackRemainingChargePercent"`
 	xxx_hidden_BatteryPackChargingState                  ChargingState                          `protobuf:"varint,20,opt,name=battery_pack_charging_state,json=batteryPackChargingState,enum=wayplatform.rfms.v5.ChargingState"`
-	xxx_hidden_BatteryPackChargingConnectionState        ChargingConnectionState                `protobuf:"varint,21,opt,name=battery_pack_charging_connection_state,json=batteryPackChargingConnectionState,enum=wayplatform.rfms.v5.ChargingConnectionState"`
-	xxx_hidden_BatteryPackChargingDevice                 ChargingDevice                         `protobuf:"varint,22,opt,name=battery_pack_charging_device,json=batteryPackChargingDevice,enum=wayplatform.rfms.v5.ChargingDevice"`
-	xxx_hidden_BatteryPackChargingPowerW                 float64                                `protobuf:"fixed64,23,opt,name=battery_pack_charging_power_w,json=batteryPackChargingPowerW"`
-	xxx_hidden_BatteryPackEstimatedChargingCompletedTime *string                                `protobuf:"bytes,24,opt,name=battery_pack_estimated_charging_completed_time,json=batteryPackEstimatedChargingCompletedTime"`
-	xxx_hidden_EstimatedDistanceToEmpty                  *SnapshotData_EstimatedDistanceToEmpty `protobuf:"bytes,25,opt,name=estimated_distance_to_empty,json=estimatedDistanceToEmpty"`
-	xxx_hidden_VehicleAxles                              *[]*VehicleAxle                        `protobuf:"bytes,26,rep,name=vehicle_axles,json=vehicleAxles"`
-	xxx_hidden_Trailers                                  *[]*Trailer                            `protobuf:"bytes,27,rep,name=trailers"`
+	xxx_hidden_UnknownBatteryPackChargingState           *string                                `protobuf:"bytes,21,opt,name=unknown_battery_pack_charging_state,json=unknownBatteryPackChargingState"`
+	xxx_hidden_BatteryPackChargingConnectionState        ChargingConnectionState                `protobuf:"varint,22,opt,name=battery_pack_charging_connection_state,json=batteryPackChargingConnectionState,enum=wayplatform.rfms.v5.ChargingConnectionState"`
+	xxx_hidden_UnknownBatteryPackChargingConnectionState *string                                `protobuf:"bytes,23,opt,name=unknown_battery_pack_charging_connection_state,json=unknownBatteryPackChargingConnectionState"`
+	xxx_hidden_BatteryPackChargingDevice                 ChargingDevice                         `protobuf:"varint,24,opt,name=battery_pack_charging_device,json=batteryPackChargingDevice,enum=wayplatform.rfms.v5.ChargingDevice"`
+	xxx_hidden_UnknownBatteryPackChargingDevice          *string                                `protobuf:"bytes,25,opt,name=unknown_battery_pack_charging_device,json=unknownBatteryPackChargingDevice"`
+	xxx_hidden_BatteryPackChargingPowerW                 float64                                `protobuf:"fixed64,26,opt,name=battery_pack_charging_power_w,json=batteryPackChargingPowerW"`
+	xxx_hidden_BatteryPackEstimatedChargingCompletedTime *string                                `protobuf:"bytes,27,opt,name=battery_pack_estimated_charging_completed_time,json=batteryPackEstimatedChargingCompletedTime"`
+	xxx_hidden_EstimatedDistanceToEmpty                  *SnapshotData_EstimatedDistanceToEmpty `protobuf:"bytes,28,opt,name=estimated_distance_to_empty,json=estimatedDistanceToEmpty"`
+	xxx_hidden_VehicleAxles                              *[]*VehicleAxle                        `protobuf:"bytes,29,rep,name=vehicle_axles,json=vehicleAxles"`
+	xxx_hidden_Trailers                                  *[]*Trailer                            `protobuf:"bytes,30,rep,name=trailers"`
 	XXX_raceDetectHookData                               protoimpl.RaceDetectHookData
 	XXX_presence                                         [1]uint32
 	unknownFields                                        protoimpl.UnknownFields
@@ -116,10 +119,10 @@ func (x *SnapshotData) GetElectricMotorSpeedRpm() float64 {
 	return 0
 }
 
-func (x *SnapshotData) GetIgnition() IgnitionState {
+func (x *SnapshotData) GetIgnitionState() IgnitionState {
 	if x != nil {
 		if protoimpl.X.Present(&(x.XXX_presence[0]), 5) {
-			return x.xxx_hidden_Ignition
+			return x.xxx_hidden_IgnitionState
 		}
 	}
 	return IgnitionState_IGNITION_STATE_UNSPECIFIED
@@ -240,22 +243,52 @@ func (x *SnapshotData) GetBatteryPackChargingState() ChargingState {
 	return ChargingState_CHARGING_STATE_UNSPECIFIED
 }
 
+func (x *SnapshotData) GetUnknownBatteryPackChargingState() string {
+	if x != nil {
+		if x.xxx_hidden_UnknownBatteryPackChargingState != nil {
+			return *x.xxx_hidden_UnknownBatteryPackChargingState
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *SnapshotData) GetBatteryPackChargingConnectionState() ChargingConnectionState {
 	if x != nil {
-		if protoimpl.X.Present(&(x.XXX_presence[0]), 20) {
+		if protoimpl.X.Present(&(x.XXX_presence[0]), 21) {
 			return x.xxx_hidden_BatteryPackChargingConnectionState
 		}
 	}
 	return ChargingConnectionState_CHARGING_CONNECTION_STATE_UNSPECIFIED
 }
 
+func (x *SnapshotData) GetUnknownBatteryPackChargingConnectionState() string {
+	if x != nil {
+		if x.xxx_hidden_UnknownBatteryPackChargingConnectionState != nil {
+			return *x.xxx_hidden_UnknownBatteryPackChargingConnectionState
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *SnapshotData) GetBatteryPackChargingDevice() ChargingDevice {
 	if x != nil {
-		if protoimpl.X.Present(&(x.XXX_presence[0]), 21) {
+		if protoimpl.X.Present(&(x.XXX_presence[0]), 23) {
 			return x.xxx_hidden_BatteryPackChargingDevice
 		}
 	}
 	return ChargingDevice_CHARGING_DEVICE_UNSPECIFIED
+}
+
+func (x *SnapshotData) GetUnknownBatteryPackChargingDevice() string {
+	if x != nil {
+		if x.xxx_hidden_UnknownBatteryPackChargingDevice != nil {
+			return *x.xxx_hidden_UnknownBatteryPackChargingDevice
+		}
+		return ""
+	}
+	return ""
 }
 
 func (x *SnapshotData) GetBatteryPackChargingPowerW() float64 {
@@ -306,62 +339,62 @@ func (x *SnapshotData) SetGnssPosition(v *GnssPosition) {
 
 func (x *SnapshotData) SetWheelBasedSpeedKmh(v float64) {
 	x.xxx_hidden_WheelBasedSpeedKmh = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 30)
 }
 
 func (x *SnapshotData) SetTachographSpeedKmh(v float64) {
 	x.xxx_hidden_TachographSpeedKmh = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 30)
 }
 
 func (x *SnapshotData) SetEngineSpeedRpm(v float64) {
 	x.xxx_hidden_EngineSpeedRpm = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 30)
 }
 
 func (x *SnapshotData) SetElectricMotorSpeedRpm(v float64) {
 	x.xxx_hidden_ElectricMotorSpeedRpm = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 30)
 }
 
-func (x *SnapshotData) SetIgnition(v IgnitionState) {
-	x.xxx_hidden_Ignition = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 27)
+func (x *SnapshotData) SetIgnitionState(v IgnitionState) {
+	x.xxx_hidden_IgnitionState = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 30)
 }
 
 func (x *SnapshotData) SetFuelType(v FuelType) {
 	x.xxx_hidden_FuelType = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 30)
 }
 
 func (x *SnapshotData) SetUnknownFuelType(v string) {
 	x.xxx_hidden_UnknownFuelType = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 30)
 }
 
 func (x *SnapshotData) SetFuelLevel1Percent(v float64) {
 	x.xxx_hidden_FuelLevel1Percent = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 8, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 8, 30)
 }
 
 func (x *SnapshotData) SetFuelLevel2Percent(v float64) {
 	x.xxx_hidden_FuelLevel2Percent = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 9, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 9, 30)
 }
 
 func (x *SnapshotData) SetCatalystFuelLevelPercent(v float64) {
 	x.xxx_hidden_CatalystFuelLevelPercent = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 10, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 10, 30)
 }
 
 func (x *SnapshotData) SetDriver1WorkingState(v DriverWorkingState) {
 	x.xxx_hidden_Driver1WorkingState = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 11, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 11, 30)
 }
 
 func (x *SnapshotData) SetUnknownDriver1WorkingState(v string) {
 	x.xxx_hidden_UnknownDriver1WorkingState = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 12, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 12, 30)
 }
 
 func (x *SnapshotData) SetDriver2Id(v *DriverIdentification) {
@@ -370,52 +403,67 @@ func (x *SnapshotData) SetDriver2Id(v *DriverIdentification) {
 
 func (x *SnapshotData) SetDriver2WorkingState(v DriverWorkingState) {
 	x.xxx_hidden_Driver2WorkingState = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 14, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 14, 30)
 }
 
 func (x *SnapshotData) SetUnknownDriver2WorkingState(v string) {
 	x.xxx_hidden_UnknownDriver2WorkingState = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 15, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 15, 30)
 }
 
 func (x *SnapshotData) SetAmbientAirTemperatureC(v float64) {
 	x.xxx_hidden_AmbientAirTemperatureC = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 16, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 16, 30)
 }
 
 func (x *SnapshotData) SetParkingBrakeSwitch(v bool) {
 	x.xxx_hidden_ParkingBrakeSwitch = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 17, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 17, 30)
 }
 
 func (x *SnapshotData) SetBatteryPackRemainingChargePercent(v float64) {
 	x.xxx_hidden_BatteryPackRemainingChargePercent = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 18, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 18, 30)
 }
 
 func (x *SnapshotData) SetBatteryPackChargingState(v ChargingState) {
 	x.xxx_hidden_BatteryPackChargingState = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 19, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 19, 30)
+}
+
+func (x *SnapshotData) SetUnknownBatteryPackChargingState(v string) {
+	x.xxx_hidden_UnknownBatteryPackChargingState = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 20, 30)
 }
 
 func (x *SnapshotData) SetBatteryPackChargingConnectionState(v ChargingConnectionState) {
 	x.xxx_hidden_BatteryPackChargingConnectionState = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 20, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 21, 30)
+}
+
+func (x *SnapshotData) SetUnknownBatteryPackChargingConnectionState(v string) {
+	x.xxx_hidden_UnknownBatteryPackChargingConnectionState = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 22, 30)
 }
 
 func (x *SnapshotData) SetBatteryPackChargingDevice(v ChargingDevice) {
 	x.xxx_hidden_BatteryPackChargingDevice = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 21, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 23, 30)
+}
+
+func (x *SnapshotData) SetUnknownBatteryPackChargingDevice(v string) {
+	x.xxx_hidden_UnknownBatteryPackChargingDevice = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 24, 30)
 }
 
 func (x *SnapshotData) SetBatteryPackChargingPowerW(v float64) {
 	x.xxx_hidden_BatteryPackChargingPowerW = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 22, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 25, 30)
 }
 
 func (x *SnapshotData) SetBatteryPackEstimatedChargingCompletedTime(v string) {
 	x.xxx_hidden_BatteryPackEstimatedChargingCompletedTime = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 23, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 26, 30)
 }
 
 func (x *SnapshotData) SetEstimatedDistanceToEmpty(v *SnapshotData_EstimatedDistanceToEmpty) {
@@ -465,7 +513,7 @@ func (x *SnapshotData) HasElectricMotorSpeedRpm() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
 }
 
-func (x *SnapshotData) HasIgnition() bool {
+func (x *SnapshotData) HasIgnitionState() bool {
 	if x == nil {
 		return false
 	}
@@ -570,32 +618,53 @@ func (x *SnapshotData) HasBatteryPackChargingState() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 19)
 }
 
-func (x *SnapshotData) HasBatteryPackChargingConnectionState() bool {
+func (x *SnapshotData) HasUnknownBatteryPackChargingState() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 20)
 }
 
-func (x *SnapshotData) HasBatteryPackChargingDevice() bool {
+func (x *SnapshotData) HasBatteryPackChargingConnectionState() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 21)
 }
 
-func (x *SnapshotData) HasBatteryPackChargingPowerW() bool {
+func (x *SnapshotData) HasUnknownBatteryPackChargingConnectionState() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 22)
 }
 
-func (x *SnapshotData) HasBatteryPackEstimatedChargingCompletedTime() bool {
+func (x *SnapshotData) HasBatteryPackChargingDevice() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 23)
+}
+
+func (x *SnapshotData) HasUnknownBatteryPackChargingDevice() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 24)
+}
+
+func (x *SnapshotData) HasBatteryPackChargingPowerW() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 25)
+}
+
+func (x *SnapshotData) HasBatteryPackEstimatedChargingCompletedTime() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 26)
 }
 
 func (x *SnapshotData) HasEstimatedDistanceToEmpty() bool {
@@ -629,9 +698,9 @@ func (x *SnapshotData) ClearElectricMotorSpeedRpm() {
 	x.xxx_hidden_ElectricMotorSpeedRpm = 0
 }
 
-func (x *SnapshotData) ClearIgnition() {
+func (x *SnapshotData) ClearIgnitionState() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
-	x.xxx_hidden_Ignition = IgnitionState_IGNITION_STATE_UNSPECIFIED
+	x.xxx_hidden_IgnitionState = IgnitionState_IGNITION_STATE_UNSPECIFIED
 }
 
 func (x *SnapshotData) ClearFuelType() {
@@ -703,23 +772,38 @@ func (x *SnapshotData) ClearBatteryPackChargingState() {
 	x.xxx_hidden_BatteryPackChargingState = ChargingState_CHARGING_STATE_UNSPECIFIED
 }
 
-func (x *SnapshotData) ClearBatteryPackChargingConnectionState() {
+func (x *SnapshotData) ClearUnknownBatteryPackChargingState() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 20)
+	x.xxx_hidden_UnknownBatteryPackChargingState = nil
+}
+
+func (x *SnapshotData) ClearBatteryPackChargingConnectionState() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 21)
 	x.xxx_hidden_BatteryPackChargingConnectionState = ChargingConnectionState_CHARGING_CONNECTION_STATE_UNSPECIFIED
 }
 
+func (x *SnapshotData) ClearUnknownBatteryPackChargingConnectionState() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 22)
+	x.xxx_hidden_UnknownBatteryPackChargingConnectionState = nil
+}
+
 func (x *SnapshotData) ClearBatteryPackChargingDevice() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 21)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 23)
 	x.xxx_hidden_BatteryPackChargingDevice = ChargingDevice_CHARGING_DEVICE_UNSPECIFIED
 }
 
+func (x *SnapshotData) ClearUnknownBatteryPackChargingDevice() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 24)
+	x.xxx_hidden_UnknownBatteryPackChargingDevice = nil
+}
+
 func (x *SnapshotData) ClearBatteryPackChargingPowerW() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 22)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 25)
 	x.xxx_hidden_BatteryPackChargingPowerW = 0
 }
 
 func (x *SnapshotData) ClearBatteryPackEstimatedChargingCompletedTime() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 23)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 26)
 	x.xxx_hidden_BatteryPackEstimatedChargingCompletedTime = nil
 }
 
@@ -741,7 +825,7 @@ type SnapshotData_builder struct {
 	// The electric motor speed of the vehicle. (rev/min)
 	ElectricMotorSpeedRpm *float64
 	// The ignition state of the vehicle.
-	Ignition *IgnitionState
+	IgnitionState *IgnitionState
 	// The fuel type currently being utilized by the vehicle.
 	FuelType *FuelType
 	// The unknown fuel type of the vehicle.
@@ -786,10 +870,19 @@ type SnapshotData_builder struct {
 	BatteryPackRemainingChargePercent *float64
 	// The battery pack charging status of the vehicle.
 	BatteryPackChargingState *ChargingState
+	// The unknown battery pack charging status of the vehicle.
+	// Provided when the battery pack charging status is CHARGING_STATE_UNKNOWN.
+	UnknownBatteryPackChargingState *string
 	// The battery pack charging status of the vehicle.
 	BatteryPackChargingConnectionState *ChargingConnectionState
+	// The unknown battery pack charging connection status of the vehicle.
+	// Provided when the battery pack charging connection status is CHARGING_CONNECTION_STATE_UNKNOWN.
+	UnknownBatteryPackChargingConnectionState *string
 	// The battery pack charging device of the vehicle.
 	BatteryPackChargingDevice *ChargingDevice
+	// The unknown battery pack charging device of the vehicle.
+	// Provided when the battery pack charging device is CHARGING_DEVICE_UNKNOWN.
+	UnknownBatteryPackChargingDevice *string
 	// The battery pack charging power of the vehicle. (W)
 	BatteryPackChargingPowerW *float64
 	// The estimated time when charging has reached the target level. (RFC 3339)
@@ -808,92 +901,104 @@ func (b0 SnapshotData_builder) Build() *SnapshotData {
 	_, _ = b, x
 	x.xxx_hidden_GnssPosition = b.GnssPosition
 	if b.WheelBasedSpeedKmh != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 30)
 		x.xxx_hidden_WheelBasedSpeedKmh = *b.WheelBasedSpeedKmh
 	}
 	if b.TachographSpeedKmh != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 30)
 		x.xxx_hidden_TachographSpeedKmh = *b.TachographSpeedKmh
 	}
 	if b.EngineSpeedRpm != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 30)
 		x.xxx_hidden_EngineSpeedRpm = *b.EngineSpeedRpm
 	}
 	if b.ElectricMotorSpeedRpm != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 30)
 		x.xxx_hidden_ElectricMotorSpeedRpm = *b.ElectricMotorSpeedRpm
 	}
-	if b.Ignition != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 27)
-		x.xxx_hidden_Ignition = *b.Ignition
+	if b.IgnitionState != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 30)
+		x.xxx_hidden_IgnitionState = *b.IgnitionState
 	}
 	if b.FuelType != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 30)
 		x.xxx_hidden_FuelType = *b.FuelType
 	}
 	if b.UnknownFuelType != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 30)
 		x.xxx_hidden_UnknownFuelType = b.UnknownFuelType
 	}
 	if b.FuelLevel1Percent != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 8, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 8, 30)
 		x.xxx_hidden_FuelLevel1Percent = *b.FuelLevel1Percent
 	}
 	if b.FuelLevel2Percent != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 9, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 9, 30)
 		x.xxx_hidden_FuelLevel2Percent = *b.FuelLevel2Percent
 	}
 	if b.CatalystFuelLevelPercent != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 10, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 10, 30)
 		x.xxx_hidden_CatalystFuelLevelPercent = *b.CatalystFuelLevelPercent
 	}
 	if b.Driver1WorkingState != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 11, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 11, 30)
 		x.xxx_hidden_Driver1WorkingState = *b.Driver1WorkingState
 	}
 	if b.UnknownDriver1WorkingState != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 12, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 12, 30)
 		x.xxx_hidden_UnknownDriver1WorkingState = b.UnknownDriver1WorkingState
 	}
 	x.xxx_hidden_Driver2Id = b.Driver2Id
 	if b.Driver2WorkingState != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 14, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 14, 30)
 		x.xxx_hidden_Driver2WorkingState = *b.Driver2WorkingState
 	}
 	if b.UnknownDriver2WorkingState != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 15, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 15, 30)
 		x.xxx_hidden_UnknownDriver2WorkingState = b.UnknownDriver2WorkingState
 	}
 	if b.AmbientAirTemperatureC != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 16, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 16, 30)
 		x.xxx_hidden_AmbientAirTemperatureC = *b.AmbientAirTemperatureC
 	}
 	if b.ParkingBrakeSwitch != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 17, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 17, 30)
 		x.xxx_hidden_ParkingBrakeSwitch = *b.ParkingBrakeSwitch
 	}
 	if b.BatteryPackRemainingChargePercent != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 18, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 18, 30)
 		x.xxx_hidden_BatteryPackRemainingChargePercent = *b.BatteryPackRemainingChargePercent
 	}
 	if b.BatteryPackChargingState != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 19, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 19, 30)
 		x.xxx_hidden_BatteryPackChargingState = *b.BatteryPackChargingState
 	}
+	if b.UnknownBatteryPackChargingState != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 20, 30)
+		x.xxx_hidden_UnknownBatteryPackChargingState = b.UnknownBatteryPackChargingState
+	}
 	if b.BatteryPackChargingConnectionState != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 20, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 21, 30)
 		x.xxx_hidden_BatteryPackChargingConnectionState = *b.BatteryPackChargingConnectionState
 	}
+	if b.UnknownBatteryPackChargingConnectionState != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 22, 30)
+		x.xxx_hidden_UnknownBatteryPackChargingConnectionState = b.UnknownBatteryPackChargingConnectionState
+	}
 	if b.BatteryPackChargingDevice != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 21, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 23, 30)
 		x.xxx_hidden_BatteryPackChargingDevice = *b.BatteryPackChargingDevice
 	}
+	if b.UnknownBatteryPackChargingDevice != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 24, 30)
+		x.xxx_hidden_UnknownBatteryPackChargingDevice = b.UnknownBatteryPackChargingDevice
+	}
 	if b.BatteryPackChargingPowerW != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 22, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 25, 30)
 		x.xxx_hidden_BatteryPackChargingPowerW = *b.BatteryPackChargingPowerW
 	}
 	if b.BatteryPackEstimatedChargingCompletedTime != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 23, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 26, 30)
 		x.xxx_hidden_BatteryPackEstimatedChargingCompletedTime = b.BatteryPackEstimatedChargingCompletedTime
 	}
 	x.xxx_hidden_EstimatedDistanceToEmpty = b.EstimatedDistanceToEmpty
@@ -1076,14 +1181,14 @@ var File_wayplatform_rfms_v5_snapshot_data_proto protoreflect.FileDescriptor
 
 const file_wayplatform_rfms_v5_snapshot_data_proto_rawDesc = "" +
 	"\n" +
-	"'wayplatform/rfms/v5/snapshot_data.proto\x12\x13wayplatform.rfms.v5\x1a3wayplatform/rfms/v5/charging_connection_state.proto\x1a)wayplatform/rfms/v5/charging_device.proto\x1a(wayplatform/rfms/v5/charging_state.proto\x1a/wayplatform/rfms/v5/driver_identification.proto\x1a.wayplatform/rfms/v5/driver_working_state.proto\x1a#wayplatform/rfms/v5/fuel_type.proto\x1a'wayplatform/rfms/v5/gnss_position.proto\x1a(wayplatform/rfms/v5/ignition_state.proto\x1a!wayplatform/rfms/v5/trailer.proto\x1a&wayplatform/rfms/v5/vehicle_axle.proto\"\xa3\x10\n" +
+	"'wayplatform/rfms/v5/snapshot_data.proto\x12\x13wayplatform.rfms.v5\x1a3wayplatform/rfms/v5/charging_connection_state.proto\x1a)wayplatform/rfms/v5/charging_device.proto\x1a(wayplatform/rfms/v5/charging_state.proto\x1a/wayplatform/rfms/v5/driver_identification.proto\x1a.wayplatform/rfms/v5/driver_working_state.proto\x1a#wayplatform/rfms/v5/fuel_type.proto\x1a'wayplatform/rfms/v5/gnss_position.proto\x1a(wayplatform/rfms/v5/ignition_state.proto\x1a!wayplatform/rfms/v5/trailer.proto\x1a&wayplatform/rfms/v5/vehicle_axle.proto\"\xaf\x12\n" +
 	"\fSnapshotData\x12F\n" +
 	"\rgnss_position\x18\x01 \x01(\v2!.wayplatform.rfms.v5.GnssPositionR\fgnssPosition\x121\n" +
 	"\x15wheel_based_speed_kmh\x18\x02 \x01(\x01R\x12wheelBasedSpeedKmh\x120\n" +
 	"\x14tachograph_speed_kmh\x18\x03 \x01(\x01R\x12tachographSpeedKmh\x12(\n" +
 	"\x10engine_speed_rpm\x18\x04 \x01(\x01R\x0eengineSpeedRpm\x127\n" +
-	"\x18electric_motor_speed_rpm\x18\x05 \x01(\x01R\x15electricMotorSpeedRpm\x12>\n" +
-	"\bignition\x18\x06 \x01(\x0e2\".wayplatform.rfms.v5.IgnitionStateR\bignition\x12:\n" +
+	"\x18electric_motor_speed_rpm\x18\x05 \x01(\x01R\x15electricMotorSpeedRpm\x12I\n" +
+	"\x0eignition_state\x18\x06 \x01(\x0e2\".wayplatform.rfms.v5.IgnitionStateR\rignitionState\x12:\n" +
 	"\tfuel_type\x18\a \x01(\x0e2\x1d.wayplatform.rfms.v5.FuelTypeR\bfuelType\x12*\n" +
 	"\x11unknown_fuel_type\x18\b \x01(\tR\x0funknownFuelType\x12.\n" +
 	"\x13fuel_level1_percent\x18\t \x01(\x01R\x11fuelLevel1Percent\x12.\n" +
@@ -1099,14 +1204,17 @@ const file_wayplatform_rfms_v5_snapshot_data_proto_rawDesc = "" +
 	"\x19ambient_air_temperature_c\x18\x11 \x01(\x01R\x16ambientAirTemperatureC\x120\n" +
 	"\x14parking_brake_switch\x18\x12 \x01(\bR\x12parkingBrakeSwitch\x12P\n" +
 	"%battery_pack_remaining_charge_percent\x18\x13 \x01(\x01R!batteryPackRemainingChargePercent\x12a\n" +
-	"\x1bbattery_pack_charging_state\x18\x14 \x01(\x0e2\".wayplatform.rfms.v5.ChargingStateR\x18batteryPackChargingState\x12\x80\x01\n" +
-	"&battery_pack_charging_connection_state\x18\x15 \x01(\x0e2,.wayplatform.rfms.v5.ChargingConnectionStateR\"batteryPackChargingConnectionState\x12d\n" +
-	"\x1cbattery_pack_charging_device\x18\x16 \x01(\x0e2#.wayplatform.rfms.v5.ChargingDeviceR\x19batteryPackChargingDevice\x12@\n" +
-	"\x1dbattery_pack_charging_power_w\x18\x17 \x01(\x01R\x19batteryPackChargingPowerW\x12a\n" +
-	".battery_pack_estimated_charging_completed_time\x18\x18 \x01(\tR)batteryPackEstimatedChargingCompletedTime\x12y\n" +
-	"\x1bestimated_distance_to_empty\x18\x19 \x01(\v2:.wayplatform.rfms.v5.SnapshotData.EstimatedDistanceToEmptyR\x18estimatedDistanceToEmpty\x12E\n" +
-	"\rvehicle_axles\x18\x1a \x03(\v2 .wayplatform.rfms.v5.VehicleAxleR\fvehicleAxles\x128\n" +
-	"\btrailers\x18\x1b \x03(\v2\x1c.wayplatform.rfms.v5.TrailerR\btrailers\x1a\x85\x01\n" +
+	"\x1bbattery_pack_charging_state\x18\x14 \x01(\x0e2\".wayplatform.rfms.v5.ChargingStateR\x18batteryPackChargingState\x12L\n" +
+	"#unknown_battery_pack_charging_state\x18\x15 \x01(\tR\x1funknownBatteryPackChargingState\x12\x80\x01\n" +
+	"&battery_pack_charging_connection_state\x18\x16 \x01(\x0e2,.wayplatform.rfms.v5.ChargingConnectionStateR\"batteryPackChargingConnectionState\x12a\n" +
+	".unknown_battery_pack_charging_connection_state\x18\x17 \x01(\tR)unknownBatteryPackChargingConnectionState\x12d\n" +
+	"\x1cbattery_pack_charging_device\x18\x18 \x01(\x0e2#.wayplatform.rfms.v5.ChargingDeviceR\x19batteryPackChargingDevice\x12N\n" +
+	"$unknown_battery_pack_charging_device\x18\x19 \x01(\tR unknownBatteryPackChargingDevice\x12@\n" +
+	"\x1dbattery_pack_charging_power_w\x18\x1a \x01(\x01R\x19batteryPackChargingPowerW\x12a\n" +
+	".battery_pack_estimated_charging_completed_time\x18\x1b \x01(\tR)batteryPackEstimatedChargingCompletedTime\x12y\n" +
+	"\x1bestimated_distance_to_empty\x18\x1c \x01(\v2:.wayplatform.rfms.v5.SnapshotData.EstimatedDistanceToEmptyR\x18estimatedDistanceToEmpty\x12E\n" +
+	"\rvehicle_axles\x18\x1d \x03(\v2 .wayplatform.rfms.v5.VehicleAxleR\fvehicleAxles\x128\n" +
+	"\btrailers\x18\x1e \x03(\v2\x1c.wayplatform.rfms.v5.TrailerR\btrailers\x1a\x85\x01\n" +
 	"\x18EstimatedDistanceToEmpty\x12\x17\n" +
 	"\atotal_m\x18\x01 \x01(\x01R\x06totalM\x12\x15\n" +
 	"\x06fuel_m\x18\x02 \x01(\x01R\x05fuelM\x12\x13\n" +
@@ -1131,7 +1239,7 @@ var file_wayplatform_rfms_v5_snapshot_data_proto_goTypes = []any{
 }
 var file_wayplatform_rfms_v5_snapshot_data_proto_depIdxs = []int32{
 	2,  // 0: wayplatform.rfms.v5.SnapshotData.gnss_position:type_name -> wayplatform.rfms.v5.GnssPosition
-	3,  // 1: wayplatform.rfms.v5.SnapshotData.ignition:type_name -> wayplatform.rfms.v5.IgnitionState
+	3,  // 1: wayplatform.rfms.v5.SnapshotData.ignition_state:type_name -> wayplatform.rfms.v5.IgnitionState
 	4,  // 2: wayplatform.rfms.v5.SnapshotData.fuel_type:type_name -> wayplatform.rfms.v5.FuelType
 	5,  // 3: wayplatform.rfms.v5.SnapshotData.driver1_working_state:type_name -> wayplatform.rfms.v5.DriverWorkingState
 	6,  // 4: wayplatform.rfms.v5.SnapshotData.driver2_id:type_name -> wayplatform.rfms.v5.DriverIdentification

@@ -68,7 +68,7 @@
   "description": "The electric motor speed of the vehicle. (rev/min)"
  },
  {
-  "name": "ignition",
+  "name": "ignition_state",
   "type": "INTEGER",
   "mode": "NULLABLE",
   "description": "The ignition state of the vehicle."
@@ -224,16 +224,34 @@
   "description": "The battery pack charging status of the vehicle."
  },
  {
+  "name": "unknown_battery_pack_charging_state",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The unknown battery pack charging status of the vehicle.\n Provided when the battery pack charging status is CHARGING_STATE_UNKNOWN."
+ },
+ {
   "name": "battery_pack_charging_connection_state",
   "type": "INTEGER",
   "mode": "NULLABLE",
   "description": "The battery pack charging status of the vehicle."
  },
  {
+  "name": "unknown_battery_pack_charging_connection_state",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The unknown battery pack charging connection status of the vehicle.\n Provided when the battery pack charging connection status is CHARGING_CONNECTION_STATE_UNKNOWN."
+ },
+ {
   "name": "battery_pack_charging_device",
   "type": "INTEGER",
   "mode": "NULLABLE",
   "description": "The battery pack charging device of the vehicle."
+ },
+ {
+  "name": "unknown_battery_pack_charging_device",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The unknown battery pack charging device of the vehicle.\n Provided when the battery pack charging device is CHARGING_DEVICE_UNKNOWN."
  },
  {
   "name": "battery_pack_charging_power_w",

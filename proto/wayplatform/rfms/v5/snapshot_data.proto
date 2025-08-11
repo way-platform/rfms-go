@@ -31,7 +31,7 @@ message SnapshotData {
   double electric_motor_speed_rpm = 5;
 
   // The ignition state of the vehicle.
-  IgnitionState ignition = 6;
+  IgnitionState ignition_state = 6;
 
   // The fuel type currently being utilized by the vehicle.
   FuelType fuel_type = 7;
@@ -91,20 +91,32 @@ message SnapshotData {
   // The battery pack charging status of the vehicle.
   ChargingState battery_pack_charging_state = 20;
 
+  // The unknown battery pack charging status of the vehicle.
+  // Provided when the battery pack charging status is CHARGING_STATE_UNKNOWN.
+  string unknown_battery_pack_charging_state = 21;
+
   // The battery pack charging status of the vehicle.
-  ChargingConnectionState battery_pack_charging_connection_state = 21;
+  ChargingConnectionState battery_pack_charging_connection_state = 22;
+
+  // The unknown battery pack charging connection status of the vehicle.
+  // Provided when the battery pack charging connection status is CHARGING_CONNECTION_STATE_UNKNOWN.
+  string unknown_battery_pack_charging_connection_state = 23;
 
   // The battery pack charging device of the vehicle.
-  ChargingDevice battery_pack_charging_device = 22;
+  ChargingDevice battery_pack_charging_device = 24;
+
+  // The unknown battery pack charging device of the vehicle.
+  // Provided when the battery pack charging device is CHARGING_DEVICE_UNKNOWN.
+  string unknown_battery_pack_charging_device = 25;
 
   // The battery pack charging power of the vehicle. (W)
-  double battery_pack_charging_power_w = 23;
+  double battery_pack_charging_power_w = 26;
 
   // The estimated time when charging has reached the target level. (RFC 3339)
-  string battery_pack_estimated_charging_completed_time = 24;
+  string battery_pack_estimated_charging_completed_time = 27;
 
   // The estimated distance to empty of the vehicle.
-  EstimatedDistanceToEmpty estimated_distance_to_empty = 25;
+  EstimatedDistanceToEmpty estimated_distance_to_empty = 28;
 
   // The estimated distance to empty of the vehicle.
   message EstimatedDistanceToEmpty {
@@ -122,8 +134,8 @@ message SnapshotData {
   }
 
   // The axles of the vehicle.
-  repeated VehicleAxle vehicle_axles = 26;
+  repeated VehicleAxle vehicle_axles = 29;
 
   // The trailers connected to the vehicle.
-  repeated Trailer trailers = 27;
+  repeated Trailer trailers = 30;
 }
