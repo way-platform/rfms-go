@@ -18,13 +18,13 @@ func VehicleStatus(input *rfmsv4oapi.VehicleStatusObject) *rfmsv5.VehicleStatus 
 		output.SetTrigger(trigger(input.TriggerType))
 	}
 	if input.CreatedDateTime != nil {
-		output.SetCreateTime(time.Time(*input.CreatedDateTime).UnixMicro())
+		output.SetCreateTime(time.Time(*input.CreatedDateTime).UTC().Format(time.RFC3339Nano))
 	}
 	if input.ReceivedDateTime != nil {
-		output.SetReceiveTime(time.Time(*input.ReceivedDateTime).UnixMicro())
+		output.SetReceiveTime(time.Time(*input.ReceivedDateTime).UTC().Format(time.RFC3339Nano))
 	}
 	if input.HrTotalVehicleDistance != nil {
-		output.SetTotalVehicleDistanceM(*input.HrTotalVehicleDistance)
+		output.SetHrTotalVehicleDistanceM(float64(*input.HrTotalVehicleDistance))
 	}
 	if input.TotalEngineHours != nil {
 		output.SetTotalEngineHours(*input.TotalEngineHours)
@@ -33,7 +33,7 @@ func VehicleStatus(input *rfmsv4oapi.VehicleStatusObject) *rfmsv5.VehicleStatus 
 		output.SetTotalElectricMotorHours(*input.TotalElectricMotorHours)
 	}
 	if input.Driver1ID != nil {
-		output.SetDriver1(driverIdentification(input.Driver1ID))
+		output.SetDriver1Id(driverIdentification(input.Driver1ID))
 	}
 	if input.GrossCombinationVehicleWeight != nil {
 		output.SetGrossCombinationVehicleWeightKg(float64(*input.GrossCombinationVehicleWeight))

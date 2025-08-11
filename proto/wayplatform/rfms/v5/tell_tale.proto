@@ -7,18 +7,6 @@ message TellTale {
   // The type of tell tale.
   Type type = 1;
 
-  // The unknown tell tale type. Used when the type is TYPE_UNKNOWN.
-  string unknown_type = 2;
-
-  // The OEM specific type. Used when the type is TYPE_OEM_SPECIFIC.
-  string oem_specific_type = 3;
-
-  // The state of the tell tale.
-  State state = 4;
-
-  // The unknown state. Used when the state is STATE_UNKNOWN.
-  string unknown_state = 5;
-
   // The type of a tell tale.
   enum Type {
     // Default value. This value is unused.
@@ -98,6 +86,18 @@ message TellTale {
     BATTERY_PACK_COOLING = 71;
     WATER_IN_FUEL_INDICATOR = 72;
   }
+
+  // The unknown tell tale type. Used when the type is TYPE_UNKNOWN.
+  string unknown_type = 2;
+
+  // The OEM specific type. Used when the type is TYPE_OEM_SPECIFIC.
+  string oem_specific_type = 3;
+
+  // The state of the tell tale.
+  State state = 4;
+
+  // The unknown state. Used when the state is STATE_UNKNOWN.
+  string unknown_state = 5;
 
   // The state of a tell tale.
   enum State {

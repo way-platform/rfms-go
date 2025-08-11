@@ -26,7 +26,7 @@ func gnssPosition(input *rfmsv4oapi.GNSSPositionObject) *rfmsv5.GnssPosition {
 		output.SetSpeedKmh(*input.Speed)
 	}
 	if input.PositionDateTime != nil {
-		output.SetTime(time.Time(*input.PositionDateTime).UnixMicro())
+		output.SetTime(time.Time(*input.PositionDateTime).UTC().Format(time.RFC3339Nano))
 	}
 	return &output
 }

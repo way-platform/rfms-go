@@ -1,0 +1,24 @@
+edition = "2023";
+
+package wayplatform.rfms.v5;
+
+// Well-known gearbox types.
+//
+// This enum is not exhaustive. It identifies standard gearbox types, as well as
+// commonly used gearbox types across OEM-specific implementations of rFMS APIs.
+enum GearboxType {
+  // Default value. This value is not used.
+  GEARBOX_TYPE_UNSPECIFIED = 0;
+  // Unknown gearbox type.
+  GEARBOX_TYPE_UNKNOWN = 1;
+  // Manual.
+  MANUAL = 2;
+  // Automatic.
+  AUTOMATIC = 3;
+  // Semi-automatic.
+  SEMI_AUTOMATIC = 4;
+  // E.g. electrical.
+  NO_GEAR = 5;
+  // Automated manual transmission. (Scania)
+  AMT = 6;
+}

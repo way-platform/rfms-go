@@ -11,48 +11,6 @@ message Trigger {
   // Trigger type for context RFMS.
   Type type = 1;
 
-  // The unknown trigger type. Used when the type is TYPE_UNKNOWN.
-  string unknown_type = 2;
-
-  // The context of the trigger.
-  Context context = 3;
-
-  // The unknown context. Used when the context is CONTEXT_UNKNOWN.
-  string unknown_context = 4;
-
-  // Additional OEM specific trigger info content.
-  // Can be used for both OEM specific and rFMS defined triggers.
-  // E.g. TRAILER_CONNECTED [id of trailer].
-  repeated string additional_info = 5;
-
-  // The driver identification.
-  // Provided when the trigger type is DRIVER_LOGIN, DRIVER_LOGOUT, DRIVER_1_WORKING_STATE_CHANGED or DRIVER_2_WORKING_STATE_CHANGED.
-  // For DRIVER_LOGIN it is the id of the driver that logged in.
-  // For DRIVER_LOGOUT it is the id of the driver that logged out.
-  // For DRIVER_1_WORKING_STATE_CHANGED it is the id of driver 1.
-  // For DRIVER_2_WORKING_STATE_CHANGED it is the id of driver 2.
-  DriverIdentification driver_info = 6;
-
-  // The id of a power take off.
-  // Provided when the trigger type is PTO_ENABLED or PTO_DISABLED.
-  string pto_id = 7;
-
-  // Additional tell tale information.
-  // Provided when the trigger type is TELL_TALE.
-  TellTale tell_tale_info = 8;
-
-  // Additional charging status information.
-  // Provided when the trigger type is BATTERY_PACK_CHARGING_STATUS_CHANGE.
-  ChargingStatusInfo charging_status_info = 9;
-
-  // Additional charging connection status information.
-  // Provided when the trigger type is BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE.
-  ChargingConnectionStatusInfo charging_connection_status_info = 10;
-
-  // Additional alarm information.
-  // Provided when the trigger type is ALARM.
-  AlarmInfo alarm_info = 11;
-
   // The type of trigger that caused the vehicle position to be sent.
   enum Type {
     // Default value. This value is not used.
@@ -122,6 +80,48 @@ message Trigger {
     ALARM = 21;
   }
 
+  // The unknown trigger type. Used when the type is TYPE_UNKNOWN.
+  string unknown_type = 2;
+
+  // The context of the trigger.
+  Context context = 3;
+
+  // The unknown context. Used when the context is CONTEXT_UNKNOWN.
+  string unknown_context = 4;
+
+  // Additional OEM specific trigger info content.
+  // Can be used for both OEM specific and rFMS defined triggers.
+  // E.g. TRAILER_CONNECTED [id of trailer].
+  repeated string trigger_info = 5;
+
+  // The driver identification.
+  // Provided when the trigger type is DRIVER_LOGIN, DRIVER_LOGOUT, DRIVER_1_WORKING_STATE_CHANGED or DRIVER_2_WORKING_STATE_CHANGED.
+  // For DRIVER_LOGIN it is the id of the driver that logged in.
+  // For DRIVER_LOGOUT it is the id of the driver that logged out.
+  // For DRIVER_1_WORKING_STATE_CHANGED it is the id of driver 1.
+  // For DRIVER_2_WORKING_STATE_CHANGED it is the id of driver 2.
+  DriverIdentification driver_id = 6;
+
+  // The id of a power take off.
+  // Provided when the trigger type is PTO_ENABLED or PTO_DISABLED.
+  string pto_id = 7;
+
+  // Additional tell tale information.
+  // Provided when the trigger type is TELL_TALE.
+  TellTale tell_tale_info = 8;
+
+  // Additional charging status information.
+  // Provided when the trigger type is BATTERY_PACK_CHARGING_STATUS_CHANGE.
+  ChargingStatusInfo charging_status_info = 9;
+
+  // Additional charging connection status information.
+  // Provided when the trigger type is BATTERY_PACK_CHARGING_CONNECTION_STATUS_CHANGE.
+  ChargingConnectionStatusInfo charging_connection_status_info = 10;
+
+  // Additional alarm information.
+  // Provided when the trigger type is ALARM.
+  AlarmInfo alarm_info = 11;
+
   // The context of a trigger.
   enum Context {
     // Default value. This value is not used.
@@ -130,20 +130,47 @@ message Trigger {
     // The context is unknown.
     CONTEXT_UNKNOWN = 1;
 
-    // The context is RFMS.
+    // RFMS.
     RFMS = 2;
+
+    // VOLVO TRUCKS.
+    VOLVO_TRUCKS = 3;
+
+    // SCANIA.
+    SCANIA = 4;
+
+    // DAIMLER.
+    DAIMLER = 5;
+
+    // IVECO.
+    IVECO = 6;
+
+    // DAF.
+    DAF = 7;
+
+    // MAN.
+    MAN = 8;
+
+    // RENAULT TRUCKS.
+    RENAULT_TRUCKS = 9;
+
+    // VDL.
+    VDL = 10;
+
+    // VOLVO BUSES.
+    VOLVO_BUSES = 11;
+
+    // IVECO BUS.
+    IVECO_BUS = 12;
+
+    // IRISBUS.
+    IRISBUS = 13;
   }
 
   // Information about a charging status.
   message ChargingStatusInfo {
     // The event that caused the charging status to be sent.
     Event event = 1;
-
-    // The unknown event. Used when the event is EVENT_UNKNOWN.
-    string unknown_event = 2;
-
-    // Event detail.
-    string detail = 3;
 
     // The charging status event.
     enum Event {
@@ -174,6 +201,12 @@ message Trigger {
       // The charging level has reached a predefined level. (Charging levels are outside the scope of rFMS).
       CHARGING_LEVEL = 8;
     }
+
+    // The unknown event. Used when the event is EVENT_UNKNOWN.
+    string unknown_event = 2;
+
+    // Event detail.
+    string detail = 3;
   }
 
   // Additonal information about the charging connection status.
@@ -189,18 +222,6 @@ message Trigger {
   message AlarmInfo {
     // The type of alarm.
     Type type = 1;
-
-    // The unknown type. Used when the type is TYPE_UNKNOWN.
-    string unknown_type = 2;
-
-    // The state of the alarm.
-    State state = 3;
-
-    // The unknown state. Used when the state is STATE_UNKNOWN.
-    string unknown_state = 4;
-
-    // OEM specific details.
-    repeated string details = 5;
 
     // The type of alarm.
     enum Type {
@@ -219,6 +240,12 @@ message Trigger {
       // Cargo temperature alarm.
       CARGO_TEMPERATURE = 6;
     }
+
+    // The unknown type. Used when the type is TYPE_UNKNOWN.
+    string unknown_type = 2;
+
+    // The state of the alarm.
+    State state = 3;
 
     // State of an alarm.
     enum State {
@@ -239,5 +266,11 @@ message Trigger {
       // The alarm is untriggered in an authorized way.
       UNTRIGGERED = 7;
     }
+
+    // The unknown state. Used when the state is STATE_UNKNOWN.
+    string unknown_state = 4;
+
+    // OEM specific details.
+    repeated string details = 5;
   }
 }

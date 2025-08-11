@@ -40,7 +40,7 @@ func snapshotData(input *rfmsv4oapi.SnapshotDataObject) *rfmsv5.SnapshotData {
 		}
 	}
 	if input.Driver2ID != nil {
-		output.SetDriver2(driverIdentification(input.Driver2ID))
+		output.SetDriver2Id(driverIdentification(input.Driver2ID))
 	}
 	if input.CatalystFuelLevel != nil {
 		output.SetCatalystFuelLevelPercent(*input.CatalystFuelLevel)

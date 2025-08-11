@@ -10,17 +10,17 @@ func accumulatedData(input *rfmsv2oapi.AccumulatedType) *rfmsv5.AccumulatedData 
 	var output rfmsv5.AccumulatedData
 	if input.AccelerationClass != nil {
 		for _, fromToAccelerationClass := range input.AccelerationClass.Value {
-			output.SetAccelerationClass(append(output.GetAccelerationClass(), fromToClass(&fromToAccelerationClass)))
+			output.SetAccelerationClassMps2(append(output.GetAccelerationClassMps2(), fromToClass(&fromToAccelerationClass)))
 		}
 	}
 	if input.AccelerationDuringBrakeClass != nil {
 		for _, fromToAccelerationDuringBrakeClass := range input.AccelerationDuringBrakeClass.Value {
-			output.SetAccelerationDuringBrakeClass(append(output.GetAccelerationDuringBrakeClass(), fromToClass(&fromToAccelerationDuringBrakeClass)))
+			output.SetAccelerationDuringBrakeClassMps2(append(output.GetAccelerationDuringBrakeClassMps2(), fromToClass(&fromToAccelerationDuringBrakeClass)))
 		}
 	}
 	if input.AccelerationPedalPositionClass != nil {
 		for _, fromToAccelerationPedalPositionClass := range input.AccelerationPedalPositionClass.Value {
-			output.SetAccelerationPedalPositionClass(append(output.GetAccelerationPedalPositionClass(), fromToClass(&fromToAccelerationPedalPositionClass)))
+			output.SetAccelerationPedalPositionClassPercent(append(output.GetAccelerationPedalPositionClassPercent(), fromToClass(&fromToAccelerationPedalPositionClass)))
 		}
 	}
 	if input.BrakePedalCounterSpeedOverZero != nil {
@@ -65,12 +65,12 @@ func accumulatedData(input *rfmsv2oapi.AccumulatedType) *rfmsv5.AccumulatedData 
 	}
 	if input.EngineSpeedClass != nil {
 		for _, fromToEngineSpeedClass := range input.EngineSpeedClass.Value {
-			output.SetEngineSpeedClass(append(output.GetEngineSpeedClass(), fromToClass(&fromToEngineSpeedClass)))
+			output.SetEngineSpeedClassRpm(append(output.GetEngineSpeedClassRpm(), fromToClass(&fromToEngineSpeedClass)))
 		}
 	}
 	if input.EngineTorqueClass != nil {
 		for _, fromToEngineTorqueClass := range input.EngineTorqueClass.Value {
-			output.SetEngineTorqueClass(append(output.GetEngineTorqueClass(), fromToClassCombustion(&fromToEngineTorqueClass)))
+			output.SetEngineTorqueClassPercent(append(output.GetEngineTorqueClassPercent(), fromToClassCombustion(&fromToEngineTorqueClass)))
 		}
 	}
 	if input.FuelConsumptionCruiseControlActive != nil {
@@ -87,7 +87,7 @@ func accumulatedData(input *rfmsv2oapi.AccumulatedType) *rfmsv5.AccumulatedData 
 	}
 	if input.HighAccelerationClass != nil {
 		for _, fromToHighAccelerationClass := range input.HighAccelerationClass.Value {
-			output.SetHighAccelerationClass(append(output.GetHighAccelerationClass(), fromToClass(&fromToHighAccelerationClass)))
+			output.SetHighAccelerationClassMps2(append(output.GetHighAccelerationClassMps2(), fromToClass(&fromToHighAccelerationClass)))
 		}
 	}
 	if input.KneelingCounter != nil {
@@ -103,7 +103,7 @@ func accumulatedData(input *rfmsv2oapi.AccumulatedType) *rfmsv5.AccumulatedData 
 	}
 	if input.RetarderTorqueClass != nil {
 		for _, fromToRetarderTorqueClass := range input.RetarderTorqueClass.Value {
-			output.SetRetarderTorqueClass(append(output.GetRetarderTorqueClass(), fromToClass(&fromToRetarderTorqueClass)))
+			output.SetRetarderTorqueClassPercent(append(output.GetRetarderTorqueClassPercent(), fromToClass(&fromToRetarderTorqueClass)))
 		}
 	}
 	if input.SelectedGearClass != nil {
@@ -116,7 +116,7 @@ func accumulatedData(input *rfmsv2oapi.AccumulatedType) *rfmsv5.AccumulatedData 
 	}
 	if input.VehicleSpeedClass != nil {
 		for _, fromToVehicleSpeedClass := range input.VehicleSpeedClass.Value {
-			output.SetVehicleSpeedClass(append(output.GetVehicleSpeedClass(), fromToClass(&fromToVehicleSpeedClass)))
+			output.SetVehicleSpeedClassKmh(append(output.GetVehicleSpeedClassKmh(), fromToClass(&fromToVehicleSpeedClass)))
 		}
 	}
 	return &output

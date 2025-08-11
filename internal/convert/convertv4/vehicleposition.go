@@ -17,10 +17,10 @@ func VehiclePosition(input *rfmsv4oapi.VehiclePositionObject) *rfmsv5.VehiclePos
 		output.SetTrigger(trigger(input.TriggerType))
 	}
 	if input.CreatedDateTime != nil {
-		output.SetCreateTime(time.Time(*input.CreatedDateTime).UnixMicro())
+		output.SetCreateTime(time.Time(*input.CreatedDateTime).UTC().Format(time.RFC3339Nano))
 	}
 	if input.ReceivedDateTime != nil {
-		output.SetReceiveTime(time.Time(*input.ReceivedDateTime).UnixMicro())
+		output.SetReceiveTime(time.Time(*input.ReceivedDateTime).UTC().Format(time.RFC3339Nano))
 	}
 	if input.GNSSPosition != nil {
 		output.SetGnssPosition(gnssPosition(input.GNSSPosition))

@@ -63,27 +63,27 @@ func accumulatedData(input *rfmsv4oapi.AccumulatedDataObject) *rfmsv5.Accumulate
 	}
 	if input.AccelerationPedalPositionClass != nil {
 		for _, fromToAccelerationPedalPositionClass := range input.AccelerationPedalPositionClass {
-			output.SetAccelerationPedalPositionClass(append(output.GetAccelerationPedalPositionClass(), fromToClass(&fromToAccelerationPedalPositionClass)))
+			output.SetAccelerationPedalPositionClassPercent(append(output.GetAccelerationPedalPositionClassPercent(), fromToClass(&fromToAccelerationPedalPositionClass)))
 		}
 	}
 	if input.BrakePedalPositionClass != nil {
 		for _, fromToBrakePedalPositionClass := range input.BrakePedalPositionClass {
-			output.SetBrakePedalPositionClass(append(output.GetBrakePedalPositionClass(), fromToClass(&fromToBrakePedalPositionClass)))
+			output.SetBrakePedalPositionClassPercent(append(output.GetBrakePedalPositionClassPercent(), fromToClass(&fromToBrakePedalPositionClass)))
 		}
 	}
 	if input.AccelerationClass != nil {
 		for _, fromToAccelerationClass := range input.AccelerationClass {
-			output.SetAccelerationClass(append(output.GetAccelerationClass(), fromToClass(&fromToAccelerationClass)))
+			output.SetAccelerationClassMps2(append(output.GetAccelerationClassMps2(), fromToClass(&fromToAccelerationClass)))
 		}
 	}
 	if input.HighAccelerationClass != nil {
 		for _, fromToHighAccelerationClass := range input.HighAccelerationClass {
-			output.SetHighAccelerationClass(append(output.GetHighAccelerationClass(), fromToClass(&fromToHighAccelerationClass)))
+			output.SetHighAccelerationClassMps2(append(output.GetHighAccelerationClassMps2(), fromToClass(&fromToHighAccelerationClass)))
 		}
 	}
 	if input.RetarderTorqueClass != nil {
 		for _, fromToRetarderTorqueClass := range input.RetarderTorqueClass {
-			output.SetRetarderTorqueClass(append(output.GetRetarderTorqueClass(), fromToClass(&fromToRetarderTorqueClass)))
+			output.SetRetarderTorqueClassPercent(append(output.GetRetarderTorqueClassPercent(), fromToClass(&fromToRetarderTorqueClass)))
 		}
 	}
 	if input.DrivingWithoutTorqueClass != nil {
@@ -93,37 +93,37 @@ func accumulatedData(input *rfmsv4oapi.AccumulatedDataObject) *rfmsv5.Accumulate
 	}
 	if input.EngineTorqueClass != nil {
 		for _, fromToEngineTorqueClass := range input.EngineTorqueClass {
-			output.SetEngineTorqueClass(append(output.GetEngineTorqueClass(), fromToClassCombustion(&fromToEngineTorqueClass)))
+			output.SetEngineTorqueClassPercent(append(output.GetEngineTorqueClassPercent(), fromToClassCombustion(&fromToEngineTorqueClass)))
 		}
 	}
 	if input.ElectricMotorTorqueClass != nil {
 		for _, fromToElectricMotorTorqueClass := range input.ElectricMotorTorqueClass {
-			output.SetElectricMotorTorqueClass(append(output.GetElectricMotorTorqueClass(), fromToClassElectrical(&fromToElectricMotorTorqueClass)))
+			output.SetElectricMotorTorqueClassPercent(append(output.GetElectricMotorTorqueClassPercent(), fromToClassElectrical(&fromToElectricMotorTorqueClass)))
 		}
 	}
 	if input.EngineTorqueAtCurrentSpeedClass != nil {
 		for _, fromToEngineTorqueAtCurrentSpeedClass := range input.EngineTorqueAtCurrentSpeedClass {
-			output.SetEngineTorqueAtCurrentSpeedClass(append(output.GetEngineTorqueAtCurrentSpeedClass(), fromToClassCombustion(&fromToEngineTorqueAtCurrentSpeedClass)))
+			output.SetEngineTorqueAtCurrentSpeedClassPercent(append(output.GetEngineTorqueAtCurrentSpeedClassPercent(), fromToClassCombustion(&fromToEngineTorqueAtCurrentSpeedClass)))
 		}
 	}
 	if input.ElectricMotorTorqueAtCurrentSpeedClass != nil {
 		for _, fromToElectricMotorTorqueAtCurrentSpeedClass := range input.ElectricMotorTorqueAtCurrentSpeedClass {
-			output.SetElectricMotorTorqueAtCurrentSpeedClass(append(output.GetElectricMotorTorqueAtCurrentSpeedClass(), fromToClassElectrical(&fromToElectricMotorTorqueAtCurrentSpeedClass)))
+			output.SetElectricMotorTorqueAtCurrentSpeedClassPercent(append(output.GetElectricMotorTorqueAtCurrentSpeedClassPercent(), fromToClassElectrical(&fromToElectricMotorTorqueAtCurrentSpeedClass)))
 		}
 	}
 	if input.VehicleSpeedClass != nil {
 		for _, fromToVehicleSpeedClass := range input.VehicleSpeedClass {
-			output.SetVehicleSpeedClass(append(output.GetVehicleSpeedClass(), fromToClass(&fromToVehicleSpeedClass)))
+			output.SetVehicleSpeedClassKmh(append(output.GetVehicleSpeedClassKmh(), fromToClass(&fromToVehicleSpeedClass)))
 		}
 	}
 	if input.EngineSpeedClass != nil {
 		for _, fromToEngineSpeedClass := range input.EngineSpeedClass {
-			output.SetEngineSpeedClass(append(output.GetEngineSpeedClass(), fromToClass(&fromToEngineSpeedClass)))
+			output.SetEngineSpeedClassRpm(append(output.GetEngineSpeedClassRpm(), fromToClass(&fromToEngineSpeedClass)))
 		}
 	}
 	if input.AccelerationDuringBrakeClass != nil {
 		for _, fromToAccelerationDuringBrakeClass := range input.AccelerationDuringBrakeClass {
-			output.SetAccelerationDuringBrakeClass(append(output.GetAccelerationDuringBrakeClass(), fromToClass(&fromToAccelerationDuringBrakeClass)))
+			output.SetAccelerationDuringBrakeClassMps2(append(output.GetAccelerationDuringBrakeClassMps2(), fromToClass(&fromToAccelerationDuringBrakeClass)))
 		}
 	}
 	if input.SelectedGearClass != nil {
@@ -150,7 +150,7 @@ func accumulatedData(input *rfmsv4oapi.AccumulatedDataObject) *rfmsv5.Accumulate
 	}
 	if input.ElectricPowerRecuperationClass != nil {
 		for _, fromToElectricPowerRecuperationClass := range input.ElectricPowerRecuperationClass {
-			output.SetElectricPowerRecuperationClass(append(output.GetElectricPowerRecuperationClass(), fromToClassElectrical(&fromToElectricPowerRecuperationClass)))
+			output.SetElectricPowerRecuperationClassKw(append(output.GetElectricPowerRecuperationClassKw(), fromToClassElectrical(&fromToElectricPowerRecuperationClass)))
 		}
 	}
 	return &output

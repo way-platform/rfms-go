@@ -19,8 +19,8 @@ func Vehicle(input *rfmsv4oapi.VehicleObject) *rfmsv5.Vehicle {
 		output.SetRegistrationNumber(*input.RegistrationNumber)
 	}
 	if input.Brand != nil {
-		output.SetBrand(convert.VehicleBrand(*input.Brand))
-		if output.GetBrand() == rfmsv5.Vehicle_BRAND_UNKNOWN {
+		output.SetBrand(convert.Brand(*input.Brand))
+		if output.GetBrand() == rfmsv5.Brand_BRAND_UNKNOWN {
 			output.SetUnknownBrand(*input.Brand)
 		}
 	}
@@ -41,13 +41,13 @@ func Vehicle(input *rfmsv4oapi.VehicleObject) *rfmsv5.Vehicle {
 			fuelType := convert.FuelType(possibleFuelType)
 			output.SetPossibleFuelTypes(append(output.GetPossibleFuelTypes(), fuelType))
 			if fuelType == rfmsv5.FuelType_FUEL_TYPE_UNKNOWN {
-				output.SetUnknownPossibleFuelTypes(append(output.GetUnknownPossibleFuelTypes(), fuelType))
+				output.SetUnknownPossibleFuelTypes(append(output.GetUnknownPossibleFuelTypes(), possibleFuelType))
 			}
 		}
 	}
 	if input.EmissionLevel != nil {
-		output.SetEmissionLevel(convert.VehicleEmissionLevel(*input.EmissionLevel))
-		if output.GetEmissionLevel() == rfmsv5.Vehicle_EMISSION_LEVEL_UNKNOWN {
+		output.SetEmissionLevel(convert.EmissionLevel(*input.EmissionLevel))
+		if output.GetEmissionLevel() == rfmsv5.EmissionLevel_EMISSION_LEVEL_UNKNOWN {
 			output.SetUnknownEmissionLevel(*input.EmissionLevel)
 		}
 	}
@@ -70,14 +70,14 @@ func Vehicle(input *rfmsv4oapi.VehicleObject) *rfmsv5.Vehicle {
 		output.SetTotalBatteryPackCapacityWh(float64(*input.TotalBatteryPackCapacity))
 	}
 	if input.TachographType != nil {
-		output.SetTachographType(convert.VehicleTachographType(*input.TachographType))
-		if output.GetTachographType() == rfmsv5.Vehicle_TACHOGRAPH_TYPE_UNKNOWN {
+		output.SetTachographType(convert.TachographType(*input.TachographType))
+		if output.GetTachographType() == rfmsv5.TachographType_TACHOGRAPH_TYPE_UNKNOWN {
 			output.SetUnknownTachographType(string(*input.TachographType))
 		}
 	}
 	if input.GearboxType != nil {
-		output.SetGearboxType(convert.VehicleGearboxType(*input.GearboxType))
-		if output.GetGearboxType() == rfmsv5.Vehicle_GEARBOX_TYPE_UNKNOWN {
+		output.SetGearboxType(convert.GearboxType(*input.GearboxType))
+		if output.GetGearboxType() == rfmsv5.GearboxType_GEARBOX_TYPE_UNKNOWN {
 			output.SetUnknownGearboxType(string(*input.GearboxType))
 		}
 	}
@@ -94,6 +94,11 @@ func Vehicle(input *rfmsv4oapi.VehicleObject) *rfmsv5.Vehicle {
 	}
 	if input.HasRampOrLift != nil {
 		output.SetHasRampOrLift(*input.HasRampOrLift)
+	}
+	if len(input.AuthorizedPaths) > 0 {
+		for _, authorizedPath := range input.AuthorizedPaths {
+			output.SetAuthorizedPaths(append(output.GetAuthorizedPaths(), authorizedPath))
+		}
 	}
 	return &output
 }

@@ -1,9 +1,9 @@
 [
  {
   "name": "time",
-  "type": "INTEGER",
+  "type": "STRING",
   "mode": "NULLABLE",
-  "description": "The date and time the GNSS position was recorded. (Unix microseconds)"
+  "description": "The time of the GNSS position data. (RFC 3339)"
  },
  {
   "name": "latitude",

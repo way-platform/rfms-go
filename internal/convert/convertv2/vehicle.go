@@ -19,8 +19,8 @@ func Vehicle(input *rfmsv2oapi.VehicleType) *rfmsv5.Vehicle {
 		}
 	}
 	if input.Brand != nil {
-		output.SetBrand(convert.VehicleBrand(*input.Brand))
-		if output.GetBrand() == rfmsv5.Vehicle_BRAND_UNKNOWN {
+		output.SetBrand(convert.Brand(*input.Brand))
+		if output.GetBrand() == rfmsv5.Brand_BRAND_UNKNOWN {
 			output.SetUnknownBrand(*input.Brand)
 		}
 	}
@@ -36,14 +36,14 @@ func Vehicle(input *rfmsv2oapi.VehicleType) *rfmsv5.Vehicle {
 		}
 	}
 	if input.EmissionLevel != nil {
-		output.SetEmissionLevel(convert.VehicleEmissionLevel(*input.EmissionLevel))
-		if output.GetEmissionLevel() == rfmsv5.Vehicle_EMISSION_LEVEL_UNKNOWN {
+		output.SetEmissionLevel(convert.EmissionLevel(*input.EmissionLevel))
+		if output.GetEmissionLevel() == rfmsv5.EmissionLevel_EMISSION_LEVEL_UNKNOWN {
 			output.SetUnknownEmissionLevel(*input.EmissionLevel)
 		}
 	}
 	if input.GearboxType != nil {
-		output.SetGearboxType(convert.VehicleGearboxType(*input.GearboxType))
-		if output.GetGearboxType() == rfmsv5.Vehicle_GEARBOX_TYPE_UNKNOWN {
+		output.SetGearboxType(convert.GearboxType(*input.GearboxType))
+		if output.GetGearboxType() == rfmsv5.GearboxType_GEARBOX_TYPE_UNKNOWN {
 			output.SetUnknownGearboxType(string(*input.GearboxType))
 		}
 	}
@@ -61,7 +61,7 @@ func Vehicle(input *rfmsv2oapi.VehicleType) *rfmsv5.Vehicle {
 			fuelType := convert.FuelType(possibleFuelType)
 			output.SetPossibleFuelTypes(append(output.GetPossibleFuelTypes(), fuelType))
 			if fuelType == rfmsv5.FuelType_FUEL_TYPE_UNKNOWN {
-				output.SetUnknownPossibleFuelTypes(append(output.GetUnknownPossibleFuelTypes(), fuelType))
+				output.SetUnknownPossibleFuelTypes(append(output.GetUnknownPossibleFuelTypes(), possibleFuelType))
 			}
 		}
 	}
@@ -69,8 +69,8 @@ func Vehicle(input *rfmsv2oapi.VehicleType) *rfmsv5.Vehicle {
 		output.SetProductionDate(convert.Date(input.ProductionDate.Year, input.ProductionDate.Month, input.ProductionDate.Day))
 	}
 	if input.TachographType != nil {
-		output.SetTachographType(convert.VehicleTachographType(*input.TachographType))
-		if output.GetTachographType() == rfmsv5.Vehicle_TACHOGRAPH_TYPE_UNKNOWN {
+		output.SetTachographType(convert.TachographType(*input.TachographType))
+		if output.GetTachographType() == rfmsv5.TachographType_TACHOGRAPH_TYPE_UNKNOWN {
 			output.SetUnknownTachographType(string(*input.TachographType))
 		}
 	}

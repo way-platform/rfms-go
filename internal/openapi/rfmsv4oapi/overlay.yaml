@@ -81,6 +81,6 @@ actions:
       format: int32
 
   - target: $..[?(@.type=="string" && @.format=="date-time")]
-    description: "Use custom type to handle non-conformance with RFC3339"
+    description: "Use custom type to handle non-conformance with RFC3339Nano"
     update:
       x-go-type: Time

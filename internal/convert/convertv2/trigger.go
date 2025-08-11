@@ -21,13 +21,13 @@ func trigger(input *rfmsv2oapi.TriggerType) *rfmsv5.Trigger {
 		}
 	}
 	if len(input.TriggerInfo) > 0 {
-		output.SetAdditionalInfo(input.TriggerInfo)
+		output.SetTriggerInfo(input.TriggerInfo)
 	}
 	if input.PtoID != nil {
 		output.SetPtoId(*input.PtoID)
 	}
 	if input.DriverID != nil {
-		output.SetDriverInfo(driverIdentification(input.DriverID))
+		output.SetDriverId(driverIdentification(input.DriverID))
 	}
 	if len(input.TellTaleInfo) > 0 {
 		output.SetTellTaleInfo(tellTale(&input.TellTaleInfo[0]))

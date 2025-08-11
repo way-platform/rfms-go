@@ -20,118 +20,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// The brand of a vehicle.
-type Vehicle_Brand int32
-
-const (
-	// Default value. This value is not used.
-	Vehicle_BRAND_UNSPECIFIED Vehicle_Brand = 0
-	// Unknown brand.
-	Vehicle_BRAND_UNKNOWN Vehicle_Brand = 1
-	// VOLVO TRUCKS.
-	Vehicle_VOLVO_TRUCKS Vehicle_Brand = 2
-	// SCANIA.
-	Vehicle_SCANIA Vehicle_Brand = 3
-	// DAIMLER.
-	Vehicle_DAIMLER Vehicle_Brand = 4
-	// IVECO.
-	Vehicle_IVECO Vehicle_Brand = 5
-	// DAF.
-	Vehicle_DAF Vehicle_Brand = 6
-	// MAN.
-	Vehicle_MAN Vehicle_Brand = 7
-	// RENAULT TRUCKS.
-	Vehicle_RENAULT_TRUCKS Vehicle_Brand = 8
-	// VDL.
-	Vehicle_VDL Vehicle_Brand = 9
-	// VOLVO BUSES.
-	Vehicle_VOLVO_BUSES Vehicle_Brand = 10
-	// IVECO BUS.
-	Vehicle_IVECO_BUS Vehicle_Brand = 11
-	// HEULIEZ.
-	Vehicle_HEULIEZ Vehicle_Brand = 12
-	// VWTB.
-	Vehicle_VWTB Vehicle_Brand = 13
-	// KENWORTH.
-	Vehicle_KENWORTH Vehicle_Brand = 14
-	// PETERBILT.
-	Vehicle_PETERBILT Vehicle_Brand = 15
-	// MACK TRUCKS.
-	Vehicle_MACK_TRUCKS Vehicle_Brand = 16
-	// INTERNATIONAL.
-	Vehicle_INTERNATIONAL Vehicle_Brand = 17
-	// IC BUS.
-	Vehicle_IC_BUS Vehicle_Brand = 18
-)
-
-// Enum value maps for Vehicle_Brand.
-var (
-	Vehicle_Brand_name = map[int32]string{
-		0:  "BRAND_UNSPECIFIED",
-		1:  "BRAND_UNKNOWN",
-		2:  "VOLVO_TRUCKS",
-		3:  "SCANIA",
-		4:  "DAIMLER",
-		5:  "IVECO",
-		6:  "DAF",
-		7:  "MAN",
-		8:  "RENAULT_TRUCKS",
-		9:  "VDL",
-		10: "VOLVO_BUSES",
-		11: "IVECO_BUS",
-		12: "HEULIEZ",
-		13: "VWTB",
-		14: "KENWORTH",
-		15: "PETERBILT",
-		16: "MACK_TRUCKS",
-		17: "INTERNATIONAL",
-		18: "IC_BUS",
-	}
-	Vehicle_Brand_value = map[string]int32{
-		"BRAND_UNSPECIFIED": 0,
-		"BRAND_UNKNOWN":     1,
-		"VOLVO_TRUCKS":      2,
-		"SCANIA":            3,
-		"DAIMLER":           4,
-		"IVECO":             5,
-		"DAF":               6,
-		"MAN":               7,
-		"RENAULT_TRUCKS":    8,
-		"VDL":               9,
-		"VOLVO_BUSES":       10,
-		"IVECO_BUS":         11,
-		"HEULIEZ":           12,
-		"VWTB":              13,
-		"KENWORTH":          14,
-		"PETERBILT":         15,
-		"MACK_TRUCKS":       16,
-		"INTERNATIONAL":     17,
-		"IC_BUS":            18,
-	}
-)
-
-func (x Vehicle_Brand) Enum() *Vehicle_Brand {
-	p := new(Vehicle_Brand)
-	*p = x
-	return p
-}
-
-func (x Vehicle_Brand) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (Vehicle_Brand) Descriptor() protoreflect.EnumDescriptor {
-	return file_wayplatform_rfms_v5_vehicle_proto_enumTypes[0].Descriptor()
-}
-
-func (Vehicle_Brand) Type() protoreflect.EnumType {
-	return &file_wayplatform_rfms_v5_vehicle_proto_enumTypes[0]
-}
-
-func (x Vehicle_Brand) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
 // The type of a vehicle.
 type Vehicle_Type int32
 
@@ -143,7 +31,9 @@ const (
 	Vehicle_TRUCK Vehicle_Type = 2
 	// A bus.
 	Vehicle_BUS Vehicle_Type = 3
-	// A van.
+	// A van.//
+	// This enum is not exhaustive. It identifies commonly used emission levels across
+	// OEM-specific implementations of rFMS APIs.
 	Vehicle_VAN Vehicle_Type = 4
 )
 
@@ -176,277 +66,19 @@ func (x Vehicle_Type) String() string {
 }
 
 func (Vehicle_Type) Descriptor() protoreflect.EnumDescriptor {
-	return file_wayplatform_rfms_v5_vehicle_proto_enumTypes[1].Descriptor()
+	return file_wayplatform_rfms_v5_vehicle_proto_enumTypes[0].Descriptor()
 }
 
 func (Vehicle_Type) Type() protoreflect.EnumType {
-	return &file_wayplatform_rfms_v5_vehicle_proto_enumTypes[1]
+	return &file_wayplatform_rfms_v5_vehicle_proto_enumTypes[0]
 }
 
 func (x Vehicle_Type) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// The emission level of a vehicle.
-type Vehicle_EmissionLevel int32
-
-const (
-	// Default value. This value is not used.
-	Vehicle_EMISSION_LEVEL_UNSPECIFIED Vehicle_EmissionLevel = 0
-	// Unknown emission level.
-	Vehicle_EMISSION_LEVEL_UNKNOWN Vehicle_EmissionLevel = 1
-	// European Union, Heavy-Duty Truck and Bus Engines.
-	Vehicle_EURO_III     Vehicle_EmissionLevel = 2
-	Vehicle_EURO_III_EEV Vehicle_EmissionLevel = 3
-	Vehicle_EURO_IV      Vehicle_EmissionLevel = 4
-	Vehicle_EURO_V       Vehicle_EmissionLevel = 5
-	Vehicle_EURO_VI      Vehicle_EmissionLevel = 6
-	Vehicle_EURO_VII     Vehicle_EmissionLevel = 7
-	// European Union, Nonroad Engines.
-	Vehicle_EURO_STAGE_III Vehicle_EmissionLevel = 8
-	Vehicle_EURO_STAGE_IV  Vehicle_EmissionLevel = 9
-	Vehicle_EURO_STAGE_V   Vehicle_EmissionLevel = 10
-	// United_States, Heavy-Duty Truck and Bus Engines.
-	Vehicle_EPA_2004       Vehicle_EmissionLevel = 11
-	Vehicle_EPA_2007       Vehicle_EmissionLevel = 12
-	Vehicle_EPA_2010       Vehicle_EmissionLevel = 13
-	Vehicle_EPA_2015_NOX10 Vehicle_EmissionLevel = 14
-	Vehicle_EPA_2015_NOX05 Vehicle_EmissionLevel = 15
-	Vehicle_EPA_2015_NOX02 Vehicle_EmissionLevel = 16
-	// United_States, Nonroad Engines.
-	Vehicle_EPA_TIER_2      Vehicle_EmissionLevel = 17
-	Vehicle_EPA_TIER_3      Vehicle_EmissionLevel = 18
-	Vehicle_EPA_TIER_4_2008 Vehicle_EmissionLevel = 19
-	Vehicle_EPA_TIER_4_2013 Vehicle_EmissionLevel = 20
-	// Brazil, Heavy-Duty Truck and Bus Engines.
-	Vehicle_PROCONVE_P5 Vehicle_EmissionLevel = 21
-	Vehicle_PROCONVE_P6 Vehicle_EmissionLevel = 22
-	Vehicle_PROCONVE_P7 Vehicle_EmissionLevel = 23
-	// Brazil, Nonroad Engines.
-	Vehicle_PROCONVE_MARI Vehicle_EmissionLevel = 24
-)
-
-// Enum value maps for Vehicle_EmissionLevel.
-var (
-	Vehicle_EmissionLevel_name = map[int32]string{
-		0:  "EMISSION_LEVEL_UNSPECIFIED",
-		1:  "EMISSION_LEVEL_UNKNOWN",
-		2:  "EURO_III",
-		3:  "EURO_III_EEV",
-		4:  "EURO_IV",
-		5:  "EURO_V",
-		6:  "EURO_VI",
-		7:  "EURO_VII",
-		8:  "EURO_STAGE_III",
-		9:  "EURO_STAGE_IV",
-		10: "EURO_STAGE_V",
-		11: "EPA_2004",
-		12: "EPA_2007",
-		13: "EPA_2010",
-		14: "EPA_2015_NOX10",
-		15: "EPA_2015_NOX05",
-		16: "EPA_2015_NOX02",
-		17: "EPA_TIER_2",
-		18: "EPA_TIER_3",
-		19: "EPA_TIER_4_2008",
-		20: "EPA_TIER_4_2013",
-		21: "PROCONVE_P5",
-		22: "PROCONVE_P6",
-		23: "PROCONVE_P7",
-		24: "PROCONVE_MARI",
-	}
-	Vehicle_EmissionLevel_value = map[string]int32{
-		"EMISSION_LEVEL_UNSPECIFIED": 0,
-		"EMISSION_LEVEL_UNKNOWN":     1,
-		"EURO_III":                   2,
-		"EURO_III_EEV":               3,
-		"EURO_IV":                    4,
-		"EURO_V":                     5,
-		"EURO_VI":                    6,
-		"EURO_VII":                   7,
-		"EURO_STAGE_III":             8,
-		"EURO_STAGE_IV":              9,
-		"EURO_STAGE_V":               10,
-		"EPA_2004":                   11,
-		"EPA_2007":                   12,
-		"EPA_2010":                   13,
-		"EPA_2015_NOX10":             14,
-		"EPA_2015_NOX05":             15,
-		"EPA_2015_NOX02":             16,
-		"EPA_TIER_2":                 17,
-		"EPA_TIER_3":                 18,
-		"EPA_TIER_4_2008":            19,
-		"EPA_TIER_4_2013":            20,
-		"PROCONVE_P5":                21,
-		"PROCONVE_P6":                22,
-		"PROCONVE_P7":                23,
-		"PROCONVE_MARI":              24,
-	}
-)
-
-func (x Vehicle_EmissionLevel) Enum() *Vehicle_EmissionLevel {
-	p := new(Vehicle_EmissionLevel)
-	*p = x
-	return p
-}
-
-func (x Vehicle_EmissionLevel) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (Vehicle_EmissionLevel) Descriptor() protoreflect.EnumDescriptor {
-	return file_wayplatform_rfms_v5_vehicle_proto_enumTypes[2].Descriptor()
-}
-
-func (Vehicle_EmissionLevel) Type() protoreflect.EnumType {
-	return &file_wayplatform_rfms_v5_vehicle_proto_enumTypes[2]
-}
-
-func (x Vehicle_EmissionLevel) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// The type of tachograph.
-type Vehicle_TachographType int32
-
-const (
-	// Default value. This value is not used.
-	Vehicle_TACHOGRAPH_TYPE_UNSPECIFIED Vehicle_TachographType = 0
-	// Unknown tachograph type.
-	Vehicle_TACHOGRAPH_TYPE_UNKNOWN Vehicle_TachographType = 1
-	// Modular tachograph.
-	Vehicle_MTCO Vehicle_TachographType = 2
-	// Digital tachograph, unknown generation.
-	Vehicle_DTCO Vehicle_TachographType = 3
-	// Digital tachograph generation 1.
-	Vehicle_DTCO_G1 Vehicle_TachographType = 4
-	// Digital tachograph generation 2.
-	Vehicle_DTCO_G2 Vehicle_TachographType = 5
-	// Tachograph simulator.
-	Vehicle_TSU Vehicle_TachographType = 6
-	// No tachograph in the vehicle.
-	Vehicle_NONE Vehicle_TachographType = 7
-	// Stoneridge Smart. (Scania)
-	Vehicle_STONERIDGE_SMART Vehicle_TachographType = 8
-	// Stoneridge Smart 2. (Scania)
-	Vehicle_STONERIDGE_SMART2 Vehicle_TachographType = 9
-)
-
-// Enum value maps for Vehicle_TachographType.
-var (
-	Vehicle_TachographType_name = map[int32]string{
-		0: "TACHOGRAPH_TYPE_UNSPECIFIED",
-		1: "TACHOGRAPH_TYPE_UNKNOWN",
-		2: "MTCO",
-		3: "DTCO",
-		4: "DTCO_G1",
-		5: "DTCO_G2",
-		6: "TSU",
-		7: "NONE",
-		8: "STONERIDGE_SMART",
-		9: "STONERIDGE_SMART2",
-	}
-	Vehicle_TachographType_value = map[string]int32{
-		"TACHOGRAPH_TYPE_UNSPECIFIED": 0,
-		"TACHOGRAPH_TYPE_UNKNOWN":     1,
-		"MTCO":                        2,
-		"DTCO":                        3,
-		"DTCO_G1":                     4,
-		"DTCO_G2":                     5,
-		"TSU":                         6,
-		"NONE":                        7,
-		"STONERIDGE_SMART":            8,
-		"STONERIDGE_SMART2":           9,
-	}
-)
-
-func (x Vehicle_TachographType) Enum() *Vehicle_TachographType {
-	p := new(Vehicle_TachographType)
-	*p = x
-	return p
-}
-
-func (x Vehicle_TachographType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (Vehicle_TachographType) Descriptor() protoreflect.EnumDescriptor {
-	return file_wayplatform_rfms_v5_vehicle_proto_enumTypes[3].Descriptor()
-}
-
-func (Vehicle_TachographType) Type() protoreflect.EnumType {
-	return &file_wayplatform_rfms_v5_vehicle_proto_enumTypes[3]
-}
-
-func (x Vehicle_TachographType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// The type of gearbox.
-type Vehicle_GearboxType int32
-
-const (
-	// Default value. This value is not used.
-	Vehicle_GEARBOX_TYPE_UNSPECIFIED Vehicle_GearboxType = 0
-	// Unknown gearbox type.
-	Vehicle_GEARBOX_TYPE_UNKNOWN Vehicle_GearboxType = 1
-	// Manual.
-	Vehicle_MANUAL Vehicle_GearboxType = 2
-	// Automatic.
-	Vehicle_AUTOMATIC Vehicle_GearboxType = 3
-	// Semi-automatic.
-	Vehicle_SEMI_AUTOMATIC Vehicle_GearboxType = 4
-	// E.g. electrical.
-	Vehicle_NO_GEAR Vehicle_GearboxType = 5
-	// Automated manual transmission. (Scania)
-	Vehicle_AMT Vehicle_GearboxType = 6
-)
-
-// Enum value maps for Vehicle_GearboxType.
-var (
-	Vehicle_GearboxType_name = map[int32]string{
-		0: "GEARBOX_TYPE_UNSPECIFIED",
-		1: "GEARBOX_TYPE_UNKNOWN",
-		2: "MANUAL",
-		3: "AUTOMATIC",
-		4: "SEMI_AUTOMATIC",
-		5: "NO_GEAR",
-		6: "AMT",
-	}
-	Vehicle_GearboxType_value = map[string]int32{
-		"GEARBOX_TYPE_UNSPECIFIED": 0,
-		"GEARBOX_TYPE_UNKNOWN":     1,
-		"MANUAL":                   2,
-		"AUTOMATIC":                3,
-		"SEMI_AUTOMATIC":           4,
-		"NO_GEAR":                  5,
-		"AMT":                      6,
-	}
-)
-
-func (x Vehicle_GearboxType) Enum() *Vehicle_GearboxType {
-	p := new(Vehicle_GearboxType)
-	*p = x
-	return p
-}
-
-func (x Vehicle_GearboxType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (Vehicle_GearboxType) Descriptor() protoreflect.EnumDescriptor {
-	return file_wayplatform_rfms_v5_vehicle_proto_enumTypes[4].Descriptor()
-}
-
-func (Vehicle_GearboxType) Type() protoreflect.EnumType {
-	return &file_wayplatform_rfms_v5_vehicle_proto_enumTypes[4]
-}
-
-func (x Vehicle_GearboxType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
 // The type of body on the chassis.
+// This is used mainly for buses.
 type Vehicle_BodyType int32
 
 const (
@@ -491,11 +123,11 @@ func (x Vehicle_BodyType) String() string {
 }
 
 func (Vehicle_BodyType) Descriptor() protoreflect.EnumDescriptor {
-	return file_wayplatform_rfms_v5_vehicle_proto_enumTypes[5].Descriptor()
+	return file_wayplatform_rfms_v5_vehicle_proto_enumTypes[1].Descriptor()
 }
 
 func (Vehicle_BodyType) Type() protoreflect.EnumType {
-	return &file_wayplatform_rfms_v5_vehicle_proto_enumTypes[5]
+	return &file_wayplatform_rfms_v5_vehicle_proto_enumTypes[1]
 }
 
 func (x Vehicle_BodyType) Number() protoreflect.EnumNumber {
@@ -508,15 +140,15 @@ type Vehicle struct {
 	xxx_hidden_Vin                            *string                `protobuf:"bytes,1,opt,name=vin"`
 	xxx_hidden_CustomerVehicleName            *string                `protobuf:"bytes,2,opt,name=customer_vehicle_name,json=customerVehicleName"`
 	xxx_hidden_RegistrationNumber             *string                `protobuf:"bytes,3,opt,name=registration_number,json=registrationNumber"`
-	xxx_hidden_Brand                          Vehicle_Brand          `protobuf:"varint,4,opt,name=brand,enum=wayplatform.rfms.v5.Vehicle_Brand"`
+	xxx_hidden_Brand                          Brand                  `protobuf:"varint,4,opt,name=brand,enum=wayplatform.rfms.v5.Brand"`
 	xxx_hidden_UnknownBrand                   *string                `protobuf:"bytes,5,opt,name=unknown_brand,json=unknownBrand"`
 	xxx_hidden_ProductionDate                 *Date                  `protobuf:"bytes,6,opt,name=production_date,json=productionDate"`
 	xxx_hidden_Type                           Vehicle_Type           `protobuf:"varint,7,opt,name=type,enum=wayplatform.rfms.v5.Vehicle_Type"`
 	xxx_hidden_UnknownType                    *string                `protobuf:"bytes,8,opt,name=unknown_type,json=unknownType"`
 	xxx_hidden_Model                          *string                `protobuf:"bytes,9,opt,name=model"`
 	xxx_hidden_PossibleFuelTypes              []FuelType             `protobuf:"varint,10,rep,packed,name=possible_fuel_types,json=possibleFuelTypes,enum=wayplatform.rfms.v5.FuelType"`
-	xxx_hidden_UnknownPossibleFuelTypes       []FuelType             `protobuf:"varint,11,rep,packed,name=unknown_possible_fuel_types,json=unknownPossibleFuelTypes,enum=wayplatform.rfms.v5.FuelType"`
-	xxx_hidden_EmissionLevel                  Vehicle_EmissionLevel  `protobuf:"varint,12,opt,name=emission_level,json=emissionLevel,enum=wayplatform.rfms.v5.Vehicle_EmissionLevel"`
+	xxx_hidden_UnknownPossibleFuelTypes       []string               `protobuf:"bytes,11,rep,name=unknown_possible_fuel_types,json=unknownPossibleFuelTypes"`
+	xxx_hidden_EmissionLevel                  EmissionLevel          `protobuf:"varint,12,opt,name=emission_level,json=emissionLevel,enum=wayplatform.rfms.v5.EmissionLevel"`
 	xxx_hidden_UnknownEmissionLevel           *string                `protobuf:"bytes,13,opt,name=unknown_emission_level,json=unknownEmissionLevel"`
 	xxx_hidden_TellTaleCode                   *string                `protobuf:"bytes,14,opt,name=tell_tale_code,json=tellTaleCode"`
 	xxx_hidden_ChassisType                    *string                `protobuf:"bytes,15,opt,name=chassis_type,json=chassisType"`
@@ -524,14 +156,15 @@ type Vehicle struct {
 	xxx_hidden_TotalFuelTankVolumeMl          float64                `protobuf:"fixed64,17,opt,name=total_fuel_tank_volume_ml,json=totalFuelTankVolumeMl"`
 	xxx_hidden_TotalFuelTankCapacityGaseousKg float64                `protobuf:"fixed64,18,opt,name=total_fuel_tank_capacity_gaseous_kg,json=totalFuelTankCapacityGaseousKg"`
 	xxx_hidden_TotalBatteryPackCapacityWh     float64                `protobuf:"fixed64,19,opt,name=total_battery_pack_capacity_wh,json=totalBatteryPackCapacityWh"`
-	xxx_hidden_TachographType                 Vehicle_TachographType `protobuf:"varint,20,opt,name=tachograph_type,json=tachographType,enum=wayplatform.rfms.v5.Vehicle_TachographType"`
+	xxx_hidden_TachographType                 TachographType         `protobuf:"varint,20,opt,name=tachograph_type,json=tachographType,enum=wayplatform.rfms.v5.TachographType"`
 	xxx_hidden_UnknownTachographType          *string                `protobuf:"bytes,21,opt,name=unknown_tachograph_type,json=unknownTachographType"`
-	xxx_hidden_GearboxType                    Vehicle_GearboxType    `protobuf:"varint,22,opt,name=gearbox_type,json=gearboxType,enum=wayplatform.rfms.v5.Vehicle_GearboxType"`
+	xxx_hidden_GearboxType                    GearboxType            `protobuf:"varint,22,opt,name=gearbox_type,json=gearboxType,enum=wayplatform.rfms.v5.GearboxType"`
 	xxx_hidden_UnknownGearboxType             *string                `protobuf:"bytes,23,opt,name=unknown_gearbox_type,json=unknownGearboxType"`
 	xxx_hidden_BodyType                       Vehicle_BodyType       `protobuf:"varint,24,opt,name=body_type,json=bodyType,enum=wayplatform.rfms.v5.Vehicle_BodyType"`
 	xxx_hidden_UnknownBodyType                *string                `protobuf:"bytes,25,opt,name=unknown_body_type,json=unknownBodyType"`
 	xxx_hidden_DoorConfiguration              []int32                `protobuf:"varint,26,rep,packed,name=door_configuration,json=doorConfiguration"`
 	xxx_hidden_HasRampOrLift                  bool                   `protobuf:"varint,27,opt,name=has_ramp_or_lift,json=hasRampOrLift"`
+	xxx_hidden_AuthorizedPaths                []string               `protobuf:"bytes,28,rep,name=authorized_paths,json=authorizedPaths"`
 	XXX_raceDetectHookData                    protoimpl.RaceDetectHookData
 	XXX_presence                              [1]uint32
 	unknownFields                             protoimpl.UnknownFields
@@ -593,13 +226,13 @@ func (x *Vehicle) GetRegistrationNumber() string {
 	return ""
 }
 
-func (x *Vehicle) GetBrand() Vehicle_Brand {
+func (x *Vehicle) GetBrand() Brand {
 	if x != nil {
 		if protoimpl.X.Present(&(x.XXX_presence[0]), 3) {
 			return x.xxx_hidden_Brand
 		}
 	}
-	return Vehicle_BRAND_UNSPECIFIED
+	return Brand_BRAND_UNSPECIFIED
 }
 
 func (x *Vehicle) GetUnknownBrand() string {
@@ -655,20 +288,20 @@ func (x *Vehicle) GetPossibleFuelTypes() []FuelType {
 	return nil
 }
 
-func (x *Vehicle) GetUnknownPossibleFuelTypes() []FuelType {
+func (x *Vehicle) GetUnknownPossibleFuelTypes() []string {
 	if x != nil {
 		return x.xxx_hidden_UnknownPossibleFuelTypes
 	}
 	return nil
 }
 
-func (x *Vehicle) GetEmissionLevel() Vehicle_EmissionLevel {
+func (x *Vehicle) GetEmissionLevel() EmissionLevel {
 	if x != nil {
 		if protoimpl.X.Present(&(x.XXX_presence[0]), 11) {
 			return x.xxx_hidden_EmissionLevel
 		}
 	}
-	return Vehicle_EMISSION_LEVEL_UNSPECIFIED
+	return EmissionLevel_EMISSION_LEVEL_UNSPECIFIED
 }
 
 func (x *Vehicle) GetUnknownEmissionLevel() string {
@@ -729,13 +362,13 @@ func (x *Vehicle) GetTotalBatteryPackCapacityWh() float64 {
 	return 0
 }
 
-func (x *Vehicle) GetTachographType() Vehicle_TachographType {
+func (x *Vehicle) GetTachographType() TachographType {
 	if x != nil {
 		if protoimpl.X.Present(&(x.XXX_presence[0]), 19) {
 			return x.xxx_hidden_TachographType
 		}
 	}
-	return Vehicle_TACHOGRAPH_TYPE_UNSPECIFIED
+	return TachographType_TACHOGRAPH_TYPE_UNSPECIFIED
 }
 
 func (x *Vehicle) GetUnknownTachographType() string {
@@ -748,13 +381,13 @@ func (x *Vehicle) GetUnknownTachographType() string {
 	return ""
 }
 
-func (x *Vehicle) GetGearboxType() Vehicle_GearboxType {
+func (x *Vehicle) GetGearboxType() GearboxType {
 	if x != nil {
 		if protoimpl.X.Present(&(x.XXX_presence[0]), 21) {
 			return x.xxx_hidden_GearboxType
 		}
 	}
-	return Vehicle_GEARBOX_TYPE_UNSPECIFIED
+	return GearboxType_GEARBOX_TYPE_UNSPECIFIED
 }
 
 func (x *Vehicle) GetUnknownGearboxType() string {
@@ -800,29 +433,36 @@ func (x *Vehicle) GetHasRampOrLift() bool {
 	return false
 }
 
+func (x *Vehicle) GetAuthorizedPaths() []string {
+	if x != nil {
+		return x.xxx_hidden_AuthorizedPaths
+	}
+	return nil
+}
+
 func (x *Vehicle) SetVin(v string) {
 	x.xxx_hidden_Vin = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 28)
 }
 
 func (x *Vehicle) SetCustomerVehicleName(v string) {
 	x.xxx_hidden_CustomerVehicleName = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 28)
 }
 
 func (x *Vehicle) SetRegistrationNumber(v string) {
 	x.xxx_hidden_RegistrationNumber = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 28)
 }
 
-func (x *Vehicle) SetBrand(v Vehicle_Brand) {
+func (x *Vehicle) SetBrand(v Brand) {
 	x.xxx_hidden_Brand = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 28)
 }
 
 func (x *Vehicle) SetUnknownBrand(v string) {
 	x.xxx_hidden_UnknownBrand = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 28)
 }
 
 func (x *Vehicle) SetProductionDate(v *Date) {
@@ -831,95 +471,95 @@ func (x *Vehicle) SetProductionDate(v *Date) {
 
 func (x *Vehicle) SetType(v Vehicle_Type) {
 	x.xxx_hidden_Type = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 28)
 }
 
 func (x *Vehicle) SetUnknownType(v string) {
 	x.xxx_hidden_UnknownType = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 28)
 }
 
 func (x *Vehicle) SetModel(v string) {
 	x.xxx_hidden_Model = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 8, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 8, 28)
 }
 
 func (x *Vehicle) SetPossibleFuelTypes(v []FuelType) {
 	x.xxx_hidden_PossibleFuelTypes = v
 }
 
-func (x *Vehicle) SetUnknownPossibleFuelTypes(v []FuelType) {
+func (x *Vehicle) SetUnknownPossibleFuelTypes(v []string) {
 	x.xxx_hidden_UnknownPossibleFuelTypes = v
 }
 
-func (x *Vehicle) SetEmissionLevel(v Vehicle_EmissionLevel) {
+func (x *Vehicle) SetEmissionLevel(v EmissionLevel) {
 	x.xxx_hidden_EmissionLevel = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 11, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 11, 28)
 }
 
 func (x *Vehicle) SetUnknownEmissionLevel(v string) {
 	x.xxx_hidden_UnknownEmissionLevel = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 12, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 12, 28)
 }
 
 func (x *Vehicle) SetTellTaleCode(v string) {
 	x.xxx_hidden_TellTaleCode = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 13, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 13, 28)
 }
 
 func (x *Vehicle) SetChassisType(v string) {
 	x.xxx_hidden_ChassisType = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 14, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 14, 28)
 }
 
 func (x *Vehicle) SetAxleCount(v int32) {
 	x.xxx_hidden_AxleCount = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 15, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 15, 28)
 }
 
 func (x *Vehicle) SetTotalFuelTankVolumeMl(v float64) {
 	x.xxx_hidden_TotalFuelTankVolumeMl = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 16, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 16, 28)
 }
 
 func (x *Vehicle) SetTotalFuelTankCapacityGaseousKg(v float64) {
 	x.xxx_hidden_TotalFuelTankCapacityGaseousKg = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 17, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 17, 28)
 }
 
 func (x *Vehicle) SetTotalBatteryPackCapacityWh(v float64) {
 	x.xxx_hidden_TotalBatteryPackCapacityWh = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 18, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 18, 28)
 }
 
-func (x *Vehicle) SetTachographType(v Vehicle_TachographType) {
+func (x *Vehicle) SetTachographType(v TachographType) {
 	x.xxx_hidden_TachographType = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 19, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 19, 28)
 }
 
 func (x *Vehicle) SetUnknownTachographType(v string) {
 	x.xxx_hidden_UnknownTachographType = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 20, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 20, 28)
 }
 
-func (x *Vehicle) SetGearboxType(v Vehicle_GearboxType) {
+func (x *Vehicle) SetGearboxType(v GearboxType) {
 	x.xxx_hidden_GearboxType = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 21, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 21, 28)
 }
 
 func (x *Vehicle) SetUnknownGearboxType(v string) {
 	x.xxx_hidden_UnknownGearboxType = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 22, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 22, 28)
 }
 
 func (x *Vehicle) SetBodyType(v Vehicle_BodyType) {
 	x.xxx_hidden_BodyType = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 23, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 23, 28)
 }
 
 func (x *Vehicle) SetUnknownBodyType(v string) {
 	x.xxx_hidden_UnknownBodyType = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 24, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 24, 28)
 }
 
 func (x *Vehicle) SetDoorConfiguration(v []int32) {
@@ -928,7 +568,11 @@ func (x *Vehicle) SetDoorConfiguration(v []int32) {
 
 func (x *Vehicle) SetHasRampOrLift(v bool) {
 	x.xxx_hidden_HasRampOrLift = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 26, 27)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 26, 28)
+}
+
+func (x *Vehicle) SetAuthorizedPaths(v []string) {
+	x.xxx_hidden_AuthorizedPaths = v
 }
 
 func (x *Vehicle) HasVin() bool {
@@ -1116,7 +760,7 @@ func (x *Vehicle) ClearRegistrationNumber() {
 
 func (x *Vehicle) ClearBrand() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
-	x.xxx_hidden_Brand = Vehicle_BRAND_UNSPECIFIED
+	x.xxx_hidden_Brand = Brand_BRAND_UNSPECIFIED
 }
 
 func (x *Vehicle) ClearUnknownBrand() {
@@ -1145,7 +789,7 @@ func (x *Vehicle) ClearModel() {
 
 func (x *Vehicle) ClearEmissionLevel() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 11)
-	x.xxx_hidden_EmissionLevel = Vehicle_EMISSION_LEVEL_UNSPECIFIED
+	x.xxx_hidden_EmissionLevel = EmissionLevel_EMISSION_LEVEL_UNSPECIFIED
 }
 
 func (x *Vehicle) ClearUnknownEmissionLevel() {
@@ -1185,7 +829,7 @@ func (x *Vehicle) ClearTotalBatteryPackCapacityWh() {
 
 func (x *Vehicle) ClearTachographType() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 19)
-	x.xxx_hidden_TachographType = Vehicle_TACHOGRAPH_TYPE_UNSPECIFIED
+	x.xxx_hidden_TachographType = TachographType_TACHOGRAPH_TYPE_UNSPECIFIED
 }
 
 func (x *Vehicle) ClearUnknownTachographType() {
@@ -1195,7 +839,7 @@ func (x *Vehicle) ClearUnknownTachographType() {
 
 func (x *Vehicle) ClearGearboxType() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 21)
-	x.xxx_hidden_GearboxType = Vehicle_GEARBOX_TYPE_UNSPECIFIED
+	x.xxx_hidden_GearboxType = GearboxType_GEARBOX_TYPE_UNSPECIFIED
 }
 
 func (x *Vehicle) ClearUnknownGearboxType() {
@@ -1222,13 +866,14 @@ type Vehicle_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// The vehicle identification number (VIN) of the vehicle.
+	// See ISO 3779 (17 characters)
 	Vin *string
 	// The customer's name for the vehicle.
 	CustomerVehicleName *string
 	// The registration number (license plate) of the vehicle.
 	RegistrationNumber *string
 	// The brand of the vehicle.
-	Brand *Vehicle_Brand
+	Brand *Brand
 	// The unknown brand of the vehicle.
 	// This is used when the type is BRAND_UNKNOWN.
 	UnknownBrand *string
@@ -1240,15 +885,16 @@ type Vehicle_builder struct {
 	// This is used when type is TYPE_UNKNOWN.
 	UnknownType *string
 	// The model of the vehicle.
+	// OEM-specific value.
 	Model *string
 	// The possible fuel types supported by this vehicle.
 	// This does NOT indicate which fuel type that is presently being used.
 	PossibleFuelTypes []FuelType
 	// The unknown possible fuel types of the vehicle.
 	// This is used when possible_fuel_types contains unknown fuel types.
-	UnknownPossibleFuelTypes []FuelType
+	UnknownPossibleFuelTypes []string
 	// The emission level of the vehicle.
-	EmissionLevel *Vehicle_EmissionLevel
+	EmissionLevel *EmissionLevel
 	// The unknown emission level of the vehicle.
 	// This is used when emission_level is EMISSION_LEVEL_UNKNOWN.
 	UnknownEmissionLevel *string
@@ -1257,26 +903,30 @@ type Vehicle_builder struct {
 	// depending on vehicle type.
 	TellTaleCode *string
 	// The chassis type of the vehicle.
+	// This is used mainly for buses.
 	ChassisType *string
 	// The number of axles on the vehicle.
 	AxleCount *int32
-	// The total fuel tank volume of the vehicle.
+	// The total fuel tank volume of the vehicle. (ml)
 	TotalFuelTankVolumeMl *float64
-	// The total fuel tank capacity of the vehicle.
+	// The total gas tank capacity of the vehicle. (kg)
 	TotalFuelTankCapacityGaseousKg *float64
-	// The total battery pack capacity of the vehicle.
+	// The total battery pack capacity of the vehicle. (Wh)
+	// The value comes from the vehicle's specification.
+	// The value is static, i.e. does not take aging into consideration.
 	TotalBatteryPackCapacityWh *float64
 	// The type of tachograph in the vehicle.
-	TachographType *Vehicle_TachographType
+	TachographType *TachographType
 	// The unknown tachograph type of the vehicle.
 	// This is used when tachograph_type is TACH_TYPE_UNKNOWN.
 	UnknownTachographType *string
 	// The type of gearbox in the vehicle.
-	GearboxType *Vehicle_GearboxType
+	GearboxType *GearboxType
 	// The unknown gearbox type of the vehicle.
 	// This is used when gearbox_type is GEARBOX_TYPE_UNKNOWN.
 	UnknownGearboxType *string
 	// The type of body on the chassis.
+	// This is used mainly for buses.
 	BodyType *Vehicle_BodyType
 	// The unknown body type of the vehicle.
 	// This is used when body_type is BODY_TYPE_UNKNOWN.
@@ -1287,6 +937,9 @@ type Vehicle_builder struct {
 	DoorConfiguration []int32
 	// If the vehicle is equipped with a ramp or not. This is used mainly for buses.
 	HasRampOrLift *bool
+	// Paths that the client is authorized to call.
+	// Example: ["/vehiclestatuses", "/vehiclepositions"]
+	AuthorizedPaths []string
 }
 
 func (b0 Vehicle_builder) Build() *Vehicle {
@@ -1294,101 +947,102 @@ func (b0 Vehicle_builder) Build() *Vehicle {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Vin != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 28)
 		x.xxx_hidden_Vin = b.Vin
 	}
 	if b.CustomerVehicleName != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 28)
 		x.xxx_hidden_CustomerVehicleName = b.CustomerVehicleName
 	}
 	if b.RegistrationNumber != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 28)
 		x.xxx_hidden_RegistrationNumber = b.RegistrationNumber
 	}
 	if b.Brand != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 28)
 		x.xxx_hidden_Brand = *b.Brand
 	}
 	if b.UnknownBrand != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 28)
 		x.xxx_hidden_UnknownBrand = b.UnknownBrand
 	}
 	x.xxx_hidden_ProductionDate = b.ProductionDate
 	if b.Type != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 28)
 		x.xxx_hidden_Type = *b.Type
 	}
 	if b.UnknownType != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 28)
 		x.xxx_hidden_UnknownType = b.UnknownType
 	}
 	if b.Model != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 8, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 8, 28)
 		x.xxx_hidden_Model = b.Model
 	}
 	x.xxx_hidden_PossibleFuelTypes = b.PossibleFuelTypes
 	x.xxx_hidden_UnknownPossibleFuelTypes = b.UnknownPossibleFuelTypes
 	if b.EmissionLevel != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 11, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 11, 28)
 		x.xxx_hidden_EmissionLevel = *b.EmissionLevel
 	}
 	if b.UnknownEmissionLevel != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 12, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 12, 28)
 		x.xxx_hidden_UnknownEmissionLevel = b.UnknownEmissionLevel
 	}
 	if b.TellTaleCode != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 13, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 13, 28)
 		x.xxx_hidden_TellTaleCode = b.TellTaleCode
 	}
 	if b.ChassisType != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 14, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 14, 28)
 		x.xxx_hidden_ChassisType = b.ChassisType
 	}
 	if b.AxleCount != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 15, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 15, 28)
 		x.xxx_hidden_AxleCount = *b.AxleCount
 	}
 	if b.TotalFuelTankVolumeMl != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 16, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 16, 28)
 		x.xxx_hidden_TotalFuelTankVolumeMl = *b.TotalFuelTankVolumeMl
 	}
 	if b.TotalFuelTankCapacityGaseousKg != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 17, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 17, 28)
 		x.xxx_hidden_TotalFuelTankCapacityGaseousKg = *b.TotalFuelTankCapacityGaseousKg
 	}
 	if b.TotalBatteryPackCapacityWh != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 18, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 18, 28)
 		x.xxx_hidden_TotalBatteryPackCapacityWh = *b.TotalBatteryPackCapacityWh
 	}
 	if b.TachographType != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 19, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 19, 28)
 		x.xxx_hidden_TachographType = *b.TachographType
 	}
 	if b.UnknownTachographType != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 20, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 20, 28)
 		x.xxx_hidden_UnknownTachographType = b.UnknownTachographType
 	}
 	if b.GearboxType != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 21, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 21, 28)
 		x.xxx_hidden_GearboxType = *b.GearboxType
 	}
 	if b.UnknownGearboxType != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 22, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 22, 28)
 		x.xxx_hidden_UnknownGearboxType = b.UnknownGearboxType
 	}
 	if b.BodyType != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 23, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 23, 28)
 		x.xxx_hidden_BodyType = *b.BodyType
 	}
 	if b.UnknownBodyType != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 24, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 24, 28)
 		x.xxx_hidden_UnknownBodyType = b.UnknownBodyType
 	}
 	x.xxx_hidden_DoorConfiguration = b.DoorConfiguration
 	if b.HasRampOrLift != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 26, 27)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 26, 28)
 		x.xxx_hidden_HasRampOrLift = *b.HasRampOrLift
 	}
+	x.xxx_hidden_AuthorizedPaths = b.AuthorizedPaths
 	return m0
 }
 
@@ -1396,21 +1050,21 @@ var File_wayplatform_rfms_v5_vehicle_proto protoreflect.FileDescriptor
 
 const file_wayplatform_rfms_v5_vehicle_proto_rawDesc = "" +
 	"\n" +
-	"!wayplatform/rfms/v5/vehicle.proto\x12\x13wayplatform.rfms.v5\x1a\x1ewayplatform/rfms/v5/date.proto\x1a#wayplatform/rfms/v5/fuel_type.proto\"\xc2\x15\n" +
+	"!wayplatform/rfms/v5/vehicle.proto\x12\x13wayplatform.rfms.v5\x1a\x1fwayplatform/rfms/v5/brand.proto\x1a\x1ewayplatform/rfms/v5/date.proto\x1a(wayplatform/rfms/v5/emission_level.proto\x1a#wayplatform/rfms/v5/fuel_type.proto\x1a&wayplatform/rfms/v5/gearbox_type.proto\x1a)wayplatform/rfms/v5/tachograph_type.proto\"\xf4\f\n" +
 	"\aVehicle\x12\x10\n" +
 	"\x03vin\x18\x01 \x01(\tR\x03vin\x122\n" +
 	"\x15customer_vehicle_name\x18\x02 \x01(\tR\x13customerVehicleName\x12/\n" +
-	"\x13registration_number\x18\x03 \x01(\tR\x12registrationNumber\x128\n" +
-	"\x05brand\x18\x04 \x01(\x0e2\".wayplatform.rfms.v5.Vehicle.BrandR\x05brand\x12#\n" +
+	"\x13registration_number\x18\x03 \x01(\tR\x12registrationNumber\x120\n" +
+	"\x05brand\x18\x04 \x01(\x0e2\x1a.wayplatform.rfms.v5.BrandR\x05brand\x12#\n" +
 	"\runknown_brand\x18\x05 \x01(\tR\funknownBrand\x12B\n" +
 	"\x0fproduction_date\x18\x06 \x01(\v2\x19.wayplatform.rfms.v5.DateR\x0eproductionDate\x125\n" +
 	"\x04type\x18\a \x01(\x0e2!.wayplatform.rfms.v5.Vehicle.TypeR\x04type\x12!\n" +
 	"\funknown_type\x18\b \x01(\tR\vunknownType\x12\x14\n" +
 	"\x05model\x18\t \x01(\tR\x05model\x12M\n" +
 	"\x13possible_fuel_types\x18\n" +
-	" \x03(\x0e2\x1d.wayplatform.rfms.v5.FuelTypeR\x11possibleFuelTypes\x12\\\n" +
-	"\x1bunknown_possible_fuel_types\x18\v \x03(\x0e2\x1d.wayplatform.rfms.v5.FuelTypeR\x18unknownPossibleFuelTypes\x12Q\n" +
-	"\x0eemission_level\x18\f \x01(\x0e2*.wayplatform.rfms.v5.Vehicle.EmissionLevelR\remissionLevel\x124\n" +
+	" \x03(\x0e2\x1d.wayplatform.rfms.v5.FuelTypeR\x11possibleFuelTypes\x12=\n" +
+	"\x1bunknown_possible_fuel_types\x18\v \x03(\tR\x18unknownPossibleFuelTypes\x12I\n" +
+	"\x0eemission_level\x18\f \x01(\x0e2\".wayplatform.rfms.v5.EmissionLevelR\remissionLevel\x124\n" +
 	"\x16unknown_emission_level\x18\r \x01(\tR\x14unknownEmissionLevel\x12$\n" +
 	"\x0etell_tale_code\x18\x0e \x01(\tR\ftellTaleCode\x12!\n" +
 	"\fchassis_type\x18\x0f \x01(\tR\vchassisType\x12\x1d\n" +
@@ -1418,94 +1072,22 @@ const file_wayplatform_rfms_v5_vehicle_proto_rawDesc = "" +
 	"axle_count\x18\x10 \x01(\x05R\taxleCount\x128\n" +
 	"\x19total_fuel_tank_volume_ml\x18\x11 \x01(\x01R\x15totalFuelTankVolumeMl\x12K\n" +
 	"#total_fuel_tank_capacity_gaseous_kg\x18\x12 \x01(\x01R\x1etotalFuelTankCapacityGaseousKg\x12B\n" +
-	"\x1etotal_battery_pack_capacity_wh\x18\x13 \x01(\x01R\x1atotalBatteryPackCapacityWh\x12T\n" +
-	"\x0ftachograph_type\x18\x14 \x01(\x0e2+.wayplatform.rfms.v5.Vehicle.TachographTypeR\x0etachographType\x126\n" +
-	"\x17unknown_tachograph_type\x18\x15 \x01(\tR\x15unknownTachographType\x12K\n" +
-	"\fgearbox_type\x18\x16 \x01(\x0e2(.wayplatform.rfms.v5.Vehicle.GearboxTypeR\vgearboxType\x120\n" +
+	"\x1etotal_battery_pack_capacity_wh\x18\x13 \x01(\x01R\x1atotalBatteryPackCapacityWh\x12L\n" +
+	"\x0ftachograph_type\x18\x14 \x01(\x0e2#.wayplatform.rfms.v5.TachographTypeR\x0etachographType\x126\n" +
+	"\x17unknown_tachograph_type\x18\x15 \x01(\tR\x15unknownTachographType\x12C\n" +
+	"\fgearbox_type\x18\x16 \x01(\x0e2 .wayplatform.rfms.v5.GearboxTypeR\vgearboxType\x120\n" +
 	"\x14unknown_gearbox_type\x18\x17 \x01(\tR\x12unknownGearboxType\x12B\n" +
 	"\tbody_type\x18\x18 \x01(\x0e2%.wayplatform.rfms.v5.Vehicle.BodyTypeR\bbodyType\x12*\n" +
 	"\x11unknown_body_type\x18\x19 \x01(\tR\x0funknownBodyType\x12-\n" +
 	"\x12door_configuration\x18\x1a \x03(\x05R\x11doorConfiguration\x12'\n" +
-	"\x10has_ramp_or_lift\x18\x1b \x01(\bR\rhasRampOrLift\"\x9a\x02\n" +
-	"\x05Brand\x12\x15\n" +
-	"\x11BRAND_UNSPECIFIED\x10\x00\x12\x11\n" +
-	"\rBRAND_UNKNOWN\x10\x01\x12\x10\n" +
-	"\fVOLVO_TRUCKS\x10\x02\x12\n" +
-	"\n" +
-	"\x06SCANIA\x10\x03\x12\v\n" +
-	"\aDAIMLER\x10\x04\x12\t\n" +
-	"\x05IVECO\x10\x05\x12\a\n" +
-	"\x03DAF\x10\x06\x12\a\n" +
-	"\x03MAN\x10\a\x12\x12\n" +
-	"\x0eRENAULT_TRUCKS\x10\b\x12\a\n" +
-	"\x03VDL\x10\t\x12\x0f\n" +
-	"\vVOLVO_BUSES\x10\n" +
-	"\x12\r\n" +
-	"\tIVECO_BUS\x10\v\x12\v\n" +
-	"\aHEULIEZ\x10\f\x12\b\n" +
-	"\x04VWTB\x10\r\x12\f\n" +
-	"\bKENWORTH\x10\x0e\x12\r\n" +
-	"\tPETERBILT\x10\x0f\x12\x0f\n" +
-	"\vMACK_TRUCKS\x10\x10\x12\x11\n" +
-	"\rINTERNATIONAL\x10\x11\x12\n" +
-	"\n" +
-	"\x06IC_BUS\x10\x12\"K\n" +
+	"\x10has_ramp_or_lift\x18\x1b \x01(\bR\rhasRampOrLift\x12)\n" +
+	"\x10authorized_paths\x18\x1c \x03(\tR\x0fauthorizedPaths\"K\n" +
 	"\x04Type\x12\x14\n" +
 	"\x10TYPE_UNSPECIFIED\x10\x00\x12\x10\n" +
 	"\fTYPE_UNKNOWN\x10\x01\x12\t\n" +
 	"\x05TRUCK\x10\x02\x12\a\n" +
 	"\x03BUS\x10\x03\x12\a\n" +
-	"\x03VAN\x10\x04\"\xce\x03\n" +
-	"\rEmissionLevel\x12\x1e\n" +
-	"\x1aEMISSION_LEVEL_UNSPECIFIED\x10\x00\x12\x1a\n" +
-	"\x16EMISSION_LEVEL_UNKNOWN\x10\x01\x12\f\n" +
-	"\bEURO_III\x10\x02\x12\x10\n" +
-	"\fEURO_III_EEV\x10\x03\x12\v\n" +
-	"\aEURO_IV\x10\x04\x12\n" +
-	"\n" +
-	"\x06EURO_V\x10\x05\x12\v\n" +
-	"\aEURO_VI\x10\x06\x12\f\n" +
-	"\bEURO_VII\x10\a\x12\x12\n" +
-	"\x0eEURO_STAGE_III\x10\b\x12\x11\n" +
-	"\rEURO_STAGE_IV\x10\t\x12\x10\n" +
-	"\fEURO_STAGE_V\x10\n" +
-	"\x12\f\n" +
-	"\bEPA_2004\x10\v\x12\f\n" +
-	"\bEPA_2007\x10\f\x12\f\n" +
-	"\bEPA_2010\x10\r\x12\x12\n" +
-	"\x0eEPA_2015_NOX10\x10\x0e\x12\x12\n" +
-	"\x0eEPA_2015_NOX05\x10\x0f\x12\x12\n" +
-	"\x0eEPA_2015_NOX02\x10\x10\x12\x0e\n" +
-	"\n" +
-	"EPA_TIER_2\x10\x11\x12\x0e\n" +
-	"\n" +
-	"EPA_TIER_3\x10\x12\x12\x13\n" +
-	"\x0fEPA_TIER_4_2008\x10\x13\x12\x13\n" +
-	"\x0fEPA_TIER_4_2013\x10\x14\x12\x0f\n" +
-	"\vPROCONVE_P5\x10\x15\x12\x0f\n" +
-	"\vPROCONVE_P6\x10\x16\x12\x0f\n" +
-	"\vPROCONVE_P7\x10\x17\x12\x11\n" +
-	"\rPROCONVE_MARI\x10\x18\"\xbc\x01\n" +
-	"\x0eTachographType\x12\x1f\n" +
-	"\x1bTACHOGRAPH_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n" +
-	"\x17TACHOGRAPH_TYPE_UNKNOWN\x10\x01\x12\b\n" +
-	"\x04MTCO\x10\x02\x12\b\n" +
-	"\x04DTCO\x10\x03\x12\v\n" +
-	"\aDTCO_G1\x10\x04\x12\v\n" +
-	"\aDTCO_G2\x10\x05\x12\a\n" +
-	"\x03TSU\x10\x06\x12\b\n" +
-	"\x04NONE\x10\a\x12\x14\n" +
-	"\x10STONERIDGE_SMART\x10\b\x12\x15\n" +
-	"\x11STONERIDGE_SMART2\x10\t\"\x8a\x01\n" +
-	"\vGearboxType\x12\x1c\n" +
-	"\x18GEARBOX_TYPE_UNSPECIFIED\x10\x00\x12\x18\n" +
-	"\x14GEARBOX_TYPE_UNKNOWN\x10\x01\x12\n" +
-	"\n" +
-	"\x06MANUAL\x10\x02\x12\r\n" +
-	"\tAUTOMATIC\x10\x03\x12\x12\n" +
-	"\x0eSEMI_AUTOMATIC\x10\x04\x12\v\n" +
-	"\aNO_GEAR\x10\x05\x12\a\n" +
-	"\x03AMT\x10\x06\"h\n" +
+	"\x03VAN\x10\x04\"h\n" +
 	"\bBodyType\x12\x19\n" +
 	"\x15BODY_TYPE_UNSPECIFIED\x10\x00\x12\x15\n" +
 	"\x11BODY_TYPE_UNKNOWN\x10\x01\x12\f\n" +
@@ -1514,34 +1096,33 @@ const file_wayplatform_rfms_v5_vehicle_proto_rawDesc = "" +
 	"\x05COACH\x10\x04B\xde\x01\n" +
 	"\x17com.wayplatform.rfms.v5B\fVehicleProtoP\x01ZGgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
 
-var file_wayplatform_rfms_v5_vehicle_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
+var file_wayplatform_rfms_v5_vehicle_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_wayplatform_rfms_v5_vehicle_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_wayplatform_rfms_v5_vehicle_proto_goTypes = []any{
-	(Vehicle_Brand)(0),          // 0: wayplatform.rfms.v5.Vehicle.Brand
-	(Vehicle_Type)(0),           // 1: wayplatform.rfms.v5.Vehicle.Type
-	(Vehicle_EmissionLevel)(0),  // 2: wayplatform.rfms.v5.Vehicle.EmissionLevel
-	(Vehicle_TachographType)(0), // 3: wayplatform.rfms.v5.Vehicle.TachographType
-	(Vehicle_GearboxType)(0),    // 4: wayplatform.rfms.v5.Vehicle.GearboxType
-	(Vehicle_BodyType)(0),       // 5: wayplatform.rfms.v5.Vehicle.BodyType
-	(*Vehicle)(nil),             // 6: wayplatform.rfms.v5.Vehicle
-	(*Date)(nil),                // 7: wayplatform.rfms.v5.Date
-	(FuelType)(0),               // 8: wayplatform.rfms.v5.FuelType
+	(Vehicle_Type)(0),     // 0: wayplatform.rfms.v5.Vehicle.Type
+	(Vehicle_BodyType)(0), // 1: wayplatform.rfms.v5.Vehicle.BodyType
+	(*Vehicle)(nil),       // 2: wayplatform.rfms.v5.Vehicle
+	(Brand)(0),            // 3: wayplatform.rfms.v5.Brand
+	(*Date)(nil),          // 4: wayplatform.rfms.v5.Date
+	(FuelType)(0),         // 5: wayplatform.rfms.v5.FuelType
+	(EmissionLevel)(0),    // 6: wayplatform.rfms.v5.EmissionLevel
+	(TachographType)(0),   // 7: wayplatform.rfms.v5.TachographType
+	(GearboxType)(0),      // 8: wayplatform.rfms.v5.GearboxType
 }
 var file_wayplatform_rfms_v5_vehicle_proto_depIdxs = []int32{
-	0, // 0: wayplatform.rfms.v5.Vehicle.brand:type_name -> wayplatform.rfms.v5.Vehicle.Brand
-	7, // 1: wayplatform.rfms.v5.Vehicle.production_date:type_name -> wayplatform.rfms.v5.Date
-	1, // 2: wayplatform.rfms.v5.Vehicle.type:type_name -> wayplatform.rfms.v5.Vehicle.Type
-	8, // 3: wayplatform.rfms.v5.Vehicle.possible_fuel_types:type_name -> wayplatform.rfms.v5.FuelType
-	8, // 4: wayplatform.rfms.v5.Vehicle.unknown_possible_fuel_types:type_name -> wayplatform.rfms.v5.FuelType
-	2, // 5: wayplatform.rfms.v5.Vehicle.emission_level:type_name -> wayplatform.rfms.v5.Vehicle.EmissionLevel
-	3, // 6: wayplatform.rfms.v5.Vehicle.tachograph_type:type_name -> wayplatform.rfms.v5.Vehicle.TachographType
-	4, // 7: wayplatform.rfms.v5.Vehicle.gearbox_type:type_name -> wayplatform.rfms.v5.Vehicle.GearboxType
-	5, // 8: wayplatform.rfms.v5.Vehicle.body_type:type_name -> wayplatform.rfms.v5.Vehicle.BodyType
-	9, // [9:9] is the sub-list for method output_type
-	9, // [9:9] is the sub-list for method input_type
-	9, // [9:9] is the sub-list for extension type_name
-	9, // [9:9] is the sub-list for extension extendee
-	0, // [0:9] is the sub-list for field type_name
+	3, // 0: wayplatform.rfms.v5.Vehicle.brand:type_name -> wayplatform.rfms.v5.Brand
+	4, // 1: wayplatform.rfms.v5.Vehicle.production_date:type_name -> wayplatform.rfms.v5.Date
+	0, // 2: wayplatform.rfms.v5.Vehicle.type:type_name -> wayplatform.rfms.v5.Vehicle.Type
+	5, // 3: wayplatform.rfms.v5.Vehicle.possible_fuel_types:type_name -> wayplatform.rfms.v5.FuelType
+	6, // 4: wayplatform.rfms.v5.Vehicle.emission_level:type_name -> wayplatform.rfms.v5.EmissionLevel
+	7, // 5: wayplatform.rfms.v5.Vehicle.tachograph_type:type_name -> wayplatform.rfms.v5.TachographType
+	8, // 6: wayplatform.rfms.v5.Vehicle.gearbox_type:type_name -> wayplatform.rfms.v5.GearboxType
+	1, // 7: wayplatform.rfms.v5.Vehicle.body_type:type_name -> wayplatform.rfms.v5.Vehicle.BodyType
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_wayplatform_rfms_v5_vehicle_proto_init() }
@@ -1549,14 +1130,18 @@ func file_wayplatform_rfms_v5_vehicle_proto_init() {
 	if File_wayplatform_rfms_v5_vehicle_proto != nil {
 		return
 	}
+	file_wayplatform_rfms_v5_brand_proto_init()
 	file_wayplatform_rfms_v5_date_proto_init()
+	file_wayplatform_rfms_v5_emission_level_proto_init()
 	file_wayplatform_rfms_v5_fuel_type_proto_init()
+	file_wayplatform_rfms_v5_gearbox_type_proto_init()
+	file_wayplatform_rfms_v5_tachograph_type_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_wayplatform_rfms_v5_vehicle_proto_rawDesc), len(file_wayplatform_rfms_v5_vehicle_proto_rawDesc)),
-			NumEnums:      6,
+			NumEnums:      2,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,

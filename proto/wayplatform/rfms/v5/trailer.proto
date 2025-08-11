@@ -24,10 +24,6 @@ message Trailer {
   // The trailer type.
   Type type = 5;
 
-  // The sum of the static vertical loads of the trailer axles. (kg)
-  // The load is sent in the EBS22 message of ISO 11992-2.
-  double axle_load_sum_kg = 6;
-
   // The type of a trailer.
   enum Type {
     // Default value. This value is not used.
@@ -63,6 +59,13 @@ message Trailer {
     // A towing full trailer.
     TOWING_FULL_TRAILER = 10;
   }
+
+  // The sum of the static vertical loads of the trailer axles. (kg)
+  // The load is sent in the EBS22 message of ISO 11992-2.
+  double axle_load_sum_kg = 6;
+
+  // The trailer axles.
+  repeated Axle axles = 7;
 
   // A trailer axle.
   message Axle {

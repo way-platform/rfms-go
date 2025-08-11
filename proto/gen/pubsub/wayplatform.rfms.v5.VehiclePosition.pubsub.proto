@@ -2,8 +2,8 @@ syntax = "proto2";
 message VehiclePosition {
   optional string vin = 1;
   optional Inline_wayplatform_rfms_v5_Trigger trigger = 2;
-  optional int64 create_time = 3;
-  optional int64 receive_time = 4;
+  optional string create_time = 3;
+  optional string receive_time = 4;
   optional Inline_wayplatform_rfms_v5_GnssPosition gnss_position = 5;
   optional double wheel_based_speed_kmh = 6;
   optional double tachograph_speed_kmh = 7;
@@ -129,8 +129,8 @@ message VehiclePosition {
     optional string unknown_type = 2;
     optional int32 context = 3;
     optional string unknown_context = 4;
-    repeated string additional_info = 5;
-    optional Inline_wayplatform_rfms_v5_DriverIdentification driver_info = 6;
+    repeated string trigger_info = 5;
+    optional Inline_wayplatform_rfms_v5_DriverIdentification driver_id = 6;
     optional string pto_id = 7;
     optional Inline_wayplatform_rfms_v5_TellTale tell_tale_info = 8;
     optional ChargingStatusInfo charging_status_info = 9;
@@ -210,10 +210,21 @@ message VehiclePosition {
       CONTEXT_UNSPECIFIED = 0;
       CONTEXT_UNKNOWN = 1;
       RFMS = 2;
+      VOLVO_TRUCKS = 3;
+      SCANIA = 4;
+      DAIMLER = 5;
+      IVECO = 6;
+      DAF = 7;
+      MAN = 8;
+      RENAULT_TRUCKS = 9;
+      VDL = 10;
+      VOLVO_BUSES = 11;
+      IVECO_BUS = 12;
+      IRISBUS = 13;
     }
   }
   message Inline_wayplatform_rfms_v5_GnssPosition {
-    optional int64 time = 1;
+    optional string time = 1;
     optional double latitude = 2;
     optional double longitude = 3;
     optional double heading_deg = 4;
