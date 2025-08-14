@@ -252,7 +252,7 @@ type VehicleStatus struct {
 	xxx_hidden_TotalFuelUsedGaseousKg           float64                    `protobuf:"fixed64,11,opt,name=total_fuel_used_gaseous_kg,json=totalFuelUsedGaseousKg"`
 	xxx_hidden_TotalElectricEnergyUsedWh        float64                    `protobuf:"fixed64,12,opt,name=total_electric_energy_used_wh,json=totalElectricEnergyUsedWh"`
 	xxx_hidden_TotalElectricEnergyRecuperatedWh float64                    `protobuf:"fixed64,13,opt,name=total_electric_energy_recuperated_wh,json=totalElectricEnergyRecuperatedWh"`
-	xxx_hidden_StateOfDoors                     VehicleStatus_StateOfDoors `protobuf:"varint,14,opt,name=state_of_doors,json=stateOfDoors,enum=wayplatform.rfms.v5.VehicleStatus_StateOfDoors"`
+	xxx_hidden_StateOfDoors                     VehicleStatus_StateOfDoors `protobuf:"varint,14,opt,name=state_of_doors,json=stateOfDoors,enum=wayplatform.connect.rfms.v5.VehicleStatus_StateOfDoors"`
 	xxx_hidden_UnknownStateOfDoors              *string                    `protobuf:"bytes,15,opt,name=unknown_state_of_doors,json=unknownStateOfDoors"`
 	xxx_hidden_Doors                            *[]*VehicleStatus_Door     `protobuf:"bytes,16,rep,name=doors"`
 	xxx_hidden_SnapshotData                     *SnapshotData              `protobuf:"bytes,18,opt,name=snapshot_data,json=snapshotData"`
@@ -882,11 +882,11 @@ func (b0 VehicleStatus_builder) Build() *VehicleStatus {
 type VehicleStatus_Door struct {
 	state                          protoimpl.MessageState          `protogen:"opaque.v1"`
 	xxx_hidden_Number              int32                           `protobuf:"varint,1,opt,name=number"`
-	xxx_hidden_EnabledState        VehicleStatus_Door_EnabledState `protobuf:"varint,2,opt,name=enabled_state,json=enabledState,enum=wayplatform.rfms.v5.VehicleStatus_Door_EnabledState"`
+	xxx_hidden_EnabledState        VehicleStatus_Door_EnabledState `protobuf:"varint,2,opt,name=enabled_state,json=enabledState,enum=wayplatform.connect.rfms.v5.VehicleStatus_Door_EnabledState"`
 	xxx_hidden_UnknownEnabledState *string                         `protobuf:"bytes,3,opt,name=unknown_enabled_state,json=unknownEnabledState"`
-	xxx_hidden_OpenState           VehicleStatus_Door_OpenState    `protobuf:"varint,4,opt,name=open_state,json=openState,enum=wayplatform.rfms.v5.VehicleStatus_Door_OpenState"`
+	xxx_hidden_OpenState           VehicleStatus_Door_OpenState    `protobuf:"varint,4,opt,name=open_state,json=openState,enum=wayplatform.connect.rfms.v5.VehicleStatus_Door_OpenState"`
 	xxx_hidden_UnknownOpenState    *string                         `protobuf:"bytes,5,opt,name=unknown_open_state,json=unknownOpenState"`
-	xxx_hidden_LockState           VehicleStatus_Door_LockState    `protobuf:"varint,6,opt,name=lock_state,json=lockState,enum=wayplatform.rfms.v5.VehicleStatus_Door_LockState"`
+	xxx_hidden_LockState           VehicleStatus_Door_LockState    `protobuf:"varint,6,opt,name=lock_state,json=lockState,enum=wayplatform.connect.rfms.v5.VehicleStatus_Door_LockState"`
 	xxx_hidden_UnknownLockState    *string                         `protobuf:"bytes,7,opt,name=unknown_lock_state,json=unknownLockState"`
 	XXX_raceDetectHookData         protoimpl.RaceDetectHookData
 	XXX_presence                   [1]uint32
@@ -1163,40 +1163,40 @@ var File_wayplatform_connect_rfms_v5_vehicle_status_proto protoreflect.FileDescr
 
 const file_wayplatform_connect_rfms_v5_vehicle_status_proto_rawDesc = "" +
 	"\n" +
-	"0wayplatform/connect/rfms/v5/vehicle_status.proto\x12\x13wayplatform.rfms.v5\x1a2wayplatform/connect/rfms/v5/accumulated_data.proto\x1a7wayplatform/connect/rfms/v5/driver_identification.proto\x1a/wayplatform/connect/rfms/v5/snapshot_data.proto\x1a)wayplatform/connect/rfms/v5/trigger.proto\x1a-wayplatform/connect/rfms/v5/uptime_data.proto\"\xb8\x11\n" +
+	"0wayplatform/connect/rfms/v5/vehicle_status.proto\x12\x1bwayplatform.connect.rfms.v5\x1a2wayplatform/connect/rfms/v5/accumulated_data.proto\x1a7wayplatform/connect/rfms/v5/driver_identification.proto\x1a/wayplatform/connect/rfms/v5/snapshot_data.proto\x1a)wayplatform/connect/rfms/v5/trigger.proto\x1a-wayplatform/connect/rfms/v5/uptime_data.proto\"\x88\x12\n" +
 	"\rVehicleStatus\x12\x10\n" +
-	"\x03vin\x18\x01 \x01(\tR\x03vin\x126\n" +
-	"\atrigger\x18\x02 \x01(\v2\x1c.wayplatform.rfms.v5.TriggerR\atrigger\x12\x1f\n" +
+	"\x03vin\x18\x01 \x01(\tR\x03vin\x12>\n" +
+	"\atrigger\x18\x02 \x01(\v2$.wayplatform.connect.rfms.v5.TriggerR\atrigger\x12\x1f\n" +
 	"\vcreate_time\x18\x03 \x01(\tR\n" +
 	"createTime\x12!\n" +
 	"\freceive_time\x18\x04 \x01(\tR\vreceiveTime\x12<\n" +
 	"\x1bhr_total_vehicle_distance_m\x18\x05 \x01(\x01R\x17hrTotalVehicleDistanceM\x12,\n" +
 	"\x12total_engine_hours\x18\x06 \x01(\x01R\x10totalEngineHours\x12;\n" +
-	"\x1atotal_electric_motor_hours\x18\a \x01(\x01R\x17totalElectricMotorHours\x12H\n" +
+	"\x1atotal_electric_motor_hours\x18\a \x01(\x01R\x17totalElectricMotorHours\x12P\n" +
 	"\n" +
-	"driver1_id\x18\b \x01(\v2).wayplatform.rfms.v5.DriverIdentificationR\tdriver1Id\x12L\n" +
+	"driver1_id\x18\b \x01(\v21.wayplatform.connect.rfms.v5.DriverIdentificationR\tdriver1Id\x12L\n" +
 	"#gross_combination_vehicle_weight_kg\x18\t \x01(\x01R\x1fgrossCombinationVehicleWeightKg\x128\n" +
 	"\x19engine_total_fuel_used_ml\x18\n" +
 	" \x01(\x01R\x15engineTotalFuelUsedMl\x12:\n" +
 	"\x1atotal_fuel_used_gaseous_kg\x18\v \x01(\x01R\x16totalFuelUsedGaseousKg\x12@\n" +
 	"\x1dtotal_electric_energy_used_wh\x18\f \x01(\x01R\x19totalElectricEnergyUsedWh\x12N\n" +
-	"$total_electric_energy_recuperated_wh\x18\r \x01(\x01R totalElectricEnergyRecuperatedWh\x12U\n" +
-	"\x0estate_of_doors\x18\x0e \x01(\x0e2/.wayplatform.rfms.v5.VehicleStatus.StateOfDoorsR\fstateOfDoors\x123\n" +
-	"\x16unknown_state_of_doors\x18\x0f \x01(\tR\x13unknownStateOfDoors\x12=\n" +
-	"\x05doors\x18\x10 \x03(\v2'.wayplatform.rfms.v5.VehicleStatus.DoorR\x05doors\x12F\n" +
-	"\rsnapshot_data\x18\x12 \x01(\v2!.wayplatform.rfms.v5.SnapshotDataR\fsnapshotData\x12@\n" +
-	"\vuptime_data\x18\x13 \x01(\v2\x1f.wayplatform.rfms.v5.UptimeDataR\n" +
-	"uptimeData\x12O\n" +
-	"\x10accumulated_data\x18\x11 \x01(\v2$.wayplatform.rfms.v5.AccumulatedDataR\x0faccumulatedData\x1a\xe9\x06\n" +
+	"$total_electric_energy_recuperated_wh\x18\r \x01(\x01R totalElectricEnergyRecuperatedWh\x12]\n" +
+	"\x0estate_of_doors\x18\x0e \x01(\x0e27.wayplatform.connect.rfms.v5.VehicleStatus.StateOfDoorsR\fstateOfDoors\x123\n" +
+	"\x16unknown_state_of_doors\x18\x0f \x01(\tR\x13unknownStateOfDoors\x12E\n" +
+	"\x05doors\x18\x10 \x03(\v2/.wayplatform.connect.rfms.v5.VehicleStatus.DoorR\x05doors\x12N\n" +
+	"\rsnapshot_data\x18\x12 \x01(\v2).wayplatform.connect.rfms.v5.SnapshotDataR\fsnapshotData\x12H\n" +
+	"\vuptime_data\x18\x13 \x01(\v2'.wayplatform.connect.rfms.v5.UptimeDataR\n" +
+	"uptimeData\x12W\n" +
+	"\x10accumulated_data\x18\x11 \x01(\v2,.wayplatform.connect.rfms.v5.AccumulatedDataR\x0faccumulatedData\x1a\x81\a\n" +
 	"\x04Door\x12\x16\n" +
-	"\x06number\x18\x01 \x01(\x05R\x06number\x12Y\n" +
-	"\renabled_state\x18\x02 \x01(\x0e24.wayplatform.rfms.v5.VehicleStatus.Door.EnabledStateR\fenabledState\x122\n" +
-	"\x15unknown_enabled_state\x18\x03 \x01(\tR\x13unknownEnabledState\x12P\n" +
+	"\x06number\x18\x01 \x01(\x05R\x06number\x12a\n" +
+	"\renabled_state\x18\x02 \x01(\x0e2<.wayplatform.connect.rfms.v5.VehicleStatus.Door.EnabledStateR\fenabledState\x122\n" +
+	"\x15unknown_enabled_state\x18\x03 \x01(\tR\x13unknownEnabledState\x12X\n" +
 	"\n" +
-	"open_state\x18\x04 \x01(\x0e21.wayplatform.rfms.v5.VehicleStatus.Door.OpenStateR\topenState\x12,\n" +
-	"\x12unknown_open_state\x18\x05 \x01(\tR\x10unknownOpenState\x12P\n" +
+	"open_state\x18\x04 \x01(\x0e29.wayplatform.connect.rfms.v5.VehicleStatus.Door.OpenStateR\topenState\x12,\n" +
+	"\x12unknown_open_state\x18\x05 \x01(\tR\x10unknownOpenState\x12X\n" +
 	"\n" +
-	"lock_state\x18\x06 \x01(\x0e21.wayplatform.rfms.v5.VehicleStatus.Door.LockStateR\tlockState\x12,\n" +
+	"lock_state\x18\x06 \x01(\x0e29.wayplatform.connect.rfms.v5.VehicleStatus.Door.LockStateR\tlockState\x12,\n" +
 	"\x12unknown_lock_state\x18\a \x01(\tR\x10unknownLockState\"\x9d\x01\n" +
 	"\fEnabledState\x12\x1d\n" +
 	"\x19ENABLED_STATE_UNSPECIFIED\x10\x00\x12\x19\n" +
@@ -1227,35 +1227,35 @@ const file_wayplatform_connect_rfms_v5_vehicle_status_proto_rawDesc = "" +
 	"\x14STATE_OF_DOORS_ERROR\x10\x02\x12 \n" +
 	"\x1cSTATE_OF_DOORS_NOT_AVAILABLE\x10\x03\x12\x16\n" +
 	"\x12ALL_DOORS_DISABLED\x10\x04\x12\x1d\n" +
-	"\x19AT_LEAST_ONE_DOOR_ENABLED\x10\x05B\xec\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x12VehicleStatusProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\x19AT_LEAST_ONE_DOOR_ENABLED\x10\x05B\x95\x02\n" +
+	"\x1fcom.wayplatform.connect.rfms.v5B\x12VehicleStatusProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WCR\xaa\x02\x1bWayplatform.Connect.Rfms.V5\xca\x02\x1bWayplatform\\Connect\\Rfms\\V5\xe2\x02'Wayplatform\\Connect\\Rfms\\V5\\GPBMetadata\xea\x02\x1eWayplatform::Connect::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_connect_rfms_v5_vehicle_status_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
 var file_wayplatform_connect_rfms_v5_vehicle_status_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_wayplatform_connect_rfms_v5_vehicle_status_proto_goTypes = []any{
-	(VehicleStatus_StateOfDoors)(0),      // 0: wayplatform.rfms.v5.VehicleStatus.StateOfDoors
-	(VehicleStatus_Door_EnabledState)(0), // 1: wayplatform.rfms.v5.VehicleStatus.Door.EnabledState
-	(VehicleStatus_Door_OpenState)(0),    // 2: wayplatform.rfms.v5.VehicleStatus.Door.OpenState
-	(VehicleStatus_Door_LockState)(0),    // 3: wayplatform.rfms.v5.VehicleStatus.Door.LockState
-	(*VehicleStatus)(nil),                // 4: wayplatform.rfms.v5.VehicleStatus
-	(*VehicleStatus_Door)(nil),           // 5: wayplatform.rfms.v5.VehicleStatus.Door
-	(*Trigger)(nil),                      // 6: wayplatform.rfms.v5.Trigger
-	(*DriverIdentification)(nil),         // 7: wayplatform.rfms.v5.DriverIdentification
-	(*SnapshotData)(nil),                 // 8: wayplatform.rfms.v5.SnapshotData
-	(*UptimeData)(nil),                   // 9: wayplatform.rfms.v5.UptimeData
-	(*AccumulatedData)(nil),              // 10: wayplatform.rfms.v5.AccumulatedData
+	(VehicleStatus_StateOfDoors)(0),      // 0: wayplatform.connect.rfms.v5.VehicleStatus.StateOfDoors
+	(VehicleStatus_Door_EnabledState)(0), // 1: wayplatform.connect.rfms.v5.VehicleStatus.Door.EnabledState
+	(VehicleStatus_Door_OpenState)(0),    // 2: wayplatform.connect.rfms.v5.VehicleStatus.Door.OpenState
+	(VehicleStatus_Door_LockState)(0),    // 3: wayplatform.connect.rfms.v5.VehicleStatus.Door.LockState
+	(*VehicleStatus)(nil),                // 4: wayplatform.connect.rfms.v5.VehicleStatus
+	(*VehicleStatus_Door)(nil),           // 5: wayplatform.connect.rfms.v5.VehicleStatus.Door
+	(*Trigger)(nil),                      // 6: wayplatform.connect.rfms.v5.Trigger
+	(*DriverIdentification)(nil),         // 7: wayplatform.connect.rfms.v5.DriverIdentification
+	(*SnapshotData)(nil),                 // 8: wayplatform.connect.rfms.v5.SnapshotData
+	(*UptimeData)(nil),                   // 9: wayplatform.connect.rfms.v5.UptimeData
+	(*AccumulatedData)(nil),              // 10: wayplatform.connect.rfms.v5.AccumulatedData
 }
 var file_wayplatform_connect_rfms_v5_vehicle_status_proto_depIdxs = []int32{
-	6,  // 0: wayplatform.rfms.v5.VehicleStatus.trigger:type_name -> wayplatform.rfms.v5.Trigger
-	7,  // 1: wayplatform.rfms.v5.VehicleStatus.driver1_id:type_name -> wayplatform.rfms.v5.DriverIdentification
-	0,  // 2: wayplatform.rfms.v5.VehicleStatus.state_of_doors:type_name -> wayplatform.rfms.v5.VehicleStatus.StateOfDoors
-	5,  // 3: wayplatform.rfms.v5.VehicleStatus.doors:type_name -> wayplatform.rfms.v5.VehicleStatus.Door
-	8,  // 4: wayplatform.rfms.v5.VehicleStatus.snapshot_data:type_name -> wayplatform.rfms.v5.SnapshotData
-	9,  // 5: wayplatform.rfms.v5.VehicleStatus.uptime_data:type_name -> wayplatform.rfms.v5.UptimeData
-	10, // 6: wayplatform.rfms.v5.VehicleStatus.accumulated_data:type_name -> wayplatform.rfms.v5.AccumulatedData
-	1,  // 7: wayplatform.rfms.v5.VehicleStatus.Door.enabled_state:type_name -> wayplatform.rfms.v5.VehicleStatus.Door.EnabledState
-	2,  // 8: wayplatform.rfms.v5.VehicleStatus.Door.open_state:type_name -> wayplatform.rfms.v5.VehicleStatus.Door.OpenState
-	3,  // 9: wayplatform.rfms.v5.VehicleStatus.Door.lock_state:type_name -> wayplatform.rfms.v5.VehicleStatus.Door.LockState
+	6,  // 0: wayplatform.connect.rfms.v5.VehicleStatus.trigger:type_name -> wayplatform.connect.rfms.v5.Trigger
+	7,  // 1: wayplatform.connect.rfms.v5.VehicleStatus.driver1_id:type_name -> wayplatform.connect.rfms.v5.DriverIdentification
+	0,  // 2: wayplatform.connect.rfms.v5.VehicleStatus.state_of_doors:type_name -> wayplatform.connect.rfms.v5.VehicleStatus.StateOfDoors
+	5,  // 3: wayplatform.connect.rfms.v5.VehicleStatus.doors:type_name -> wayplatform.connect.rfms.v5.VehicleStatus.Door
+	8,  // 4: wayplatform.connect.rfms.v5.VehicleStatus.snapshot_data:type_name -> wayplatform.connect.rfms.v5.SnapshotData
+	9,  // 5: wayplatform.connect.rfms.v5.VehicleStatus.uptime_data:type_name -> wayplatform.connect.rfms.v5.UptimeData
+	10, // 6: wayplatform.connect.rfms.v5.VehicleStatus.accumulated_data:type_name -> wayplatform.connect.rfms.v5.AccumulatedData
+	1,  // 7: wayplatform.connect.rfms.v5.VehicleStatus.Door.enabled_state:type_name -> wayplatform.connect.rfms.v5.VehicleStatus.Door.EnabledState
+	2,  // 8: wayplatform.connect.rfms.v5.VehicleStatus.Door.open_state:type_name -> wayplatform.connect.rfms.v5.VehicleStatus.Door.OpenState
+	3,  // 9: wayplatform.connect.rfms.v5.VehicleStatus.Door.lock_state:type_name -> wayplatform.connect.rfms.v5.VehicleStatus.Door.LockState
 	10, // [10:10] is the sub-list for method output_type
 	10, // [10:10] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name

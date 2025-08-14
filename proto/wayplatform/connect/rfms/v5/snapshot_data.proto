@@ -1,6 +1,6 @@
 edition = "2023";
 
-package wayplatform.rfms.v5;
+package wayplatform.connect.rfms.v5;
 
 import "wayplatform/connect/rfms/v5/charging_connection_state.proto";
 import "wayplatform/connect/rfms/v5/charging_device.proto";

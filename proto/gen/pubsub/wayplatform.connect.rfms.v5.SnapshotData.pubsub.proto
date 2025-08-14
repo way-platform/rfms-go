@@ -1,6 +1,6 @@
 syntax = "proto2";
 message SnapshotData {
-  optional Inline_wayplatform_rfms_v5_GnssPosition gnss_position = 1;
+  optional Inline_wayplatform_connect_rfms_v5_GnssPosition gnss_position = 1;
   optional double wheel_based_speed_kmh = 2;
   optional double tachograph_speed_kmh = 3;
   optional double engine_speed_rpm = 4;
@@ -13,7 +13,7 @@ message SnapshotData {
   optional double catalyst_fuel_level_percent = 11;
   optional int32 driver1_working_state = 12;
   optional string unknown_driver1_working_state = 13;
-  optional Inline_wayplatform_rfms_v5_DriverIdentification driver2_id = 14;
+  optional Inline_wayplatform_connect_rfms_v5_DriverIdentification driver2_id = 14;
   optional int32 driver2_working_state = 15;
   optional string unknown_driver2_working_state = 16;
   optional double ambient_air_temperature_c = 17;
@@ -28,15 +28,15 @@ message SnapshotData {
   optional double battery_pack_charging_power_w = 26;
   optional string battery_pack_estimated_charging_completed_time = 27;
   optional EstimatedDistanceToEmpty estimated_distance_to_empty = 28;
-  repeated Inline_wayplatform_rfms_v5_VehicleAxle vehicle_axles = 29;
-  repeated Inline_wayplatform_rfms_v5_Trailer trailers = 30;
+  repeated Inline_wayplatform_connect_rfms_v5_VehicleAxle vehicle_axles = 29;
+  repeated Inline_wayplatform_connect_rfms_v5_Trailer trailers = 30;
   message EstimatedDistanceToEmpty {
     optional double total_m = 1;
     optional double fuel_m = 2;
     optional double gas_m = 3;
     optional double battery_pack_m = 4;
   }
-  message Inline_wayplatform_rfms_v5_GnssPosition {
+  message Inline_wayplatform_connect_rfms_v5_GnssPosition {
     optional string time = 1;
     optional double latitude = 2;
     optional double longitude = 3;
@@ -44,7 +44,7 @@ message SnapshotData {
     optional double altitude_m = 5;
     optional double speed_kmh = 6;
   }
-  message Inline_wayplatform_rfms_v5_DriverIdentification {
+  message Inline_wayplatform_connect_rfms_v5_DriverIdentification {
     optional Tacho tacho = 1;
     optional Oem oem = 2;
     message Tacho {
@@ -70,7 +70,7 @@ message SnapshotData {
       optional string driver_id = 2;
     }
   }
-  message Inline_wayplatform_rfms_v5_VehicleAxle {
+  message Inline_wayplatform_connect_rfms_v5_VehicleAxle {
     optional int32 position = 1;
     optional double load_kg = 2;
     repeated Tire tires = 3;
@@ -79,7 +79,7 @@ message SnapshotData {
       optional double pressure_kpa = 2;
     }
   }
-  message Inline_wayplatform_rfms_v5_Trailer {
+  message Inline_wayplatform_connect_rfms_v5_Trailer {
     optional int32 number = 1;
     optional string identification_data = 2;
     optional string vin = 3;

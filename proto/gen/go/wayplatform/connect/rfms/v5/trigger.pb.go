@@ -443,9 +443,9 @@ func (x Trigger_AlarmInfo_State) Number() protoreflect.EnumNumber {
 // The type of trigger that caused the vehicle position to be sent.
 type Trigger struct {
 	state                                   protoimpl.MessageState                `protogen:"opaque.v1"`
-	xxx_hidden_Type                         Trigger_Type                          `protobuf:"varint,1,opt,name=type,enum=wayplatform.rfms.v5.Trigger_Type"`
+	xxx_hidden_Type                         Trigger_Type                          `protobuf:"varint,1,opt,name=type,enum=wayplatform.connect.rfms.v5.Trigger_Type"`
 	xxx_hidden_UnknownType                  *string                               `protobuf:"bytes,2,opt,name=unknown_type,json=unknownType"`
-	xxx_hidden_Context                      Trigger_Context                       `protobuf:"varint,3,opt,name=context,enum=wayplatform.rfms.v5.Trigger_Context"`
+	xxx_hidden_Context                      Trigger_Context                       `protobuf:"varint,3,opt,name=context,enum=wayplatform.connect.rfms.v5.Trigger_Context"`
 	xxx_hidden_UnknownContext               *string                               `protobuf:"bytes,4,opt,name=unknown_context,json=unknownContext"`
 	xxx_hidden_TriggerInfo                  []string                              `protobuf:"bytes,5,rep,name=trigger_info,json=triggerInfo"`
 	xxx_hidden_DriverId                     *DriverIdentification                 `protobuf:"bytes,6,opt,name=driver_id,json=driverId"`
@@ -814,7 +814,7 @@ func (b0 Trigger_builder) Build() *Trigger {
 // Information about a charging status.
 type Trigger_ChargingStatusInfo struct {
 	state                   protoimpl.MessageState           `protogen:"opaque.v1"`
-	xxx_hidden_Event        Trigger_ChargingStatusInfo_Event `protobuf:"varint,1,opt,name=event,enum=wayplatform.rfms.v5.Trigger_ChargingStatusInfo_Event"`
+	xxx_hidden_Event        Trigger_ChargingStatusInfo_Event `protobuf:"varint,1,opt,name=event,enum=wayplatform.connect.rfms.v5.Trigger_ChargingStatusInfo_Event"`
 	xxx_hidden_UnknownEvent *string                          `protobuf:"bytes,2,opt,name=unknown_event,json=unknownEvent"`
 	xxx_hidden_Detail       *string                          `protobuf:"bytes,3,opt,name=detail"`
 	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
@@ -961,7 +961,7 @@ func (b0 Trigger_ChargingStatusInfo_builder) Build() *Trigger_ChargingStatusInfo
 // Additonal information about the charging connection status.
 type Trigger_ChargingConnectionStatusInfo struct {
 	state                   protoimpl.MessageState  `protogen:"opaque.v1"`
-	xxx_hidden_State        ChargingConnectionState `protobuf:"varint,1,opt,name=state,enum=wayplatform.rfms.v5.ChargingConnectionState"`
+	xxx_hidden_State        ChargingConnectionState `protobuf:"varint,1,opt,name=state,enum=wayplatform.connect.rfms.v5.ChargingConnectionState"`
 	xxx_hidden_UnknownState *string                 `protobuf:"bytes,2,opt,name=unknown_state,json=unknownState"`
 	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
 	XXX_presence            [1]uint32
@@ -1074,9 +1074,9 @@ func (b0 Trigger_ChargingConnectionStatusInfo_builder) Build() *Trigger_Charging
 // Information about an alarm.
 type Trigger_AlarmInfo struct {
 	state                   protoimpl.MessageState  `protogen:"opaque.v1"`
-	xxx_hidden_Type         Trigger_AlarmInfo_Type  `protobuf:"varint,1,opt,name=type,enum=wayplatform.rfms.v5.Trigger_AlarmInfo_Type"`
+	xxx_hidden_Type         Trigger_AlarmInfo_Type  `protobuf:"varint,1,opt,name=type,enum=wayplatform.connect.rfms.v5.Trigger_AlarmInfo_Type"`
 	xxx_hidden_UnknownType  *string                 `protobuf:"bytes,2,opt,name=unknown_type,json=unknownType"`
-	xxx_hidden_State        Trigger_AlarmInfo_State `protobuf:"varint,3,opt,name=state,enum=wayplatform.rfms.v5.Trigger_AlarmInfo_State"`
+	xxx_hidden_State        Trigger_AlarmInfo_State `protobuf:"varint,3,opt,name=state,enum=wayplatform.connect.rfms.v5.Trigger_AlarmInfo_State"`
 	xxx_hidden_UnknownState *string                 `protobuf:"bytes,4,opt,name=unknown_state,json=unknownState"`
 	xxx_hidden_Details      []string                `protobuf:"bytes,5,rep,name=details"`
 	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
@@ -1270,23 +1270,23 @@ var File_wayplatform_connect_rfms_v5_trigger_proto protoreflect.FileDescriptor
 
 const file_wayplatform_connect_rfms_v5_trigger_proto_rawDesc = "" +
 	"\n" +
-	")wayplatform/connect/rfms/v5/trigger.proto\x12\x13wayplatform.rfms.v5\x1a;wayplatform/connect/rfms/v5/charging_connection_state.proto\x1a7wayplatform/connect/rfms/v5/driver_identification.proto\x1a+wayplatform/connect/rfms/v5/tell_tale.proto\"\x99\x13\n" +
-	"\aTrigger\x125\n" +
-	"\x04type\x18\x01 \x01(\x0e2!.wayplatform.rfms.v5.Trigger.TypeR\x04type\x12!\n" +
-	"\funknown_type\x18\x02 \x01(\tR\vunknownType\x12>\n" +
-	"\acontext\x18\x03 \x01(\x0e2$.wayplatform.rfms.v5.Trigger.ContextR\acontext\x12'\n" +
+	")wayplatform/connect/rfms/v5/trigger.proto\x12\x1bwayplatform.connect.rfms.v5\x1a;wayplatform/connect/rfms/v5/charging_connection_state.proto\x1a7wayplatform/connect/rfms/v5/driver_identification.proto\x1a+wayplatform/connect/rfms/v5/tell_tale.proto\"\xf1\x13\n" +
+	"\aTrigger\x12=\n" +
+	"\x04type\x18\x01 \x01(\x0e2).wayplatform.connect.rfms.v5.Trigger.TypeR\x04type\x12!\n" +
+	"\funknown_type\x18\x02 \x01(\tR\vunknownType\x12F\n" +
+	"\acontext\x18\x03 \x01(\x0e2,.wayplatform.connect.rfms.v5.Trigger.ContextR\acontext\x12'\n" +
 	"\x0funknown_context\x18\x04 \x01(\tR\x0eunknownContext\x12!\n" +
-	"\ftrigger_info\x18\x05 \x03(\tR\vtriggerInfo\x12F\n" +
-	"\tdriver_id\x18\x06 \x01(\v2).wayplatform.rfms.v5.DriverIdentificationR\bdriverId\x12\x15\n" +
-	"\x06pto_id\x18\a \x01(\tR\x05ptoId\x12C\n" +
-	"\x0etell_tale_info\x18\b \x01(\v2\x1d.wayplatform.rfms.v5.TellTaleR\ftellTaleInfo\x12a\n" +
-	"\x14charging_status_info\x18\t \x01(\v2/.wayplatform.rfms.v5.Trigger.ChargingStatusInfoR\x12chargingStatusInfo\x12\x80\x01\n" +
+	"\ftrigger_info\x18\x05 \x03(\tR\vtriggerInfo\x12N\n" +
+	"\tdriver_id\x18\x06 \x01(\v21.wayplatform.connect.rfms.v5.DriverIdentificationR\bdriverId\x12\x15\n" +
+	"\x06pto_id\x18\a \x01(\tR\x05ptoId\x12K\n" +
+	"\x0etell_tale_info\x18\b \x01(\v2%.wayplatform.connect.rfms.v5.TellTaleR\ftellTaleInfo\x12i\n" +
+	"\x14charging_status_info\x18\t \x01(\v27.wayplatform.connect.rfms.v5.Trigger.ChargingStatusInfoR\x12chargingStatusInfo\x12\x88\x01\n" +
 	"\x1fcharging_connection_status_info\x18\n" +
-	" \x01(\v29.wayplatform.rfms.v5.Trigger.ChargingConnectionStatusInfoR\x1cchargingConnectionStatusInfo\x12E\n" +
+	" \x01(\v2A.wayplatform.connect.rfms.v5.Trigger.ChargingConnectionStatusInfoR\x1cchargingConnectionStatusInfo\x12M\n" +
 	"\n" +
-	"alarm_info\x18\v \x01(\v2&.wayplatform.rfms.v5.Trigger.AlarmInfoR\talarmInfo\x1a\xf1\x02\n" +
-	"\x12ChargingStatusInfo\x12K\n" +
-	"\x05event\x18\x01 \x01(\x0e25.wayplatform.rfms.v5.Trigger.ChargingStatusInfo.EventR\x05event\x12#\n" +
+	"alarm_info\x18\v \x01(\v2..wayplatform.connect.rfms.v5.Trigger.AlarmInfoR\talarmInfo\x1a\xf9\x02\n" +
+	"\x12ChargingStatusInfo\x12S\n" +
+	"\x05event\x18\x01 \x01(\x0e2=.wayplatform.connect.rfms.v5.Trigger.ChargingStatusInfo.EventR\x05event\x12#\n" +
 	"\runknown_event\x18\x02 \x01(\tR\funknownEvent\x12\x16\n" +
 	"\x06detail\x18\x03 \x01(\tR\x06detail\"\xd0\x01\n" +
 	"\x05Event\x12\x15\n" +
@@ -1298,14 +1298,14 @@ const file_wayplatform_connect_rfms_v5_trigger_proto_rawDesc = "" +
 	"\x14CHARGING_INTERRUPTED\x10\x05\x12%\n" +
 	"!ESTIMATED_COMPLETION_TIME_CHANGED\x10\x06\x12\t\n" +
 	"\x05TIMER\x10\a\x12\x12\n" +
-	"\x0eCHARGING_LEVEL\x10\b\x1a\x87\x01\n" +
-	"\x1cChargingConnectionStatusInfo\x12B\n" +
-	"\x05state\x18\x01 \x01(\x0e2,.wayplatform.rfms.v5.ChargingConnectionStateR\x05state\x12#\n" +
-	"\runknown_state\x18\x02 \x01(\tR\funknownState\x1a\xfd\x03\n" +
-	"\tAlarmInfo\x12?\n" +
-	"\x04type\x18\x01 \x01(\x0e2+.wayplatform.rfms.v5.Trigger.AlarmInfo.TypeR\x04type\x12!\n" +
-	"\funknown_type\x18\x02 \x01(\tR\vunknownType\x12B\n" +
-	"\x05state\x18\x03 \x01(\x0e2,.wayplatform.rfms.v5.Trigger.AlarmInfo.StateR\x05state\x12#\n" +
+	"\x0eCHARGING_LEVEL\x10\b\x1a\x8f\x01\n" +
+	"\x1cChargingConnectionStatusInfo\x12J\n" +
+	"\x05state\x18\x01 \x01(\x0e24.wayplatform.connect.rfms.v5.ChargingConnectionStateR\x05state\x12#\n" +
+	"\runknown_state\x18\x02 \x01(\tR\funknownState\x1a\x8d\x04\n" +
+	"\tAlarmInfo\x12G\n" +
+	"\x04type\x18\x01 \x01(\x0e23.wayplatform.connect.rfms.v5.Trigger.AlarmInfo.TypeR\x04type\x12!\n" +
+	"\funknown_type\x18\x02 \x01(\tR\vunknownType\x12J\n" +
+	"\x05state\x18\x03 \x01(\x0e24.wayplatform.connect.rfms.v5.Trigger.AlarmInfo.StateR\x05state\x12#\n" +
 	"\runknown_state\x18\x04 \x01(\tR\funknownState\x12\x18\n" +
 	"\adetails\x18\x05 \x03(\tR\adetails\"u\n" +
 	"\x04Type\x12\x14\n" +
@@ -1367,37 +1367,37 @@ const file_wayplatform_connect_rfms_v5_trigger_proto_rawDesc = "" +
 	"\x12\x0f\n" +
 	"\vVOLVO_BUSES\x10\v\x12\r\n" +
 	"\tIVECO_BUS\x10\f\x12\v\n" +
-	"\aIRISBUS\x10\rB\xe6\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\fTriggerProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\aIRISBUS\x10\rB\x8f\x02\n" +
+	"\x1fcom.wayplatform.connect.rfms.v5B\fTriggerProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WCR\xaa\x02\x1bWayplatform.Connect.Rfms.V5\xca\x02\x1bWayplatform\\Connect\\Rfms\\V5\xe2\x02'Wayplatform\\Connect\\Rfms\\V5\\GPBMetadata\xea\x02\x1eWayplatform::Connect::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_connect_rfms_v5_trigger_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
 var file_wayplatform_connect_rfms_v5_trigger_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_wayplatform_connect_rfms_v5_trigger_proto_goTypes = []any{
-	(Trigger_Type)(0),                            // 0: wayplatform.rfms.v5.Trigger.Type
-	(Trigger_Context)(0),                         // 1: wayplatform.rfms.v5.Trigger.Context
-	(Trigger_ChargingStatusInfo_Event)(0),        // 2: wayplatform.rfms.v5.Trigger.ChargingStatusInfo.Event
-	(Trigger_AlarmInfo_Type)(0),                  // 3: wayplatform.rfms.v5.Trigger.AlarmInfo.Type
-	(Trigger_AlarmInfo_State)(0),                 // 4: wayplatform.rfms.v5.Trigger.AlarmInfo.State
-	(*Trigger)(nil),                              // 5: wayplatform.rfms.v5.Trigger
-	(*Trigger_ChargingStatusInfo)(nil),           // 6: wayplatform.rfms.v5.Trigger.ChargingStatusInfo
-	(*Trigger_ChargingConnectionStatusInfo)(nil), // 7: wayplatform.rfms.v5.Trigger.ChargingConnectionStatusInfo
-	(*Trigger_AlarmInfo)(nil),                    // 8: wayplatform.rfms.v5.Trigger.AlarmInfo
-	(*DriverIdentification)(nil),                 // 9: wayplatform.rfms.v5.DriverIdentification
-	(*TellTale)(nil),                             // 10: wayplatform.rfms.v5.TellTale
-	(ChargingConnectionState)(0),                 // 11: wayplatform.rfms.v5.ChargingConnectionState
+	(Trigger_Type)(0),                            // 0: wayplatform.connect.rfms.v5.Trigger.Type
+	(Trigger_Context)(0),                         // 1: wayplatform.connect.rfms.v5.Trigger.Context
+	(Trigger_ChargingStatusInfo_Event)(0),        // 2: wayplatform.connect.rfms.v5.Trigger.ChargingStatusInfo.Event
+	(Trigger_AlarmInfo_Type)(0),                  // 3: wayplatform.connect.rfms.v5.Trigger.AlarmInfo.Type
+	(Trigger_AlarmInfo_State)(0),                 // 4: wayplatform.connect.rfms.v5.Trigger.AlarmInfo.State
+	(*Trigger)(nil),                              // 5: wayplatform.connect.rfms.v5.Trigger
+	(*Trigger_ChargingStatusInfo)(nil),           // 6: wayplatform.connect.rfms.v5.Trigger.ChargingStatusInfo
+	(*Trigger_ChargingConnectionStatusInfo)(nil), // 7: wayplatform.connect.rfms.v5.Trigger.ChargingConnectionStatusInfo
+	(*Trigger_AlarmInfo)(nil),                    // 8: wayplatform.connect.rfms.v5.Trigger.AlarmInfo
+	(*DriverIdentification)(nil),                 // 9: wayplatform.connect.rfms.v5.DriverIdentification
+	(*TellTale)(nil),                             // 10: wayplatform.connect.rfms.v5.TellTale
+	(ChargingConnectionState)(0),                 // 11: wayplatform.connect.rfms.v5.ChargingConnectionState
 }
 var file_wayplatform_connect_rfms_v5_trigger_proto_depIdxs = []int32{
-	0,  // 0: wayplatform.rfms.v5.Trigger.type:type_name -> wayplatform.rfms.v5.Trigger.Type
-	1,  // 1: wayplatform.rfms.v5.Trigger.context:type_name -> wayplatform.rfms.v5.Trigger.Context
-	9,  // 2: wayplatform.rfms.v5.Trigger.driver_id:type_name -> wayplatform.rfms.v5.DriverIdentification
-	10, // 3: wayplatform.rfms.v5.Trigger.tell_tale_info:type_name -> wayplatform.rfms.v5.TellTale
-	6,  // 4: wayplatform.rfms.v5.Trigger.charging_status_info:type_name -> wayplatform.rfms.v5.Trigger.ChargingStatusInfo
-	7,  // 5: wayplatform.rfms.v5.Trigger.charging_connection_status_info:type_name -> wayplatform.rfms.v5.Trigger.ChargingConnectionStatusInfo
-	8,  // 6: wayplatform.rfms.v5.Trigger.alarm_info:type_name -> wayplatform.rfms.v5.Trigger.AlarmInfo
-	2,  // 7: wayplatform.rfms.v5.Trigger.ChargingStatusInfo.event:type_name -> wayplatform.rfms.v5.Trigger.ChargingStatusInfo.Event
-	11, // 8: wayplatform.rfms.v5.Trigger.ChargingConnectionStatusInfo.state:type_name -> wayplatform.rfms.v5.ChargingConnectionState
-	3,  // 9: wayplatform.rfms.v5.Trigger.AlarmInfo.type:type_name -> wayplatform.rfms.v5.Trigger.AlarmInfo.Type
-	4,  // 10: wayplatform.rfms.v5.Trigger.AlarmInfo.state:type_name -> wayplatform.rfms.v5.Trigger.AlarmInfo.State
+	0,  // 0: wayplatform.connect.rfms.v5.Trigger.type:type_name -> wayplatform.connect.rfms.v5.Trigger.Type
+	1,  // 1: wayplatform.connect.rfms.v5.Trigger.context:type_name -> wayplatform.connect.rfms.v5.Trigger.Context
+	9,  // 2: wayplatform.connect.rfms.v5.Trigger.driver_id:type_name -> wayplatform.connect.rfms.v5.DriverIdentification
+	10, // 3: wayplatform.connect.rfms.v5.Trigger.tell_tale_info:type_name -> wayplatform.connect.rfms.v5.TellTale
+	6,  // 4: wayplatform.connect.rfms.v5.Trigger.charging_status_info:type_name -> wayplatform.connect.rfms.v5.Trigger.ChargingStatusInfo
+	7,  // 5: wayplatform.connect.rfms.v5.Trigger.charging_connection_status_info:type_name -> wayplatform.connect.rfms.v5.Trigger.ChargingConnectionStatusInfo
+	8,  // 6: wayplatform.connect.rfms.v5.Trigger.alarm_info:type_name -> wayplatform.connect.rfms.v5.Trigger.AlarmInfo
+	2,  // 7: wayplatform.connect.rfms.v5.Trigger.ChargingStatusInfo.event:type_name -> wayplatform.connect.rfms.v5.Trigger.ChargingStatusInfo.Event
+	11, // 8: wayplatform.connect.rfms.v5.Trigger.ChargingConnectionStatusInfo.state:type_name -> wayplatform.connect.rfms.v5.ChargingConnectionState
+	3,  // 9: wayplatform.connect.rfms.v5.Trigger.AlarmInfo.type:type_name -> wayplatform.connect.rfms.v5.Trigger.AlarmInfo.Type
+	4,  // 10: wayplatform.connect.rfms.v5.Trigger.AlarmInfo.state:type_name -> wayplatform.connect.rfms.v5.Trigger.AlarmInfo.State
 	11, // [11:11] is the sub-list for method output_type
 	11, // [11:11] is the sub-list for method input_type
 	11, // [11:11] is the sub-list for extension type_name

@@ -1,6 +1,6 @@
 edition = "2023";
 
-package wayplatform.rfms.v5;
+package wayplatform.connect.rfms.v5;
 
 // Ignition state.
 enum IgnitionState {

@@ -1,6 +1,6 @@
 edition = "2023";
 
-package wayplatform.rfms.v5;
+package wayplatform.connect.rfms.v5;
 
 import "wayplatform/connect/rfms/v5/accumulated_data.proto";
 import "wayplatform/connect/rfms/v5/driver_identification.proto";

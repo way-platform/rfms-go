@@ -189,7 +189,7 @@ type DriverIdentification_Tacho struct {
 	state                                     protoimpl.MessageState                             `protogen:"opaque.v1"`
 	xxx_hidden_DriverId                       *string                                            `protobuf:"bytes,1,opt,name=driver_id,json=driverId"`
 	xxx_hidden_CardIssuingMemberState         *string                                            `protobuf:"bytes,2,opt,name=card_issuing_member_state,json=cardIssuingMemberState"`
-	xxx_hidden_AuthenticationEquipment        DriverIdentification_Tacho_AuthenticationEquipment `protobuf:"varint,3,opt,name=authentication_equipment,json=authenticationEquipment,enum=wayplatform.rfms.v5.DriverIdentification_Tacho_AuthenticationEquipment"`
+	xxx_hidden_AuthenticationEquipment        DriverIdentification_Tacho_AuthenticationEquipment `protobuf:"varint,3,opt,name=authentication_equipment,json=authenticationEquipment,enum=wayplatform.connect.rfms.v5.DriverIdentification_Tacho_AuthenticationEquipment"`
 	xxx_hidden_UnknownAuthenticationEquipment *string                                            `protobuf:"bytes,4,opt,name=unknown_authentication_equipment,json=unknownAuthenticationEquipment"`
 	xxx_hidden_CardReplacementIndex           *string                                            `protobuf:"bytes,5,opt,name=card_replacement_index,json=cardReplacementIndex"`
 	xxx_hidden_CardRenewalIndex               *string                                            `protobuf:"bytes,6,opt,name=card_renewal_index,json=cardRenewalIndex"`
@@ -562,14 +562,14 @@ var File_wayplatform_connect_rfms_v5_driver_identification_proto protoreflect.Fi
 
 const file_wayplatform_connect_rfms_v5_driver_identification_proto_rawDesc = "" +
 	"\n" +
-	"7wayplatform/connect/rfms/v5/driver_identification.proto\x12\x13wayplatform.rfms.v5\"\xce\x06\n" +
-	"\x14DriverIdentification\x12E\n" +
-	"\x05tacho\x18\x01 \x01(\v2/.wayplatform.rfms.v5.DriverIdentification.TachoR\x05tacho\x12?\n" +
-	"\x03oem\x18\x02 \x01(\v2-.wayplatform.rfms.v5.DriverIdentification.OemR\x03oem\x1a\xf0\x04\n" +
+	"7wayplatform/connect/rfms/v5/driver_identification.proto\x12\x1bwayplatform.connect.rfms.v5\"\xe6\x06\n" +
+	"\x14DriverIdentification\x12M\n" +
+	"\x05tacho\x18\x01 \x01(\v27.wayplatform.connect.rfms.v5.DriverIdentification.TachoR\x05tacho\x12G\n" +
+	"\x03oem\x18\x02 \x01(\v25.wayplatform.connect.rfms.v5.DriverIdentification.OemR\x03oem\x1a\xf8\x04\n" +
 	"\x05Tacho\x12\x1b\n" +
 	"\tdriver_id\x18\x01 \x01(\tR\bdriverId\x129\n" +
-	"\x19card_issuing_member_state\x18\x02 \x01(\tR\x16cardIssuingMemberState\x12\x82\x01\n" +
-	"\x18authentication_equipment\x18\x03 \x01(\x0e2G.wayplatform.rfms.v5.DriverIdentification.Tacho.AuthenticationEquipmentR\x17authenticationEquipment\x12H\n" +
+	"\x19card_issuing_member_state\x18\x02 \x01(\tR\x16cardIssuingMemberState\x12\x8a\x01\n" +
+	"\x18authentication_equipment\x18\x03 \x01(\x0e2O.wayplatform.connect.rfms.v5.DriverIdentification.Tacho.AuthenticationEquipmentR\x17authenticationEquipment\x12H\n" +
 	" unknown_authentication_equipment\x18\x04 \x01(\tR\x1eunknownAuthenticationEquipment\x124\n" +
 	"\x16card_replacement_index\x18\x05 \x01(\tR\x14cardReplacementIndex\x12,\n" +
 	"\x12card_renewal_index\x18\x06 \x01(\tR\x10cardRenewalIndex\"\xdb\x01\n" +
@@ -584,21 +584,21 @@ const file_wayplatform_connect_rfms_v5_driver_identification_proto_rawDesc = "" 
 	"\rMOTION_SENSOR\x10\a\x1a;\n" +
 	"\x03Oem\x12\x17\n" +
 	"\aid_type\x18\x01 \x01(\tR\x06idType\x12\x1b\n" +
-	"\tdriver_id\x18\x02 \x01(\tR\bdriverIdB\xf3\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x19DriverIdentificationProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\tdriver_id\x18\x02 \x01(\tR\bdriverIdB\x9c\x02\n" +
+	"\x1fcom.wayplatform.connect.rfms.v5B\x19DriverIdentificationProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WCR\xaa\x02\x1bWayplatform.Connect.Rfms.V5\xca\x02\x1bWayplatform\\Connect\\Rfms\\V5\xe2\x02'Wayplatform\\Connect\\Rfms\\V5\\GPBMetadata\xea\x02\x1eWayplatform::Connect::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_connect_rfms_v5_driver_identification_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_wayplatform_connect_rfms_v5_driver_identification_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_wayplatform_connect_rfms_v5_driver_identification_proto_goTypes = []any{
-	(DriverIdentification_Tacho_AuthenticationEquipment)(0), // 0: wayplatform.rfms.v5.DriverIdentification.Tacho.AuthenticationEquipment
-	(*DriverIdentification)(nil),                            // 1: wayplatform.rfms.v5.DriverIdentification
-	(*DriverIdentification_Tacho)(nil),                      // 2: wayplatform.rfms.v5.DriverIdentification.Tacho
-	(*DriverIdentification_Oem)(nil),                        // 3: wayplatform.rfms.v5.DriverIdentification.Oem
+	(DriverIdentification_Tacho_AuthenticationEquipment)(0), // 0: wayplatform.connect.rfms.v5.DriverIdentification.Tacho.AuthenticationEquipment
+	(*DriverIdentification)(nil),                            // 1: wayplatform.connect.rfms.v5.DriverIdentification
+	(*DriverIdentification_Tacho)(nil),                      // 2: wayplatform.connect.rfms.v5.DriverIdentification.Tacho
+	(*DriverIdentification_Oem)(nil),                        // 3: wayplatform.connect.rfms.v5.DriverIdentification.Oem
 }
 var file_wayplatform_connect_rfms_v5_driver_identification_proto_depIdxs = []int32{
-	2, // 0: wayplatform.rfms.v5.DriverIdentification.tacho:type_name -> wayplatform.rfms.v5.DriverIdentification.Tacho
-	3, // 1: wayplatform.rfms.v5.DriverIdentification.oem:type_name -> wayplatform.rfms.v5.DriverIdentification.Oem
-	0, // 2: wayplatform.rfms.v5.DriverIdentification.Tacho.authentication_equipment:type_name -> wayplatform.rfms.v5.DriverIdentification.Tacho.AuthenticationEquipment
+	2, // 0: wayplatform.connect.rfms.v5.DriverIdentification.tacho:type_name -> wayplatform.connect.rfms.v5.DriverIdentification.Tacho
+	3, // 1: wayplatform.connect.rfms.v5.DriverIdentification.oem:type_name -> wayplatform.connect.rfms.v5.DriverIdentification.Oem
+	0, // 2: wayplatform.connect.rfms.v5.DriverIdentification.Tacho.authentication_equipment:type_name -> wayplatform.connect.rfms.v5.DriverIdentification.Tacho.AuthenticationEquipment
 	3, // [3:3] is the sub-list for method output_type
 	3, // [3:3] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name

@@ -345,10 +345,10 @@ func (x TellTale_State) Number() protoreflect.EnumNumber {
 // Information about a tell tale.
 type TellTale struct {
 	state                      protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Type            TellTale_Type          `protobuf:"varint,1,opt,name=type,enum=wayplatform.rfms.v5.TellTale_Type"`
+	xxx_hidden_Type            TellTale_Type          `protobuf:"varint,1,opt,name=type,enum=wayplatform.connect.rfms.v5.TellTale_Type"`
 	xxx_hidden_UnknownType     *string                `protobuf:"bytes,2,opt,name=unknown_type,json=unknownType"`
 	xxx_hidden_OemSpecificType *string                `protobuf:"bytes,3,opt,name=oem_specific_type,json=oemSpecificType"`
-	xxx_hidden_State           TellTale_State         `protobuf:"varint,4,opt,name=state,enum=wayplatform.rfms.v5.TellTale_State"`
+	xxx_hidden_State           TellTale_State         `protobuf:"varint,4,opt,name=state,enum=wayplatform.connect.rfms.v5.TellTale_State"`
 	xxx_hidden_UnknownState    *string                `protobuf:"bytes,5,opt,name=unknown_state,json=unknownState"`
 	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
 	XXX_presence               [1]uint32
@@ -560,12 +560,12 @@ var File_wayplatform_connect_rfms_v5_tell_tale_proto protoreflect.FileDescriptor
 
 const file_wayplatform_connect_rfms_v5_tell_tale_proto_rawDesc = "" +
 	"\n" +
-	"+wayplatform/connect/rfms/v5/tell_tale.proto\x12\x13wayplatform.rfms.v5\"\xa9\x10\n" +
-	"\bTellTale\x126\n" +
-	"\x04type\x18\x01 \x01(\x0e2\".wayplatform.rfms.v5.TellTale.TypeR\x04type\x12!\n" +
+	"+wayplatform/connect/rfms/v5/tell_tale.proto\x12\x1bwayplatform.connect.rfms.v5\"\xb9\x10\n" +
+	"\bTellTale\x12>\n" +
+	"\x04type\x18\x01 \x01(\x0e2*.wayplatform.connect.rfms.v5.TellTale.TypeR\x04type\x12!\n" +
 	"\funknown_type\x18\x02 \x01(\tR\vunknownType\x12*\n" +
-	"\x11oem_specific_type\x18\x03 \x01(\tR\x0foemSpecificType\x129\n" +
-	"\x05state\x18\x04 \x01(\x0e2#.wayplatform.rfms.v5.TellTale.StateR\x05state\x12#\n" +
+	"\x11oem_specific_type\x18\x03 \x01(\tR\x0foemSpecificType\x12A\n" +
+	"\x05state\x18\x04 \x01(\x0e2+.wayplatform.connect.rfms.v5.TellTale.StateR\x05state\x12#\n" +
 	"\runknown_state\x18\x05 \x01(\tR\funknownState\"\xc1\r\n" +
 	"\x04Type\x12\x14\n" +
 	"\x10TYPE_UNSPECIFIED\x10\x00\x12\x10\n" +
@@ -654,19 +654,19 @@ const file_wayplatform_connect_rfms_v5_tell_tale_proto_rawDesc = "" +
 	"\n" +
 	"\x06YELLOW\x10\x04\x12\b\n" +
 	"\x04INFO\x10\x05\x12\a\n" +
-	"\x03OFF\x10\x06B\xe7\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\rTellTaleProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\x03OFF\x10\x06B\x90\x02\n" +
+	"\x1fcom.wayplatform.connect.rfms.v5B\rTellTaleProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WCR\xaa\x02\x1bWayplatform.Connect.Rfms.V5\xca\x02\x1bWayplatform\\Connect\\Rfms\\V5\xe2\x02'Wayplatform\\Connect\\Rfms\\V5\\GPBMetadata\xea\x02\x1eWayplatform::Connect::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_connect_rfms_v5_tell_tale_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_wayplatform_connect_rfms_v5_tell_tale_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_wayplatform_connect_rfms_v5_tell_tale_proto_goTypes = []any{
-	(TellTale_Type)(0),  // 0: wayplatform.rfms.v5.TellTale.Type
-	(TellTale_State)(0), // 1: wayplatform.rfms.v5.TellTale.State
-	(*TellTale)(nil),    // 2: wayplatform.rfms.v5.TellTale
+	(TellTale_Type)(0),  // 0: wayplatform.connect.rfms.v5.TellTale.Type
+	(TellTale_State)(0), // 1: wayplatform.connect.rfms.v5.TellTale.State
+	(*TellTale)(nil),    // 2: wayplatform.connect.rfms.v5.TellTale
 }
 var file_wayplatform_connect_rfms_v5_tell_tale_proto_depIdxs = []int32{
-	0, // 0: wayplatform.rfms.v5.TellTale.type:type_name -> wayplatform.rfms.v5.TellTale.Type
-	1, // 1: wayplatform.rfms.v5.TellTale.state:type_name -> wayplatform.rfms.v5.TellTale.State
+	0, // 0: wayplatform.connect.rfms.v5.TellTale.type:type_name -> wayplatform.connect.rfms.v5.TellTale.Type
+	1, // 1: wayplatform.connect.rfms.v5.TellTale.state:type_name -> wayplatform.connect.rfms.v5.TellTale.State
 	2, // [2:2] is the sub-list for method output_type
 	2, // [2:2] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name

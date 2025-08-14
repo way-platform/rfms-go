@@ -92,7 +92,7 @@ var File_wayplatform_connect_rfms_v5_charging_connection_state_proto protoreflec
 
 const file_wayplatform_connect_rfms_v5_charging_connection_state_proto_rawDesc = "" +
 	"\n" +
-	";wayplatform/connect/rfms/v5/charging_connection_state.proto\x12\x13wayplatform.rfms.v5*\x81\x02\n" +
+	";wayplatform/connect/rfms/v5/charging_connection_state.proto\x12\x1bwayplatform.connect.rfms.v5*\x81\x02\n" +
 	"\x17ChargingConnectionState\x12)\n" +
 	"%CHARGING_CONNECTION_STATE_UNSPECIFIED\x10\x00\x12%\n" +
 	"!CHARGING_CONNECTION_STATE_UNKNOWN\x10\x01\x12+\n" +
@@ -102,12 +102,12 @@ const file_wayplatform_connect_rfms_v5_charging_connection_state_proto_rawDesc =
 	"CONNECTING\x10\x04\x12\r\n" +
 	"\tCONNECTED\x10\x05\x12\x11\n" +
 	"\rDISCONNECTING\x10\x06\x12\x10\n" +
-	"\fDISCONNECTED\x10\aB\xf6\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x1cChargingConnectionStateProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\x06proto3"
+	"\fDISCONNECTED\x10\aB\x9f\x02\n" +
+	"\x1fcom.wayplatform.connect.rfms.v5B\x1cChargingConnectionStateProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WCR\xaa\x02\x1bWayplatform.Connect.Rfms.V5\xca\x02\x1bWayplatform\\Connect\\Rfms\\V5\xe2\x02'Wayplatform\\Connect\\Rfms\\V5\\GPBMetadata\xea\x02\x1eWayplatform::Connect::Rfms::V5b\x06proto3"
 
 var file_wayplatform_connect_rfms_v5_charging_connection_state_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_wayplatform_connect_rfms_v5_charging_connection_state_proto_goTypes = []any{
-	(ChargingConnectionState)(0), // 0: wayplatform.rfms.v5.ChargingConnectionState
+	(ChargingConnectionState)(0), // 0: wayplatform.connect.rfms.v5.ChargingConnectionState
 }
 var file_wayplatform_connect_rfms_v5_charging_connection_state_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

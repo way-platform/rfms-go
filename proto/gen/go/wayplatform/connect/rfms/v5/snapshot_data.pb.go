@@ -28,25 +28,25 @@ type SnapshotData struct {
 	xxx_hidden_TachographSpeedKmh                        float64                                `protobuf:"fixed64,3,opt,name=tachograph_speed_kmh,json=tachographSpeedKmh"`
 	xxx_hidden_EngineSpeedRpm                            float64                                `protobuf:"fixed64,4,opt,name=engine_speed_rpm,json=engineSpeedRpm"`
 	xxx_hidden_ElectricMotorSpeedRpm                     float64                                `protobuf:"fixed64,5,opt,name=electric_motor_speed_rpm,json=electricMotorSpeedRpm"`
-	xxx_hidden_IgnitionState                             IgnitionState                          `protobuf:"varint,6,opt,name=ignition_state,json=ignitionState,enum=wayplatform.rfms.v5.IgnitionState"`
-	xxx_hidden_FuelType                                  FuelType                               `protobuf:"varint,7,opt,name=fuel_type,json=fuelType,enum=wayplatform.rfms.v5.FuelType"`
+	xxx_hidden_IgnitionState                             IgnitionState                          `protobuf:"varint,6,opt,name=ignition_state,json=ignitionState,enum=wayplatform.connect.rfms.v5.IgnitionState"`
+	xxx_hidden_FuelType                                  FuelType                               `protobuf:"varint,7,opt,name=fuel_type,json=fuelType,enum=wayplatform.connect.rfms.v5.FuelType"`
 	xxx_hidden_UnknownFuelType                           *string                                `protobuf:"bytes,8,opt,name=unknown_fuel_type,json=unknownFuelType"`
 	xxx_hidden_FuelLevel1Percent                         float64                                `protobuf:"fixed64,9,opt,name=fuel_level1_percent,json=fuelLevel1Percent"`
 	xxx_hidden_FuelLevel2Percent                         float64                                `protobuf:"fixed64,10,opt,name=fuel_level2_percent,json=fuelLevel2Percent"`
 	xxx_hidden_CatalystFuelLevelPercent                  float64                                `protobuf:"fixed64,11,opt,name=catalyst_fuel_level_percent,json=catalystFuelLevelPercent"`
-	xxx_hidden_Driver1WorkingState                       DriverWorkingState                     `protobuf:"varint,12,opt,name=driver1_working_state,json=driver1WorkingState,enum=wayplatform.rfms.v5.DriverWorkingState"`
+	xxx_hidden_Driver1WorkingState                       DriverWorkingState                     `protobuf:"varint,12,opt,name=driver1_working_state,json=driver1WorkingState,enum=wayplatform.connect.rfms.v5.DriverWorkingState"`
 	xxx_hidden_UnknownDriver1WorkingState                *string                                `protobuf:"bytes,13,opt,name=unknown_driver1_working_state,json=unknownDriver1WorkingState"`
 	xxx_hidden_Driver2Id                                 *DriverIdentification                  `protobuf:"bytes,14,opt,name=driver2_id,json=driver2Id"`
-	xxx_hidden_Driver2WorkingState                       DriverWorkingState                     `protobuf:"varint,15,opt,name=driver2_working_state,json=driver2WorkingState,enum=wayplatform.rfms.v5.DriverWorkingState"`
+	xxx_hidden_Driver2WorkingState                       DriverWorkingState                     `protobuf:"varint,15,opt,name=driver2_working_state,json=driver2WorkingState,enum=wayplatform.connect.rfms.v5.DriverWorkingState"`
 	xxx_hidden_UnknownDriver2WorkingState                *string                                `protobuf:"bytes,16,opt,name=unknown_driver2_working_state,json=unknownDriver2WorkingState"`
 	xxx_hidden_AmbientAirTemperatureC                    float64                                `protobuf:"fixed64,17,opt,name=ambient_air_temperature_c,json=ambientAirTemperatureC"`
 	xxx_hidden_ParkingBrakeSwitch                        bool                                   `protobuf:"varint,18,opt,name=parking_brake_switch,json=parkingBrakeSwitch"`
 	xxx_hidden_BatteryPackRemainingChargePercent         float64                                `protobuf:"fixed64,19,opt,name=battery_pack_remaining_charge_percent,json=batteryPackRemainingChargePercent"`
-	xxx_hidden_BatteryPackChargingState                  ChargingState                          `protobuf:"varint,20,opt,name=battery_pack_charging_state,json=batteryPackChargingState,enum=wayplatform.rfms.v5.ChargingState"`
+	xxx_hidden_BatteryPackChargingState                  ChargingState                          `protobuf:"varint,20,opt,name=battery_pack_charging_state,json=batteryPackChargingState,enum=wayplatform.connect.rfms.v5.ChargingState"`
 	xxx_hidden_UnknownBatteryPackChargingState           *string                                `protobuf:"bytes,21,opt,name=unknown_battery_pack_charging_state,json=unknownBatteryPackChargingState"`
-	xxx_hidden_BatteryPackChargingConnectionState        ChargingConnectionState                `protobuf:"varint,22,opt,name=battery_pack_charging_connection_state,json=batteryPackChargingConnectionState,enum=wayplatform.rfms.v5.ChargingConnectionState"`
+	xxx_hidden_BatteryPackChargingConnectionState        ChargingConnectionState                `protobuf:"varint,22,opt,name=battery_pack_charging_connection_state,json=batteryPackChargingConnectionState,enum=wayplatform.connect.rfms.v5.ChargingConnectionState"`
 	xxx_hidden_UnknownBatteryPackChargingConnectionState *string                                `protobuf:"bytes,23,opt,name=unknown_battery_pack_charging_connection_state,json=unknownBatteryPackChargingConnectionState"`
-	xxx_hidden_BatteryPackChargingDevice                 ChargingDevice                         `protobuf:"varint,24,opt,name=battery_pack_charging_device,json=batteryPackChargingDevice,enum=wayplatform.rfms.v5.ChargingDevice"`
+	xxx_hidden_BatteryPackChargingDevice                 ChargingDevice                         `protobuf:"varint,24,opt,name=battery_pack_charging_device,json=batteryPackChargingDevice,enum=wayplatform.connect.rfms.v5.ChargingDevice"`
 	xxx_hidden_UnknownBatteryPackChargingDevice          *string                                `protobuf:"bytes,25,opt,name=unknown_battery_pack_charging_device,json=unknownBatteryPackChargingDevice"`
 	xxx_hidden_BatteryPackChargingPowerW                 float64                                `protobuf:"fixed64,26,opt,name=battery_pack_charging_power_w,json=batteryPackChargingPowerW"`
 	xxx_hidden_BatteryPackEstimatedChargingCompletedTime *string                                `protobuf:"bytes,27,opt,name=battery_pack_estimated_charging_completed_time,json=batteryPackEstimatedChargingCompletedTime"`
@@ -1181,75 +1181,75 @@ var File_wayplatform_connect_rfms_v5_snapshot_data_proto protoreflect.FileDescri
 
 const file_wayplatform_connect_rfms_v5_snapshot_data_proto_rawDesc = "" +
 	"\n" +
-	"/wayplatform/connect/rfms/v5/snapshot_data.proto\x12\x13wayplatform.rfms.v5\x1a;wayplatform/connect/rfms/v5/charging_connection_state.proto\x1a1wayplatform/connect/rfms/v5/charging_device.proto\x1a0wayplatform/connect/rfms/v5/charging_state.proto\x1a7wayplatform/connect/rfms/v5/driver_identification.proto\x1a6wayplatform/connect/rfms/v5/driver_working_state.proto\x1a+wayplatform/connect/rfms/v5/fuel_type.proto\x1a/wayplatform/connect/rfms/v5/gnss_position.proto\x1a0wayplatform/connect/rfms/v5/ignition_state.proto\x1a)wayplatform/connect/rfms/v5/trailer.proto\x1a.wayplatform/connect/rfms/v5/vehicle_axle.proto\"\xaf\x12\n" +
-	"\fSnapshotData\x12F\n" +
-	"\rgnss_position\x18\x01 \x01(\v2!.wayplatform.rfms.v5.GnssPositionR\fgnssPosition\x121\n" +
+	"/wayplatform/connect/rfms/v5/snapshot_data.proto\x12\x1bwayplatform.connect.rfms.v5\x1a;wayplatform/connect/rfms/v5/charging_connection_state.proto\x1a1wayplatform/connect/rfms/v5/charging_device.proto\x1a0wayplatform/connect/rfms/v5/charging_state.proto\x1a7wayplatform/connect/rfms/v5/driver_identification.proto\x1a6wayplatform/connect/rfms/v5/driver_working_state.proto\x1a+wayplatform/connect/rfms/v5/fuel_type.proto\x1a/wayplatform/connect/rfms/v5/gnss_position.proto\x1a0wayplatform/connect/rfms/v5/ignition_state.proto\x1a)wayplatform/connect/rfms/v5/trailer.proto\x1a.wayplatform/connect/rfms/v5/vehicle_axle.proto\"\x90\x13\n" +
+	"\fSnapshotData\x12N\n" +
+	"\rgnss_position\x18\x01 \x01(\v2).wayplatform.connect.rfms.v5.GnssPositionR\fgnssPosition\x121\n" +
 	"\x15wheel_based_speed_kmh\x18\x02 \x01(\x01R\x12wheelBasedSpeedKmh\x120\n" +
 	"\x14tachograph_speed_kmh\x18\x03 \x01(\x01R\x12tachographSpeedKmh\x12(\n" +
 	"\x10engine_speed_rpm\x18\x04 \x01(\x01R\x0eengineSpeedRpm\x127\n" +
-	"\x18electric_motor_speed_rpm\x18\x05 \x01(\x01R\x15electricMotorSpeedRpm\x12I\n" +
-	"\x0eignition_state\x18\x06 \x01(\x0e2\".wayplatform.rfms.v5.IgnitionStateR\rignitionState\x12:\n" +
-	"\tfuel_type\x18\a \x01(\x0e2\x1d.wayplatform.rfms.v5.FuelTypeR\bfuelType\x12*\n" +
+	"\x18electric_motor_speed_rpm\x18\x05 \x01(\x01R\x15electricMotorSpeedRpm\x12Q\n" +
+	"\x0eignition_state\x18\x06 \x01(\x0e2*.wayplatform.connect.rfms.v5.IgnitionStateR\rignitionState\x12B\n" +
+	"\tfuel_type\x18\a \x01(\x0e2%.wayplatform.connect.rfms.v5.FuelTypeR\bfuelType\x12*\n" +
 	"\x11unknown_fuel_type\x18\b \x01(\tR\x0funknownFuelType\x12.\n" +
 	"\x13fuel_level1_percent\x18\t \x01(\x01R\x11fuelLevel1Percent\x12.\n" +
 	"\x13fuel_level2_percent\x18\n" +
 	" \x01(\x01R\x11fuelLevel2Percent\x12=\n" +
-	"\x1bcatalyst_fuel_level_percent\x18\v \x01(\x01R\x18catalystFuelLevelPercent\x12[\n" +
-	"\x15driver1_working_state\x18\f \x01(\x0e2'.wayplatform.rfms.v5.DriverWorkingStateR\x13driver1WorkingState\x12A\n" +
-	"\x1dunknown_driver1_working_state\x18\r \x01(\tR\x1aunknownDriver1WorkingState\x12H\n" +
+	"\x1bcatalyst_fuel_level_percent\x18\v \x01(\x01R\x18catalystFuelLevelPercent\x12c\n" +
+	"\x15driver1_working_state\x18\f \x01(\x0e2/.wayplatform.connect.rfms.v5.DriverWorkingStateR\x13driver1WorkingState\x12A\n" +
+	"\x1dunknown_driver1_working_state\x18\r \x01(\tR\x1aunknownDriver1WorkingState\x12P\n" +
 	"\n" +
-	"driver2_id\x18\x0e \x01(\v2).wayplatform.rfms.v5.DriverIdentificationR\tdriver2Id\x12[\n" +
-	"\x15driver2_working_state\x18\x0f \x01(\x0e2'.wayplatform.rfms.v5.DriverWorkingStateR\x13driver2WorkingState\x12A\n" +
+	"driver2_id\x18\x0e \x01(\v21.wayplatform.connect.rfms.v5.DriverIdentificationR\tdriver2Id\x12c\n" +
+	"\x15driver2_working_state\x18\x0f \x01(\x0e2/.wayplatform.connect.rfms.v5.DriverWorkingStateR\x13driver2WorkingState\x12A\n" +
 	"\x1dunknown_driver2_working_state\x18\x10 \x01(\tR\x1aunknownDriver2WorkingState\x129\n" +
 	"\x19ambient_air_temperature_c\x18\x11 \x01(\x01R\x16ambientAirTemperatureC\x120\n" +
 	"\x14parking_brake_switch\x18\x12 \x01(\bR\x12parkingBrakeSwitch\x12P\n" +
-	"%battery_pack_remaining_charge_percent\x18\x13 \x01(\x01R!batteryPackRemainingChargePercent\x12a\n" +
-	"\x1bbattery_pack_charging_state\x18\x14 \x01(\x0e2\".wayplatform.rfms.v5.ChargingStateR\x18batteryPackChargingState\x12L\n" +
-	"#unknown_battery_pack_charging_state\x18\x15 \x01(\tR\x1funknownBatteryPackChargingState\x12\x80\x01\n" +
-	"&battery_pack_charging_connection_state\x18\x16 \x01(\x0e2,.wayplatform.rfms.v5.ChargingConnectionStateR\"batteryPackChargingConnectionState\x12a\n" +
-	".unknown_battery_pack_charging_connection_state\x18\x17 \x01(\tR)unknownBatteryPackChargingConnectionState\x12d\n" +
-	"\x1cbattery_pack_charging_device\x18\x18 \x01(\x0e2#.wayplatform.rfms.v5.ChargingDeviceR\x19batteryPackChargingDevice\x12N\n" +
+	"%battery_pack_remaining_charge_percent\x18\x13 \x01(\x01R!batteryPackRemainingChargePercent\x12i\n" +
+	"\x1bbattery_pack_charging_state\x18\x14 \x01(\x0e2*.wayplatform.connect.rfms.v5.ChargingStateR\x18batteryPackChargingState\x12L\n" +
+	"#unknown_battery_pack_charging_state\x18\x15 \x01(\tR\x1funknownBatteryPackChargingState\x12\x88\x01\n" +
+	"&battery_pack_charging_connection_state\x18\x16 \x01(\x0e24.wayplatform.connect.rfms.v5.ChargingConnectionStateR\"batteryPackChargingConnectionState\x12a\n" +
+	".unknown_battery_pack_charging_connection_state\x18\x17 \x01(\tR)unknownBatteryPackChargingConnectionState\x12l\n" +
+	"\x1cbattery_pack_charging_device\x18\x18 \x01(\x0e2+.wayplatform.connect.rfms.v5.ChargingDeviceR\x19batteryPackChargingDevice\x12N\n" +
 	"$unknown_battery_pack_charging_device\x18\x19 \x01(\tR unknownBatteryPackChargingDevice\x12@\n" +
 	"\x1dbattery_pack_charging_power_w\x18\x1a \x01(\x01R\x19batteryPackChargingPowerW\x12a\n" +
-	".battery_pack_estimated_charging_completed_time\x18\x1b \x01(\tR)batteryPackEstimatedChargingCompletedTime\x12y\n" +
-	"\x1bestimated_distance_to_empty\x18\x1c \x01(\v2:.wayplatform.rfms.v5.SnapshotData.EstimatedDistanceToEmptyR\x18estimatedDistanceToEmpty\x12E\n" +
-	"\rvehicle_axles\x18\x1d \x03(\v2 .wayplatform.rfms.v5.VehicleAxleR\fvehicleAxles\x128\n" +
-	"\btrailers\x18\x1e \x03(\v2\x1c.wayplatform.rfms.v5.TrailerR\btrailers\x1a\x85\x01\n" +
+	".battery_pack_estimated_charging_completed_time\x18\x1b \x01(\tR)batteryPackEstimatedChargingCompletedTime\x12\x81\x01\n" +
+	"\x1bestimated_distance_to_empty\x18\x1c \x01(\v2B.wayplatform.connect.rfms.v5.SnapshotData.EstimatedDistanceToEmptyR\x18estimatedDistanceToEmpty\x12M\n" +
+	"\rvehicle_axles\x18\x1d \x03(\v2(.wayplatform.connect.rfms.v5.VehicleAxleR\fvehicleAxles\x12@\n" +
+	"\btrailers\x18\x1e \x03(\v2$.wayplatform.connect.rfms.v5.TrailerR\btrailers\x1a\x85\x01\n" +
 	"\x18EstimatedDistanceToEmpty\x12\x17\n" +
 	"\atotal_m\x18\x01 \x01(\x01R\x06totalM\x12\x15\n" +
 	"\x06fuel_m\x18\x02 \x01(\x01R\x05fuelM\x12\x13\n" +
 	"\x05gas_m\x18\x03 \x01(\x01R\x04gasM\x12$\n" +
-	"\x0ebattery_pack_m\x18\x04 \x01(\x01R\fbatteryPackMB\xeb\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x11SnapshotDataProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\x0ebattery_pack_m\x18\x04 \x01(\x01R\fbatteryPackMB\x94\x02\n" +
+	"\x1fcom.wayplatform.connect.rfms.v5B\x11SnapshotDataProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WCR\xaa\x02\x1bWayplatform.Connect.Rfms.V5\xca\x02\x1bWayplatform\\Connect\\Rfms\\V5\xe2\x02'Wayplatform\\Connect\\Rfms\\V5\\GPBMetadata\xea\x02\x1eWayplatform::Connect::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_connect_rfms_v5_snapshot_data_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_wayplatform_connect_rfms_v5_snapshot_data_proto_goTypes = []any{
-	(*SnapshotData)(nil),                          // 0: wayplatform.rfms.v5.SnapshotData
-	(*SnapshotData_EstimatedDistanceToEmpty)(nil), // 1: wayplatform.rfms.v5.SnapshotData.EstimatedDistanceToEmpty
-	(*GnssPosition)(nil),                          // 2: wayplatform.rfms.v5.GnssPosition
-	(IgnitionState)(0),                            // 3: wayplatform.rfms.v5.IgnitionState
-	(FuelType)(0),                                 // 4: wayplatform.rfms.v5.FuelType
-	(DriverWorkingState)(0),                       // 5: wayplatform.rfms.v5.DriverWorkingState
-	(*DriverIdentification)(nil),                  // 6: wayplatform.rfms.v5.DriverIdentification
-	(ChargingState)(0),                            // 7: wayplatform.rfms.v5.ChargingState
-	(ChargingConnectionState)(0),                  // 8: wayplatform.rfms.v5.ChargingConnectionState
-	(ChargingDevice)(0),                           // 9: wayplatform.rfms.v5.ChargingDevice
-	(*VehicleAxle)(nil),                           // 10: wayplatform.rfms.v5.VehicleAxle
-	(*Trailer)(nil),                               // 11: wayplatform.rfms.v5.Trailer
+	(*SnapshotData)(nil),                          // 0: wayplatform.connect.rfms.v5.SnapshotData
+	(*SnapshotData_EstimatedDistanceToEmpty)(nil), // 1: wayplatform.connect.rfms.v5.SnapshotData.EstimatedDistanceToEmpty
+	(*GnssPosition)(nil),                          // 2: wayplatform.connect.rfms.v5.GnssPosition
+	(IgnitionState)(0),                            // 3: wayplatform.connect.rfms.v5.IgnitionState
+	(FuelType)(0),                                 // 4: wayplatform.connect.rfms.v5.FuelType
+	(DriverWorkingState)(0),                       // 5: wayplatform.connect.rfms.v5.DriverWorkingState
+	(*DriverIdentification)(nil),                  // 6: wayplatform.connect.rfms.v5.DriverIdentification
+	(ChargingState)(0),                            // 7: wayplatform.connect.rfms.v5.ChargingState
+	(ChargingConnectionState)(0),                  // 8: wayplatform.connect.rfms.v5.ChargingConnectionState
+	(ChargingDevice)(0),                           // 9: wayplatform.connect.rfms.v5.ChargingDevice
+	(*VehicleAxle)(nil),                           // 10: wayplatform.connect.rfms.v5.VehicleAxle
+	(*Trailer)(nil),                               // 11: wayplatform.connect.rfms.v5.Trailer
 }
 var file_wayplatform_connect_rfms_v5_snapshot_data_proto_depIdxs = []int32{
-	2,  // 0: wayplatform.rfms.v5.SnapshotData.gnss_position:type_name -> wayplatform.rfms.v5.GnssPosition
-	3,  // 1: wayplatform.rfms.v5.SnapshotData.ignition_state:type_name -> wayplatform.rfms.v5.IgnitionState
-	4,  // 2: wayplatform.rfms.v5.SnapshotData.fuel_type:type_name -> wayplatform.rfms.v5.FuelType
-	5,  // 3: wayplatform.rfms.v5.SnapshotData.driver1_working_state:type_name -> wayplatform.rfms.v5.DriverWorkingState
-	6,  // 4: wayplatform.rfms.v5.SnapshotData.driver2_id:type_name -> wayplatform.rfms.v5.DriverIdentification
-	5,  // 5: wayplatform.rfms.v5.SnapshotData.driver2_working_state:type_name -> wayplatform.rfms.v5.DriverWorkingState
-	7,  // 6: wayplatform.rfms.v5.SnapshotData.battery_pack_charging_state:type_name -> wayplatform.rfms.v5.ChargingState
-	8,  // 7: wayplatform.rfms.v5.SnapshotData.battery_pack_charging_connection_state:type_name -> wayplatform.rfms.v5.ChargingConnectionState
-	9,  // 8: wayplatform.rfms.v5.SnapshotData.battery_pack_charging_device:type_name -> wayplatform.rfms.v5.ChargingDevice
-	1,  // 9: wayplatform.rfms.v5.SnapshotData.estimated_distance_to_empty:type_name -> wayplatform.rfms.v5.SnapshotData.EstimatedDistanceToEmpty
-	10, // 10: wayplatform.rfms.v5.SnapshotData.vehicle_axles:type_name -> wayplatform.rfms.v5.VehicleAxle
-	11, // 11: wayplatform.rfms.v5.SnapshotData.trailers:type_name -> wayplatform.rfms.v5.Trailer
+	2,  // 0: wayplatform.connect.rfms.v5.SnapshotData.gnss_position:type_name -> wayplatform.connect.rfms.v5.GnssPosition
+	3,  // 1: wayplatform.connect.rfms.v5.SnapshotData.ignition_state:type_name -> wayplatform.connect.rfms.v5.IgnitionState
+	4,  // 2: wayplatform.connect.rfms.v5.SnapshotData.fuel_type:type_name -> wayplatform.connect.rfms.v5.FuelType
+	5,  // 3: wayplatform.connect.rfms.v5.SnapshotData.driver1_working_state:type_name -> wayplatform.connect.rfms.v5.DriverWorkingState
+	6,  // 4: wayplatform.connect.rfms.v5.SnapshotData.driver2_id:type_name -> wayplatform.connect.rfms.v5.DriverIdentification
+	5,  // 5: wayplatform.connect.rfms.v5.SnapshotData.driver2_working_state:type_name -> wayplatform.connect.rfms.v5.DriverWorkingState
+	7,  // 6: wayplatform.connect.rfms.v5.SnapshotData.battery_pack_charging_state:type_name -> wayplatform.connect.rfms.v5.ChargingState
+	8,  // 7: wayplatform.connect.rfms.v5.SnapshotData.battery_pack_charging_connection_state:type_name -> wayplatform.connect.rfms.v5.ChargingConnectionState
+	9,  // 8: wayplatform.connect.rfms.v5.SnapshotData.battery_pack_charging_device:type_name -> wayplatform.connect.rfms.v5.ChargingDevice
+	1,  // 9: wayplatform.connect.rfms.v5.SnapshotData.estimated_distance_to_empty:type_name -> wayplatform.connect.rfms.v5.SnapshotData.EstimatedDistanceToEmpty
+	10, // 10: wayplatform.connect.rfms.v5.SnapshotData.vehicle_axles:type_name -> wayplatform.connect.rfms.v5.VehicleAxle
+	11, // 11: wayplatform.connect.rfms.v5.SnapshotData.trailers:type_name -> wayplatform.connect.rfms.v5.Trailer
 	12, // [12:12] is the sub-list for method output_type
 	12, // [12:12] is the sub-list for method input_type
 	12, // [12:12] is the sub-list for extension type_name

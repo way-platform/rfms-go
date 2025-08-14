@@ -103,7 +103,7 @@ var File_wayplatform_connect_rfms_v5_tachograph_type_proto protoreflect.FileDesc
 
 const file_wayplatform_connect_rfms_v5_tachograph_type_proto_rawDesc = "" +
 	"\n" +
-	"1wayplatform/connect/rfms/v5/tachograph_type.proto\x12\x13wayplatform.rfms.v5*\xbc\x01\n" +
+	"1wayplatform/connect/rfms/v5/tachograph_type.proto\x12\x1bwayplatform.connect.rfms.v5*\xbc\x01\n" +
 	"\x0eTachographType\x12\x1f\n" +
 	"\x1bTACHOGRAPH_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n" +
 	"\x17TACHOGRAPH_TYPE_UNKNOWN\x10\x01\x12\b\n" +
@@ -114,12 +114,12 @@ const file_wayplatform_connect_rfms_v5_tachograph_type_proto_rawDesc = "" +
 	"\x03TSU\x10\x06\x12\b\n" +
 	"\x04NONE\x10\a\x12\x14\n" +
 	"\x10STONERIDGE_SMART\x10\b\x12\x15\n" +
-	"\x11STONERIDGE_SMART2\x10\tB\xed\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x13TachographTypeProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\x11STONERIDGE_SMART2\x10\tB\x96\x02\n" +
+	"\x1fcom.wayplatform.connect.rfms.v5B\x13TachographTypeProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WCR\xaa\x02\x1bWayplatform.Connect.Rfms.V5\xca\x02\x1bWayplatform\\Connect\\Rfms\\V5\xe2\x02'Wayplatform\\Connect\\Rfms\\V5\\GPBMetadata\xea\x02\x1eWayplatform::Connect::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_connect_rfms_v5_tachograph_type_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_wayplatform_connect_rfms_v5_tachograph_type_proto_goTypes = []any{
-	(TachographType)(0), // 0: wayplatform.rfms.v5.TachographType
+	(TachographType)(0), // 0: wayplatform.connect.rfms.v5.TachographType
 }
 var file_wayplatform_connect_rfms_v5_tachograph_type_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

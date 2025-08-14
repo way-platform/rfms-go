@@ -5,7 +5,7 @@ message Vehicle {
   optional string registration_number = 3;
   optional int32 brand = 4;
   optional string unknown_brand = 5;
-  optional Inline_wayplatform_rfms_v5_Date production_date = 6;
+  optional Inline_wayplatform_connect_rfms_v5_Date production_date = 6;
   optional int32 type = 7;
   optional string unknown_type = 8;
   optional string model = 9;
@@ -28,7 +28,7 @@ message Vehicle {
   repeated int32 door_configuration = 26;
   optional bool has_ramp_or_lift = 27;
   repeated string authorized_paths = 28;
-  message Inline_wayplatform_rfms_v5_Date {
+  message Inline_wayplatform_connect_rfms_v5_Date {
     optional int32 day = 1;
     optional int32 month = 2;
     optional int32 year = 3;

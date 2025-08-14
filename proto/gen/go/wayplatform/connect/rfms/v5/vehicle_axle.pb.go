@@ -259,23 +259,23 @@ var File_wayplatform_connect_rfms_v5_vehicle_axle_proto protoreflect.FileDescrip
 
 const file_wayplatform_connect_rfms_v5_vehicle_axle_proto_rawDesc = "" +
 	"\n" +
-	".wayplatform/connect/rfms/v5/vehicle_axle.proto\x12\x13wayplatform.rfms.v5\"\xc6\x01\n" +
+	".wayplatform/connect/rfms/v5/vehicle_axle.proto\x12\x1bwayplatform.connect.rfms.v5\"\xce\x01\n" +
 	"\vVehicleAxle\x12\x1a\n" +
 	"\bposition\x18\x01 \x01(\x05R\bposition\x12\x17\n" +
-	"\aload_kg\x18\x02 \x01(\x01R\x06loadKg\x12;\n" +
-	"\x05tires\x18\x03 \x03(\v2%.wayplatform.rfms.v5.VehicleAxle.TireR\x05tires\x1aE\n" +
+	"\aload_kg\x18\x02 \x01(\x01R\x06loadKg\x12C\n" +
+	"\x05tires\x18\x03 \x03(\v2-.wayplatform.connect.rfms.v5.VehicleAxle.TireR\x05tires\x1aE\n" +
 	"\x04Tire\x12\x1a\n" +
 	"\bposition\x18\x01 \x01(\x05R\bposition\x12!\n" +
-	"\fpressure_kpa\x18\x02 \x01(\x01R\vpressureKpaB\xea\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x10VehicleAxleProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\fpressure_kpa\x18\x02 \x01(\x01R\vpressureKpaB\x93\x02\n" +
+	"\x1fcom.wayplatform.connect.rfms.v5B\x10VehicleAxleProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WCR\xaa\x02\x1bWayplatform.Connect.Rfms.V5\xca\x02\x1bWayplatform\\Connect\\Rfms\\V5\xe2\x02'Wayplatform\\Connect\\Rfms\\V5\\GPBMetadata\xea\x02\x1eWayplatform::Connect::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_connect_rfms_v5_vehicle_axle_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_wayplatform_connect_rfms_v5_vehicle_axle_proto_goTypes = []any{
-	(*VehicleAxle)(nil),      // 0: wayplatform.rfms.v5.VehicleAxle
-	(*VehicleAxle_Tire)(nil), // 1: wayplatform.rfms.v5.VehicleAxle.Tire
+	(*VehicleAxle)(nil),      // 0: wayplatform.connect.rfms.v5.VehicleAxle
+	(*VehicleAxle_Tire)(nil), // 1: wayplatform.connect.rfms.v5.VehicleAxle.Tire
 }
 var file_wayplatform_connect_rfms_v5_vehicle_axle_proto_depIdxs = []int32{
-	1, // 0: wayplatform.rfms.v5.VehicleAxle.tires:type_name -> wayplatform.rfms.v5.VehicleAxle.Tire
+	1, // 0: wayplatform.connect.rfms.v5.VehicleAxle.tires:type_name -> wayplatform.connect.rfms.v5.VehicleAxle.Tire
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name

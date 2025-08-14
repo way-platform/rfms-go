@@ -143,7 +143,7 @@ var File_wayplatform_connect_rfms_v5_emission_level_proto protoreflect.FileDescr
 
 const file_wayplatform_connect_rfms_v5_emission_level_proto_rawDesc = "" +
 	"\n" +
-	"0wayplatform/connect/rfms/v5/emission_level.proto\x12\x13wayplatform.rfms.v5*\xce\x03\n" +
+	"0wayplatform/connect/rfms/v5/emission_level.proto\x12\x1bwayplatform.connect.rfms.v5*\xce\x03\n" +
 	"\rEmissionLevel\x12\x1e\n" +
 	"\x1aEMISSION_LEVEL_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16EMISSION_LEVEL_UNKNOWN\x10\x01\x12\f\n" +
@@ -173,12 +173,12 @@ const file_wayplatform_connect_rfms_v5_emission_level_proto_rawDesc = "" +
 	"\vPROCONVE_P5\x10\x15\x12\x0f\n" +
 	"\vPROCONVE_P6\x10\x16\x12\x0f\n" +
 	"\vPROCONVE_P7\x10\x17\x12\x11\n" +
-	"\rPROCONVE_MARI\x10\x18B\xec\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x12EmissionLevelProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\rPROCONVE_MARI\x10\x18B\x95\x02\n" +
+	"\x1fcom.wayplatform.connect.rfms.v5B\x12EmissionLevelProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WCR\xaa\x02\x1bWayplatform.Connect.Rfms.V5\xca\x02\x1bWayplatform\\Connect\\Rfms\\V5\xe2\x02'Wayplatform\\Connect\\Rfms\\V5\\GPBMetadata\xea\x02\x1eWayplatform::Connect::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_connect_rfms_v5_emission_level_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_wayplatform_connect_rfms_v5_emission_level_proto_goTypes = []any{
-	(EmissionLevel)(0), // 0: wayplatform.rfms.v5.EmissionLevel
+	(EmissionLevel)(0), // 0: wayplatform.connect.rfms.v5.EmissionLevel
 }
 var file_wayplatform_connect_rfms_v5_emission_level_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

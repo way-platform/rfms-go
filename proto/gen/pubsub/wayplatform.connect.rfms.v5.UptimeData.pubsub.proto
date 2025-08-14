@@ -1,6 +1,6 @@
 syntax = "proto2";
 message UptimeData {
-  repeated Inline_wayplatform_rfms_v5_TellTale tell_tales = 1;
+  repeated Inline_wayplatform_connect_rfms_v5_TellTale tell_tales = 1;
   optional double service_distance_m = 2;
   optional double engine_coolant_temperature_c = 3;
   optional double hvess_outlet_coolant_temperature_c = 4;
@@ -26,7 +26,7 @@ message UptimeData {
       CHARGING = 5;
     }
   }
-  message Inline_wayplatform_rfms_v5_TellTale {
+  message Inline_wayplatform_connect_rfms_v5_TellTale {
     optional int32 type = 1;
     optional string unknown_type = 2;
     optional string oem_specific_type = 3;

@@ -107,7 +107,7 @@ type Trailer struct {
 	xxx_hidden_IdentificationData *string                `protobuf:"bytes,2,opt,name=identification_data,json=identificationData"`
 	xxx_hidden_Vin                *string                `protobuf:"bytes,3,opt,name=vin"`
 	xxx_hidden_CustomerName       *string                `protobuf:"bytes,4,opt,name=customer_name,json=customerName"`
-	xxx_hidden_Type               Trailer_Type           `protobuf:"varint,5,opt,name=type,enum=wayplatform.rfms.v5.Trailer_Type"`
+	xxx_hidden_Type               Trailer_Type           `protobuf:"varint,5,opt,name=type,enum=wayplatform.connect.rfms.v5.Trailer_Type"`
 	xxx_hidden_AxleLoadSumKg      float64                `protobuf:"fixed64,6,opt,name=axle_load_sum_kg,json=axleLoadSumKg"`
 	xxx_hidden_Axles              *[]*Trailer_Axle       `protobuf:"bytes,7,rep,name=axles"`
 	XXX_raceDetectHookData        protoimpl.RaceDetectHookData
@@ -480,15 +480,15 @@ var File_wayplatform_connect_rfms_v5_trailer_proto protoreflect.FileDescriptor
 
 const file_wayplatform_connect_rfms_v5_trailer_proto_rawDesc = "" +
 	"\n" +
-	")wayplatform/connect/rfms/v5/trailer.proto\x12\x13wayplatform.rfms.v5\"\xde\x04\n" +
+	")wayplatform/connect/rfms/v5/trailer.proto\x12\x1bwayplatform.connect.rfms.v5\"\xee\x04\n" +
 	"\aTrailer\x12\x16\n" +
 	"\x06number\x18\x01 \x01(\x05R\x06number\x12/\n" +
 	"\x13identification_data\x18\x02 \x01(\tR\x12identificationData\x12\x10\n" +
 	"\x03vin\x18\x03 \x01(\tR\x03vin\x12#\n" +
-	"\rcustomer_name\x18\x04 \x01(\tR\fcustomerName\x125\n" +
-	"\x04type\x18\x05 \x01(\x0e2!.wayplatform.rfms.v5.Trailer.TypeR\x04type\x12'\n" +
-	"\x10axle_load_sum_kg\x18\x06 \x01(\x01R\raxleLoadSumKg\x127\n" +
-	"\x05axles\x18\a \x03(\v2!.wayplatform.rfms.v5.Trailer.AxleR\x05axles\x1a;\n" +
+	"\rcustomer_name\x18\x04 \x01(\tR\fcustomerName\x12=\n" +
+	"\x04type\x18\x05 \x01(\x0e2).wayplatform.connect.rfms.v5.Trailer.TypeR\x04type\x12'\n" +
+	"\x10axle_load_sum_kg\x18\x06 \x01(\x01R\raxleLoadSumKg\x12?\n" +
+	"\x05axles\x18\a \x03(\v2).wayplatform.connect.rfms.v5.Trailer.AxleR\x05axles\x1a;\n" +
 	"\x04Axle\x12\x1a\n" +
 	"\bposition\x18\x01 \x01(\x05R\bposition\x12\x17\n" +
 	"\aload_kg\x18\x02 \x01(\x01R\x06loadKg\"\xfc\x01\n" +
@@ -504,19 +504,19 @@ const file_wayplatform_connect_rfms_v5_trailer_proto_rawDesc = "" +
 	"\x13TOWING_SEMI_TRAILER\x10\b\x12\x1e\n" +
 	"\x1aTOWING_CENTRE_AXLE_TRAILER\x10\t\x12\x17\n" +
 	"\x13TOWING_FULL_TRAILER\x10\n" +
-	"B\xe6\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\fTrailerProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"B\x8f\x02\n" +
+	"\x1fcom.wayplatform.connect.rfms.v5B\fTrailerProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WCR\xaa\x02\x1bWayplatform.Connect.Rfms.V5\xca\x02\x1bWayplatform\\Connect\\Rfms\\V5\xe2\x02'Wayplatform\\Connect\\Rfms\\V5\\GPBMetadata\xea\x02\x1eWayplatform::Connect::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_connect_rfms_v5_trailer_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_wayplatform_connect_rfms_v5_trailer_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_wayplatform_connect_rfms_v5_trailer_proto_goTypes = []any{
-	(Trailer_Type)(0),    // 0: wayplatform.rfms.v5.Trailer.Type
-	(*Trailer)(nil),      // 1: wayplatform.rfms.v5.Trailer
-	(*Trailer_Axle)(nil), // 2: wayplatform.rfms.v5.Trailer.Axle
+	(Trailer_Type)(0),    // 0: wayplatform.connect.rfms.v5.Trailer.Type
+	(*Trailer)(nil),      // 1: wayplatform.connect.rfms.v5.Trailer
+	(*Trailer_Axle)(nil), // 2: wayplatform.connect.rfms.v5.Trailer.Axle
 }
 var file_wayplatform_connect_rfms_v5_trailer_proto_depIdxs = []int32{
-	0, // 0: wayplatform.rfms.v5.Trailer.type:type_name -> wayplatform.rfms.v5.Trailer.Type
-	2, // 1: wayplatform.rfms.v5.Trailer.axles:type_name -> wayplatform.rfms.v5.Trailer.Axle
+	0, // 0: wayplatform.connect.rfms.v5.Trailer.type:type_name -> wayplatform.connect.rfms.v5.Trailer.Type
+	2, // 1: wayplatform.connect.rfms.v5.Trailer.axles:type_name -> wayplatform.connect.rfms.v5.Trailer.Axle
 	2, // [2:2] is the sub-list for method output_type
 	2, // [2:2] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name

@@ -260,7 +260,7 @@ var File_wayplatform_connect_rfms_v5_gnss_position_proto protoreflect.FileDescri
 
 const file_wayplatform_connect_rfms_v5_gnss_position_proto_rawDesc = "" +
 	"\n" +
-	"/wayplatform/connect/rfms/v5/gnss_position.proto\x12\x13wayplatform.rfms.v5\"\xb9\x01\n" +
+	"/wayplatform/connect/rfms/v5/gnss_position.proto\x12\x1bwayplatform.connect.rfms.v5\"\xb9\x01\n" +
 	"\fGnssPosition\x12\x12\n" +
 	"\x04time\x18\x01 \x01(\tR\x04time\x12\x1a\n" +
 	"\blatitude\x18\x02 \x01(\x01R\blatitude\x12\x1c\n" +
@@ -269,12 +269,12 @@ const file_wayplatform_connect_rfms_v5_gnss_position_proto_rawDesc = "" +
 	"headingDeg\x12\x1d\n" +
 	"\n" +
 	"altitude_m\x18\x05 \x01(\x01R\taltitudeM\x12\x1b\n" +
-	"\tspeed_kmh\x18\x06 \x01(\x01R\bspeedKmhB\xeb\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x11GnssPositionProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\tspeed_kmh\x18\x06 \x01(\x01R\bspeedKmhB\x94\x02\n" +
+	"\x1fcom.wayplatform.connect.rfms.v5B\x11GnssPositionProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WCR\xaa\x02\x1bWayplatform.Connect.Rfms.V5\xca\x02\x1bWayplatform\\Connect\\Rfms\\V5\xe2\x02'Wayplatform\\Connect\\Rfms\\V5\\GPBMetadata\xea\x02\x1eWayplatform::Connect::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_connect_rfms_v5_gnss_position_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_wayplatform_connect_rfms_v5_gnss_position_proto_goTypes = []any{
-	(*GnssPosition)(nil), // 0: wayplatform.rfms.v5.GnssPosition
+	(*GnssPosition)(nil), // 0: wayplatform.connect.rfms.v5.GnssPosition
 }
 var file_wayplatform_connect_rfms_v5_gnss_position_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

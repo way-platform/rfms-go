@@ -92,7 +92,7 @@ var File_wayplatform_connect_rfms_v5_driver_working_state_proto protoreflect.Fil
 
 const file_wayplatform_connect_rfms_v5_driver_working_state_proto_rawDesc = "" +
 	"\n" +
-	"6wayplatform/connect/rfms/v5/driver_working_state.proto\x12\x13wayplatform.rfms.v5*\xd2\x01\n" +
+	"6wayplatform/connect/rfms/v5/driver_working_state.proto\x12\x1bwayplatform.connect.rfms.v5*\xd2\x01\n" +
 	"\x12DriverWorkingState\x12$\n" +
 	" DRIVER_WORKING_STATE_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cDRIVER_WORKING_STATE_UNKNOWN\x10\x01\x12&\n" +
@@ -101,12 +101,12 @@ const file_wayplatform_connect_rfms_v5_driver_working_state_proto_rawDesc = "" +
 	"\x04REST\x10\x04\x12\r\n" +
 	"\tAVAILABLE\x10\x05\x12\b\n" +
 	"\x04WORK\x10\x06\x12\t\n" +
-	"\x05DRIVE\x10\aB\xf1\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x17DriverWorkingStateProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\x05DRIVE\x10\aB\x9a\x02\n" +
+	"\x1fcom.wayplatform.connect.rfms.v5B\x17DriverWorkingStateProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WCR\xaa\x02\x1bWayplatform.Connect.Rfms.V5\xca\x02\x1bWayplatform\\Connect\\Rfms\\V5\xe2\x02'Wayplatform\\Connect\\Rfms\\V5\\GPBMetadata\xea\x02\x1eWayplatform::Connect::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_connect_rfms_v5_driver_working_state_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_wayplatform_connect_rfms_v5_driver_working_state_proto_goTypes = []any{
-	(DriverWorkingState)(0), // 0: wayplatform.rfms.v5.DriverWorkingState
+	(DriverWorkingState)(0), // 0: wayplatform.connect.rfms.v5.DriverWorkingState
 }
 var file_wayplatform_connect_rfms_v5_driver_working_state_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

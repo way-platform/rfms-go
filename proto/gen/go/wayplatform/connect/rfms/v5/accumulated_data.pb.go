@@ -2068,7 +2068,7 @@ var File_wayplatform_connect_rfms_v5_accumulated_data_proto protoreflect.FileDes
 
 const file_wayplatform_connect_rfms_v5_accumulated_data_proto_rawDesc = "" +
 	"\n" +
-	"2wayplatform/connect/rfms/v5/accumulated_data.proto\x12\x13wayplatform.rfms.v5\"\xe8$\n" +
+	"2wayplatform/connect/rfms/v5/accumulated_data.proto\x12\x1bwayplatform.connect.rfms.v5\"\xf2%\n" +
 	"\x0fAccumulatedData\x12P\n" +
 	"&wheel_based_speed_over_zero_duration_s\x18\x01 \x01(\x01R wheelBasedSpeedOverZeroDurationS\x12J\n" +
 	"#wheel_based_speed_over_zero_fuel_ml\x18\x02 \x01(\x01R\x1dwheelBasedSpeedOverZeroFuelMl\x12Y\n" +
@@ -2085,30 +2085,30 @@ const file_wayplatform_connect_rfms_v5_accumulated_data_proto_rawDesc = "" +
 	")cruise_control_active_fuel_consumption_ml\x18\f \x01(\x01R$cruiseControlActiveFuelConsumptionMl\x12f\n" +
 	"1cruise_control_active_fuel_consumption_gaseous_kg\x18\r \x01(\x01R+cruiseControlActiveFuelConsumptionGaseousKg\x12l\n" +
 	"4cruise_control_active_electric_energy_consumption_wh\x18\x0e \x01(\x01R.cruiseControlActiveElectricEnergyConsumptionWh\x12J\n" +
-	"\"aux_electric_energy_consumption_wh\x18\x0f \x01(\x01R\x1eauxElectricEnergyConsumptionWh\x12Y\n" +
-	"\x10pto_active_class\x18\x10 \x03(\v2/.wayplatform.rfms.v5.AccumulatedData.LabelClassR\x0eptoActiveClass\x12G\n" +
+	"\"aux_electric_energy_consumption_wh\x18\x0f \x01(\x01R\x1eauxElectricEnergyConsumptionWh\x12a\n" +
+	"\x10pto_active_class\x18\x10 \x03(\v27.wayplatform.connect.rfms.v5.AccumulatedData.LabelClassR\x0eptoActiveClass\x12G\n" +
 	"!brake_pedal_speed_over_zero_count\x18\x11 \x01(\x05R\x1cbrakePedalSpeedOverZeroCount\x12P\n" +
-	"&brake_pedal_speed_over_zero_distance_m\x18\x12 \x01(\x01R brakePedalSpeedOverZeroDistanceM\x12\x8a\x01\n" +
-	")acceleration_pedal_position_class_percent\x18\x13 \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR%accelerationPedalPositionClassPercent\x12|\n" +
-	"\"brake_pedal_position_class_percent\x18\x14 \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR\x1ebrakePedalPositionClassPercent\x12h\n" +
-	"\x17acceleration_class_mps2\x18\x15 \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR\x15accelerationClassMps2\x12q\n" +
-	"\x1chigh_acceleration_class_mps2\x18\x16 \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR\x19highAccelerationClassMps2\x12s\n" +
-	"\x1dretarder_torque_class_percent\x18\x17 \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR\x1aretarderTorqueClassPercent\x12p\n" +
-	"\x1cdriving_without_torque_class\x18\x18 \x03(\v2/.wayplatform.rfms.v5.AccumulatedData.LabelClassR\x19drivingWithoutTorqueClass\x12y\n" +
-	"\x1bengine_torque_class_percent\x18\x19 \x03(\v2:.wayplatform.rfms.v5.AccumulatedData.FromToClassCombustionR\x18engineTorqueClassPercent\x12\x88\x01\n" +
-	"#electric_motor_torque_class_percent\x18\x1a \x03(\v2:.wayplatform.rfms.v5.AccumulatedData.FromToClassElectricalR\x1felectricMotorTorqueClassPercent\x12\x98\x01\n" +
-	",engine_torque_at_current_speed_class_percent\x18\x1b \x03(\v2:.wayplatform.rfms.v5.AccumulatedData.FromToClassCombustionR&engineTorqueAtCurrentSpeedClassPercent\x12\xa7\x01\n" +
-	"4electric_motor_torque_at_current_speed_class_percent\x18\x1c \x03(\v2:.wayplatform.rfms.v5.AccumulatedData.FromToClassElectricalR-electricMotorTorqueAtCurrentSpeedClassPercent\x12g\n" +
-	"\x17vehicle_speed_class_kmh\x18\x1d \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR\x14vehicleSpeedClassKmh\x12e\n" +
-	"\x16engine_speed_class_rpm\x18\x1e \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR\x13engineSpeedClassRpm\x12\x80\x01\n" +
-	"$acceleration_during_brake_class_mps2\x18\x1f \x03(\v20.wayplatform.rfms.v5.AccumulatedData.FromToClassR accelerationDuringBrakeClassMps2\x12_\n" +
-	"\x13selected_gear_class\x18  \x03(\v2/.wayplatform.rfms.v5.AccumulatedData.LabelClassR\x11selectedGearClass\x12]\n" +
-	"\x12current_gear_class\x18! \x03(\v2/.wayplatform.rfms.v5.AccumulatedData.LabelClassR\x10currentGearClass\x12'\n" +
+	"&brake_pedal_speed_over_zero_distance_m\x18\x12 \x01(\x01R brakePedalSpeedOverZeroDistanceM\x12\x92\x01\n" +
+	")acceleration_pedal_position_class_percent\x18\x13 \x03(\v28.wayplatform.connect.rfms.v5.AccumulatedData.FromToClassR%accelerationPedalPositionClassPercent\x12\x84\x01\n" +
+	"\"brake_pedal_position_class_percent\x18\x14 \x03(\v28.wayplatform.connect.rfms.v5.AccumulatedData.FromToClassR\x1ebrakePedalPositionClassPercent\x12p\n" +
+	"\x17acceleration_class_mps2\x18\x15 \x03(\v28.wayplatform.connect.rfms.v5.AccumulatedData.FromToClassR\x15accelerationClassMps2\x12y\n" +
+	"\x1chigh_acceleration_class_mps2\x18\x16 \x03(\v28.wayplatform.connect.rfms.v5.AccumulatedData.FromToClassR\x19highAccelerationClassMps2\x12{\n" +
+	"\x1dretarder_torque_class_percent\x18\x17 \x03(\v28.wayplatform.connect.rfms.v5.AccumulatedData.FromToClassR\x1aretarderTorqueClassPercent\x12x\n" +
+	"\x1cdriving_without_torque_class\x18\x18 \x03(\v27.wayplatform.connect.rfms.v5.AccumulatedData.LabelClassR\x19drivingWithoutTorqueClass\x12\x81\x01\n" +
+	"\x1bengine_torque_class_percent\x18\x19 \x03(\v2B.wayplatform.connect.rfms.v5.AccumulatedData.FromToClassCombustionR\x18engineTorqueClassPercent\x12\x90\x01\n" +
+	"#electric_motor_torque_class_percent\x18\x1a \x03(\v2B.wayplatform.connect.rfms.v5.AccumulatedData.FromToClassElectricalR\x1felectricMotorTorqueClassPercent\x12\xa0\x01\n" +
+	",engine_torque_at_current_speed_class_percent\x18\x1b \x03(\v2B.wayplatform.connect.rfms.v5.AccumulatedData.FromToClassCombustionR&engineTorqueAtCurrentSpeedClassPercent\x12\xaf\x01\n" +
+	"4electric_motor_torque_at_current_speed_class_percent\x18\x1c \x03(\v2B.wayplatform.connect.rfms.v5.AccumulatedData.FromToClassElectricalR-electricMotorTorqueAtCurrentSpeedClassPercent\x12o\n" +
+	"\x17vehicle_speed_class_kmh\x18\x1d \x03(\v28.wayplatform.connect.rfms.v5.AccumulatedData.FromToClassR\x14vehicleSpeedClassKmh\x12m\n" +
+	"\x16engine_speed_class_rpm\x18\x1e \x03(\v28.wayplatform.connect.rfms.v5.AccumulatedData.FromToClassR\x13engineSpeedClassRpm\x12\x88\x01\n" +
+	"$acceleration_during_brake_class_mps2\x18\x1f \x03(\v28.wayplatform.connect.rfms.v5.AccumulatedData.FromToClassR accelerationDuringBrakeClassMps2\x12g\n" +
+	"\x13selected_gear_class\x18  \x03(\v27.wayplatform.connect.rfms.v5.AccumulatedData.LabelClassR\x11selectedGearClass\x12e\n" +
+	"\x12current_gear_class\x18! \x03(\v27.wayplatform.connect.rfms.v5.AccumulatedData.LabelClassR\x10currentGearClass\x12'\n" +
 	"\x0fchairlift_count\x18\" \x01(\x05R\x0echairliftCount\x12,\n" +
 	"\x12stop_request_count\x18# \x01(\x05R\x10stopRequestCount\x12%\n" +
 	"\x0ekneeling_count\x18$ \x01(\x05R\rkneelingCount\x12,\n" +
-	"\x12pram_request_count\x18% \x01(\x05R\x10pramRequestCount\x12\x8a\x01\n" +
-	"$electric_power_recuperation_class_kw\x18& \x03(\v2:.wayplatform.rfms.v5.AccumulatedData.FromToClassElectricalR electricPowerRecuperationClassKw\x1a\x94\x02\n" +
+	"\x12pram_request_count\x18% \x01(\x05R\x10pramRequestCount\x12\x92\x01\n" +
+	"$electric_power_recuperation_class_kw\x18& \x03(\v2B.wayplatform.connect.rfms.v5.AccumulatedData.FromToClassElectricalR electricPowerRecuperationClassKw\x1a\x94\x02\n" +
 	"\n" +
 	"LabelClass\x12\x14\n" +
 	"\x05label\x18\x01 \x01(\tR\x05label\x12\x1d\n" +
@@ -2145,35 +2145,35 @@ const file_wayplatform_connect_rfms_v5_accumulated_data_proto_rawDesc = "" +
 	"duration_s\x18\x03 \x01(\x01R\tdurationS\x12\x1d\n" +
 	"\n" +
 	"distance_m\x18\x04 \x01(\x01R\tdistanceM\x12C\n" +
-	"\x1eelectric_energy_consumption_wh\x18\x05 \x01(\x01R\x1belectricEnergyConsumptionWhB\xee\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x14AccumulatedDataProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\x1eelectric_energy_consumption_wh\x18\x05 \x01(\x01R\x1belectricEnergyConsumptionWhB\x97\x02\n" +
+	"\x1fcom.wayplatform.connect.rfms.v5B\x14AccumulatedDataProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WCR\xaa\x02\x1bWayplatform.Connect.Rfms.V5\xca\x02\x1bWayplatform\\Connect\\Rfms\\V5\xe2\x02'Wayplatform\\Connect\\Rfms\\V5\\GPBMetadata\xea\x02\x1eWayplatform::Connect::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_connect_rfms_v5_accumulated_data_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_wayplatform_connect_rfms_v5_accumulated_data_proto_goTypes = []any{
-	(*AccumulatedData)(nil),                       // 0: wayplatform.rfms.v5.AccumulatedData
-	(*AccumulatedData_LabelClass)(nil),            // 1: wayplatform.rfms.v5.AccumulatedData.LabelClass
-	(*AccumulatedData_FromToClass)(nil),           // 2: wayplatform.rfms.v5.AccumulatedData.FromToClass
-	(*AccumulatedData_FromToClassCombustion)(nil), // 3: wayplatform.rfms.v5.AccumulatedData.FromToClassCombustion
-	(*AccumulatedData_FromToClassElectrical)(nil), // 4: wayplatform.rfms.v5.AccumulatedData.FromToClassElectrical
+	(*AccumulatedData)(nil),                       // 0: wayplatform.connect.rfms.v5.AccumulatedData
+	(*AccumulatedData_LabelClass)(nil),            // 1: wayplatform.connect.rfms.v5.AccumulatedData.LabelClass
+	(*AccumulatedData_FromToClass)(nil),           // 2: wayplatform.connect.rfms.v5.AccumulatedData.FromToClass
+	(*AccumulatedData_FromToClassCombustion)(nil), // 3: wayplatform.connect.rfms.v5.AccumulatedData.FromToClassCombustion
+	(*AccumulatedData_FromToClassElectrical)(nil), // 4: wayplatform.connect.rfms.v5.AccumulatedData.FromToClassElectrical
 }
 var file_wayplatform_connect_rfms_v5_accumulated_data_proto_depIdxs = []int32{
-	1,  // 0: wayplatform.rfms.v5.AccumulatedData.pto_active_class:type_name -> wayplatform.rfms.v5.AccumulatedData.LabelClass
-	2,  // 1: wayplatform.rfms.v5.AccumulatedData.acceleration_pedal_position_class_percent:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
-	2,  // 2: wayplatform.rfms.v5.AccumulatedData.brake_pedal_position_class_percent:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
-	2,  // 3: wayplatform.rfms.v5.AccumulatedData.acceleration_class_mps2:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
-	2,  // 4: wayplatform.rfms.v5.AccumulatedData.high_acceleration_class_mps2:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
-	2,  // 5: wayplatform.rfms.v5.AccumulatedData.retarder_torque_class_percent:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
-	1,  // 6: wayplatform.rfms.v5.AccumulatedData.driving_without_torque_class:type_name -> wayplatform.rfms.v5.AccumulatedData.LabelClass
-	3,  // 7: wayplatform.rfms.v5.AccumulatedData.engine_torque_class_percent:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClassCombustion
-	4,  // 8: wayplatform.rfms.v5.AccumulatedData.electric_motor_torque_class_percent:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClassElectrical
-	3,  // 9: wayplatform.rfms.v5.AccumulatedData.engine_torque_at_current_speed_class_percent:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClassCombustion
-	4,  // 10: wayplatform.rfms.v5.AccumulatedData.electric_motor_torque_at_current_speed_class_percent:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClassElectrical
-	2,  // 11: wayplatform.rfms.v5.AccumulatedData.vehicle_speed_class_kmh:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
-	2,  // 12: wayplatform.rfms.v5.AccumulatedData.engine_speed_class_rpm:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
-	2,  // 13: wayplatform.rfms.v5.AccumulatedData.acceleration_during_brake_class_mps2:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClass
-	1,  // 14: wayplatform.rfms.v5.AccumulatedData.selected_gear_class:type_name -> wayplatform.rfms.v5.AccumulatedData.LabelClass
-	1,  // 15: wayplatform.rfms.v5.AccumulatedData.current_gear_class:type_name -> wayplatform.rfms.v5.AccumulatedData.LabelClass
-	4,  // 16: wayplatform.rfms.v5.AccumulatedData.electric_power_recuperation_class_kw:type_name -> wayplatform.rfms.v5.AccumulatedData.FromToClassElectrical
+	1,  // 0: wayplatform.connect.rfms.v5.AccumulatedData.pto_active_class:type_name -> wayplatform.connect.rfms.v5.AccumulatedData.LabelClass
+	2,  // 1: wayplatform.connect.rfms.v5.AccumulatedData.acceleration_pedal_position_class_percent:type_name -> wayplatform.connect.rfms.v5.AccumulatedData.FromToClass
+	2,  // 2: wayplatform.connect.rfms.v5.AccumulatedData.brake_pedal_position_class_percent:type_name -> wayplatform.connect.rfms.v5.AccumulatedData.FromToClass
+	2,  // 3: wayplatform.connect.rfms.v5.AccumulatedData.acceleration_class_mps2:type_name -> wayplatform.connect.rfms.v5.AccumulatedData.FromToClass
+	2,  // 4: wayplatform.connect.rfms.v5.AccumulatedData.high_acceleration_class_mps2:type_name -> wayplatform.connect.rfms.v5.AccumulatedData.FromToClass
+	2,  // 5: wayplatform.connect.rfms.v5.AccumulatedData.retarder_torque_class_percent:type_name -> wayplatform.connect.rfms.v5.AccumulatedData.FromToClass
+	1,  // 6: wayplatform.connect.rfms.v5.AccumulatedData.driving_without_torque_class:type_name -> wayplatform.connect.rfms.v5.AccumulatedData.LabelClass
+	3,  // 7: wayplatform.connect.rfms.v5.AccumulatedData.engine_torque_class_percent:type_name -> wayplatform.connect.rfms.v5.AccumulatedData.FromToClassCombustion
+	4,  // 8: wayplatform.connect.rfms.v5.AccumulatedData.electric_motor_torque_class_percent:type_name -> wayplatform.connect.rfms.v5.AccumulatedData.FromToClassElectrical
+	3,  // 9: wayplatform.connect.rfms.v5.AccumulatedData.engine_torque_at_current_speed_class_percent:type_name -> wayplatform.connect.rfms.v5.AccumulatedData.FromToClassCombustion
+	4,  // 10: wayplatform.connect.rfms.v5.AccumulatedData.electric_motor_torque_at_current_speed_class_percent:type_name -> wayplatform.connect.rfms.v5.AccumulatedData.FromToClassElectrical
+	2,  // 11: wayplatform.connect.rfms.v5.AccumulatedData.vehicle_speed_class_kmh:type_name -> wayplatform.connect.rfms.v5.AccumulatedData.FromToClass
+	2,  // 12: wayplatform.connect.rfms.v5.AccumulatedData.engine_speed_class_rpm:type_name -> wayplatform.connect.rfms.v5.AccumulatedData.FromToClass
+	2,  // 13: wayplatform.connect.rfms.v5.AccumulatedData.acceleration_during_brake_class_mps2:type_name -> wayplatform.connect.rfms.v5.AccumulatedData.FromToClass
+	1,  // 14: wayplatform.connect.rfms.v5.AccumulatedData.selected_gear_class:type_name -> wayplatform.connect.rfms.v5.AccumulatedData.LabelClass
+	1,  // 15: wayplatform.connect.rfms.v5.AccumulatedData.current_gear_class:type_name -> wayplatform.connect.rfms.v5.AccumulatedData.LabelClass
+	4,  // 16: wayplatform.connect.rfms.v5.AccumulatedData.electric_power_recuperation_class_kw:type_name -> wayplatform.connect.rfms.v5.AccumulatedData.FromToClassElectrical
 	17, // [17:17] is the sub-list for method output_type
 	17, // [17:17] is the sub-list for method input_type
 	17, // [17:17] is the sub-list for extension type_name

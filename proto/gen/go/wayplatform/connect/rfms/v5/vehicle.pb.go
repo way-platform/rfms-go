@@ -140,15 +140,15 @@ type Vehicle struct {
 	xxx_hidden_Vin                            *string                `protobuf:"bytes,1,opt,name=vin"`
 	xxx_hidden_CustomerVehicleName            *string                `protobuf:"bytes,2,opt,name=customer_vehicle_name,json=customerVehicleName"`
 	xxx_hidden_RegistrationNumber             *string                `protobuf:"bytes,3,opt,name=registration_number,json=registrationNumber"`
-	xxx_hidden_Brand                          Brand                  `protobuf:"varint,4,opt,name=brand,enum=wayplatform.rfms.v5.Brand"`
+	xxx_hidden_Brand                          Brand                  `protobuf:"varint,4,opt,name=brand,enum=wayplatform.connect.rfms.v5.Brand"`
 	xxx_hidden_UnknownBrand                   *string                `protobuf:"bytes,5,opt,name=unknown_brand,json=unknownBrand"`
 	xxx_hidden_ProductionDate                 *Date                  `protobuf:"bytes,6,opt,name=production_date,json=productionDate"`
-	xxx_hidden_Type                           Vehicle_Type           `protobuf:"varint,7,opt,name=type,enum=wayplatform.rfms.v5.Vehicle_Type"`
+	xxx_hidden_Type                           Vehicle_Type           `protobuf:"varint,7,opt,name=type,enum=wayplatform.connect.rfms.v5.Vehicle_Type"`
 	xxx_hidden_UnknownType                    *string                `protobuf:"bytes,8,opt,name=unknown_type,json=unknownType"`
 	xxx_hidden_Model                          *string                `protobuf:"bytes,9,opt,name=model"`
-	xxx_hidden_PossibleFuelTypes              []FuelType             `protobuf:"varint,10,rep,packed,name=possible_fuel_types,json=possibleFuelTypes,enum=wayplatform.rfms.v5.FuelType"`
+	xxx_hidden_PossibleFuelTypes              []FuelType             `protobuf:"varint,10,rep,packed,name=possible_fuel_types,json=possibleFuelTypes,enum=wayplatform.connect.rfms.v5.FuelType"`
 	xxx_hidden_UnknownPossibleFuelTypes       []string               `protobuf:"bytes,11,rep,name=unknown_possible_fuel_types,json=unknownPossibleFuelTypes"`
-	xxx_hidden_EmissionLevel                  EmissionLevel          `protobuf:"varint,12,opt,name=emission_level,json=emissionLevel,enum=wayplatform.rfms.v5.EmissionLevel"`
+	xxx_hidden_EmissionLevel                  EmissionLevel          `protobuf:"varint,12,opt,name=emission_level,json=emissionLevel,enum=wayplatform.connect.rfms.v5.EmissionLevel"`
 	xxx_hidden_UnknownEmissionLevel           *string                `protobuf:"bytes,13,opt,name=unknown_emission_level,json=unknownEmissionLevel"`
 	xxx_hidden_TellTaleCode                   *string                `protobuf:"bytes,14,opt,name=tell_tale_code,json=tellTaleCode"`
 	xxx_hidden_ChassisType                    *string                `protobuf:"bytes,15,opt,name=chassis_type,json=chassisType"`
@@ -156,11 +156,11 @@ type Vehicle struct {
 	xxx_hidden_TotalFuelTankVolumeMl          float64                `protobuf:"fixed64,17,opt,name=total_fuel_tank_volume_ml,json=totalFuelTankVolumeMl"`
 	xxx_hidden_TotalFuelTankCapacityGaseousKg float64                `protobuf:"fixed64,18,opt,name=total_fuel_tank_capacity_gaseous_kg,json=totalFuelTankCapacityGaseousKg"`
 	xxx_hidden_TotalBatteryPackCapacityWh     float64                `protobuf:"fixed64,19,opt,name=total_battery_pack_capacity_wh,json=totalBatteryPackCapacityWh"`
-	xxx_hidden_TachographType                 TachographType         `protobuf:"varint,20,opt,name=tachograph_type,json=tachographType,enum=wayplatform.rfms.v5.TachographType"`
+	xxx_hidden_TachographType                 TachographType         `protobuf:"varint,20,opt,name=tachograph_type,json=tachographType,enum=wayplatform.connect.rfms.v5.TachographType"`
 	xxx_hidden_UnknownTachographType          *string                `protobuf:"bytes,21,opt,name=unknown_tachograph_type,json=unknownTachographType"`
-	xxx_hidden_GearboxType                    GearboxType            `protobuf:"varint,22,opt,name=gearbox_type,json=gearboxType,enum=wayplatform.rfms.v5.GearboxType"`
+	xxx_hidden_GearboxType                    GearboxType            `protobuf:"varint,22,opt,name=gearbox_type,json=gearboxType,enum=wayplatform.connect.rfms.v5.GearboxType"`
 	xxx_hidden_UnknownGearboxType             *string                `protobuf:"bytes,23,opt,name=unknown_gearbox_type,json=unknownGearboxType"`
-	xxx_hidden_BodyType                       Vehicle_BodyType       `protobuf:"varint,24,opt,name=body_type,json=bodyType,enum=wayplatform.rfms.v5.Vehicle_BodyType"`
+	xxx_hidden_BodyType                       Vehicle_BodyType       `protobuf:"varint,24,opt,name=body_type,json=bodyType,enum=wayplatform.connect.rfms.v5.Vehicle_BodyType"`
 	xxx_hidden_UnknownBodyType                *string                `protobuf:"bytes,25,opt,name=unknown_body_type,json=unknownBodyType"`
 	xxx_hidden_DoorConfiguration              []int32                `protobuf:"varint,26,rep,packed,name=door_configuration,json=doorConfiguration"`
 	xxx_hidden_HasRampOrLift                  bool                   `protobuf:"varint,27,opt,name=has_ramp_or_lift,json=hasRampOrLift"`
@@ -1050,21 +1050,21 @@ var File_wayplatform_connect_rfms_v5_vehicle_proto protoreflect.FileDescriptor
 
 const file_wayplatform_connect_rfms_v5_vehicle_proto_rawDesc = "" +
 	"\n" +
-	")wayplatform/connect/rfms/v5/vehicle.proto\x12\x13wayplatform.rfms.v5\x1a'wayplatform/connect/rfms/v5/brand.proto\x1a&wayplatform/connect/rfms/v5/date.proto\x1a0wayplatform/connect/rfms/v5/emission_level.proto\x1a+wayplatform/connect/rfms/v5/fuel_type.proto\x1a.wayplatform/connect/rfms/v5/gearbox_type.proto\x1a1wayplatform/connect/rfms/v5/tachograph_type.proto\"\xf4\f\n" +
+	")wayplatform/connect/rfms/v5/vehicle.proto\x12\x1bwayplatform.connect.rfms.v5\x1a'wayplatform/connect/rfms/v5/brand.proto\x1a&wayplatform/connect/rfms/v5/date.proto\x1a0wayplatform/connect/rfms/v5/emission_level.proto\x1a+wayplatform/connect/rfms/v5/fuel_type.proto\x1a.wayplatform/connect/rfms/v5/gearbox_type.proto\x1a1wayplatform/connect/rfms/v5/tachograph_type.proto\"\xb4\r\n" +
 	"\aVehicle\x12\x10\n" +
 	"\x03vin\x18\x01 \x01(\tR\x03vin\x122\n" +
 	"\x15customer_vehicle_name\x18\x02 \x01(\tR\x13customerVehicleName\x12/\n" +
-	"\x13registration_number\x18\x03 \x01(\tR\x12registrationNumber\x120\n" +
-	"\x05brand\x18\x04 \x01(\x0e2\x1a.wayplatform.rfms.v5.BrandR\x05brand\x12#\n" +
-	"\runknown_brand\x18\x05 \x01(\tR\funknownBrand\x12B\n" +
-	"\x0fproduction_date\x18\x06 \x01(\v2\x19.wayplatform.rfms.v5.DateR\x0eproductionDate\x125\n" +
-	"\x04type\x18\a \x01(\x0e2!.wayplatform.rfms.v5.Vehicle.TypeR\x04type\x12!\n" +
+	"\x13registration_number\x18\x03 \x01(\tR\x12registrationNumber\x128\n" +
+	"\x05brand\x18\x04 \x01(\x0e2\".wayplatform.connect.rfms.v5.BrandR\x05brand\x12#\n" +
+	"\runknown_brand\x18\x05 \x01(\tR\funknownBrand\x12J\n" +
+	"\x0fproduction_date\x18\x06 \x01(\v2!.wayplatform.connect.rfms.v5.DateR\x0eproductionDate\x12=\n" +
+	"\x04type\x18\a \x01(\x0e2).wayplatform.connect.rfms.v5.Vehicle.TypeR\x04type\x12!\n" +
 	"\funknown_type\x18\b \x01(\tR\vunknownType\x12\x14\n" +
-	"\x05model\x18\t \x01(\tR\x05model\x12M\n" +
+	"\x05model\x18\t \x01(\tR\x05model\x12U\n" +
 	"\x13possible_fuel_types\x18\n" +
-	" \x03(\x0e2\x1d.wayplatform.rfms.v5.FuelTypeR\x11possibleFuelTypes\x12=\n" +
-	"\x1bunknown_possible_fuel_types\x18\v \x03(\tR\x18unknownPossibleFuelTypes\x12I\n" +
-	"\x0eemission_level\x18\f \x01(\x0e2\".wayplatform.rfms.v5.EmissionLevelR\remissionLevel\x124\n" +
+	" \x03(\x0e2%.wayplatform.connect.rfms.v5.FuelTypeR\x11possibleFuelTypes\x12=\n" +
+	"\x1bunknown_possible_fuel_types\x18\v \x03(\tR\x18unknownPossibleFuelTypes\x12Q\n" +
+	"\x0eemission_level\x18\f \x01(\x0e2*.wayplatform.connect.rfms.v5.EmissionLevelR\remissionLevel\x124\n" +
 	"\x16unknown_emission_level\x18\r \x01(\tR\x14unknownEmissionLevel\x12$\n" +
 	"\x0etell_tale_code\x18\x0e \x01(\tR\ftellTaleCode\x12!\n" +
 	"\fchassis_type\x18\x0f \x01(\tR\vchassisType\x12\x1d\n" +
@@ -1072,12 +1072,12 @@ const file_wayplatform_connect_rfms_v5_vehicle_proto_rawDesc = "" +
 	"axle_count\x18\x10 \x01(\x05R\taxleCount\x128\n" +
 	"\x19total_fuel_tank_volume_ml\x18\x11 \x01(\x01R\x15totalFuelTankVolumeMl\x12K\n" +
 	"#total_fuel_tank_capacity_gaseous_kg\x18\x12 \x01(\x01R\x1etotalFuelTankCapacityGaseousKg\x12B\n" +
-	"\x1etotal_battery_pack_capacity_wh\x18\x13 \x01(\x01R\x1atotalBatteryPackCapacityWh\x12L\n" +
-	"\x0ftachograph_type\x18\x14 \x01(\x0e2#.wayplatform.rfms.v5.TachographTypeR\x0etachographType\x126\n" +
-	"\x17unknown_tachograph_type\x18\x15 \x01(\tR\x15unknownTachographType\x12C\n" +
-	"\fgearbox_type\x18\x16 \x01(\x0e2 .wayplatform.rfms.v5.GearboxTypeR\vgearboxType\x120\n" +
-	"\x14unknown_gearbox_type\x18\x17 \x01(\tR\x12unknownGearboxType\x12B\n" +
-	"\tbody_type\x18\x18 \x01(\x0e2%.wayplatform.rfms.v5.Vehicle.BodyTypeR\bbodyType\x12*\n" +
+	"\x1etotal_battery_pack_capacity_wh\x18\x13 \x01(\x01R\x1atotalBatteryPackCapacityWh\x12T\n" +
+	"\x0ftachograph_type\x18\x14 \x01(\x0e2+.wayplatform.connect.rfms.v5.TachographTypeR\x0etachographType\x126\n" +
+	"\x17unknown_tachograph_type\x18\x15 \x01(\tR\x15unknownTachographType\x12K\n" +
+	"\fgearbox_type\x18\x16 \x01(\x0e2(.wayplatform.connect.rfms.v5.GearboxTypeR\vgearboxType\x120\n" +
+	"\x14unknown_gearbox_type\x18\x17 \x01(\tR\x12unknownGearboxType\x12J\n" +
+	"\tbody_type\x18\x18 \x01(\x0e2-.wayplatform.connect.rfms.v5.Vehicle.BodyTypeR\bbodyType\x12*\n" +
 	"\x11unknown_body_type\x18\x19 \x01(\tR\x0funknownBodyType\x12-\n" +
 	"\x12door_configuration\x18\x1a \x03(\x05R\x11doorConfiguration\x12'\n" +
 	"\x10has_ramp_or_lift\x18\x1b \x01(\bR\rhasRampOrLift\x12)\n" +
@@ -1093,31 +1093,31 @@ const file_wayplatform_connect_rfms_v5_vehicle_proto_rawDesc = "" +
 	"\x11BODY_TYPE_UNKNOWN\x10\x01\x12\f\n" +
 	"\bCITY_BUS\x10\x02\x12\x11\n" +
 	"\rINTERCITY_BUS\x10\x03\x12\t\n" +
-	"\x05COACH\x10\x04B\xe6\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\fVehicleProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\x05COACH\x10\x04B\x8f\x02\n" +
+	"\x1fcom.wayplatform.connect.rfms.v5B\fVehicleProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WCR\xaa\x02\x1bWayplatform.Connect.Rfms.V5\xca\x02\x1bWayplatform\\Connect\\Rfms\\V5\xe2\x02'Wayplatform\\Connect\\Rfms\\V5\\GPBMetadata\xea\x02\x1eWayplatform::Connect::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_connect_rfms_v5_vehicle_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_wayplatform_connect_rfms_v5_vehicle_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_wayplatform_connect_rfms_v5_vehicle_proto_goTypes = []any{
-	(Vehicle_Type)(0),     // 0: wayplatform.rfms.v5.Vehicle.Type
-	(Vehicle_BodyType)(0), // 1: wayplatform.rfms.v5.Vehicle.BodyType
-	(*Vehicle)(nil),       // 2: wayplatform.rfms.v5.Vehicle
-	(Brand)(0),            // 3: wayplatform.rfms.v5.Brand
-	(*Date)(nil),          // 4: wayplatform.rfms.v5.Date
-	(FuelType)(0),         // 5: wayplatform.rfms.v5.FuelType
-	(EmissionLevel)(0),    // 6: wayplatform.rfms.v5.EmissionLevel
-	(TachographType)(0),   // 7: wayplatform.rfms.v5.TachographType
-	(GearboxType)(0),      // 8: wayplatform.rfms.v5.GearboxType
+	(Vehicle_Type)(0),     // 0: wayplatform.connect.rfms.v5.Vehicle.Type
+	(Vehicle_BodyType)(0), // 1: wayplatform.connect.rfms.v5.Vehicle.BodyType
+	(*Vehicle)(nil),       // 2: wayplatform.connect.rfms.v5.Vehicle
+	(Brand)(0),            // 3: wayplatform.connect.rfms.v5.Brand
+	(*Date)(nil),          // 4: wayplatform.connect.rfms.v5.Date
+	(FuelType)(0),         // 5: wayplatform.connect.rfms.v5.FuelType
+	(EmissionLevel)(0),    // 6: wayplatform.connect.rfms.v5.EmissionLevel
+	(TachographType)(0),   // 7: wayplatform.connect.rfms.v5.TachographType
+	(GearboxType)(0),      // 8: wayplatform.connect.rfms.v5.GearboxType
 }
 var file_wayplatform_connect_rfms_v5_vehicle_proto_depIdxs = []int32{
-	3, // 0: wayplatform.rfms.v5.Vehicle.brand:type_name -> wayplatform.rfms.v5.Brand
-	4, // 1: wayplatform.rfms.v5.Vehicle.production_date:type_name -> wayplatform.rfms.v5.Date
-	0, // 2: wayplatform.rfms.v5.Vehicle.type:type_name -> wayplatform.rfms.v5.Vehicle.Type
-	5, // 3: wayplatform.rfms.v5.Vehicle.possible_fuel_types:type_name -> wayplatform.rfms.v5.FuelType
-	6, // 4: wayplatform.rfms.v5.Vehicle.emission_level:type_name -> wayplatform.rfms.v5.EmissionLevel
-	7, // 5: wayplatform.rfms.v5.Vehicle.tachograph_type:type_name -> wayplatform.rfms.v5.TachographType
-	8, // 6: wayplatform.rfms.v5.Vehicle.gearbox_type:type_name -> wayplatform.rfms.v5.GearboxType
-	1, // 7: wayplatform.rfms.v5.Vehicle.body_type:type_name -> wayplatform.rfms.v5.Vehicle.BodyType
+	3, // 0: wayplatform.connect.rfms.v5.Vehicle.brand:type_name -> wayplatform.connect.rfms.v5.Brand
+	4, // 1: wayplatform.connect.rfms.v5.Vehicle.production_date:type_name -> wayplatform.connect.rfms.v5.Date
+	0, // 2: wayplatform.connect.rfms.v5.Vehicle.type:type_name -> wayplatform.connect.rfms.v5.Vehicle.Type
+	5, // 3: wayplatform.connect.rfms.v5.Vehicle.possible_fuel_types:type_name -> wayplatform.connect.rfms.v5.FuelType
+	6, // 4: wayplatform.connect.rfms.v5.Vehicle.emission_level:type_name -> wayplatform.connect.rfms.v5.EmissionLevel
+	7, // 5: wayplatform.connect.rfms.v5.Vehicle.tachograph_type:type_name -> wayplatform.connect.rfms.v5.TachographType
+	8, // 6: wayplatform.connect.rfms.v5.Vehicle.gearbox_type:type_name -> wayplatform.connect.rfms.v5.GearboxType
+	1, // 7: wayplatform.connect.rfms.v5.Vehicle.body_type:type_name -> wayplatform.connect.rfms.v5.Vehicle.BodyType
 	8, // [8:8] is the sub-list for method output_type
 	8, // [8:8] is the sub-list for method input_type
 	8, // [8:8] is the sub-list for extension type_name

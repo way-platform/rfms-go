@@ -88,7 +88,7 @@ var File_wayplatform_connect_rfms_v5_charging_device_proto protoreflect.FileDesc
 
 const file_wayplatform_connect_rfms_v5_charging_device_proto_rawDesc = "" +
 	"\n" +
-	"1wayplatform/connect/rfms/v5/charging_device.proto\x12\x13wayplatform.rfms.v5*\xde\x01\n" +
+	"1wayplatform/connect/rfms/v5/charging_device.proto\x12\x1bwayplatform.connect.rfms.v5*\xde\x01\n" +
 	"\x0eChargingDevice\x12\x1f\n" +
 	"\x1bCHARGING_DEVICE_UNSPECIFIED\x10\x00\x12\x1b\n" +
 	"\x17CHARGING_DEVICE_UNKNOWN\x10\x01\x12!\n" +
@@ -96,12 +96,12 @@ const file_wayplatform_connect_rfms_v5_charging_device_proto_rawDesc = "" +
 	"\x14CHARGING_DEVICE_NONE\x10\x03\x12\x1f\n" +
 	"\x1bAUTOMATIC_CONNECTION_DEVICE\x10\x04\x12\x1b\n" +
 	"\x17WIRELESS_POWER_TRANSFER\x10\x05\x12\x13\n" +
-	"\x0fVEHICLE_COUPLER\x10\x06B\xed\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x13ChargingDeviceProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\x0fVEHICLE_COUPLER\x10\x06B\x96\x02\n" +
+	"\x1fcom.wayplatform.connect.rfms.v5B\x13ChargingDeviceProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WCR\xaa\x02\x1bWayplatform.Connect.Rfms.V5\xca\x02\x1bWayplatform\\Connect\\Rfms\\V5\xe2\x02'Wayplatform\\Connect\\Rfms\\V5\\GPBMetadata\xea\x02\x1eWayplatform::Connect::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_connect_rfms_v5_charging_device_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_wayplatform_connect_rfms_v5_charging_device_proto_goTypes = []any{
-	(ChargingDevice)(0), // 0: wayplatform.rfms.v5.ChargingDevice
+	(ChargingDevice)(0), // 0: wayplatform.connect.rfms.v5.ChargingDevice
 }
 var file_wayplatform_connect_rfms_v5_charging_device_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

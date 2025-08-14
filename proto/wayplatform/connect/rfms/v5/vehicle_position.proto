@@ -1,6 +1,6 @@
 edition = "2023";
 
-package wayplatform.rfms.v5;
+package wayplatform.connect.rfms.v5;
 
 import "wayplatform/connect/rfms/v5/gnss_position.proto";
 import "wayplatform/connect/rfms/v5/trigger.proto";

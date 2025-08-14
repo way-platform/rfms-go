@@ -1,13 +1,13 @@
 syntax = "proto2";
 message VehicleStatus {
   optional string vin = 1;
-  optional Inline_wayplatform_rfms_v5_Trigger trigger = 2;
+  optional Inline_wayplatform_connect_rfms_v5_Trigger trigger = 2;
   optional string create_time = 3;
   optional string receive_time = 4;
   optional double hr_total_vehicle_distance_m = 5;
   optional double total_engine_hours = 6;
   optional double total_electric_motor_hours = 7;
-  optional Inline_wayplatform_rfms_v5_DriverIdentification driver1_id = 8;
+  optional Inline_wayplatform_connect_rfms_v5_DriverIdentification driver1_id = 8;
   optional double gross_combination_vehicle_weight_kg = 9;
   optional double engine_total_fuel_used_ml = 10;
   optional double total_fuel_used_gaseous_kg = 11;
@@ -16,9 +16,9 @@ message VehicleStatus {
   optional int32 state_of_doors = 14;
   optional string unknown_state_of_doors = 15;
   repeated Door doors = 16;
-  optional Inline_wayplatform_rfms_v5_SnapshotData snapshot_data = 18;
-  optional Inline_wayplatform_rfms_v5_UptimeData uptime_data = 19;
-  optional Inline_wayplatform_rfms_v5_AccumulatedData accumulated_data = 17;
+  optional Inline_wayplatform_connect_rfms_v5_SnapshotData snapshot_data = 18;
+  optional Inline_wayplatform_connect_rfms_v5_UptimeData uptime_data = 19;
+  optional Inline_wayplatform_connect_rfms_v5_AccumulatedData accumulated_data = 17;
   message Door {
     optional int32 number = 1;
     optional int32 enabled_state = 2;
@@ -52,7 +52,7 @@ message VehicleStatus {
       LOCKED = 5;
     }
   }
-  message Inline_wayplatform_rfms_v5_DriverIdentification {
+  message Inline_wayplatform_connect_rfms_v5_DriverIdentification {
     optional Tacho tacho = 1;
     optional Oem oem = 2;
     message Tacho {
@@ -78,7 +78,7 @@ message VehicleStatus {
       optional string driver_id = 2;
     }
   }
-  message Inline_wayplatform_rfms_v5_TellTale {
+  message Inline_wayplatform_connect_rfms_v5_TellTale {
     optional int32 type = 1;
     optional string unknown_type = 2;
     optional string oem_specific_type = 3;
@@ -169,15 +169,15 @@ message VehicleStatus {
       OFF = 6;
     }
   }
-  message Inline_wayplatform_rfms_v5_Trigger {
+  message Inline_wayplatform_connect_rfms_v5_Trigger {
     optional int32 type = 1;
     optional string unknown_type = 2;
     optional int32 context = 3;
     optional string unknown_context = 4;
     repeated string trigger_info = 5;
-    optional Inline_wayplatform_rfms_v5_DriverIdentification driver_id = 6;
+    optional Inline_wayplatform_connect_rfms_v5_DriverIdentification driver_id = 6;
     optional string pto_id = 7;
-    optional Inline_wayplatform_rfms_v5_TellTale tell_tale_info = 8;
+    optional Inline_wayplatform_connect_rfms_v5_TellTale tell_tale_info = 8;
     optional ChargingStatusInfo charging_status_info = 9;
     optional ChargingConnectionStatusInfo charging_connection_status_info = 10;
     optional AlarmInfo alarm_info = 11;
@@ -268,7 +268,7 @@ message VehicleStatus {
       IRISBUS = 13;
     }
   }
-  message Inline_wayplatform_rfms_v5_GnssPosition {
+  message Inline_wayplatform_connect_rfms_v5_GnssPosition {
     optional string time = 1;
     optional double latitude = 2;
     optional double longitude = 3;
@@ -276,7 +276,7 @@ message VehicleStatus {
     optional double altitude_m = 5;
     optional double speed_kmh = 6;
   }
-  message Inline_wayplatform_rfms_v5_VehicleAxle {
+  message Inline_wayplatform_connect_rfms_v5_VehicleAxle {
     optional int32 position = 1;
     optional double load_kg = 2;
     repeated Tire tires = 3;
@@ -285,7 +285,7 @@ message VehicleStatus {
       optional double pressure_kpa = 2;
     }
   }
-  message Inline_wayplatform_rfms_v5_Trailer {
+  message Inline_wayplatform_connect_rfms_v5_Trailer {
     optional int32 number = 1;
     optional string identification_data = 2;
     optional string vin = 3;
@@ -311,8 +311,8 @@ message VehicleStatus {
       TOWING_FULL_TRAILER = 10;
     }
   }
-  message Inline_wayplatform_rfms_v5_SnapshotData {
-    optional Inline_wayplatform_rfms_v5_GnssPosition gnss_position = 1;
+  message Inline_wayplatform_connect_rfms_v5_SnapshotData {
+    optional Inline_wayplatform_connect_rfms_v5_GnssPosition gnss_position = 1;
     optional double wheel_based_speed_kmh = 2;
     optional double tachograph_speed_kmh = 3;
     optional double engine_speed_rpm = 4;
@@ -325,7 +325,7 @@ message VehicleStatus {
     optional double catalyst_fuel_level_percent = 11;
     optional int32 driver1_working_state = 12;
     optional string unknown_driver1_working_state = 13;
-    optional Inline_wayplatform_rfms_v5_DriverIdentification driver2_id = 14;
+    optional Inline_wayplatform_connect_rfms_v5_DriverIdentification driver2_id = 14;
     optional int32 driver2_working_state = 15;
     optional string unknown_driver2_working_state = 16;
     optional double ambient_air_temperature_c = 17;
@@ -340,8 +340,8 @@ message VehicleStatus {
     optional double battery_pack_charging_power_w = 26;
     optional string battery_pack_estimated_charging_completed_time = 27;
     optional EstimatedDistanceToEmpty estimated_distance_to_empty = 28;
-    repeated Inline_wayplatform_rfms_v5_VehicleAxle vehicle_axles = 29;
-    repeated Inline_wayplatform_rfms_v5_Trailer trailers = 30;
+    repeated Inline_wayplatform_connect_rfms_v5_VehicleAxle vehicle_axles = 29;
+    repeated Inline_wayplatform_connect_rfms_v5_Trailer trailers = 30;
     message EstimatedDistanceToEmpty {
       optional double total_m = 1;
       optional double fuel_m = 2;
@@ -349,8 +349,8 @@ message VehicleStatus {
       optional double battery_pack_m = 4;
     }
   }
-  message Inline_wayplatform_rfms_v5_UptimeData {
-    repeated Inline_wayplatform_rfms_v5_TellTale tell_tales = 1;
+  message Inline_wayplatform_connect_rfms_v5_UptimeData {
+    repeated Inline_wayplatform_connect_rfms_v5_TellTale tell_tales = 1;
     optional double service_distance_m = 2;
     optional double engine_coolant_temperature_c = 3;
     optional double hvess_outlet_coolant_temperature_c = 4;
@@ -377,7 +377,7 @@ message VehicleStatus {
       }
     }
   }
-  message Inline_wayplatform_rfms_v5_AccumulatedData {
+  message Inline_wayplatform_connect_rfms_v5_AccumulatedData {
     optional double wheel_based_speed_over_zero_duration_s = 1;
     optional double wheel_based_speed_over_zero_fuel_ml = 2;
     optional double wheel_based_speed_over_zero_fuel_gaseous_kg = 3;

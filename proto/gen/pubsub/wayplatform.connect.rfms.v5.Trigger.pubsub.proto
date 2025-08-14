@@ -5,9 +5,9 @@ message Trigger {
   optional int32 context = 3;
   optional string unknown_context = 4;
   repeated string trigger_info = 5;
-  optional Inline_wayplatform_rfms_v5_DriverIdentification driver_id = 6;
+  optional Inline_wayplatform_connect_rfms_v5_DriverIdentification driver_id = 6;
   optional string pto_id = 7;
-  optional Inline_wayplatform_rfms_v5_TellTale tell_tale_info = 8;
+  optional Inline_wayplatform_connect_rfms_v5_TellTale tell_tale_info = 8;
   optional ChargingStatusInfo charging_status_info = 9;
   optional ChargingConnectionStatusInfo charging_connection_status_info = 10;
   optional AlarmInfo alarm_info = 11;
@@ -57,7 +57,7 @@ message Trigger {
       UNTRIGGERED = 7;
     }
   }
-  message Inline_wayplatform_rfms_v5_DriverIdentification {
+  message Inline_wayplatform_connect_rfms_v5_DriverIdentification {
     optional Tacho tacho = 1;
     optional Oem oem = 2;
     message Tacho {
@@ -83,7 +83,7 @@ message Trigger {
       optional string driver_id = 2;
     }
   }
-  message Inline_wayplatform_rfms_v5_TellTale {
+  message Inline_wayplatform_connect_rfms_v5_TellTale {
     optional int32 type = 1;
     optional string unknown_type = 2;
     optional string oem_specific_type = 3;

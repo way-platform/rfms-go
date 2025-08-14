@@ -163,16 +163,16 @@ var File_wayplatform_connect_rfms_v5_date_proto protoreflect.FileDescriptor
 
 const file_wayplatform_connect_rfms_v5_date_proto_rawDesc = "" +
 	"\n" +
-	"&wayplatform/connect/rfms/v5/date.proto\x12\x13wayplatform.rfms.v5\"B\n" +
+	"&wayplatform/connect/rfms/v5/date.proto\x12\x1bwayplatform.connect.rfms.v5\"B\n" +
 	"\x04Date\x12\x10\n" +
 	"\x03day\x18\x01 \x01(\x05R\x03day\x12\x14\n" +
 	"\x05month\x18\x02 \x01(\x05R\x05month\x12\x12\n" +
-	"\x04year\x18\x03 \x01(\x05R\x04yearB\xe3\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\tDateProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\x04year\x18\x03 \x01(\x05R\x04yearB\x8c\x02\n" +
+	"\x1fcom.wayplatform.connect.rfms.v5B\tDateProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WCR\xaa\x02\x1bWayplatform.Connect.Rfms.V5\xca\x02\x1bWayplatform\\Connect\\Rfms\\V5\xe2\x02'Wayplatform\\Connect\\Rfms\\V5\\GPBMetadata\xea\x02\x1eWayplatform::Connect::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_connect_rfms_v5_date_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_wayplatform_connect_rfms_v5_date_proto_goTypes = []any{
-	(*Date)(nil), // 0: wayplatform.rfms.v5.Date
+	(*Date)(nil), // 0: wayplatform.connect.rfms.v5.Date
 }
 var file_wayplatform_connect_rfms_v5_date_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

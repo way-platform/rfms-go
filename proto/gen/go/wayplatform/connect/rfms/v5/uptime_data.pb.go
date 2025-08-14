@@ -507,7 +507,7 @@ func (b0 UptimeData_builder) Build() *UptimeData {
 type UptimeData_Alternator struct {
 	state                   protoimpl.MessageState      `protogen:"opaque.v1"`
 	xxx_hidden_Number       int32                       `protobuf:"varint,1,opt,name=number"`
-	xxx_hidden_State        UptimeData_Alternator_State `protobuf:"varint,2,opt,name=state,enum=wayplatform.rfms.v5.UptimeData_Alternator_State"`
+	xxx_hidden_State        UptimeData_Alternator_State `protobuf:"varint,2,opt,name=state,enum=wayplatform.connect.rfms.v5.UptimeData_Alternator_State"`
 	xxx_hidden_UnknownState *string                     `protobuf:"bytes,3,opt,name=unknown_state,json=unknownState"`
 	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
 	XXX_presence            [1]uint32
@@ -652,28 +652,28 @@ var File_wayplatform_connect_rfms_v5_uptime_data_proto protoreflect.FileDescript
 
 const file_wayplatform_connect_rfms_v5_uptime_data_proto_rawDesc = "" +
 	"\n" +
-	"-wayplatform/connect/rfms/v5/uptime_data.proto\x12\x13wayplatform.rfms.v5\x1a+wayplatform/connect/rfms/v5/tell_tale.proto\"\xae\t\n" +
+	"-wayplatform/connect/rfms/v5/uptime_data.proto\x12\x1bwayplatform.connect.rfms.v5\x1a+wayplatform/connect/rfms/v5/tell_tale.proto\"\xc6\t\n" +
 	"\n" +
-	"UptimeData\x12<\n" +
+	"UptimeData\x12D\n" +
 	"\n" +
-	"tell_tales\x18\x01 \x03(\v2\x1d.wayplatform.rfms.v5.TellTaleR\ttellTales\x12,\n" +
+	"tell_tales\x18\x01 \x03(\v2%.wayplatform.connect.rfms.v5.TellTaleR\ttellTales\x12,\n" +
 	"\x12service_distance_m\x18\x02 \x01(\x01R\x10serviceDistanceM\x12?\n" +
 	"\x1cengine_coolant_temperature_c\x18\x03 \x01(\x01R\x19engineCoolantTemperatureC\x12J\n" +
 	"\"hvess_outlet_coolant_temperature_c\x18\x04 \x01(\x01R\x1ehvessOutletCoolantTemperatureC\x12.\n" +
 	"\x13hvess_temperature_c\x18\x05 \x01(\x01R\x11hvessTemperatureC\x12Q\n" +
 	"&service_brake_air_pressure_circuit1_pa\x18\x06 \x01(\x01R!serviceBrakeAirPressureCircuit1Pa\x12Q\n" +
 	"&service_brake_air_pressure_circuit2_pa\x18\a \x01(\x01R!serviceBrakeAirPressureCircuit2Pa\x12F\n" +
-	"!at_least_one_door_open_duration_s\x18\b \x01(\x01R\x1batLeastOneDoorOpenDurationS\x12L\n" +
-	"\valternators\x18\t \x03(\v2*.wayplatform.rfms.v5.UptimeData.AlternatorR\valternators\x12I\n" +
+	"!at_least_one_door_open_duration_s\x18\b \x01(\x01R\x1batLeastOneDoorOpenDurationS\x12T\n" +
+	"\valternators\x18\t \x03(\v22.wayplatform.connect.rfms.v5.UptimeData.AlternatorR\valternators\x12I\n" +
 	"\"bellow_pressure_front_axle_left_pa\x18\n" +
 	" \x01(\x01R\x1dbellowPressureFrontAxleLeftPa\x12K\n" +
 	"#bellow_pressure_front_axle_right_pa\x18\v \x01(\x01R\x1ebellowPressureFrontAxleRightPa\x12G\n" +
 	"!bellow_pressure_rear_axle_left_pa\x18\f \x01(\x01R\x1cbellowPressureRearAxleLeftPa\x12I\n" +
-	"\"bellow_pressure_rear_axle_right_pa\x18\r \x01(\x01R\x1dbellowPressureRearAxleRightPa\x1a\x8e\x02\n" +
+	"\"bellow_pressure_rear_axle_right_pa\x18\r \x01(\x01R\x1dbellowPressureRearAxleRightPa\x1a\x96\x02\n" +
 	"\n" +
 	"Alternator\x12\x16\n" +
-	"\x06number\x18\x01 \x01(\x05R\x06number\x12F\n" +
-	"\x05state\x18\x02 \x01(\x0e20.wayplatform.rfms.v5.UptimeData.Alternator.StateR\x05state\x12#\n" +
+	"\x06number\x18\x01 \x01(\x05R\x06number\x12N\n" +
+	"\x05state\x18\x02 \x01(\x0e28.wayplatform.connect.rfms.v5.UptimeData.Alternator.StateR\x05state\x12#\n" +
 	"\runknown_state\x18\x03 \x01(\tR\funknownState\"{\n" +
 	"\x05State\x12\x15\n" +
 	"\x11STATE_UNSPECIFIED\x10\x00\x12\x11\n" +
@@ -681,21 +681,21 @@ const file_wayplatform_connect_rfms_v5_uptime_data_proto_rawDesc = "" +
 	"\vSTATE_ERROR\x10\x02\x12\x17\n" +
 	"\x13STATE_NOT_AVAILABLE\x10\x03\x12\x10\n" +
 	"\fNOT_CHARGING\x10\x04\x12\f\n" +
-	"\bCHARGING\x10\x05B\xe9\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x0fUptimeDataProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\bCHARGING\x10\x05B\x92\x02\n" +
+	"\x1fcom.wayplatform.connect.rfms.v5B\x0fUptimeDataProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WCR\xaa\x02\x1bWayplatform.Connect.Rfms.V5\xca\x02\x1bWayplatform\\Connect\\Rfms\\V5\xe2\x02'Wayplatform\\Connect\\Rfms\\V5\\GPBMetadata\xea\x02\x1eWayplatform::Connect::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_connect_rfms_v5_uptime_data_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_wayplatform_connect_rfms_v5_uptime_data_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_wayplatform_connect_rfms_v5_uptime_data_proto_goTypes = []any{
-	(UptimeData_Alternator_State)(0), // 0: wayplatform.rfms.v5.UptimeData.Alternator.State
-	(*UptimeData)(nil),               // 1: wayplatform.rfms.v5.UptimeData
-	(*UptimeData_Alternator)(nil),    // 2: wayplatform.rfms.v5.UptimeData.Alternator
-	(*TellTale)(nil),                 // 3: wayplatform.rfms.v5.TellTale
+	(UptimeData_Alternator_State)(0), // 0: wayplatform.connect.rfms.v5.UptimeData.Alternator.State
+	(*UptimeData)(nil),               // 1: wayplatform.connect.rfms.v5.UptimeData
+	(*UptimeData_Alternator)(nil),    // 2: wayplatform.connect.rfms.v5.UptimeData.Alternator
+	(*TellTale)(nil),                 // 3: wayplatform.connect.rfms.v5.TellTale
 }
 var file_wayplatform_connect_rfms_v5_uptime_data_proto_depIdxs = []int32{
-	3, // 0: wayplatform.rfms.v5.UptimeData.tell_tales:type_name -> wayplatform.rfms.v5.TellTale
-	2, // 1: wayplatform.rfms.v5.UptimeData.alternators:type_name -> wayplatform.rfms.v5.UptimeData.Alternator
-	0, // 2: wayplatform.rfms.v5.UptimeData.Alternator.state:type_name -> wayplatform.rfms.v5.UptimeData.Alternator.State
+	3, // 0: wayplatform.connect.rfms.v5.UptimeData.tell_tales:type_name -> wayplatform.connect.rfms.v5.TellTale
+	2, // 1: wayplatform.connect.rfms.v5.UptimeData.alternators:type_name -> wayplatform.connect.rfms.v5.UptimeData.Alternator
+	0, // 2: wayplatform.connect.rfms.v5.UptimeData.Alternator.state:type_name -> wayplatform.connect.rfms.v5.UptimeData.Alternator.State
 	3, // [3:3] is the sub-list for method output_type
 	3, // [3:3] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name

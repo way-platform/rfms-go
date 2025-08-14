@@ -287,27 +287,27 @@ var File_wayplatform_connect_rfms_v5_vehicle_position_proto protoreflect.FileDes
 
 const file_wayplatform_connect_rfms_v5_vehicle_position_proto_rawDesc = "" +
 	"\n" +
-	"2wayplatform/connect/rfms/v5/vehicle_position.proto\x12\x13wayplatform.rfms.v5\x1a/wayplatform/connect/rfms/v5/gnss_position.proto\x1a)wayplatform/connect/rfms/v5/trigger.proto\"\xcc\x02\n" +
+	"2wayplatform/connect/rfms/v5/vehicle_position.proto\x12\x1bwayplatform.connect.rfms.v5\x1a/wayplatform/connect/rfms/v5/gnss_position.proto\x1a)wayplatform/connect/rfms/v5/trigger.proto\"\xdc\x02\n" +
 	"\x0fVehiclePosition\x12\x10\n" +
-	"\x03vin\x18\x01 \x01(\tR\x03vin\x126\n" +
-	"\atrigger\x18\x02 \x01(\v2\x1c.wayplatform.rfms.v5.TriggerR\atrigger\x12\x1f\n" +
+	"\x03vin\x18\x01 \x01(\tR\x03vin\x12>\n" +
+	"\atrigger\x18\x02 \x01(\v2$.wayplatform.connect.rfms.v5.TriggerR\atrigger\x12\x1f\n" +
 	"\vcreate_time\x18\x03 \x01(\tR\n" +
 	"createTime\x12!\n" +
-	"\freceive_time\x18\x04 \x01(\tR\vreceiveTime\x12F\n" +
-	"\rgnss_position\x18\x05 \x01(\v2!.wayplatform.rfms.v5.GnssPositionR\fgnssPosition\x121\n" +
+	"\freceive_time\x18\x04 \x01(\tR\vreceiveTime\x12N\n" +
+	"\rgnss_position\x18\x05 \x01(\v2).wayplatform.connect.rfms.v5.GnssPositionR\fgnssPosition\x121\n" +
 	"\x15wheel_based_speed_kmh\x18\x06 \x01(\x01R\x12wheelBasedSpeedKmh\x120\n" +
-	"\x14tachograph_speed_kmh\x18\a \x01(\x01R\x12tachographSpeedKmhB\xee\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x14VehiclePositionProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\x14tachograph_speed_kmh\x18\a \x01(\x01R\x12tachographSpeedKmhB\x97\x02\n" +
+	"\x1fcom.wayplatform.connect.rfms.v5B\x14VehiclePositionProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WCR\xaa\x02\x1bWayplatform.Connect.Rfms.V5\xca\x02\x1bWayplatform\\Connect\\Rfms\\V5\xe2\x02'Wayplatform\\Connect\\Rfms\\V5\\GPBMetadata\xea\x02\x1eWayplatform::Connect::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_connect_rfms_v5_vehicle_position_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_wayplatform_connect_rfms_v5_vehicle_position_proto_goTypes = []any{
-	(*VehiclePosition)(nil), // 0: wayplatform.rfms.v5.VehiclePosition
-	(*Trigger)(nil),         // 1: wayplatform.rfms.v5.Trigger
-	(*GnssPosition)(nil),    // 2: wayplatform.rfms.v5.GnssPosition
+	(*VehiclePosition)(nil), // 0: wayplatform.connect.rfms.v5.VehiclePosition
+	(*Trigger)(nil),         // 1: wayplatform.connect.rfms.v5.Trigger
+	(*GnssPosition)(nil),    // 2: wayplatform.connect.rfms.v5.GnssPosition
 }
 var file_wayplatform_connect_rfms_v5_vehicle_position_proto_depIdxs = []int32{
-	1, // 0: wayplatform.rfms.v5.VehiclePosition.trigger:type_name -> wayplatform.rfms.v5.Trigger
-	2, // 1: wayplatform.rfms.v5.VehiclePosition.gnss_position:type_name -> wayplatform.rfms.v5.GnssPosition
+	1, // 0: wayplatform.connect.rfms.v5.VehiclePosition.trigger:type_name -> wayplatform.connect.rfms.v5.Trigger
+	2, // 1: wayplatform.connect.rfms.v5.VehiclePosition.gnss_position:type_name -> wayplatform.connect.rfms.v5.GnssPosition
 	2, // [2:2] is the sub-list for method output_type
 	2, // [2:2] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name

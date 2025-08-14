@@ -92,7 +92,7 @@ var File_wayplatform_connect_rfms_v5_charging_state_proto protoreflect.FileDescr
 
 const file_wayplatform_connect_rfms_v5_charging_state_proto_rawDesc = "" +
 	"\n" +
-	"0wayplatform/connect/rfms/v5/charging_state.proto\x12\x13wayplatform.rfms.v5*\xc9\x01\n" +
+	"0wayplatform/connect/rfms/v5/charging_state.proto\x12\x1bwayplatform.connect.rfms.v5*\xc9\x01\n" +
 	"\rChargingState\x12\x1e\n" +
 	"\x1aCHARGING_STATE_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16CHARGING_STATE_UNKNOWN\x10\x01\x12 \n" +
@@ -101,12 +101,12 @@ const file_wayplatform_connect_rfms_v5_charging_state_proto_rawDesc = "" +
 	"\fNOT_CHARGING\x10\x04\x12\f\n" +
 	"\bCHARGING\x10\x05\x12\x0f\n" +
 	"\vCHARGING_AC\x10\x06\x12\x0f\n" +
-	"\vCHARGING_DC\x10\aB\xec\x01\n" +
-	"\x17com.wayplatform.rfms.v5B\x12ChargingStateProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WRX\xaa\x02\x13Wayplatform.Rfms.V5\xca\x02\x13Wayplatform\\Rfms\\V5\xe2\x02\x1fWayplatform\\Rfms\\V5\\GPBMetadata\xea\x02\x15Wayplatform::Rfms::V5b\beditionsp\xe8\a"
+	"\vCHARGING_DC\x10\aB\x95\x02\n" +
+	"\x1fcom.wayplatform.connect.rfms.v5B\x12ChargingStateProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WCR\xaa\x02\x1bWayplatform.Connect.Rfms.V5\xca\x02\x1bWayplatform\\Connect\\Rfms\\V5\xe2\x02'Wayplatform\\Connect\\Rfms\\V5\\GPBMetadata\xea\x02\x1eWayplatform::Connect::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_connect_rfms_v5_charging_state_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_wayplatform_connect_rfms_v5_charging_state_proto_goTypes = []any{
-	(ChargingState)(0), // 0: wayplatform.rfms.v5.ChargingState
+	(ChargingState)(0), // 0: wayplatform.connect.rfms.v5.ChargingState
 }
 var file_wayplatform_connect_rfms_v5_charging_state_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
