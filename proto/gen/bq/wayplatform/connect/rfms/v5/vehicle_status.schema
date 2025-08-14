@@ -6,6 +6,18 @@
   "description": "The vehicle identification number (VIN) of the vehicle."
  },
  {
+  "name": "create_time",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The date and time the vehicle status was created. (RFC 3339)"
+ },
+ {
+  "name": "receive_time",
+  "type": "STRING",
+  "mode": "NULLABLE",
+  "description": "The date and time the vehicle status was received. (RFC 3339)"
+ },
+ {
   "name": "trigger",
   "type": "RECORD",
   "mode": "NULLABLE",
@@ -242,18 +254,6 @@
     ]
    }
   ]
- },
- {
-  "name": "create_time",
-  "type": "STRING",
-  "mode": "NULLABLE",
-  "description": "The date and time the vehicle status was created. (RFC 3339)"
- },
- {
-  "name": "receive_time",
-  "type": "STRING",
-  "mode": "NULLABLE",
-  "description": "The date and time the vehicle status was received. (RFC 3339)"
  },
  {
   "name": "hr_total_vehicle_distance_m",

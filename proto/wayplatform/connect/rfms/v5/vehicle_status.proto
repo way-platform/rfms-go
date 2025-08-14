@@ -13,14 +13,14 @@ message VehicleStatus {
   // The vehicle identification number (VIN) of the vehicle.
   string vin = 1;
 
-  // The type of trigger that caused the vehicle status to be sent.
-  Trigger trigger = 2;
-
   // The date and time the vehicle status was created. (RFC 3339)
-  string create_time = 3;
+  string create_time = 2;
 
   // The date and time the vehicle status was received. (RFC 3339)
-  string receive_time = 4;
+  string receive_time = 3;
+
+  // The type of trigger that caused the vehicle status to be sent.
+  Trigger trigger = 4;
 
   // The total distance travelled by the vehicle during its operation in meters.
   // Should not be reset during lifetime of the vehicle.

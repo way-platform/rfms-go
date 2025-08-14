@@ -11,14 +11,14 @@ message VehiclePosition {
   // See ISO 3779 (17 characters).
   string vin = 1;
 
-  // The type of trigger that caused the vehicle position to be sent.
-  Trigger trigger = 2;
-
   // The date and time the vehicle position was created. (RFC 3339)
-  string create_time = 3;
+  string create_time = 2;
 
   // The date and time the vehicle position was received. (RFC 3339)
-  string receive_time = 4;
+  string receive_time = 3;
+
+  // The type of trigger that caused the vehicle position to be sent.
+  Trigger trigger = 4;
 
   // The GNSS position of the vehicle.
   GnssPosition gnss_position = 5;

@@ -1,9 +1,9 @@
 syntax = "proto2";
 message VehicleStatus {
   optional string vin = 1;
-  optional Inline_wayplatform_connect_rfms_v5_Trigger trigger = 2;
-  optional string create_time = 3;
-  optional string receive_time = 4;
+  optional string create_time = 2;
+  optional string receive_time = 3;
+  optional Inline_wayplatform_connect_rfms_v5_Trigger trigger = 4;
   optional double hr_total_vehicle_distance_m = 5;
   optional double total_engine_hours = 6;
   optional double total_electric_motor_hours = 7;

@@ -1,9 +1,9 @@
 syntax = "proto2";
 message VehiclePosition {
   optional string vin = 1;
-  optional Inline_wayplatform_connect_rfms_v5_Trigger trigger = 2;
-  optional string create_time = 3;
-  optional string receive_time = 4;
+  optional string create_time = 2;
+  optional string receive_time = 3;
+  optional Inline_wayplatform_connect_rfms_v5_Trigger trigger = 4;
   optional Inline_wayplatform_connect_rfms_v5_GnssPosition gnss_position = 5;
   optional double wheel_based_speed_kmh = 6;
   optional double tachograph_speed_kmh = 7;

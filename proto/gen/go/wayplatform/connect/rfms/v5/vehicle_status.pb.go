@@ -240,9 +240,9 @@ func (x VehicleStatus_Door_LockState) Number() protoreflect.EnumNumber {
 type VehicleStatus struct {
 	state                                       protoimpl.MessageState     `protogen:"opaque.v1"`
 	xxx_hidden_Vin                              *string                    `protobuf:"bytes,1,opt,name=vin"`
-	xxx_hidden_Trigger                          *Trigger                   `protobuf:"bytes,2,opt,name=trigger"`
-	xxx_hidden_CreateTime                       *string                    `protobuf:"bytes,3,opt,name=create_time,json=createTime"`
-	xxx_hidden_ReceiveTime                      *string                    `protobuf:"bytes,4,opt,name=receive_time,json=receiveTime"`
+	xxx_hidden_CreateTime                       *string                    `protobuf:"bytes,2,opt,name=create_time,json=createTime"`
+	xxx_hidden_ReceiveTime                      *string                    `protobuf:"bytes,3,opt,name=receive_time,json=receiveTime"`
+	xxx_hidden_Trigger                          *Trigger                   `protobuf:"bytes,4,opt,name=trigger"`
 	xxx_hidden_HrTotalVehicleDistanceM          float64                    `protobuf:"fixed64,5,opt,name=hr_total_vehicle_distance_m,json=hrTotalVehicleDistanceM"`
 	xxx_hidden_TotalEngineHours                 float64                    `protobuf:"fixed64,6,opt,name=total_engine_hours,json=totalEngineHours"`
 	xxx_hidden_TotalElectricMotorHours          float64                    `protobuf:"fixed64,7,opt,name=total_electric_motor_hours,json=totalElectricMotorHours"`
@@ -299,13 +299,6 @@ func (x *VehicleStatus) GetVin() string {
 	return ""
 }
 
-func (x *VehicleStatus) GetTrigger() *Trigger {
-	if x != nil {
-		return x.xxx_hidden_Trigger
-	}
-	return nil
-}
-
 func (x *VehicleStatus) GetCreateTime() string {
 	if x != nil {
 		if x.xxx_hidden_CreateTime != nil {
@@ -324,6 +317,13 @@ func (x *VehicleStatus) GetReceiveTime() string {
 		return ""
 	}
 	return ""
+}
+
+func (x *VehicleStatus) GetTrigger() *Trigger {
+	if x != nil {
+		return x.xxx_hidden_Trigger
+	}
+	return nil
 }
 
 func (x *VehicleStatus) GetHrTotalVehicleDistanceM() float64 {
@@ -443,18 +443,18 @@ func (x *VehicleStatus) SetVin(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 19)
 }
 
-func (x *VehicleStatus) SetTrigger(v *Trigger) {
-	x.xxx_hidden_Trigger = v
-}
-
 func (x *VehicleStatus) SetCreateTime(v string) {
 	x.xxx_hidden_CreateTime = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 19)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 19)
 }
 
 func (x *VehicleStatus) SetReceiveTime(v string) {
 	x.xxx_hidden_ReceiveTime = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 19)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 19)
+}
+
+func (x *VehicleStatus) SetTrigger(v *Trigger) {
+	x.xxx_hidden_Trigger = v
 }
 
 func (x *VehicleStatus) SetHrTotalVehicleDistanceM(v float64) {
@@ -534,25 +534,25 @@ func (x *VehicleStatus) HasVin() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *VehicleStatus) HasTrigger() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_Trigger != nil
-}
-
 func (x *VehicleStatus) HasCreateTime() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
 func (x *VehicleStatus) HasReceiveTime() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *VehicleStatus) HasTrigger() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Trigger != nil
 }
 
 func (x *VehicleStatus) HasHrTotalVehicleDistanceM() bool {
@@ -658,18 +658,18 @@ func (x *VehicleStatus) ClearVin() {
 	x.xxx_hidden_Vin = nil
 }
 
-func (x *VehicleStatus) ClearTrigger() {
-	x.xxx_hidden_Trigger = nil
-}
-
 func (x *VehicleStatus) ClearCreateTime() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_CreateTime = nil
 }
 
 func (x *VehicleStatus) ClearReceiveTime() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_ReceiveTime = nil
+}
+
+func (x *VehicleStatus) ClearTrigger() {
+	x.xxx_hidden_Trigger = nil
 }
 
 func (x *VehicleStatus) ClearHrTotalVehicleDistanceM() {
@@ -743,12 +743,12 @@ type VehicleStatus_builder struct {
 
 	// The vehicle identification number (VIN) of the vehicle.
 	Vin *string
-	// The type of trigger that caused the vehicle status to be sent.
-	Trigger *Trigger
 	// The date and time the vehicle status was created. (RFC 3339)
 	CreateTime *string
 	// The date and time the vehicle status was received. (RFC 3339)
 	ReceiveTime *string
+	// The type of trigger that caused the vehicle status to be sent.
+	Trigger *Trigger
 	// The total distance travelled by the vehicle during its operation in meters.
 	// Should not be reset during lifetime of the vehicle.
 	HrTotalVehicleDistanceM *float64
@@ -821,15 +821,15 @@ func (b0 VehicleStatus_builder) Build() *VehicleStatus {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 19)
 		x.xxx_hidden_Vin = b.Vin
 	}
-	x.xxx_hidden_Trigger = b.Trigger
 	if b.CreateTime != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 19)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 19)
 		x.xxx_hidden_CreateTime = b.CreateTime
 	}
 	if b.ReceiveTime != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 19)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 19)
 		x.xxx_hidden_ReceiveTime = b.ReceiveTime
 	}
+	x.xxx_hidden_Trigger = b.Trigger
 	if b.HrTotalVehicleDistanceM != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 19)
 		x.xxx_hidden_HrTotalVehicleDistanceM = *b.HrTotalVehicleDistanceM
@@ -1165,11 +1165,11 @@ const file_wayplatform_connect_rfms_v5_vehicle_status_proto_rawDesc = "" +
 	"\n" +
 	"0wayplatform/connect/rfms/v5/vehicle_status.proto\x12\x1bwayplatform.connect.rfms.v5\x1a2wayplatform/connect/rfms/v5/accumulated_data.proto\x1a7wayplatform/connect/rfms/v5/driver_identification.proto\x1a/wayplatform/connect/rfms/v5/snapshot_data.proto\x1a)wayplatform/connect/rfms/v5/trigger.proto\x1a-wayplatform/connect/rfms/v5/uptime_data.proto\"\x88\x12\n" +
 	"\rVehicleStatus\x12\x10\n" +
-	"\x03vin\x18\x01 \x01(\tR\x03vin\x12>\n" +
-	"\atrigger\x18\x02 \x01(\v2$.wayplatform.connect.rfms.v5.TriggerR\atrigger\x12\x1f\n" +
-	"\vcreate_time\x18\x03 \x01(\tR\n" +
+	"\x03vin\x18\x01 \x01(\tR\x03vin\x12\x1f\n" +
+	"\vcreate_time\x18\x02 \x01(\tR\n" +
 	"createTime\x12!\n" +
-	"\freceive_time\x18\x04 \x01(\tR\vreceiveTime\x12<\n" +
+	"\freceive_time\x18\x03 \x01(\tR\vreceiveTime\x12>\n" +
+	"\atrigger\x18\x04 \x01(\v2$.wayplatform.connect.rfms.v5.TriggerR\atrigger\x12<\n" +
 	"\x1bhr_total_vehicle_distance_m\x18\x05 \x01(\x01R\x17hrTotalVehicleDistanceM\x12,\n" +
 	"\x12total_engine_hours\x18\x06 \x01(\x01R\x10totalEngineHours\x12;\n" +
 	"\x1atotal_electric_motor_hours\x18\a \x01(\x01R\x17totalElectricMotorHours\x12P\n" +
