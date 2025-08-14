@@ -2,7 +2,7 @@ package convertv4
 
 import (
 	rfmsv4oapi "github.com/way-platform/rfms-go/internal/openapi/rfmsv4oapi"
-	rfmsv5 "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5"
+	rfmsv5 "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5"
 )
 
 // accumulatedData converts an rFMS v4 accumulated data to proto.

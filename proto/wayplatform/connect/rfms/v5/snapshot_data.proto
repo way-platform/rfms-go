@@ -1,0 +1,141 @@
+edition = "2023";
+
+package wayplatform.rfms.v5;
+
+import "wayplatform/connect/rfms/v5/charging_connection_state.proto";
+import "wayplatform/connect/rfms/v5/charging_device.proto";
+import "wayplatform/connect/rfms/v5/charging_state.proto";
+import "wayplatform/connect/rfms/v5/driver_identification.proto";
+import "wayplatform/connect/rfms/v5/driver_working_state.proto";
+import "wayplatform/connect/rfms/v5/fuel_type.proto";
+import "wayplatform/connect/rfms/v5/gnss_position.proto";
+import "wayplatform/connect/rfms/v5/ignition_state.proto";
+import "wayplatform/connect/rfms/v5/trailer.proto";
+import "wayplatform/connect/rfms/v5/vehicle_axle.proto";
+
+// Snapshot data for a vehicle.
+message SnapshotData {
+  // The GNSS position of the vehicle.
+  GnssPosition gnss_position = 1;
+
+  // The wheel-based speed of the vehicle. (km/h)
+  double wheel_based_speed_kmh = 2;
+
+  // The tachograph speed of the vehicle. (km/h)
+  double tachograph_speed_kmh = 3;
+
+  // The engine (diesel/gaseous) speed of the vehicle. (rev/min)
+  double engine_speed_rpm = 4;
+
+  // The electric motor speed of the vehicle. (rev/min)
+  double electric_motor_speed_rpm = 5;
+
+  // The ignition state of the vehicle.
+  IgnitionState ignition_state = 6;
+
+  // The fuel type currently being utilized by the vehicle.
+  FuelType fuel_type = 7;
+
+  // The unknown fuel type of the vehicle.
+  // Provided when the fuel type is FUEL_TYPE_UNKNOWN.
+  string unknown_fuel_type = 8;
+
+  // The fuel level of the vehicle. (%) (0 - 100)
+  double fuel_level1_percent = 9;
+
+  // The fuel level of the vehicle. (%) (0 - 100)
+  // When Fuel Level 2 is not used, Fuel Level 1 represents
+  // the total fuel in all fuel storage containers.
+  //
+  // When Fuel Level 2 is used,
+  // Fuel Level 1 represents the fuel level in the primary or left-side fuel
+  // storage container.
+  double fuel_level2_percent = 10;
+
+  // The adblue level percentage
+  double catalyst_fuel_level_percent = 11;
+
+  // The driver working state of the vehicle.
+  DriverWorkingState driver1_working_state = 12;
+
+  // The unknown driver working state of the vehicle.
+  // Provided when the driver working state is DRIVER_WORKING_STATE_UNKNOWN.
+  string unknown_driver1_working_state = 13;
+
+  // The driver identification of driver 2.
+  DriverIdentification driver2_id = 14;
+
+  // The driver working state of the vehicle.
+  DriverWorkingState driver2_working_state = 15;
+
+  // The unknown driver working state of the vehicle.
+  // Provided when the driver working state is DRIVER_WORKING_STATE_UNKNOWN.
+  string unknown_driver2_working_state = 16;
+
+  // The ambient air temperature of the vehicle. (°C)
+  double ambient_air_temperature_c = 17;
+
+  // The parking brake switch state of the vehicle.
+  // In general the switch actuated by the operator's park brake control, whether
+  // a pedal, lever or other control mechanism
+  //
+  // true - parking brake set
+  // false - parking brake not set
+  bool parking_brake_switch = 18;
+
+  // The battery pack remaining charge of the vehicle. (%) (0 - 100)
+  // 0% means no charge remaining, 100% means full charge remaining.
+  // Is used for hybrid vehicles as well for full electrical vehicles
+  double battery_pack_remaining_charge_percent = 19;
+
+  // The battery pack charging status of the vehicle.
+  ChargingState battery_pack_charging_state = 20;
+
+  // The unknown battery pack charging status of the vehicle.
+  // Provided when the battery pack charging status is CHARGING_STATE_UNKNOWN.
+  string unknown_battery_pack_charging_state = 21;
+
+  // The battery pack charging status of the vehicle.
+  ChargingConnectionState battery_pack_charging_connection_state = 22;
+
+  // The unknown battery pack charging connection status of the vehicle.
+  // Provided when the battery pack charging connection status is CHARGING_CONNECTION_STATE_UNKNOWN.
+  string unknown_battery_pack_charging_connection_state = 23;
+
+  // The battery pack charging device of the vehicle.
+  ChargingDevice battery_pack_charging_device = 24;
+
+  // The unknown battery pack charging device of the vehicle.
+  // Provided when the battery pack charging device is CHARGING_DEVICE_UNKNOWN.
+  string unknown_battery_pack_charging_device = 25;
+
+  // The battery pack charging power of the vehicle. (W)
+  double battery_pack_charging_power_w = 26;
+
+  // The estimated time when charging has reached the target level. (RFC 3339)
+  string battery_pack_estimated_charging_completed_time = 27;
+
+  // The estimated distance to empty of the vehicle.
+  EstimatedDistanceToEmpty estimated_distance_to_empty = 28;
+
+  // The estimated distance to empty of the vehicle.
+  message EstimatedDistanceToEmpty {
+    // The estimated distance to empty of the vehicle. (m)
+    double total_m = 1;
+
+    // The estimated distance to empty of the vehicle. (m)
+    double fuel_m = 2;
+
+    // The estimated distance to empty of the vehicle. (m)
+    double gas_m = 3;
+
+    // The estimated distance to empty of the vehicle. (m)
+    double battery_pack_m = 4;
+  }
+
+  // The axles of the vehicle.
+  repeated VehicleAxle vehicle_axles = 29;
+
+  // The trailers connected to the vehicle.
+  repeated Trailer trailers = 30;
+}

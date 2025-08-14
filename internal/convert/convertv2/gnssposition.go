@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/way-platform/rfms-go/internal/openapi/rfmsv2oapi"
-	rfmsv5 "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5"
+	rfmsv5 "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5"
 )
 
 func gnssPosition(input *rfmsv2oapi.GNSSPositionType) *rfmsv5.GnssPosition {

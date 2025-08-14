@@ -13,7 +13,7 @@ import (
 	"github.com/way-platform/rfms-go/internal/convert/convertv4"
 	"github.com/way-platform/rfms-go/internal/openapi/rfmsv2oapi"
 	"github.com/way-platform/rfms-go/internal/openapi/rfmsv4oapi"
-	rfmsv5 "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5"
+	rfmsv5 "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5"
 )
 
 // VehicleStatusesRequest is the request for the [Client.VehicleStatuses] method.

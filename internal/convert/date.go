@@ -1,7 +1,7 @@
 package convert
 
 import (
-	rfmsv5 "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/rfms/v5"
+	rfmsv5 "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5"
 )
 
 // Date converts an rFMS date to proto.

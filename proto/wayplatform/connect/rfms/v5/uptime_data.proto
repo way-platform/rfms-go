@@ -1,0 +1,78 @@
+edition = "2023";
+
+package wayplatform.rfms.v5;
+
+import "wayplatform/connect/rfms/v5/tell_tale.proto";
+
+// Uptime data for a vehicle.
+message UptimeData {
+  // List of tell tales with the actual state for each tell tale.
+  repeated TellTale tell_tales = 1;
+
+  // The distance in meter to the next service. (m)
+  double service_distance_m = 2;
+
+  // The temperature of the coolant liquid. (°C)
+  double engine_coolant_temperature_c = 3;
+
+  // The temperature of the battery pack coolant. (°C)
+  // HVESS - High Voltage Energy Storage System.
+  double hvess_outlet_coolant_temperature_c = 4;
+
+  // The temperature of the battery pack. (°C)
+  // HVESS - High Voltage Energy Storage System.
+  double hvess_temperature_c = 5;
+
+  // The pressure of the service brake air pressure circuit 1. (Pa)
+  double service_brake_air_pressure_circuit1_pa = 6;
+
+  // The pressure of the service brake air pressure circuit 2. (Pa)
+  double service_brake_air_pressure_circuit2_pa = 7;
+
+  // The total time at least one door has been opened in the bus. (s)
+  // Used mainly for buses.
+  double at_least_one_door_open_duration_s = 8;
+
+  // The alternator status of up to 4 alternators.
+  // Used mainly for buses.
+  repeated Alternator alternators = 9;
+
+  // The pressure of the bellow pressure front axle left. (Pa)
+  // Used mainly for buses.
+  double bellow_pressure_front_axle_left_pa = 10;
+
+  // The pressure of the bellow pressure front axle right. (Pa)
+  // Used mainly for buses.
+  double bellow_pressure_front_axle_right_pa = 11;
+
+  // The pressure of the bellow pressure rear axle left. (Pa)
+  // Used mainly for buses.
+  double bellow_pressure_rear_axle_left_pa = 12;
+
+  // The pressure of the bellow pressure rear axle right. (Pa)
+  // Used mainly for buses.
+  double bellow_pressure_rear_axle_right_pa = 13;
+
+  // An alternator.
+  message Alternator {
+    // The number of the alternator.
+    int32 number = 1;
+
+    // The status of the alternator.
+    State state = 2;
+
+    // The unknown state of the alternator.
+    // Used when the state is STATE_UNKNOWN.
+    string unknown_state = 3;
+
+    // The state of an alternator.
+    enum State {
+      STATE_UNSPECIFIED = 0;
+      STATE_UNKNOWN = 1;
+      STATE_ERROR = 2;
+      STATE_NOT_AVAILABLE = 3;
+      NOT_CHARGING = 4;
+      CHARGING = 5;
+    }
+  }
+}
