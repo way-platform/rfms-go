@@ -49,17 +49,17 @@ func newRootCommand() *cobra.Command {
 		Short: "rFMS CLI",
 	}
 	cmd.AddGroup(&cobra.Group{
-		ID:    "auth",
-		Title: "Authentication",
-	})
-	cmd.AddCommand(auth.NewCommand())
-	cmd.AddGroup(&cobra.Group{
 		ID:    "rfms",
 		Title: "rFMS Commands",
 	})
 	cmd.AddCommand(newVehiclesCommand())
 	cmd.AddCommand(newVehiclePositionsCommand())
 	cmd.AddCommand(newVehicleStatusesCommand())
+	cmd.AddGroup(&cobra.Group{
+		ID:    "auth",
+		Title: "Authentication",
+	})
+	cmd.AddCommand(auth.NewCommand())
 	cmd.AddGroup(&cobra.Group{
 		ID:    "utils",
 		Title: "Utils",
