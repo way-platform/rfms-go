@@ -2,6 +2,7 @@ edition = "2023";
 
 package wayplatform.connect.rfms.v5;
 
+import "google/protobuf/timestamp.proto";
 import "wayplatform/connect/rfms/v5/accumulated_data.proto";
 import "wayplatform/connect/rfms/v5/driver_identification.proto";
 import "wayplatform/connect/rfms/v5/snapshot_data.proto";
@@ -14,10 +15,10 @@ message VehicleStatus {
   string vin = 1;
 
   // The date and time the vehicle status was created. (RFC 3339)
-  string create_time = 2;
+  google.protobuf.Timestamp create_time = 2;
 
   // The date and time the vehicle status was received. (RFC 3339)
-  string receive_time = 3;
+  google.protobuf.Timestamp receive_time = 3;
 
   // The type of trigger that caused the vehicle status to be sent.
   Trigger trigger = 4;

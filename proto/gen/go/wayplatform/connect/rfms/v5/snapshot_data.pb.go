@@ -9,6 +9,7 @@ package rfmsv5
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -49,7 +50,7 @@ type SnapshotData struct {
 	xxx_hidden_BatteryPackChargingDevice                 ChargingDevice                         `protobuf:"varint,24,opt,name=battery_pack_charging_device,json=batteryPackChargingDevice,enum=wayplatform.connect.rfms.v5.ChargingDevice"`
 	xxx_hidden_UnknownBatteryPackChargingDevice          *string                                `protobuf:"bytes,25,opt,name=unknown_battery_pack_charging_device,json=unknownBatteryPackChargingDevice"`
 	xxx_hidden_BatteryPackChargingPowerW                 float64                                `protobuf:"fixed64,26,opt,name=battery_pack_charging_power_w,json=batteryPackChargingPowerW"`
-	xxx_hidden_BatteryPackEstimatedChargingCompletedTime *string                                `protobuf:"bytes,27,opt,name=battery_pack_estimated_charging_completed_time,json=batteryPackEstimatedChargingCompletedTime"`
+	xxx_hidden_BatteryPackEstimatedChargingCompletedTime *timestamppb.Timestamp                 `protobuf:"bytes,27,opt,name=battery_pack_estimated_charging_completed_time,json=batteryPackEstimatedChargingCompletedTime"`
 	xxx_hidden_EstimatedDistanceToEmpty                  *SnapshotData_EstimatedDistanceToEmpty `protobuf:"bytes,28,opt,name=estimated_distance_to_empty,json=estimatedDistanceToEmpty"`
 	xxx_hidden_VehicleAxles                              *[]*VehicleAxle                        `protobuf:"bytes,29,rep,name=vehicle_axles,json=vehicleAxles"`
 	xxx_hidden_Trailers                                  *[]*Trailer                            `protobuf:"bytes,30,rep,name=trailers"`
@@ -298,14 +299,11 @@ func (x *SnapshotData) GetBatteryPackChargingPowerW() float64 {
 	return 0
 }
 
-func (x *SnapshotData) GetBatteryPackEstimatedChargingCompletedTime() string {
+func (x *SnapshotData) GetBatteryPackEstimatedChargingCompletedTime() *timestamppb.Timestamp {
 	if x != nil {
-		if x.xxx_hidden_BatteryPackEstimatedChargingCompletedTime != nil {
-			return *x.xxx_hidden_BatteryPackEstimatedChargingCompletedTime
-		}
-		return ""
+		return x.xxx_hidden_BatteryPackEstimatedChargingCompletedTime
 	}
-	return ""
+	return nil
 }
 
 func (x *SnapshotData) GetEstimatedDistanceToEmpty() *SnapshotData_EstimatedDistanceToEmpty {
@@ -461,9 +459,8 @@ func (x *SnapshotData) SetBatteryPackChargingPowerW(v float64) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 25, 30)
 }
 
-func (x *SnapshotData) SetBatteryPackEstimatedChargingCompletedTime(v string) {
-	x.xxx_hidden_BatteryPackEstimatedChargingCompletedTime = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 26, 30)
+func (x *SnapshotData) SetBatteryPackEstimatedChargingCompletedTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_BatteryPackEstimatedChargingCompletedTime = v
 }
 
 func (x *SnapshotData) SetEstimatedDistanceToEmpty(v *SnapshotData_EstimatedDistanceToEmpty) {
@@ -664,7 +661,7 @@ func (x *SnapshotData) HasBatteryPackEstimatedChargingCompletedTime() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 26)
+	return x.xxx_hidden_BatteryPackEstimatedChargingCompletedTime != nil
 }
 
 func (x *SnapshotData) HasEstimatedDistanceToEmpty() bool {
@@ -803,7 +800,6 @@ func (x *SnapshotData) ClearBatteryPackChargingPowerW() {
 }
 
 func (x *SnapshotData) ClearBatteryPackEstimatedChargingCompletedTime() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 26)
 	x.xxx_hidden_BatteryPackEstimatedChargingCompletedTime = nil
 }
 
@@ -886,7 +882,7 @@ type SnapshotData_builder struct {
 	// The battery pack charging power of the vehicle. (W)
 	BatteryPackChargingPowerW *float64
 	// The estimated time when charging has reached the target level. (RFC 3339)
-	BatteryPackEstimatedChargingCompletedTime *string
+	BatteryPackEstimatedChargingCompletedTime *timestamppb.Timestamp
 	// The estimated distance to empty of the vehicle.
 	EstimatedDistanceToEmpty *SnapshotData_EstimatedDistanceToEmpty
 	// The axles of the vehicle.
@@ -997,10 +993,7 @@ func (b0 SnapshotData_builder) Build() *SnapshotData {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 25, 30)
 		x.xxx_hidden_BatteryPackChargingPowerW = *b.BatteryPackChargingPowerW
 	}
-	if b.BatteryPackEstimatedChargingCompletedTime != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 26, 30)
-		x.xxx_hidden_BatteryPackEstimatedChargingCompletedTime = b.BatteryPackEstimatedChargingCompletedTime
-	}
+	x.xxx_hidden_BatteryPackEstimatedChargingCompletedTime = b.BatteryPackEstimatedChargingCompletedTime
 	x.xxx_hidden_EstimatedDistanceToEmpty = b.EstimatedDistanceToEmpty
 	x.xxx_hidden_VehicleAxles = &b.VehicleAxles
 	x.xxx_hidden_Trailers = &b.Trailers
@@ -1181,7 +1174,7 @@ var File_wayplatform_connect_rfms_v5_snapshot_data_proto protoreflect.FileDescri
 
 const file_wayplatform_connect_rfms_v5_snapshot_data_proto_rawDesc = "" +
 	"\n" +
-	"/wayplatform/connect/rfms/v5/snapshot_data.proto\x12\x1bwayplatform.connect.rfms.v5\x1a;wayplatform/connect/rfms/v5/charging_connection_state.proto\x1a1wayplatform/connect/rfms/v5/charging_device.proto\x1a0wayplatform/connect/rfms/v5/charging_state.proto\x1a7wayplatform/connect/rfms/v5/driver_identification.proto\x1a6wayplatform/connect/rfms/v5/driver_working_state.proto\x1a+wayplatform/connect/rfms/v5/fuel_type.proto\x1a/wayplatform/connect/rfms/v5/gnss_position.proto\x1a0wayplatform/connect/rfms/v5/ignition_state.proto\x1a)wayplatform/connect/rfms/v5/trailer.proto\x1a.wayplatform/connect/rfms/v5/vehicle_axle.proto\"\x90\x13\n" +
+	"/wayplatform/connect/rfms/v5/snapshot_data.proto\x12\x1bwayplatform.connect.rfms.v5\x1a\x1fgoogle/protobuf/timestamp.proto\x1a;wayplatform/connect/rfms/v5/charging_connection_state.proto\x1a1wayplatform/connect/rfms/v5/charging_device.proto\x1a0wayplatform/connect/rfms/v5/charging_state.proto\x1a7wayplatform/connect/rfms/v5/driver_identification.proto\x1a6wayplatform/connect/rfms/v5/driver_working_state.proto\x1a+wayplatform/connect/rfms/v5/fuel_type.proto\x1a/wayplatform/connect/rfms/v5/gnss_position.proto\x1a0wayplatform/connect/rfms/v5/ignition_state.proto\x1a)wayplatform/connect/rfms/v5/trailer.proto\x1a.wayplatform/connect/rfms/v5/vehicle_axle.proto\"\xac\x13\n" +
 	"\fSnapshotData\x12N\n" +
 	"\rgnss_position\x18\x01 \x01(\v2).wayplatform.connect.rfms.v5.GnssPositionR\fgnssPosition\x121\n" +
 	"\x15wheel_based_speed_kmh\x18\x02 \x01(\x01R\x12wheelBasedSpeedKmh\x120\n" +
@@ -1210,8 +1203,8 @@ const file_wayplatform_connect_rfms_v5_snapshot_data_proto_rawDesc = "" +
 	".unknown_battery_pack_charging_connection_state\x18\x17 \x01(\tR)unknownBatteryPackChargingConnectionState\x12l\n" +
 	"\x1cbattery_pack_charging_device\x18\x18 \x01(\x0e2+.wayplatform.connect.rfms.v5.ChargingDeviceR\x19batteryPackChargingDevice\x12N\n" +
 	"$unknown_battery_pack_charging_device\x18\x19 \x01(\tR unknownBatteryPackChargingDevice\x12@\n" +
-	"\x1dbattery_pack_charging_power_w\x18\x1a \x01(\x01R\x19batteryPackChargingPowerW\x12a\n" +
-	".battery_pack_estimated_charging_completed_time\x18\x1b \x01(\tR)batteryPackEstimatedChargingCompletedTime\x12\x81\x01\n" +
+	"\x1dbattery_pack_charging_power_w\x18\x1a \x01(\x01R\x19batteryPackChargingPowerW\x12}\n" +
+	".battery_pack_estimated_charging_completed_time\x18\x1b \x01(\v2\x1a.google.protobuf.TimestampR)batteryPackEstimatedChargingCompletedTime\x12\x81\x01\n" +
 	"\x1bestimated_distance_to_empty\x18\x1c \x01(\v2B.wayplatform.connect.rfms.v5.SnapshotData.EstimatedDistanceToEmptyR\x18estimatedDistanceToEmpty\x12M\n" +
 	"\rvehicle_axles\x18\x1d \x03(\v2(.wayplatform.connect.rfms.v5.VehicleAxleR\fvehicleAxles\x12@\n" +
 	"\btrailers\x18\x1e \x03(\v2$.wayplatform.connect.rfms.v5.TrailerR\btrailers\x1a\x85\x01\n" +
@@ -1234,8 +1227,9 @@ var file_wayplatform_connect_rfms_v5_snapshot_data_proto_goTypes = []any{
 	(ChargingState)(0),                            // 7: wayplatform.connect.rfms.v5.ChargingState
 	(ChargingConnectionState)(0),                  // 8: wayplatform.connect.rfms.v5.ChargingConnectionState
 	(ChargingDevice)(0),                           // 9: wayplatform.connect.rfms.v5.ChargingDevice
-	(*VehicleAxle)(nil),                           // 10: wayplatform.connect.rfms.v5.VehicleAxle
-	(*Trailer)(nil),                               // 11: wayplatform.connect.rfms.v5.Trailer
+	(*timestamppb.Timestamp)(nil),                 // 10: google.protobuf.Timestamp
+	(*VehicleAxle)(nil),                           // 11: wayplatform.connect.rfms.v5.VehicleAxle
+	(*Trailer)(nil),                               // 12: wayplatform.connect.rfms.v5.Trailer
 }
 var file_wayplatform_connect_rfms_v5_snapshot_data_proto_depIdxs = []int32{
 	2,  // 0: wayplatform.connect.rfms.v5.SnapshotData.gnss_position:type_name -> wayplatform.connect.rfms.v5.GnssPosition
@@ -1247,14 +1241,15 @@ var file_wayplatform_connect_rfms_v5_snapshot_data_proto_depIdxs = []int32{
 	7,  // 6: wayplatform.connect.rfms.v5.SnapshotData.battery_pack_charging_state:type_name -> wayplatform.connect.rfms.v5.ChargingState
 	8,  // 7: wayplatform.connect.rfms.v5.SnapshotData.battery_pack_charging_connection_state:type_name -> wayplatform.connect.rfms.v5.ChargingConnectionState
 	9,  // 8: wayplatform.connect.rfms.v5.SnapshotData.battery_pack_charging_device:type_name -> wayplatform.connect.rfms.v5.ChargingDevice
-	1,  // 9: wayplatform.connect.rfms.v5.SnapshotData.estimated_distance_to_empty:type_name -> wayplatform.connect.rfms.v5.SnapshotData.EstimatedDistanceToEmpty
-	10, // 10: wayplatform.connect.rfms.v5.SnapshotData.vehicle_axles:type_name -> wayplatform.connect.rfms.v5.VehicleAxle
-	11, // 11: wayplatform.connect.rfms.v5.SnapshotData.trailers:type_name -> wayplatform.connect.rfms.v5.Trailer
-	12, // [12:12] is the sub-list for method output_type
-	12, // [12:12] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	10, // 9: wayplatform.connect.rfms.v5.SnapshotData.battery_pack_estimated_charging_completed_time:type_name -> google.protobuf.Timestamp
+	1,  // 10: wayplatform.connect.rfms.v5.SnapshotData.estimated_distance_to_empty:type_name -> wayplatform.connect.rfms.v5.SnapshotData.EstimatedDistanceToEmpty
+	11, // 11: wayplatform.connect.rfms.v5.SnapshotData.vehicle_axles:type_name -> wayplatform.connect.rfms.v5.VehicleAxle
+	12, // 12: wayplatform.connect.rfms.v5.SnapshotData.trailers:type_name -> wayplatform.connect.rfms.v5.Trailer
+	13, // [13:13] is the sub-list for method output_type
+	13, // [13:13] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_wayplatform_connect_rfms_v5_snapshot_data_proto_init() }

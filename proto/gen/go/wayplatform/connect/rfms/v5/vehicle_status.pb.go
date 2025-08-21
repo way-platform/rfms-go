@@ -9,6 +9,7 @@ package rfmsv5
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -240,8 +241,8 @@ func (x VehicleStatus_Door_LockState) Number() protoreflect.EnumNumber {
 type VehicleStatus struct {
 	state                                       protoimpl.MessageState     `protogen:"opaque.v1"`
 	xxx_hidden_Vin                              *string                    `protobuf:"bytes,1,opt,name=vin"`
-	xxx_hidden_CreateTime                       *string                    `protobuf:"bytes,2,opt,name=create_time,json=createTime"`
-	xxx_hidden_ReceiveTime                      *string                    `protobuf:"bytes,3,opt,name=receive_time,json=receiveTime"`
+	xxx_hidden_CreateTime                       *timestamppb.Timestamp     `protobuf:"bytes,2,opt,name=create_time,json=createTime"`
+	xxx_hidden_ReceiveTime                      *timestamppb.Timestamp     `protobuf:"bytes,3,opt,name=receive_time,json=receiveTime"`
 	xxx_hidden_Trigger                          *Trigger                   `protobuf:"bytes,4,opt,name=trigger"`
 	xxx_hidden_HrTotalVehicleDistanceM          float64                    `protobuf:"fixed64,5,opt,name=hr_total_vehicle_distance_m,json=hrTotalVehicleDistanceM"`
 	xxx_hidden_TotalEngineHours                 float64                    `protobuf:"fixed64,6,opt,name=total_engine_hours,json=totalEngineHours"`
@@ -299,24 +300,18 @@ func (x *VehicleStatus) GetVin() string {
 	return ""
 }
 
-func (x *VehicleStatus) GetCreateTime() string {
+func (x *VehicleStatus) GetCreateTime() *timestamppb.Timestamp {
 	if x != nil {
-		if x.xxx_hidden_CreateTime != nil {
-			return *x.xxx_hidden_CreateTime
-		}
-		return ""
+		return x.xxx_hidden_CreateTime
 	}
-	return ""
+	return nil
 }
 
-func (x *VehicleStatus) GetReceiveTime() string {
+func (x *VehicleStatus) GetReceiveTime() *timestamppb.Timestamp {
 	if x != nil {
-		if x.xxx_hidden_ReceiveTime != nil {
-			return *x.xxx_hidden_ReceiveTime
-		}
-		return ""
+		return x.xxx_hidden_ReceiveTime
 	}
-	return ""
+	return nil
 }
 
 func (x *VehicleStatus) GetTrigger() *Trigger {
@@ -443,14 +438,12 @@ func (x *VehicleStatus) SetVin(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 19)
 }
 
-func (x *VehicleStatus) SetCreateTime(v string) {
-	x.xxx_hidden_CreateTime = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 19)
+func (x *VehicleStatus) SetCreateTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_CreateTime = v
 }
 
-func (x *VehicleStatus) SetReceiveTime(v string) {
-	x.xxx_hidden_ReceiveTime = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 19)
+func (x *VehicleStatus) SetReceiveTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_ReceiveTime = v
 }
 
 func (x *VehicleStatus) SetTrigger(v *Trigger) {
@@ -538,14 +531,14 @@ func (x *VehicleStatus) HasCreateTime() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+	return x.xxx_hidden_CreateTime != nil
 }
 
 func (x *VehicleStatus) HasReceiveTime() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+	return x.xxx_hidden_ReceiveTime != nil
 }
 
 func (x *VehicleStatus) HasTrigger() bool {
@@ -659,12 +652,10 @@ func (x *VehicleStatus) ClearVin() {
 }
 
 func (x *VehicleStatus) ClearCreateTime() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_CreateTime = nil
 }
 
 func (x *VehicleStatus) ClearReceiveTime() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_ReceiveTime = nil
 }
 
@@ -744,9 +735,9 @@ type VehicleStatus_builder struct {
 	// The vehicle identification number (VIN) of the vehicle.
 	Vin *string
 	// The date and time the vehicle status was created. (RFC 3339)
-	CreateTime *string
+	CreateTime *timestamppb.Timestamp
 	// The date and time the vehicle status was received. (RFC 3339)
-	ReceiveTime *string
+	ReceiveTime *timestamppb.Timestamp
 	// The type of trigger that caused the vehicle status to be sent.
 	Trigger *Trigger
 	// The total distance travelled by the vehicle during its operation in meters.
@@ -821,14 +812,8 @@ func (b0 VehicleStatus_builder) Build() *VehicleStatus {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 19)
 		x.xxx_hidden_Vin = b.Vin
 	}
-	if b.CreateTime != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 19)
-		x.xxx_hidden_CreateTime = b.CreateTime
-	}
-	if b.ReceiveTime != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 19)
-		x.xxx_hidden_ReceiveTime = b.ReceiveTime
-	}
+	x.xxx_hidden_CreateTime = b.CreateTime
+	x.xxx_hidden_ReceiveTime = b.ReceiveTime
 	x.xxx_hidden_Trigger = b.Trigger
 	if b.HrTotalVehicleDistanceM != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 19)
@@ -1163,12 +1148,12 @@ var File_wayplatform_connect_rfms_v5_vehicle_status_proto protoreflect.FileDescr
 
 const file_wayplatform_connect_rfms_v5_vehicle_status_proto_rawDesc = "" +
 	"\n" +
-	"0wayplatform/connect/rfms/v5/vehicle_status.proto\x12\x1bwayplatform.connect.rfms.v5\x1a2wayplatform/connect/rfms/v5/accumulated_data.proto\x1a7wayplatform/connect/rfms/v5/driver_identification.proto\x1a/wayplatform/connect/rfms/v5/snapshot_data.proto\x1a)wayplatform/connect/rfms/v5/trigger.proto\x1a-wayplatform/connect/rfms/v5/uptime_data.proto\"\x88\x12\n" +
+	"0wayplatform/connect/rfms/v5/vehicle_status.proto\x12\x1bwayplatform.connect.rfms.v5\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2wayplatform/connect/rfms/v5/accumulated_data.proto\x1a7wayplatform/connect/rfms/v5/driver_identification.proto\x1a/wayplatform/connect/rfms/v5/snapshot_data.proto\x1a)wayplatform/connect/rfms/v5/trigger.proto\x1a-wayplatform/connect/rfms/v5/uptime_data.proto\"\xc0\x12\n" +
 	"\rVehicleStatus\x12\x10\n" +
-	"\x03vin\x18\x01 \x01(\tR\x03vin\x12\x1f\n" +
-	"\vcreate_time\x18\x02 \x01(\tR\n" +
-	"createTime\x12!\n" +
-	"\freceive_time\x18\x03 \x01(\tR\vreceiveTime\x12>\n" +
+	"\x03vin\x18\x01 \x01(\tR\x03vin\x12;\n" +
+	"\vcreate_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"createTime\x12=\n" +
+	"\freceive_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\vreceiveTime\x12>\n" +
 	"\atrigger\x18\x04 \x01(\v2$.wayplatform.connect.rfms.v5.TriggerR\atrigger\x12<\n" +
 	"\x1bhr_total_vehicle_distance_m\x18\x05 \x01(\x01R\x17hrTotalVehicleDistanceM\x12,\n" +
 	"\x12total_engine_hours\x18\x06 \x01(\x01R\x10totalEngineHours\x12;\n" +
@@ -1239,28 +1224,31 @@ var file_wayplatform_connect_rfms_v5_vehicle_status_proto_goTypes = []any{
 	(VehicleStatus_Door_LockState)(0),    // 3: wayplatform.connect.rfms.v5.VehicleStatus.Door.LockState
 	(*VehicleStatus)(nil),                // 4: wayplatform.connect.rfms.v5.VehicleStatus
 	(*VehicleStatus_Door)(nil),           // 5: wayplatform.connect.rfms.v5.VehicleStatus.Door
-	(*Trigger)(nil),                      // 6: wayplatform.connect.rfms.v5.Trigger
-	(*DriverIdentification)(nil),         // 7: wayplatform.connect.rfms.v5.DriverIdentification
-	(*SnapshotData)(nil),                 // 8: wayplatform.connect.rfms.v5.SnapshotData
-	(*UptimeData)(nil),                   // 9: wayplatform.connect.rfms.v5.UptimeData
-	(*AccumulatedData)(nil),              // 10: wayplatform.connect.rfms.v5.AccumulatedData
+	(*timestamppb.Timestamp)(nil),        // 6: google.protobuf.Timestamp
+	(*Trigger)(nil),                      // 7: wayplatform.connect.rfms.v5.Trigger
+	(*DriverIdentification)(nil),         // 8: wayplatform.connect.rfms.v5.DriverIdentification
+	(*SnapshotData)(nil),                 // 9: wayplatform.connect.rfms.v5.SnapshotData
+	(*UptimeData)(nil),                   // 10: wayplatform.connect.rfms.v5.UptimeData
+	(*AccumulatedData)(nil),              // 11: wayplatform.connect.rfms.v5.AccumulatedData
 }
 var file_wayplatform_connect_rfms_v5_vehicle_status_proto_depIdxs = []int32{
-	6,  // 0: wayplatform.connect.rfms.v5.VehicleStatus.trigger:type_name -> wayplatform.connect.rfms.v5.Trigger
-	7,  // 1: wayplatform.connect.rfms.v5.VehicleStatus.driver1_id:type_name -> wayplatform.connect.rfms.v5.DriverIdentification
-	0,  // 2: wayplatform.connect.rfms.v5.VehicleStatus.state_of_doors:type_name -> wayplatform.connect.rfms.v5.VehicleStatus.StateOfDoors
-	5,  // 3: wayplatform.connect.rfms.v5.VehicleStatus.doors:type_name -> wayplatform.connect.rfms.v5.VehicleStatus.Door
-	8,  // 4: wayplatform.connect.rfms.v5.VehicleStatus.snapshot_data:type_name -> wayplatform.connect.rfms.v5.SnapshotData
-	9,  // 5: wayplatform.connect.rfms.v5.VehicleStatus.uptime_data:type_name -> wayplatform.connect.rfms.v5.UptimeData
-	10, // 6: wayplatform.connect.rfms.v5.VehicleStatus.accumulated_data:type_name -> wayplatform.connect.rfms.v5.AccumulatedData
-	1,  // 7: wayplatform.connect.rfms.v5.VehicleStatus.Door.enabled_state:type_name -> wayplatform.connect.rfms.v5.VehicleStatus.Door.EnabledState
-	2,  // 8: wayplatform.connect.rfms.v5.VehicleStatus.Door.open_state:type_name -> wayplatform.connect.rfms.v5.VehicleStatus.Door.OpenState
-	3,  // 9: wayplatform.connect.rfms.v5.VehicleStatus.Door.lock_state:type_name -> wayplatform.connect.rfms.v5.VehicleStatus.Door.LockState
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	6,  // 0: wayplatform.connect.rfms.v5.VehicleStatus.create_time:type_name -> google.protobuf.Timestamp
+	6,  // 1: wayplatform.connect.rfms.v5.VehicleStatus.receive_time:type_name -> google.protobuf.Timestamp
+	7,  // 2: wayplatform.connect.rfms.v5.VehicleStatus.trigger:type_name -> wayplatform.connect.rfms.v5.Trigger
+	8,  // 3: wayplatform.connect.rfms.v5.VehicleStatus.driver1_id:type_name -> wayplatform.connect.rfms.v5.DriverIdentification
+	0,  // 4: wayplatform.connect.rfms.v5.VehicleStatus.state_of_doors:type_name -> wayplatform.connect.rfms.v5.VehicleStatus.StateOfDoors
+	5,  // 5: wayplatform.connect.rfms.v5.VehicleStatus.doors:type_name -> wayplatform.connect.rfms.v5.VehicleStatus.Door
+	9,  // 6: wayplatform.connect.rfms.v5.VehicleStatus.snapshot_data:type_name -> wayplatform.connect.rfms.v5.SnapshotData
+	10, // 7: wayplatform.connect.rfms.v5.VehicleStatus.uptime_data:type_name -> wayplatform.connect.rfms.v5.UptimeData
+	11, // 8: wayplatform.connect.rfms.v5.VehicleStatus.accumulated_data:type_name -> wayplatform.connect.rfms.v5.AccumulatedData
+	1,  // 9: wayplatform.connect.rfms.v5.VehicleStatus.Door.enabled_state:type_name -> wayplatform.connect.rfms.v5.VehicleStatus.Door.EnabledState
+	2,  // 10: wayplatform.connect.rfms.v5.VehicleStatus.Door.open_state:type_name -> wayplatform.connect.rfms.v5.VehicleStatus.Door.OpenState
+	3,  // 11: wayplatform.connect.rfms.v5.VehicleStatus.Door.lock_state:type_name -> wayplatform.connect.rfms.v5.VehicleStatus.Door.LockState
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_wayplatform_connect_rfms_v5_vehicle_status_proto_init() }

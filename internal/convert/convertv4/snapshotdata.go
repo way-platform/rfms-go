@@ -6,6 +6,7 @@ import (
 	"github.com/way-platform/rfms-go/internal/convert"
 	rfmsv4oapi "github.com/way-platform/rfms-go/internal/openapi/rfmsv4oapi"
 	rfmsv5 "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 // snapshotData converts an rFMS v4 snapshot data to proto.
@@ -90,7 +91,9 @@ func snapshotData(input *rfmsv4oapi.SnapshotDataObject) *rfmsv5.SnapshotData {
 		output.SetBatteryPackChargingPowerW(*input.BatteryPackChargingPower)
 	}
 	if input.EstimatedTimeBatteryPackChargingCompleted != nil {
-		output.SetBatteryPackEstimatedChargingCompletedTime(time.Time(*input.EstimatedTimeBatteryPackChargingCompleted).UTC().Format(time.RFC3339Nano))
+		output.SetBatteryPackEstimatedChargingCompletedTime(
+			timestamppb.New(time.Time(*input.EstimatedTimeBatteryPackChargingCompleted).UTC()),
+		)
 	}
 	if input.EstimatedDistanceToEmpty != nil {
 		output.SetEstimatedDistanceToEmpty(&rfmsv5.SnapshotData_EstimatedDistanceToEmpty{})

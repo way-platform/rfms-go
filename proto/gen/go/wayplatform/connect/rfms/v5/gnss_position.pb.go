@@ -9,6 +9,7 @@ package rfmsv5
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -23,7 +24,7 @@ const (
 // A GNSS position.
 type GnssPosition struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Time        *string                `protobuf:"bytes,1,opt,name=time"`
+	xxx_hidden_Time        *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=time"`
 	xxx_hidden_Latitude    float64                `protobuf:"fixed64,2,opt,name=latitude"`
 	xxx_hidden_Longitude   float64                `protobuf:"fixed64,3,opt,name=longitude"`
 	xxx_hidden_HeadingDeg  float64                `protobuf:"fixed64,4,opt,name=heading_deg,json=headingDeg"`
@@ -60,14 +61,11 @@ func (x *GnssPosition) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *GnssPosition) GetTime() string {
+func (x *GnssPosition) GetTime() *timestamppb.Timestamp {
 	if x != nil {
-		if x.xxx_hidden_Time != nil {
-			return *x.xxx_hidden_Time
-		}
-		return ""
+		return x.xxx_hidden_Time
 	}
-	return ""
+	return nil
 }
 
 func (x *GnssPosition) GetLatitude() float64 {
@@ -105,9 +103,8 @@ func (x *GnssPosition) GetSpeedKmh() float64 {
 	return 0
 }
 
-func (x *GnssPosition) SetTime(v string) {
-	x.xxx_hidden_Time = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
+func (x *GnssPosition) SetTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_Time = v
 }
 
 func (x *GnssPosition) SetLatitude(v float64) {
@@ -139,7 +136,7 @@ func (x *GnssPosition) HasTime() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+	return x.xxx_hidden_Time != nil
 }
 
 func (x *GnssPosition) HasLatitude() bool {
@@ -178,7 +175,6 @@ func (x *GnssPosition) HasSpeedKmh() bool {
 }
 
 func (x *GnssPosition) ClearTime() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Time = nil
 }
 
@@ -211,7 +207,7 @@ type GnssPosition_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// The time of the GNSS position data. (RFC 3339)
-	Time *string
+	Time *timestamppb.Timestamp
 	// The latitude of the vehicle. (WGS84 based)
 	Latitude *float64
 	// The longitude of the vehicle. (WGS84 based)
@@ -229,10 +225,7 @@ func (b0 GnssPosition_builder) Build() *GnssPosition {
 	m0 := &GnssPosition{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.Time != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
-		x.xxx_hidden_Time = b.Time
-	}
+	x.xxx_hidden_Time = b.Time
 	if b.Latitude != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 6)
 		x.xxx_hidden_Latitude = *b.Latitude
@@ -260,9 +253,9 @@ var File_wayplatform_connect_rfms_v5_gnss_position_proto protoreflect.FileDescri
 
 const file_wayplatform_connect_rfms_v5_gnss_position_proto_rawDesc = "" +
 	"\n" +
-	"/wayplatform/connect/rfms/v5/gnss_position.proto\x12\x1bwayplatform.connect.rfms.v5\"\xb9\x01\n" +
-	"\fGnssPosition\x12\x12\n" +
-	"\x04time\x18\x01 \x01(\tR\x04time\x12\x1a\n" +
+	"/wayplatform/connect/rfms/v5/gnss_position.proto\x12\x1bwayplatform.connect.rfms.v5\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd5\x01\n" +
+	"\fGnssPosition\x12.\n" +
+	"\x04time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x04time\x12\x1a\n" +
 	"\blatitude\x18\x02 \x01(\x01R\blatitude\x12\x1c\n" +
 	"\tlongitude\x18\x03 \x01(\x01R\tlongitude\x12\x1f\n" +
 	"\vheading_deg\x18\x04 \x01(\x01R\n" +
@@ -274,14 +267,16 @@ const file_wayplatform_connect_rfms_v5_gnss_position_proto_rawDesc = "" +
 
 var file_wayplatform_connect_rfms_v5_gnss_position_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_wayplatform_connect_rfms_v5_gnss_position_proto_goTypes = []any{
-	(*GnssPosition)(nil), // 0: wayplatform.connect.rfms.v5.GnssPosition
+	(*GnssPosition)(nil),          // 0: wayplatform.connect.rfms.v5.GnssPosition
+	(*timestamppb.Timestamp)(nil), // 1: google.protobuf.Timestamp
 }
 var file_wayplatform_connect_rfms_v5_gnss_position_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	1, // 0: wayplatform.connect.rfms.v5.GnssPosition.time:type_name -> google.protobuf.Timestamp
+	1, // [1:1] is the sub-list for method output_type
+	1, // [1:1] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_wayplatform_connect_rfms_v5_gnss_position_proto_init() }
