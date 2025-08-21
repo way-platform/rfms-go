@@ -2,10 +2,12 @@ edition = "2023";
 
 package wayplatform.connect.rfms.v5;
 
+import "google/protobuf/timestamp.proto";
+
 // A GNSS position.
 message GnssPosition {
   // The time of the GNSS position data. (RFC 3339)
-  string time = 1;
+  google.protobuf.Timestamp time = 1;
   // The latitude of the vehicle. (WGS84 based)
   double latitude = 2;
   // The longitude of the vehicle. (WGS84 based)

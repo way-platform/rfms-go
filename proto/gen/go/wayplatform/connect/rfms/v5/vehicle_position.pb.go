@@ -9,6 +9,7 @@ package rfmsv5
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -24,8 +25,8 @@ const (
 type VehiclePosition struct {
 	state                         protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Vin                *string                `protobuf:"bytes,1,opt,name=vin"`
-	xxx_hidden_CreateTime         *string                `protobuf:"bytes,2,opt,name=create_time,json=createTime"`
-	xxx_hidden_ReceiveTime        *string                `protobuf:"bytes,3,opt,name=receive_time,json=receiveTime"`
+	xxx_hidden_CreateTime         *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=create_time,json=createTime"`
+	xxx_hidden_ReceiveTime        *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=receive_time,json=receiveTime"`
 	xxx_hidden_Trigger            *Trigger               `protobuf:"bytes,4,opt,name=trigger"`
 	xxx_hidden_GnssPosition       *GnssPosition          `protobuf:"bytes,5,opt,name=gnss_position,json=gnssPosition"`
 	xxx_hidden_WheelBasedSpeedKmh float64                `protobuf:"fixed64,6,opt,name=wheel_based_speed_kmh,json=wheelBasedSpeedKmh"`
@@ -71,24 +72,18 @@ func (x *VehiclePosition) GetVin() string {
 	return ""
 }
 
-func (x *VehiclePosition) GetCreateTime() string {
+func (x *VehiclePosition) GetCreateTime() *timestamppb.Timestamp {
 	if x != nil {
-		if x.xxx_hidden_CreateTime != nil {
-			return *x.xxx_hidden_CreateTime
-		}
-		return ""
+		return x.xxx_hidden_CreateTime
 	}
-	return ""
+	return nil
 }
 
-func (x *VehiclePosition) GetReceiveTime() string {
+func (x *VehiclePosition) GetReceiveTime() *timestamppb.Timestamp {
 	if x != nil {
-		if x.xxx_hidden_ReceiveTime != nil {
-			return *x.xxx_hidden_ReceiveTime
-		}
-		return ""
+		return x.xxx_hidden_ReceiveTime
 	}
-	return ""
+	return nil
 }
 
 func (x *VehiclePosition) GetTrigger() *Trigger {
@@ -124,14 +119,12 @@ func (x *VehiclePosition) SetVin(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 7)
 }
 
-func (x *VehiclePosition) SetCreateTime(v string) {
-	x.xxx_hidden_CreateTime = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 7)
+func (x *VehiclePosition) SetCreateTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_CreateTime = v
 }
 
-func (x *VehiclePosition) SetReceiveTime(v string) {
-	x.xxx_hidden_ReceiveTime = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 7)
+func (x *VehiclePosition) SetReceiveTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_ReceiveTime = v
 }
 
 func (x *VehiclePosition) SetTrigger(v *Trigger) {
@@ -163,14 +156,14 @@ func (x *VehiclePosition) HasCreateTime() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+	return x.xxx_hidden_CreateTime != nil
 }
 
 func (x *VehiclePosition) HasReceiveTime() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+	return x.xxx_hidden_ReceiveTime != nil
 }
 
 func (x *VehiclePosition) HasTrigger() bool {
@@ -207,12 +200,10 @@ func (x *VehiclePosition) ClearVin() {
 }
 
 func (x *VehiclePosition) ClearCreateTime() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_CreateTime = nil
 }
 
 func (x *VehiclePosition) ClearReceiveTime() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_ReceiveTime = nil
 }
 
@@ -241,9 +232,9 @@ type VehiclePosition_builder struct {
 	// See ISO 3779 (17 characters).
 	Vin *string
 	// The date and time the vehicle position was created. (RFC 3339)
-	CreateTime *string
+	CreateTime *timestamppb.Timestamp
 	// The date and time the vehicle position was received. (RFC 3339)
-	ReceiveTime *string
+	ReceiveTime *timestamppb.Timestamp
 	// The type of trigger that caused the vehicle position to be sent.
 	Trigger *Trigger
 	// The GNSS position of the vehicle.
@@ -262,14 +253,8 @@ func (b0 VehiclePosition_builder) Build() *VehiclePosition {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 7)
 		x.xxx_hidden_Vin = b.Vin
 	}
-	if b.CreateTime != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 7)
-		x.xxx_hidden_CreateTime = b.CreateTime
-	}
-	if b.ReceiveTime != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 7)
-		x.xxx_hidden_ReceiveTime = b.ReceiveTime
-	}
+	x.xxx_hidden_CreateTime = b.CreateTime
+	x.xxx_hidden_ReceiveTime = b.ReceiveTime
 	x.xxx_hidden_Trigger = b.Trigger
 	x.xxx_hidden_GnssPosition = b.GnssPosition
 	if b.WheelBasedSpeedKmh != nil {
@@ -287,12 +272,12 @@ var File_wayplatform_connect_rfms_v5_vehicle_position_proto protoreflect.FileDes
 
 const file_wayplatform_connect_rfms_v5_vehicle_position_proto_rawDesc = "" +
 	"\n" +
-	"2wayplatform/connect/rfms/v5/vehicle_position.proto\x12\x1bwayplatform.connect.rfms.v5\x1a/wayplatform/connect/rfms/v5/gnss_position.proto\x1a)wayplatform/connect/rfms/v5/trigger.proto\"\xdc\x02\n" +
+	"2wayplatform/connect/rfms/v5/vehicle_position.proto\x12\x1bwayplatform.connect.rfms.v5\x1a\x1fgoogle/protobuf/timestamp.proto\x1a/wayplatform/connect/rfms/v5/gnss_position.proto\x1a)wayplatform/connect/rfms/v5/trigger.proto\"\x94\x03\n" +
 	"\x0fVehiclePosition\x12\x10\n" +
-	"\x03vin\x18\x01 \x01(\tR\x03vin\x12\x1f\n" +
-	"\vcreate_time\x18\x02 \x01(\tR\n" +
-	"createTime\x12!\n" +
-	"\freceive_time\x18\x03 \x01(\tR\vreceiveTime\x12>\n" +
+	"\x03vin\x18\x01 \x01(\tR\x03vin\x12;\n" +
+	"\vcreate_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"createTime\x12=\n" +
+	"\freceive_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\vreceiveTime\x12>\n" +
 	"\atrigger\x18\x04 \x01(\v2$.wayplatform.connect.rfms.v5.TriggerR\atrigger\x12N\n" +
 	"\rgnss_position\x18\x05 \x01(\v2).wayplatform.connect.rfms.v5.GnssPositionR\fgnssPosition\x121\n" +
 	"\x15wheel_based_speed_kmh\x18\x06 \x01(\x01R\x12wheelBasedSpeedKmh\x120\n" +
@@ -301,18 +286,21 @@ const file_wayplatform_connect_rfms_v5_vehicle_position_proto_rawDesc = "" +
 
 var file_wayplatform_connect_rfms_v5_vehicle_position_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_wayplatform_connect_rfms_v5_vehicle_position_proto_goTypes = []any{
-	(*VehiclePosition)(nil), // 0: wayplatform.connect.rfms.v5.VehiclePosition
-	(*Trigger)(nil),         // 1: wayplatform.connect.rfms.v5.Trigger
-	(*GnssPosition)(nil),    // 2: wayplatform.connect.rfms.v5.GnssPosition
+	(*VehiclePosition)(nil),       // 0: wayplatform.connect.rfms.v5.VehiclePosition
+	(*timestamppb.Timestamp)(nil), // 1: google.protobuf.Timestamp
+	(*Trigger)(nil),               // 2: wayplatform.connect.rfms.v5.Trigger
+	(*GnssPosition)(nil),          // 3: wayplatform.connect.rfms.v5.GnssPosition
 }
 var file_wayplatform_connect_rfms_v5_vehicle_position_proto_depIdxs = []int32{
-	1, // 0: wayplatform.connect.rfms.v5.VehiclePosition.trigger:type_name -> wayplatform.connect.rfms.v5.Trigger
-	2, // 1: wayplatform.connect.rfms.v5.VehiclePosition.gnss_position:type_name -> wayplatform.connect.rfms.v5.GnssPosition
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	1, // 0: wayplatform.connect.rfms.v5.VehiclePosition.create_time:type_name -> google.protobuf.Timestamp
+	1, // 1: wayplatform.connect.rfms.v5.VehiclePosition.receive_time:type_name -> google.protobuf.Timestamp
+	2, // 2: wayplatform.connect.rfms.v5.VehiclePosition.trigger:type_name -> wayplatform.connect.rfms.v5.Trigger
+	3, // 3: wayplatform.connect.rfms.v5.VehiclePosition.gnss_position:type_name -> wayplatform.connect.rfms.v5.GnssPosition
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_wayplatform_connect_rfms_v5_vehicle_position_proto_init() }

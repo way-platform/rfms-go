@@ -5,6 +5,7 @@ import (
 
 	"github.com/way-platform/rfms-go/internal/openapi/rfmsv4oapi"
 	rfmsv5 "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 // gnssPosition converts an rFMS v4 GNSS position to proto.
@@ -26,7 +27,7 @@ func gnssPosition(input *rfmsv4oapi.GNSSPositionObject) *rfmsv5.GnssPosition {
 		output.SetSpeedKmh(*input.Speed)
 	}
 	if input.PositionDateTime != nil {
-		output.SetTime(time.Time(*input.PositionDateTime).UTC().Format(time.RFC3339Nano))
+		output.SetTime(timestamppb.New(time.Time(*input.PositionDateTime).UTC()))
 	}
 	return &output
 }
