@@ -1,9 +1,13 @@
 package rfms
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"io"
+	"net/http"
+	"net/http/httputil"
+	"os"
 	"runtime/debug"
 
 	"github.com/hashicorp/go-retryablehttp"
@@ -48,6 +52,40 @@ func (c *Client) newRequest(ctx context.Context, method, path string, body io.Re
 	}
 	request.Header.Set("User-Agent", getUserAgent())
 	return request, nil
+}
+
+func (c *Client) do(request *retryablehttp.Request) (*http.Response, error) {
+	if c.config.debug {
+		requestData, err := httputil.DumpRequestOut(request.Request, true)
+		if err != nil {
+			return nil, err
+		}
+		var output bytes.Buffer
+		output.Grow(2 * len(requestData))
+		for line := range bytes.Lines(requestData) {
+			_, _ = output.WriteString("> ")
+			_, _ = output.Write(line)
+		}
+		_, _ = os.Stderr.Write(output.Bytes())
+	}
+	response, err := c.httpClient.Do(request)
+	if err != nil {
+		return nil, err
+	}
+	if c.config.debug {
+		responseData, err := httputil.DumpResponse(response, true)
+		if err != nil {
+			return nil, err
+		}
+		var output bytes.Buffer
+		output.Grow(2 * len(responseData))
+		for line := range bytes.Lines(responseData) {
+			_, _ = output.WriteString("< ")
+			_, _ = output.Write(line)
+		}
+		_, _ = os.Stderr.Write(output.Bytes())
+	}
+	return response, nil
 }
 
 func getUserAgent() string {

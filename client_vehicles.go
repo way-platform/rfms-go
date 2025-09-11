@@ -57,7 +57,7 @@ func (c *Client) vehiclesV2(ctx context.Context, request VehiclesRequest) (Vehic
 		q.Set("lastVin", request.LastVIN)
 	}
 	httpRequest.URL.RawQuery = q.Encode()
-	httpResponse, err := c.httpClient.Do(httpRequest)
+	httpResponse, err := c.do(httpRequest)
 	if err != nil {
 		return VehiclesResponse{}, fmt.Errorf("send request: %w", err)
 	}
@@ -94,7 +94,7 @@ func (c *Client) vehiclesV4(ctx context.Context, request VehiclesRequest) (Vehic
 		q.Set("lastVin", request.LastVIN)
 	}
 	httpRequest.URL.RawQuery = q.Encode()
-	httpResponse, err := c.httpClient.Do(httpRequest)
+	httpResponse, err := c.do(httpRequest)
 	if err != nil {
 		return VehiclesResponse{}, fmt.Errorf("send request: %w", err)
 	}

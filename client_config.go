@@ -13,6 +13,7 @@ type ClientConfig struct {
 	transport  http.RoundTripper
 	retryCount int
 	logger     Logger
+	debug      bool
 }
 
 // newClientConfig creates a new default [ClientConfig].
@@ -26,6 +27,13 @@ func newClientConfig() ClientConfig {
 
 // ClientOption is an option that configures a [Client].
 type ClientOption func(*ClientConfig)
+
+// WithDebug sets the debug flag for the [Client].
+func WithDebug(debug bool) ClientOption {
+	return func(cc *ClientConfig) {
+		cc.debug = debug
+	}
+}
 
 // WithBaseURL sets the API base URL for the [Client].
 func WithBaseURL(baseURL string) ClientOption {

@@ -94,7 +94,7 @@ func (c *Client) vehicleStatusesV2(ctx context.Context, request VehicleStatusesR
 		q.Set("latestOnly", "true")
 	}
 	httpRequest.URL.RawQuery = q.Encode()
-	httpResponse, err := c.httpClient.Do(httpRequest)
+	httpResponse, err := c.do(httpRequest)
 	if err != nil {
 		return VehicleStatusesResponse{}, fmt.Errorf("send request: %w", err)
 	}
@@ -153,7 +153,7 @@ func (c *Client) vehicleStatusesV4(ctx context.Context, request VehicleStatusesR
 		q.Set("latestOnly", "true")
 	}
 	httpRequest.URL.RawQuery = q.Encode()
-	httpResponse, err := c.httpClient.Do(httpRequest)
+	httpResponse, err := c.do(httpRequest)
 	if err != nil {
 		return VehicleStatusesResponse{}, fmt.Errorf("send request: %w", err)
 	}

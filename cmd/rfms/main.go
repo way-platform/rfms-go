@@ -49,6 +49,7 @@ func newRootCommand() *cobra.Command {
 		Use:   "rfms",
 		Short: "rFMS CLI",
 	}
+	cmd.PersistentFlags().Bool("debug", false, "Enable debug logging")
 	cmd.AddGroup(&cobra.Group{
 		ID:    "rfms",
 		Title: "rFMS Commands",
@@ -67,10 +68,9 @@ func newRootCommand() *cobra.Command {
 	})
 	cmd.SetHelpCommandGroupID("utils")
 	cmd.SetCompletionCommandGroupID("utils")
-	cmd.PersistentFlags().BoolP("debug", "d", false, "enable debug logging")
 	cmd.PersistentPreRunE = func(cmd *cobra.Command, args []string) error {
 		level := slog.LevelInfo
-		if cmd.Flags().Changed("debug") {
+		if cmd.Root().PersistentFlags().Changed("debug") {
 			level = slog.LevelDebug
 		}
 		slog.SetDefault(slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
@@ -81,6 +81,17 @@ func newRootCommand() *cobra.Command {
 	return cmd
 }
 
+func newClient(cmd *cobra.Command) (*rfms.Client, error) {
+	debug, _ := cmd.Root().PersistentFlags().GetBool("debug")
+	client, err := auth.NewClient(
+		rfms.WithDebug(debug),
+	)
+	if err != nil {
+		return nil, err
+	}
+	return client, nil
+}
+
 func newVehiclesCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:     "vehicles",
@@ -89,7 +100,7 @@ func newVehiclesCommand() *cobra.Command {
 	}
 	limit := cmd.Flags().Int("limit", 100, "max vehicles queried")
 	cmd.RunE = func(cmd *cobra.Command, args []string) error {
-		client, err := auth.NewClient()
+		client, err := newClient(cmd)
 		if err != nil {
 			return err
 		}
@@ -115,30 +126,42 @@ func newVehiclesCommand() *cobra.Command {
 
 func newVehiclePositionsCommand() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:     "vehicle-positions",
+		Use:     "vehicle-positions [VIN]",
 		Short:   "List vehicle positions",
 		GroupID: "rfms",
+		Args:    cobra.MaximumNArgs(1),
 	}
-	limit := cmd.Flags().Int("limit", 100, "max vehicle positions queried")
+	startTime := cmd.Flags().Time("start", time.Time{}, []string{time.DateOnly, time.RFC3339}, "start time")
+	stopTime := cmd.Flags().Time("stop", time.Time{}, []string{time.DateOnly, time.RFC3339}, "stop time")
 	cmd.RunE = func(cmd *cobra.Command, args []string) error {
-		client, err := auth.NewClient()
+		client, err := newClient(cmd)
 		if err != nil {
 			return err
 		}
-		moreDataAvailable, lastVIN, count := true, "", 0
-		for moreDataAvailable && count < *limit {
-			response, err := client.VehiclePositions(cmd.Context(), rfms.VehiclePositionsRequest{
+		var vin string
+		if len(args) > 0 {
+			vin = args[0]
+		}
+		moreDataAvailable, lastVIN := true, ""
+		for moreDataAvailable {
+			request := rfms.VehiclePositionsRequest{
 				LastVIN:    lastVIN,
-				LatestOnly: true,
-			})
+				VIN:        vin,
+				LatestOnly: startTime.IsZero() && stopTime.IsZero(),
+				StartTime:  *startTime,
+				StopTime:   *stopTime,
+			}
+			response, err := client.VehiclePositions(cmd.Context(), request)
 			if err != nil {
 				return err
 			}
 			for _, vehiclePosition := range response.VehiclePositions {
 				fmt.Println(protojson.Format(vehiclePosition))
 			}
-			count += len(response.VehiclePositions)
 			moreDataAvailable = response.MoreDataAvailable
+			if !moreDataAvailable {
+				break
+			}
 			lastVIN = response.VehiclePositions[len(response.VehiclePositions)-1].GetVin()
 		}
 		return nil
@@ -156,7 +179,7 @@ func newVehicleStatusesCommand() *cobra.Command {
 	startTime := cmd.Flags().Time("start", time.Time{}, []string{time.DateOnly, time.RFC3339}, "start time")
 	stopTime := cmd.Flags().Time("stop", time.Time{}, []string{time.DateOnly, time.RFC3339}, "stop time")
 	cmd.RunE = func(cmd *cobra.Command, args []string) error {
-		client, err := auth.NewClient()
+		client, err := newClient(cmd)
 		if err != nil {
 			return err
 		}

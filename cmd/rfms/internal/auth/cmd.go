@@ -45,7 +45,7 @@ func ReadCredentials() (*Credentials, error) {
 }
 
 // NewClient creates a new rFMS client using the CLI credentials.
-func NewClient() (*rfms.Client, error) {
+func NewClient(opts ...rfms.ClientOption) (*rfms.Client, error) {
 	auth, err := ReadCredentials()
 	if err != nil {
 		return nil, err
@@ -60,13 +60,17 @@ func NewClient() (*rfms.Client, error) {
 			return nil, fmt.Errorf("session expired - please login again")
 		}
 		return rfms.NewClient(
-			rfms.WithBaseURL(rfms.ScaniaBaseURL),
-			rfms.WithVersion(rfms.V4),
-			rfms.WithReuseTokenAuth(*auth.TokenCredentials),
+			append(opts,
+				rfms.WithBaseURL(rfms.ScaniaBaseURL),
+				rfms.WithVersion(rfms.V4),
+				rfms.WithReuseTokenAuth(*auth.TokenCredentials),
+			)...,
 		), nil
 	case rfms.BrandVolvoTrucks:
 		return rfms.NewClient(
-			rfms.WithVolvoTrucks(auth.Username, auth.Password),
+			append(opts,
+				rfms.WithVolvoTrucks(auth.Username, auth.Password),
+			)...,
 		), nil
 	default:
 		return nil, fmt.Errorf("unknown provider: %s", auth.Provider)

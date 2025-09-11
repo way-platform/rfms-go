@@ -89,7 +89,7 @@ func (c *Client) vehiclePositionsV2(ctx context.Context, request VehiclePosition
 		q.Set("triggerFilter", request.TriggerFilter)
 	}
 	httpRequest.URL.RawQuery = q.Encode()
-	httpResponse, err := c.httpClient.Do(httpRequest)
+	httpResponse, err := c.do(httpRequest)
 	if err != nil {
 		return VehiclePositionsResponse{}, fmt.Errorf("send request: %w", err)
 	}
@@ -145,7 +145,7 @@ func (c *Client) vehiclePositionsV4(ctx context.Context, request VehiclePosition
 		q.Set("triggerFilter", request.TriggerFilter)
 	}
 	httpRequest.URL.RawQuery = q.Encode()
-	httpResponse, err := c.httpClient.Do(httpRequest)
+	httpResponse, err := c.do(httpRequest)
 	if err != nil {
 		return VehiclePositionsResponse{}, fmt.Errorf("send request: %w", err)
 	}
