@@ -6,6 +6,7 @@ import (
 	"image/color"
 	"log/slog"
 	"os"
+	"time"
 
 	"github.com/charmbracelet/fang"
 	"github.com/charmbracelet/lipgloss/v2"
@@ -147,30 +148,42 @@ func newVehiclePositionsCommand() *cobra.Command {
 
 func newVehicleStatusesCommand() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:     "vehicle-statuses",
+		Use:     "vehicle-statuses [VIN]",
 		Short:   "List vehicle statuses",
 		GroupID: "rfms",
+		Args:    cobra.MaximumNArgs(1),
 	}
-	limit := cmd.Flags().Int("limit", 100, "max vehicle statuses queried")
+	startTime := cmd.Flags().Time("start", time.Time{}, []string{time.DateOnly, time.RFC3339}, "start time")
+	stopTime := cmd.Flags().Time("stop", time.Time{}, []string{time.DateOnly, time.RFC3339}, "stop time")
 	cmd.RunE = func(cmd *cobra.Command, args []string) error {
 		client, err := auth.NewClient()
 		if err != nil {
 			return err
 		}
-		moreDataAvailable, lastVIN, count := true, "", 0
-		for moreDataAvailable && count < *limit {
-			response, err := client.VehicleStatuses(cmd.Context(), rfms.VehicleStatusesRequest{
+		var vin string
+		if len(args) > 0 {
+			vin = args[0]
+		}
+		moreDataAvailable, lastVIN := true, ""
+		for moreDataAvailable {
+			request := rfms.VehicleStatusesRequest{
 				LastVIN:    lastVIN,
-				LatestOnly: true,
-			})
+				VIN:        vin,
+				LatestOnly: startTime.IsZero() && stopTime.IsZero(),
+				StartTime:  *startTime,
+				StopTime:   *stopTime,
+			}
+			response, err := client.VehicleStatuses(cmd.Context(), request)
 			if err != nil {
 				return err
 			}
 			for _, vehicleStatus := range response.VehicleStatuses {
 				fmt.Println(protojson.Format(vehicleStatus))
 			}
-			count += len(response.VehicleStatuses)
 			moreDataAvailable = response.MoreDataAvailable
+			if !moreDataAvailable {
+				break
+			}
 			lastVIN = response.VehicleStatuses[len(response.VehicleStatuses)-1].GetVin()
 		}
 		return nil
