@@ -7,6 +7,7 @@ import (
 	"io"
 	"log/slog"
 	"net/http"
+	"net/url"
 
 	"github.com/way-platform/rfms-go/internal/convert/convertv2"
 	"github.com/way-platform/rfms-go/internal/convert/convertv4"
@@ -30,36 +31,50 @@ type VehiclesResponse struct {
 }
 
 // Vehicles implements the rFMS API method "GET /vehicles".
-func (c *Client) Vehicles(ctx context.Context, request VehiclesRequest) (_ VehiclesResponse, err error) {
-	defer func() {
-		if err != nil {
-			err = fmt.Errorf("rFMS %s vehicles: %w", c.config.apiVersion, err)
-		}
-	}()
-	switch c.config.apiVersion {
+func (c *Client) Vehicles(ctx context.Context, request VehiclesRequest, opts ...ClientOption) (_ VehiclesResponse, err error) {
+	cfg := c.config.with(opts...)
+	switch cfg.apiVersion {
 	case V2_1:
-		return c.vehiclesV2(ctx, request)
+		return c.vehiclesV2(ctx, request, cfg)
 	case V4:
-		return c.vehiclesV4(ctx, request)
+		return c.vehiclesV4(ctx, request, cfg)
 	default:
 		return VehiclesResponse{}, fmt.Errorf("unsupported API version")
 	}
 }
 
-func (c *Client) vehiclesV2(ctx context.Context, request VehiclesRequest) (VehiclesResponse, error) {
-	httpRequest, err := c.newRequest(ctx, http.MethodGet, "/vehicles", nil)
-	if err != nil {
-		return VehiclesResponse{}, fmt.Errorf("create request: %w", err)
-	}
-	httpRequest.Header.Set("Accept", "application/vnd.fmsstandard.com.Vehicles.v2.1+json; UTF-8")
-	q := httpRequest.URL.Query()
+func (c *Client) vehiclesV2(ctx context.Context, request VehiclesRequest, cfg ClientConfig) (_ VehiclesResponse, err error) {
+	defer func() {
+		if err != nil {
+			err = fmt.Errorf("rFMS v2 vehicles: %w", err)
+		}
+	}()
+	// Build query parameters
+	query := url.Values{}
 	if request.LastVIN != "" {
-		q.Set("lastVin", request.LastVIN)
+		query.Set("lastVin", request.LastVIN)
 	}
-	httpRequest.URL.RawQuery = q.Encode()
-	httpResponse, err := c.do(httpRequest)
+
+	// Build path with query parameters
+	path := "/vehicles"
+	if len(query) > 0 {
+		path += "?" + query.Encode()
+	}
+	// Apply per-request configuration overrides
+	fullURL := cfg.baseURL + path
+	// Create the request
+	httpRequest, err := http.NewRequestWithContext(ctx, http.MethodGet, fullURL, nil)
 	if err != nil {
-		return VehiclesResponse{}, fmt.Errorf("send request: %w", err)
+		return VehiclesResponse{}, fmt.Errorf("http request: %w", err)
+	}
+	// Set headers
+	httpRequest.Header.Set("User-Agent", getUserAgent())
+	httpRequest.Header.Set("Accept", "application/vnd.fmsstandard.com.Vehicles.v2.1+json")
+	// Create HTTP client and make request
+	client := c.httpClient(cfg)
+	httpResponse, err := client.Do(httpRequest)
+	if err != nil {
+		return VehiclesResponse{}, fmt.Errorf("http request: %w", err)
 	}
 	defer httpResponse.Body.Close()
 	if httpResponse.StatusCode != http.StatusOK {
@@ -83,20 +98,37 @@ func (c *Client) vehiclesV2(ctx context.Context, request VehiclesRequest) (Vehic
 	return result, nil
 }
 
-func (c *Client) vehiclesV4(ctx context.Context, request VehiclesRequest) (VehiclesResponse, error) {
-	httpRequest, err := c.newRequest(ctx, http.MethodGet, "/vehicles", nil)
-	if err != nil {
-		return VehiclesResponse{}, fmt.Errorf("create request: %w", err)
-	}
-	httpRequest.Header.Set("Accept", "application/json; rfms=vehicles.v4.0")
-	q := httpRequest.URL.Query()
+func (c *Client) vehiclesV4(ctx context.Context, request VehiclesRequest, cfg ClientConfig) (_ VehiclesResponse, err error) {
+	defer func() {
+		if err != nil {
+			err = fmt.Errorf("rFMS v4 vehicles: %w", err)
+		}
+	}()
+	// Build query parameters
+	query := url.Values{}
 	if request.LastVIN != "" {
-		q.Set("lastVin", request.LastVIN)
+		query.Set("lastVin", request.LastVIN)
 	}
-	httpRequest.URL.RawQuery = q.Encode()
-	httpResponse, err := c.do(httpRequest)
+	// Build path with query parameters
+	path := "/vehicles"
+	if len(query) > 0 {
+		path += "?" + query.Encode()
+	}
+	// Apply per-request configuration overrides
+	fullURL := cfg.baseURL + path
+	// Create the request
+	httpRequest, err := http.NewRequestWithContext(ctx, http.MethodGet, fullURL, nil)
 	if err != nil {
-		return VehiclesResponse{}, fmt.Errorf("send request: %w", err)
+		return VehiclesResponse{}, fmt.Errorf("http request: %w", err)
+	}
+	// Set headers
+	httpRequest.Header.Set("User-Agent", getUserAgent())
+	httpRequest.Header.Set("Accept", "application/json; rfms=vehicles.v4.0")
+	// Create HTTP client and make request
+	client := c.httpClient(cfg)
+	httpResponse, err := client.Do(httpRequest)
+	if err != nil {
+		return VehiclesResponse{}, fmt.Errorf("http request: %w", err)
 	}
 	defer httpResponse.Body.Close()
 	if httpResponse.StatusCode != http.StatusOK {

@@ -1,23 +1,24 @@
 package auth
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"os"
-	"time"
 
 	"github.com/adrg/xdg"
 	"github.com/spf13/cobra"
 	"github.com/way-platform/rfms-go"
+	"golang.org/x/oauth2"
 	"golang.org/x/term"
 )
 
 // Credentials for the rFMS CLI.
 type Credentials struct {
-	Provider         string                 `json:"provider"`
-	TokenCredentials *rfms.TokenCredentials `json:"tokenCredentials,omitzero"`
-	Username         string                 `json:"username,omitzero"`
-	Password         string                 `json:"password,omitzero"`
+	Provider string        `json:"provider"`
+	Token    *oauth2.Token `json:"token,omitzero"`
+	Username string        `json:"username,omitzero"`
+	Password string        `json:"password,omitzero"`
 }
 
 func resolveCredentialsFilepath() (string, error) {
@@ -52,26 +53,22 @@ func NewClient(opts ...rfms.ClientOption) (*rfms.Client, error) {
 	}
 	switch auth.Provider {
 	case rfms.BrandScania:
-		if auth.TokenCredentials.TokenExpireTime.Before(time.Now()) {
-			if auth.TokenCredentials.RefreshTokenExpireTime.Before(time.Now()) {
-				// TODO: Refresh token credentials if they are expired.
-				_ = "TODO"
-			}
+		if auth.Token == nil || !auth.Token.Valid() {
 			return nil, fmt.Errorf("session expired - please login again")
 		}
 		return rfms.NewClient(
 			append(opts,
 				rfms.WithBaseURL(rfms.ScaniaBaseURL),
 				rfms.WithVersion(rfms.V4),
-				rfms.WithReuseTokenAuth(*auth.TokenCredentials),
+				rfms.WithTokenSource(oauth2.StaticTokenSource(auth.Token)),
 			)...,
-		), nil
+		)
 	case rfms.BrandVolvoTrucks:
 		return rfms.NewClient(
 			append(opts,
 				rfms.WithVolvoTrucks(auth.Username, auth.Password),
 			)...,
-		), nil
+		)
 	default:
 		return nil, fmt.Errorf("unknown provider: %s", auth.Provider)
 	}
@@ -145,14 +142,17 @@ func newLoginScaniaCommand() *cobra.Command {
 			}
 			*clientSecret = string(input)
 		}
-		authenticator := rfms.NewScaniaTokenAuthenticator(*clientID, *clientSecret)
-		credentials, err := authenticator.Authenticate(cmd.Context())
+		tokenSource := rfms.ScaniaAuthConfig{
+			ClientID:     *clientID,
+			ClientSecret: *clientSecret,
+		}.TokenSource(context.Background())
+		token, err := tokenSource.Token()
 		if err != nil {
 			return err
 		}
 		auth := &Credentials{
-			Provider:         provider,
-			TokenCredentials: &credentials,
+			Provider: provider,
+			Token:    token,
 		}
 		if err := writeCredentials(auth); err != nil {
 			return err
