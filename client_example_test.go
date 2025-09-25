@@ -9,9 +9,12 @@ import (
 )
 
 func ExampleClient_scania() {
-	client := rfms.NewClient(
+	client, err := rfms.NewClient(
 		rfms.WithScania(os.Getenv("SCANIA_CLIENT_ID"), os.Getenv("SCANIA_CLIENT_SECRET")),
 	)
+	if err != nil {
+		panic(err)
+	}
 	lastVIN, moreDataAvailable := "", true
 	for moreDataAvailable {
 		response, err := client.Vehicles(context.Background(), rfms.VehiclesRequest{
@@ -31,9 +34,12 @@ func ExampleClient_scania() {
 }
 
 func ExampleClient_volvoTrucks() {
-	client := rfms.NewClient(
+	client, err := rfms.NewClient(
 		rfms.WithVolvoTrucks(os.Getenv("VOLVO_TRUCKS_USERNAME"), os.Getenv("VOLVO_TRUCKS_PASSWORD")),
 	)
+	if err != nil {
+		panic(err)
+	}
 	lastVIN, moreDataAvailable := "", true
 	for moreDataAvailable {
 		response, err := client.Vehicles(context.Background(), rfms.VehiclesRequest{
