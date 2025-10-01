@@ -159,29 +159,35 @@ func WithBasicAuth(username, password string) ClientOption {
 	}
 }
 
-// Convenience Configuration Functions
-
 // WithScania configures the [Client] to use the Scania rFMS v4 API.
 func WithScania(clientID string, clientSecret string) ClientOption {
 	return func(cc *ClientConfig) {
-		WithBaseURL(ScaniaBaseURL)(cc)
-		WithTokenSource(ScaniaAuthConfig{
-			ClientID:     clientID,
-			ClientSecret: clientSecret,
-			Debug:        cc.debug,
-			MaxRetries:   cc.retryCount,
-			Timeout:      cc.timeout,
-		}.TokenSource(context.Background()))
-		WithVersion(V4)(cc)
+		for _, opt := range []ClientOption{
+			WithBaseURL(ScaniaBaseURL),
+			WithVersion(V4),
+			WithTokenSource(ScaniaAuthConfig{
+				ClientID:     clientID,
+				ClientSecret: clientSecret,
+				Debug:        cc.debug,
+				MaxRetries:   cc.retryCount,
+				Timeout:      cc.timeout,
+			}.TokenSource(context.Background())),
+		} {
+			opt(cc)
+		}
 	}
 }
 
 // WithVolvoTrucks configures the [Client] to use the Volvo Trucks rFMS v2.1 API.
 func WithVolvoTrucks(username string, password string) ClientOption {
 	return func(cc *ClientConfig) {
-		WithBaseURL(VolvoTrucksBaseURL)(cc)
-		WithBasicAuth(username, password)(cc)
-		WithVersion(V2_1)(cc)
+		for _, opt := range []ClientOption{
+			WithBaseURL(VolvoTrucksBaseURL),
+			WithVersion(V2_1),
+			WithBasicAuth(username, password),
+		} {
+			opt(cc)
+		}
 	}
 }
 
