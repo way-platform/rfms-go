@@ -74,13 +74,6 @@ func (c *Client) httpClient(cfg ClientConfig) *http.Client {
 			next: transport,
 		}
 	}
-	// Add middleware transport if middlewares are configured.
-	if len(cfg.interceptors) > 0 {
-		transport = &interceptorTransport{
-			interceptors: cfg.interceptors,
-			next:         transport,
-		}
-	}
 	// Add basic auth transport if username/password are configured
 	if cfg.username != "" && cfg.password != "" {
 		transport = &basicAuthTransport{
@@ -94,6 +87,13 @@ func (c *Client) httpClient(cfg ClientConfig) *http.Client {
 		transport = &oauth2.Transport{
 			Source: cfg.tokenSource,
 			Base:   transport,
+		}
+	}
+	// Add middleware transport if middlewares are configured.
+	if len(cfg.interceptors) > 0 {
+		transport = &interceptorTransport{
+			interceptors: cfg.interceptors,
+			next:         transport,
 		}
 	}
 	// Add retry transport if retry count > 0.
