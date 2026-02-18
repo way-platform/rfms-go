@@ -24,9 +24,15 @@ func driverIdentification(input *rfmsv2oapi.DriverIDType) *rfmsv5.DriverIdentifi
 			tacho.SetCardReplacementIndex(*input.TachoDriverIdentification.CardReplacementIndex)
 		}
 		if input.TachoDriverIdentification.DriverAuthenticationEquipment != nil {
-			tacho.SetAuthenticationEquipment(convert.AuthenticationEquipment(string(*input.TachoDriverIdentification.DriverAuthenticationEquipment)))
+			tacho.SetAuthenticationEquipment(
+				convert.AuthenticationEquipment(
+					string(*input.TachoDriverIdentification.DriverAuthenticationEquipment),
+				),
+			)
 			if tacho.GetAuthenticationEquipment() == rfmsv5.DriverIdentification_Tacho_AUTHENTICATION_EQUIPMENT_UNKNOWN {
-				tacho.SetUnknownAuthenticationEquipment(string(*input.TachoDriverIdentification.DriverAuthenticationEquipment))
+				tacho.SetUnknownAuthenticationEquipment(
+					string(*input.TachoDriverIdentification.DriverAuthenticationEquipment),
+				)
 			}
 		}
 		output.SetTacho(&tacho)

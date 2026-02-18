@@ -35,7 +35,10 @@ func ExampleClient_scania() {
 
 func ExampleClient_volvoTrucks() {
 	client, err := rfms.NewClient(
-		rfms.WithVolvoTrucks(os.Getenv("VOLVO_TRUCKS_USERNAME"), os.Getenv("VOLVO_TRUCKS_PASSWORD")),
+		rfms.WithVolvoTrucks(
+			os.Getenv("VOLVO_TRUCKS_USERNAME"),
+			os.Getenv("VOLVO_TRUCKS_PASSWORD"),
+		),
 	)
 	if err != nil {
 		panic(err)

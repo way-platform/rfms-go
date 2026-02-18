@@ -61,7 +61,9 @@ func VehicleStatus(input *rfmsv4oapi.VehicleStatusObject) *rfmsv5.VehicleStatus 
 				door.SetNumber(*doorStatus.DoorNumber)
 			}
 			if doorStatus.DoorEnabledStatus != nil {
-				door.SetEnabledState(convert.DoorEnabledState(string(*doorStatus.DoorEnabledStatus)))
+				door.SetEnabledState(
+					convert.DoorEnabledState(string(*doorStatus.DoorEnabledStatus)),
+				)
 				if door.GetEnabledState() == rfmsv5.VehicleStatus_Door_ENABLED_STATE_UNKNOWN {
 					door.SetUnknownEnabledState(string(*doorStatus.DoorEnabledStatus))
 				}

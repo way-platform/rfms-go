@@ -43,7 +43,9 @@ func uptimeData(input *rfmsv2oapi.UptimeType) *rfmsv5.UptimeData {
 				alternator.SetNumber(int32(*alternatorInfo.AlternatorNumber))
 			}
 			if alternatorInfo.AlternatorStatus != nil {
-				alternator.SetState(convert.AlternatorState(string(*alternatorInfo.AlternatorStatus)))
+				alternator.SetState(
+					convert.AlternatorState(string(*alternatorInfo.AlternatorStatus)),
+				)
 				if alternator.GetState() == rfmsv5.UptimeData_Alternator_STATE_UNKNOWN {
 					alternator.SetUnknownState(string(*alternatorInfo.AlternatorStatus))
 				}

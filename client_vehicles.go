@@ -31,7 +31,11 @@ type VehiclesResponse struct {
 }
 
 // Vehicles implements the rFMS API method "GET /vehicles".
-func (c *Client) Vehicles(ctx context.Context, request VehiclesRequest, opts ...ClientOption) (_ VehiclesResponse, err error) {
+func (c *Client) Vehicles(
+	ctx context.Context,
+	request VehiclesRequest,
+	opts ...ClientOption,
+) (_ VehiclesResponse, err error) {
 	cfg := c.config.with(opts...)
 	switch cfg.apiVersion {
 	case V2_1:
@@ -43,7 +47,11 @@ func (c *Client) Vehicles(ctx context.Context, request VehiclesRequest, opts ...
 	}
 }
 
-func (c *Client) vehiclesV2(ctx context.Context, request VehiclesRequest, cfg ClientConfig) (_ VehiclesResponse, err error) {
+func (c *Client) vehiclesV2(
+	ctx context.Context,
+	request VehiclesRequest,
+	cfg ClientConfig,
+) (_ VehiclesResponse, err error) {
 	defer func() {
 		if err != nil {
 			err = fmt.Errorf("rFMS v2 vehicles: %w", err)
@@ -76,7 +84,9 @@ func (c *Client) vehiclesV2(ctx context.Context, request VehiclesRequest, cfg Cl
 	if err != nil {
 		return VehiclesResponse{}, fmt.Errorf("http request: %w", err)
 	}
-	defer httpResponse.Body.Close()
+	defer func() {
+		_ = httpResponse.Body.Close()
+	}()
 	if httpResponse.StatusCode != http.StatusOK {
 		return VehiclesResponse{}, newHTTPError(httpResponse)
 	}
@@ -98,7 +108,11 @@ func (c *Client) vehiclesV2(ctx context.Context, request VehiclesRequest, cfg Cl
 	return result, nil
 }
 
-func (c *Client) vehiclesV4(ctx context.Context, request VehiclesRequest, cfg ClientConfig) (_ VehiclesResponse, err error) {
+func (c *Client) vehiclesV4(
+	ctx context.Context,
+	request VehiclesRequest,
+	cfg ClientConfig,
+) (_ VehiclesResponse, err error) {
 	defer func() {
 		if err != nil {
 			err = fmt.Errorf("rFMS v4 vehicles: %w", err)
@@ -130,7 +144,9 @@ func (c *Client) vehiclesV4(ctx context.Context, request VehiclesRequest, cfg Cl
 	if err != nil {
 		return VehiclesResponse{}, fmt.Errorf("http request: %w", err)
 	}
-	defer httpResponse.Body.Close()
+	defer func() {
+		_ = httpResponse.Body.Close()
+	}()
 	if httpResponse.StatusCode != http.StatusOK {
 		return VehiclesResponse{}, newHTTPError(httpResponse)
 	}

@@ -25,7 +25,13 @@ func Vehicle(input *rfmsv4oapi.VehicleObject) *rfmsv5.Vehicle {
 		}
 	}
 	if input.ProductionDate != nil {
-		output.SetProductionDate(convert.Date(input.ProductionDate.Year, input.ProductionDate.Month, input.ProductionDate.Day))
+		output.SetProductionDate(
+			convert.Date(
+				input.ProductionDate.Year,
+				input.ProductionDate.Month,
+				input.ProductionDate.Day,
+			),
+		)
 	}
 	if input.Type != nil {
 		output.SetType(convert.VehicleType(*input.Type))
@@ -41,7 +47,9 @@ func Vehicle(input *rfmsv4oapi.VehicleObject) *rfmsv5.Vehicle {
 			fuelType := convert.FuelType(possibleFuelType)
 			output.SetPossibleFuelTypes(append(output.GetPossibleFuelTypes(), fuelType))
 			if fuelType == rfmsv5.FuelType_FUEL_TYPE_UNKNOWN {
-				output.SetUnknownPossibleFuelTypes(append(output.GetUnknownPossibleFuelTypes(), possibleFuelType))
+				output.SetUnknownPossibleFuelTypes(
+					append(output.GetUnknownPossibleFuelTypes(), possibleFuelType),
+				)
 			}
 		}
 	}

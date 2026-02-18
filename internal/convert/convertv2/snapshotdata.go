@@ -28,13 +28,17 @@ func snapshotData(input *rfmsv2oapi.SnapshotType) *rfmsv5.SnapshotData {
 		output.SetWheelBasedSpeedKmh(*input.WheelBasedSpeed)
 	}
 	if input.Driver1WorkingState != nil {
-		output.SetDriver1WorkingState(convert.DriverWorkingState(string(*input.Driver1WorkingState)))
+		output.SetDriver1WorkingState(
+			convert.DriverWorkingState(string(*input.Driver1WorkingState)),
+		)
 		if output.GetDriver1WorkingState() == rfmsv5.DriverWorkingState_DRIVER_WORKING_STATE_UNKNOWN {
 			output.SetUnknownDriver1WorkingState(string(*input.Driver1WorkingState))
 		}
 	}
 	if input.Driver2WorkingState != nil {
-		output.SetDriver2WorkingState(convert.DriverWorkingState(string(*input.Driver2WorkingState)))
+		output.SetDriver2WorkingState(
+			convert.DriverWorkingState(string(*input.Driver2WorkingState)),
+		)
 		if output.GetDriver2WorkingState() == rfmsv5.DriverWorkingState_DRIVER_WORKING_STATE_UNKNOWN {
 			output.SetUnknownDriver2WorkingState(string(*input.Driver2WorkingState))
 		}

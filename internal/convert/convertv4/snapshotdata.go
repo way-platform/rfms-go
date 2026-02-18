@@ -46,13 +46,17 @@ func snapshotData(input *rfmsv4oapi.SnapshotDataObject) *rfmsv5.SnapshotData {
 		output.SetCatalystFuelLevelPercent(*input.CatalystFuelLevel)
 	}
 	if input.Driver1WorkingState != nil {
-		output.SetDriver1WorkingState(convert.DriverWorkingState(string(*input.Driver1WorkingState)))
+		output.SetDriver1WorkingState(
+			convert.DriverWorkingState(string(*input.Driver1WorkingState)),
+		)
 		if output.GetDriver1WorkingState() == rfmsv5.DriverWorkingState_DRIVER_WORKING_STATE_UNKNOWN {
 			output.SetUnknownDriver1WorkingState(string(*input.Driver1WorkingState))
 		}
 	}
 	if input.Driver2WorkingState != nil {
-		output.SetDriver2WorkingState(convert.DriverWorkingState(string(*input.Driver2WorkingState)))
+		output.SetDriver2WorkingState(
+			convert.DriverWorkingState(string(*input.Driver2WorkingState)),
+		)
 		if output.GetDriver2WorkingState() == rfmsv5.DriverWorkingState_DRIVER_WORKING_STATE_UNKNOWN {
 			output.SetUnknownDriver2WorkingState(string(*input.Driver2WorkingState))
 		}
@@ -70,19 +74,27 @@ func snapshotData(input *rfmsv4oapi.SnapshotDataObject) *rfmsv5.SnapshotData {
 		output.SetBatteryPackRemainingChargePercent(*input.HybridBatteryPackRemainingCharge)
 	}
 	if input.BatteryPackChargingStatus != nil {
-		output.SetBatteryPackChargingState(convert.ChargingState(string(*input.BatteryPackChargingStatus)))
+		output.SetBatteryPackChargingState(
+			convert.ChargingState(string(*input.BatteryPackChargingStatus)),
+		)
 		if output.GetBatteryPackChargingState() == rfmsv5.ChargingState_CHARGING_STATE_UNKNOWN {
 			output.SetUnknownBatteryPackChargingState(string(*input.BatteryPackChargingStatus))
 		}
 	}
 	if input.BatteryPackChargingConnectionStatus != nil {
-		output.SetBatteryPackChargingConnectionState(convert.ChargingConnectionState(string(*input.BatteryPackChargingConnectionStatus)))
+		output.SetBatteryPackChargingConnectionState(
+			convert.ChargingConnectionState(string(*input.BatteryPackChargingConnectionStatus)),
+		)
 		if output.GetBatteryPackChargingConnectionState() == rfmsv5.ChargingConnectionState_CHARGING_CONNECTION_STATE_UNKNOWN {
-			output.SetUnknownBatteryPackChargingConnectionState(string(*input.BatteryPackChargingConnectionStatus))
+			output.SetUnknownBatteryPackChargingConnectionState(
+				string(*input.BatteryPackChargingConnectionStatus),
+			)
 		}
 	}
 	if input.BatteryPackChargingDevice != nil {
-		output.SetBatteryPackChargingDevice(convert.ChargingDevice(string(*input.BatteryPackChargingDevice)))
+		output.SetBatteryPackChargingDevice(
+			convert.ChargingDevice(string(*input.BatteryPackChargingDevice)),
+		)
 		if output.GetBatteryPackChargingDevice() == rfmsv5.ChargingDevice_CHARGING_DEVICE_UNKNOWN {
 			output.SetUnknownBatteryPackChargingDevice(string(*input.BatteryPackChargingDevice))
 		}
@@ -98,16 +110,20 @@ func snapshotData(input *rfmsv4oapi.SnapshotDataObject) *rfmsv5.SnapshotData {
 	if input.EstimatedDistanceToEmpty != nil {
 		output.SetEstimatedDistanceToEmpty(&rfmsv5.SnapshotData_EstimatedDistanceToEmpty{})
 		if input.EstimatedDistanceToEmpty.Total != nil {
-			output.GetEstimatedDistanceToEmpty().SetTotalM(float64(*input.EstimatedDistanceToEmpty.Total))
+			output.GetEstimatedDistanceToEmpty().
+				SetTotalM(float64(*input.EstimatedDistanceToEmpty.Total))
 		}
 		if input.EstimatedDistanceToEmpty.Fuel != nil {
-			output.GetEstimatedDistanceToEmpty().SetFuelM(float64(*input.EstimatedDistanceToEmpty.Fuel))
+			output.GetEstimatedDistanceToEmpty().
+				SetFuelM(float64(*input.EstimatedDistanceToEmpty.Fuel))
 		}
 		if input.EstimatedDistanceToEmpty.Gas != nil {
-			output.GetEstimatedDistanceToEmpty().SetGasM(float64(*input.EstimatedDistanceToEmpty.Gas))
+			output.GetEstimatedDistanceToEmpty().
+				SetGasM(float64(*input.EstimatedDistanceToEmpty.Gas))
 		}
 		if input.EstimatedDistanceToEmpty.BatteryPack != nil {
-			output.GetEstimatedDistanceToEmpty().SetBatteryPackM(float64(*input.EstimatedDistanceToEmpty.BatteryPack))
+			output.GetEstimatedDistanceToEmpty().
+				SetBatteryPackM(float64(*input.EstimatedDistanceToEmpty.BatteryPack))
 		}
 	}
 	for _, inputVehicleAxle := range input.VehicleAxles {

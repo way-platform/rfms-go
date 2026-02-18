@@ -160,7 +160,7 @@ func WithBasicAuth(username, password string) ClientOption {
 }
 
 // WithScania configures the [Client] to use the Scania rFMS v4 API.
-func WithScania(clientID string, clientSecret string) ClientOption {
+func WithScania(clientID, clientSecret string) ClientOption {
 	return func(cc *ClientConfig) {
 		for _, opt := range []ClientOption{
 			WithBaseURL(ScaniaBaseURL),
@@ -179,7 +179,7 @@ func WithScania(clientID string, clientSecret string) ClientOption {
 }
 
 // WithVolvoTrucks configures the [Client] to use the Volvo Trucks rFMS v2.1 API.
-func WithVolvoTrucks(username string, password string) ClientOption {
+func WithVolvoTrucks(username, password string) ClientOption {
 	return func(cc *ClientConfig) {
 		for _, opt := range []ClientOption{
 			WithBaseURL(VolvoTrucksBaseURL),

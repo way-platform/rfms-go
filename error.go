@@ -65,7 +65,21 @@ func newHTTPError(resp *http.Response) *Error {
 // Error implements the error interface.
 func (e *Error) Error() string {
 	if e.RateLimitReset > 0 {
-		return fmt.Sprintf("%s %s - %s: rate limit reset in %s", e.Method, e.URL, e.Status, e.RateLimitReset)
+		return fmt.Sprintf(
+			"%s %s - %s: rate limit reset in %s",
+			e.Method,
+			e.URL,
+			e.Status,
+			e.RateLimitReset,
+		)
 	}
-	return fmt.Sprintf("%s %s: %s: %s - %s %s", e.Method, e.URL, e.Status, e.Identifier, e.Description, e.ErrorURI)
+	return fmt.Sprintf(
+		"%s %s: %s: %s - %s %s",
+		e.Method,
+		e.URL,
+		e.Status,
+		e.Identifier,
+		e.Description,
+		e.ErrorURI,
+	)
 }

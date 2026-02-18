@@ -131,8 +131,10 @@ func newVehiclePositionsCommand() *cobra.Command {
 		GroupID: "rfms",
 		Args:    cobra.MaximumNArgs(1),
 	}
-	startTime := cmd.Flags().Time("start", time.Time{}, []string{time.DateOnly, time.RFC3339}, "start time")
-	stopTime := cmd.Flags().Time("stop", time.Time{}, []string{time.DateOnly, time.RFC3339}, "stop time")
+	startTime := cmd.Flags().
+		Time("start", time.Time{}, []string{time.DateOnly, time.RFC3339}, "start time")
+	stopTime := cmd.Flags().
+		Time("stop", time.Time{}, []string{time.DateOnly, time.RFC3339}, "stop time")
 	cmd.RunE = func(cmd *cobra.Command, args []string) error {
 		client, err := newClient(cmd)
 		if err != nil {
@@ -176,8 +178,10 @@ func newVehicleStatusesCommand() *cobra.Command {
 		GroupID: "rfms",
 		Args:    cobra.MaximumNArgs(1),
 	}
-	startTime := cmd.Flags().Time("start", time.Time{}, []string{time.DateOnly, time.RFC3339}, "start time")
-	stopTime := cmd.Flags().Time("stop", time.Time{}, []string{time.DateOnly, time.RFC3339}, "stop time")
+	startTime := cmd.Flags().
+		Time("start", time.Time{}, []string{time.DateOnly, time.RFC3339}, "start time")
+	stopTime := cmd.Flags().
+		Time("stop", time.Time{}, []string{time.DateOnly, time.RFC3339}, "stop time")
 	cmd.RunE = func(cmd *cobra.Command, args []string) error {
 		client, err := newClient(cmd)
 		if err != nil {
