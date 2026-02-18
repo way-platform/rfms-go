@@ -26,10 +26,10 @@ func (t *retryTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	if req.Body != nil && req.Body != http.NoBody {
 		var buf bytes.Buffer
 		if _, err := io.Copy(&buf, req.Body); err != nil {
-			req.Body.Close()
+			_ = req.Body.Close()
 			return nil, fmt.Errorf("error buffering body before retry: %w", err)
 		}
-		req.Body.Close()
+		_ = req.Body.Close()
 		br = bytes.NewReader(buf.Bytes())
 		req.Body = io.NopCloser(br)
 	}
@@ -47,13 +47,16 @@ func (t *retryTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 		delay := retryDelay(attemptCount, res)
 		if br != nil {
 			if _, serr := br.Seek(0, 0); serr != nil {
-				return res, fmt.Errorf("error seeking body buffer back to beginning after attempt: %w", serr)
+				return res, fmt.Errorf(
+					"error seeking body buffer back to beginning after attempt: %w",
+					serr,
+				)
 			}
 			req.Body = io.NopCloser(br)
 		}
 		if res != nil {
 			_, _ = io.Copy(io.Discard, res.Body)
-			res.Body.Close()
+			_ = res.Body.Close()
 		}
 		if err := sleepWithContext(req.Context(), delay); err != nil {
 			return nil, err
@@ -81,7 +84,10 @@ func shouldRetry(err error, request *http.Request, response *http.Response) bool
 	switch response.StatusCode {
 	case http.StatusTooManyRequests:
 		return true
-	case http.StatusBadGateway, http.StatusServiceUnavailable, http.StatusGatewayTimeout, http.StatusInternalServerError:
+	case http.StatusBadGateway,
+		http.StatusServiceUnavailable,
+		http.StatusGatewayTimeout,
+		http.StatusInternalServerError:
 		return isIdempotent(request)
 	default:
 		return false
@@ -130,7 +136,12 @@ func isIdempotent(req *http.Request) bool {
 		return true
 	}
 	switch req.Method {
-	case http.MethodGet, http.MethodHead, http.MethodOptions, http.MethodTrace, http.MethodPut, http.MethodDelete:
+	case http.MethodGet,
+		http.MethodHead,
+		http.MethodOptions,
+		http.MethodTrace,
+		http.MethodPut,
+		http.MethodDelete:
 		return true
 	}
 	return false

@@ -5,7 +5,9 @@ import (
 )
 
 // AuthenticationEquipment converts an rFMS driver authentication equipment to proto.
-func AuthenticationEquipment(input string) rfmsv5.DriverIdentification_Tacho_AuthenticationEquipment {
+func AuthenticationEquipment(
+	input string,
+) rfmsv5.DriverIdentification_Tacho_AuthenticationEquipment {
 	switch input {
 	case "DRIVER_CARD":
 		return rfmsv5.DriverIdentification_Tacho_DRIVER_CARD

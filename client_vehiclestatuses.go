@@ -47,7 +47,11 @@ type VehicleStatusesResponse struct {
 	RequestServerDateTime time.Time `json:"requestServerDateTime,omitzero"`
 }
 
-func (c *Client) VehicleStatuses(ctx context.Context, request VehicleStatusesRequest, opts ...ClientOption) (_ VehicleStatusesResponse, err error) {
+func (c *Client) VehicleStatuses(
+	ctx context.Context,
+	request VehicleStatusesRequest,
+	opts ...ClientOption,
+) (_ VehicleStatusesResponse, err error) {
 	cfg := c.config.with(opts...)
 	switch cfg.apiVersion {
 	case V2_1:
@@ -59,7 +63,11 @@ func (c *Client) VehicleStatuses(ctx context.Context, request VehicleStatusesReq
 	}
 }
 
-func (c *Client) vehicleStatusesV2(ctx context.Context, request VehicleStatusesRequest, cfg ClientConfig) (_ VehicleStatusesResponse, err error) {
+func (c *Client) vehicleStatusesV2(
+	ctx context.Context,
+	request VehicleStatusesRequest,
+	cfg ClientConfig,
+) (_ VehicleStatusesResponse, err error) {
 	defer func() {
 		if err != nil {
 			err = fmt.Errorf("rFMS v2 vehicle statuses: %w", err)
@@ -112,7 +120,9 @@ func (c *Client) vehicleStatusesV2(ctx context.Context, request VehicleStatusesR
 	if err != nil {
 		return VehicleStatusesResponse{}, fmt.Errorf("http request: %w", err)
 	}
-	defer httpResponse.Body.Close()
+	defer func() {
+		_ = httpResponse.Body.Close()
+	}()
 	if httpResponse.StatusCode != http.StatusOK {
 		return VehicleStatusesResponse{}, newHTTPError(httpResponse)
 	}
@@ -127,7 +137,10 @@ func (c *Client) vehicleStatusesV2(ctx context.Context, request VehicleStatusesR
 	var result VehicleStatusesResponse
 	result.MoreDataAvailable = response.MoreDataAvailable != nil && *response.MoreDataAvailable
 	for _, vehicleStatus := range response.VehicleStatus {
-		result.VehicleStatuses = append(result.VehicleStatuses, convertv2.VehicleStatus(&vehicleStatus))
+		result.VehicleStatuses = append(
+			result.VehicleStatuses,
+			convertv2.VehicleStatus(&vehicleStatus),
+		)
 	}
 	if response.RequestServerDateTime != nil {
 		result.RequestServerDateTime = *response.RequestServerDateTime
@@ -135,7 +148,11 @@ func (c *Client) vehicleStatusesV2(ctx context.Context, request VehicleStatusesR
 	return result, nil
 }
 
-func (c *Client) vehicleStatusesV4(ctx context.Context, request VehicleStatusesRequest, cfg ClientConfig) (_ VehicleStatusesResponse, err error) {
+func (c *Client) vehicleStatusesV4(
+	ctx context.Context,
+	request VehicleStatusesRequest,
+	cfg ClientConfig,
+) (_ VehicleStatusesResponse, err error) {
 	defer func() {
 		if err != nil {
 			err = fmt.Errorf("rFMS v4 vehicle statuses: %w", err)
@@ -188,7 +205,9 @@ func (c *Client) vehicleStatusesV4(ctx context.Context, request VehicleStatusesR
 	if err != nil {
 		return VehicleStatusesResponse{}, fmt.Errorf("http request: %w", err)
 	}
-	defer httpResponse.Body.Close()
+	defer func() {
+		_ = httpResponse.Body.Close()
+	}()
 	if httpResponse.StatusCode != http.StatusOK {
 		return VehicleStatusesResponse{}, newHTTPError(httpResponse)
 	}
@@ -203,7 +222,10 @@ func (c *Client) vehicleStatusesV4(ctx context.Context, request VehicleStatusesR
 	var result VehicleStatusesResponse
 	result.MoreDataAvailable = response.MoreDataAvailable != nil && *response.MoreDataAvailable
 	for _, vehicleStatus := range response.VehicleStatusResponse.VehicleStatuses {
-		result.VehicleStatuses = append(result.VehicleStatuses, convertv4.VehicleStatus(&vehicleStatus))
+		result.VehicleStatuses = append(
+			result.VehicleStatuses,
+			convertv4.VehicleStatus(&vehicleStatus),
+		)
 	}
 	if response.RequestServerDateTime != nil {
 		result.RequestServerDateTime = time.Time(*response.RequestServerDateTime)

@@ -22,7 +22,12 @@ type Credentials struct {
 }
 
 func resolveCredentialsFilepath() (string, error) {
-	return xdg.ConfigFile("rfms-go/auth.json")
+	path, err := xdg.ConfigFile("rfms-go/auth.json")
+	if err != nil {
+		return "", fmt.Errorf("resolve credentials filepath: %w", err)
+	}
+
+	return path, nil
 }
 
 // ReadCredentials reads the rFMS CLI credentials.
@@ -31,17 +36,22 @@ func ReadCredentials() (*Credentials, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	if _, err := os.Stat(credentialsFilepath); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("stat credentials file: %w", err)
 	}
+
 	data, err := os.ReadFile(credentialsFilepath)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("read credentials file: %w", err)
 	}
+
 	var credentials Credentials
+
 	if err := json.Unmarshal(data, &credentials); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("unmarshal credentials: %w", err)
 	}
+
 	return &credentials, nil
 }
 
@@ -51,11 +61,13 @@ func NewClient(opts ...rfms.ClientOption) (*rfms.Client, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	switch auth.Provider {
 	case rfms.BrandScania:
 		if auth.Token == nil || !auth.Token.Valid() {
 			return nil, fmt.Errorf("session expired - please login again")
 		}
+
 		return rfms.NewClient(
 			append(opts,
 				rfms.WithBaseURL(rfms.ScaniaBaseURL),
@@ -79,11 +91,17 @@ func writeCredentials(credentials *Credentials) error {
 	if err != nil {
 		return err
 	}
+
 	data, err := json.MarshalIndent(credentials, "", "  ")
 	if err != nil {
-		return err
+		return fmt.Errorf("marshal credentials: %w", err)
 	}
-	return os.WriteFile(credentialsFilepath, data, 0o600)
+
+	if err := os.WriteFile(credentialsFilepath, data, 0o600); err != nil {
+		return fmt.Errorf("write credentials file: %w", err)
+	}
+
+	return nil
 }
 
 func removeCredentials() error {
@@ -91,7 +109,12 @@ func removeCredentials() error {
 	if err != nil {
 		return err
 	}
-	return os.RemoveAll(credentialsFilepath)
+
+	if err := os.RemoveAll(credentialsFilepath); err != nil {
+		return fmt.Errorf("remove credentials file: %w", err)
+	}
+
+	return nil
 }
 
 // NewCommand returns a new [cobra.Command] for rFMS CLI authentication.
@@ -101,8 +124,10 @@ func NewCommand() *cobra.Command {
 		Short:   "Authenticate with an rFMS API",
 		GroupID: "auth",
 	}
+
 	cmd.AddCommand(newLoginCommand())
 	cmd.AddCommand(newLogoutCommand())
+
 	return cmd
 }
 
@@ -111,94 +136,125 @@ func newLoginCommand() *cobra.Command {
 		Use:   "login",
 		Short: "Login to an rFMS API",
 	}
+
 	cmd.AddCommand(newLoginScaniaCommand())
 	cmd.AddCommand(newLoginVolvoTrucksCommand())
 	// TODO: Implement login with unknown provider.
+
 	return cmd
 }
 
 func newLoginScaniaCommand() *cobra.Command {
 	const provider = rfms.BrandScania
+
 	cmd := &cobra.Command{
 		Use:   "scania",
 		Short: "Login to the Scania rFMS API",
 	}
+
 	clientID := cmd.Flags().String("client-id", "-", "client ID to use for authentication")
-	clientSecret := cmd.Flags().String("client-secret", "-", "client secret to use for authentication")
+	clientSecret := cmd.Flags().
+		String("client-secret", "-", "client secret to use for authentication")
+
 	cmd.RunE = func(cmd *cobra.Command, _ []string) error {
 		if *clientID == "-" {
 			cmd.Println("\nEnter OAuth2 client ID:")
+
 			input, err := term.ReadPassword(int(os.Stdin.Fd()))
 			if err != nil {
-				return err
+				return fmt.Errorf("read client ID: %w", err)
 			}
+
 			*clientID = string(input)
 		}
+
 		if *clientSecret == "-" {
 			cmd.Println("\nEnter OAuth2 client secret:")
+
 			input, err := term.ReadPassword(int(os.Stdin.Fd()))
 			if err != nil {
-				return err
+				return fmt.Errorf("read client secret: %w", err)
 			}
+
 			*clientSecret = string(input)
 		}
+
 		tokenSource := rfms.ScaniaAuthConfig{
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
 		}.TokenSource(context.Background())
+
 		token, err := tokenSource.Token()
 		if err != nil {
-			return err
+			return fmt.Errorf("get token: %w", err)
 		}
+
 		auth := &Credentials{
 			Provider: provider,
 			Token:    token,
 		}
+
 		if err := writeCredentials(auth); err != nil {
 			return err
 		}
+
 		cmd.Printf("Logged in to %s.", provider)
+
 		return nil
 	}
+
 	return cmd
 }
 
 func newLoginVolvoTrucksCommand() *cobra.Command {
 	const provider = rfms.BrandVolvoTrucks
+
 	cmd := &cobra.Command{
 		Use:   "volvo-trucks",
 		Short: "Login to the Volvo Trucks rFMS API",
 	}
+
 	username := cmd.Flags().String("username", "-", "username to use for authentication")
 	password := cmd.Flags().String("password", "-", "password to use for authentication")
+
 	cmd.RunE = func(cmd *cobra.Command, _ []string) error {
 		if *username == "-" {
 			cmd.Println("\nEnter username:")
+
 			input, err := term.ReadPassword(int(os.Stdin.Fd()))
 			if err != nil {
-				return err
+				return fmt.Errorf("read username: %w", err)
 			}
+
 			*username = string(input)
 		}
+
 		if *password == "-" {
 			cmd.Println("\nEnter password:")
+
 			input, err := term.ReadPassword(int(os.Stdin.Fd()))
 			if err != nil {
-				return err
+				return fmt.Errorf("read password: %w", err)
 			}
+
 			*password = string(input)
 		}
+
 		auth := &Credentials{
 			Provider: provider,
 			Username: *username,
 			Password: *password,
 		}
+
 		if err := writeCredentials(auth); err != nil {
 			return err
 		}
+
 		cmd.Printf("Logged in to %s.", provider)
+
 		return nil
 	}
+
 	return cmd
 }
 
@@ -210,7 +266,9 @@ func newLogoutCommand() *cobra.Command {
 			if err := removeCredentials(); err != nil {
 				return err
 			}
+
 			cmd.Println("Logged out.")
+
 			return nil
 		},
 	}
