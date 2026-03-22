@@ -37,8 +37,9 @@ type ScaniaAuthConfig struct {
 	// Timeout is the timeout for a request.
 	Timeout time.Duration
 
-	// Debug is whether to enable debug logging.
-	Debug bool
+	// HTTPClient is the base HTTP client whose transport is used as the
+	// innermost layer. When nil, [http.DefaultTransport] is used.
+	HTTPClient *http.Client
 }
 
 // TokenSource returns an oauth2.TokenSource that retrieves tokens using
@@ -169,10 +170,8 @@ func (s *scaniaTokenSource) newRequest(method, path string, body io.Reader) (*ht
 // httpClient returns the HTTP client to use, with retry transport if none specified.
 func (s *scaniaTokenSource) httpClient() *http.Client {
 	transport := http.DefaultTransport
-	if s.config.Debug {
-		transport = &debugTransport{
-			next: transport,
-		}
+	if s.config.HTTPClient != nil && s.config.HTTPClient.Transport != nil {
+		transport = s.config.HTTPClient.Transport
 	}
 	if s.config.MaxRetries > 0 {
 		transport = &retryTransport{

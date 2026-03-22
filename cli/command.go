@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"io/fs"
-	"log/slog"
 	"os"
 	"time"
 
@@ -25,17 +24,6 @@ func NewCommand(opts ...Option) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "rfms",
 		Short: "rFMS CLI",
-	}
-	cmd.PersistentFlags().Bool("debug", false, "Enable debug logging")
-	cmd.PersistentPreRunE = func(cmd *cobra.Command, _ []string) error {
-		level := slog.LevelInfo
-		if cmd.Root().PersistentFlags().Changed("debug") {
-			level = slog.LevelDebug
-		}
-		slog.SetDefault(slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
-			Level: level,
-		})))
-		return nil
 	}
 	cmd.AddGroup(&cobra.Group{ID: "rfms", Title: "rFMS Commands"})
 	cmd.AddCommand(newVehiclesCommand(&cfg))
@@ -352,8 +340,7 @@ func newVehicleStatusesCommand(cfg *config) *cobra.Command {
 	return cmd
 }
 
-func newClient(cmd *cobra.Command, cfg *config) (*rfms.Client, error) {
-	debug, _ := cmd.Root().PersistentFlags().GetBool("debug")
+func newClient(_ *cobra.Command, cfg *config) (*rfms.Client, error) {
 	var creds Credentials
 	if cfg.credentialStore != nil {
 		if err := cfg.credentialStore.Read(&creds); err != nil {
@@ -362,6 +349,10 @@ func newClient(cmd *cobra.Command, cfg *config) (*rfms.Client, error) {
 			}
 			return nil, fmt.Errorf("read credentials: %w", err)
 		}
+	}
+	var opts []rfms.ClientOption
+	if cfg.httpClient != nil {
+		opts = append(opts, rfms.WithHTTPClient(cfg.httpClient))
 	}
 	switch creds.Provider {
 	case rfms.BrandScania:
@@ -381,17 +372,17 @@ func newClient(cmd *cobra.Command, cfg *config) (*rfms.Client, error) {
 				"session expired, please login again using `rfms auth login scania`",
 			)
 		}
-		return rfms.NewClient(
-			rfms.WithDebug(debug),
+		opts = append(opts,
 			rfms.WithBaseURL(rfms.ScaniaBaseURL),
 			rfms.WithVersion(rfms.V4),
 			rfms.WithTokenSource(oauth2.StaticTokenSource(&token)),
 		)
+		return rfms.NewClient(opts...)
 	case rfms.BrandVolvoTrucks:
-		return rfms.NewClient(
-			rfms.WithDebug(debug),
+		opts = append(opts,
 			rfms.WithVolvoTrucks(creds.Username, creds.Password),
 		)
+		return rfms.NewClient(opts...)
 	default:
 		return nil, fmt.Errorf("unknown provider: %s", creds.Provider)
 	}
