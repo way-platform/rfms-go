@@ -9,17 +9,35 @@ import (
 	"os"
 )
 
-type debugTransport struct {
-	next http.RoundTripper
+// DebugTransport is an [http.RoundTripper] that dumps HTTP requests and
+// responses to stderr. When Enabled is non-nil, logging is gated on the
+// pointed-to bool, allowing a CLI flag to be bound before the value is known.
+type DebugTransport struct {
+	// Enabled gates debug output. When nil, output is always enabled.
+	Enabled *bool
+	// Next is the underlying transport. Defaults to [http.DefaultTransport].
+	Next http.RoundTripper
 }
 
-func (t *debugTransport) RoundTrip(request *http.Request) (*http.Response, error) {
+var _ http.RoundTripper = (*DebugTransport)(nil)
+
+func (t *DebugTransport) next() http.RoundTripper {
+	if t.Next != nil {
+		return t.Next
+	}
+	return http.DefaultTransport
+}
+
+func (t *DebugTransport) RoundTrip(request *http.Request) (*http.Response, error) {
+	if t.Enabled != nil && !*t.Enabled {
+		return t.next().RoundTrip(request)
+	}
 	requestDump, err := httputil.DumpRequestOut(request, true)
 	if err != nil {
 		return nil, fmt.Errorf("failed to dump request for debug: %w", err)
 	}
 	prettyPrintDump(os.Stderr, requestDump, "> ")
-	response, err := t.next.RoundTrip(request)
+	response, err := t.next().RoundTrip(request)
 	if err != nil {
 		return nil, err
 	}

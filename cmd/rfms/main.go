@@ -3,21 +3,27 @@ package main
 import (
 	"context"
 	"image/color"
+	"net/http"
 	"os"
 
 	"charm.land/fang/v2"
 	"charm.land/lipgloss/v2"
 	"github.com/adrg/xdg"
+	rfms "github.com/way-platform/rfms-go"
 	"github.com/way-platform/rfms-go/cli"
 )
 
 func main() {
 	credPath, _ := xdg.ConfigFile("rfms-go/credentials.json")
 	tokenPath, _ := xdg.ConfigFile("rfms-go/token.json")
+	var debug bool
+	debugTransport := &rfms.DebugTransport{Enabled: &debug}
 	cmd := cli.NewCommand(
 		cli.WithCredentialStore(cli.NewFileStore(credPath)),
 		cli.WithTokenStore(cli.NewFileStore(tokenPath)),
+		cli.WithHTTPClient(&http.Client{Transport: debugTransport}),
 	)
+	cmd.PersistentFlags().BoolVar(&debug, "debug", false, "Enable debug logging of HTTP requests")
 	if err := fang.Execute(
 		context.Background(),
 		cmd,

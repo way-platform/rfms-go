@@ -20,7 +20,7 @@ type ClientConfig struct {
 	baseURL      string
 	apiVersion   Version
 	retryCount   int
-	debug        bool
+	httpClient   *http.Client
 	timeout      time.Duration
 	tokenSource  oauth2.TokenSource
 	username     string
@@ -67,12 +67,10 @@ func NewClient(opts ...ClientOption) (*Client, error) {
 
 // httpClient creates a new HTTP client with the given configuration.
 func (c *Client) httpClient(cfg ClientConfig) *http.Client {
+	// Use injected client's transport as base, or fall back to default.
 	transport := http.DefaultTransport
-	// Add debug transport if debug is enabled.
-	if cfg.debug {
-		transport = &debugTransport{
-			next: transport,
-		}
+	if cfg.httpClient != nil && cfg.httpClient.Transport != nil {
+		transport = cfg.httpClient.Transport
 	}
 	// Add basic auth transport if username/password are configured
 	if cfg.username != "" && cfg.password != "" {
@@ -109,10 +107,12 @@ func (c *Client) httpClient(cfg ClientConfig) *http.Client {
 	}
 }
 
-// WithDebug sets the debug flag for the [Client].
-func WithDebug(debug bool) ClientOption {
+// WithHTTPClient sets the base [http.Client] whose transport is used as the
+// innermost layer of the transport chain. This is useful for injecting a
+// [DebugTransport] or custom TLS configuration.
+func WithHTTPClient(httpClient *http.Client) ClientOption {
 	return func(cc *ClientConfig) {
-		cc.debug = debug
+		cc.httpClient = httpClient
 	}
 }
 
@@ -168,7 +168,7 @@ func WithScania(clientID, clientSecret string) ClientOption {
 			WithTokenSource(ScaniaAuthConfig{
 				ClientID:     clientID,
 				ClientSecret: clientSecret,
-				Debug:        cc.debug,
+				HTTPClient:   cc.httpClient,
 				MaxRetries:   cc.retryCount,
 				Timeout:      cc.timeout,
 			}.TokenSource(context.Background())),

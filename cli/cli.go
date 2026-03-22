@@ -3,6 +3,7 @@ package cli
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 	"os"
 	"path/filepath"
 )
@@ -32,6 +33,7 @@ type Option func(*config)
 type config struct {
 	credentialStore Store
 	tokenStore      Store
+	httpClient      *http.Client
 }
 
 // WithCredentialStore sets the credential store.
@@ -42,6 +44,11 @@ func WithCredentialStore(s Store) Option {
 // WithTokenStore sets the token store (used for Scania OAuth2 tokens).
 func WithTokenStore(s Store) Option {
 	return func(c *config) { c.tokenStore = s }
+}
+
+// WithHTTPClient sets the base [http.Client] passed to the SDK client.
+func WithHTTPClient(httpClient *http.Client) Option {
+	return func(c *config) { c.httpClient = httpClient }
 }
 
 // FileStore is a JSON file-backed store.
