@@ -6,3 +6,6 @@ formatters:
     - gofumpt
     - goimports
     - golines
+  settings:
+    golines:
+      max-len: 120

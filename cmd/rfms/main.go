@@ -14,12 +14,14 @@ import (
 )
 
 func main() {
-	credPath, _ := xdg.ConfigFile("rfms-go/credentials.json")
+	scaniaCredPath, _ := xdg.ConfigFile("rfms-go/scania-credentials.json")
+	volvoCredPath, _ := xdg.ConfigFile("rfms-go/volvo-trucks-credentials.json")
 	tokenPath, _ := xdg.ConfigFile("rfms-go/token.json")
 	var debug bool
 	debugTransport := &rfms.DebugTransport{Enabled: &debug}
 	cmd := cli.NewCommand(
-		cli.WithCredentialStore(cli.NewFileStore(credPath)),
+		cli.WithScaniaCredentialStore(cli.NewFileStore(scaniaCredPath)),
+		cli.WithVolvoTrucksCredentialStore(cli.NewFileStore(volvoCredPath)),
 		cli.WithTokenStore(cli.NewFileStore(tokenPath)),
 		cli.WithHTTPClient(&http.Client{Transport: debugTransport}),
 	)
