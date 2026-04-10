@@ -120,7 +120,7 @@ func newLoginScaniaCommand(cfg *config) *cobra.Command {
 		}
 		// Cache token.
 		if cfg.tokenStore != nil {
-			if err := cfg.tokenStore.Write(token); err != nil {
+			if err := cfg.tokenStore.Save(token); err != nil {
 				return fmt.Errorf("write token: %w", err)
 			}
 		}
@@ -347,9 +347,9 @@ func newClient(_ *cobra.Command, cfg *config) (*rfms.Client, error) {
 	// Try Scania credentials.
 	if cfg.scaniaCredentialStore != nil {
 		if _, err := cfg.scaniaCredentialStore.Load(); err == nil {
-			var token oauth2.Token
 			if cfg.tokenStore != nil {
-				if err := cfg.tokenStore.Read(&token); err != nil {
+				token, err := cfg.tokenStore.Load()
+				if err != nil {
 					if errors.Is(err, fs.ErrNotExist) {
 						return nil, fmt.Errorf(
 							"session expired, please login again using `rfms auth login scania`",
@@ -357,17 +357,17 @@ func newClient(_ *cobra.Command, cfg *config) (*rfms.Client, error) {
 					}
 					return nil, fmt.Errorf("read token: %w", err)
 				}
-			}
-			if !token.Valid() {
-				return nil, fmt.Errorf(
-					"session expired, please login again using `rfms auth login scania`",
+				if !token.Valid() {
+					return nil, fmt.Errorf(
+						"session expired, please login again using `rfms auth login scania`",
+					)
+				}
+				opts = append(opts,
+					rfms.WithBaseURL(rfms.ScaniaBaseURL),
+					rfms.WithVersion(rfms.V4),
+					rfms.WithTokenSource(oauth2.StaticTokenSource(token)),
 				)
 			}
-			opts = append(opts,
-				rfms.WithBaseURL(rfms.ScaniaBaseURL),
-				rfms.WithVersion(rfms.V4),
-				rfms.WithTokenSource(oauth2.StaticTokenSource(&token)),
-			)
 			return rfms.NewClient(opts...)
 		}
 	}

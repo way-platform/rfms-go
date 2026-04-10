@@ -22,7 +22,7 @@ func main() {
 	cmd := cli.NewCommand(
 		cli.WithScaniaCredentialStore(cli.NewScaniaCredentialFileStore(scaniaCredPath)),
 		cli.WithVolvoCredentialStore(cli.NewVolvoCredentialFileStore(volvoCredPath)),
-		cli.WithTokenStore(cli.NewFileStore(tokenPath)),
+		cli.WithTokenStore(cli.NewTokenFileStore(tokenPath)),
 		cli.WithHTTPClient(&http.Client{Transport: debugTransport}),
 	)
 	cmd.PersistentFlags().BoolVar(&debug, "debug", false, "Enable debug logging of HTTP requests")
