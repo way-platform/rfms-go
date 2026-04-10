@@ -20,8 +20,8 @@ func main() {
 	var debug bool
 	debugTransport := &rfms.DebugTransport{Enabled: &debug}
 	cmd := cli.NewCommand(
-		cli.WithScaniaCredentialStore(cli.NewFileStore(scaniaCredPath)),
-		cli.WithVolvoTrucksCredentialStore(cli.NewFileStore(volvoCredPath)),
+		cli.WithScaniaCredentialStore(cli.NewScaniaCredentialFileStore(scaniaCredPath)),
+		cli.WithVolvoCredentialStore(cli.NewVolvoCredentialFileStore(volvoCredPath)),
 		cli.WithTokenStore(cli.NewFileStore(tokenPath)),
 		cli.WithHTTPClient(&http.Client{Transport: debugTransport}),
 	)

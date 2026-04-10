@@ -10,8 +10,6 @@ import (
 
 	"github.com/spf13/cobra"
 	rfms "github.com/way-platform/rfms-go"
-	scaniacreds "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/scania/rfms/v1"
-	volvocreds "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/volvotrucks/rfms/v1"
 	"golang.org/x/oauth2"
 	"golang.org/x/term"
 	"google.golang.org/protobuf/encoding/protojson"
@@ -71,48 +69,50 @@ func newLoginScaniaCommand(cfg *config) *cobra.Command {
 
 	cmd.RunE = func(cmd *cobra.Command, _ []string) error {
 		// Try loading stored credentials first.
-		creds := &scaniacreds.Credentials{}
+		creds := &ScaniaCredentials{}
 		if cfg.scaniaCredentialStore != nil {
-			if err := cfg.scaniaCredentialStore.Read(creds); err != nil && !errors.Is(err, fs.ErrNotExist) {
+			if loaded, err := cfg.scaniaCredentialStore.Load(); err != nil && !errors.Is(err, fs.ErrNotExist) {
 				return fmt.Errorf("read credentials: %w", err)
+			} else if err == nil {
+				creds = loaded
 			}
 		}
 		// Override with flags.
 		if *clientID != "" {
-			creds.SetClientId(*clientID)
+			creds.ClientID = *clientID
 		}
 		if *clientSecret != "" {
-			creds.SetClientSecret(*clientSecret)
+			creds.ClientSecret = *clientSecret
 		}
 		// Prompt for missing fields.
-		if creds.GetClientId() == "" {
+		if creds.ClientID == "" {
 			val, err := promptSecret(cmd, "Enter OAuth2 client ID: ")
 			if err != nil {
 				return fmt.Errorf("read client ID: %w", err)
 			}
-			creds.SetClientId(val)
+			creds.ClientID = val
 		}
-		if creds.GetClientSecret() == "" {
+		if creds.ClientSecret == "" {
 			val, err := promptSecret(cmd, "Enter OAuth2 client secret: ")
 			if err != nil {
 				return fmt.Errorf("read client secret: %w", err)
 			}
-			creds.SetClientSecret(val)
+			creds.ClientSecret = val
 		}
 		// Persist credentials.
 		if cfg.scaniaCredentialStore != nil {
-			if err := cfg.scaniaCredentialStore.Write(creds); err != nil {
+			if err := cfg.scaniaCredentialStore.Save(creds); err != nil {
 				return fmt.Errorf("write credentials: %w", err)
 			}
 		}
 		// Clear Volvo credentials when switching provider.
-		if cfg.volvoTrucksCredentialStore != nil {
-			_ = cfg.volvoTrucksCredentialStore.Clear()
+		if cfg.volvoCredentialStore != nil {
+			_ = cfg.volvoCredentialStore.Clear()
 		}
 		// Run OAuth2 flow.
 		tokenSource := rfms.ScaniaAuthConfig{
-			ClientID:     creds.GetClientId(),
-			ClientSecret: creds.GetClientSecret(),
+			ClientID:     creds.ClientID,
+			ClientSecret: creds.ClientSecret,
 		}.TokenSource(context.Background())
 		token, err := tokenSource.Token()
 		if err != nil {
@@ -141,37 +141,39 @@ func newLoginVolvoTrucksCommand(cfg *config) *cobra.Command {
 
 	cmd.RunE = func(cmd *cobra.Command, _ []string) error {
 		// Try loading stored credentials first.
-		creds := &volvocreds.Credentials{}
-		if cfg.volvoTrucksCredentialStore != nil {
-			if err := cfg.volvoTrucksCredentialStore.Read(creds); err != nil && !errors.Is(err, fs.ErrNotExist) {
+		creds := &VolvoCredentials{}
+		if cfg.volvoCredentialStore != nil {
+			if loaded, err := cfg.volvoCredentialStore.Load(); err != nil && !errors.Is(err, fs.ErrNotExist) {
 				return fmt.Errorf("read credentials: %w", err)
+			} else if err == nil {
+				creds = loaded
 			}
 		}
 		// Override with flags.
 		if *username != "" {
-			creds.SetUsername(*username)
+			creds.Username = *username
 		}
 		if *password != "" {
-			creds.SetPassword(*password)
+			creds.Password = *password
 		}
 		// Prompt for missing fields.
-		if creds.GetUsername() == "" {
+		if creds.Username == "" {
 			val, err := promptSecret(cmd, "Enter username: ")
 			if err != nil {
 				return fmt.Errorf("read username: %w", err)
 			}
-			creds.SetUsername(val)
+			creds.Username = val
 		}
-		if creds.GetPassword() == "" {
+		if creds.Password == "" {
 			val, err := promptSecret(cmd, "Enter password: ")
 			if err != nil {
 				return fmt.Errorf("read password: %w", err)
 			}
-			creds.SetPassword(val)
+			creds.Password = val
 		}
 		// Persist credentials.
-		if cfg.volvoTrucksCredentialStore != nil {
-			if err := cfg.volvoTrucksCredentialStore.Write(creds); err != nil {
+		if cfg.volvoCredentialStore != nil {
+			if err := cfg.volvoCredentialStore.Save(creds); err != nil {
 				return fmt.Errorf("write credentials: %w", err)
 			}
 		}
@@ -200,8 +202,8 @@ func newLogoutCommand(cfg *config) *cobra.Command {
 					return fmt.Errorf("clear scania credentials: %w", err)
 				}
 			}
-			if cfg.volvoTrucksCredentialStore != nil {
-				if err := cfg.volvoTrucksCredentialStore.Clear(); err != nil {
+			if cfg.volvoCredentialStore != nil {
+				if err := cfg.volvoCredentialStore.Clear(); err != nil {
 					return fmt.Errorf("clear volvo credentials: %w", err)
 				}
 			}
@@ -344,8 +346,7 @@ func newClient(_ *cobra.Command, cfg *config) (*rfms.Client, error) {
 	}
 	// Try Scania credentials.
 	if cfg.scaniaCredentialStore != nil {
-		creds := &scaniacreds.Credentials{}
-		if err := cfg.scaniaCredentialStore.Read(creds); err == nil {
+		if _, err := cfg.scaniaCredentialStore.Load(); err == nil {
 			var token oauth2.Token
 			if cfg.tokenStore != nil {
 				if err := cfg.tokenStore.Read(&token); err != nil {
@@ -371,11 +372,10 @@ func newClient(_ *cobra.Command, cfg *config) (*rfms.Client, error) {
 		}
 	}
 	// Try Volvo Trucks credentials.
-	if cfg.volvoTrucksCredentialStore != nil {
-		creds := &volvocreds.Credentials{}
-		if err := cfg.volvoTrucksCredentialStore.Read(creds); err == nil {
+	if cfg.volvoCredentialStore != nil {
+		if creds, err := cfg.volvoCredentialStore.Load(); err == nil {
 			opts = append(opts,
-				rfms.WithVolvoTrucks(creds.GetUsername(), creds.GetPassword()),
+				rfms.WithVolvoTrucks(creds.Username, creds.Password),
 			)
 			return rfms.NewClient(opts...)
 		}
