@@ -15,220 +15,176 @@ import (
 	"github.com/way-platform/rfms-go/internal/openapi/rfmsv2oapi"
 	"github.com/way-platform/rfms-go/internal/openapi/rfmsv4oapi"
 	rfmsv5 "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
-// VehicleStatusesRequest is the request for the [Client.VehicleStatuses] method.
-type VehicleStatusesRequest struct {
-	// LastVIN is the last VIN included in the previous response.
-	LastVIN string
-	// DateType indicates whether the start/stop times are compared to created or received time.
-	DateType string
-	// StartTime to filter statuses (only statuses after this time).
-	StartTime time.Time
-	// StopTime to filter statuses (only statuses before this time).
-	StopTime time.Time
-	// VIN to filter statuses for a specific vehicle.
-	VIN string
-	// ContentFilter filters statuses by content type (ACCUMULATED, SNAPSHOT, UPTIME).
-	ContentFilter []string
-	// TriggerFilter filters statuses by trigger type.
-	TriggerFilter []string
-	// LatestOnly returns only the latest status for each vehicle.
-	LatestOnly bool
-}
-
-// VehicleStatusesResponse is the response for the [Client.VehicleStatuses] method.
-type VehicleStatusesResponse struct {
-	// VehicleStatuses in the response.
-	VehicleStatuses []*rfmsv5.VehicleStatus `json:"vehicleStatuses"`
-	// MoreDataAvailable indicates if there is more data available.
-	MoreDataAvailable bool `json:"moreDataAvailable"`
-	// RequestServerDateTime is the server time when the request was received.
-	RequestServerDateTime time.Time `json:"requestServerDateTime,omitzero"`
-}
-
+// VehicleStatuses implements the rFMS API method "GET /vehiclestatuses".
 func (c *Client) VehicleStatuses(
 	ctx context.Context,
-	request VehicleStatusesRequest,
-	opts ...ClientOption,
-) (_ VehicleStatusesResponse, err error) {
-	cfg := c.config.with(opts...)
-	switch cfg.apiVersion {
+	request *rfmsv5.VehicleStatusesRequest,
+) (_ *rfmsv5.VehicleStatusesResponse, err error) {
+	switch c.config.apiVersion {
 	case V2_1:
-		return c.vehicleStatusesV2(ctx, request, cfg)
+		return c.vehicleStatusesV2(ctx, request)
 	case V4:
-		return c.vehicleStatusesV4(ctx, request, cfg)
+		return c.vehicleStatusesV4(ctx, request)
 	default:
-		return VehicleStatusesResponse{}, fmt.Errorf("unsupported API version")
+		return nil, fmt.Errorf("unsupported API version")
 	}
 }
 
 func (c *Client) vehicleStatusesV2(
 	ctx context.Context,
-	request VehicleStatusesRequest,
-	cfg ClientConfig,
-) (_ VehicleStatusesResponse, err error) {
+	request *rfmsv5.VehicleStatusesRequest,
+) (_ *rfmsv5.VehicleStatusesResponse, err error) {
 	defer func() {
 		if err != nil {
 			err = fmt.Errorf("rFMS v2 vehicle statuses: %w", err)
 		}
 	}()
-	// Build query parameters
 	query := url.Values{}
-	if request.LastVIN != "" {
-		query.Set("lastVin", request.LastVIN)
+	if request.GetLastVin() != "" {
+		query.Set("lastVin", request.GetLastVin())
 	}
-	if request.DateType != "" {
-		query.Set("datetype", request.DateType)
+	if request.GetDateType() != "" {
+		query.Set("datetype", request.GetDateType())
 	}
-	if !request.StartTime.IsZero() {
-		query.Set("starttime", rfmsv4oapi.Time(request.StartTime).String())
+	if request.HasStartTime() {
+		query.Set("starttime", rfmsv4oapi.Time(request.GetStartTime().AsTime()).String())
 	}
-	if !request.StopTime.IsZero() {
-		query.Set("stoptime", rfmsv4oapi.Time(request.StopTime).String())
+	if request.HasStopTime() {
+		query.Set("stoptime", rfmsv4oapi.Time(request.GetStopTime().AsTime()).String())
 	}
-	if request.VIN != "" {
-		query.Set("vin", request.VIN)
+	if request.GetVin() != "" {
+		query.Set("vin", request.GetVin())
 	}
-	if len(request.ContentFilter) > 0 {
-		query.Set("contentFilter", strings.Join(request.ContentFilter, ","))
+	if len(request.GetContentFilter()) > 0 {
+		query.Set("contentFilter", strings.Join(request.GetContentFilter(), ","))
 	}
-	if len(request.TriggerFilter) > 0 {
-		query.Set("triggerFilter", strings.Join(request.TriggerFilter, ","))
+	if len(request.GetTriggerFilter()) > 0 {
+		query.Set("triggerFilter", strings.Join(request.GetTriggerFilter(), ","))
 	}
-	if request.LatestOnly {
+	if request.GetLatestOnly() {
 		query.Set("latestOnly", "true")
 	}
-	// Build path with query parameters
 	path := "/vehiclestatuses"
 	if len(query) > 0 {
 		path += "?" + query.Encode()
 	}
-	// Apply per-request configuration overrides
-	fullURL := cfg.baseURL + path
-	// Create the request
+	fullURL := c.config.baseURL + path
 	httpRequest, err := http.NewRequestWithContext(ctx, http.MethodGet, fullURL, nil)
 	if err != nil {
-		return VehicleStatusesResponse{}, fmt.Errorf("http request: %w", err)
+		return nil, fmt.Errorf("http request: %w", err)
 	}
-	// Set headers
 	httpRequest.Header.Set("User-Agent", getUserAgent())
 	httpRequest.Header.Set("Accept", "application/vnd.fmsstandard.com.Vehiclestatuses.v2.1+json")
-	// Create HTTP client and make request
-	client := c.httpClient(cfg)
-	httpResponse, err := client.Do(httpRequest)
+	httpResponse, err := c.httpClient(c.config).Do(httpRequest)
 	if err != nil {
-		return VehicleStatusesResponse{}, fmt.Errorf("http request: %w", err)
+		return nil, fmt.Errorf("http request: %w", err)
 	}
 	defer func() {
 		_ = httpResponse.Body.Close()
 	}()
 	if httpResponse.StatusCode != http.StatusOK {
-		return VehicleStatusesResponse{}, newHTTPError(httpResponse)
+		return nil, newHTTPError(httpResponse)
 	}
 	data, err := io.ReadAll(httpResponse.Body)
 	if err != nil {
-		return VehicleStatusesResponse{}, fmt.Errorf("read response body: %w", err)
+		return nil, fmt.Errorf("read response body: %w", err)
 	}
 	var response rfmsv2oapi.VehicleStatuses
 	if err := json.Unmarshal(data, &response); err != nil {
-		return VehicleStatusesResponse{}, fmt.Errorf("unmarshal v4 response body: %w", err)
+		return nil, fmt.Errorf("unmarshal v2 response body: %w", err)
 	}
-	var result VehicleStatusesResponse
-	result.MoreDataAvailable = response.MoreDataAvailable != nil && *response.MoreDataAvailable
+	resp := &rfmsv5.VehicleStatusesResponse{}
+	statuses := make([]*rfmsv5.VehicleStatus, 0, len(response.VehicleStatus))
 	for _, vehicleStatus := range response.VehicleStatus {
-		result.VehicleStatuses = append(
-			result.VehicleStatuses,
-			convertv2.VehicleStatus(&vehicleStatus),
-		)
+		statuses = append(statuses, convertv2.VehicleStatus(&vehicleStatus))
+	}
+	resp.SetVehicleStatuses(statuses)
+	if response.MoreDataAvailable != nil {
+		resp.SetMoreDataAvailable(*response.MoreDataAvailable)
 	}
 	if response.RequestServerDateTime != nil {
-		result.RequestServerDateTime = *response.RequestServerDateTime
+		resp.SetRequestServerDateTime(timestamppb.New(*response.RequestServerDateTime))
 	}
-	return result, nil
+	return resp, nil
 }
 
 func (c *Client) vehicleStatusesV4(
 	ctx context.Context,
-	request VehicleStatusesRequest,
-	cfg ClientConfig,
-) (_ VehicleStatusesResponse, err error) {
+	request *rfmsv5.VehicleStatusesRequest,
+) (_ *rfmsv5.VehicleStatusesResponse, err error) {
 	defer func() {
 		if err != nil {
 			err = fmt.Errorf("rFMS v4 vehicle statuses: %w", err)
 		}
 	}()
-	// Build query parameters
 	query := url.Values{}
-	if request.LastVIN != "" {
-		query.Set("lastVin", request.LastVIN)
+	if request.GetLastVin() != "" {
+		query.Set("lastVin", request.GetLastVin())
 	}
-	if request.DateType != "" {
-		query.Set("datetype", request.DateType)
+	if request.GetDateType() != "" {
+		query.Set("datetype", request.GetDateType())
 	}
-	if !request.StartTime.IsZero() {
-		query.Set("starttime", rfmsv4oapi.Time(request.StartTime).String())
+	if request.HasStartTime() {
+		query.Set("starttime", rfmsv4oapi.Time(request.GetStartTime().AsTime()).String())
 	}
-	if !request.StopTime.IsZero() {
-		query.Set("stoptime", rfmsv4oapi.Time(request.StopTime).String())
+	if request.HasStopTime() {
+		query.Set("stoptime", rfmsv4oapi.Time(request.GetStopTime().AsTime()).String())
 	}
-	if request.VIN != "" {
-		query.Set("vin", request.VIN)
+	if request.GetVin() != "" {
+		query.Set("vin", request.GetVin())
 	}
-	if len(request.ContentFilter) > 0 {
-		query.Set("contentFilter", strings.Join(request.ContentFilter, ","))
+	if len(request.GetContentFilter()) > 0 {
+		query.Set("contentFilter", strings.Join(request.GetContentFilter(), ","))
 	}
-	if len(request.TriggerFilter) > 0 {
-		query.Set("triggerFilter", strings.Join(request.TriggerFilter, ","))
+	if len(request.GetTriggerFilter()) > 0 {
+		query.Set("triggerFilter", strings.Join(request.GetTriggerFilter(), ","))
 	}
-	if request.LatestOnly {
+	if request.GetLatestOnly() {
 		query.Set("latestOnly", "true")
 	}
-	// Build path with query parameters
 	path := "/vehiclestatuses"
 	if len(query) > 0 {
 		path += "?" + query.Encode()
 	}
-	// Apply per-request configuration overrides
-	fullURL := cfg.baseURL + path
-	// Create the request
+	fullURL := c.config.baseURL + path
 	httpRequest, err := http.NewRequestWithContext(ctx, http.MethodGet, fullURL, nil)
 	if err != nil {
-		return VehicleStatusesResponse{}, fmt.Errorf("http request: %w", err)
+		return nil, fmt.Errorf("http request: %w", err)
 	}
-	// Set headers
 	httpRequest.Header.Set("User-Agent", getUserAgent())
 	httpRequest.Header.Set("Accept", "application/json; rfms=vehiclestatuses.v4.0")
-	// Create HTTP client and make request
-	client := c.httpClient(cfg)
-	httpResponse, err := client.Do(httpRequest)
+	httpResponse, err := c.httpClient(c.config).Do(httpRequest)
 	if err != nil {
-		return VehicleStatusesResponse{}, fmt.Errorf("http request: %w", err)
+		return nil, fmt.Errorf("http request: %w", err)
 	}
 	defer func() {
 		_ = httpResponse.Body.Close()
 	}()
 	if httpResponse.StatusCode != http.StatusOK {
-		return VehicleStatusesResponse{}, newHTTPError(httpResponse)
+		return nil, newHTTPError(httpResponse)
 	}
 	data, err := io.ReadAll(httpResponse.Body)
 	if err != nil {
-		return VehicleStatusesResponse{}, fmt.Errorf("read response body: %w", err)
+		return nil, fmt.Errorf("read response body: %w", err)
 	}
 	var response rfmsv4oapi.VehicleStatusResponseObject
 	if err := json.Unmarshal(data, &response); err != nil {
-		return VehicleStatusesResponse{}, fmt.Errorf("unmarshal v4 response body: %w", err)
+		return nil, fmt.Errorf("unmarshal v4 response body: %w", err)
 	}
-	var result VehicleStatusesResponse
-	result.MoreDataAvailable = response.MoreDataAvailable != nil && *response.MoreDataAvailable
+	resp := &rfmsv5.VehicleStatusesResponse{}
+	statuses := make([]*rfmsv5.VehicleStatus, 0, len(response.VehicleStatusResponse.VehicleStatuses))
 	for _, vehicleStatus := range response.VehicleStatusResponse.VehicleStatuses {
-		result.VehicleStatuses = append(
-			result.VehicleStatuses,
-			convertv4.VehicleStatus(&vehicleStatus),
-		)
+		statuses = append(statuses, convertv4.VehicleStatus(&vehicleStatus))
+	}
+	resp.SetVehicleStatuses(statuses)
+	if response.MoreDataAvailable != nil {
+		resp.SetMoreDataAvailable(*response.MoreDataAvailable)
 	}
 	if response.RequestServerDateTime != nil {
-		result.RequestServerDateTime = time.Time(*response.RequestServerDateTime)
+		resp.SetRequestServerDateTime(timestamppb.New(time.Time(*response.RequestServerDateTime)))
 	}
-	return result, nil
+	return resp, nil
 }

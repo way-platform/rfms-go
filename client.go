@@ -7,8 +7,11 @@ import (
 	"runtime/debug"
 	"time"
 
+	rfmsv5connect "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5/rfmsv5connect"
 	"golang.org/x/oauth2"
 )
+
+var _ rfmsv5connect.RfmsApiClient = (*Client)(nil)
 
 // Client is an rFMS API client.
 type Client struct {
@@ -34,15 +37,6 @@ func newClientConfig() ClientConfig {
 		timeout:    30 * time.Second,
 		retryCount: 3,
 	}
-}
-
-// with returns a new ClientConfig with the given options applied.
-// This enables per-request configuration overrides.
-func (cc ClientConfig) with(opts ...ClientOption) ClientConfig {
-	for _, opt := range opts {
-		opt(&cc)
-	}
-	return cc
 }
 
 // ClientOption is an option that configures a [Client].

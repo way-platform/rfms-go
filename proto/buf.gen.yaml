@@ -17,3 +17,8 @@ plugins:
     opt:
       - module=github.com/way-platform/rfms-go/proto/gen/go
       - default_api_level=API_OPAQUE
+  - local: ["go", "tool", "-modfile", "../tools/go.mod", "protoc-gen-connect-go"]
+    out: gen/go
+    opt:
+      - module=github.com/way-platform/rfms-go/proto/gen/go
+      - simple
