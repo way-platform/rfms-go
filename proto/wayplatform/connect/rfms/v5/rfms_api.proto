@@ -1,0 +1,110 @@
+edition = "2023";
+
+package wayplatform.connect.rfms.v5;
+
+import "google/protobuf/timestamp.proto";
+import "wayplatform/connect/rfms/v5/vehicle.proto";
+import "wayplatform/connect/rfms/v5/vehicle_position.proto";
+import "wayplatform/connect/rfms/v5/vehicle_status.proto";
+
+// RfmsApi is the interface definition for the rFMS Fleet Management Standard API.
+service RfmsApi {
+  // Vehicles lists vehicles registered in the fleet.
+  rpc Vehicles(VehiclesRequest) returns (VehiclesResponse);
+
+  // VehiclePositions lists vehicle positions.
+  rpc VehiclePositions(VehiclePositionsRequest) returns (VehiclePositionsResponse);
+
+  // VehicleStatuses lists vehicle statuses.
+  rpc VehicleStatuses(VehicleStatusesRequest) returns (VehicleStatusesResponse);
+}
+
+// Request for Vehicles.
+message VehiclesRequest {
+  // Last VIN included in the previous response, for pagination.
+  string last_vin = 1;
+}
+
+// Response for Vehicles.
+message VehiclesResponse {
+  // The vehicles.
+  repeated Vehicle vehicles = 1;
+
+  // Whether more data is available for pagination.
+  bool more_data_available = 2;
+}
+
+// Request for VehiclePositions.
+message VehiclePositionsRequest {
+  // Last VIN included in the previous response, for pagination.
+  string last_vin = 1;
+
+  // Whether start/stop times are compared to created or received time.
+  string date_type = 2;
+
+  // Start of the time window.
+  google.protobuf.Timestamp start_time = 3;
+
+  // End of the time window.
+  google.protobuf.Timestamp stop_time = 4;
+
+  // Filter positions for a specific vehicle VIN.
+  string vin = 5;
+
+  // Return only the latest position for each vehicle.
+  bool latest_only = 6;
+
+  // Filter positions by trigger type.
+  string trigger_filter = 7;
+}
+
+// Response for VehiclePositions.
+message VehiclePositionsResponse {
+  // The vehicle positions.
+  repeated VehiclePosition vehicle_positions = 1;
+
+  // Whether more data is available for pagination.
+  bool more_data_available = 2;
+
+  // Server time when the request was received.
+  google.protobuf.Timestamp request_server_date_time = 3;
+}
+
+// Request for VehicleStatuses.
+message VehicleStatusesRequest {
+  // Last VIN included in the previous response, for pagination.
+  string last_vin = 1;
+
+  // Whether start/stop times are compared to created or received time.
+  string date_type = 2;
+
+  // Start of the time window.
+  google.protobuf.Timestamp start_time = 3;
+
+  // End of the time window.
+  google.protobuf.Timestamp stop_time = 4;
+
+  // Filter statuses for a specific vehicle VIN.
+  string vin = 5;
+
+  // Filter statuses by content type (ACCUMULATED, SNAPSHOT, UPTIME).
+  repeated string content_filter = 6;
+
+  // Filter statuses by trigger type.
+  repeated string trigger_filter = 7;
+
+  // Return only the latest status for each vehicle.
+  bool latest_only = 8;
+}
+
+// Response for VehicleStatuses.
+message VehicleStatusesResponse {
+  // The vehicle statuses.
+  repeated VehicleStatus vehicle_statuses = 1;
+
+  // Whether more data is available for pagination.
+  bool more_data_available = 2;
+
+  // Server time when the request was received.
+  google.protobuf.Timestamp request_server_date_time = 3;
+}

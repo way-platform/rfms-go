@@ -16,155 +16,126 @@ import (
 	rfmsv5 "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5"
 )
 
-// VehiclesRequest is the request for the [Client.Vehicles] method.
-type VehiclesRequest struct {
-	// LastVIN is the last VIN included in the previous response.
-	LastVIN string `json:"lastVin"`
-}
-
-// VehiclesResponse is the response for the [Client.Vehicles] method.
-type VehiclesResponse struct {
-	// Vehicles in the response.
-	Vehicles []*rfmsv5.Vehicle `json:"vehicles"`
-	// MoreDataAvailable indicates if there is more data available.
-	MoreDataAvailable bool `json:"moreDataAvailable"`
-}
-
 // Vehicles implements the rFMS API method "GET /vehicles".
 func (c *Client) Vehicles(
 	ctx context.Context,
-	request VehiclesRequest,
-	opts ...ClientOption,
-) (_ VehiclesResponse, err error) {
-	cfg := c.config.with(opts...)
-	switch cfg.apiVersion {
+	request *rfmsv5.VehiclesRequest,
+) (_ *rfmsv5.VehiclesResponse, err error) {
+	switch c.config.apiVersion {
 	case V2_1:
-		return c.vehiclesV2(ctx, request, cfg)
+		return c.vehiclesV2(ctx, request)
 	case V4:
-		return c.vehiclesV4(ctx, request, cfg)
+		return c.vehiclesV4(ctx, request)
 	default:
-		return VehiclesResponse{}, fmt.Errorf("unsupported API version")
+		return nil, fmt.Errorf("unsupported API version")
 	}
 }
 
 func (c *Client) vehiclesV2(
 	ctx context.Context,
-	request VehiclesRequest,
-	cfg ClientConfig,
-) (_ VehiclesResponse, err error) {
+	request *rfmsv5.VehiclesRequest,
+) (_ *rfmsv5.VehiclesResponse, err error) {
 	defer func() {
 		if err != nil {
 			err = fmt.Errorf("rFMS v2 vehicles: %w", err)
 		}
 	}()
-	// Build query parameters
 	query := url.Values{}
-	if request.LastVIN != "" {
-		query.Set("lastVin", request.LastVIN)
+	if request.GetLastVin() != "" {
+		query.Set("lastVin", request.GetLastVin())
 	}
-
-	// Build path with query parameters
 	path := "/vehicles"
 	if len(query) > 0 {
 		path += "?" + query.Encode()
 	}
-	// Apply per-request configuration overrides
-	fullURL := cfg.baseURL + path
-	// Create the request
+	fullURL := c.config.baseURL + path
 	httpRequest, err := http.NewRequestWithContext(ctx, http.MethodGet, fullURL, nil)
 	if err != nil {
-		return VehiclesResponse{}, fmt.Errorf("http request: %w", err)
+		return nil, fmt.Errorf("http request: %w", err)
 	}
-	// Set headers
 	httpRequest.Header.Set("User-Agent", getUserAgent())
 	httpRequest.Header.Set("Accept", "application/vnd.fmsstandard.com.Vehicles.v2.1+json")
-	// Create HTTP client and make request
-	client := c.httpClient(cfg)
-	httpResponse, err := client.Do(httpRequest)
+	httpResponse, err := c.httpClient(c.config).Do(httpRequest)
 	if err != nil {
-		return VehiclesResponse{}, fmt.Errorf("http request: %w", err)
+		return nil, fmt.Errorf("http request: %w", err)
 	}
 	defer func() {
 		_ = httpResponse.Body.Close()
 	}()
 	if httpResponse.StatusCode != http.StatusOK {
-		return VehiclesResponse{}, newHTTPError(httpResponse)
+		return nil, newHTTPError(httpResponse)
 	}
 	data, err := io.ReadAll(httpResponse.Body)
 	if err != nil {
-		return VehiclesResponse{}, fmt.Errorf("read response body: %w", err)
+		return nil, fmt.Errorf("read response body: %w", err)
 	}
 	var response rfmsv2oapi.Vehicles
 	if err := json.Unmarshal(data, &response); err != nil {
-		return VehiclesResponse{}, fmt.Errorf("unmarshal v2 response body: %w", err)
+		return nil, fmt.Errorf("unmarshal v2 response body: %w", err)
 	}
-	result := VehiclesResponse{
-		MoreDataAvailable: response.MoreDataAvailable != nil && *response.MoreDataAvailable,
-		Vehicles:          make([]*rfmsv5.Vehicle, 0, len(response.Vehicle)),
-	}
+	resp := &rfmsv5.VehiclesResponse{}
+	vehicles := make([]*rfmsv5.Vehicle, 0, len(response.Vehicle))
 	for _, vehicle := range response.Vehicle {
-		result.Vehicles = append(result.Vehicles, convertv2.Vehicle(&vehicle))
+		vehicles = append(vehicles, convertv2.Vehicle(&vehicle))
 	}
-	return result, nil
+	resp.SetVehicles(vehicles)
+	if response.MoreDataAvailable != nil {
+		resp.SetMoreDataAvailable(*response.MoreDataAvailable)
+	}
+	return resp, nil
 }
 
 func (c *Client) vehiclesV4(
 	ctx context.Context,
-	request VehiclesRequest,
-	cfg ClientConfig,
-) (_ VehiclesResponse, err error) {
+	request *rfmsv5.VehiclesRequest,
+) (_ *rfmsv5.VehiclesResponse, err error) {
 	defer func() {
 		if err != nil {
 			err = fmt.Errorf("rFMS v4 vehicles: %w", err)
 		}
 	}()
-	// Build query parameters
 	query := url.Values{}
-	if request.LastVIN != "" {
-		query.Set("lastVin", request.LastVIN)
+	if request.GetLastVin() != "" {
+		query.Set("lastVin", request.GetLastVin())
 	}
-	// Build path with query parameters
 	path := "/vehicles"
 	if len(query) > 0 {
 		path += "?" + query.Encode()
 	}
-	// Apply per-request configuration overrides
-	fullURL := cfg.baseURL + path
-	// Create the request
+	fullURL := c.config.baseURL + path
 	httpRequest, err := http.NewRequestWithContext(ctx, http.MethodGet, fullURL, nil)
 	if err != nil {
-		return VehiclesResponse{}, fmt.Errorf("http request: %w", err)
+		return nil, fmt.Errorf("http request: %w", err)
 	}
-	// Set headers
 	httpRequest.Header.Set("User-Agent", getUserAgent())
 	httpRequest.Header.Set("Accept", "application/json; rfms=vehicles.v4.0")
-	// Create HTTP client and make request
-	client := c.httpClient(cfg)
-	httpResponse, err := client.Do(httpRequest)
+	httpResponse, err := c.httpClient(c.config).Do(httpRequest)
 	if err != nil {
-		return VehiclesResponse{}, fmt.Errorf("http request: %w", err)
+		return nil, fmt.Errorf("http request: %w", err)
 	}
 	defer func() {
 		_ = httpResponse.Body.Close()
 	}()
 	if httpResponse.StatusCode != http.StatusOK {
-		return VehiclesResponse{}, newHTTPError(httpResponse)
+		return nil, newHTTPError(httpResponse)
 	}
 	data, err := io.ReadAll(httpResponse.Body)
 	if err != nil {
-		return VehiclesResponse{}, fmt.Errorf("read response body: %w", err)
+		return nil, fmt.Errorf("read response body: %w", err)
 	}
 	slog.Debug("vehicles v4 response", "body", json.RawMessage(data))
 	var response rfmsv4oapi.VehicleResponseObject
 	if err := json.Unmarshal(data, &response); err != nil {
-		return VehiclesResponse{}, fmt.Errorf("unmarshal v4 response body: %w", err)
+		return nil, fmt.Errorf("unmarshal v4 response body: %w", err)
 	}
-	result := VehiclesResponse{
-		MoreDataAvailable: response.MoreDataAvailable != nil && *response.MoreDataAvailable,
-		Vehicles:          make([]*rfmsv5.Vehicle, 0, len(response.VehicleResponse.Vehicles)),
-	}
+	resp := &rfmsv5.VehiclesResponse{}
+	vehicles := make([]*rfmsv5.Vehicle, 0, len(response.VehicleResponse.Vehicles))
 	for _, vehicle := range response.VehicleResponse.Vehicles {
-		result.Vehicles = append(result.Vehicles, convertv4.Vehicle(&vehicle))
+		vehicles = append(vehicles, convertv4.Vehicle(&vehicle))
 	}
-	return result, nil
+	resp.SetVehicles(vehicles)
+	if response.MoreDataAvailable != nil {
+		resp.SetMoreDataAvailable(*response.MoreDataAvailable)
+	}
+	return resp, nil
 }

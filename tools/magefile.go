@@ -50,7 +50,10 @@ func Generate() error {
 func Lint() error {
 	log.Println("linting and fixing code")
 	return forEachGoMod(func(dir string) error {
-		return tool(dir, "golangci-lint", "run", "--fix", "--path-prefix", dir, "--build-tags", "mage").Run()
+		return toolWith(
+			map[string]string{"GOFLAGS": "-mod=mod"},
+			dir, "golangci-lint", "run", "--fix", "--path-prefix", dir, "--build-tags", "mage",
+		).Run()
 	})
 }
 

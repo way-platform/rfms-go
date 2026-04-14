@@ -10,9 +10,11 @@ import (
 
 	"github.com/spf13/cobra"
 	rfms "github.com/way-platform/rfms-go"
+	rfmsv5 "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5"
 	"golang.org/x/oauth2"
 	"golang.org/x/term"
 	"google.golang.org/protobuf/encoding/protojson"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 // NewCommand builds the full CLI command tree for the rFMS SDK.
@@ -225,20 +227,21 @@ func newVehiclesCommand(cfg *config) *cobra.Command {
 		if err != nil {
 			return err
 		}
-		moreDataAvailable, lastVIN, count := true, "", 0
-		for moreDataAvailable && count < *limit {
-			response, err := client.Vehicles(cmd.Context(), rfms.VehiclesRequest{
-				LastVIN: lastVIN,
-			})
+		request := rfmsv5.VehiclesRequest_builder{}.Build()
+		count := 0
+		for count < *limit {
+			response, err := client.Vehicles(cmd.Context(), request)
 			if err != nil {
 				return err
 			}
-			for _, vehicle := range response.Vehicles {
+			for _, vehicle := range response.GetVehicles() {
 				fmt.Println(protojson.Format(vehicle))
 			}
-			count += len(response.Vehicles)
-			moreDataAvailable = response.MoreDataAvailable
-			lastVIN = response.Vehicles[len(response.Vehicles)-1].GetVin()
+			count += len(response.GetVehicles())
+			if !response.GetMoreDataAvailable() || len(response.GetVehicles()) == 0 {
+				break
+			}
+			request.SetLastVin(response.GetVehicles()[len(response.GetVehicles())-1].GetVin())
 		}
 		return nil
 	}
@@ -265,27 +268,29 @@ func newVehiclePositionsCommand(cfg *config) *cobra.Command {
 		if len(args) > 0 {
 			vin = args[0]
 		}
-		moreDataAvailable, lastVIN := true, ""
-		for moreDataAvailable {
-			request := rfms.VehiclePositionsRequest{
-				LastVIN:    lastVIN,
-				VIN:        vin,
-				LatestOnly: startTime.IsZero() && stopTime.IsZero(),
-				StartTime:  *startTime,
-				StopTime:   *stopTime,
-			}
+		b := rfmsv5.VehiclePositionsRequest_builder{
+			Vin:        new(vin),
+			LatestOnly: new(startTime.IsZero() && stopTime.IsZero()),
+		}
+		if !startTime.IsZero() {
+			b.StartTime = timestamppb.New(*startTime)
+		}
+		if !stopTime.IsZero() {
+			b.StopTime = timestamppb.New(*stopTime)
+		}
+		request := b.Build()
+		for {
 			response, err := client.VehiclePositions(cmd.Context(), request)
 			if err != nil {
 				return err
 			}
-			for _, vehiclePosition := range response.VehiclePositions {
+			for _, vehiclePosition := range response.GetVehiclePositions() {
 				fmt.Println(protojson.Format(vehiclePosition))
 			}
-			moreDataAvailable = response.MoreDataAvailable
-			if !moreDataAvailable {
+			if !response.GetMoreDataAvailable() || len(response.GetVehiclePositions()) == 0 {
 				break
 			}
-			lastVIN = response.VehiclePositions[len(response.VehiclePositions)-1].GetVin()
+			request.SetLastVin(response.GetVehiclePositions()[len(response.GetVehiclePositions())-1].GetVin())
 		}
 		return nil
 	}
@@ -312,27 +317,29 @@ func newVehicleStatusesCommand(cfg *config) *cobra.Command {
 		if len(args) > 0 {
 			vin = args[0]
 		}
-		moreDataAvailable, lastVIN := true, ""
-		for moreDataAvailable {
-			request := rfms.VehicleStatusesRequest{
-				LastVIN:    lastVIN,
-				VIN:        vin,
-				LatestOnly: startTime.IsZero() && stopTime.IsZero(),
-				StartTime:  *startTime,
-				StopTime:   *stopTime,
-			}
+		b := rfmsv5.VehicleStatusesRequest_builder{
+			Vin:        new(vin),
+			LatestOnly: new(startTime.IsZero() && stopTime.IsZero()),
+		}
+		if !startTime.IsZero() {
+			b.StartTime = timestamppb.New(*startTime)
+		}
+		if !stopTime.IsZero() {
+			b.StopTime = timestamppb.New(*stopTime)
+		}
+		request := b.Build()
+		for {
 			response, err := client.VehicleStatuses(cmd.Context(), request)
 			if err != nil {
 				return err
 			}
-			for _, vehicleStatus := range response.VehicleStatuses {
+			for _, vehicleStatus := range response.GetVehicleStatuses() {
 				fmt.Println(protojson.Format(vehicleStatus))
 			}
-			moreDataAvailable = response.MoreDataAvailable
-			if !moreDataAvailable {
+			if !response.GetMoreDataAvailable() || len(response.GetVehicleStatuses()) == 0 {
 				break
 			}
-			lastVIN = response.VehicleStatuses[len(response.VehicleStatuses)-1].GetVin()
+			request.SetLastVin(response.GetVehicleStatuses()[len(response.GetVehicleStatuses())-1].GetVin())
 		}
 		return nil
 	}

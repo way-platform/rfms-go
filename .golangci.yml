@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://golangci-lint.run/jsonschema/golangci.jsonschema.json
+version: "2"
+
+issues:
+  exclude-dirs:
+    - proto/gen
+
+formatters:
+  enable:
+    - gci
+    - gofumpt
+    - goimports
+    - golines
+  settings:
+    golines:
+      max-len: 120

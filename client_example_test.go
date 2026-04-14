@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/way-platform/rfms-go"
+	rfms "github.com/way-platform/rfms-go"
+	rfmsv5 "github.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5"
 )
 
 func ExampleClient_scania() {
@@ -15,21 +16,19 @@ func ExampleClient_scania() {
 	if err != nil {
 		panic(err)
 	}
-	lastVIN, moreDataAvailable := "", true
-	for moreDataAvailable {
-		response, err := client.Vehicles(context.Background(), rfms.VehiclesRequest{
-			LastVIN: lastVIN,
-		})
+	request := rfmsv5.VehiclesRequest_builder{}.Build()
+	for {
+		response, err := client.Vehicles(context.Background(), request)
 		if err != nil {
 			panic(err)
 		}
-		for _, vehicle := range response.Vehicles {
+		for _, vehicle := range response.GetVehicles() {
 			fmt.Println(vehicle.GetVin())
 		}
-		moreDataAvailable = response.MoreDataAvailable
-		if moreDataAvailable {
-			lastVIN = response.Vehicles[len(response.Vehicles)-1].GetVin()
+		if !response.GetMoreDataAvailable() || len(response.GetVehicles()) == 0 {
+			break
 		}
+		request.SetLastVin(response.GetVehicles()[len(response.GetVehicles())-1].GetVin())
 	}
 }
 
@@ -43,20 +42,18 @@ func ExampleClient_volvoTrucks() {
 	if err != nil {
 		panic(err)
 	}
-	lastVIN, moreDataAvailable := "", true
-	for moreDataAvailable {
-		response, err := client.Vehicles(context.Background(), rfms.VehiclesRequest{
-			LastVIN: lastVIN,
-		})
+	request := rfmsv5.VehiclesRequest_builder{}.Build()
+	for {
+		response, err := client.Vehicles(context.Background(), request)
 		if err != nil {
 			panic(err)
 		}
-		for _, vehicle := range response.Vehicles {
+		for _, vehicle := range response.GetVehicles() {
 			fmt.Println(vehicle.GetVin())
 		}
-		moreDataAvailable = response.MoreDataAvailable
-		if moreDataAvailable {
-			lastVIN = response.Vehicles[len(response.Vehicles)-1].GetVin()
+		if !response.GetMoreDataAvailable() || len(response.GetVehicles()) == 0 {
+			break
 		}
+		request.SetLastVin(response.GetVehicles()[len(response.GetVehicles())-1].GetVin())
 	}
 }
