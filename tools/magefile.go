@@ -77,6 +77,12 @@ func CLI() error {
 	return cmd(root("cmd/rfms"), "go", "install", ".").Run()
 }
 
+// BufPush pushes the proto module to the Buf Schema Registry.
+func BufPush() error {
+	log.Println("pushing proto module to BSR")
+	return tool(root("proto"), "buf", "push").Run()
+}
+
 // Diff checks for git diffs.
 func Diff() error {
 	log.Println("checking for git diffs")
