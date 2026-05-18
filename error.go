@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"time"
 
+	"connectrpc.com/connect"
 	"github.com/way-platform/rfms-go/internal/openapi/rfmsv4oapi"
 )
 
@@ -31,7 +32,7 @@ type Error struct {
 	ErrorURI string
 }
 
-func newHTTPError(resp *http.Response) *Error {
+func newHTTPError(resp *http.Response) error {
 	result := &Error{
 		Method:     resp.Request.Method,
 		URL:        resp.Request.URL.String(),
@@ -59,7 +60,7 @@ func newHTTPError(resp *http.Response) *Error {
 			result.RateLimitReset = time.Duration(retryAfter) * time.Second
 		}
 	}
-	return result
+	return result.connectError()
 }
 
 // Error implements the error interface.
@@ -82,4 +83,35 @@ func (e *Error) Error() string {
 		e.Description,
 		e.ErrorURI,
 	)
+}
+
+func (e *Error) connectError() error {
+	return connect.NewError(httpStatusToConnectCode(e.StatusCode), e)
+}
+
+func httpStatusToConnectCode(statusCode int) connect.Code {
+	switch statusCode {
+	case http.StatusBadRequest:
+		return connect.CodeInvalidArgument
+	case http.StatusUnauthorized:
+		return connect.CodeUnauthenticated
+	case http.StatusForbidden:
+		return connect.CodePermissionDenied
+	case http.StatusNotFound:
+		return connect.CodeNotFound
+	case http.StatusConflict:
+		return connect.CodeAlreadyExists
+	case http.StatusTooManyRequests:
+		return connect.CodeResourceExhausted
+	case http.StatusNotImplemented:
+		return connect.CodeUnimplemented
+	case http.StatusServiceUnavailable:
+		return connect.CodeUnavailable
+	case http.StatusGatewayTimeout:
+		return connect.CodeDeadlineExceeded
+	case http.StatusInternalServerError:
+		return connect.CodeInternal
+	default:
+		return connect.CodeUnknown
+	}
 }
