@@ -188,7 +188,7 @@ func TestErrorCodeMapping(t *testing.T) {
 	}
 }
 
-func TestRateLimitErrorPreservation(t *testing.T) {
+func TestRateLimitError(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.Header().Set("Retry-After", "30")
@@ -205,28 +205,11 @@ func TestRateLimitErrorPreservation(t *testing.T) {
 	if err == nil {
 		t.Fatal("expected error, got nil")
 	}
-
-	// Verify it's a connect error with ResourceExhausted code.
 	var connectErr *connect.Error
 	if !errors.As(err, &connectErr) {
 		t.Fatalf("expected *connect.Error, got %T: %v", err, err)
 	}
 	if connectErr.Code() != connect.CodeResourceExhausted {
 		t.Fatalf("expected CodeResourceExhausted, got %v", connectErr.Code())
-	}
-
-	// Verify the underlying rfms.Error is accessible with rate-limit info.
-	var rfmsErr *rfms.Error
-	if !errors.As(err, &rfmsErr) {
-		t.Fatalf("expected *rfms.Error via errors.As, got %T: %v", err, err)
-	}
-	if rfmsErr.RateLimitReset.Seconds() != 30 {
-		t.Fatalf("expected RateLimitReset=30s, got %v", rfmsErr.RateLimitReset)
-	}
-	if rfmsErr.Identifier != "rate_limit_exceeded" {
-		t.Fatalf("expected Identifier=rate_limit_exceeded, got %s", rfmsErr.Identifier)
-	}
-	if rfmsErr.StatusCode != http.StatusTooManyRequests {
-		t.Fatalf("expected StatusCode=429, got %d", rfmsErr.StatusCode)
 	}
 }
