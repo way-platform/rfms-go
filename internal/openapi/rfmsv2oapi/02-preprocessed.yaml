@@ -7,11 +7,6 @@ info:
   title: rFMS specification v2.1
 host: api.volvotrucks.com
 basePath: /
-securityDefinitions:
-  basicAuth:
-    type: basic
-security:
-  - basicAuth: []
 schemes:
   - https
 paths:

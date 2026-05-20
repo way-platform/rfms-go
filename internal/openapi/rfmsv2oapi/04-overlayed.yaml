@@ -3,8 +3,6 @@ info:
     version: "2.1"
     description: rFMS standard version 2.1, for retrieval of vehicle information, position and vehicle status
     title: rFMS specification v2.1
-security:
-    - basicAuth: []
 servers:
     - url: https://api.volvotrucks.com
 components:
