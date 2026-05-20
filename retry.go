@@ -3,11 +3,12 @@ package rfms
 import (
 	"bytes"
 	"context"
+	"crypto/rand"
 	"errors"
 	"fmt"
 	"io"
 	"math"
-	"math/rand"
+	"math/big"
 	"net"
 	"net/http"
 	"strconv"
@@ -113,19 +114,25 @@ func expBackoff(attempt int) time.Duration {
 	const base = time.Millisecond * 250
 	const cap = time.Second * 10
 	exp := math.Pow(2, float64(attempt-1))
-	v := float64(base) * exp
-	return time.Duration(
-		rand.Int63n(int64(math.Min(float64(cap), v))),
-	)
+	v := int64(math.Min(float64(cap), float64(base)*exp))
+	if v <= 0 {
+		return 0
+	}
+	n, _ := rand.Int(rand.Reader, big.NewInt(v))
+	return time.Duration(n.Int64())
 }
 
 func addJitter(d time.Duration) time.Duration {
 	const magnitude = 0.333
 	f := float64(d)
-	mj := f * magnitude
-	j := rand.Float64() * mj
-	coin := rand.Float64()
-	if coin < 0.5 {
+	mj := int64(f * magnitude)
+	if mj <= 0 {
+		return d
+	}
+	n, _ := rand.Int(rand.Reader, big.NewInt(mj))
+	j := float64(n.Int64())
+	coin, _ := rand.Int(rand.Reader, big.NewInt(2))
+	if coin.Int64() == 0 {
 		return time.Duration(f + j)
 	}
 	return time.Duration(f - j)

@@ -14,3 +14,20 @@ formatters:
   settings:
     golines:
       max-len: 120
+
+linters:
+  enable:
+    - gosec
+  settings:
+    gosec:
+      excludes:
+        # Pre-existing proto/binary integer conversions; values are API-bounded.
+        - G115
+
+  exclusions:
+    rules:
+      # Test files: hardcoded test tokens/URLs and test file I/O are not vulnerabilities.
+      - path: "_test\\.go"
+        linters:
+          - gosec
+        text: "G101|G304|G306"
