@@ -1,0 +1,99 @@
+# rfms-go mise configuration
+#
+# Usage examples:
+#   mise install                # Install all tools
+#   mise run build              # Full CI build
+#   mise run lint               # Run linter
+#   mise run test               # Run tests
+#   mise run cli                # Build rfms CLI
+
+[tools]
+go = "1.26"
+golangci-lint = "2.10.1"
+"go:github.com/bufbuild/buf/cmd/buf" = "v1.55.1"
+"go:github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen" = "v2.5.0"
+"go:github.com/speakeasy-api/openapi-overlay" = "v0.10.3"
+"go:google.golang.org/protobuf/cmd/protoc-gen-go" = "v1.36.9"
+"go:connectrpc.com/connect/cmd/protoc-gen-connect-go" = "v1.19.1"
+"go:github.com/charmbracelet/vhs" = "v0.10.0"
+
+[tasks.build]
+description = "run full CI build"
+run = "mise run download && mise run format && mise run generate && mise run lint && mise run test && mise run tidy && mise run cli && mise run diff"
+
+[tasks.download]
+description = "download Go dependencies"
+run = """
+for dir in $(find . -name go.mod -exec dirname {} \\;); do
+  echo "downloading $dir"
+  (cd "$dir" && go mod download)
+done
+"""
+
+[tasks.format]
+description = "format proto files"
+run = "buf format -w proto"
+
+[tasks.lint]
+description = "lint Go code"
+run = """
+for dir in $(find . -name go.mod -exec dirname {} \\;); do
+  echo "linting $dir"
+  (cd "$dir" && GOFLAGS=-mod=mod golangci-lint run --fix --allow-parallel-runners --path-prefix "$dir")
+done
+"""
+
+[tasks.generate]
+description = "run code generators"
+run = """
+mise run openapi-generator
+for dir in $(find . -name go.mod -exec dirname {} \\;); do
+  echo "generating $dir"
+  (cd "$dir" && go generate -v ./...)
+done
+"""
+
+[tasks.test]
+description = "run Go tests"
+run = "go test -v -cover ./..."
+
+[tasks.tidy]
+description = "tidy Go mod files"
+run = """
+for dir in $(find . -name go.mod -exec dirname {} \\;); do
+  echo "tidying $dir"
+  (cd "$dir" && go mod tidy -v)
+done
+"""
+
+[tasks.cli]
+description = "build rfms CLI"
+run = "cd cmd/rfms && go install ."
+
+[tasks.diff]
+description = "check for git diffs"
+run = """
+if git rev-parse --is-inside-work-tree &>/dev/null && ! jj root &>/dev/null; then
+  git diff --exit-code
+fi
+"""
+
+[tasks.buf-push]
+description = "push proto module to BSR"
+run = "cd proto && buf push"
+
+[tasks.vhs]
+description = "record CLI GIF"
+run = "mise run cli && cd docs && vhs cli.tape"
+
+[tasks.openapi-generator]
+description = "download OpenAPI generator JAR"
+run = """
+VERSION="7.13.0"
+TARGET="build/openapi-generator-cli-${VERSION}.jar"
+if [ -f "$TARGET" ]; then
+  exit 0
+fi
+echo "downloading OpenAPI generator"
+curl --create-dirs -L -o "$TARGET" "https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/${VERSION}/openapi-generator-cli-${VERSION}.jar"
+"""
