@@ -53,17 +53,17 @@ for moreDataAvailable {
 
 #### Build project
 
-The project is built using [Mage](https://magefile.org), see
-[magefile.go](./magefile.go).
+The project is built using [mise](https://mise.jdx.dev), see
+[mise.toml](./mise.toml).
 
 ```bash
-$ ./tools/mage build
+$ mise install && mise run build
 ```
 
 For all available build tasks, see:
 
 ```bash
-$ ./tools/mage -l
+$ mise tasks
 ```
 
 ## CLI tool

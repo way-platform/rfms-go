@@ -1,5 +1,15 @@
 # Agent Instructions
 
+## Build Tools
+
+Use [mise](https://mise.jdx.dev) for tool management and task running.
+
+```bash
+mise install        # install pinned tools
+mise run build      # full CI build
+mise tasks          # list all tasks
+```
+
 ## Package Manager
 
 Use **Go Modules**: `go mod tidy`, `go test ./...`
