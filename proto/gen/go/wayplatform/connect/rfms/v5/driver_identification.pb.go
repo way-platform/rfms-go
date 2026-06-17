@@ -562,17 +562,17 @@ var File_wayplatform_connect_rfms_v5_driver_identification_proto protoreflect.Fi
 
 const file_wayplatform_connect_rfms_v5_driver_identification_proto_rawDesc = "" +
 	"\n" +
-	"7wayplatform/connect/rfms/v5/driver_identification.proto\x12\x1bwayplatform.connect.rfms.v5\"\xe6\x06\n" +
+	"7wayplatform/connect/rfms/v5/driver_identification.proto\x12\x1bwayplatform.connect.rfms.v5\"\xfa\x06\n" +
 	"\x14DriverIdentification\x12M\n" +
 	"\x05tacho\x18\x01 \x01(\v27.wayplatform.connect.rfms.v5.DriverIdentification.TachoR\x05tacho\x12G\n" +
-	"\x03oem\x18\x02 \x01(\v25.wayplatform.connect.rfms.v5.DriverIdentification.OemR\x03oem\x1a\xf8\x04\n" +
-	"\x05Tacho\x12\x1b\n" +
-	"\tdriver_id\x18\x01 \x01(\tR\bdriverId\x129\n" +
+	"\x03oem\x18\x02 \x01(\v25.wayplatform.connect.rfms.v5.DriverIdentification.OemR\x03oem\x1a\x87\x05\n" +
+	"\x05Tacho\x12 \n" +
+	"\tdriver_id\x18\x01 \x01(\tB\x03\x80\x01\x01R\bdriverId\x129\n" +
 	"\x19card_issuing_member_state\x18\x02 \x01(\tR\x16cardIssuingMemberState\x12\x8a\x01\n" +
 	"\x18authentication_equipment\x18\x03 \x01(\x0e2O.wayplatform.connect.rfms.v5.DriverIdentification.Tacho.AuthenticationEquipmentR\x17authenticationEquipment\x12H\n" +
-	" unknown_authentication_equipment\x18\x04 \x01(\tR\x1eunknownAuthenticationEquipment\x124\n" +
-	"\x16card_replacement_index\x18\x05 \x01(\tR\x14cardReplacementIndex\x12,\n" +
-	"\x12card_renewal_index\x18\x06 \x01(\tR\x10cardRenewalIndex\"\xdb\x01\n" +
+	" unknown_authentication_equipment\x18\x04 \x01(\tR\x1eunknownAuthenticationEquipment\x129\n" +
+	"\x16card_replacement_index\x18\x05 \x01(\tB\x03\x80\x01\x01R\x14cardReplacementIndex\x121\n" +
+	"\x12card_renewal_index\x18\x06 \x01(\tB\x03\x80\x01\x01R\x10cardRenewalIndex\"\xdb\x01\n" +
 	"\x17AuthenticationEquipment\x12(\n" +
 	"$AUTHENTICATION_EQUIPMENT_UNSPECIFIED\x10\x00\x12$\n" +
 	" AUTHENTICATION_EQUIPMENT_UNKNOWN\x10\x01\x12\x0f\n" +
@@ -581,10 +581,10 @@ const file_wayplatform_connect_rfms_v5_driver_identification_proto_rawDesc = "" 
 	"\fCOMPANY_CARD\x10\x04\x12\x16\n" +
 	"\x12MANUFACTURING_CARD\x10\x05\x12\x10\n" +
 	"\fVEHICLE_UNIT\x10\x06\x12\x11\n" +
-	"\rMOTION_SENSOR\x10\a\x1a;\n" +
+	"\rMOTION_SENSOR\x10\a\x1a@\n" +
 	"\x03Oem\x12\x17\n" +
-	"\aid_type\x18\x01 \x01(\tR\x06idType\x12\x1b\n" +
-	"\tdriver_id\x18\x02 \x01(\tR\bdriverIdB\x9c\x02\n" +
+	"\aid_type\x18\x01 \x01(\tR\x06idType\x12 \n" +
+	"\tdriver_id\x18\x02 \x01(\tB\x03\x80\x01\x01R\bdriverIdB\x9c\x02\n" +
 	"\x1fcom.wayplatform.connect.rfms.v5B\x19DriverIdentificationProtoP\x01ZOgithub.com/way-platform/rfms-go/proto/gen/go/wayplatform/connect/rfms/v5;rfmsv5\xa2\x02\x03WCR\xaa\x02\x1bWayplatform.Connect.Rfms.V5\xca\x02\x1bWayplatform\\Connect\\Rfms\\V5\xe2\x02'Wayplatform\\Connect\\Rfms\\V5\\GPBMetadata\xea\x02\x1eWayplatform::Connect::Rfms::V5b\beditionsp\xe8\a"
 
 var file_wayplatform_connect_rfms_v5_driver_identification_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
